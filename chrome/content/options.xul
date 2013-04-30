@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<?xml-stylesheet href="chrome://global/skin/global.css" type="text/css"?>
+<?xml-stylesheet href="chrome://thepuzzlepiece/skin/options.css" type="text/css"?>
+<!DOCTYPE options SYSTEM "chrome://thepuzzlepiece/locale/options.dtd">
+<prefwindow xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+			id="thepuzzlepiece-options-window"
+			title="&Options.title;">
+
+	<prefpane>
+		<preferences>
+		</preferences>
+		
+		<tabbox id="thepuzzlepieceTabBox">
+			<tabs id="tabsElement">
+				<!--<tab id="aboutTab" label="&Optabout.label;"/>-->
+			</tabs>
+			
+			<tabpanels id="tabPanels">
+				<!--<tabpanel id="aboutTab" orient="vertical" align="center">
+					<image id="logo"/>
+					<vbox align="end">
+						<description class="closer">&thepuzzlepieceabout.name;</description>
+						<description>&thepuzzlepieceabout.by;</description>
+						<description class="justify">&thepuzzlepieceabout.desc;</description>
+						<label class="text-link closer" href="https://addons.mozilla.org/en-US/firefox/addon//" value="&thepuzzlepieceabout.home;"/>
+						<label class="text-link closer" href="https://github.com/Quicksaver/The-Puzzle-Piece/issues" value="&thepuzzlepieceabout.tech;"/>
+					</vbox>
+				</tabpanel>-->
+			</tabpanels>
+		</tabbox>
+	</prefpane>
+</prefwindow>

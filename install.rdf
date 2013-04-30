@@ -7,7 +7,7 @@
 		<em:creator>Quicksaver</em:creator>
 		<em:homepageURL></em:homepageURL>
 		<em:iconURL></em:iconURL>
-		<em:optionsURL></em:optionsURL>
+		<em:optionsURL>chrome://thepuzzlepiece/content/options.xul</em:optionsURL>
 		<em:name>The Puzzle Piece</em:name>
 		<em:bootstrap>true</em:bootstrap>
 		
