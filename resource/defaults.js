@@ -1,5 +1,5 @@
-var defaultsVersion = '1.0.0';
-var objName = 'thepuzzlepiece';
+var defaultsVersion = '1.0.1';
+var objName = 'thePuzzlePiece';
 var objPathString = 'thepuzzlepiece';
 var prefList = {};
 
