@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE overlay SYSTEM "chrome://thepuzzlepiece/locale/overlay.dtd">
+<overlay id="menus-overlay" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul" >
+	
+	<menupopup id="toolbar-context-menu">
+		<menuseparator id="objName-contextSeparator" hidden="true"/>
+			
+		<menuitem id="objName-contextOptions"
+			label="&OptionsMenu.label;"
+			oncommand="objName.doOpenOptions();"
+			hidden="true"/>
+	</menupopup>
+	
+</overlay>
