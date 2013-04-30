@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.0.0';
+moduleAid.VERSION = '1.0.1';
 
 this.__defineGetter__('addonBar', function() { return $('addon-bar'); });
 this.__defineGetter__('contextMenu', function() { return $('toolbar-context-menu'); });
@@ -15,11 +15,11 @@ this.setContextMenu = function(e) {
 };
 
 moduleAid.LOADMODULE = function() {
-	overlayAid.overlayWindow(window, 'contextMenu');
+	overlayAid.overlayWindow(window, 'addonBar');
 	listenerAid.add(contextMenu, 'popupshown', setContextMenu, false);
 };
 
 moduleAid.UNLOADMODULE = function() {
 	listenerAid.remove(contextMenu, 'popupshown', setContextMenu, false);
-	overlayAid.removeOverlayWindow(window, 'contextMenu');
+	overlayAid.removeOverlayWindow(window, 'addonBar');
 };

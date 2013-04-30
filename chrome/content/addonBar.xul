@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE overlay SYSTEM "chrome://thepuzzlepiece/locale/overlay.dtd">
-<overlay id="menus-overlay" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul" >
+<overlay id="addonBar-overlay" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul" >
 	
 	<menupopup id="toolbar-context-menu">
 		<menuseparator id="objName-contextSeparator" hidden="true"/>
@@ -10,5 +10,7 @@
 			oncommand="objName.doOpenOptions();"
 			hidden="true"/>
 	</menupopup>
+	
+	<toolbarbutton id="addonbar-closebutton" hidden="true" />
 	
 </overlay>
