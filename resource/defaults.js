@@ -1,7 +1,9 @@
-var defaultsVersion = '1.0.1';
+var defaultsVersion = '1.0.2';
 var objName = 'thePuzzlePiece';
 var objPathString = 'thepuzzlepiece';
-var prefList = {};
+var prefList = {
+	movetoRight: true
+};
 
 function startAddon(window) {
 	prepareObject(window);

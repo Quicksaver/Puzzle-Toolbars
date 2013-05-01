@@ -8,14 +8,19 @@
 
 	<prefpane>
 		<preferences>
+			<preference id="pref-movetoRight" name="extensions.thepuzzlepiece.movetoRight" type="bool" />
 		</preferences>
 		
 		<tabbox id="thepuzzlepieceTabBox">
 			<tabs id="tabsElement">
+				<tab id="genTab" label="&Optgeneral.label;"/>
 				<!--<tab id="aboutTab" label="&Optabout.label;"/>-->
 			</tabs>
 			
 			<tabpanels id="tabPanels">
+				<tabpanel id="genTab" orient="vertical" align="start">
+					<checkbox label="&OptmoveToRight.label;" preference="pref-movetoRight"/>
+				</tabpanel>
 				<!--<tabpanel id="aboutTab" orient="vertical" align="center">
 					<image id="logo"/>
 					<vbox align="end">

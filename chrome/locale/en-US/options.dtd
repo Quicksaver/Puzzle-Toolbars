@@ -1,5 +1,8 @@
 <!ENTITY Options.title "The Puzzle Piece">
+<!ENTITY Optgeneral.label "Preferences">
 <!ENTITY Optabout.label "About">
+
+<!ENTITY OptmoveToRight.label "Place on the right">
 
 <!ENTITY thepuzzlepieceabout.name "The Puzzle Piece">
 <!ENTITY thepuzzlepieceabout.by "by Quicksaver">
