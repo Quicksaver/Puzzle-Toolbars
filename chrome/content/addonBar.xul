@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet href="chrome://thepuzzlepiece/skin/addonBar.css" type="text/css"?>
+<?xml-stylesheet href="chrome://thepuzzlepiece-os/skin/addonBar.css" type="text/css"?>
 <!DOCTYPE overlay SYSTEM "chrome://thepuzzlepiece/locale/overlay.dtd">
 <overlay id="addonBar-overlay" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul" >
 	

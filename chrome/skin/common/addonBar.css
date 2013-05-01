@@ -1,0 +1,74 @@
+@namespace url(http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul);
+@-moz-document url("chrome://browser/content/browser.xul") {
+
+	/*Animation*/
+	#addon-bar {
+		position: fixed;
+		padding: 3px 5px 0px 5px;
+		border-radius: 8px 8px 0 0;
+		background-image: none;
+		overflow: hidden;
+	}
+	
+	#addon-bar[autohide]:hover,
+	#addon-bar[autohide][active],
+	#addon-bar[autohide][customizing="true"] {
+		opacity: 1;
+		-moz-transition: bottom .5s linear 0s, opacity .5s linear 0s;
+		transition: bottom .5s linear 0s, opacity .5s linear 0s; /* Firefox 16+ */
+	}
+	
+	#addon-bar[autohide]:not(:hover):not([active]) {
+		opacity: 0;
+		-moz-transition: bottom .5s linear .2s, opacity .5s linear .2s;
+		transition: bottom .5s linear .2s, opacity .5s linear .2s; /* Firefox 16+ */
+	}
+	
+	/* Inner buttons and other elements display */
+	#addon-bar image.toolbarbutton-icon {
+		max-height: 16px;
+	}
+	
+	#addon-bar > toolbaritem {
+		height: 18px;
+	}
+	
+	#addon-bar > toolbarbutton {
+		-moz-appearance: none;
+	}
+	
+	#addon-bar > toolbarseparator,
+	#addon-bar > toolbarpaletteitem[type="separator"] {
+		height: 16px;
+		margin-bottom: -16px;
+		position: relative;
+		top: -16px;
+	}
+	
+	#addon-bar > toolbarspring,
+	#addon-bar > toolbarpaletteitem[type="spring"] {
+		min-width: 10px;
+	}
+	
+	
+	#addon-bar #status-bar {
+		max-height: 18px;
+	}
+	
+	#addon-bar #status-bar label {
+		margin-top: 0px;
+		margin-bottom: 0px;
+	}
+	
+	#addon-bar > * > toolbarbutton {
+		-moz-appearance: none;
+		padding: 0 3px;
+		border: none;
+	}
+	
+	#addon-bar > * > dropmaker {
+		padding: 0 3px;
+		border: none;
+	}
+	
+}

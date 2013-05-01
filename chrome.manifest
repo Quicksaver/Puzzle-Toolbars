@@ -3,4 +3,7 @@ content   thepuzzlepiece                    chrome/content/
 locale    thepuzzlepiece-en   en-US         chrome/locale/en-US/
 locale    thepuzzlepiece      en-US         chrome/locale/en-US/
 
-skin      thepuzzlepiece      classic/1.0   chrome/skin/
+skin      thepuzzlepiece      classic/1.0   chrome/skin/common/
+skin      thepuzzlepiece-os   classic/1.0   chrome/skin/linux/
+skin      thepuzzlepiece-os   classic/1.0   chrome/skin/win/     os=WINNT
+skin      thepuzzlepiece-os   classic/1.0   chrome/skin/mac/     os=Darwin

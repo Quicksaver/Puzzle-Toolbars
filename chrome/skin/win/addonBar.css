@@ -1,0 +1,21 @@
+@namespace url(http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul);
+@-moz-document url("chrome://browser/content/browser.xul") {
+	
+	#addon-bar {
+		border-top: 1px solid rgb(0,0,0);
+		border-right: 1px solid rgb(0,0,0);
+		border-left: 1px solid rgb(0,0,0);
+		-moz-border-top-colors: rgb(160, 160, 160);
+		-moz-border-right-colors: rgb(160, 160, 160);
+		-moz-border-left-colors: rgb(160, 160, 160);
+	}
+	
+	window:not([thepuzzlepiece-oscpu="Windows NT 5.1"]) #addon-bar {
+		background-color: rgb(219,234,249);
+	}
+	
+	window[thepuzzlepiece-oscpu="Windows NT 5.1"] #addon-bar {
+		background-color: -moz-dialog;
+	}
+	
+}

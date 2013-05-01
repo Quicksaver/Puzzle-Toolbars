@@ -1,0 +1,23 @@
+@namespace url(http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul);
+@-moz-document url("chrome://browser/content/browser.xul") {
+
+	#addon-bar {
+		background-color: -moz-mac-chrome-active;
+		border-top: 1px solid rgba(0,0,0,0.57);
+		border-right: 1px solid rgba(0,0,0,0.57);
+		border-left: 1px solid rgba(0,0,0,0.57);
+		-moz-border-top-colors: rgba(0,0,0,0.57);
+		-moz-border-right-colors: rgba(0,0,0,0.57);
+		-moz-border-left-colors: rgba(0,0,0,0.57);
+	}
+	#addon-bar:-moz-window-inactive {
+		background-color: -moz-mac-chrome-inactive;
+		border-top: 1px solid rgba(0,0,0,0.32);
+		border-right: 1px solid rgba(0,0,0,0.32);
+		border-left: 1px solid rgba(0,0,0,0.32);
+		-moz-border-top-colors: rgba(0,0,0,0.32);
+		-moz-border-right-colors: rgba(0,0,0,0.32);
+		-moz-border-left-colors: rgba(0,0,0,0.32);
+	}
+	
+}

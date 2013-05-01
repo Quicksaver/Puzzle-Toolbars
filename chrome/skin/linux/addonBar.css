@@ -1,0 +1,14 @@
+@namespace url(http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul);
+@-moz-document url("chrome://browser/content/browser.xul") {
+
+	#addon-bar {
+		background-color: -moz-dialog;
+		border-top: 1px solid rgb(0,0,0);
+		border-right: 1px solid rgb(0,0,0);
+		border-left: 1px solid rgb(0,0,0);
+		-moz-border-top-colors: rgb(178,174,170);
+		-moz-border-right-colors: rgb(178,174,170);
+		-moz-border-left-colors: rgb(178,174,170);
+	}
+	
+}

@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.1.0';
+moduleAid.VERSION = '1.1.1';
 
 this.__defineGetter__('addonBar', function() { return $('addon-bar'); });
 this.__defineGetter__('browserPanel', function() { return $('browser-panel'); });
@@ -69,6 +69,9 @@ this.moveAddonBar = function() {
 	moveBarStyle.left += appContentPos.left;
 	moveBarStyle.right += document.documentElement.clientWidth -appContentPos.right;
 	
+	// Let's try to show it like it's poping up from somewhere when there's something below it
+	if(moveBarStyle.bottom > 1) { moveBarStyle.bottom--; }
+	
 	moveBarStyle.movetoRight = prefAid.movetoRight;
 	if(!shouldReMoveBar(moveBarStyle)) { return; }
 	lastBarStyle = moveBarStyle;
@@ -81,7 +84,7 @@ this.moveAddonBar = function() {
 	sscode += '	window['+objName+'_UUID="'+_UUID+'"] #addon-bar {\n';
 	sscode += '		bottom: '+moveBarStyle.bottom+'px;\n';
 	sscode += (!prefAid.movetoRight) ? '		left: '+moveBarStyle.left+'px;\n' : '		right: '+moveBarStyle.right+'px;\n';
-	sscode += '		max-width: '+moveBarStyle.maxWidth+'px;\n';
+	sscode += '		max-width: '+Math.max(moveBarStyle.maxWidth, 5)+'px;\n';
 	sscode += '	}\n';
 	sscode += '}';
 	
@@ -89,7 +92,7 @@ this.moveAddonBar = function() {
 };
 
 moduleAid.LOADMODULE = function() {
-	styleAid.load('addonBar', 'addonBar');
+	moduleAid.load('compatibilityFix/windowFixes');
 	
 	overlayAid.overlayWindow(window, 'addonBar');
 	
@@ -127,7 +130,5 @@ moduleAid.UNLOADMODULE = function() {
 	
 	overlayAid.removeOverlayWindow(window, 'addonBar');
 	
-	if(UNLOADED) {
-		styleAid.unload('addonBar');
-	}
+	moduleAid.unload('compatibilityFix/windowFixes');
 };
