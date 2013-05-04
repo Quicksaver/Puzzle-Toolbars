@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.1.1';
+moduleAid.VERSION = '1.1.2';
 
 this.__defineGetter__('addonBar', function() { return $('addon-bar'); });
 this.__defineGetter__('browserPanel', function() { return $('browser-panel'); });
@@ -92,8 +92,6 @@ this.moveAddonBar = function() {
 };
 
 moduleAid.LOADMODULE = function() {
-	moduleAid.load('compatibilityFix/windowFixes');
-	
 	overlayAid.overlayWindow(window, 'addonBar');
 	
 	this.backups = {
@@ -129,6 +127,4 @@ moduleAid.UNLOADMODULE = function() {
 	}
 	
 	overlayAid.removeOverlayWindow(window, 'addonBar');
-	
-	moduleAid.unload('compatibilityFix/windowFixes');
 };
