@@ -7,6 +7,16 @@
 		border-radius: 8px 8px 0 0;
 		background-image: none;
 		overflow: hidden;
+		opacity: 1;
+		-moz-transition: opacity .25s linear 0s;
+		transition: opacity .25s linear 0s; /* Firefox 16+ */
+	}
+	
+	#addon-bar[collapsed="true"] {
+		opacity: 0;
+		display: block !important;
+		visibility: visible !important;
+		pointer-events: none;
 	}
 	
 	/* Inner buttons and other elements display */
