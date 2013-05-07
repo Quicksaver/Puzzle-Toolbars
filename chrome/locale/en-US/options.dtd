@@ -4,6 +4,23 @@
 
 <!ENTITY OptmoveToRight.label "Place on the right">
 
+<!ENTITY OptKeyboardShortcut.caption "Add-on Bar Keyboard Shortcut">
+<!ENTITY OptKeyboardShortcut.control "Control">
+<!ENTITY OptKeyboardShortcut.shift "Shift">
+<!ENTITY OptKeyboardShortcut.alt "Alt">
+<!ENTITY OptKeyboardShortcut.command "Command">
+<!ENTITY OptKeyboardShortcut.option "Option">
+<!ENTITY OptKeyboardShortcut.none "None">
+<!ENTITY OptKeyboardShortcut.spacebar "Spacebar">
+<!ENTITY OptKeyboardShortcut.pageup "Page Up">
+<!ENTITY OptKeyboardShortcut.pagedown "Page Down">
+<!ENTITY OptKeyboardShortcut.end "End">
+<!ENTITY OptKeyboardShortcut.home "Home">
+<!ENTITY OptKeyboardShortcut.left "Left">
+<!ENTITY OptKeyboardShortcut.up "Up">
+<!ENTITY OptKeyboardShortcut.right "Right">
+<!ENTITY OptKeyboardShortcut.down "Down">
+
 <!ENTITY thepuzzlepieceabout.name "The Puzzle Piece">
 <!ENTITY thepuzzlepieceabout.by "by Quicksaver">
 <!ENTITY thepuzzlepieceabout.desc "All information about the add-on and its developer can be found in its Mozilla Add-ons Homepage. If you liked the add-on, please consider leaving there a nice review or a small contribution to help support its continued development. Bug reports and suggestions can be made in the technical support webpage.">

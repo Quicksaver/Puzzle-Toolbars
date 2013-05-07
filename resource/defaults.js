@@ -1,8 +1,13 @@
-var defaultsVersion = '1.0.2';
+var defaultsVersion = '1.0.3';
 var objName = 'thePuzzlePiece';
 var objPathString = 'thepuzzlepiece';
 var prefList = {
-	movetoRight: true
+	movetoRight: true,
+	
+	addonBarKeycode: '/',
+	addonBarAccel: true,
+	addonBarShift: false,
+	addonBarAlt: false
 };
 
 function startAddon(window) {
@@ -14,14 +19,28 @@ function stopAddon(window) {
 	removeObject(window);
 }
 
+function startPreferences(window) {
+	replaceObjStrings(window.document);
+	preparePreferences(window);
+	window[objName].moduleAid.load('options');
+}
+
 function startConditions(aReason) {
 	return true;
 }
 
 function onStartup(aReason) {
+	moduleAid.load('keysets');
+	
 	// Apply the add-on to every window opened and to be opened
 	windowMediator.callOnAll(startAddon, 'navigator:browser');
 	windowMediator.register(startAddon, 'domwindowopened', 'navigator:browser');
+	
+	// Apply the add-on to every preferences window opened and to be opened
+	windowMediator.callOnAll(startPreferences, null, "chrome://"+objPathString+"/content/options.xul");
+	windowMediator.register(startPreferences, 'domwindowopened', null, "chrome://"+objPathString+"/content/options.xul");
+	browserMediator.callOnAll(startPreferences, "chrome://"+objPathString+"/content/options.xul");
+	browserMediator.register(startPreferences, 'pageshow', "chrome://"+objPathString+"/content/options.xul");
 }
 
 function onShutdown(aReason) {
@@ -30,4 +49,6 @@ function onShutdown(aReason) {
 	
 	// remove the add-on from all windows
 	windowMediator.callOnAll(stopAddon, null, null, true);
+	
+	moduleAid.unload('keysets');
 }

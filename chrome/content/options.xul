@@ -9,6 +9,10 @@
 	<prefpane>
 		<preferences>
 			<preference id="pref-movetoRight" name="extensions.thepuzzlepiece.movetoRight" type="bool" />
+			<preference id="pref-addonBarKeycode" name="extensions.thepuzzlepiece.addonBarKeycode" type="string"/>
+			<preference id="pref-addonBarAccel" name="extensions.thepuzzlepiece.addonBarAccel" type="bool"/>
+			<preference id="pref-addonBarShift" name="extensions.thepuzzlepiece.addonBarShift" type="bool"/>
+			<preference id="pref-addonBarAlt" name="extensions.thepuzzlepiece.addonBarAlt" type="bool"/>
 		</preferences>
 		
 		<tabbox id="thepuzzlepieceTabBox">
@@ -20,6 +24,88 @@
 			<tabpanels id="tabPanels">
 				<tabpanel id="genTab" orient="vertical" align="start">
 					<checkbox label="&OptmoveToRight.label;" preference="pref-movetoRight"/>
+					
+					<groupbox align="center">
+						<caption label="&OptKeyboardShortcut.caption;"/>
+						<hbox>
+							<checkbox id="accelCheckbox" oncommand="objName.fillKeycodes();" label="&OptKeyboardShortcut.control;" preference="pref-addonBarAccel"/>
+							<checkbox id="altCheckbox" oncommand="objName.fillKeycodes();" label="&OptKeyboardShortcut.alt;" preference="pref-addonBarAlt"/>
+							<checkbox id="shiftCheckbox" oncommand="objName.fillKeycodes();" label="&OptKeyboardShortcut.shift;" preference="pref-addonBarShift"/>
+							<menulist id="addonBarKeyset-menu" oncommand="objName.fillKeycodes();" preference="pref-addonBarKeycode">
+								<menupopup id="addonBarKeyset-menupopup">
+									<menuitem value="none" label="&OptKeyboardShortcut.none;"/>
+									<menuitem value="A" label="A"/>
+									<menuitem value="B" label="B"/>
+									<menuitem value="C" label="C"/>
+									<menuitem value="D" label="D"/>
+									<menuitem value="E" label="E"/>
+									<menuitem value="F" label="F"/>
+									<menuitem value="G" label="G"/>
+									<menuitem value="H" label="H"/>
+									<menuitem value="I" label="I"/>
+									<menuitem value="J" label="J"/>
+									<menuitem value="K" label="K"/>
+									<menuitem value="L" label="L"/>
+									<menuitem value="M" label="M"/>
+									<menuitem value="N" label="N"/>
+									<menuitem value="O" label="O"/>
+									<menuitem value="P" label="P"/>
+									<menuitem value="Q" label="Q"/>
+									<menuitem value="R" label="R"/>
+									<menuitem value="S" label="S"/>
+									<menuitem value="T" label="T"/>
+									<menuitem value="U" label="U"/>
+									<menuitem value="V" label="V"/>
+									<menuitem value="W" label="W"/>
+									<menuitem value="X" label="X"/>
+									<menuitem value="Y" label="Y"/>
+									<menuitem value="Z" label="Z"/>
+									<menuitem value=" " label="&OptKeyboardShortcut.spacebar;"/>
+									<menuitem value="VK_PAGE_UP" label="&OptKeyboardShortcut.pageup;"/>
+									<menuitem value="VK_PAGE_DOWN" label="&OptKeyboardShortcut.pagedown;"/>
+									<menuitem value="VK_HOME" label="&OptKeyboardShortcut.home;"/>
+									<menuitem value="VK_END" label="&OptKeyboardShortcut.end;"/>
+									<menuitem value="VK_UP" label="&OptKeyboardShortcut.up;"/>
+									<menuitem value="VK_DOWN" label="&OptKeyboardShortcut.down;"/>
+									<menuitem value="VK_LEFT" label="&OptKeyboardShortcut.left;"/>
+									<menuitem value="VK_RIGHT" label="&OptKeyboardShortcut.right;"/>
+									<menuitem value="." label="."/>
+									<menuitem value="," label=","/>
+									<menuitem value=";" label=";"/>
+									<menuitem value="/" label="/"/>
+									<menuitem value="\" label="\"/>
+									<menuitem value="=" label="="/>
+									<menuitem value="+" label="+"/>
+									<menuitem value="-" label="-"/>
+									<menuitem value="*" label="*"/>
+									<menuitem value="VK_F1" label="F1"/>
+									<menuitem value="VK_F2" label="F2"/>
+									<menuitem value="VK_F3" label="F3"/>
+									<menuitem value="VK_F4" label="F4"/>
+									<menuitem value="VK_F5" label="F5"/>
+									<menuitem value="VK_F6" label="F6"/>
+									<menuitem value="VK_F7" label="F7"/>
+									<menuitem value="VK_F8" label="F8"/>
+									<menuitem value="VK_F9" label="F9"/>
+									<menuitem value="VK_F10" label="F10"/>
+									<menuitem value="VK_F11" label="F11"/>
+									<menuitem value="VK_F12" label="F12"/>
+									<menuitem value="VK_F13" label="F13"/>
+									<menuitem value="VK_F14" label="F14"/>
+									<menuitem value="VK_F15" label="F15"/>
+									<menuitem value="VK_F16" label="F16"/>
+									<menuitem value="VK_F17" label="F17"/>
+									<menuitem value="VK_F18" label="F18"/>
+									<menuitem value="VK_F19" label="F19"/>
+									<menuitem value="VK_F20" label="F20"/>
+									<menuitem value="VK_F21" label="F21"/>
+									<menuitem value="VK_F22" label="F22"/>
+									<menuitem value="VK_F23" label="F23"/>
+									<menuitem value="VK_F24" label="F24"/>
+								</menupopup>
+							</menulist>
+						</hbox>
+					</groupbox>
 				</tabpanel>
 				<!--<tabpanel id="aboutTab" orient="vertical" align="center">
 					<image id="logo"/>
