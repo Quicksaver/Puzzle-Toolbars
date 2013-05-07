@@ -15,4 +15,20 @@
 	
 	<toolbarbutton id="addonbar-closebutton" hidden="true" />
 	
+	<vbox id="browser-bottombox">
+		<box id="objName-left-PP"
+			class="PuzzlePiece"
+			context="toolbar-context-menu"
+			hidden="true">
+			<image onclick="objName.commandPP(event);" />
+		</box>
+		
+		<box id="objName-right-PP"
+			class="PuzzlePiece"
+			context="toolbar-context-menu"
+			hidden="true">
+			<image onclick="objName.commandPP(event);" />
+		</box>
+	</vbox>
+	
 </overlay>

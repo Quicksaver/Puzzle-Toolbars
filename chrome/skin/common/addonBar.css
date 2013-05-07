@@ -1,27 +1,12 @@
 @namespace url(http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul);
 @-moz-document url("chrome://browser/content/browser.xul") {
-
-	/*Animation*/
+	
 	#addon-bar {
 		position: fixed;
 		padding: 3px 5px 0px 5px;
 		border-radius: 8px 8px 0 0;
 		background-image: none;
 		overflow: hidden;
-	}
-	
-	#addon-bar[autohide]:hover,
-	#addon-bar[autohide][active],
-	#addon-bar[autohide][customizing="true"] {
-		opacity: 1;
-		-moz-transition: bottom .5s linear 0s, opacity .5s linear 0s;
-		transition: bottom .5s linear 0s, opacity .5s linear 0s; /* Firefox 16+ */
-	}
-	
-	#addon-bar[autohide]:not(:hover):not([active]) {
-		opacity: 0;
-		-moz-transition: bottom .5s linear .2s, opacity .5s linear .2s;
-		transition: bottom .5s linear .2s, opacity .5s linear .2s; /* Firefox 16+ */
 	}
 	
 	/* Inner buttons and other elements display */
@@ -69,6 +54,91 @@
 	#addon-bar > * > dropmaker {
 		padding: 0 3px;
 		border: none;
+	}
+	
+	/* Puzzle Pieces */
+	.PuzzlePiece {
+		position: fixed;
+	}
+	
+	.PuzzlePiece image {
+		list-style-image: url("chrome://thepuzzlepiece/skin/pp.png");
+		cursor: pointer;
+	}
+	#thePuzzlePiece-left-PP image {
+		-moz-image-region: rect(0px, 32px, 32px, 0px);
+	}
+	#thePuzzlePiece-right-PP image {
+		-moz-image-region: rect(0px, 64px, 32px, 32px);
+	}
+	#thePuzzlePiece-left-PP:hover image {
+		-moz-image-region: rect(32px, 32px, 64px, 0px);
+	}
+	#thePuzzlePiece-right-PP:hover image {
+		-moz-image-region: rect(32px, 64px, 64px, 32px);
+	}
+	
+	#addon-bar:not([movetoright]) {
+		padding-left: 17px;
+	}
+	#addon-bar[movetoright] {
+		padding-right: 17px;
+	}
+	
+	.PuzzlePiece:not([active]):not(:hover) {
+		opacity: 0;
+		-moz-transition: bottom .5s linear .2s, opacity .5s linear .2s, clip .5s linear .2s;
+		transition: bottom .5s linear .2s, opacity .5s linear .2s, clip .5s linear .2s; /* Firefox 16+ */
+	}
+	.PuzzlePiece:hover {
+		-moz-transition: bottom .25s linear 0s, opacity .25s linear 0s, clip .25s linear 0s;
+		transition: bottom .25s linear 0s, opacity .25s linear 0s, clip .25s linear 0s; /* Firefox 16+ */
+	}
+	.PuzzlePiece:not([active]):not(:hover) image {
+		-moz-transition: -moz-transform .5s linear .2s;
+		transition: transform .5s linear .2s; /* Firefox 16+ */
+	}
+	.PuzzlePiece:hover image {
+		-moz-transition: -moz-transform .25s linear 0s;
+		transition: transform .25s linear 0s; /* Firefox 16+ */
+	}
+	
+	.PuzzlePiece {
+		clip: rect(0px, 32px, 32px, 0px);
+	}
+	.PuzzlePiece[clipped][active],
+	.PuzzlePiece[clipped]:hover {
+		clip: rect(0px, 32px, 28px, 0px);
+	}
+	.PuzzlePiece:not([active]):not(:hover) {
+		clip: rect(0px, 32px, 9px, 0px);
+	}
+	.PuzzlePiece image {
+		-moz-transform: rotate(0deg);
+		transform: rotate(0deg); /* Firefox 16 */
+	}
+	#thePuzzlePiece-left-PP:not([active]):not(:hover) image {
+		-moz-transform: rotate(-40deg);
+		transform: rotate(-40deg); /* Firefox 16 */
+	}
+	#thePuzzlePiece-right-PP:not([active]):not(:hover) image {
+		-moz-transform: rotate(40deg);
+		transform: rotate(40deg); /* Firefox 16 */
+	}
+	
+	/*Animation*/
+	#addon-bar[autohide]:hover,
+	#addon-bar[autohide][active],
+	#addon-bar[autohide][customizing="true"] {
+		opacity: 1;
+		-moz-transition: bottom .5s linear 0s, opacity .5s linear 0s;
+		transition: bottom .5s linear 0s, opacity .5s linear 0s; /* Firefox 16+ */
+	}
+	
+	#addon-bar[autohide]:not(:hover):not([active]) {
+		opacity: 0;
+		-moz-transition: bottom .5s linear .2s, opacity .5s linear .2s;
+		transition: bottom .5s linear .2s, opacity .5s linear .2s; /* Firefox 16+ */
 	}
 	
 }

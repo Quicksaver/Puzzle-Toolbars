@@ -1,12 +1,17 @@
-moduleAid.VERSION = '1.1.2';
+moduleAid.VERSION = '1.1.3';
 
 this.__defineGetter__('addonBar', function() { return $('addon-bar'); });
 this.__defineGetter__('browserPanel', function() { return $('browser-panel'); });
 this.__defineGetter__('toggleAddonBar', function() { return window.toggleAddonBar; });
 this.__defineSetter__('toggleAddonBar', function(v) { return window.toggleAddonBar = v; });
+this.__defineGetter__('setToolbarVisibility', function() { return window.setToolbarVisibility; });
 this.__defineGetter__('contextMenu', function() { return $('toolbar-context-menu'); });
 this.__defineGetter__('contextOptions', function() { return $(objName+'-contextOptions'); });
 this.__defineGetter__('contextSeparator', function() { return $(objName+'-contextSeparator'); });
+
+this.addonBarContextNodes = {
+	get addonBar () { return addonBar; }
+};
 
 this._scrollBarWidth = null;
 this.__defineGetter__('scrollBarWidth', function() {
@@ -44,8 +49,15 @@ this.doOpenOptions = function() {
 };
 
 this.setContextMenu = function(e) {
-	toggleAttribute(contextOptions, 'hidden', !isAncestor(e.originalTarget.triggerNode, addonBar));
-	toggleAttribute(contextSeparator, 'hidden', !isAncestor(e.originalTarget.triggerNode, addonBar));
+	var notHidden = false;
+	for(var n in addonBarContextNodes) {
+		if(isAncestor(e.originalTarget.triggerNode, addonBarContextNodes[n])) {
+			notHidden = true;
+			break;
+		}
+	}
+	toggleAttribute(contextOptions, 'hidden', !notHidden);
+	toggleAttribute(contextSeparator, 'hidden', !notHidden);
 };
 
 this.delayMoveAddonBar = function() {
@@ -53,9 +65,7 @@ this.delayMoveAddonBar = function() {
 };
 
 this.moveAddonBar = function() {
-	// No point in positioning it if it's not visible
-	if(addonBar.collapsed) { return; }
-	
+	// We should do all these calculations to also position the puzzle pieces, even if the add-on bar is closed
 	moveBarStyle = {
 		maxWidth: -(scrollBarWidth *2),
 		left: scrollBarWidth,
@@ -69,12 +79,20 @@ this.moveAddonBar = function() {
 	moveBarStyle.left += appContentPos.left;
 	moveBarStyle.right += document.documentElement.clientWidth -appContentPos.right;
 	
+	// Account for the puzzle piece
+	moveBarStyle.left += 12;
+	moveBarStyle.right += 12;
+	
 	// Let's try to show it like it's poping up from somewhere when there's something below it
 	if(moveBarStyle.bottom > 1) { moveBarStyle.bottom--; }
 	
 	moveBarStyle.movetoRight = prefAid.movetoRight;
-	if(!shouldReMoveBar(moveBarStyle)) { return; }
 	lastBarStyle = moveBarStyle;
+	
+	dispatch(addonBar, { type: "WillMoveAddonBar", cancelable: false });
+	
+	// No point in positioning it if it's not visible
+	if(addonBar.collapsed) { return; }
 	
 	styleAid.unload('positionAddonBar_'+_UUID);
 	
@@ -89,10 +107,12 @@ this.moveAddonBar = function() {
 	sscode += '}';
 	
 	styleAid.load('positionAddonBar_'+_UUID, sscode, true);
+	
+	dispatch(addonBar, { type: "AddonBarMoved", cancelable: false });
 };
 
 moduleAid.LOADMODULE = function() {
-	overlayAid.overlayWindow(window, 'addonBar');
+	overlayAid.overlayWindow(window, 'addonBar', null, function(aWindow) { dispatch(aWindow, { type: "loadedAddonBarOverlay", cancelable: false }); });
 	
 	this.backups = {
 		toggleAddonBar: toggleAddonBar
