@@ -1,6 +1,8 @@
 <!ENTITY Options.title "The Puzzle Piece">
-<!ENTITY Optgeneral.label "Preferences">
+<!ENTITY Optgeneral.label "Add-on Bar">
 <!ENTITY Optabout.label "About">
+
+<!ENTITY GroupPosition.label "Position">
 
 <!ENTITY OptmoveToRight.label "Place on the right">
 

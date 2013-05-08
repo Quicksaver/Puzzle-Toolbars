@@ -1,6 +1,7 @@
-moduleAid.VERSION = '1.1.3';
+moduleAid.VERSION = '1.1.4';
 
 this.__defineGetter__('addonBar', function() { return $('addon-bar'); });
+this.__defineGetter__('bottomBox', function() { return $('browser-bottombox'); });
 this.__defineGetter__('browserPanel', function() { return $('browser-panel'); });
 this.__defineGetter__('toggleAddonBar', function() { return window.toggleAddonBar; });
 this.__defineSetter__('toggleAddonBar', function(v) { return window.toggleAddonBar = v; });
@@ -8,6 +9,7 @@ this.__defineGetter__('setToolbarVisibility', function() { return window.setTool
 this.__defineGetter__('contextMenu', function() { return $('toolbar-context-menu'); });
 this.__defineGetter__('contextOptions', function() { return $(objName+'-contextOptions'); });
 this.__defineGetter__('contextSeparator', function() { return $(objName+'-contextSeparator'); });
+this.getComputedStyle = function(el) { return window.getComputedStyle(el); };
 
 this.addonBarContextNodes = {
 	get addonBar () { return addonBar; }
@@ -28,6 +30,7 @@ this.__defineGetter__('scrollBarWidth', function() {
 	return _scrollBarWidth;
 });
 
+this.lwthemeImage = null;
 this.moveBarStyle = {};
 this.lastBarStyle = null;
 this.shouldReMoveBar = function(newStyle) {
@@ -37,6 +40,7 @@ this.shouldReMoveBar = function(newStyle) {
 	|| newStyle.right != lastBarStyle.right
 	|| newStyle.left != lastBarStyle.left
 	|| newStyle.maxWidth != lastBarStyle.maxWidth
+	|| newStyle.clientHeight != lastBarStyle.clientHeight
 	|| newStyle.movetoRight != lastBarStyle.movetoRight) {
 		return true;
 	}
@@ -86,6 +90,7 @@ this.moveAddonBar = function() {
 	// Let's try to show it like it's poping up from somewhere when there's something below it
 	if(moveBarStyle.bottom > 1) { moveBarStyle.bottom--; }
 	
+	moveBarStyle.clientHeight = addonBar.clientHeight;
 	moveBarStyle.movetoRight = prefAid.movetoRight;
 	lastBarStyle = moveBarStyle;
 	
@@ -108,7 +113,83 @@ this.moveAddonBar = function() {
 	
 	styleAid.load('positionAddonBar_'+_UUID, sscode, true);
 	
+	findPersonaPosition();
+	
 	dispatch(addonBar, { type: "AddonBarMoved", cancelable: false });
+};
+
+this.findPersonaPosition = function() {
+	if(bottomBox.getAttribute('lwthemefooter') != 'true') {
+		prefAid.lwthemebgImage = '';
+		prefAid.lwthemebgWidth = 0;
+		prefAid.lwthemebgHeight = 0;
+		prefAid.lwthemecolor = '';
+		prefAid.lwthemebgColor = '';
+		stylePersonaAddonBar();
+		return;
+	}
+	
+	var boxStyle = getComputedStyle(bottomBox);
+	if(prefAid.lwthemebgImage != boxStyle.getPropertyValue('background-image') && boxStyle.getPropertyValue('background-image') != 'none') {
+		prefAid.lwthemebgImage = boxStyle.getPropertyValue('background-image');
+		prefAid.lwthemecolor = boxStyle.getPropertyValue('color');
+		prefAid.lwthemebgColor = boxStyle.getPropertyValue('background-color');
+		prefAid.lwthemebgWidth = 0;
+		prefAid.lwthemebgHeight = 0;
+		
+		lwthemeImage = new window.Image();
+		lwthemeImage.onload = function() { findPersonaWidth(); };
+		lwthemeImage.src = prefAid.lwthemebgImage.substr(5, prefAid.lwthemebgImage.length - 8);
+		return;
+	}
+	
+	stylePersonaAddonBar();
+};
+
+this.findPersonaWidth = function() {
+	if(prefAid.lwthemebgWidth == 0 && lwthemeImage.naturalWidth != 0) {
+		prefAid.lwthemebgWidth = lwthemeImage.naturalWidth;
+	}
+	if(prefAid.lwthemebgHeight == 0 && lwthemeImage.naturalHeight != 0) {
+		prefAid.lwthemebgHeight = lwthemeImage.naturalHeight;
+	}
+	
+	if(prefAid.lwthemebgWidth != 0 && prefAid.lwthemebgHeight != 0) {
+		stylePersonaAddonBar();
+	}
+};
+
+this.stylePersonaAddonBar = function() {
+	// Unload current stylesheet if it's been loaded
+	styleAid.unload('personaFindBar_'+_UUID);
+	
+	if(prefAid.lwthemebgImage != '') {
+		var boxStyle = getComputedStyle(bottomBox);
+		
+		var offsetPersonaX = (!prefAid.movetoRight) ? -lastBarStyle.left : -bottomBox.clientWidth +lastBarStyle.right +addonBar.clientWidth;
+		
+		// Another personas in OSX tweak
+		var offsetPersonaY = -prefAid.lwthemebgHeight +lastBarStyle.clientHeight +lastBarStyle.bottom;
+		var offsetPadding = boxStyle.getPropertyValue('background-position');
+		if(offsetPadding.indexOf(' ') > -1 && offsetPadding.indexOf('px', offsetPadding.indexOf(' ') +1) > -1) {
+			offsetPersonaY += parseInt(offsetPadding.substr(offsetPadding.indexOf(' ') +1, offsetPadding.indexOf('px', offsetPadding.indexOf(' ') +1)));
+		}
+		
+		var sscode = '/*The Puzzle Piece CSS declarations of variable values*/\n';
+		sscode += '@namespace url(http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul);\n';
+		sscode += '@-moz-document url("'+document.baseURI+'") {\n';
+		sscode += '	window['+objName+'_UUID="'+_UUID+'"] #addon-bar {\n';
+		sscode += '	  background-image: ' + prefAid.lwthemebgImage + ' !important;\n';
+		sscode += '	  background-color: ' + prefAid.lwthemecolor + ' !important;\n';
+		sscode += '	  color: ' + prefAid.lwthemecolor + ' !important;\n';
+		sscode += '	  background-position: ' + offsetPersonaX + 'px ' +offsetPersonaY+ 'px !important;\n';
+		sscode += '	  background-repeat: repeat !important;\n';
+		sscode += '	  background-size: auto auto !important;\n';
+		sscode += '	}\n';
+		sscode += '}';
+		
+		styleAid.load('personaFindBar_'+_UUID, sscode, true);
+	}
 };
 
 moduleAid.LOADMODULE = function() {
@@ -128,6 +209,7 @@ moduleAid.LOADMODULE = function() {
 	listenerAid.add(contextMenu, 'popupshown', setContextMenu, false);
 	listenerAid.add(browserPanel, 'resize', delayMoveAddonBar);
 	listenerAid.add(addonBar, 'ToggledAddonBar', moveAddonBar);
+	observerAid.add(findPersonaPosition, "lightweight-theme-changed");
 	
 	moveAddonBar();
 };
@@ -135,6 +217,7 @@ moduleAid.LOADMODULE = function() {
 moduleAid.UNLOADMODULE = function() {
 	styleAid.unload('positionAddonBar_'+_UUID);
 	
+	observerAid.remove(findPersonaPosition, "lightweight-theme-changed");
 	listenerAid.remove(contextMenu, 'popupshown', setContextMenu, false);
 	listenerAid.remove(browserPanel, 'resize', delayMoveAddonBar);
 	listenerAid.remove(addonBar, 'ToggledAddonBar', moveAddonBar);

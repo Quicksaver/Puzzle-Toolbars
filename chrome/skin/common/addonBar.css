@@ -1,6 +1,11 @@
 @namespace url(http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul);
 @-moz-document url("chrome://browser/content/browser.xul") {
 	
+	/* FindBar has an annoying 1px background that makes the add-on bar look ugly */
+	#FindToolbar:not([movetotop]) {
+		background-image: none;
+	}
+	
 	#addon-bar {
 		position: fixed;
 		padding: 3px 5px 0px 5px;
@@ -17,6 +22,11 @@
 		display: block !important;
 		visibility: visible !important;
 		pointer-events: none;
+	}
+	
+	/* for fullscreen */
+	#addon-bar[moz-collapsed="true"] {
+		visibility: visible !important;
 	}
 	
 	/* Inner buttons and other elements display */

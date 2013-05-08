@@ -1,4 +1,4 @@
-var defaultsVersion = '1.0.3';
+var defaultsVersion = '1.0.4';
 var objName = 'thePuzzlePiece';
 var objPathString = 'thepuzzlepiece';
 var prefList = {
@@ -7,7 +7,13 @@ var prefList = {
 	addonBarKeycode: '/',
 	addonBarAccel: true,
 	addonBarShift: false,
-	addonBarAlt: false
+	addonBarAlt: false,
+	
+	lwthemebgImage: '',
+	lwthemebgWidth: 0,
+	lwthemebgHeight: 0,
+	lwthemecolor: '',
+	lwthemebgColor: ''
 };
 
 function startAddon(window) {

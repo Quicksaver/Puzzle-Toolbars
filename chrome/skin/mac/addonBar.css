@@ -1,6 +1,16 @@
 @namespace url(http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul);
 @-moz-document url("chrome://browser/content/browser.xul") {
 
+	/* FindBar has an annoying 1px background that makes the add-on bar look ugly */
+	#FindToolbar:not([movetotop]) {
+		border-top: 1px solid rgba(0,0,0,0.57);
+		-moz-border-top-colors: rgba(0,0,0,0.57);
+	}
+	#FindToolbar:not([movetotop]):-moz-window-inactive {
+		border-top: 1px solid rgba(0,0,0,0.32);
+		-moz-border-top-colors: rgba(0,0,0,0.32);
+	}
+	
 	#addon-bar {
 		background-color: -moz-mac-chrome-active;
 		border-top: 1px solid rgba(0,0,0,0.57);

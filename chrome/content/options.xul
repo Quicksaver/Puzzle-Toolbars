@@ -22,8 +22,11 @@
 			</tabs>
 			
 			<tabpanels id="tabPanels">
-				<tabpanel id="genTab" orient="vertical" align="start">
-					<checkbox label="&OptmoveToRight.label;" preference="pref-movetoRight"/>
+				<tabpanel id="genTab" orient="vertical">
+					<groupbox align="start">
+						<caption label="&GroupPosition.label;" />
+						<checkbox label="&OptmoveToRight.label;" preference="pref-movetoRight"/>
+					</groupbox>
 					
 					<groupbox align="center">
 						<caption label="&OptKeyboardShortcut.caption;"/>
