@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.0.0';
+moduleAid.VERSION = '1.0.1';
 
 this.__defineGetter__('leftPP', function() { return $(objName+'-left-PP'); });
 this.__defineGetter__('rightPP', function() { return $(objName+'-right-PP'); });
@@ -12,6 +12,8 @@ this.commandPP = function(e) {
 this.movePPs = function() {
 	toggleAttribute(activePP, 'clipped', lastBarStyle.bottom == 1);
 	
+	var OSoffset = (Services.appinfo.OS != 'WINNT') ? 3 : 8;
+	
 	styleAid.unload('positionPPs_'+_UUID);
 	
 	var sscode = '/*The Puzzle Piece CSS declarations of variable values*/\n';
@@ -19,8 +21,8 @@ this.movePPs = function() {
 	sscode += '@-moz-document url("'+document.baseURI+'") {\n';
 	sscode += '	window['+objName+'_UUID="'+_UUID+'"] #'+objName+'-left-PP { left: '+(lastBarStyle.left -12)+'px; }\n';
 	sscode += '	window['+objName+'_UUID="'+_UUID+'"] #'+objName+'-right-PP { right: '+(lastBarStyle.right -12)+'px; }\n';
-	sscode += '	window['+objName+'_UUID="'+_UUID+'"] #browser-bottombox .PuzzlePiece { bottom: '+(lastBarStyle.bottom -8)+'px; }\n';
-	sscode += '	window['+objName+'_UUID="'+_UUID+'"] #browser-bottombox .PuzzlePiece:not([active]):not(:hover) { bottom: '+(lastBarStyle.bottom -8 -19)+'px; }\n';
+	sscode += '	window['+objName+'_UUID="'+_UUID+'"] #browser-bottombox .PuzzlePiece { bottom: '+(lastBarStyle.bottom -OSoffset)+'px; }\n';
+	sscode += '	window['+objName+'_UUID="'+_UUID+'"] #browser-bottombox .PuzzlePiece:not([active]):not(:hover) { bottom: '+(lastBarStyle.bottom -OSoffset -19)+'px; }\n';
 	sscode += '}';
 	
 	styleAid.load('positionPPs_'+_UUID, sscode, true);

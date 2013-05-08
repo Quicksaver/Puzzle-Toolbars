@@ -8,6 +8,7 @@
 	}
 	
 	#addon-bar {
+		-moz-appearance: none !important;
 		background-color: -moz-dialog;
 		border-top: 1px solid rgb(0,0,0);
 		border-right: 1px solid rgb(0,0,0);
@@ -15,6 +16,10 @@
 		-moz-border-top-colors: rgb(178,174,170);
 		-moz-border-right-colors: rgb(178,174,170);
 		-moz-border-left-colors: rgb(178,174,170);
+	}
+	
+	.PuzzlePiece:not([active]):not(:hover) {
+		clip: rect(0px, 32px, 14px, 0px);
 	}
 	
 }

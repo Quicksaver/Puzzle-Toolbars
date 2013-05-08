@@ -16,12 +16,24 @@
 		-moz-border-left-colors: rgb(160, 160, 160);
 	}
 	
-	window:not([thepuzzlepiece-oscpu="Windows NT 5.1"]) #addon-bar {
+	window:not([thePuzzlePiece-oscpu="Windows NT 5.1"]) #addon-bar {
 		background-color: rgb(219,234,249);
 	}
 	
-	window[thepuzzlepiece-oscpu="Windows NT 5.1"] #addon-bar {
+	window[thePuzzlePiece-oscpu="Windows NT 5.1"] #addon-bar {
 		background-color: -moz-dialog;
+	}
+	
+	window[thePuzzlePiece-oscpu="Windows NT 5.1"] #addon-bar #status-bar resizer {
+		display: none !important;
+	}
+	
+	.PuzzlePiece[clipped][active],
+	.PuzzlePiece[clipped]:hover {
+		clip: rect(0px, 32px, 28px, 0px);
+	}
+	.PuzzlePiece:not([active]):not(:hover) {
+		clip: rect(0px, 32px, 9px, 0px);
 	}
 	
 }
