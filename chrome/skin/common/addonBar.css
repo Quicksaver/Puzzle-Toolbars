@@ -105,7 +105,7 @@
 		padding-right: 17px;
 	}
 	
-	.PuzzlePiece:not([active]):not(:hover) {
+	.PuzzlePiece:not([customizing]):not([active]):not(:hover) {
 		opacity: 0;
 		-moz-transition: bottom .5s linear .2s, opacity .5s linear .2s, clip .5s linear .2s;
 		transition: bottom .5s linear .2s, opacity .5s linear .2s, clip .5s linear .2s; /* Firefox 16+ */
@@ -114,7 +114,7 @@
 		-moz-transition: bottom .25s linear 0s, opacity .25s linear 0s, clip .25s linear 0s;
 		transition: bottom .25s linear 0s, opacity .25s linear 0s, clip .25s linear 0s; /* Firefox 16+ */
 	}
-	.PuzzlePiece:not([active]):not(:hover) image {
+	.PuzzlePiece:not([customizing]):not([active]):not(:hover) image {
 		-moz-transition: -moz-transform .5s linear .2s;
 		transition: transform .5s linear .2s; /* Firefox 16+ */
 	}
@@ -130,29 +130,29 @@
 	.PuzzlePiece[clipped]:hover {
 		clip: rect(0px, 32px, 28px, 0px);
 	}
-	.PuzzlePiece:not([active]):not(:hover) {
+	.PuzzlePiece:not([customizing]):not([active]):not(:hover) {
 		clip: rect(0px, 32px, 9px, 0px);
 	}
 	.PuzzlePiece image {
 		-moz-transform: rotate(0deg);
 		transform: rotate(0deg); /* Firefox 16 */
 	}
-	#thePuzzlePiece-left-PP:not([active]):not(:hover) image {
+	#thePuzzlePiece-left-PP:not([customizing]):not([active]):not(:hover) image {
 		-moz-transform: rotate(-40deg);
 		transform: rotate(-40deg); /* Firefox 16 */
 	}
-	#thePuzzlePiece-right-PP:not([active]):not(:hover) image {
+	#thePuzzlePiece-right-PP:not([customizing]):not([active]):not(:hover) image {
 		-moz-transform: rotate(40deg);
 		transform: rotate(40deg); /* Firefox 16 */
 	}
 	
 	/*Animation*/
 	#addon-bar[autohide]:hover,
-	#addon-bar[autohide][active],
+	#addon-bar[autohide][hover],
 	#addon-bar[autohide][customizing="true"] {
 		opacity: 1;
-		-moz-transition: bottom .5s linear 0s, opacity .5s linear 0s;
-		transition: bottom .5s linear 0s, opacity .5s linear 0s; /* Firefox 16+ */
+		-moz-transition: bottom .25s linear 0s, opacity .25s linear 0s;
+		transition: bottom .25s linear 0s, opacity .25s linear 0s; /* Firefox 16+ */
 	}
 	
 	#addon-bar[autohide]:not(:hover):not([active]) {

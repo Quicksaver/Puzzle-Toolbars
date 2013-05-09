@@ -18,7 +18,7 @@
 		-moz-border-left-colors: rgb(178,174,170);
 	}
 	
-	.PuzzlePiece:not([active]):not(:hover) {
+	.PuzzlePiece:not([customizing]):not([active]):not(:hover) {
 		clip: rect(0px, 32px, 14px, 0px);
 	}
 	

@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.0.2';
+moduleAid.VERSION = '1.0.3';
 
 this.__defineGetter__('leftPP', function() { return $(objName+'-left-PP'); });
 this.__defineGetter__('rightPP', function() { return $(objName+'-right-PP'); });
@@ -22,7 +22,7 @@ this.movePPs = function() {
 	sscode += '	window['+objName+'_UUID="'+_UUID+'"] #'+objName+'-left-PP { left: '+(lastBarStyle.left -12)+'px; }\n';
 	sscode += '	window['+objName+'_UUID="'+_UUID+'"] #'+objName+'-right-PP { right: '+(lastBarStyle.right -12)+'px; }\n';
 	sscode += '	window['+objName+'_UUID="'+_UUID+'"] #browser-bottombox .PuzzlePiece { bottom: '+(lastBarStyle.bottom -OSoffset)+'px; }\n';
-	sscode += '	window['+objName+'_UUID="'+_UUID+'"] #browser-bottombox .PuzzlePiece:not([active]):not(:hover) { bottom: '+(lastBarStyle.bottom -OSoffset -19)+'px; }\n';
+	sscode += '	window['+objName+'_UUID="'+_UUID+'"] #browser-bottombox .PuzzlePiece:not([customizing]):not([active]):not(:hover) { bottom: '+(lastBarStyle.bottom -OSoffset -19)+'px; }\n';
 	sscode += '}';
 	
 	styleAid.load('positionPPs_'+_UUID, sscode, true);
@@ -45,11 +45,17 @@ this.activatePPs = function() {
 	toggleAttribute(activePP, 'active', !addonBar.collapsed);
 };
 
+this.customizePP = function(e) {
+	toggleAttribute(activePP, 'customizing', (e.type == 'beforecustomization'));
+};
+
 moduleAid.LOADMODULE = function() {
 	addonBarContextNodes.__defineGetter__('activePP', function() { return activePP; });
 	
 	listenerAid.add(addonBar, 'WillMoveAddonBar', movePPs);
 	listenerAid.add(addonBar, 'ToggledAddonBar', activatePPs);
+	listenerAid.add(window, 'beforecustomization', customizePP, false);
+	listenerAid.add(window, 'aftercustomization', customizePP, false);
 	
 	prefAid.listen('movetoRight', choosePP);
 	
@@ -66,6 +72,8 @@ moduleAid.UNLOADMODULE = function() {
 	
 	listenerAid.remove(addonBar, 'WillMoveAddonBar', movePPs);
 	listenerAid.remove(addonBar, 'ToggledAddonBar', activatePPs);
+	listenerAid.remove(window, 'beforecustomization', customizePP, false);
+	listenerAid.remove(window, 'aftercustomization', customizePP, false);
 	
 	delete addonBarContextNodes.activePP;
 	

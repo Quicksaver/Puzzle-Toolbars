@@ -32,7 +32,7 @@
 	.PuzzlePiece[clipped]:hover {
 		clip: rect(0px, 32px, 28px, 0px);
 	}
-	.PuzzlePiece:not([active]):not(:hover) {
+	.PuzzlePiece:not([customizing]):not([active]):not(:hover) {
 		clip: rect(0px, 32px, 9px, 0px);
 	}
 	

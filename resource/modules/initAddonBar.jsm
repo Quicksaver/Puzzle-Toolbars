@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.1.5';
+moduleAid.VERSION = '1.1.6';
 
 this.__defineGetter__('addonBar', function() { return $('addon-bar'); });
 this.__defineGetter__('bottomBox', function() { return $('browser-bottombox'); });
@@ -108,8 +108,8 @@ this.moveAddonBar = function() {
 	
 	dispatch(addonBar, { type: "WillMoveAddonBar", cancelable: false });
 	
-	// No point in positioning it if it's not visible
-	if(addonBar.collapsed) { return; }
+	// I find it easier to always just move the add-on bar when this is called, instead of checking every occasion when it isn't visible and should still be moved
+	//if(addonBar.collapsed) { return; }
 	
 	styleAid.unload('positionAddonBar_'+_UUID);
 	
