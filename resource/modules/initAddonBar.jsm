@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.1.4';
+moduleAid.VERSION = '1.1.5';
 
 this.__defineGetter__('addonBar', function() { return $('addon-bar'); });
 this.__defineGetter__('bottomBox', function() { return $('browser-bottombox'); });
@@ -6,6 +6,8 @@ this.__defineGetter__('browserPanel', function() { return $('browser-panel'); })
 this.__defineGetter__('toggleAddonBar', function() { return window.toggleAddonBar; });
 this.__defineSetter__('toggleAddonBar', function(v) { return window.toggleAddonBar = v; });
 this.__defineGetter__('setToolbarVisibility', function() { return window.setToolbarVisibility; });
+this.__defineGetter__('appMenu', function() { return $('appmenu_customizeMenu'); });
+this.__defineGetter__('viewMenu', function() { return $('viewToolbarsMenu').firstChild; });
 this.__defineGetter__('contextMenu', function() { return $('toolbar-context-menu'); });
 this.__defineGetter__('contextOptions', function() { return $(objName+'-contextOptions'); });
 this.__defineGetter__('contextSeparator', function() { return $(objName+'-contextSeparator'); });
@@ -62,6 +64,16 @@ this.setContextMenu = function(e) {
 	}
 	toggleAttribute(contextOptions, 'hidden', !notHidden);
 	toggleAttribute(contextSeparator, 'hidden', !notHidden);
+	
+	setAttribute(contextMenu.getElementsByAttribute('toolbarId', 'addon-bar')[0], 'command', 'Browser:ToggleAddonBar');
+};
+
+this.setViewMenu = function(e) {
+	setAttribute(viewMenu.getElementsByAttribute('toolbarId', 'addon-bar')[0], 'command', 'Browser:ToggleAddonBar');
+};
+
+this.setAppMenu = function(e) {
+	setAttribute(appMenu.getElementsByAttribute('toolbarId', 'addon-bar')[0], 'command', 'Browser:ToggleAddonBar');
 };
 
 this.delayMoveAddonBar = function() {
@@ -207,6 +219,8 @@ moduleAid.LOADMODULE = function() {
 	prefAid.listen('movetoRight', moveAddonBar);
 	
 	listenerAid.add(contextMenu, 'popupshown', setContextMenu, false);
+	listenerAid.add(viewMenu, 'popupshown', setViewMenu, false);
+	listenerAid.add(appMenu, 'popupshown', setAppMenu, false);
 	listenerAid.add(browserPanel, 'resize', delayMoveAddonBar);
 	listenerAid.add(addonBar, 'ToggledAddonBar', moveAddonBar);
 	observerAid.add(findPersonaPosition, "lightweight-theme-changed");
@@ -219,10 +233,16 @@ moduleAid.UNLOADMODULE = function() {
 	
 	observerAid.remove(findPersonaPosition, "lightweight-theme-changed");
 	listenerAid.remove(contextMenu, 'popupshown', setContextMenu, false);
+	listenerAid.remove(viewMenu, 'popupshown', setViewMenu, false);
+	listenerAid.remove(appMenu, 'popupshown', setAppMenu, false);
 	listenerAid.remove(browserPanel, 'resize', delayMoveAddonBar);
 	listenerAid.remove(addonBar, 'ToggledAddonBar', moveAddonBar);
 	
 	prefAid.unlisten('movetoRight', moveAddonBar);
+	
+	removeAttribute(contextMenu.getElementsByAttribute('toolbarId', 'addon-bar')[0], 'command');
+	removeAttribute(viewMenu.getElementsByAttribute('toolbarId', 'addon-bar')[0], 'command');
+	removeAttribute(appMenu.getElementsByAttribute('toolbarId', 'addon-bar')[0], 'command');
 	
 	if(this.backups) {
 		toggleAddonBar = this.backups.toggleAddonBar;

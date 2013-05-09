@@ -17,7 +17,7 @@
 		transition: opacity .25s linear 0s; /* Firefox 16+ */
 	}
 	
-	#addon-bar[collapsed="true"] {
+	#addon-bar[collapsed="true"]:not([customizing="true"]) {
 		opacity: 0;
 		display: block !important;
 		visibility: visible !important;

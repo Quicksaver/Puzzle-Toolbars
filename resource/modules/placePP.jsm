@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.0.1';
+moduleAid.VERSION = '1.0.2';
 
 this.__defineGetter__('leftPP', function() { return $(objName+'-left-PP'); });
 this.__defineGetter__('rightPP', function() { return $(objName+'-right-PP'); });
@@ -54,6 +54,7 @@ moduleAid.LOADMODULE = function() {
 	prefAid.listen('movetoRight', choosePP);
 	
 	choosePP();
+	movePPs();
 };
 
 moduleAid.UNLOADMODULE = function() {
