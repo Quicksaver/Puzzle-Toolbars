@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.1.6';
+moduleAid.VERSION = '1.1.7';
 
 this.__defineGetter__('addonBar', function() { return $('addon-bar'); });
 this.__defineGetter__('bottomBox', function() { return $('browser-bottombox'); });
@@ -12,6 +12,8 @@ this.__defineGetter__('contextMenu', function() { return $('toolbar-context-menu
 this.__defineGetter__('contextOptions', function() { return $(objName+'-contextOptions'); });
 this.__defineGetter__('contextSeparator', function() { return $(objName+'-contextSeparator'); });
 this.getComputedStyle = function(el) { return window.getComputedStyle(el); };
+
+this.CLIPBAR = 5; // ammount of pixels to clip the bar to when it is closed or hidden
 
 this.addonBarContextNodes = {
 	get addonBar () { return addonBar; }
@@ -108,6 +110,8 @@ this.moveAddonBar = function() {
 	
 	dispatch(addonBar, { type: "WillMoveAddonBar", cancelable: false });
 	
+	var barOffset = addonBar.clientHeight -CLIPBAR;
+	
 	// I find it easier to always just move the add-on bar when this is called, instead of checking every occasion when it isn't visible and should still be moved
 	//if(addonBar.collapsed) { return; }
 	
@@ -120,6 +124,13 @@ this.moveAddonBar = function() {
 	sscode += '		bottom: '+moveBarStyle.bottom+'px;\n';
 	sscode += (!prefAid.movetoRight) ? '		left: '+moveBarStyle.left+'px;\n' : '		right: '+moveBarStyle.right+'px;\n';
 	sscode += '		max-width: '+Math.max(moveBarStyle.maxWidth, 5)+'px;\n';
+	sscode += '	}\n';
+	sscode += '	window['+objName+'_UUID="'+_UUID+'"] #addon-bar:not([autohide]) {\n';
+	sscode += '		clip: rect(0px, '+(addonBar.clientWidth +1)+'px, '+(addonBar.clientHeight +1)+'px, 0px);\n';
+	sscode += '	}\n';
+	sscode += '	window['+objName+'_UUID="'+_UUID+'"] #addon-bar[collapsed="true"]:not([customizing="true"]) {\n';
+	sscode += '		bottom: '+(moveBarStyle.bottom -barOffset)+'px;\n';
+	sscode += '		clip: rect(0px, '+(addonBar.clientWidth +1)+'px, '+CLIPBAR+'px, 0px);\n';
 	sscode += '	}\n';
 	sscode += '}';
 	

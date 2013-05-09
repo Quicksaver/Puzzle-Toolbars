@@ -13,8 +13,6 @@
 		background-image: none;
 		overflow: hidden;
 		opacity: 1;
-		-moz-transition: opacity .25s linear 0s;
-		transition: opacity .25s linear 0s; /* Firefox 16+ */
 	}
 	
 	#addon-bar[collapsed="true"]:not([customizing="true"]) {
@@ -105,20 +103,25 @@
 		padding-right: 17px;
 	}
 	
-	.PuzzlePiece:not([customizing]):not([active]):not(:hover) {
+	.PuzzlePiece:not([customizing]):not([active]):not(:hover):not([hover]),
+	.PuzzlePiece:not([customizing])[autohide]:not(:hover):not([hover]) {
 		opacity: 0;
 		-moz-transition: bottom .5s linear .2s, opacity .5s linear .2s, clip .5s linear .2s;
 		transition: bottom .5s linear .2s, opacity .5s linear .2s, clip .5s linear .2s; /* Firefox 16+ */
 	}
-	.PuzzlePiece:hover {
+	.PuzzlePiece:hover,
+	.PuzzlePiece[hover],
+	.PuzzlePiece[active] {
 		-moz-transition: bottom .25s linear 0s, opacity .25s linear 0s, clip .25s linear 0s;
 		transition: bottom .25s linear 0s, opacity .25s linear 0s, clip .25s linear 0s; /* Firefox 16+ */
 	}
-	.PuzzlePiece:not([customizing]):not([active]):not(:hover) image {
+	.PuzzlePiece:not([customizing]):not([active]):not(:hover):not([hover]) image {
 		-moz-transition: -moz-transform .5s linear .2s;
 		transition: transform .5s linear .2s; /* Firefox 16+ */
 	}
-	.PuzzlePiece:hover image {
+	.PuzzlePiece:hover image,
+	.PuzzlePiece[hover] image,
+	.PuzzlePiece[active] image {
 		-moz-transition: -moz-transform .25s linear 0s;
 		transition: transform .25s linear 0s; /* Firefox 16+ */
 	}
@@ -126,39 +129,42 @@
 	.PuzzlePiece {
 		clip: rect(0px, 32px, 32px, 0px);
 	}
-	.PuzzlePiece[clipped][active],
-	.PuzzlePiece[clipped]:hover {
-		clip: rect(0px, 32px, 28px, 0px);
-	}
-	.PuzzlePiece:not([customizing]):not([active]):not(:hover) {
-		clip: rect(0px, 32px, 9px, 0px);
-	}
 	.PuzzlePiece image {
 		-moz-transform: rotate(0deg);
 		transform: rotate(0deg); /* Firefox 16 */
 	}
-	#thePuzzlePiece-left-PP:not([customizing]):not([active]):not(:hover) image {
+	#thePuzzlePiece-left-PP:not([customizing]):not([active]):not(:hover):not([hover]) image {
 		-moz-transform: rotate(-40deg);
 		transform: rotate(-40deg); /* Firefox 16 */
 	}
-	#thePuzzlePiece-right-PP:not([customizing]):not([active]):not(:hover) image {
+	#thePuzzlePiece-right-PP:not([customizing]):not([active]):not(:hover):not([hover]) image {
 		-moz-transform: rotate(40deg);
 		transform: rotate(40deg); /* Firefox 16 */
 	}
 	
-	/*Animation*/
-	#addon-bar[autohide]:hover,
-	#addon-bar[autohide][hover],
-	#addon-bar[autohide][customizing="true"] {
-		opacity: 1;
-		-moz-transition: bottom .25s linear 0s, opacity .25s linear 0s;
-		transition: bottom .25s linear 0s, opacity .25s linear 0s; /* Firefox 16+ */
+	/* Animation */
+	#addon-bar:hover,
+	#addon-bar[hover],
+	#addon-bar[customizing="true"],
+	#addon-bar:not([collapsed="true"]) {
+		-moz-transition: bottom .25s linear 0s, opacity .25s linear 0s, clip .25s linear 0s;
+		transition: bottom .25s linear 0s, opacity .25s linear 0s, clip .25s linear 0s; /* Firefox 16+ */
 	}
 	
-	#addon-bar[autohide]:not(:hover):not([active]) {
+	#addon-bar[autohide]:not(:hover):not([hover]):not([customizing="true"]),
+	#addon-bar[collapsed="true"] {
+		-moz-transition: bottom .5s linear .2s, opacity .5s linear .2s, clip .5s linear .2s;
+		transition: bottom .5s linear .2s, opacity .5s linear .2s, clip .5s linear .2s; /* Firefox 16+ */
+	}
+	
+	#addon-bar:not([collapsed="true"]):hover,
+	#addon-bar:not([collapsed="true"])[hover],
+	#addon-bar[customizing="true"] {
+		opacity: 1;
+	}
+	
+	#addon-bar[autohide]:not([customizing]):not(:hover):not([hover]) {
 		opacity: 0;
-		-moz-transition: bottom .5s linear .2s, opacity .5s linear .2s;
-		transition: bottom .5s linear .2s, opacity .5s linear .2s; /* Firefox 16+ */
 	}
 	
 }

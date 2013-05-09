@@ -3,8 +3,10 @@
 <!ENTITY Optabout.label "About">
 
 <!ENTITY GroupPosition.label "Position">
+<!ENTITY GroupBehavior.label "Behavior">
 
 <!ENTITY OptmoveToRight.label "Place on the right">
+<!ENTITY OptautoHide.label "Hide add-on bar automatically">
 
 <!ENTITY OptKeyboardShortcut.caption "Add-on Bar Keyboard Shortcut">
 <!ENTITY OptKeyboardShortcut.control "Control">

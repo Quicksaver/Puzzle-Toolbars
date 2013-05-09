@@ -9,6 +9,7 @@
 	<prefpane>
 		<preferences>
 			<preference id="pref-movetoRight" name="extensions.thepuzzlepiece.movetoRight" type="bool" />
+			<preference id="pref-autoHide" name="extensions.thepuzzlepiece.autoHide" type="bool" />
 			<preference id="pref-addonBarKeycode" name="extensions.thepuzzlepiece.addonBarKeycode" type="string"/>
 			<preference id="pref-addonBarAccel" name="extensions.thepuzzlepiece.addonBarAccel" type="bool"/>
 			<preference id="pref-addonBarShift" name="extensions.thepuzzlepiece.addonBarShift" type="bool"/>
@@ -26,6 +27,11 @@
 					<groupbox align="start">
 						<caption label="&GroupPosition.label;" />
 						<checkbox label="&OptmoveToRight.label;" preference="pref-movetoRight"/>
+					</groupbox>
+					
+					<groupbox align="start">
+						<caption label="&GroupBehavior.label;" />
+						<checkbox label="&OptautoHide.label;" preference="pref-autoHide"/>
 					</groupbox>
 					
 					<groupbox align="center">

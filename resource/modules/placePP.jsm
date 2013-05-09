@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.0.3';
+moduleAid.VERSION = '1.0.4';
 
 this.__defineGetter__('leftPP', function() { return $(objName+'-left-PP'); });
 this.__defineGetter__('rightPP', function() { return $(objName+'-right-PP'); });
@@ -7,6 +7,7 @@ this.__defineGetter__('activePP', function() { return (prefAid.movetoRight) ? ri
 this.commandPP = function(e) {
 	if(e.button != 0) { return; }
 	toggleAddonBar();
+	dispatch(activePP, { type: 'toggledAddonBarThroughButton', cancelable: false });
 };
 
 this.movePPs = function() {
