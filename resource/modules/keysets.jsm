@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.0.0';
+moduleAid.VERSION = '1.0.1';
 
 this.addonBarKey = {
 	id: objName+'-key',
@@ -15,7 +15,7 @@ this.setKeys = function() {
 };
 
 moduleAid.LOADMODULE = function() {
-	overlayAid.overlayURI('chrome://browser/content/browser.xul', 'keyset', null, function() { setKeys(); });
+	overlayAid.overlayURI('chrome://browser/content/browser.xul', 'keyset', null, setKeys);
 	
 	prefAid.listen('addonBarKeycode', setKeys);
 	prefAid.listen('addonBarAccel', setKeys);
