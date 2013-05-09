@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.0.0';
+moduleAid.VERSION = '1.0.1';
 
 this.onMouseOver = function() {
 	setHover(true);
@@ -104,6 +104,21 @@ this.initialThroughButton = function() {
 	}
 };
 
+// Keep add-on bar visible when opening menus within it
+this.holdPopupMenu = function(e) {
+	var trigger = e.originalTarget.triggerNode;
+	
+	if(isAncestor(trigger, addonBar) || isAncestor(trigger, activePP) || isAncestor(e.originalTarget, addonBar)) {
+		setHover(true);
+		var selfRemover = function(ee) {
+			if(ee.originalTarget != e.originalTarget) { return; } //submenus
+			setHover(false);
+			listenerAid.remove(e.target, 'popuphidden', selfRemover);
+		}
+		listenerAid.add(e.target, 'popuphidden', selfRemover);
+	}
+};
+
 moduleAid.LOADMODULE = function() {
 	setAttribute(addonBar, 'autohide', 'true');
 	addonBar.hovers = 0;
@@ -114,6 +129,7 @@ moduleAid.LOADMODULE = function() {
 	listenerAid.add(addonBar, 'mouseout', onMouseOut);
 	listenerAid.add(addonBar, 'WillMoveAddonBar', moveAutoHide);
 	listenerAid.add(addonBar, 'ToggledAddonBar', initialShowBar);
+	listenerAid.add(window, 'popupshown', holdPopupMenu, false);
 	
 	prefAid.listen('movetoRight', initHovers);
 	
@@ -141,6 +157,7 @@ moduleAid.UNLOADMODULE = function() {
 	listenerAid.remove(addonBar, 'mouseout', onMouseOut);
 	listenerAid.remove(addonBar, 'WillMoveAddonBar', moveAutoHide);
 	listenerAid.remove(addonBar, 'ToggledAddonBar', initialShowBar);
+	listenerAid.remove(window, 'popupshown', holdPopupMenu, false);
 	
 	listenerAid.remove(leftPP, 'dragenter', onDragEnter);
 	listenerAid.remove(leftPP, 'dragexit', onDragExit);

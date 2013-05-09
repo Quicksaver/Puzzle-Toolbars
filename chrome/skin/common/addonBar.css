@@ -150,11 +150,13 @@
 		-moz-transition: bottom .25s linear 0s, opacity .25s linear 0s, clip .25s linear 0s;
 		transition: bottom .25s linear 0s, opacity .25s linear 0s, clip .25s linear 0s; /* Firefox 16+ */
 	}
-	
-	#addon-bar[autohide]:not(:hover):not([hover]):not([customizing="true"]),
-	#addon-bar[collapsed="true"] {
+	#addon-bar:not([collapsed="true"])[autohide]:not(:hover):not([hover]):not([customizing="true"]) {
 		-moz-transition: bottom .5s linear .2s, opacity .5s linear .2s, clip .5s linear .2s;
 		transition: bottom .5s linear .2s, opacity .5s linear .2s, clip .5s linear .2s; /* Firefox 16+ */
+	}
+	#addon-bar[collapsed="true"] {
+		-moz-transition: bottom .5s linear 0s, opacity .5s linear 0s, clip .5s linear 0s;
+		transition: bottom .5s linear 0s, opacity .5s linear 0s, clip .5s linear 0s; /* Firefox 16+ */
 	}
 	
 	#addon-bar:not([collapsed="true"]):hover,

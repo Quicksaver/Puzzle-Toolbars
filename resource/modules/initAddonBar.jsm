@@ -56,6 +56,7 @@ this.doOpenOptions = function() {
 	openOptions();
 };
 
+// Menus are dynamic, I need to make sure the entries do what they're supposed to if they're changed
 this.setContextMenu = function(e) {
 	var notHidden = false;
 	for(var n in addonBarContextNodes) {
