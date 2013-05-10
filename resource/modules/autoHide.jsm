@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.0.1';
+moduleAid.VERSION = '1.0.2';
 
 this.onMouseOver = function() {
 	setHover(true);
@@ -75,7 +75,7 @@ this.moveAutoHide = function() {
 	sscode += '@namespace url(http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul);\n';
 	sscode += '@-moz-document url("'+document.baseURI+'") {\n';
 	sscode += '	window['+objName+'_UUID="'+_UUID+'"] #addon-bar[autohide]:not([customizing="true"]):not([hover]):not(:hover) {\n';
-	sscode += '		bottom: '+(lastBarStyle.bottom -barOffset)+'px;\n';
+	sscode += '		bottom: '+(moveBarStyle.bottom -barOffset)+'px;\n';
 	sscode += '		clip: rect(0px, '+(addonBar.clientWidth +1)+'px, '+CLIPBAR+'px, 0px);\n';
 	sscode += '	}\n';
 	sscode += '	window['+objName+'_UUID="'+_UUID+'"] #addon-bar[autohide][hover],\n';
@@ -83,7 +83,7 @@ this.moveAutoHide = function() {
 	sscode += '	window['+objName+'_UUID="'+_UUID+'"] #addon-bar[autohide][customizing="true"] {\n';
 	sscode += '		clip: rect(0px, '+(addonBar.clientWidth +1)+'px, '+(addonBar.clientHeight +1)+'px, 0px);\n';
 	sscode += '	}\n';
-	sscode += '	window['+objName+'_UUID="'+_UUID+'"] #browser-bottombox .PuzzlePiece:not([customizing])[autohide][active]:not(:hover):not([hover]) { bottom: '+(lastBarStyle.bottom -OSoffset -19)+'px; }\n';
+	sscode += '	window['+objName+'_UUID="'+_UUID+'"] #browser-bottombox .PuzzlePiece:not([customizing])[autohide][active]:not(:hover):not([hover]) { bottom: '+(moveBarStyle.bottom -OSoffset -19)+'px; }\n';
 	sscode += '}';
 	
 	styleAid.load('autoHide_'+_UUID, sscode, true);

@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.1.7';
+moduleAid.VERSION = '1.1.8';
 
 this.__defineGetter__('addonBar', function() { return $('addon-bar'); });
 this.__defineGetter__('bottomBox', function() { return $('browser-bottombox'); });
@@ -36,21 +36,6 @@ this.__defineGetter__('scrollBarWidth', function() {
 
 this.lwthemeImage = null;
 this.moveBarStyle = {};
-this.lastBarStyle = null;
-this.shouldReMoveBar = function(newStyle) {
-	if(!lastBarStyle) { return true; }
-	
-	if(newStyle.bottom != lastBarStyle.bottom
-	|| newStyle.right != lastBarStyle.right
-	|| newStyle.left != lastBarStyle.left
-	|| newStyle.maxWidth != lastBarStyle.maxWidth
-	|| newStyle.clientHeight != lastBarStyle.clientHeight
-	|| newStyle.movetoRight != lastBarStyle.movetoRight) {
-		return true;
-	}
-	
-	return false;
-};
 
 this.doOpenOptions = function() {
 	openOptions();
@@ -107,7 +92,7 @@ this.moveAddonBar = function() {
 	
 	moveBarStyle.clientHeight = addonBar.clientHeight;
 	moveBarStyle.movetoRight = prefAid.movetoRight;
-	lastBarStyle = moveBarStyle;
+	moveBarStyle = moveBarStyle;
 	
 	dispatch(addonBar, { type: "WillMoveAddonBar", cancelable: false });
 	
@@ -190,10 +175,10 @@ this.stylePersonaAddonBar = function() {
 	if(prefAid.lwthemebgImage != '') {
 		var boxStyle = getComputedStyle(bottomBox);
 		
-		var offsetPersonaX = (!prefAid.movetoRight) ? -lastBarStyle.left : -bottomBox.clientWidth +lastBarStyle.right +addonBar.clientWidth;
+		var offsetPersonaX = (!prefAid.movetoRight) ? -moveBarStyle.left : -bottomBox.clientWidth +moveBarStyle.right +addonBar.clientWidth;
 		
 		// Another personas in OSX tweak
-		var offsetPersonaY = -prefAid.lwthemebgHeight +lastBarStyle.clientHeight +lastBarStyle.bottom;
+		var offsetPersonaY = -prefAid.lwthemebgHeight +moveBarStyle.clientHeight +moveBarStyle.bottom;
 		var offsetPadding = boxStyle.getPropertyValue('background-position');
 		if(offsetPadding.indexOf(' ') > -1 && offsetPadding.indexOf('px', offsetPadding.indexOf(' ') +1) > -1) {
 			offsetPersonaY += parseInt(offsetPadding.substr(offsetPadding.indexOf(' ') +1, offsetPadding.indexOf('px', offsetPadding.indexOf(' ') +1)));
