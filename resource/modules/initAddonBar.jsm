@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.1.9';
+moduleAid.VERSION = '1.1.10';
 
 this.__defineGetter__('addonBar', function() { return $('addon-bar'); });
 this.__defineGetter__('bottomBox', function() { return $('browser-bottombox'); });
@@ -223,6 +223,8 @@ moduleAid.LOADMODULE = function() {
 	listenerAid.add(viewMenu, 'popupshown', setViewMenu, false);
 	listenerAid.add(appMenu, 'popupshown', setAppMenu, false);
 	listenerAid.add(browserPanel, 'resize', delayMoveAddonBar);
+	listenerAid.add(addonBar, 'resize', delayMoveAddonBar);
+	listenerAid.add(addonBar, 'dragdrop', delayMoveAddonBar);
 	listenerAid.add(addonBar, 'ToggledAddonBar', moveAddonBar);
 	observerAid.add(findPersonaPosition, "lightweight-theme-changed");
 	
@@ -237,6 +239,8 @@ moduleAid.UNLOADMODULE = function() {
 	listenerAid.remove(viewMenu, 'popupshown', setViewMenu, false);
 	listenerAid.remove(appMenu, 'popupshown', setAppMenu, false);
 	listenerAid.remove(browserPanel, 'resize', delayMoveAddonBar);
+	listenerAid.remove(addonBar, 'resize', delayMoveAddonBar);
+	listenerAid.remove(addonBar, 'dragdrop', delayMoveAddonBar);
 	listenerAid.remove(addonBar, 'ToggledAddonBar', moveAddonBar);
 	
 	prefAid.unlisten('movetoRight', moveAddonBar);
