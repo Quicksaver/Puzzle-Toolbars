@@ -5,8 +5,8 @@
 		<em:version>1</em:version>
 		<em:type>2</em:type>
 		<em:creator>Quicksaver</em:creator>
-		<em:homepageURL></em:homepageURL>
-		<em:iconURL></em:iconURL>
+		<em:homepageURL>https://addons.mozilla.org/en-US/firefox/addon/the-puzzle-piece/</em:homepageURL>
+		<em:iconURL>chrome://thepuzzlepiece/skin/icon.png</em:iconURL>
 		<em:optionsURL>chrome://thepuzzlepiece/content/options.xul</em:optionsURL>
 		<em:name>The Puzzle Piece</em:name>
 		<em:bootstrap>true</em:bootstrap>
