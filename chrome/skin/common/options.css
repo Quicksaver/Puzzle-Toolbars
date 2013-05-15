@@ -15,5 +15,9 @@ textbox[type="number"] input {
 
 tabpanel#aboutTab {
 	min-width: 400px;
-	min-height: 410px;
+	min-height: 425px;
+}
+
+.justify {
+	text-align: justify;
 }

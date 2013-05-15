@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.1.11';
+moduleAid.VERSION = '1.1.12';
 
 this.__defineGetter__('addonBar', function() { return $('addon-bar'); });
 this.__defineGetter__('bottomBox', function() { return $('browser-bottombox'); });
@@ -115,11 +115,11 @@ this.moveAddonBar = function() {
 	sscode += '		max-width: '+Math.max(moveBarStyle.maxWidth, 5)+'px;\n';
 	sscode += '	}\n';
 	sscode += '	window['+objName+'_UUID="'+_UUID+'"] #addon-bar:not([inURLBar]):not([autohide]) {\n';
-	sscode += '		clip: rect(0px, '+(addonBar.clientWidth +1)+'px, '+(addonBar.clientHeight +1)+'px, 0px);\n';
+	sscode += '		clip: rect(0px, '+(addonBar.clientWidth +(addonBar.clientLeft *2))+'px, '+(addonBar.clientHeight +1)+'px, 0px);\n';
 	sscode += '	}\n';
 	sscode += '	window['+objName+'_UUID="'+_UUID+'"] #addon-bar:not([inURLBar])[collapsed="true"]:not([customizing="true"]) {\n';
 	sscode += '		bottom: '+(moveBarStyle.bottom -barOffset)+'px;\n';
-	sscode += '		clip: rect(0px, '+(addonBar.clientWidth +1)+'px, '+CLIPBAR+'px, 0px);\n';
+	sscode += '		clip: rect(0px, '+(addonBar.clientWidth +(addonBar.clientLeft *2))+'px, '+CLIPBAR+'px, 0px);\n';
 	sscode += '	}\n';
 	sscode += '}';
 	

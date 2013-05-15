@@ -37,4 +37,8 @@
 		clip: rect(0px, 32px, 9px, 0px);
 	}
 	
+	window:not([thePuzzlePiece-oscpu="Windows NT 5.1"]) #addon-bar dropmarker {
+		-moz-appearance: menulist-button;
+	}
+	
 }

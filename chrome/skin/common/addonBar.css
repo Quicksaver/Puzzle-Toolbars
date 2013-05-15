@@ -7,6 +7,7 @@
 	}
 	
 	#addon-bar {
+		-moz-appearance: none !important;
 		background-image: none;
 		overflow: hidden;
 		opacity: 1;
@@ -21,6 +22,7 @@
 	#addon-bar[inURLBar] {
 		background: none;
 		border: none;
+		box-shadow: none;
 		padding: 1px 0px 0px 0px;
 		max-height: 20px; /* I swear this one makes me mad trying to figure out why it increases the height of the location bar only sometimes */
 	}
@@ -107,7 +109,6 @@
 	}
 	
 	#addon-bar dropmarker {
-		-moz-appearance: menulist-button;
 		padding: 0 2px !important;
 		border: none;
 	}
