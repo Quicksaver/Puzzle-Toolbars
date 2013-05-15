@@ -37,6 +37,11 @@
 	}
 	
 	/* Inner buttons and other elements display */
+	#addon-bar image.toolbarbutton-icon:not(:hover) {
+		background: none !important;
+		border: none !important;
+		box-shadow: none !important;
+	}
 	#addon-bar:not([inURLBar]) image.toolbarbutton-icon {
 		max-height: 16px;
 	}
