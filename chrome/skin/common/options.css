@@ -12,3 +12,8 @@ textbox[type="number"] input {
 	max-height: 200px;
 	margin: 20px 0;
 }
+
+tabpanel#aboutTab {
+	min-width: 400px;
+	min-height: 410px;
+}

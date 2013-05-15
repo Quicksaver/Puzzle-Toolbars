@@ -20,7 +20,7 @@
 		<tabbox id="thepuzzlepieceTabBox">
 			<tabs id="tabsElement">
 				<tab id="genTab" label="&Optgeneral.label;"/>
-				<!--<tab id="aboutTab" label="&Optabout.label;"/>-->
+				<tab id="aboutTab" label="&Optabout.label;"/>
 			</tabs>
 			
 			<tabpanels id="tabPanels">
@@ -118,7 +118,7 @@
 						</hbox>
 					</groupbox>
 				</tabpanel>
-				<!--<tabpanel id="aboutTab" orient="vertical" align="center">
+				<tabpanel id="aboutTab" orient="vertical" align="center">
 					<image id="logo"/>
 					<vbox align="end">
 						<description class="closer">&thepuzzlepieceabout.name;</description>
@@ -127,7 +127,7 @@
 						<label class="text-link closer" href="https://addons.mozilla.org/en-US/firefox/addon//" value="&thepuzzlepieceabout.home;"/>
 						<label class="text-link closer" href="https://github.com/Quicksaver/The-Puzzle-Piece/issues" value="&thepuzzlepieceabout.tech;"/>
 					</vbox>
-				</tabpanel>-->
+				</tabpanel>
 			</tabpanels>
 		</tabbox>
 	</prefpane>
