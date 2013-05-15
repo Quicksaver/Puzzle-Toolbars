@@ -158,8 +158,8 @@
 	}
 	
 	#thePuzzlePiece-urlbar-PP image {
-		height: 16px;
-		width: 16px;
+		height: 18px;
+		width: 18px;
 	}
 	
 	#addon-bar:not([inURLBar]):not([movetoright]) {
