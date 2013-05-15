@@ -7,7 +7,7 @@
 		-moz-border-top-colors: rgb(160, 160, 160);
 	}
 	
-	#addon-bar {
+	#addon-bar:not([inURLBar]) {
 		border-top: 1px solid rgb(0,0,0);
 		border-right: 1px solid rgb(0,0,0);
 		border-left: 1px solid rgb(0,0,0);
@@ -16,11 +16,11 @@
 		-moz-border-left-colors: rgb(160, 160, 160);
 	}
 	
-	window:not([thePuzzlePiece-oscpu="Windows NT 5.1"]) #addon-bar {
+	window:not([thePuzzlePiece-oscpu="Windows NT 5.1"]) #addon-bar:not([inURLBar]) {
 		background-color: rgb(219,234,249);
 	}
 	
-	window[thePuzzlePiece-oscpu="Windows NT 5.1"] #addon-bar {
+	window[thePuzzlePiece-oscpu="Windows NT 5.1"] #addon-bar:not([inURLBar]) {
 		background-color: -moz-dialog;
 	}
 	
@@ -28,12 +28,12 @@
 		display: none !important;
 	}
 	
-	.PuzzlePiece[clipped][active],
-	.PuzzlePiece[clipped]:hover {
+	.PuzzlePiece:not(#thePuzzlePiece-urlbar-PP)[clipped][active],
+	.PuzzlePiece:not(#thePuzzlePiece-urlbar-PP)[clipped]:hover {
 		clip: rect(0px, 32px, 28px, 0px);
 	}
-	.PuzzlePiece:not([customizing]):not([active]):not(:hover),
-	.PuzzlePiece:not([customizing])[autohide]:not(:hover):not([hover]) {
+	.PuzzlePiece:not(#thePuzzlePiece-urlbar-PP):not([customizing]):not([active]):not(:hover),
+	.PuzzlePiece:not(#thePuzzlePiece-urlbar-PP):not([customizing])[autohide]:not(:hover):not([hover]) {
 		clip: rect(0px, 32px, 9px, 0px);
 	}
 	

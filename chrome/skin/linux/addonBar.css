@@ -7,7 +7,7 @@
 		-moz-border-top-colors: rgb(178,174,170);
 	}
 	
-	#addon-bar {
+	#addon-bar:not([inURLBar]) {
 		-moz-appearance: none !important;
 		background-color: -moz-dialog;
 		border-top: 1px solid rgb(0,0,0);
@@ -18,8 +18,8 @@
 		-moz-border-left-colors: rgb(178,174,170);
 	}
 	
-	.PuzzlePiece:not([customizing]):not([active]):not(:hover),
-	.PuzzlePiece:not([customizing])[autohide]:not(:hover):not([hover]) {
+	.PuzzlePiece:not(#thePuzzlePiece-urlbar-PP):not([customizing]):not([active]):not(:hover),
+	.PuzzlePiece:not(#thePuzzlePiece-urlbar-PP):not([customizing])[autohide]:not(:hover):not([hover]) {
 		clip: rect(0px, 32px, 14px, 0px);
 	}
 	

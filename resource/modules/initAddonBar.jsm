@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.1.8';
+moduleAid.VERSION = '1.1.9';
 
 this.__defineGetter__('addonBar', function() { return $('addon-bar'); });
 this.__defineGetter__('bottomBox', function() { return $('browser-bottombox'); });
@@ -12,6 +12,9 @@ this.__defineGetter__('contextMenu', function() { return $('toolbar-context-menu
 this.__defineGetter__('contextOptions', function() { return $(objName+'-contextOptions'); });
 this.__defineGetter__('contextSeparator', function() { return $(objName+'-contextSeparator'); });
 this.getComputedStyle = function(el) { return window.getComputedStyle(el); };
+
+/* This only returns non-null when inURLBar is true */
+this.__defineGetter__('URLBarContainer', function() { return $(objName+'-urlbar-addonbar-container'); });
 
 this.CLIPBAR = 5; // ammount of pixels to clip the bar to when it is closed or hidden
 
@@ -106,15 +109,15 @@ this.moveAddonBar = function() {
 	var sscode = '/*The Puzzle Piece CSS declarations of variable values*/\n';
 	sscode += '@namespace url(http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul);\n';
 	sscode += '@-moz-document url("'+document.baseURI+'") {\n';
-	sscode += '	window['+objName+'_UUID="'+_UUID+'"] #addon-bar {\n';
+	sscode += '	window['+objName+'_UUID="'+_UUID+'"] #addon-bar:not([inURLBar]) {\n';
 	sscode += '		bottom: '+moveBarStyle.bottom+'px;\n';
 	sscode += (!prefAid.movetoRight) ? '		left: '+moveBarStyle.left+'px;\n' : '		right: '+moveBarStyle.right+'px;\n';
 	sscode += '		max-width: '+Math.max(moveBarStyle.maxWidth, 5)+'px;\n';
 	sscode += '	}\n';
-	sscode += '	window['+objName+'_UUID="'+_UUID+'"] #addon-bar:not([autohide]) {\n';
+	sscode += '	window['+objName+'_UUID="'+_UUID+'"] #addon-bar:not([inURLBar]):not([autohide]) {\n';
 	sscode += '		clip: rect(0px, '+(addonBar.clientWidth +1)+'px, '+(addonBar.clientHeight +1)+'px, 0px);\n';
 	sscode += '	}\n';
-	sscode += '	window['+objName+'_UUID="'+_UUID+'"] #addon-bar[collapsed="true"]:not([customizing="true"]) {\n';
+	sscode += '	window['+objName+'_UUID="'+_UUID+'"] #addon-bar:not([inURLBar])[collapsed="true"]:not([customizing="true"]) {\n';
 	sscode += '		bottom: '+(moveBarStyle.bottom -barOffset)+'px;\n';
 	sscode += '		clip: rect(0px, '+(addonBar.clientWidth +1)+'px, '+CLIPBAR+'px, 0px);\n';
 	sscode += '	}\n';
@@ -187,7 +190,7 @@ this.stylePersonaAddonBar = function() {
 		var sscode = '/*The Puzzle Piece CSS declarations of variable values*/\n';
 		sscode += '@namespace url(http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul);\n';
 		sscode += '@-moz-document url("'+document.baseURI+'") {\n';
-		sscode += '	window['+objName+'_UUID="'+_UUID+'"] #addon-bar {\n';
+		sscode += '	window['+objName+'_UUID="'+_UUID+'"] #addon-bar:not([inURLBar]) {\n';
 		sscode += '	  background-image: ' + prefAid.lwthemebgImage + ' !important;\n';
 		sscode += '	  background-color: ' + prefAid.lwthemecolor + ' !important;\n';
 		sscode += '	  color: ' + prefAid.lwthemecolor + ' !important;\n';
@@ -214,6 +217,7 @@ moduleAid.LOADMODULE = function() {
 	};
 	
 	prefAid.listen('movetoRight', moveAddonBar);
+	prefAid.listen('inURLBar', moveAddonBar);
 	
 	listenerAid.add(contextMenu, 'popupshown', setContextMenu, false);
 	listenerAid.add(viewMenu, 'popupshown', setViewMenu, false);
@@ -236,6 +240,7 @@ moduleAid.UNLOADMODULE = function() {
 	listenerAid.remove(addonBar, 'ToggledAddonBar', moveAddonBar);
 	
 	prefAid.unlisten('movetoRight', moveAddonBar);
+	prefAid.unlisten('inURLBar', moveAddonBar);
 	
 	removeAttribute(contextMenu.getElementsByAttribute('toolbarId', 'addon-bar')[0], 'command');
 	removeAttribute(viewMenu.getElementsByAttribute('toolbarId', 'addon-bar')[0], 'command');

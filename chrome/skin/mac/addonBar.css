@@ -11,7 +11,7 @@
 		-moz-border-top-colors: rgba(0,0,0,0.32);
 	}
 	
-	#addon-bar {
+	#addon-bar:not([inURLBar]) {
 		-moz-appearance: none !important;
 		background-color: rgb(238,238,238) !important;
 		border-top: 1px solid rgba(0,0,0,0.57);
@@ -21,7 +21,7 @@
 		-moz-border-right-colors: rgba(0,0,0,0.57);
 		-moz-border-left-colors: rgba(0,0,0,0.57);
 	}
-	#addon-bar:-moz-window-inactive {
+	#addon-bar:not([inURLBar]):-moz-window-inactive {
 		border-top: 1px solid rgba(0,0,0,0.32);
 		border-right: 1px solid rgba(0,0,0,0.32);
 		border-left: 1px solid rgba(0,0,0,0.32);
@@ -30,8 +30,8 @@
 		-moz-border-left-colors: rgba(0,0,0,0.32);
 	}
 	
-	.PuzzlePiece:not([customizing]):not([active]):not(:hover),
-	.PuzzlePiece:not([customizing])[autohide]:not(:hover):not([hover]) {
+	.PuzzlePiece:not(#thePuzzlePiece-urlbar-PP):not([customizing]):not([active]):not(:hover),
+	.PuzzlePiece:not(#thePuzzlePiece-urlbar-PP):not([customizing])[autohide]:not(:hover):not([hover]) {
 		clip: rect(0px, 32px, 14px, 0px);
 	}
 	

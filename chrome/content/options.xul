@@ -10,6 +10,7 @@
 		<preferences>
 			<preference id="pref-movetoRight" name="extensions.thepuzzlepiece.movetoRight" type="bool" />
 			<preference id="pref-autoHide" name="extensions.thepuzzlepiece.autoHide" type="bool" />
+			<preference id="pref-inURLBar" name="extensions.thepuzzlepiece.inURLBar" type="bool" />
 			<preference id="pref-addonBarKeycode" name="extensions.thepuzzlepiece.addonBarKeycode" type="string"/>
 			<preference id="pref-addonBarAccel" name="extensions.thepuzzlepiece.addonBarAccel" type="bool"/>
 			<preference id="pref-addonBarShift" name="extensions.thepuzzlepiece.addonBarShift" type="bool"/>
@@ -26,7 +27,8 @@
 				<tabpanel id="genTab" orient="vertical">
 					<groupbox align="start">
 						<caption label="&GroupPosition.label;" />
-						<checkbox label="&OptmoveToRight.label;" preference="pref-movetoRight"/>
+						<checkbox label="&OptmoveToRight.label;" dependson="!pref-inURLBar" preference="pref-movetoRight"/>
+						<checkbox label="&OptinURLBar.label;" preference="pref-inURLBar"/>
 					</groupbox>
 					
 					<groupbox align="start">

@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.0.2';
+moduleAid.VERSION = '1.0.3';
 
 this.onMouseOver = function() {
 	setHover(true);
@@ -31,6 +31,7 @@ this.setHover = function(hover, force) {
 		addonBar.hovers++;
 		setAttribute(addonBar, 'hover', 'true');
 		setAttribute(activePP, 'hover', 'true');
+		setAttribute(URLBarContainer, 'hover', 'true');
 		if(force != undefined && typeof(force) == 'number') {
 			addonBar.hovers = force;
 		}
@@ -44,6 +45,7 @@ this.setHover = function(hover, force) {
 		if(addonBar.hovers == 0) {
 			removeAttribute(addonBar, 'hover');
 			removeAttribute(activePP, 'hover');
+			removeAttribute(URLBarContainer, 'hover');
 		}
 	}
 };
@@ -54,8 +56,7 @@ this.initHovers = function() {
 		return;
 	}
 	
-	activePP.hovers = addonBar.hovers;
-	setAttribute(activePP, 'autohide');
+	setAttribute(activePP, 'autohide', 'true');
 	toggleAttribute(activePP, 'hover', activePP.hovers > 0);
 	
 	listenerAid.add(activePP, 'dragenter', onDragEnter);
@@ -74,13 +75,13 @@ this.moveAutoHide = function() {
 	var sscode = '/*The Puzzle Piece CSS declarations of variable values*/\n';
 	sscode += '@namespace url(http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul);\n';
 	sscode += '@-moz-document url("'+document.baseURI+'") {\n';
-	sscode += '	window['+objName+'_UUID="'+_UUID+'"] #addon-bar[autohide]:not([customizing="true"]):not([hover]):not(:hover) {\n';
+	sscode += '	window['+objName+'_UUID="'+_UUID+'"] #addon-bar:not([inURLBar])[autohide]:not([customizing="true"]):not([hover]):not(:hover) {\n';
 	sscode += '		bottom: '+(moveBarStyle.bottom -barOffset)+'px;\n';
 	sscode += '		clip: rect(0px, '+(addonBar.clientWidth +1)+'px, '+CLIPBAR+'px, 0px);\n';
 	sscode += '	}\n';
-	sscode += '	window['+objName+'_UUID="'+_UUID+'"] #addon-bar[autohide][hover],\n';
-	sscode += '	window['+objName+'_UUID="'+_UUID+'"] #addon-bar[autohide]:hover,\n';
-	sscode += '	window['+objName+'_UUID="'+_UUID+'"] #addon-bar[autohide][customizing="true"] {\n';
+	sscode += '	window['+objName+'_UUID="'+_UUID+'"] #addon-bar:not([inURLBar])[autohide][hover],\n';
+	sscode += '	window['+objName+'_UUID="'+_UUID+'"] #addon-bar:not([inURLBar])[autohide]:hover,\n';
+	sscode += '	window['+objName+'_UUID="'+_UUID+'"] #addon-bar:not([inURLBar])[autohide][customizing="true"] {\n';
 	sscode += '		clip: rect(0px, '+(addonBar.clientWidth +1)+'px, '+(addonBar.clientHeight +1)+'px, 0px);\n';
 	sscode += '	}\n';
 	sscode += '	window['+objName+'_UUID="'+_UUID+'"] #browser-bottombox .PuzzlePiece:not([customizing])[autohide][active]:not(:hover):not([hover]) { bottom: '+(moveBarStyle.bottom -OSoffset -19)+'px; }\n';
@@ -132,6 +133,7 @@ moduleAid.LOADMODULE = function() {
 	listenerAid.add(window, 'popupshown', holdPopupMenu, false);
 	
 	prefAid.listen('movetoRight', initHovers);
+	prefAid.listen('inURLBar', initHovers);
 	
 	initHovers();
 	moveAutoHide();
@@ -143,9 +145,11 @@ moduleAid.UNLOADMODULE = function() {
 	styleAid.unload('autoHide_'+_UUID);
 	
 	prefAid.unlisten('movetoRight', initHovers);
+	prefAid.unlisten('inURLBar', initHovers);
 	
 	removeAttribute(addonBar, 'hover');
 	removeAttribute(activePP, 'hover');
+	removeAttribute(URLBarContainer, 'hover');
 	removeAttribute(addonBar, 'autohide');
 	removeAttribute(leftPP, 'autohide');
 	removeAttribute(rightPP, 'autohide');
@@ -169,4 +173,8 @@ moduleAid.UNLOADMODULE = function() {
 	listenerAid.remove(rightPP, 'toggledAddonBarThroughButton', initialThroughButton);
 	listenerAid.remove(rightPP, 'mouseover', onMouseOver);
 	listenerAid.remove(rightPP, 'mouseout', onMouseOut);
+	listenerAid.remove(urlbarPP, 'dragenter', onDragEnter);
+	listenerAid.remove(urlbarPP, 'dragexit', onDragExit);
+	listenerAid.remove(urlbarPP, 'mouseover', onMouseOver);
+	listenerAid.remove(urlbarPP, 'mouseout', onMouseOut);
 };

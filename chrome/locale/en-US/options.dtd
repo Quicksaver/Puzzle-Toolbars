@@ -6,6 +6,7 @@
 <!ENTITY GroupBehavior.label "Behavior">
 
 <!ENTITY OptmoveToRight.label "Place on the right">
+<!ENTITY OptinURLBar.label "Move the Add-on Bar into the Location Bar">
 <!ENTITY OptautoHide.label "Hide add-on bar automatically">
 
 <!ENTITY OptKeyboardShortcut.caption "Add-on Bar Keyboard Shortcut">

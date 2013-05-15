@@ -1,8 +1,9 @@
-moduleAid.VERSION = '1.0.5';
+moduleAid.VERSION = '1.0.6';
 
 this.__defineGetter__('leftPP', function() { return $(objName+'-left-PP'); });
 this.__defineGetter__('rightPP', function() { return $(objName+'-right-PP'); });
-this.__defineGetter__('activePP', function() { return (prefAid.movetoRight) ? rightPP : leftPP; });
+this.__defineGetter__('urlbarPP', function() { return $(objName+'-urlbar-PP'); });
+this.__defineGetter__('activePP', function() { return (prefAid.inURLBar) ? urlbarPP : (prefAid.movetoRight) ? rightPP : leftPP; });
 
 this.commandPP = function(e) {
 	if(e.button != 0) { return; }
@@ -36,8 +37,8 @@ this.choosePP = function() {
 	}
 	
 	toggleAttribute(addonBar, 'movetoright', prefAid.movetoRight);
-	leftPP.hidden = prefAid.movetoRight;
-	rightPP.hidden = !prefAid.movetoRight;
+	leftPP.hidden = prefAid.inURLBar || prefAid.movetoRight;
+	rightPP.hidden = prefAid.inURLBar || !prefAid.movetoRight;
 	
 	activatePPs();
 };
@@ -59,6 +60,7 @@ moduleAid.LOADMODULE = function() {
 	listenerAid.add(window, 'aftercustomization', customizePP, false);
 	
 	prefAid.listen('movetoRight', choosePP);
+	prefAid.listen('inURLBar', choosePP);
 	
 	choosePP();
 	movePPs();
@@ -67,6 +69,7 @@ moduleAid.LOADMODULE = function() {
 
 moduleAid.UNLOADMODULE = function() {
 	prefAid.unlisten('movetoRight', choosePP);
+	prefAid.unlisten('inURLBar', choosePP);
 	
 	removeAttribute('movetoright');
 	leftPP.hidden = true;
