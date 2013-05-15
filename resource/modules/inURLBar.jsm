@@ -1,8 +1,25 @@
-moduleAid.VERSION = '1.0.0';
+moduleAid.VERSION = '1.0.1';
+
+this.onCustomizing = function(e) {
+	tempMoveAddonBar(e.type == 'beforecustomization');
+};
+
+// I can't drag from the add-on bar when it's in the url bar, it only drags the whole url bar in this case
+this.tempMoveAddonBar = function(move) {
+	toggleAttribute(addonBar, 'inURLBar', !move);
+	if(move) {
+		bottomBox.appendChild(addonBar);
+	} else {
+		URLBarContainer.appendChild(addonBar);
+	}
+};
 
 this.loadInURLBar = function() {
 	URLBarContainer.appendChild(addonBar);
 	listenerAid.add(addonBar, 'ToggledAddonBar', openURLBarContainer);
+	
+	listenerAid.add(window, 'beforecustomization', onCustomizing);
+	listenerAid.add(window, 'aftercustomization', onCustomizing);
 	
 	moveAddonBar();
 	openURLBarContainer();
@@ -11,6 +28,10 @@ this.loadInURLBar = function() {
 	
 	if(prefAid.autoHide) {
 		initHovers(); // the button would only be added after this had been called, mousing over it wouldn't work
+	}
+	
+	if(addonBar.getAttribute('customizing') == 'true') {
+		tempMoveAddonBar(true);
 	}
 };
 
@@ -47,6 +68,9 @@ moduleAid.LOADMODULE = function() {
 moduleAid.UNLOADMODULE = function() {
 	listenerAid.remove(addonBar, 'ToggledAddonBar', openURLBarContainer);
 	listenerAid.remove(addonBar, 'AddonBarMoved', moveContainer);
+	
+	listenerAid.remove(window, 'beforecustomization', onCustomizing);
+	listenerAid.remove(window, 'aftercustomization', onCustomizing);
 	
 	prefAid.unlisten('autoHide', autoHideContainer);
 	
