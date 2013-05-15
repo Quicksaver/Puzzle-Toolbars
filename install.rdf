@@ -25,6 +25,12 @@
 				<em:name>The Puzzle Piece</em:name>
 				<em:description>It controls your add-on bar. Where do you want it? What do you want it to do? You decide!</em:description>
 			</Description>
+			<Description>
+				<em:locale>pt-PT</em:locale>
+				<em:name>A Peça do Puzzle</em:name>
+				<em:description>Ela controla a sua barra de extras. Onde a quer? Como lhe quer aceder? Você decide!</em:description>
+				<em:translator>Quicksaver</em:translator>
+			</Description>
 		</em:localized>
 	</Description>
 </RDF>
