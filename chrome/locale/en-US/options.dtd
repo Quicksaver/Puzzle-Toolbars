@@ -5,7 +5,7 @@
 <!ENTITY GroupPosition.label "Position">
 <!ENTITY GroupBehavior.label "Behavior">
 
-<!ENTITY OptmoveToRight.label "Place on the right">
+<!ENTITY OptmoveToRight.label "Place on the right of the browser window">
 <!ENTITY OptinURLBar.label "Move the Add-on Bar into the Location Bar">
 <!ENTITY OptautoHide.label "Hide add-on bar automatically">
 

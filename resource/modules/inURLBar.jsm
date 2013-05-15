@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.0.1';
+moduleAid.VERSION = '1.0.2';
 
 this.onCustomizing = function(e) {
 	tempMoveAddonBar(e.type == 'beforecustomization');
@@ -7,6 +7,7 @@ this.onCustomizing = function(e) {
 // I can't drag from the add-on bar when it's in the url bar, it only drags the whole url bar in this case
 this.tempMoveAddonBar = function(move) {
 	toggleAttribute(addonBar, 'inURLBar', !move);
+	URLBarContainer.hidden = move;
 	if(move) {
 		bottomBox.appendChild(addonBar);
 	} else {
@@ -80,6 +81,6 @@ moduleAid.UNLOADMODULE = function() {
 	styleAid.unload('moveContainer_'+_UUID);
 	
 	if(!UNLOADED) {
-		moveAddonBar();
+		delayMoveAddonBar();
 	}
 };

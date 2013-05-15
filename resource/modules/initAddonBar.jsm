@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.1.10';
+moduleAid.VERSION = '1.1.11';
 
 this.__defineGetter__('addonBar', function() { return $('addon-bar'); });
 this.__defineGetter__('bottomBox', function() { return $('browser-bottombox'); });
@@ -228,6 +228,9 @@ moduleAid.LOADMODULE = function() {
 	listenerAid.add(addonBar, 'ToggledAddonBar', moveAddonBar);
 	observerAid.add(findPersonaPosition, "lightweight-theme-changed");
 	
+	// Half fix for when the status-bar is changed
+	listenerAid.add($('status-bar'), 'load', delayMoveAddonBar, true);
+	
 	moveAddonBar();
 };
 
@@ -242,6 +245,7 @@ moduleAid.UNLOADMODULE = function() {
 	listenerAid.remove(addonBar, 'resize', delayMoveAddonBar);
 	listenerAid.remove(addonBar, 'dragdrop', delayMoveAddonBar);
 	listenerAid.remove(addonBar, 'ToggledAddonBar', moveAddonBar);
+	listenerAid.remove($('status-bar'), 'load', delayMoveAddonBar, true);
 	
 	prefAid.unlisten('movetoRight', moveAddonBar);
 	prefAid.unlisten('inURLBar', moveAddonBar);

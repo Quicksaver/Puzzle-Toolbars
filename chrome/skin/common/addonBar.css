@@ -22,6 +22,7 @@
 		background: none;
 		border: none;
 		padding: 1px 0px 0px 0px;
+		max-height: 20px; /* I swear this one makes me mad trying to figure out why it increases the height of the location bar only sometimes */
 	}
 	
 	#addon-bar[collapsed="true"]:not([customizing="true"]) {
@@ -56,10 +57,7 @@
 		-moz-padding-end: 17px !important;
 	}
 	
-	#addon-bar:not([inURLBar]) > toolbaritem {
-		height: 18px;
-	}
-	#addon-bar[inURLBar] > toolbaritem {
+	#addon-bar > toolbaritem:not(#fixer-status-bar) { /* #fixer-status-bar selector is from UI Fixer add-on "make status bar movable" feature */
 		height: 18px;
 	}
 	
@@ -101,19 +99,27 @@
 	
 	#addon-bar > * > toolbarbutton {
 		-moz-appearance: none;
-		padding: 0 3px;
 		border: none;
 	}
 	
-	#addon-bar > * > dropmaker {
-		padding: 0 3px;
+	#addon-bar > * toolbarbutton {
+		padding: 0px 3px !important;
+	}
+	
+	#addon-bar dropmarker {
+		-moz-appearance: menulist-button;
+		padding: 0 2px !important;
 		border: none;
+	}
+	
+	#addon-bar dropmarker image {
+		padding: 0 !important;
 	}
 	
 	/* These are for the mouse over effects, !important tags are necessary especially for when inURLBar is true */
-	#addon-bar > toolbarbutton:not([disabled]):hover,
-	#addon-bar > toolbarbutton[open],
-	#addon-bar > toolbarbutton > .toolbarbutton-menubutton-button:not([disabled]):hover {
+	#addon-bar toolbarbutton:not([disabled]):hover,
+	#addon-bar toolbarbutton[open],
+	#addon-bar toolbarbutton > .toolbarbutton-menubutton-button:not([disabled]):hover {
 		background-position: left, left, right !important;
 		background-size: auto, 1px 100%, 1px 100% !important;
 		background-repeat: no-repeat !important;
@@ -125,9 +131,9 @@
 		        		linear-gradient(to top, transparent, rgba(0,0,0,.15) 30%) !important; /* Firefox 16 */
 	}
 	
-	#addon-bar > toolbarbutton:not([disabled]):hover image,
-	#addon-bar > toolbarbutton[open] image,
-	#addon-bar > toolbarbutton > .toolbarbutton-menubutton-button:not([disabled]):hover image {
+	#addon-bar toolbarbutton:not([disabled]):hover image,
+	#addon-bar toolbarbutton[open] image,
+	#addon-bar toolbarbutton > .toolbarbutton-menubutton-button:not([disabled]):hover image {
 		border-color: transparent !important;
 		box-shadow: none !important;
 		background: none !important;
