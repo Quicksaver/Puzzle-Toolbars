@@ -25,6 +25,8 @@
 				<em:name>The Puzzle Piece</em:name>
 				<em:description>It controls your add-on bar. Where do you want it? What do you want it to do? You decide!</em:description>
 			</Description>
+		</em:localized>
+		<em:localized>
 			<Description>
 				<em:locale>pt-PT</em:locale>
 				<em:name>A Peça do Puzzle</em:name>
