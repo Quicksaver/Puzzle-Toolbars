@@ -1,1 +1,1 @@
-For more information go to [put url here]
+For more information go to https://addons.mozilla.org/en-US/firefox/addon/the-puzzle-piece/
