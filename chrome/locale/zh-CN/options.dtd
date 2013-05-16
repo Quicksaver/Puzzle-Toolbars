@@ -1,0 +1,29 @@
+<!ENTITY Options.title "The Puzzle Piece">
+<!ENTITY Optgeneral.label "附加组件栏">
+<!ENTITY Optabout.label "关于">
+<!ENTITY GroupPosition.label "位置">
+<!ENTITY GroupBehavior.label "行为">
+<!ENTITY OptmoveToRight.label "放置在浏览器窗口右端">
+<!ENTITY OptinURLBar.label "移动附加组件栏到地址栏中">
+<!ENTITY OptautoHide.label "自动隐藏附加组件栏">
+<!ENTITY OptKeyboardShortcut.caption "附加组件栏键盘快捷键">
+<!ENTITY OptKeyboardShortcut.control "Control">
+<!ENTITY OptKeyboardShortcut.shift "Shift">
+<!ENTITY OptKeyboardShortcut.alt "Alt">
+<!ENTITY OptKeyboardShortcut.command "Command">
+<!ENTITY OptKeyboardShortcut.option "选项">
+<!ENTITY OptKeyboardShortcut.none "无">
+<!ENTITY OptKeyboardShortcut.spacebar "空格键">
+<!ENTITY OptKeyboardShortcut.pageup "Page Up">
+<!ENTITY OptKeyboardShortcut.pagedown "Page Down">
+<!ENTITY OptKeyboardShortcut.end "End">
+<!ENTITY OptKeyboardShortcut.home "Home">
+<!ENTITY OptKeyboardShortcut.left "左">
+<!ENTITY OptKeyboardShortcut.up "上">
+<!ENTITY OptKeyboardShortcut.right "右">
+<!ENTITY OptKeyboardShortcut.down "下">
+<!ENTITY thepuzzlepieceabout.name "The Puzzle Piece">
+<!ENTITY thepuzzlepieceabout.by "作者 Quicksaver">
+<!ENTITY thepuzzlepieceabout.desc "关于此附加组件的所有信息可以在 Mozilla 附加组件主页上查看。如果你喜欢这个附加组件，请考虑在附加组件主页上留下好评或者做出一点捐助来支持它的继续开发。问题报告和建议请发送到技术支持页面。">
+<!ENTITY thepuzzlepieceabout.home "附加组件主页">
+<!ENTITY thepuzzlepieceabout.tech "技术支持">

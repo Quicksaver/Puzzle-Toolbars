@@ -34,5 +34,13 @@
 				<em:translator>Quicksaver</em:translator>
 			</Description>
 		</em:localized>
+		<em:localized>
+			<Description>
+				<em:locale>zh-CN</em:locale>
+				<em:name>The Puzzle Piece</em:name>
+				<em:description>此扩展可以用来控制附加组件栏。它要出现在哪里？它要做什么？全由你决定！</em:description>
+				<em:translator>Wang.H.K</em:translator>
+			</Description>
+		</em:localized>
 	</Description>
 </RDF>
