@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.1.13';
+moduleAid.VERSION = '1.1.14';
 
 this.__defineGetter__('addonBar', function() { return $('addon-bar'); });
 this.__defineGetter__('bottomBox', function() { return $('browser-bottombox'); });
@@ -71,6 +71,12 @@ this.delayMoveAddonBar = function() {
 	timerAid.init('delayMoveAddonBar', moveAddonBar, 0);
 };
 
+this.moveWhenStatusBarChanged = function() {
+	if(isAncestor($('status-bar'), addonBar)) {
+		delayMoveAddonBar();
+	}
+};
+
 this.moveAddonBar = function() {
 	// We should do all these calculations to also position the puzzle pieces, even if the add-on bar is closed
 	moveBarStyle = {
@@ -115,11 +121,11 @@ this.moveAddonBar = function() {
 	sscode += '		max-width: '+Math.max(moveBarStyle.maxWidth, 5)+'px;\n';
 	sscode += '	}\n';
 	sscode += '	window['+objName+'_UUID="'+_UUID+'"] #addon-bar:not([inURLBar]):not([autohide]) {\n';
-	sscode += '		clip: rect(0px, '+(addonBar.clientWidth +(addonBar.clientLeft *2))+'px, '+(addonBar.clientHeight +1)+'px, 0px);\n';
+	sscode += '		clip: rect(0px, '+/*(addonBar.clientWidth +(addonBar.clientLeft *2))*/+'4000px, '+(addonBar.clientHeight +1)+'px, 0px);\n';
 	sscode += '	}\n';
 	sscode += '	window['+objName+'_UUID="'+_UUID+'"] #addon-bar:not([inURLBar])[collapsed="true"]:not([customizing="true"]) {\n';
 	sscode += '		bottom: '+(moveBarStyle.bottom -barOffset)+'px;\n';
-	sscode += '		clip: rect(0px, '+(addonBar.clientWidth +(addonBar.clientLeft *2))+'px, '+CLIPBAR+'px, 0px);\n';
+	sscode += '		clip: rect(0px, '+/*(addonBar.clientWidth +(addonBar.clientLeft *2))*/+'4000px, '+CLIPBAR+'px, 0px);\n';
 	sscode += '	}\n';
 	sscode += '}';
 	
@@ -233,8 +239,15 @@ moduleAid.LOADMODULE = function() {
 	listenerAid.add(browserPanel, 'resize', delayMoveAddonBar);
 	listenerAid.add(addonBar, 'resize', delayMoveAddonBar);
 	listenerAid.add(addonBar, 'dragdrop', delayMoveAddonBar);
+	listenerAid.add(addonBar, 'load', delayMoveAddonBar);
 	listenerAid.add(addonBar, 'ToggledAddonBar', moveAddonBar);
 	observerAid.add(findPersonaPosition, "lightweight-theme-changed");
+	
+	for(var i=0; i<$('status-bar').childNodes.length; i++) {
+		if($('status-bar').childNodes[i].nodeName != 'statusbarpanel' || !$('status-bar').childNodes[i].id) { continue; }
+		
+		objectWatcher.addAttributeWatcher($('status-bar').childNodes[i], 'hidden', moveWhenStatusBarChanged);
+	}
 	
 	// Half fix for when the status-bar is changed
 	listenerAid.add($('status-bar'), 'load', delayMoveAddonBar, true);
@@ -245,6 +258,12 @@ moduleAid.LOADMODULE = function() {
 moduleAid.UNLOADMODULE = function() {
 	styleAid.unload('positionAddonBar_'+_UUID);
 	
+	for(var i=0; i<$('status-bar').childNodes.length; i++) {
+		if($('status-bar').childNodes[i].nodeName != 'statusbarpanel' || !$('status-bar').childNodes[i].id) { continue; }
+		
+		objectWatcher.removeAttributeWatcher($('status-bar').childNodes[i], 'hidden', moveWhenStatusBarChanged);
+	}
+	
 	observerAid.remove(findPersonaPosition, "lightweight-theme-changed");
 	listenerAid.remove(contextMenu, 'popupshown', setContextMenu, false);
 	listenerAid.remove(viewMenu, 'popupshown', setViewMenu, false);
@@ -252,6 +271,7 @@ moduleAid.UNLOADMODULE = function() {
 	listenerAid.remove(browserPanel, 'resize', delayMoveAddonBar);
 	listenerAid.remove(addonBar, 'resize', delayMoveAddonBar);
 	listenerAid.remove(addonBar, 'dragdrop', delayMoveAddonBar);
+	listenerAid.remove(addonBar, 'load', delayMoveAddonBar);
 	listenerAid.remove(addonBar, 'ToggledAddonBar', moveAddonBar);
 	listenerAid.remove($('status-bar'), 'load', delayMoveAddonBar, true);
 	
