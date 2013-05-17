@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.0.5';
+moduleAid.VERSION = '1.0.6';
 
 this.onMouseOver = function() {
 	setHover(true);
@@ -138,7 +138,7 @@ moduleAid.LOADMODULE = function() {
 	initHovers();
 	moveAutoHide();
 	
-	if(!addonBar.collapsed) { initialShowBar(); }
+	if(!addonBar.collapsed && (STARTED != APP_STARTUP || !prefAid.noInitialShow)) { initialShowBar(); }
 };
 
 moduleAid.UNLOADMODULE = function() {
