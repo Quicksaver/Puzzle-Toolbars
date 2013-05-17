@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.0.3';
+moduleAid.VERSION = '1.0.4';
 
 this.onCustomizing = function(e) {
 	tempMoveAddonBar(e.type == 'beforecustomization');
@@ -44,7 +44,11 @@ this.openURLBarContainer = function() {
 	toggleAttribute(URLBarContainer, 'active', !addonBar.collapsed);
 };
 
+this.lastWidth = 0;
 this.moveContainer = function() {
+	// Bugfix for the add-on being completely cutoff at startup
+	if(addonBar.clientWidth == 0) { aSync(moveContainer); }
+	
 	styleAid.unload('moveContainer_'+_UUID);
 	
 	var sscode = '/*The Puzzle Piece CSS declarations of variable values*/\n';
@@ -56,6 +60,16 @@ this.moveContainer = function() {
 	sscode += '}';
 	
 	styleAid.load('moveContainer_'+_UUID, sscode, true);
+	
+	// Bugfix for the add-on being partially cutoff at startup
+	if(lastWidth == 0) {
+		lastWidth = addonBar.clientWidth;
+		if(STARTED == APP_STARTUP) {
+			aSync(function() {
+				if(addonBar.clientWidth != lastWidth) { moveContainer(); }
+			}, 1000);
+		}
+	}
 };
 
 this.autoHideContainer = function() {
