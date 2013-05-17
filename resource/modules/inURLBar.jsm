@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.0.2';
+moduleAid.VERSION = '1.0.3';
 
 this.onCustomizing = function(e) {
 	tempMoveAddonBar(e.type == 'beforecustomization');
@@ -9,7 +9,7 @@ this.tempMoveAddonBar = function(move) {
 	toggleAttribute(addonBar, 'inURLBar', !move);
 	URLBarContainer.hidden = move;
 	if(move) {
-		bottomBox.appendChild(addonBar);
+		bottomBox.insertBefore(addonBar, leftPP);
 	} else {
 		URLBarContainer.appendChild(addonBar);
 	}
@@ -34,6 +34,10 @@ this.loadInURLBar = function() {
 	if(addonBar.getAttribute('customizing') == 'true') {
 		tempMoveAddonBar(true);
 	}
+};
+
+this.unloadInURLBar = function() {
+	tempMoveAddonBar(true);
 };
 
 this.openURLBarContainer = function() {
@@ -63,7 +67,7 @@ moduleAid.LOADMODULE = function() {
 	
 	listenerAid.add(addonBar, 'AddonBarMoved', moveContainer);
 	
-	overlayAid.overlayWindow(window, 'inURLBar', null, loadInURLBar);
+	overlayAid.overlayWindow(window, 'inURLBar', null, loadInURLBar, unloadInURLBar);
 };
 
 moduleAid.UNLOADMODULE = function() {
@@ -75,7 +79,6 @@ moduleAid.UNLOADMODULE = function() {
 	
 	prefAid.unlisten('autoHide', autoHideContainer);
 	
-	bottomBox.insertBefore(addonBar, leftPP);
 	overlayAid.removeOverlayWindow(window, 'inURLBar');
 	
 	styleAid.unload('moveContainer_'+_UUID);

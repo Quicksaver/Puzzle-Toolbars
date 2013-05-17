@@ -1,4 +1,4 @@
-var defaultsVersion = '1.0.6';
+var defaultsVersion = '1.0.7';
 var objName = 'thePuzzlePiece';
 var objPathString = 'thepuzzlepiece';
 var prefList = {
@@ -20,6 +20,10 @@ var prefList = {
 
 function startAddon(window) {
 	prepareObject(window);
+	
+	// Prevent things from jumping around on startup
+	window.document.getElementById('addon-bar').hidden = true;
+	
 	window[objName].moduleAid.load(objName, true);
 }
 

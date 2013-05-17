@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.0.6';
+moduleAid.VERSION = '1.0.7';
 
 this.__defineGetter__('leftPP', function() { return $(objName+'-left-PP'); });
 this.__defineGetter__('rightPP', function() { return $(objName+'-right-PP'); });
@@ -31,10 +31,7 @@ this.movePPs = function() {
 };
 
 this.choosePP = function() {
-	if(!leftPP || !rightPP) {
-		listenerAid.add(window, 'loadedAddonBarOverlay', choosePP, false, true);
-		return;
-	}
+	if(!leftPP || !rightPP) { return; }
 	
 	toggleAttribute(addonBar, 'movetoright', prefAid.movetoRight);
 	leftPP.hidden = prefAid.inURLBar || prefAid.movetoRight;
@@ -58,6 +55,7 @@ moduleAid.LOADMODULE = function() {
 	listenerAid.add(addonBar, 'ToggledAddonBar', activatePPs);
 	listenerAid.add(window, 'beforecustomization', customizePP, false);
 	listenerAid.add(window, 'aftercustomization', customizePP, false);
+	listenerAid.add(window, 'loadedAddonBarOverlay', choosePP);
 	
 	prefAid.listen('movetoRight', choosePP);
 	prefAid.listen('inURLBar', choosePP);
@@ -79,6 +77,7 @@ moduleAid.UNLOADMODULE = function() {
 	listenerAid.remove(addonBar, 'ToggledAddonBar', activatePPs);
 	listenerAid.remove(window, 'beforecustomization', customizePP, false);
 	listenerAid.remove(window, 'aftercustomization', customizePP, false);
+	listenerAid.remove(window, 'loadedAddonBarOverlay', choosePP);
 	
 	delete addonBarContextNodes.activePP;
 	

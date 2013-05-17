@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.1.12';
+moduleAid.VERSION = '1.1.13';
 
 this.__defineGetter__('addonBar', function() { return $('addon-bar'); });
 this.__defineGetter__('bottomBox', function() { return $('browser-bottombox'); });
@@ -205,7 +205,15 @@ this.stylePersonaAddonBar = function() {
 };
 
 moduleAid.LOADMODULE = function() {
-	overlayAid.overlayWindow(window, 'addonBar', null, function(aWindow) { dispatch(aWindow, { type: "loadedAddonBarOverlay", cancelable: false }); });
+	overlayAid.overlayWindow(window, 'addonBar', null,
+	function(aWindow) {
+		aSync(function() { addonBar.hidden = false; }); // aSync works best
+		dispatch(aWindow, { type: "loadedAddonBarOverlay", cancelable: false });
+	},
+	function(aWindow) {
+		// Prevent things from jumping around on startup
+		addonBar.hidden = true;
+	});
 	
 	this.backups = {
 		toggleAddonBar: toggleAddonBar
@@ -260,4 +268,5 @@ moduleAid.UNLOADMODULE = function() {
 	}
 	
 	overlayAid.removeOverlayWindow(window, 'addonBar');
+	addonBar.hidden = false;
 };
