@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.0.7';
+moduleAid.VERSION = '1.0.8';
 
 this.onMouseOver = function() {
 	setHover(true);
@@ -82,7 +82,7 @@ this.moveAutoHide = function() {
 	sscode += '	window['+objName+'_UUID="'+_UUID+'"] #addon-bar:not([inURLBar])[autohide][hover],\n';
 	sscode += '	window['+objName+'_UUID="'+_UUID+'"] #addon-bar:not([inURLBar])[autohide]:hover,\n';
 	sscode += '	window['+objName+'_UUID="'+_UUID+'"] #addon-bar:not([inURLBar])[autohide][customizing="true"] {\n';
-	sscode += '		clip: rect(0px, '+/*(addonBar.clientWidth +(addonBar.clientLeft *2))*/4000+'px, '+(addonBar.clientHeight +1)+'px, 0px);\n';
+	sscode += '		clip: rect(0px, '+/*(addonBar.clientWidth +(addonBar.clientLeft *2))*/4000+'px, '+(moveBarStyle.clientHeight +1)+'px, 0px);\n';
 	sscode += '	}\n';
 	sscode += '	window['+objName+'_UUID="'+_UUID+'"] #browser-bottombox .PuzzlePiece:not([customizing])[autohide][active]:not(:hover):not([hover]) { bottom: '+(moveBarStyle.bottom -OSoffset -19)+'px; }\n';
 	sscode += '}';

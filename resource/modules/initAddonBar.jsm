@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.1.15';
+moduleAid.VERSION = '1.1.16';
 
 this.__defineGetter__('addonBar', function() { return $('addon-bar'); });
 this.__defineGetter__('bottomBox', function() { return $('browser-bottombox'); });
@@ -101,7 +101,6 @@ this.moveAddonBar = function() {
 	
 	moveBarStyle.clientHeight = addonBar.clientHeight;
 	moveBarStyle.movetoRight = prefAid.movetoRight;
-	moveBarStyle = moveBarStyle;
 	
 	dispatch(addonBar, { type: "WillMoveAddonBar", cancelable: false });
 	
@@ -121,7 +120,7 @@ this.moveAddonBar = function() {
 	sscode += '		max-width: '+Math.max(moveBarStyle.maxWidth, 5)+'px;\n';
 	sscode += '	}\n';
 	sscode += '	window['+objName+'_UUID="'+_UUID+'"] #addon-bar:not([inURLBar]):not([autohide]) {\n';
-	sscode += '		clip: rect(0px, '+/*(addonBar.clientWidth +(addonBar.clientLeft *2))*/4000+'px, '+(addonBar.clientHeight +1)+'px, 0px);\n';
+	sscode += '		clip: rect(0px, '+/*(addonBar.clientWidth +(addonBar.clientLeft *2))*/4000+'px, '+(moveBarStyle.clientHeight +1)+'px, 0px);\n';
 	sscode += '	}\n';
 	sscode += '	window['+objName+'_UUID="'+_UUID+'"] #addon-bar:not([inURLBar])[collapsed="true"]:not([customizing="true"]) {\n';
 	sscode += '		bottom: '+(moveBarStyle.bottom -barOffset)+'px;\n';
@@ -134,6 +133,22 @@ this.moveAddonBar = function() {
 	findPersonaPosition();
 	
 	dispatch(addonBar, { type: "AddonBarMoved", cancelable: false });
+	
+	reMoveBar();
+};
+
+this.reMoveBar = function() {
+	var lastSize = {
+		height: addonBar.clientHeight +(addonBar.clientTop *2),
+		width: addonBar.clientWidth +(addonBar.clientLeft *2)
+	};
+	timerAid.init('reMoveBar', function() {
+		if(typeof(moveAddonBar) != 'undefined' && !UNLOADED) {
+			if(lastSize.width != addonBar.clientWidth +(addonBar.clientLeft *2) || lastSize.height != addonBar.clientHeight +(addonBar.clientTop *2)) {
+				moveAddonBar();
+			}
+		}
+	}, 500);
 };
 
 this.findPersonaPosition = function() {
