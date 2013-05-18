@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.0.4';
+moduleAid.VERSION = '1.0.5';
 
 this.onCustomizing = function(e) {
 	tempMoveAddonBar(e.type == 'beforecustomization');
@@ -46,8 +46,21 @@ this.openURLBarContainer = function() {
 
 this.lastWidth = 0;
 this.moveContainer = function() {
+	// Bugfix: Endless loop because width of addonBar here is always 0
+	if($('main-window').getAttribute('disablechrome') == 'true') {
+		if(isAncestor(addonBar, $('navigator-toolbox'))
+		&& $('navigator-toolbox').getAttribute('tabsontop') == 'true'
+		&& !isAncestor(addonBar, $('toolbar-menubar'))
+		&& !isAncestor(addonBar, $('TabsToolbar'))) {
+			return;
+		}
+	}
+	
 	// Bugfix for the add-on being completely cutoff at startup
-	if(addonBar.clientWidth == 0) { aSync(moveContainer); }
+	if(addonBar.clientWidth == 0) {
+		aSync(moveContainer);
+		return;
+	}
 	
 	styleAid.unload('moveContainer_'+_UUID);
 	
