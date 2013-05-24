@@ -31,4 +31,6 @@
 		</box>
 	</vbox>
 	
+	<toolbar id="addon-bar" inCorner="true" />
+	
 </overlay>
