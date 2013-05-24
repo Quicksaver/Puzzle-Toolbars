@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.1.16';
+moduleAid.VERSION = '1.1.17';
 
 this.__defineGetter__('addonBar', function() { return $('addon-bar'); });
 this.__defineGetter__('bottomBox', function() { return $('browser-bottombox'); });
@@ -253,7 +253,7 @@ moduleAid.LOADMODULE = function() {
 	listenerAid.add(appMenu, 'popupshown', setAppMenu, false);
 	listenerAid.add(browserPanel, 'resize', delayMoveAddonBar);
 	listenerAid.add(addonBar, 'resize', delayMoveAddonBar);
-	listenerAid.add(addonBar, 'dragdrop', delayMoveAddonBar);
+	listenerAid.add(addonBar, 'drop', delayMoveAddonBar);
 	listenerAid.add(addonBar, 'load', delayMoveAddonBar);
 	listenerAid.add(addonBar, 'ToggledAddonBar', moveAddonBar);
 	observerAid.add(findPersonaPosition, "lightweight-theme-changed");
@@ -285,7 +285,7 @@ moduleAid.UNLOADMODULE = function() {
 	listenerAid.remove(appMenu, 'popupshown', setAppMenu, false);
 	listenerAid.remove(browserPanel, 'resize', delayMoveAddonBar);
 	listenerAid.remove(addonBar, 'resize', delayMoveAddonBar);
-	listenerAid.remove(addonBar, 'dragdrop', delayMoveAddonBar);
+	listenerAid.remove(addonBar, 'drop', delayMoveAddonBar);
 	listenerAid.remove(addonBar, 'load', delayMoveAddonBar);
 	listenerAid.remove(addonBar, 'ToggledAddonBar', moveAddonBar);
 	listenerAid.remove($('status-bar'), 'load', delayMoveAddonBar, true);

@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.0.8';
+moduleAid.VERSION = '1.0.9';
 
 this.onMouseOver = function() {
 	setHover(true);
@@ -11,7 +11,7 @@ this.onMouseOut = function() {
 this.onDragEnter = function() {
 	setHover(true, 1);
 	listenerAid.add(window.gBrowser, "dragenter", onDragExitAll, false);
-	listenerAid.add(window, "dragdrop", onDragExitAll, false);
+	listenerAid.add(window, "drop", onDragExitAll, false);
 	listenerAid.add(window, "dragend", onDragExitAll, false);
 };
 
@@ -21,7 +21,7 @@ this.onDragExit = function() {
 
 this.onDragExitAll = function() {
 	listenerAid.remove(window.gBrowser, "dragenter", onDragExitAll, false);
-	listenerAid.remove(window, "dragdrop", onDragExitAll, false);
+	listenerAid.remove(window, "drop", onDragExitAll, false);
 	listenerAid.remove(window, "dragend", onDragExitAll, false);
 	setHover(false);
 };
@@ -60,7 +60,6 @@ this.initHovers = function() {
 	toggleAttribute(activePP, 'hover', activePP.hovers > 0);
 	
 	listenerAid.add(activePP, 'dragenter', onDragEnter);
-	listenerAid.add(activePP, 'dragexit', onDragExit);
 	listenerAid.add(activePP, 'mouseover', onMouseOver);
 	listenerAid.add(activePP, 'mouseout', onMouseOut);
 	listenerAid.add(activePP, 'toggledAddonBarThroughButton', initialThroughButton);
@@ -125,7 +124,6 @@ moduleAid.LOADMODULE = function() {
 	addonBar.hovers = 0;
 	
 	listenerAid.add(addonBar, 'dragenter', onDragEnter);
-	listenerAid.add(addonBar, 'dragexit', onDragExit);
 	listenerAid.add(addonBar, 'mouseover', onMouseOver);
 	listenerAid.add(addonBar, 'mouseout', onMouseOut);
 	listenerAid.add(addonBar, 'WillMoveAddonBar', moveAutoHide);
@@ -156,7 +154,6 @@ moduleAid.UNLOADMODULE = function() {
 	delete addonBar.hovers;
 	
 	listenerAid.remove(addonBar, 'dragenter', onDragEnter);
-	listenerAid.remove(addonBar, 'dragexit', onDragExit);
 	listenerAid.remove(addonBar, 'mouseover', onMouseOver);
 	listenerAid.remove(addonBar, 'mouseout', onMouseOut);
 	listenerAid.remove(addonBar, 'WillMoveAddonBar', moveAutoHide);
@@ -164,17 +161,14 @@ moduleAid.UNLOADMODULE = function() {
 	listenerAid.remove(window, 'popupshown', holdPopupMenu, false);
 	
 	listenerAid.remove(leftPP, 'dragenter', onDragEnter);
-	listenerAid.remove(leftPP, 'dragexit', onDragExit);
 	listenerAid.remove(leftPP, 'toggledAddonBarThroughButton', initialThroughButton);
 	listenerAid.remove(leftPP, 'mouseover', onMouseOver);
 	listenerAid.remove(leftPP, 'mouseout', onMouseOut);
 	listenerAid.remove(rightPP, 'dragenter', onDragEnter);
-	listenerAid.remove(rightPP, 'dragexit', onDragExit);
 	listenerAid.remove(rightPP, 'toggledAddonBarThroughButton', initialThroughButton);
 	listenerAid.remove(rightPP, 'mouseover', onMouseOver);
 	listenerAid.remove(rightPP, 'mouseout', onMouseOut);
 	listenerAid.remove(urlbarPP, 'dragenter', onDragEnter);
-	listenerAid.remove(urlbarPP, 'dragexit', onDragExit);
 	listenerAid.remove(urlbarPP, 'mouseover', onMouseOver);
 	listenerAid.remove(urlbarPP, 'mouseout', onMouseOut);
 };
