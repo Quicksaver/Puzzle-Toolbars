@@ -3,6 +3,7 @@ content   thepuzzlepiece                    chrome/content/
 locale    thepuzzlepiece-en   en-US         chrome/locale/en-US/
 locale    thepuzzlepiece      en-US         chrome/locale/en-US/
 locale    thepuzzlepiece      pt-PT         chrome/locale/pt-PT/
+locale    thepuzzlepiece      sv-SE         chrome/locale/sv-SE/
 locale    thepuzzlepiece      zh-CN         chrome/locale/zh-CN/
 
 skin      thepuzzlepiece      classic/1.0   chrome/skin/common/

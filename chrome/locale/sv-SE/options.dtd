@@ -1,0 +1,29 @@
+<!ENTITY Options.title "The Puzzle Piece">
+<!ENTITY Optgeneral.label "Tilläggsfältet">
+<!ENTITY Optabout.label "Om">
+<!ENTITY GroupPosition.label "Position">
+<!ENTITY GroupBehavior.label "Beteende">
+<!ENTITY OptmoveToRight.label "Placera till höger om webbläsarfönstret">
+<!ENTITY OptinURLBar.label "Flytta tilläggsfältet till adressfältet">
+<!ENTITY OptautoHide.label "Dölj tilläggsfältet automatiskt">
+<!ENTITY OptKeyboardShortcut.caption "Kortkommandon för tilläggsfältet">
+<!ENTITY OptKeyboardShortcut.control "Ctrl">
+<!ENTITY OptKeyboardShortcut.shift "Skift">
+<!ENTITY OptKeyboardShortcut.alt "Alt">
+<!ENTITY OptKeyboardShortcut.command "Cmd">
+<!ENTITY OptKeyboardShortcut.option "Option">
+<!ENTITY OptKeyboardShortcut.none "Ingen">
+<!ENTITY OptKeyboardShortcut.spacebar "Blanksteg">
+<!ENTITY OptKeyboardShortcut.pageup "Page Up">
+<!ENTITY OptKeyboardShortcut.pagedown "Page Down">
+<!ENTITY OptKeyboardShortcut.end "End">
+<!ENTITY OptKeyboardShortcut.home "Home">
+<!ENTITY OptKeyboardShortcut.left "Vänsterpil">
+<!ENTITY OptKeyboardShortcut.up "Uppåtpil">
+<!ENTITY OptKeyboardShortcut.right "Högerpil">
+<!ENTITY OptKeyboardShortcut.down "Nedåtpil">
+<!ENTITY thepuzzlepieceabout.name "The Puzzle Piece - Pusselbiten">
+<!ENTITY thepuzzlepieceabout.by "av Quicksaver">
+<!ENTITY thepuzzlepieceabout.desc "All information om The Puzzle Piece och dess utvecklare återfinns på dess tilläggssida hos Mozilla. Om du tycker om tillägget, skriv då gärna en informativ recension eller donera en slant för att stödja dess fortsatta utveckling. Buggrapporter och förslag kan skickas in på tilläggets sida för teknisk support.">
+<!ENTITY thepuzzlepieceabout.home "Tilläggets webbplats">
+<!ENTITY thepuzzlepieceabout.tech "Teknisk support">
