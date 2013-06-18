@@ -5,7 +5,6 @@
 		<em:version>1.0.2</em:version>
 		<em:type>2</em:type>
 		<em:creator>Quicksaver</em:creator>
-		<em:homepageURL>https://addons.mozilla.org/en-US/firefox/addon/the-puzzle-piece/</em:homepageURL>
 		<em:iconURL>chrome://thepuzzlepiece/skin/icon.png</em:iconURL>
 		<em:optionsURL>chrome://thepuzzlepiece/content/options.xul</em:optionsURL>
 		<em:name>The Puzzle Piece</em:name>
@@ -24,6 +23,7 @@
 				<em:locale>en-US</em:locale>
 				<em:name>The Puzzle Piece</em:name>
 				<em:description>It controls your add-on bar. Where do you want it? What do you want it to do? You decide!</em:description>
+				<em:homepageURL>https://addons.mozilla.org/en-US/firefox/addon/the-puzzle-piece/</em:homepageURL>
 			</Description>
 		</em:localized>
 		<em:localized>
@@ -31,6 +31,7 @@
 				<em:locale>pt-PT</em:locale>
 				<em:name>A Peça do Puzzle</em:name>
 				<em:description>Ela controla a sua barra de extras. Onde a quer? Como lhe quer aceder? Você decide!</em:description>
+				<em:homepageURL>https://addons.mozilla.org/pt-PT/firefox/addon/the-puzzle-piece/</em:homepageURL>
 				<em:translator>Quicksaver</em:translator>
 			</Description>
 		</em:localized>
@@ -39,6 +40,7 @@
 				<em:locale>sv-SE</em:locale>
 				<em:name>The Puzzle Piece – Pusselbiten</em:name>
 				<em:description>Kontrollerar ditt tilläggsfält. Var vill du ha den? Vad vill du att den skall göra? Du bestämmer!</em:description>
+				<em:homepageURL>https://addons.mozilla.org/sv-SE/firefox/addon/the-puzzle-piece/</em:homepageURL>
 				<em:translator>Mikael Hiort af Ornäs</em:translator>
 			</Description>
 		</em:localized>
@@ -47,6 +49,7 @@
 				<em:locale>zh-CN</em:locale>
 				<em:name>The Puzzle Piece</em:name>
 				<em:description>此扩展可以用来控制附加组件栏。它要出现在哪里？它要做什么？全由你决定！</em:description>
+				<em:homepageURL>https://addons.mozilla.org/zh-CN/firefox/addon/the-puzzle-piece/</em:homepageURL>
 				<em:translator>Wang.H.K</em:translator>
 			</Description>
 		</em:localized>
