@@ -1,4 +1,6 @@
-moduleAid.VERSION = '1.0.7';
+moduleAid.VERSION = '1.0.8';
+
+this.__defineGetter__('gBrowser', function() { return window.gBrowser; });
 
 this.__defineGetter__('leftPP', function() { return $(objName+'-left-PP'); });
 this.__defineGetter__('rightPP', function() { return $(objName+'-right-PP'); });
@@ -48,6 +50,23 @@ this.customizePP = function(e) {
 	toggleAttribute(activePP, 'customizing', (e.type == 'beforecustomization'));
 };
 
+this.handleFullScreen = function() {
+	var inFullScreen = !!gBrowser.mCurrentBrowser.contentDocument.mozFullScreenElement;
+	
+	setAttribute(addonBar, 'noAnimation', 'true');
+	setAttribute(activePP, 'noAnimation', 'true');
+	setAttribute(URLBarContainer, 'noAnimation', 'true');
+	
+	if(URLBarContainer) { URLBarContainer.hidden = inFullScreen; } else { addonBar.hidden = inFullScreen; }
+	activePP.hidden = inFullScreen;
+	
+	aSync(function() {
+		removeAttribute(addonBar, 'noAnimation');
+		removeAttribute(activePP, 'noAnimation');
+		removeAttribute(URLBarContainer, 'noAnimation');
+	});
+};
+
 moduleAid.LOADMODULE = function() {
 	addonBarContextNodes.__defineGetter__('activePP', function() { return activePP; });
 	
@@ -56,6 +75,7 @@ moduleAid.LOADMODULE = function() {
 	listenerAid.add(window, 'beforecustomization', customizePP, false);
 	listenerAid.add(window, 'aftercustomization', customizePP, false);
 	listenerAid.add(window, 'loadedAddonBarOverlay', choosePP);
+	listenerAid.add(window, 'mozfullscreenchange', handleFullScreen);
 	
 	prefAid.listen('movetoRight', choosePP);
 	prefAid.listen('inURLBar', choosePP);
@@ -78,6 +98,7 @@ moduleAid.UNLOADMODULE = function() {
 	listenerAid.remove(window, 'beforecustomization', customizePP, false);
 	listenerAid.remove(window, 'aftercustomization', customizePP, false);
 	listenerAid.remove(window, 'loadedAddonBarOverlay', choosePP);
+	listenerAid.remove(window, 'mozfullscreenchange', handleFullScreen);
 	
 	delete addonBarContextNodes.activePP;
 	
