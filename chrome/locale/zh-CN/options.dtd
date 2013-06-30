@@ -1,3 +1,4 @@
+<!ENTITY Optwindow.style "width: 25em;">
 <!ENTITY Options.title "The Puzzle Piece">
 <!ENTITY Optgeneral.label "附加组件栏">
 <!ENTITY Optabout.label "关于">

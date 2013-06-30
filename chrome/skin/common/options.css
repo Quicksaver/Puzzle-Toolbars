@@ -8,16 +8,29 @@ textbox[type="number"] input {
 
 #logo {
 	list-style-image: url("chrome://thepuzzlepiece/skin/icon.png");
-	max-width: 200px;
-	max-height: 200px;
-	margin: 20px 0;
-}
-
-tabpanel#aboutTab {
-	min-width: 400px;
-	min-height: 425px;
+	margin-top: 20px;
+	margin-bottom: 20px;
 }
 
 .justify {
 	text-align: justify;
+}
+
+/* Bugfix: cropped prefpanes with animateFadeIn, found at https://bugzilla.mozilla.org/show_bug.cgi?id=394793 comment #1 */
+prefpane > .content-box {
+	overflow: -moz-hidden-unscrollable;
+}
+
+.paneSelector radio[pane] label {
+	margin: 1px 5px 2px 5px;
+}
+.paneSelector radio[pane] {
+	list-style-image: url("chrome://thepuzzlepiece/skin/panes.png");
+	padding: 5px 3px 1px;
+}
+.paneSelector radio[pane="generalPane"] {
+	-moz-image-region: rect(0px 32px 32px 0px);
+}
+.paneSelector radio[pane="aboutPane"] {
+	-moz-image-region: rect(0px 64px 32px 32px);
 }
