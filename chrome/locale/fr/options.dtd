@@ -1,0 +1,30 @@
+<!ENTITY Optwindow.style "width: 30em;">
+<!ENTITY Options.title "The Puzzle Piece">
+<!ENTITY Optgeneral.label "Barre des modules">
+<!ENTITY Optabout.label "À propos">
+<!ENTITY GroupPosition.label "Position">
+<!ENTITY GroupBehavior.label "Comportement">
+<!ENTITY OptmoveToRight.label "Placer à droite de la fenêtre du navigateur">
+<!ENTITY OptinURLBar.label "Déplacer la barre des modules dans la barre d'adresse">
+<!ENTITY OptautoHide.label "Masquer automatiquement la barre des modules">
+<!ENTITY OptKeyboardShortcut.caption "Raccourci clavier">
+<!ENTITY OptKeyboardShortcut.control "Ctrl">
+<!ENTITY OptKeyboardShortcut.shift "Maj">
+<!ENTITY OptKeyboardShortcut.alt "Alt">
+<!ENTITY OptKeyboardShortcut.command "Command">
+<!ENTITY OptKeyboardShortcut.option "Option">
+<!ENTITY OptKeyboardShortcut.none "Aucun">
+<!ENTITY OptKeyboardShortcut.spacebar "Barre d'espace">
+<!ENTITY OptKeyboardShortcut.pageup "Page précédente">
+<!ENTITY OptKeyboardShortcut.pagedown "Page suivante">
+<!ENTITY OptKeyboardShortcut.end "Fin">
+<!ENTITY OptKeyboardShortcut.home "Début">
+<!ENTITY OptKeyboardShortcut.left "Gauche">
+<!ENTITY OptKeyboardShortcut.up "Haut">
+<!ENTITY OptKeyboardShortcut.right "Droite">
+<!ENTITY OptKeyboardShortcut.down "Bas">
+<!ENTITY thepuzzlepieceabout.name "The Puzzle Piece">
+<!ENTITY thepuzzlepieceabout.by "par Quicksaver">
+<!ENTITY thepuzzlepieceabout.desc "Toutes les informations à propos de cette extension et de son développeur peuvent être trouvées sur la page Mozilla Add-ons. Si vous avez aimé l'extension, veuillez y laisser un commentaire sympathique ou une petite contribution pour soutenir son développement. Les signalements de bogues et les suggestions peuvent être faits sur la page d'aide technique.">
+<!ENTITY thepuzzlepieceabout.home "Page web de l'extension">
+<!ENTITY thepuzzlepieceabout.tech "Aide technique">

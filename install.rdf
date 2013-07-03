@@ -28,6 +28,15 @@
 		</em:localized>
 		<em:localized>
 			<Description>
+				<em:locale>fr</em:locale>
+				<em:name>The Puzzle Piece</em:name>
+				<em:description>Elle contrôle votre barre des modules. Où la voulez-vous ? Que souhaitez-vous qu'elle fasse ? C'est vous qui décidez !</em:description>
+				<em:homepageURL>https://addons.mozilla.org/fr/firefox/addon/the-puzzle-piece/</em:homepageURL>
+				<em:translator>Jojaba - BabelZilla</em:translator>
+			</Description>
+		</em:localized>
+		<em:localized>
+			<Description>
 				<em:locale>pt-PT</em:locale>
 				<em:name>A Peça do Puzzle</em:name>
 				<em:description>Ela controla a sua barra de extras. Onde a quer? Como lhe quer aceder? Você decide!</em:description>
