@@ -11,7 +11,7 @@
 <!ENTITY OptinURLBar.label "Move the add-on bar into the location bar">
 <!ENTITY OptautoHide.label "Hide the add-on bar automatically">
 
-<!ENTITY OptKeyboardShortcut.caption "Add-on Bar Keyboard Shortcut">
+<!ENTITY OptKeyboardShortcut.caption "Keyboard Shortcut">
 <!ENTITY OptKeyboardShortcut.control "Control">
 <!ENTITY OptKeyboardShortcut.shift "Shift">
 <!ENTITY OptKeyboardShortcut.alt "Alt">

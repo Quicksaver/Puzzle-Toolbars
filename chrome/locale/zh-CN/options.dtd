@@ -7,7 +7,7 @@
 <!ENTITY OptmoveToRight.label "放置在浏览器窗口右端">
 <!ENTITY OptinURLBar.label "移动附加组件栏到地址栏中">
 <!ENTITY OptautoHide.label "自动隐藏附加组件栏">
-<!ENTITY OptKeyboardShortcut.caption "附加组件栏键盘快捷键">
+<!ENTITY OptKeyboardShortcut.caption "键盘快捷键">
 <!ENTITY OptKeyboardShortcut.control "Control">
 <!ENTITY OptKeyboardShortcut.shift "Shift">
 <!ENTITY OptKeyboardShortcut.alt "Alt">

@@ -10,7 +10,7 @@
 <!ENTITY OptinURLBar.label "Mover a barra de extras para a barra de endereço">
 <!ENTITY OptautoHide.label "Esconder a barra de extras automaticamente">
 
-<!ENTITY OptKeyboardShortcut.caption "Atalho de Teclado para a Barra de Extras">
+<!ENTITY OptKeyboardShortcut.caption "Atalho de Teclado">
 <!ENTITY OptKeyboardShortcut.control "Control">
 <!ENTITY OptKeyboardShortcut.shift "Shift">
 <!ENTITY OptKeyboardShortcut.alt "Alt">

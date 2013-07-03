@@ -7,7 +7,7 @@
 <!ENTITY OptmoveToRight.label "Placera till höger om webbläsarfönstret">
 <!ENTITY OptinURLBar.label "Flytta tilläggsfältet till adressfältet">
 <!ENTITY OptautoHide.label "Dölj tilläggsfältet automatiskt">
-<!ENTITY OptKeyboardShortcut.caption "Kortkommandon för tilläggsfältet">
+<!ENTITY OptKeyboardShortcut.caption "Kortkommando">
 <!ENTITY OptKeyboardShortcut.control "Ctrl">
 <!ENTITY OptKeyboardShortcut.shift "Skift">
 <!ENTITY OptKeyboardShortcut.alt "Alt">
