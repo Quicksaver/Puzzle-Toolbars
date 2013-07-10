@@ -1,8 +1,9 @@
-moduleAid.VERSION = '1.1.17';
+moduleAid.VERSION = '1.1.18';
 
 this.__defineGetter__('addonBar', function() { return $('addon-bar'); });
 this.__defineGetter__('bottomBox', function() { return $('browser-bottombox'); });
 this.__defineGetter__('browserPanel', function() { return $('browser-panel'); });
+this.__defineGetter__('gFindBar', function() { return window.gFindBar; });
 this.__defineGetter__('toggleAddonBar', function() { return window.toggleAddonBar; });
 this.__defineSetter__('toggleAddonBar', function(v) { return window.toggleAddonBar = v; });
 this.__defineGetter__('setToolbarVisibility', function() { return window.setToolbarVisibility; });
@@ -91,6 +92,11 @@ this.moveAddonBar = function() {
 	moveBarStyle.bottom += document.documentElement.clientHeight -appContentPos.bottom;
 	moveBarStyle.left += appContentPos.left;
 	moveBarStyle.right += document.documentElement.clientWidth -appContentPos.right;
+	
+	// Firefox 25 introduces per-tab findbars. The findbar is now a part of appcontent, so I have to account for its height as well
+	if(Services.vc.compare(Services.appinfo.platformVersion, "25.0a1") >= 0 && !gFindBar.hidden) {
+		moveBarStyle.bottom += gFindBar.clientHeight +gFindBar.clientTop;
+	}
 	
 	// Account for the puzzle piece
 	moveBarStyle.left += 12;

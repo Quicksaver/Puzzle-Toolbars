@@ -2,6 +2,7 @@
 @-moz-document url("chrome://browser/content/browser.xul") {
 	
 	/* FindBar has an annoying 1px background that makes the add-on bar look ugly */
+	.browserContainer findbar:not([movetotop]), /* Firefox 25 */
 	#FindToolbar:not([movetotop]) {
 		background-image: none;
 	}
