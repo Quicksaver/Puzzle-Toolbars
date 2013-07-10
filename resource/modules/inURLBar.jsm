@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.0.5';
+moduleAid.VERSION = '1.0.6';
 
 this.onCustomizing = function(e) {
 	tempMoveAddonBar(e.type == 'beforecustomization');
@@ -31,7 +31,7 @@ this.loadInURLBar = function() {
 		initHovers(); // the button would only be added after this had been called, mousing over it wouldn't work
 	}
 	
-	if(addonBar.getAttribute('customizing') == 'true') {
+	if(trueAttribute(addonBar, 'customizing')) {
 		tempMoveAddonBar(true);
 	}
 };
@@ -47,9 +47,9 @@ this.openURLBarContainer = function() {
 this.lastWidth = 0;
 this.moveContainer = function() {
 	// Bugfix: Endless loop because width of addonBar here is always 0
-	if($('main-window').getAttribute('disablechrome') == 'true') {
+	if(trueAttribute($('main-window'), 'disablechrome')) {
 		if(isAncestor(addonBar, $('navigator-toolbox'))
-		&& $('navigator-toolbox').getAttribute('tabsontop') == 'true'
+		&& trueAttribute($('navigator-toolbox'), 'tabsontop')
 		&& !isAncestor(addonBar, $('toolbar-menubar'))
 		&& !isAncestor(addonBar, $('TabsToolbar'))) {
 			return;
