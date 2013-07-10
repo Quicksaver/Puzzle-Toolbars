@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.1.19';
+moduleAid.VERSION = '1.1.20';
 
 this.__defineGetter__('addonBar', function() { return $('addon-bar'); });
 this.__defineGetter__('bottomBox', function() { return $('browser-bottombox'); });
@@ -301,7 +301,7 @@ moduleAid.UNLOADMODULE = function() {
 	
 	removeAttribute(contextMenu.getElementsByAttribute('toolbarId', 'addon-bar')[0], 'command');
 	removeAttribute(viewMenu.getElementsByAttribute('toolbarId', 'addon-bar')[0], 'command');
-	removeAttribute(appMenu.getElementsByAttribute('toolbarId', 'addon-bar')[0], 'command');
+	if(appMenu) { removeAttribute(appMenu.getElementsByAttribute('toolbarId', 'addon-bar')[0], 'command'); }
 	
 	if(this.backups) {
 		toggleAddonBar = this.backups.toggleAddonBar;
