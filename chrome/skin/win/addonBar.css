@@ -4,25 +4,27 @@
 	/* FindBar has an annoying 1px background that makes the add-on bar look ugly */
 	.browserContainer findbar:not([movetotop]), /* Firefox 25 */
 	#FindToolbar:not([movetotop]) {
-		border-top: 1px solid rgb(0,0,0);
-		-moz-border-top-colors: rgb(160, 160, 160);
-	}
-	
-	#addon-bar:not([inURLBar]) {
-		border-top: 1px solid rgb(0,0,0);
-		border-right: 1px solid rgb(0,0,0);
-		border-left: 1px solid rgb(0,0,0);
-		-moz-border-top-colors: rgb(160, 160, 160);
-		-moz-border-right-colors: rgb(160, 160, 160);
-		-moz-border-left-colors: rgb(160, 160, 160);
+		background-image: linear-gradient(rgba(0, 0, 0, 0.15) 1px, transparent 1px);
 	}
 	
 	window:not([thePuzzlePiece-oscpu="Windows NT 5.1"]) #addon-bar:not([inURLBar]) {
 		background-color: rgb(219,234,249);
+		border-top: 1px solid rgb(0,0,0);
+		border-right: 1px solid rgb(0,0,0);
+		border-left: 1px solid rgb(0,0,0);
+		-moz-border-top-colors: rgb(186, 199, 212);
+		-moz-border-right-colors: rgb(186, 199, 212);
+		-moz-border-left-colors: rgb(186, 199, 212);
 	}
 	
 	window[thePuzzlePiece-oscpu="Windows NT 5.1"] #addon-bar:not([inURLBar]) {
 		background-color: -moz-dialog;
+		border-top: 1px solid rgb(0,0,0);
+		border-right: 1px solid rgb(0,0,0);
+		border-left: 1px solid rgb(0,0,0);
+		-moz-border-top-colors: rgb(191, 191, 191);
+		-moz-border-right-colors: rgb(191, 191, 191);
+		-moz-border-left-colors: rgb(191, 191, 191);
 	}
 	
 	window[thePuzzlePiece-oscpu="Windows NT 5.1"] #addon-bar #status-bar resizer {
