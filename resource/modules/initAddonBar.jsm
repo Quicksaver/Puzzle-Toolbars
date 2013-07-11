@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.1.20';
+moduleAid.VERSION = '1.1.21';
 
 this.__defineGetter__('addonBar', function() { return $('addon-bar'); });
 this.__defineGetter__('bottomBox', function() { return $('browser-bottombox'); });
@@ -158,7 +158,7 @@ this.reMoveBar = function() {
 };
 
 this.findPersonaPosition = function() {
-	if(bottomBox.getAttribute('lwthemefooter') != 'true') {
+	if(!trueAttribute(bottomBox, 'lwthemefooter')) {
 		prefAid.lwthemebgImage = '';
 		prefAid.lwthemebgWidth = 0;
 		prefAid.lwthemebgHeight = 0;
