@@ -10,7 +10,6 @@
 	
 	#addon-bar:not([inURLBar]) {
 		position: fixed;
-		border-radius: 8px 8px 0 0;
 		padding: 3px 5px 0px 5px;
 	}
 	

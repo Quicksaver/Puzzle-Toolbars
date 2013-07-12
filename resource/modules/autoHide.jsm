@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.0.10';
+moduleAid.VERSION = '1.0.11';
 
 this.onMouseOver = function() {
 	setHover(true);
@@ -65,6 +65,8 @@ this.initHovers = function() {
 this.moveAutoHide = function() {
 	var OSoffset = (Services.appinfo.OS != 'WINNT') ? 3 : 8;
 	var barOffset = addonBar.clientHeight -CLIPBAR;
+	var clipOffHeight = moveBarStyle.clientHeight +moveBarStyle.clientTop;
+	if(moveBarStyle.bottom > 1) { clipOffHeight += moveBarStyle.clientBottom; }
 	
 	styleAid.unload('autoHide_'+_UUID);
 	
@@ -73,12 +75,12 @@ this.moveAutoHide = function() {
 	sscode += '@-moz-document url("'+document.baseURI+'") {\n';
 	sscode += '	window['+objName+'_UUID="'+_UUID+'"] #addon-bar:not([inURLBar])[autohide]:not([customizing="true"]):not([hover]):not(:hover) {\n';
 	sscode += '		bottom: '+(moveBarStyle.bottom -barOffset)+'px;\n';
-	sscode += '		clip: rect(0px, '+/*(addonBar.clientWidth +(addonBar.clientLeft *2))*/4000+'px, '+CLIPBAR+'px, 0px);\n';
+	sscode += '		clip: rect(0px, '+4000+'px, '+CLIPBAR+'px, 0px);\n';
 	sscode += '	}\n';
 	sscode += '	window['+objName+'_UUID="'+_UUID+'"] #addon-bar:not([inURLBar])[autohide][hover],\n';
 	sscode += '	window['+objName+'_UUID="'+_UUID+'"] #addon-bar:not([inURLBar])[autohide]:hover,\n';
 	sscode += '	window['+objName+'_UUID="'+_UUID+'"] #addon-bar:not([inURLBar])[autohide][customizing="true"] {\n';
-	sscode += '		clip: rect(0px, '+/*(addonBar.clientWidth +(addonBar.clientLeft *2))*/4000+'px, '+(moveBarStyle.clientHeight +1)+'px, 0px);\n';
+	sscode += '		clip: rect(0px, '+4000+'px, '+clipOffHeight+'px, 0px);\n';
 	sscode += '	}\n';
 	sscode += '	window['+objName+'_UUID="'+_UUID+'"] #browser-bottombox .PuzzlePiece:not([customizing])[autohide][active]:not(:hover):not([hover]) { bottom: '+(moveBarStyle.bottom -OSoffset -19)+'px; }\n';
 	sscode += '}';

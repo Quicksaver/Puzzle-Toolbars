@@ -1,20 +1,23 @@
 @namespace url(http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul);
 @-moz-document url("chrome://browser/content/browser.xul") {
 	
-	/* FindBar has an annoying 1px background that makes the add-on bar look ugly */
-	.browserContainer findbar:not([movetotop]), /* Firefox 25 */
-	#FindToolbar:not([movetotop]) {
-		background-image: linear-gradient(rgba(0, 0, 0, 0.15) 1px, transparent 1px);
+	#addon-bar:not([inURLBar]) {
+		border-radius: 8px 8px 2px 2px;
+		border-top: 2px solid rgba(0,0,0,0.15);
+		border-right: 2px solid rgba(0,0,0,0.15);
+		border-left: 2px solid rgba(0,0,0,0.15);
+		-moz-border-top-colors: rgba(0,0,0,0.15) rgba(255,255,255,0.15);
+		-moz-border-right-colors: rgba(0,0,0,0.15) rgba(255,255,255,0.15);
+		-moz-border-left-colors: rgba(0,0,0,0.15) rgba(255,255,255,0.15);
+		border-bottom: 1px solid transparent;
+  		-moz-border-bottom-colors: transparent;
 	}
 	
-	#addon-bar:not([inURLBar]) {
+	window[thePuzzlePiece-oscpu="Windows NT 5.1"] #addon-bar:not([inURLBar]) {
+		background-color: -moz-dialog;
+	}
+	window:not([thePuzzlePiece-oscpu="Windows NT 5.1"]) #addon-bar:not([inURLBar]) {
 		background-color: rgb(219,234,249);
-		border-top: 1px solid rgba(0,0,0,0.15);
-		border-right: 1px solid rgba(0,0,0,0.15);
-		border-left: 1px solid rgba(0,0,0,0.15);
-		-moz-border-top-colors: rgba(0,0,0,0.15);
-		-moz-border-right-colors: rgba(0,0,0,0.15);
-		-moz-border-left-colors: rgba(0,0,0,0.15);
 	}
 	
 	window[thePuzzlePiece-oscpu="Windows NT 5.1"] #addon-bar #status-bar resizer {

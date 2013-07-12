@@ -1,22 +1,18 @@
 @namespace url(http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul);
 @-moz-document url("chrome://browser/content/browser.xul") {
 
-	/* FindBar has an annoying 1px background that makes the add-on bar look ugly */
-	.browserContainer findbar:not([movetotop]), /* Firefox 25 */
-	#FindToolbar:not([movetotop]) {
-		border-top: 2px solid -moz-use-text-color;
-		-moz-border-top-colors: threedshadow transparent;
-	}
-	
 	#addon-bar:not([inURLBar]) {
 		-moz-appearance: none !important;
 		background-color: -moz-dialog;
-		border-top: 1px solid threedshadow;
-		border-right: 1px solid threedshadow;
-		border-left: 1px solid threedshadow;
-		-moz-border-top-colors: threedshadow;
-		-moz-border-right-colors: threedshadow;
-		-moz-border-left-colors: threedshadow;
+		border-radius: 8px 8px 2px 2px;
+		border-top: 2px solid threedshadow;
+		border-right: 2px solid threedshadow;
+		border-left: 2px solid threedshadow;
+		-moz-border-top-colors: threedshadow threedhighlight;
+		-moz-border-right-colors: threedshadow threedhighlight;
+		-moz-border-left-colors: threedshadow threedhighlight;
+		border-bottom: 1px solid transparent;
+  		-moz-border-bottom-colors: transparent;
 	}
 	
 	.PuzzlePiece:not(#thePuzzlePiece-urlbar-PP):not([customizing]):not([active]):not(:hover),

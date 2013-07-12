@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.1.21';
+moduleAid.VERSION = '1.1.22';
 
 this.__defineGetter__('addonBar', function() { return $('addon-bar'); });
 this.__defineGetter__('bottomBox', function() { return $('browser-bottombox'); });
@@ -17,7 +17,7 @@ this.getComputedStyle = function(el) { return window.getComputedStyle(el); };
 /* This only returns non-null when inURLBar is true */
 this.__defineGetter__('URLBarContainer', function() { return $(objName+'-urlbar-addonbar-container'); });
 
-this.CLIPBAR = 5; // ammount of pixels to clip the bar to when it is closed or hidden
+this.CLIPBAR = 6; // ammount of pixels to clip the bar to when it is closed or hidden
 
 this.addonBarContextNodes = {
 	get addonBar () { return addonBar; }
@@ -93,10 +93,20 @@ this.moveAddonBar = function() {
 	moveBarStyle.left += appContentPos.left;
 	moveBarStyle.right += document.documentElement.clientWidth -appContentPos.right;
 	
+	moveBarStyle.clientHeight = addonBar.clientHeight;
+	moveBarStyle.clientTop = addonBar.clientTop;
+	moveBarStyle.movetoRight = prefAid.movetoRight;
+	
+	var addonBarStyle = getComputedStyle(addonBar);
+	moveBarStyle.clientBottom = parseInt(addonBarStyle.getPropertyValue('border-bottom-width'));
+	
 	// Firefox 25 introduces per-tab findbars. The findbar is now a part of appcontent, so I have to account for its height as well
 	if(Services.vc.compare(Services.appinfo.platformVersion, "25.0a1") >= 0 && !gFindBar.hidden && !trueAttribute(gFindBar, 'movetotop')) {
 		moveBarStyle.bottom += gFindBar.clientHeight +gFindBar.clientTop;
 	}
+	
+	// Let's account for the transparent bottom border as well if it exists
+	moveBarStyle.bottom -= moveBarStyle.clientBottom;
 	
 	// Account for the puzzle piece
 	moveBarStyle.left += 12;
@@ -105,12 +115,11 @@ this.moveAddonBar = function() {
 	// Let's try to show it like it's poping up from somewhere when there's something below it
 	if(moveBarStyle.bottom > 1) { moveBarStyle.bottom--; }
 	
-	moveBarStyle.clientHeight = addonBar.clientHeight;
-	moveBarStyle.movetoRight = prefAid.movetoRight;
-	
 	dispatch(addonBar, { type: "WillMoveAddonBar", cancelable: false });
 	
 	var barOffset = addonBar.clientHeight -CLIPBAR;
+	var clipOffHeight = moveBarStyle.clientHeight +moveBarStyle.clientTop;
+	if(moveBarStyle.bottom > 1) { clipOffHeight += moveBarStyle.clientBottom; }
 	
 	// I find it easier to always just move the add-on bar when this is called, instead of checking every occasion when it isn't visible and should still be moved
 	//if(addonBar.collapsed) { return; }
@@ -126,11 +135,11 @@ this.moveAddonBar = function() {
 	sscode += '		max-width: '+Math.max(moveBarStyle.maxWidth, 5)+'px;\n';
 	sscode += '	}\n';
 	sscode += '	window['+objName+'_UUID="'+_UUID+'"] #addon-bar:not([inURLBar]):not([autohide]) {\n';
-	sscode += '		clip: rect(0px, '+/*(addonBar.clientWidth +(addonBar.clientLeft *2))*/4000+'px, '+(moveBarStyle.clientHeight +1)+'px, 0px);\n';
+	sscode += '		clip: rect(0px, '+4000+'px, '+clipOffHeight+'px, 0px);\n';
 	sscode += '	}\n';
 	sscode += '	window['+objName+'_UUID="'+_UUID+'"] #addon-bar:not([inURLBar])[collapsed="true"]:not([customizing="true"]) {\n';
 	sscode += '		bottom: '+(moveBarStyle.bottom -barOffset)+'px;\n';
-	sscode += '		clip: rect(0px, '+/*(addonBar.clientWidth +(addonBar.clientLeft *2))*/4000+'px, '+CLIPBAR+'px, 0px);\n';
+	sscode += '		clip: rect(0px, '+4000+'px, '+CLIPBAR+'px, 0px);\n';
 	sscode += '	}\n';
 	sscode += '}';
 	
@@ -205,10 +214,25 @@ this.stylePersonaAddonBar = function() {
 	if(prefAid.lwthemebgImage != '') {
 		var boxStyle = getComputedStyle(bottomBox);
 		
-		var offsetPersonaX = (!prefAid.movetoRight) ? -moveBarStyle.left : -bottomBox.clientWidth +moveBarStyle.right +addonBar.clientWidth;
+		if(!prefAid.movetoRight) {
+			var offsetPersonaX = -moveBarStyle.left -addonBar.clientLeft +parseInt(boxStyle.getPropertyValue('border-left-width'));
+		} else {
+			var offsetPersonaX =
+				-bottomBox.clientWidth
+				+moveBarStyle.right
+				+addonBar.clientWidth
+				+addonBar.clientLeft
+				-parseInt(boxStyle.getPropertyValue('border-left-width'));
+		}
 		
-		// Another personas in OSX tweak
-		var offsetPersonaY = -prefAid.lwthemebgHeight +moveBarStyle.clientHeight +moveBarStyle.bottom;
+		var offsetPersonaY =
+			-prefAid.lwthemebgHeight
+			+moveBarStyle.clientHeight
+			+moveBarStyle.bottom
+			+moveBarStyle.clientTop
+			-parseInt(boxStyle.getPropertyValue('border-bottom-width'));
+		if(moveBarStyle.bottom > 1) { offsetPersonaY--; }
+		
 		var offsetPadding = boxStyle.getPropertyValue('background-position');
 		if(offsetPadding.indexOf(' ') > -1 && offsetPadding.indexOf('px', offsetPadding.indexOf(' ') +1) > -1) {
 			offsetPersonaY += parseInt(offsetPadding.substr(offsetPadding.indexOf(' ') +1, offsetPadding.indexOf('px', offsetPadding.indexOf(' ') +1)));

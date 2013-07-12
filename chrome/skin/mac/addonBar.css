@@ -4,6 +4,7 @@
 	#addon-bar:not([inURLBar]) {
 		-moz-appearance: none !important;
 		background-color: #E8E8E8 !important;
+		border-radius: 8px 8px 0 0;
 		border-top: 1px solid #888;
 		border-right: 1px solid #888;
 		border-left: 1px solid #888;
