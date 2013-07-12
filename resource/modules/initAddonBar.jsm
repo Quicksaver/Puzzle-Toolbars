@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.1.22';
+moduleAid.VERSION = '1.1.23';
 
 this.__defineGetter__('addonBar', function() { return $('addon-bar'); });
 this.__defineGetter__('bottomBox', function() { return $('browser-bottombox'); });
@@ -101,7 +101,10 @@ this.moveAddonBar = function() {
 	moveBarStyle.clientBottom = parseInt(addonBarStyle.getPropertyValue('border-bottom-width'));
 	
 	// Firefox 25 introduces per-tab findbars. The findbar is now a part of appcontent, so I have to account for its height as well
-	if(Services.vc.compare(Services.appinfo.platformVersion, "25.0a1") >= 0 && !gFindBar.hidden && !trueAttribute(gFindBar, 'movetotop')) {
+	if(Services.vc.compare(Services.appinfo.platformVersion, "25.0a1") >= 0
+	&& !gFindBar.hidden
+	&& gFindBar.getAttribute('position') != 'top'
+	&& !trueAttribute(gFindBar, 'movetotop')) {
 		moveBarStyle.bottom += gFindBar.clientHeight +gFindBar.clientTop;
 	}
 	
