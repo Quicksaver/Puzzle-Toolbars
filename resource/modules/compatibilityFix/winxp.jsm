@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.0.1';
+moduleAid.VERSION = '1.0.2';
 
 moduleAid.LOADMODULE = function() {
 	this.backups = {
@@ -13,14 +13,10 @@ moduleAid.LOADMODULE = function() {
 		}
 	};
 	
-	setAttribute($('main-window'), objName+'-oscpu', 'Windows NT 5.1');
-	
 	window.gBrowser.updateWindowResizers();
 };
 
 moduleAid.UNLOADMODULE = function() {
-	removeAttribute($('main-window'), objName+'-oscpu', 'Windows NT 5.1');
-	
 	if(this.backups) {
 		window.gBrowser.updateWindowResizers = this.backups.updateWindowResizers;
 	}

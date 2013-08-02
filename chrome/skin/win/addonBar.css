@@ -11,16 +11,22 @@
 		-moz-border-left-colors: rgba(0,0,0,0.15) rgba(255,255,255,0.15);
 		border-bottom: 1px solid transparent;
   		-moz-border-bottom-colors: transparent;
-	}
-	
-	window[thePuzzlePiece-oscpu="Windows NT 5.1"] #addon-bar:not([inURLBar]) {
 		background-color: -moz-dialog;
 	}
-	window:not([thePuzzlePiece-oscpu="Windows NT 5.1"]) #addon-bar:not([inURLBar]) {
-		background-color: rgb(219,234,249);
+	
+	@media not all and (-moz-windows-classic) {
+		@media (-moz-windows-default-theme) {
+			#addon-bar:not([inURLBar]) {
+				background-color: rgb(219,234,249);
+			}
+			
+			#addon-bar dropmarker {
+				-moz-appearance: menulist-button;
+			}
+		}
 	}
 	
-	window[thePuzzlePiece-oscpu="Windows NT 5.1"] #addon-bar #status-bar resizer {
+	#addon-bar #status-bar resizer {
 		display: none !important;
 	}
 	
@@ -32,9 +38,4 @@
 	.PuzzlePiece:not(#thePuzzlePiece-urlbar-PP):not([customizing])[autohide]:not(:hover):not([hover]) {
 		clip: rect(0px, 32px, 9px, 0px);
 	}
-	
-	window:not([thePuzzlePiece-oscpu="Windows NT 5.1"]) #addon-bar dropmarker {
-		-moz-appearance: menulist-button;
-	}
-	
 }
