@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.2.0';
+moduleAid.VERSION = '1.2.1';
 
 this.__defineGetter__('bottomBox', function() { return $('browser-bottombox'); });
 this.__defineGetter__('browserPanel', function() { return $('browser-panel'); });
@@ -251,7 +251,7 @@ this.stylePersonaAddonBar = function() {
 		sscode += '@-moz-document url("'+document.baseURI+'") {\n';
 		sscode += '	window['+objName+'_UUID="'+_UUID+'"] #addon-bar[placement="corner"] {\n';
 		sscode += '	  background-image: ' + prefAid.lwthemebgImage + ' !important;\n';
-		sscode += '	  background-color: ' + prefAid.lwthemecolor + ' !important;\n';
+		sscode += '	  background-color: ' + prefAid.lwthemebgColor + ' !important;\n';
 		sscode += '	  color: ' + prefAid.lwthemecolor + ' !important;\n';
 		sscode += '	  background-position: ' + offsetPersonaX + 'px ' +offsetPersonaY+ 'px !important;\n';
 		sscode += '	  background-repeat: repeat !important;\n';
