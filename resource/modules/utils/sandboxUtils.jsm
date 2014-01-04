@@ -1,4 +1,4 @@
-moduleAid.VERSION = '2.1.2';
+moduleAid.VERSION = '2.1.5';
 moduleAid.LAZY = true;
 
 // window - Similarly to windowMediator.callOnMostRecent, the window property returns the most recent navigator:browser window object
@@ -80,6 +80,15 @@ this.closeOptions = function() {
 	windowMediator.callOnAll(function(aWindow) { try { aWindow.close(); } catch(ex) {} }, null, Addon.optionsURL);
 };
 
+// fillVersion() - to automatically fill in the version information in the about tab of the preferences dialog
+// 	box - (xul element) where the version number is supposed to appear
+this.fillVersion = function(box) {
+	if(!box || !Addon || !Addon.version) { return; }
+	
+	box.textContent = Addon.version;
+	box.hidden = false;
+};
+
 // setAttribute() - helper me that saves me the trouble of checking if the obj exists first everywhere in my scripts; yes I'm that lazy
 this.setAttribute = function(obj, attr, val) { loadAttributesTools(); return setAttribute(obj, attr, val); };
 
@@ -91,6 +100,9 @@ this.toggleAttribute = function(obj, attr, condition, trueval, falseval) { loadA
 
 // trueAttribute() - checks if attr on obj has value 'true'; once again, I'm uber lazy
 this.trueAttribute = function(obj, attr) { loadAttributesTools(); return trueAttribute(obj, attr); };
+
+// innerText() - returns the equivalent of IE's .innerText property of node; essentially returns .textContent without the script tags
+this.innerText = function(node) { loadHTMLElementsTools(); return innerText(node); };
 
 this.loadSandboxTools = function() {
 	delete this.xmlHttpRequest;
@@ -113,12 +125,10 @@ this.loadAttributesTools = function() {
 	moduleAid.load('utils/attributes');
 };
 
-// fullClean[] - array of methods to be called when a window is unloaded. Each entry expects function(aWindow) where
-// 	aWindow - (object) the window that has been unloaded
-this.fullClean = [];
-this.fullClean.push(function(aWindow) {
-	removeObject(aWindow, objName);
-});
+this.loadHTMLElementsTools = function() {
+	delete this.innerText;
+	moduleAid.load('utils/HTMLElements');
+};
 
 moduleAid.UNLOADMODULE = function() {
 	moduleAid.clean();

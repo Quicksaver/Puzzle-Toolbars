@@ -28,7 +28,7 @@
 // disable() - disables the add-on, in general the add-on disabling itself is a bad idea so I shouldn't use it
 // Note: Firefox 8 is the minimum version supported as the bootstrap requires the chrome.manifest file to be loaded, which was implemented in Firefox 8.
 
-let bootstrapVersion = '1.2.13';
+let bootstrapVersion = '1.2.16';
 let UNLOADED = false;
 let STARTED = false;
 let Addon = {};
@@ -46,6 +46,12 @@ Cu.import("resource://gre/modules/AddonManager.jsm");
 Cu.import("resource://gre/modules/Services.jsm");
 Cu.import("resource://gre/modules/XPCOMUtils.jsm");
 Cu.import("resource://gre/modules/PlacesUtils.jsm");
+Cu.import("resource://gre/modules/PluralForm.jsm");
+
+// This will be defined in builds with Australis enabled, easier than version checking in case they change this again.
+// I will change/remove this in the future when this is more certain
+let Australis = null;
+try { Australis = Cu.import("resource:///modules/CustomizableUI.jsm"); } catch(ex) {}
 
 // For some reason, PlacesUIUtils.jsm disappeared in FF21 (probably has to do with the whole PB restructuring that is going on)
 // So I'm adding the tools needed in it manually, makes no practical difference as far as I can tell
@@ -243,8 +249,8 @@ function shutdown(aData, aReason) {
 	
 	if(aReason == APP_SHUTDOWN) {
 		// List of methods that must always be run on shutdown, such as restoring some native prefs
-		for(var i=0; i<alwaysRunOnShutdown.length; i++) {
-			alwaysRunOnShutdown[i]();
+		while(alwaysRunOnShutdown.length > 0) {
+			alwaysRunOnShutdown.pop()();
 		}
 		
 		if(observerLOADED) { observerAid.callQuits(); }
