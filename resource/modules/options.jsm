@@ -58,4 +58,5 @@ moduleAid.LOADMODULE = function() {
 	}
 	
 	fillKeycodes();
+	fillVersion($('addonVersion'));
 };

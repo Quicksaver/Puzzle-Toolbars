@@ -119,7 +119,10 @@
 		</hbox>
 		
 		<vbox align="end">
-			<description class="closer">&thepuzzlepieceabout.name;</description>
+			<hbox>
+				<description class="closer">&thepuzzlepieceabout.name;</description>
+				<description id="addonVersion" hidden="true" class="closer"></description>
+			</hbox>
 			<description>&thepuzzlepieceabout.by;</description>
 			<description class="justify">&thepuzzlepieceabout.desc;</description>
 			<label class="text-link closer" href="https://addons.mozilla.org/UserAgentLocale/firefox/addon/the-puzzle-piece/" value="&thepuzzlepieceabout.home;"/>
