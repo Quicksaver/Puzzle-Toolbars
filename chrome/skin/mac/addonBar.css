@@ -1,11 +1,11 @@
 @namespace url(http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul);
 @-moz-document url("chrome://browser/content/browser.xul") {
 
-	#addon-bar:not([inURLBar]) {
+	#addon-bar[placement="corner"] {
 		-moz-appearance: none !important;
 		background-color: #E8E8E8 !important;
 		border-radius: 8px 8px 0 0;
-		border-top: 1px solid #888;
+		border-top: 1px solid #888 !important;
 		border-right: 1px solid #888;
 		border-left: 1px solid #888;
 		-moz-border-top-colors: #888;

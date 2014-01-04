@@ -10,7 +10,7 @@
 		<preferences>
 			<preference id="pref-movetoRight" name="extensions.thepuzzlepiece.movetoRight" type="bool" />
 			<preference id="pref-autoHide" name="extensions.thepuzzlepiece.autoHide" type="bool" />
-			<preference id="pref-inURLBar" name="extensions.thepuzzlepiece.inURLBar" type="bool" />
+			<preference id="pref-placement" name="extensions.thepuzzlepiece.placement" type="string" />
 			<preference id="pref-addonBarKeycode" name="extensions.thepuzzlepiece.addonBarKeycode" type="string"/>
 			<preference id="pref-addonBarAccel" name="extensions.thepuzzlepiece.addonBarAccel" type="bool"/>
 			<preference id="pref-addonBarShift" name="extensions.thepuzzlepiece.addonBarShift" type="bool"/>
@@ -19,13 +19,19 @@
 		
 		<groupbox align="start">
 			<caption label="&GroupPosition.label;" />
-			<checkbox label="&OptmoveToRight.label;" dependson="!pref-inURLBar" preference="pref-movetoRight"/>
-			<checkbox label="&OptinURLBar.label;" preference="pref-inURLBar"/>
+			<radiogroup preference="pref-placement">
+				<vbox align="start">
+					<radio label="&OptPlacement.bottomLabel;" value="bottom"/>
+					<radio label="&OptPlacement.cornerLabel;" value="corner"/>
+					<radio label="&OptPlacement.urlbarLabel;" value="urlbar"/>
+				</vbox>
+			</radiogroup>
+			<checkbox label="&OptmoveToRight.label;" dependson="!pref-placement:urlbar" preference="pref-movetoRight"/>	
 		</groupbox>
 		
 		<groupbox align="start">
 			<caption label="&GroupBehavior.label;" />
-			<checkbox label="&OptautoHide.label;" preference="pref-autoHide"/>
+			<checkbox label="&OptautoHide.label;" dependson="!pref-placement:bottom" preference="pref-autoHide"/>
 		</groupbox>
 		
 		<groupbox align="center">

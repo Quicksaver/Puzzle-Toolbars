@@ -1,11 +1,11 @@
-moduleAid.VERSION = '1.0.8';
+moduleAid.VERSION = '1.1.0';
 
 this.__defineGetter__('gBrowser', function() { return window.gBrowser; });
 
 this.__defineGetter__('leftPP', function() { return $(objName+'-left-PP'); });
 this.__defineGetter__('rightPP', function() { return $(objName+'-right-PP'); });
 this.__defineGetter__('urlbarPP', function() { return $(objName+'-urlbar-PP'); });
-this.__defineGetter__('activePP', function() { return (prefAid.inURLBar) ? urlbarPP : (prefAid.movetoRight) ? rightPP : leftPP; });
+this.__defineGetter__('activePP', function() { return (prefAid.placement == 'urlbar') ? urlbarPP : (prefAid.movetoRight) ? rightPP : leftPP; });
 
 this.commandPP = function(e) {
 	if(e.button != 0) { return; }
@@ -16,7 +16,7 @@ this.commandPP = function(e) {
 this.movePPs = function() {
 	toggleAttribute(activePP, 'clipped', moveBarStyle.bottom == 1);
 	
-	var OSoffset = (Services.appinfo.OS != 'WINNT') ? 3 : 8;
+	var OSoffset = (Services.appinfo.OS != 'WINNT') ? 1 : 6;
 	
 	styleAid.unload('positionPPs_'+_UUID);
 	
@@ -26,7 +26,7 @@ this.movePPs = function() {
 	sscode += '	window['+objName+'_UUID="'+_UUID+'"] #'+objName+'-left-PP { left: '+(moveBarStyle.left -12)+'px; }\n';
 	sscode += '	window['+objName+'_UUID="'+_UUID+'"] #'+objName+'-right-PP { right: '+(moveBarStyle.right -12)+'px; }\n';
 	sscode += '	window['+objName+'_UUID="'+_UUID+'"] #browser-bottombox .PuzzlePiece { bottom: '+(moveBarStyle.bottom -OSoffset)+'px; }\n';
-	sscode += '	window['+objName+'_UUID="'+_UUID+'"] #browser-bottombox .PuzzlePiece:not([customizing]):not([active]):not(:hover) { bottom: '+(moveBarStyle.bottom -OSoffset -19)+'px; }\n';
+	sscode += '	window['+objName+'_UUID="'+_UUID+'"] #browser-bottombox .PuzzlePiece:not([customizing]):not([active]):not(:hover) { bottom: '+(moveBarStyle.bottom -OSoffset -21)+'px; }\n';
 	sscode += '}';
 	
 	styleAid.load('positionPPs_'+_UUID, sscode, true);
@@ -36,8 +36,8 @@ this.choosePP = function() {
 	if(!leftPP || !rightPP) { return; }
 	
 	toggleAttribute(addonBar, 'movetoright', prefAid.movetoRight);
-	leftPP.hidden = prefAid.inURLBar || prefAid.movetoRight;
-	rightPP.hidden = prefAid.inURLBar || !prefAid.movetoRight;
+	leftPP.hidden = (prefAid.placement == 'urlbar') || prefAid.movetoRight;
+	rightPP.hidden = (prefAid.placement == 'urlbar') || !prefAid.movetoRight;
 	
 	activatePPs();
 };
@@ -78,7 +78,7 @@ moduleAid.LOADMODULE = function() {
 	listenerAid.add(window, 'mozfullscreenchange', handleFullScreen);
 	
 	prefAid.listen('movetoRight', choosePP);
-	prefAid.listen('inURLBar', choosePP);
+	prefAid.listen('placement', choosePP);
 	
 	choosePP();
 	movePPs();
@@ -87,7 +87,7 @@ moduleAid.LOADMODULE = function() {
 
 moduleAid.UNLOADMODULE = function() {
 	prefAid.unlisten('movetoRight', choosePP);
-	prefAid.unlisten('inURLBar', choosePP);
+	prefAid.unlisten('placement', choosePP);
 	
 	removeAttribute('movetoright');
 	leftPP.hidden = true;

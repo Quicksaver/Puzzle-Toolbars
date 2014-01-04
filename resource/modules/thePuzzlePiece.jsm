@@ -1,11 +1,17 @@
-moduleAid.VERSION = '1.0.4';
+moduleAid.VERSION = '1.1.0';
+
+this.__defineGetter__('addonBar', function() { return $('addon-bar'); });
 
 this.toggleAutoHide = function() {
-	moduleAid.loadIf('autoHide', prefAid.autoHide);
+	moduleAid.loadIf('autoHide', prefAid.placement != 'bottom' && prefAid.autoHide);
 };
 
-this.toggleInURLBar = function() {
-	moduleAid.loadIf('inURLBar', prefAid.inURLBar);
+this.togglePlacement = function() {
+	// I can't drag from the add-on bar when it's in the url bar, it only drags the whole url bar in this case
+	var customizing = trueAttribute(addonBar, 'customizing');
+	
+	moduleAid.loadIf('inURLBar', !customizing && prefAid.placement == 'urlbar');
+	setAttribute(addonBar, 'placement', (!customizing) ? prefAid.placement : 'bottom');
 };
 
 moduleAid.LOADMODULE = function() {
@@ -13,16 +19,26 @@ moduleAid.LOADMODULE = function() {
 	moduleAid.load('initAddonBar');
 	moduleAid.load('placePP');
 	
-	prefAid.listen('autoHide', toggleAutoHide);
-	prefAid.listen('inURLBar', toggleInURLBar);
+	listenerAid.add(window, 'beforecustomization', togglePlacement);
+	listenerAid.add(window, 'aftercustomization', togglePlacement);
 	
-	toggleInURLBar();
+	prefAid.listen('autoHide', toggleAutoHide);
+	prefAid.listen('placement', toggleAutoHide);
+	prefAid.listen('placement', togglePlacement);
+	
+	togglePlacement();
 	toggleAutoHide();
 };
 
 moduleAid.UNLOADMODULE = function() {
 	prefAid.unlisten('autoHide', toggleAutoHide);
-	prefAid.unlisten('inURLBar', toggleInURLBar);
+	prefAid.unlisten('placement', toggleAutoHide);
+	prefAid.unlisten('placement', togglePlacement);
+	
+	listenerAid.remove(window, 'beforecustomization', togglePlacement);
+	listenerAid.remove(window, 'aftercustomization', togglePlacement);
+	
+	removeAttribute(addonBar, 'placement');
 	
 	moduleAid.unload('inURLBar');
 	moduleAid.unload('autoHide');

@@ -13,8 +13,6 @@
 			hidden="true"/>
 	</menupopup>
 	
-	<toolbarbutton id="addonbar-closebutton" hidden="true" />
-	
 	<vbox id="browser-bottombox">
 		<box id="objName-left-PP"
 			class="PuzzlePiece"
@@ -30,7 +28,5 @@
 			<image onclick="objName.commandPP(event);" />
 		</box>
 	</vbox>
-	
-	<toolbar id="addon-bar" inCorner="true" />
 	
 </overlay>

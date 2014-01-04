@@ -7,8 +7,10 @@
 <!ENTITY GroupPosition.label "Position">
 <!ENTITY GroupBehavior.label "Behavior">
 
+<!ENTITY OptPlacement.bottomLabel "Place at the bottom of the browser">
+<!ENTITY OptPlacement.cornerLabel "Shrink into a corner at the bottom of the webpage">
+<!ENTITY OptPlacement.urlbarLabel "Move into the location bar">
 <!ENTITY OptmoveToRight.label "Place on the right of the browser window">
-<!ENTITY OptinURLBar.label "Move the add-on bar into the location bar">
 <!ENTITY OptautoHide.label "Hide the add-on bar automatically">
 
 <!ENTITY OptKeyboardShortcut.caption "Keyboard Shortcut">

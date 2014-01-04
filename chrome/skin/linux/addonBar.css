@@ -1,18 +1,16 @@
 @namespace url(http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul);
 @-moz-document url("chrome://browser/content/browser.xul") {
 
-	#addon-bar:not([inURLBar]) {
+	#addon-bar[placement="corner"] {
 		-moz-appearance: none !important;
 		background-color: -moz-dialog;
 		border-radius: 8px 8px 2px 2px;
-		border-top: 2px solid threedshadow;
+		border-top: 2px solid threedshadow !important;
 		border-right: 2px solid threedshadow;
 		border-left: 2px solid threedshadow;
 		-moz-border-top-colors: threedshadow threedhighlight;
 		-moz-border-right-colors: threedshadow threedhighlight;
 		-moz-border-left-colors: threedshadow threedhighlight;
-		border-bottom: 1px solid transparent;
-  		-moz-border-bottom-colors: transparent;
 	}
 	
 	.PuzzlePiece:not(#thePuzzlePiece-urlbar-PP):not([customizing]):not([active]):not(:hover),

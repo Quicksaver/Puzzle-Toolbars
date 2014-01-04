@@ -1,10 +1,10 @@
-var defaultsVersion = '1.0.8';
+var defaultsVersion = '1.1.0';
 var objName = 'thePuzzlePiece';
 var objPathString = 'thepuzzlepiece';
 var prefList = {
 	movetoRight: true,
 	autoHide: false,
-	inURLBar: false,
+	placement: 'bottom',
 	
 	/* hidden preference to not show the addon bar autohiding on startup */
 	noInitialShow: false,

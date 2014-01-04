@@ -1,19 +1,24 @@
 @namespace url(http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul);
 @-moz-document url("chrome://browser/content/browser.xul") {
+
+	#addonbar-closebutton {
+		display: none !important;
+	}
 	
-	#addon-bar {
+	#addon-bar:not([placement="bottom"]) {
 		-moz-appearance: none !important;
 		background-image: none;
 		overflow: hidden;
 		opacity: 1;
 	}
 	
-	#addon-bar:not([inURLBar]) {
+	#addon-bar[placement="corner"] {
 		position: fixed;
-		padding: 3px 5px 0px 5px;
+		padding: 1px 5px 0px 5px;
+		border-bottom: none;
 	}
 	
-	#addon-bar[inURLBar] {
+	#addon-bar[placement="urlbar"] {
 		background: none;
 		border: none;
 		box-shadow: none;
@@ -21,7 +26,7 @@
 		max-height: 20px; /* I swear this one makes me mad trying to figure out why it increases the height of the location bar only sometimes */
 	}
 	
-	#addon-bar[collapsed="true"]:not([customizing="true"]) {
+	#addon-bar:not([placement="bottom"])[collapsed="true"]:not([customizing="true"]) {
 		opacity: 0;
 		display: -moz-box !important;
 		visibility: visible !important;
@@ -29,7 +34,8 @@
 	}
 	
 	/* for fullscreen */
-	#addon-bar[moz-collapsed="true"] {
+	#addon-bar:not([placement="bottom"])[moz-collapsed="true"],
+	#addon-bar[placement="bottom"][moz-collapsed="true"]:not([collapsed="true"]) {
 		visibility: visible !important;
 	}
 	
@@ -39,18 +45,18 @@
 		border: none !important;
 		box-shadow: none !important;
 	}
-	#addon-bar:not([inURLBar]) image.toolbarbutton-icon {
-		max-height: 16px;
-	}
-	#addon-bar[inURLBar] image.toolbarbutton-icon {
+	#addon-bar image.toolbarbutton-icon {
 		max-height: 18px;
-		min-width: 20px;
 	}
-	#addon-bar[inURLBar] image.toolbarbutton-icon {
-		padding: 0px 2px !important;
+	#addon-bar[placement="corner"] image.toolbarbutton-icon {
+		margin: 2px 0 !important;
 	}
-	#addon-bar[inURLBar] image[type="menu"].toolbarbutton-icon {
-		-moz-padding-end: 17px !important;
+	#addon-bar[placement="urlbar"] image.toolbarbutton-icon {
+		padding: 0 !important;
+		margin: 0 2px !important;
+	}
+	#addon-bar[placement="urlbar"] image[type="menu"].toolbarbutton-icon {
+		-moz-margin-end: 17px !important;
 	}
 	
 	#addon-bar > toolbaritem:not(#fixer-status-bar) { /* #fixer-status-bar selector is from UI Fixer add-on "make status bar movable" feature */
@@ -61,12 +67,12 @@
 		-moz-appearance: none;
 	}
 	
-	#addon-bar:not([inURLBar]) > toolbarseparator,
-	#addon-bar:not([inURLBar]) > toolbarpaletteitem[type="separator"] {
-		height: 16px;
-		margin-bottom: -16px;
+	#addon-bar[placement="corner"] > toolbarseparator,
+	#addon-bar[placement="corner"] > toolbarpaletteitem[type="separator"] {
+		height: 18px;
+		margin-bottom: -18px;
 		position: relative;
-		top: -16px;
+		top: -18px;
 	}
 	
 	#addon-bar > toolbarspring,
@@ -74,17 +80,17 @@
 		min-width: 10px;
 	}
 	
-	#addon-bar:not([inURLBar]) #status-bar {
+	#addon-bar[placement="corner"] #status-bar {
 		max-height: 18px;
 	}
-	#addon-bar[inURLBar] > *:not(toolbarseparator):not([type="separator"]):not(toolbarspring):not([type="spring"]) {
+	#addon-bar[placement="urlbar"] > *:not(toolbarseparator):not([type="separator"]):not(toolbarspring):not([type="spring"]) {
 		max-height: 18px;
 		padding: 0px 1px !important;
 	}
-	#addon-bar[inURLBar] > toolbarseparator,
-	#addon-bar[inURLBar] > toolbarpaletteitem[type="separator"],
-	#addon-bar[inURLBar] > toolbarspring,
-	#addon-bar[inURLBar] > toolbarpaletteitem[type="spring"] {
+	#addon-bar[placement="urlbar"] > toolbarseparator,
+	#addon-bar[placement="urlbar"] > toolbarpaletteitem[type="separator"],
+	#addon-bar[placement="urlbar"] > toolbarspring,
+	#addon-bar[placement="urlbar"] > toolbarpaletteitem[type="spring"] {
 		max-height: 18px;
 	}
 	
@@ -168,10 +174,16 @@
 		width: 18px;
 	}
 	
-	#addon-bar:not([inURLBar]):not([movetoright]) {
+	#addon-bar[placement="bottom"]:not([movetoright]) {
+		padding-left: 34px;
+	}
+	#addon-bar[placement="bottom"][movetoright] {
+		padding-right: 34px;
+	}
+	#addon-bar[placement="corner"]:not([movetoright]) {
 		padding-left: 17px;
 	}
-	#addon-bar:not([inURLBar])[movetoright] {
+	#addon-bar[placement="corner"][movetoright] {
 		padding-right: 17px;
 	}
 	
@@ -219,34 +231,34 @@
 	}
 	
 	/* Animation in corners */
-	#addon-bar:not([noAnimation]):not([inURLBar]):hover,
-	#addon-bar:not([noAnimation]):not([inURLBar])[hover],
-	#addon-bar:not([noAnimation]):not([inURLBar])[customizing="true"],
-	#addon-bar:not([noAnimation]):not([inURLBar]):not([collapsed="true"]) {
+	#addon-bar:not([noAnimation])[placement="corner"]:hover,
+	#addon-bar:not([noAnimation])[placement="corner"][hover],
+	#addon-bar:not([noAnimation])[placement="corner"][customizing="true"],
+	#addon-bar:not([noAnimation])[placement="corner"]:not([collapsed="true"]) {
 		-moz-transition: bottom .25s linear 0s, opacity .25s linear 0s, clip .25s linear 0s;
 		transition: bottom .25s linear 0s, opacity .25s linear 0s, clip .25s linear 0s; /* Firefox 16+ */
 	}
-	#addon-bar:not([noAnimation]):not([inURLBar]):not([collapsed="true"])[autohide]:not(:hover):not([hover]):not([customizing="true"]) {
+	#addon-bar:not([noAnimation])[placement="corner"]:not([collapsed="true"])[autohide]:not(:hover):not([hover]):not([customizing="true"]) {
 		-moz-transition: bottom .5s linear .2s, opacity .5s linear .2s, clip .5s linear .2s;
 		transition: bottom .5s linear .2s, opacity .5s linear .2s, clip .5s linear .2s; /* Firefox 16+ */
 	}
-	#addon-bar:not([noAnimation]):not([inURLBar])[collapsed="true"] {
+	#addon-bar:not([noAnimation])[placement="corner"][collapsed="true"] {
 		-moz-transition: bottom .5s linear 0s, opacity .5s linear 0s, clip .5s linear 0s;
 		transition: bottom .5s linear 0s, opacity .5s linear 0s, clip .5s linear 0s; /* Firefox 16+ */
 	}
 	
-	#addon-bar:not([noAnimation])[inURLBar]:hover,
-	#addon-bar:not([noAnimation])[inURLBar][hover],
-	#addon-bar:not([noAnimation])[inURLBar][customizing="true"],
-	#addon-bar:not([noAnimation])[inURLBar]:not([collapsed="true"]) {
+	#addon-bar:not([noAnimation])[placement="urlbar"]:hover,
+	#addon-bar:not([noAnimation])[placement="urlbar"][hover],
+	#addon-bar:not([noAnimation])[placement="urlbar"][customizing="true"],
+	#addon-bar:not([noAnimation])[placement="urlbar"]:not([collapsed="true"]) {
 		-moz-transition: opacity .25s linear 0s;
 		transition: opacity .25s linear 0s; /* Firefox 16+ */
 	}
-	#addon-bar:not([noAnimation])[inURLBar]:not([collapsed="true"])[autohide]:not(:hover):not([hover]):not([customizing="true"]) {
+	#addon-bar:not([noAnimation])[placement="urlbar"]:not([collapsed="true"])[autohide]:not(:hover):not([hover]):not([customizing="true"]) {
 		-moz-transition: opacity .5s linear .2s;
 		transition: opacity .5s linear .2s; /* Firefox 16+ */
 	}
-	#addon-bar:not([noAnimation])[inURLBar][collapsed="true"] {
+	#addon-bar:not([noAnimation])[placement="urlbar"][collapsed="true"] {
 		-moz-transition: opacity .5s linear 0s;
 		transition: opacity .5s linear 0s; /* Firefox 16+ */
 	}

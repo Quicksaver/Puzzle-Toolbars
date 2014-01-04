@@ -1,22 +1,20 @@
 @namespace url(http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul);
 @-moz-document url("chrome://browser/content/browser.xul") {
 	
-	#addon-bar:not([inURLBar]) {
+	#addon-bar[placement="corner"] {
 		border-radius: 8px 8px 2px 2px;
-		border-top: 2px solid rgba(0,0,0,0.15);
+		border-top: 2px solid rgba(0,0,0,0.15) !important;
 		border-right: 2px solid rgba(0,0,0,0.15);
 		border-left: 2px solid rgba(0,0,0,0.15);
 		-moz-border-top-colors: rgba(0,0,0,0.15) rgba(255,255,255,0.15);
 		-moz-border-right-colors: rgba(0,0,0,0.15) rgba(255,255,255,0.15);
 		-moz-border-left-colors: rgba(0,0,0,0.15) rgba(255,255,255,0.15);
-		border-bottom: 1px solid transparent;
-  		-moz-border-bottom-colors: transparent;
 		background-color: -moz-dialog;
 	}
 	
 	@media not all and (-moz-windows-classic) {
 		@media (-moz-windows-default-theme) {
-			#addon-bar:not([inURLBar]) {
+			#addon-bar[placement="corner"] {
 				background-color: rgb(219,234,249);
 			}
 			
@@ -32,7 +30,7 @@
 	
 	.PuzzlePiece:not(#thePuzzlePiece-urlbar-PP)[clipped][active],
 	.PuzzlePiece:not(#thePuzzlePiece-urlbar-PP)[clipped]:hover {
-		clip: rect(0px, 32px, 28px, 0px);
+		clip: rect(0px, 32px, 30px, 0px);
 	}
 	.PuzzlePiece:not(#thePuzzlePiece-urlbar-PP):not([customizing]):not([active]):not(:hover),
 	.PuzzlePiece:not(#thePuzzlePiece-urlbar-PP):not([customizing])[autohide]:not(:hover):not([hover]) {
