@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.0.0';
+moduleAid.VERSION = '1.0.1';
 
 this.__defineGetter__('ctrBar', function() { return $('ctr_addon-bar'); });
 
@@ -11,7 +11,7 @@ moduleAid.LOADMODULE = function() {
 		// ignore CTR's spacers and stuff
 		var i = 0;
 		while(i < ids.length) {
-			if(ids[i].indexOf('ctr_') === 0) {
+			if(ids[i].startsWith('ctr_')) {
 				ids.splice(i, 1);
 				continue;
 			}
