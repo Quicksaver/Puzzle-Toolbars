@@ -29,4 +29,6 @@
 		</box>
 	</vbox>
 	
+	<toolbar id="addon-bar" class="toolbar-primary chromeclass-toolbar addon-bar" />
+	
 </overlay>

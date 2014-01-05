@@ -1,4 +1,4 @@
-var defaultsVersion = '1.1.0';
+var defaultsVersion = '1.2.0';
 var objName = 'thePuzzlePiece';
 var objPathString = 'thepuzzlepiece';
 var prefList = {
@@ -24,10 +24,14 @@ var prefList = {
 function startAddon(window) {
 	prepareObject(window);
 	
-	// Prevent things from jumping around on startup
-	window.document.getElementById('addon-bar').hidden = true;
-	
-	window[objName].moduleAid.load(objName, true);
+	if(!Australis) {
+		// Prevent things from jumping around on startup
+		window.document.getElementById('addon-bar').hidden = true;
+		
+		window[objName].moduleAid.load(objName, true);
+	} else {
+		window[objName].moduleAid.load('australis', true);
+	}
 }
 
 function stopAddon(window) {
@@ -47,9 +51,16 @@ function startConditions(aReason) {
 function onStartup(aReason) {
 	moduleAid.load('keysets');
 	
-	// Apply the add-on to every window opened and to be opened
-	windowMediator.callOnAll(startAddon, 'navigator:browser');
-	windowMediator.register(startAddon, 'domwindowopened', 'navigator:browser');
+	if(!Australis) {
+		// Apply the add-on to every window opened and to be opened
+		windowMediator.callOnAll(startAddon, 'navigator:browser');
+		windowMediator.register(startAddon, 'domwindowopened', 'navigator:browser');
+	} else {
+		overlayAid.overlayURI('chrome://browser/content/browser.xul', 'australisBar', null,
+			function(aWindow) { startAddon(aWindow); },
+			function(aWindow) { stopAddon(aWindow); }
+		);
+	}
 	
 	// Apply the add-on to every preferences window opened and to be opened
 	windowMediator.callOnAll(startPreferences, null, "chrome://"+objPathString+"/content/options.xul");
@@ -62,8 +73,12 @@ function onShutdown(aReason) {
 	// Placing these here prevents an error which I couldn't figure out why the closeCustomize() in overlayAid weren't already preventing.
 	closeCustomize();
 	
-	// remove the add-on from all windows
-	windowMediator.callOnAll(stopAddon, null, null, true);
+	if(!Australis) {
+		// remove the add-on from all windows
+		windowMediator.callOnAll(stopAddon, null, null, true);
+	} else {
+		overlayAid.removeOverlayURI('chrome://browser/content/browser.xul', 'australisBar');
+	}
 	
 	moduleAid.unload('keysets');
 }

@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.1.0';
+moduleAid.VERSION = '1.1.1';
 
 this.onMouseOver = function() {
 	setHover(true);
@@ -73,13 +73,13 @@ this.moveAutoHide = function() {
 	var sscode = '/*The Puzzle Piece CSS declarations of variable values*/\n';
 	sscode += '@namespace url(http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul);\n';
 	sscode += '@-moz-document url("'+document.baseURI+'") {\n';
-	sscode += '	window['+objName+'_UUID="'+_UUID+'"] #addon-bar[placement="corner"][autohide]:not([customizing="true"]):not([hover]):not(:hover) {\n';
+	sscode += '	window['+objName+'_UUID="'+_UUID+'"] .addon-bar[placement="corner"][autohide]:not([customizing="true"]):not([hover]):not(:hover) {\n';
 	sscode += '		bottom: '+(moveBarStyle.bottom -barOffset)+'px;\n';
 	sscode += '		clip: rect(0px, '+4000+'px, '+CLIPBAR+'px, 0px);\n';
 	sscode += '	}\n';
-	sscode += '	window['+objName+'_UUID="'+_UUID+'"] #addon-bar[placement="corner"][autohide][hover],\n';
-	sscode += '	window['+objName+'_UUID="'+_UUID+'"] #addon-bar[placement="corner"][autohide]:hover,\n';
-	sscode += '	window['+objName+'_UUID="'+_UUID+'"] #addon-bar[placement="corner"][autohide][customizing="true"] {\n';
+	sscode += '	window['+objName+'_UUID="'+_UUID+'"] .addon-bar[placement="corner"][autohide][hover],\n';
+	sscode += '	window['+objName+'_UUID="'+_UUID+'"] .addon-bar[placement="corner"][autohide]:hover,\n';
+	sscode += '	window['+objName+'_UUID="'+_UUID+'"] .addon-bar[placement="corner"][autohide][customizing="true"] {\n';
 	sscode += '		clip: rect(0px, '+4000+'px, '+clipOffHeight+'px, 0px);\n';
 	sscode += '	}\n';
 	sscode += '	window['+objName+'_UUID="'+_UUID+'"] #browser-bottombox .PuzzlePiece:not([customizing])[autohide][active]:not(:hover):not([hover]) { bottom: '+(moveBarStyle.bottom -OSoffset -21)+'px; }\n';

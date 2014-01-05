@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.2.1';
+moduleAid.VERSION = '1.2.2';
 
 this.__defineGetter__('bottomBox', function() { return $('browser-bottombox'); });
 this.__defineGetter__('browserPanel', function() { return $('browser-panel'); });
@@ -56,13 +56,22 @@ this.setContextMenu = function(e) {
 	toggleAttribute(contextOptions, 'hidden', !notHidden);
 	toggleAttribute(contextSeparator, 'hidden', !notHidden);
 	
-	setAttribute(contextMenu.getElementsByAttribute('toolbarId', 'addon-bar')[0], 'command', 'Browser:ToggleAddonBar');
+	if(!Australis) {
+		setAttribute(contextMenu.getElementsByAttribute('toolbarId', 'addon-bar')[0], 'command', 'Browser:ToggleAddonBar');
+	} else {
+		setAttribute(contextMenu.getElementsByAttribute('toolbarId', objName+'-addon-bar')[0], 'command', objName+':ToggleAddonBar');
+	}
 };
 
 this.setViewMenu = function(e) {
-	setAttribute(viewMenu.getElementsByAttribute('toolbarId', 'addon-bar')[0], 'command', 'Browser:ToggleAddonBar');
+	if(!Australis) {
+		setAttribute(viewMenu.getElementsByAttribute('toolbarId', 'addon-bar')[0], 'command', 'Browser:ToggleAddonBar');
+	} else {
+		setAttribute(contextMenu.getElementsByAttribute('toolbarId', objName+'-addon-bar')[0], 'command', objName+':ToggleAddonBar');
+	}
 };
 
+// Appmenu doesn't exist in Australis
 this.setAppMenu = function(e) {
 	setAttribute(appMenu.getElementsByAttribute('toolbarId', 'addon-bar')[0], 'command', 'Browser:ToggleAddonBar');
 };
@@ -137,15 +146,15 @@ this.moveAddonBar = function() {
 	var sscode = '/*The Puzzle Piece CSS declarations of variable values*/\n';
 	sscode += '@namespace url(http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul);\n';
 	sscode += '@-moz-document url("'+document.baseURI+'") {\n';
-	sscode += '	window['+objName+'_UUID="'+_UUID+'"] #addon-bar[placement="corner"] {\n';
+	sscode += '	window['+objName+'_UUID="'+_UUID+'"] .addon-bar[placement="corner"] {\n';
 	sscode += '		bottom: '+moveBarStyle.bottom+'px;\n';
 	sscode += (!prefAid.movetoRight) ? '		left: '+moveBarStyle.left+'px;\n' : '		right: '+moveBarStyle.right+'px;\n';
 	sscode += '		max-width: '+Math.max(moveBarStyle.maxWidth, 5)+'px;\n';
 	sscode += '	}\n';
-	sscode += '	window['+objName+'_UUID="'+_UUID+'"] #addon-bar[placement="corner"]:not([autohide]) {\n';
+	sscode += '	window['+objName+'_UUID="'+_UUID+'"] .addon-bar[placement="corner"]:not([autohide]) {\n';
 	sscode += '		clip: rect(0px, '+4000+'px, '+clipOffHeight+'px, 0px);\n';
 	sscode += '	}\n';
-	sscode += '	window['+objName+'_UUID="'+_UUID+'"] #addon-bar[placement="corner"][collapsed="true"]:not([customizing="true"]) {\n';
+	sscode += '	window['+objName+'_UUID="'+_UUID+'"] .addon-bar[placement="corner"][collapsed="true"]:not([customizing="true"]) {\n';
 	sscode += '		bottom: '+(moveBarStyle.bottom -barOffset)+'px;\n';
 	sscode += '		clip: rect(0px, '+4000+'px, '+CLIPBAR+'px, 0px);\n';
 	sscode += '	}\n';
@@ -249,7 +258,7 @@ this.stylePersonaAddonBar = function() {
 		var sscode = '/*The Puzzle Piece CSS declarations of variable values*/\n';
 		sscode += '@namespace url(http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul);\n';
 		sscode += '@-moz-document url("'+document.baseURI+'") {\n';
-		sscode += '	window['+objName+'_UUID="'+_UUID+'"] #addon-bar[placement="corner"] {\n';
+		sscode += '	window['+objName+'_UUID="'+_UUID+'"] .addon-bar[placement="corner"] {\n';
 		sscode += '	  background-image: ' + prefAid.lwthemebgImage + ' !important;\n';
 		sscode += '	  background-color: ' + prefAid.lwthemebgColor + ' !important;\n';
 		sscode += '	  color: ' + prefAid.lwthemecolor + ' !important;\n';
@@ -265,14 +274,15 @@ this.stylePersonaAddonBar = function() {
 
 moduleAid.LOADMODULE = function() {
 	overlayAid.overlayWindow(window, 'addonBar', null,
-	function(aWindow) {
-		aSync(function() { addonBar.hidden = false; }); // aSync works best
-		dispatch(aWindow, { type: "loadedAddonBarOverlay", cancelable: false });
-	},
-	function(aWindow) {
-		// Prevent things from jumping around on startup
-		addonBar.hidden = true;
-	});
+		function(aWindow) {
+			aSync(function() { addonBar.hidden = false; }); // aSync works best
+			dispatch(aWindow, { type: "loadedAddonBarOverlay", cancelable: false });
+		},
+		function(aWindow) {
+			// Prevent things from jumping around on startup
+			addonBar.hidden = true;
+		}
+	);
 	
 	this.backups = {
 		toggleAddonBar: toggleAddonBar
@@ -331,9 +341,14 @@ moduleAid.UNLOADMODULE = function() {
 	prefAid.unlisten('movetoRight', moveAddonBar);
 	prefAid.unlisten('placement', moveAddonBar);
 	
-	removeAttribute(contextMenu.getElementsByAttribute('toolbarId', 'addon-bar')[0], 'command');
-	removeAttribute(viewMenu.getElementsByAttribute('toolbarId', 'addon-bar')[0], 'command');
-	if(appMenu) { removeAttribute(appMenu.getElementsByAttribute('toolbarId', 'addon-bar')[0], 'command'); }
+	if(!Australis) {
+		removeAttribute(contextMenu.getElementsByAttribute('toolbarId', 'addon-bar')[0], 'command');
+		removeAttribute(viewMenu.getElementsByAttribute('toolbarId', 'addon-bar')[0], 'command');
+		if(appMenu) { removeAttribute(appMenu.getElementsByAttribute('toolbarId', 'addon-bar')[0], 'command'); }
+	} else {
+		removeAttribute(contextMenu.getElementsByAttribute('toolbarId', objName+'-addon-bar')[0], 'command');
+		removeAttribute(viewMenu.getElementsByAttribute('toolbarId', objName+'-addon-bar')[0], 'command');
+	}
 	
 	if(this.backups) {
 		toggleAddonBar = this.backups.toggleAddonBar;

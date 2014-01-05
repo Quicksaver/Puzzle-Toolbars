@@ -1,14 +1,18 @@
-moduleAid.VERSION = '1.1.0';
+moduleAid.VERSION = '1.1.1';
 
-this.__defineGetter__('addonBar', function() { return $('addon-bar'); });
+this.__defineGetter__('addonBar', function() { return (!Australis) ? $('addon-bar') : $(objName+'-addon-bar'); });
+
+this.toggleAddonBar = function() {
+	setToolbarVisibility(addonBar, addonBar.collapsed);
+};
 
 this.toggleAutoHide = function() {
 	moduleAid.loadIf('autoHide', prefAid.placement != 'bottom' && prefAid.autoHide);
 };
 
-this.togglePlacement = function() {
+this.togglePlacement = function(e) {
 	// I can't drag from the add-on bar when it's in the url bar, it only drags the whole url bar in this case
-	var customizing = trueAttribute(addonBar, 'customizing');
+	var customizing = (e && e.type == 'beforecustomization') || trueAttribute(addonBar, 'customizing');
 	
 	moduleAid.loadIf('inURLBar', !customizing && prefAid.placement == 'urlbar');
 	setAttribute(addonBar, 'placement', (!customizing) ? prefAid.placement : 'bottom');
