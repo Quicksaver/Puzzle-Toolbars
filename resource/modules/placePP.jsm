@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.1.0';
+moduleAid.VERSION = '1.1.1';
 
 this.__defineGetter__('gBrowser', function() { return window.gBrowser; });
 
@@ -90,8 +90,8 @@ moduleAid.UNLOADMODULE = function() {
 	prefAid.unlisten('placement', choosePP);
 	
 	removeAttribute('movetoright');
-	leftPP.hidden = true;
-	rightPP.hidden = true;
+	if(leftPP) { leftPP.hidden = true; }
+	if(rightPP) { rightPP.hidden = true; }
 	
 	listenerAid.remove(addonBar, 'WillMoveAddonBar', movePPs);
 	listenerAid.remove(addonBar, 'ToggledAddonBar', activatePPs);
