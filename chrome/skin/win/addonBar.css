@@ -36,4 +36,5 @@
 	.PuzzlePiece:not(#thePuzzlePiece-urlbar-PP):not([customizing])[autohide]:not(:hover):not([hover]) {
 		clip: rect(0px, 32px, 9px, 0px);
 	}
+	
 }
