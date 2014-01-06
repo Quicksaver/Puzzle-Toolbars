@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.2.3';
+moduleAid.VERSION = '1.2.4';
 
 this.__defineGetter__('bottomBox', function() { return $('browser-bottombox'); });
 this.__defineGetter__('browserPanel', function() { return $('browser-panel'); });
@@ -184,6 +184,9 @@ this.reMoveBar = function() {
 };
 
 this.findPersonaPosition = function() {
+	// Australis isn't really built for the lw-theme footer, plus it might go away someday
+	if(Australis) { return; }
+	
 	if(!trueAttribute(bottomBox, 'lwthemefooter')) {
 		prefAid.lwthemebgImage = '';
 		prefAid.lwthemebgWidth = 0;
