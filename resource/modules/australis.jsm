@@ -1,6 +1,26 @@
-moduleAid.VERSION = '1.1.3';
+moduleAid.VERSION = '1.2.0';
 
+this.__defineGetter__('oldBar', function() { return $('addon-bar'); });
 this.__defineGetter__('PrintPreviewListener', function() { return window.PrintPreviewListener; });
+
+this.barBackups = {};
+
+this.migrateBackWidgets = function() {
+	var migratedSet = oldBar.getMigratedItems();
+	if(!migratedSet.length) { return; }
+	
+	for(var i=0; i<migratedSet.length; i++) {
+		try {
+			var placement = CustomizableUI.getPlacementOfWidget(migratedSet[i]);
+			if(!placement || placement.area == barBackups.delegate) {
+				CustomizableUI.addWidgetToArea(migratedSet[i], objName+'-addon-bar');
+			}
+		}
+		catch(ex) { Cu.reportError(ex); } // Make sure we don't block the code if something happens here
+	}
+	oldBar._currentSetMigrated.clear();
+	oldBar._updateMigratedSet();
+};
 
 moduleAid.LOADMODULE = function() {
 	// The add-on bar needs to be hidden when entering print preview mode
@@ -15,12 +35,43 @@ moduleAid.LOADMODULE = function() {
 		this.__showChrome();
 	};
 	
+	// Delegate the old add-on bar into ours
+	barBackups = {
+		delegate: oldBar._delegatingToolbar,
+		collapsed: oldBar._wasCollapsed
+	};
+	setAttribute(oldBar, 'toolbar-delegate', objName+'-addon-bar');
+	oldBar._delegatingToolbar = objName+'-addon-bar';
+	oldBar._wasCollapsed = false;
+	
+	oldBar._insertItem = oldBar.insertItem;
+	oldBar._evictNodes = oldBar.evictNodes;
+	oldBar.insertItem = function(aId, aBeforeElt, aWrapper) {
+		this._insertItem(aId, aBeforeElt, aWrapper);
+		migrateBackWidgets();
+	};
+	oldBar.evictNodes = function() {
+		this._evictNodes();
+		migrateBackWidgets();
+	};
+	
+	// Migrate back already migrated items
+	migrateBackWidgets();
+	
 	// since we're starting with this australis-specific module, we Load the rest of the add-on here after everything
 	moduleAid.load(objName);
 };
 
 moduleAid.UNLOADMODULE = function() {
 	moduleAid.unload(objName);
+	
+	setAttribute(oldBar, 'toolbar-delegate', barBackups.delegate);
+	oldBar._delegatingToolbar = barBackups.delegate;
+	oldBar._wasCollapsed = barBackups.collapsed;
+	oldBar.insertItem = oldBar._insertItem;
+	oldBar.evictNodes = oldBar._evictNodes;
+	delete oldBar._insertItem;
+	delete oldBar._evictNodes;
 	
 	PrintPreviewListener._hideChrome = PrintPreviewListener.__hideChrome;
 	PrintPreviewListener._showChrome = PrintPreviewListener.__showChrome;
