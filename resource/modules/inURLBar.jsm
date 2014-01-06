@@ -1,4 +1,9 @@
-moduleAid.VERSION = '1.1.0';
+moduleAid.VERSION = '1.1.1';
+
+this.__defineGetter__('urlbarContainer', function() { return $('urlbar-container'); });
+this.__defineGetter__('searchContainer', function() { return $('search-container'); });
+
+this.flexContainers = false;
 
 this.loadInURLBar = function() {
 	URLBarContainer.appendChild(addonBar);
@@ -70,6 +75,20 @@ this.autoHideContainer = function() {
 moduleAid.LOADMODULE = function() {
 	prefAid.listen('autoHide', autoHideContainer);
 	
+	// Prevent the location bar's flex attribute from taking over and moving stuff when we hover/open the add-on bar in it
+	if(Australis
+	&& urlbarContainer
+	&& searchContainer
+	&& urlbarContainer.parentNode == searchContainer.parentNode
+	&& !urlbarContainer.getAttribute('width')
+	&& !searchContainer.getAttribute('width')) {
+		flexContainers = true;
+		var urlbarWidth = urlbarContainer.clientWidth;
+		var searchWidth = searchContainer.clientWidth;
+		setAttribute(urlbarContainer, 'width', urlbarWidth);
+		setAttribute(searchContainer, 'width', searchWidth);
+	}
+	
 	listenerAid.add(addonBar, 'AddonBarMoved', moveContainer);
 	
 	overlayAid.overlayWindow(window, 'inURLBar', null, loadInURLBar, unloadInURLBar);
@@ -82,6 +101,11 @@ moduleAid.UNLOADMODULE = function() {
 	prefAid.unlisten('autoHide', autoHideContainer);
 	
 	overlayAid.removeOverlayWindow(window, 'inURLBar');
+	
+	if(flexContainers) {
+		removeAttribute(urlbarContainer, 'width');
+		removeAttribute(searchContainer, 'width');
+	}
 	
 	styleAid.unload('moveContainer_'+_UUID);
 	
