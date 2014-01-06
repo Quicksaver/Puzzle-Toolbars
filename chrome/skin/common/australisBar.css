@@ -3,7 +3,10 @@
 
 	.addon-bar .toolbarbutton-1 .toolbarbutton-text,
 	window[PrintPreview="true"] .addon-bar,
-	window[PrintPreview="true"] .PuzzlePiece {
+	window[PrintPreview="true"] .PuzzlePiece,
+	
+	/* Vertical Toolbar's spring widget, no need to create a whole module just for this */
+	#wrapper-verticaltoolbar-spring {
 		display: none;
 	}
 	
