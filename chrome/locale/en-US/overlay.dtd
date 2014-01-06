@@ -2,3 +2,7 @@
 
 <!ENTITY addonBar.name "Add-on Bar">
 <!ENTITY addonBar.accesskey "A">
+
+<!ENTITY specialWidget.separator "Separator">
+<!ENTITY specialWidget.spring "Flexible Space">
+<!ENTITY specialWidget.spacer "Space">

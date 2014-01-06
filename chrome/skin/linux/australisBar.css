@@ -1,10 +1,54 @@
 @namespace url(http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul);
 @-moz-document url("chrome://browser/content/browser.xul") {
 
+	/* style the add-on bar */
+	
 	#thePuzzlePiece-addon-bar {
 		box-shadow: 0 1px 0 rgba(0,0,0,.15) inset;
 		padding: 0;
 		min-height: 20px;
+	}
+	
+	/* special widgets styling */
+	
+	toolbarpaletteitem toolbarspacer,
+	toolbarpaletteitem toolbarspring,
+	toolbarpaletteitem #thePuzzlePiece-special-spacer,
+	toolbarpaletteitem #thePuzzlePiece-special-spring {
+		border: 1px solid #808080;
+		background-color: #FFF !important;
+	}
+	
+	toolbarpaletteitem[place="toolbar"] toolbarspacer,
+	toolbarpaletteitem[place="toolbar"] toolbarspring {
+		margin-top: 2px;
+		margin-bottom: 2px;
+		-moz-margin-start: 0px;
+		-moz-margin-end: 2px;
+	}
+	
+	toolbarpaletteitem[place="palette"] toolbarseparator,
+	toolbarpaletteitem[place="palette"] #thePuzzlePiece-special-separator {
+		-moz-appearance: separator !important;
+		margin : 0;
+		border: 0;
+		min-width: 2px;
+		width: 2px;
+		height: 50px;
+	}
+	
+	toolbarpaletteitem[place="palette"] toolbarspacer,
+	toolbarpaletteitem[place="palette"] toolbarspring,
+	toolbarpaletteitem[place="palette"] #thePuzzlePiece-special-spacer,
+	toolbarpaletteitem[place="palette"] #thePuzzlePiece-special-spring {
+		margin-bottom: 2px;
+		width: 50px;
+		height: 50px;
+	}
+	
+	toolbarpaletteitem[place="palette"] toolbarspring,
+	toolbarpaletteitem[place="palette"] #thePuzzlePiece-special-spring {
+		background: url("chrome://global/skin/toolbar/spring.png") no-repeat center;
 	}
 	
 }

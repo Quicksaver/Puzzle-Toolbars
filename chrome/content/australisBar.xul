@@ -23,4 +23,23 @@
 		</toolbar>
 	</vbox>
 	
+	<!-- so we have separators, springs and spacers to add to the add-on bar -->
+	<toolbarpalette id="BrowserToolbarPalette">
+		<toolbaritem id="objName-special-separator" 
+			class="toolbarbutton-1 chromeclass-toolbar-additional"
+			label="&specialWidget.separator;"
+			tooltiptext="&specialWidget.separator;"
+			type="custom" />
+		<toolbaritem id="objName-special-spring" 
+			class="toolbarbutton-1 chromeclass-toolbar-additional"
+			label="&specialWidget.spring;"
+			tooltiptext="&specialWidget.spring;"
+			type="custom" />
+		<toolbaritem id="objName-special-spacer" 
+			class="toolbarbutton-1 chromeclass-toolbar-additional"
+			label="&specialWidget.spacer;"
+			tooltiptext="&specialWidget.spacer;"
+			type="custom" />
+	</toolbarpalette>
+	
 </overlay>

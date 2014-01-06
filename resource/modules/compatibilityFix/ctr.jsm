@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.0.1';
+moduleAid.VERSION = '1.0.2';
 
 this.__defineGetter__('ctrBar', function() { return $('ctr_addon-bar'); });
 
@@ -8,12 +8,22 @@ moduleAid.LOADMODULE = function() {
 	if(CustomizableUI.getAreaType('ctr_addon-bar')) {
 		var ids = CustomizableUI.getWidgetIdsInArea('ctr_addon-bar');
 		
-		// ignore CTR's spacers and stuff
+		// ignore CTR's closebutton and replace with normal special widgets
 		var i = 0;
 		while(i < ids.length) {
 			if(ids[i].startsWith('ctr_')) {
-				ids.splice(i, 1);
-				continue;
+				if(ids[i] == 'ctr_addonbar-close') {
+					ids.splice(i, 1);
+					continue;
+				}
+				
+				if(ids[i].startsWith('ctr_separator')) {
+					ids[i] = 'separator';
+				} else if(ids[i].startsWith('ctr_flexible_space')) {
+					ids[i] = 'spring';
+				} else if(ids[i].startsWith('ctr_space')) {
+					ids[i] = 'spacer';
+				}
 			}
 			i++;
 		}

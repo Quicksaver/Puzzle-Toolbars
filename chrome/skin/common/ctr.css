@@ -2,8 +2,33 @@
 @-moz-document url("chrome://browser/content/browser.xul") {
 
 	#toggle_ctr_addon-bar,
-	#ctr_addon-bar {
-		display: none;
+	#ctr_addon-bar,
+	
+	/* we don't want these anywhere if we can use ours */
+	#wrapper-ctr_flexible_space1,
+	#wrapper-ctr_flexible_space2,
+	#wrapper-ctr_flexible_space3,
+	#wrapper-ctr_flexible_space4,
+	#wrapper-ctr_flexible_space5,
+	#wrapper-ctr_flexible_space6,
+	#wrapper-ctr_flexible_space7,
+	#wrapper-ctr_flexible_space_ab,
+	#wrapper-ctr_space1,
+	#wrapper-ctr_space2,
+	#wrapper-ctr_space3,
+	#wrapper-ctr_space4,
+	#wrapper-ctr_space5,
+	#wrapper-ctr_space6,
+	#wrapper-ctr_space7,
+	#wrapper-ctr_separator1,
+	#wrapper-ctr_separator2,
+	#wrapper-ctr_separator3,
+	#wrapper-ctr_separator4,
+	#wrapper-ctr_separator5,
+	.ctr_flexspaces,
+	.ctr_spaces,
+	.ctr_separators {
+		display: none !important;
 	}
 	
 }
