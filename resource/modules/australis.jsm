@@ -1,13 +1,16 @@
-moduleAid.VERSION = '1.2.0';
+moduleAid.VERSION = '1.2.1';
 
 this.__defineGetter__('oldBar', function() { return $('addon-bar'); });
 this.__defineGetter__('PrintPreviewListener', function() { return window.PrintPreviewListener; });
 
 this.barBackups = {};
+this.oldBarMigrated = false;
 
 this.migrateBackWidgets = function() {
 	var migratedSet = oldBar.getMigratedItems();
 	if(!migratedSet.length) { return; }
+	
+	oldBarMigrated = true;
 	
 	for(var i=0; i<migratedSet.length; i++) {
 		try {
@@ -20,6 +23,8 @@ this.migrateBackWidgets = function() {
 	}
 	oldBar._currentSetMigrated.clear();
 	oldBar._updateMigratedSet();
+	
+	dispatch(window, { type: 'MigratedFromAddonBar', cancelable: false });
 };
 
 moduleAid.LOADMODULE = function() {

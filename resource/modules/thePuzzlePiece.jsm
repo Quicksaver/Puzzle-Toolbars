@@ -1,6 +1,16 @@
-moduleAid.VERSION = '1.1.2';
+moduleAid.VERSION = '1.1.3';
 
 this.__defineGetter__('addonBar', function() { return (!Australis) ? $('addon-bar') : $(objName+'-addon-bar'); });
+
+this.showWhenMigrated = function() {
+	if(oldBarMigrated) {
+		if(addonBar.collapsed) {
+			toggleAddonBar();
+		}
+		
+		oldBarMigrated = false;
+	}
+};
 
 this.toggleAutoHide = function() {
 	moduleAid.loadIf('autoHide', prefAid.placement != 'bottom' && prefAid.autoHide);
@@ -28,6 +38,11 @@ moduleAid.LOADMODULE = function() {
 	
 	togglePlacement();
 	toggleAutoHide();
+	
+	if(Australis) {
+		listenerAid.add(window, 'MigratedFromAddonBar', showWhenMigrated);
+		showWhenMigrated();
+	}
 };
 
 moduleAid.UNLOADMODULE = function() {
@@ -35,13 +50,17 @@ moduleAid.UNLOADMODULE = function() {
 	prefAid.unlisten('placement', toggleAutoHide);
 	prefAid.unlisten('placement', togglePlacement);
 	
+	if(Australis) {
+		listenerAid.remove(window, 'MigratedFromAddonBar', showWhenMigrated);
+	}
+	
 	listenerAid.remove(window, 'beforecustomization', togglePlacement);
 	listenerAid.remove(window, 'aftercustomization', togglePlacement);
 	
 	removeAttribute(addonBar, 'placement');
 	
-	moduleAid.unload('inURLBar');
 	moduleAid.unload('autoHide');
+	moduleAid.unload('inURLBar');
 	moduleAid.unload('placePP');
 	moduleAid.unload('initAddonBar');
 	moduleAid.unload('compatibilityFix/windowFixes');
