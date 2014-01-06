@@ -2,6 +2,7 @@
 
 <!ENTITY addonBar.name "Add-on Bar">
 <!ENTITY addonBar.accesskey "A">
+<!ENTITY statusBar.label "Status Bar">
 
 <!ENTITY specialWidget.separator "Separator">
 <!ENTITY specialWidget.spring "Flexible Space">

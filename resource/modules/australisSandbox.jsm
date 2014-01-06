@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.0.0';
+moduleAid.VERSION = '1.0.1';
 
 this.CustomizableUI = null;
 
@@ -29,6 +29,7 @@ moduleAid.LOADMODULE = function() {
 		CustomizableUI.removeWidgetFromArea(objName+'-special-'+specialWidgets[i]);
 	}
 	
+	overlayAid.overlayURI('chrome://'+objPathString+'/content/options.xul', 'optionsAustralis');
 	overlayAid.overlayURI('chrome://browser/content/browser.xul', 'australisBar', null,
 		function(aWindow) {
 			moduleAid.load('compatibilityFix/sandboxFixes'); // We need our add-on bar registered for this
@@ -42,6 +43,7 @@ moduleAid.UNLOADMODULE = function() {
 	moduleAid.unload('compatibilityFix/sandboxFixes');
 	
 	overlayAid.removeOverlayURI('chrome://browser/content/browser.xul', 'australisBar');
+	overlayAid.removeOverlayURI('chrome://'+objPathString+'/content/options.xul', 'optionsAustralis');
 	
 	CustomizableUI.removeListener(trackSpecialWidgets);
 };

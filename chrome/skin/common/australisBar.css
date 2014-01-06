@@ -47,4 +47,27 @@
 		max-width: 21em;
 	}
 	
+	/* status-bar */
+	
+	#status-bar {
+		-moz-appearance: none;
+		min-width: 1px;
+		
+		/* override australis shim */
+		height: auto !important;
+		
+		/* override hidden="true" for the status bar compatibility shim in case it was persisted for the real status bar */
+		display: -moz-box;
+	}
+	
+	#status-bar > statusbarpanel {
+		border-width: 0;
+		-moz-appearance: none;
+	}
+	
+	window[customizing="true"] #status-bar,
+	window:not([customizing="true"]) #thePuzzlePiece-status-bar-placeholder {
+		display: none;
+	}
+	
 }

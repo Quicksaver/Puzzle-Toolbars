@@ -40,6 +40,18 @@
 			label="&specialWidget.spacer;"
 			tooltiptext="&specialWidget.spacer;"
 			type="custom" />
+			
+		<toolbaritem id="objName-status-bar-container"
+			label="&statusBar.label;"
+			removable="false"
+			hidden="true"
+			defaultArea="objName-addon-bar"
+			type="custom">
+			
+			<stack id="objName-status-bar-stack">
+				<label id="objName-status-bar-placeholder" value="&statusBar.label;"/>
+			</stack>
+		</toolbaritem>
 	</toolbarpalette>
 	
 </overlay>

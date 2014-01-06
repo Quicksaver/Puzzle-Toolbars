@@ -13,6 +13,7 @@
 <!ENTITY OptPlacement.urlbarLabel "Move into the location bar">
 <!ENTITY OptmoveToRight.label "Place on the right of the browser window">
 <!ENTITY OptautoHide.label "Hide the add-on bar automatically">
+<!ENTITY OptstatusBar.label "Restore the status bar">
 
 <!ENTITY OptKeyboardShortcut.caption "Keyboard Shortcut">
 <!ENTITY OptKeyboardShortcut.control "Control">
