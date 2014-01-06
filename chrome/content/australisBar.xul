@@ -5,7 +5,7 @@
 <overlay id="australisBar-overlay" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul" >
 
 	<commandset id="mainCommandSet">
-		<command id="objName:ToggleAddonBar" oncommand="objName.toggleAddonBar();"/>
+		<command id="objName:ToggleAddonBar" oncommand="toggleAddonBar();"/>
 	</commandset>
 	
 	<vbox id="browser-bottombox">

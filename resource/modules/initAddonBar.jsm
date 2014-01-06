@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.2.2';
+moduleAid.VERSION = '1.2.3';
 
 this.__defineGetter__('bottomBox', function() { return $('browser-bottombox'); });
 this.__defineGetter__('browserPanel', function() { return $('browser-panel'); });
@@ -284,9 +284,12 @@ moduleAid.LOADMODULE = function() {
 		}
 	);
 	
-	this.backups = {
-		toggleAddonBar: toggleAddonBar
-	};
+	// Australis doesn't have this method anymore
+	if(!Australis) {
+		this.backups = {
+			toggleAddonBar: toggleAddonBar
+		};
+	}
 	
 	toggleAddonBar = function toggleAddonBar() {
 		setToolbarVisibility(addonBar, addonBar.collapsed);
@@ -350,9 +353,14 @@ moduleAid.UNLOADMODULE = function() {
 		removeAttribute(viewMenu.getElementsByAttribute('toolbarId', objName+'-addon-bar')[0], 'command');
 	}
 	
-	if(this.backups) {
-		toggleAddonBar = this.backups.toggleAddonBar;
-		delete this.backups;
+	// Australis doesn't have this method anymore
+	if(!Australis) {
+		if(this.backups) {
+			toggleAddonBar = this.backups.toggleAddonBar;
+			delete this.backups;
+		}
+	} else {
+		delete window.toggleAddonBar;
 	}
 	
 	overlayAid.removeOverlayWindow(window, 'addonBar');

@@ -1,10 +1,6 @@
-moduleAid.VERSION = '1.1.1';
+moduleAid.VERSION = '1.1.2';
 
 this.__defineGetter__('addonBar', function() { return (!Australis) ? $('addon-bar') : $(objName+'-addon-bar'); });
-
-this.toggleAddonBar = function() {
-	setToolbarVisibility(addonBar, addonBar.collapsed);
-};
 
 this.toggleAutoHide = function() {
 	moduleAid.loadIf('autoHide', prefAid.placement != 'bottom' && prefAid.autoHide);
