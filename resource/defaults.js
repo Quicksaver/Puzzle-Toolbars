@@ -6,7 +6,7 @@ var prefList = {
 	autoHide: false,
 	placement: 'bottom',
 	
-	/* hidden preference to not show the addon bar autohiding on startup */
+	// hidden preference to not show the addon bar autohiding on startup
 	noInitialShow: false,
 	
 	addonBarKeycode: '/',
