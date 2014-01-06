@@ -47,7 +47,8 @@
 	}
 	
 	toolbarpaletteitem[place="palette"] toolbarspring,
-	toolbarpaletteitem[place="palette"] #thePuzzlePiece-special-spring {
+	toolbarpaletteitem[place="palette"] #thePuzzlePiece-special-spring,
+	toolbarpaletteitem toolbarspring[cui-areatype="menu-panel"] {
 		background: url("chrome://global/skin/toolbar/spring.png") no-repeat center;
 	}
 	

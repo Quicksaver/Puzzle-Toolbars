@@ -10,4 +10,41 @@
 		display: none;
 	}
 	
+	/* trying to use our special widgets in the menu-panel */
+	
+	toolbarspacer[cui-areatype="menu-panel"] {
+		min-width: 7em;
+		width: 7em;
+		max-width: 7em;
+	}
+	
+	toolbarpaletteitem toolbarspacer[cui-areatype="menu-panel"] {
+		min-height: 5em;
+		height: 5em;
+		max-height: 5em;
+		margin-top: -2.5em;
+	}
+	
+	toolbarspring[cui-areatype="menu-panel"] {
+		min-width: 21em;
+		width: 21em;
+		max-width: 21em;
+		min-height: 0;
+		height: 0;
+		max-height: 0;
+	}
+	
+	toolbarpaletteitem toolbarspring[cui-areatype="menu-panel"] {
+		min-height: 2em;
+		height: 2em;
+		max-height: 2em;
+		margin-top: -1em;
+	}
+	
+	toolbarseparator[cui-areatype="menu-panel"] {
+		min-width: 21em;
+		width: 21em;
+		max-width: 21em;
+	}
+	
 }

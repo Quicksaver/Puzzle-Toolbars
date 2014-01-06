@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.1.1';
+moduleAid.VERSION = '1.1.2';
 
 this.__defineGetter__('CustomizableUI', function() { return window.CustomizableUI; });
 this.__defineGetter__('PrintPreviewListener', function() { return window.PrintPreviewListener; });
@@ -10,11 +10,7 @@ this.trackSpecialWidgets = {
 		if(aId.startsWith(objName+'-special-')) {
 			var type = aId.split(objName+'-special-')[1];
 			CustomizableUI.removeWidgetFromArea(aId);
-			
-			// Don't add these to the menu panel, they aren't made for it
-			if(!aCurrentArea.startsWith('PanelUI')) {
-				CustomizableUI.addWidgetToArea(type, aCurrentArea, aCurrentPosition);
-			}
+			CustomizableUI.addWidgetToArea(type, aCurrentArea, aCurrentPosition);
 		}
 	}
 };
@@ -36,7 +32,7 @@ moduleAid.LOADMODULE = function() {
 	CustomizableUI.addListener(trackSpecialWidgets);
 	
 	for(var i=0; i<specialWidgets.length; i++) {
-		CustomizableUI.removeWidgetFromArea(objName+'-special-'+specialWidgets[i]); }
+		CustomizableUI.removeWidgetFromArea(objName+'-special-'+specialWidgets[i]);
 	}
 	
 	// since we're starting with this australis-specific module, we Load the rest of the add-on here after everything
