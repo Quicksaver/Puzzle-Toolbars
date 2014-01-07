@@ -3,7 +3,6 @@
 <!ENTITY Options.title "The Puzzle Piece">
 <!ENTITY Optgeneral.label "Add-on Bar">
 <!ENTITY Optabout.label "About">
-<!ENTITY Optaustralis.label "Australis">
 
 <!ENTITY GroupPosition.label "Position">
 <!ENTITY GroupBehavior.label "Behavior">
