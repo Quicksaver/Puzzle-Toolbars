@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.2.2';
+moduleAid.VERSION = '1.2.3';
 
 this.__defineGetter__('oldBar', function() { return $('addon-bar'); });
 this.__defineGetter__('statusBar', function() { return $('status-bar'); });
@@ -68,9 +68,6 @@ moduleAid.LOADMODULE = function() {
 	// Migrate back already migrated items
 	migrateBackWidgets();
 	
-	// move the status bar onto our container
-	$(objName+'-status-bar-stack').insertBefore(statusBar, $(objName+'-status-bar-stack').firstChild);
-	
 	prefAid.listen('statusBar', toggleStatusBar);
 	toggleStatusBar();
 	
@@ -82,8 +79,6 @@ moduleAid.UNLOADMODULE = function() {
 	moduleAid.unload(objName);
 	
 	prefAid.unlisten('statusBar', toggleStatusBar);
-	
-	oldBar.appendChild(statusBar);
 	
 	setAttribute(oldBar, 'toolbar-delegate', barBackups.delegate);
 	oldBar._delegatingToolbar = barBackups.delegate;

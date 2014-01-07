@@ -1,6 +1,10 @@
 @namespace url(http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul);
 @-moz-document url("chrome://browser/content/browser.xul") {
-
+	
+	.addon-bar:not([placement="bottom"]) {
+		box-shadow: none;
+	}
+	
 	.addon-bar[placement="corner"] {
 		-moz-appearance: none !important;
 		background-color: #E8E8E8 !important;
@@ -13,8 +17,8 @@
 		-moz-border-left-colors: #888;
 	}
 	
-	.PuzzlePiece:not(#thePuzzlePiece-urlbar-PP):not([customizing]):not([active]):not(:hover),
-	.PuzzlePiece:not(#thePuzzlePiece-urlbar-PP):not([customizing])[autohide]:not(:hover):not([hover]) {
+	window:not([customizing="true"]) .PuzzlePiece:not(#thePuzzlePiece-urlbar-PP):not([customizing]):not([active]):not(:hover),
+	window:not([customizing="true"]) .PuzzlePiece:not(#thePuzzlePiece-urlbar-PP):not([customizing])[autohide]:not(:hover):not([hover]) {
 		clip: rect(0px, 32px, 14px, 0px);
 	}
 	

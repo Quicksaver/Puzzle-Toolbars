@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.0.1';
+moduleAid.VERSION = '1.1.0';
 
 this.CustomizableUI = null;
 
@@ -17,6 +17,25 @@ this.trackSpecialWidgets = {
 	}
 };
 
+this.trackStatusBar = function() {
+	windowMediator.callOnAll(moveStatusBar, 'navigator:browser');
+};
+	
+// move the status bar onto our container
+this.moveStatusBar = function(aWindow) {
+	if(aWindow.closed || aWindow.willClose) { return; }
+	
+	var sBar = aWindow.document.getElementById('status-bar') || aWindow.__statusBar;
+	var sStack = aWindow.document.getElementById(objName+'-status-bar-stack');
+	if(sBar.parentNode == sStack) { return; }
+	
+	aWindow.__statusBar = sBar;
+	
+	setAttribute(sBar, 'removable', 'true');
+	CustomizableUI.removeWidgetFromArea('status-bar');
+	sStack.insertBefore(sBar, sStack.firstChild);
+};
+
 moduleAid.LOADMODULE = function() {
 	var scope = {};
 	Cu.import("resource:///modules/CustomizableUI.jsm", scope);
@@ -33,9 +52,20 @@ moduleAid.LOADMODULE = function() {
 	overlayAid.overlayURI('chrome://browser/content/browser.xul', 'australisBar', null,
 		function(aWindow) {
 			moduleAid.load('compatibilityFix/sandboxFixes'); // We need our add-on bar registered for this
+			
+			moveStatusBar(aWindow);
+			listenOnce(aWindow, 'unload', trackStatusBar);
+			
 			startAddon(aWindow);
 		},
-		function(aWindow) { stopAddon(aWindow); }
+		function(aWindow) {
+			stopAddon(aWindow);
+			
+			var sBar = aWindow.document.getElementById('status-bar') || aWindow.__statusBar;
+			aWindow.document.getElementById('addon-bar').appendChild(sBar);
+			setAttribute('statusBar', 'removable', 'false');
+			delete aWindow.__statusBar;
+		}
 	);
 };
 

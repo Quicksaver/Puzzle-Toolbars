@@ -13,8 +13,8 @@
 		-moz-border-left-colors: threedshadow threedhighlight;
 	}
 	
-	.PuzzlePiece:not(#thePuzzlePiece-urlbar-PP):not([customizing]):not([active]):not(:hover),
-	.PuzzlePiece:not(#thePuzzlePiece-urlbar-PP):not([customizing])[autohide]:not(:hover):not([hover]) {
+	window:not([customizing="true"]) .PuzzlePiece:not(#thePuzzlePiece-urlbar-PP):not([customizing]):not([active]):not(:hover),
+	window:not([customizing="true"]) .PuzzlePiece:not(#thePuzzlePiece-urlbar-PP):not([customizing])[autohide]:not(:hover):not([hover]) {
 		clip: rect(0px, 32px, 14px, 0px);
 	}
 	

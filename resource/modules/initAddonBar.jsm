@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.2.4';
+moduleAid.VERSION = '1.2.5';
 
 this.__defineGetter__('bottomBox', function() { return $('browser-bottombox'); });
 this.__defineGetter__('browserPanel', function() { return $('browser-panel'); });
@@ -154,7 +154,7 @@ this.moveAddonBar = function() {
 	sscode += '	window['+objName+'_UUID="'+_UUID+'"] .addon-bar[placement="corner"]:not([autohide]) {\n';
 	sscode += '		clip: rect(0px, '+4000+'px, '+clipOffHeight+'px, 0px);\n';
 	sscode += '	}\n';
-	sscode += '	window['+objName+'_UUID="'+_UUID+'"] .addon-bar[placement="corner"][collapsed="true"]:not([customizing="true"]) {\n';
+	sscode += '	window['+objName+'_UUID="'+_UUID+'"]:not([customizing="true"]) .addon-bar[placement="corner"][collapsed="true"]:not([customizing="true"]) {\n';
 	sscode += '		bottom: '+(moveBarStyle.bottom -barOffset)+'px;\n';
 	sscode += '		clip: rect(0px, '+4000+'px, '+CLIPBAR+'px, 0px);\n';
 	sscode += '	}\n';

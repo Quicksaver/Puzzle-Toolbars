@@ -30,7 +30,7 @@
 		max-height: 20px; /* I swear this one makes me mad trying to figure out why it increases the height of the location bar only sometimes */
 	}
 	
-	.addon-bar:not([placement="bottom"])[collapsed="true"]:not([customizing="true"]) {
+	window:not([customizing="true"]) .addon-bar:not([placement="bottom"])[collapsed="true"]:not([customizing="true"]) {
 		opacity: 0;
 		display: -moz-box !important;
 		visibility: visible !important;
@@ -182,10 +182,10 @@
 		width: 18px;
 	}
 	
-	.addon-bar:not([customizing="true"])[placement="bottom"]:not([movetoright]) {
+	window:not([customizing="true"]) .addon-bar:not([customizing="true"])[placement="bottom"]:not([movetoright]) {
 		padding-left: 34px;
 	}
-	.addon-bar:not([customizing="true"])[placement="bottom"][movetoright] {
+	window:not([customizing="true"]) .addon-bar:not([customizing="true"])[placement="bottom"][movetoright] {
 		padding-right: 34px;
 	}
 	.addon-bar[placement="corner"]:not([movetoright]) {
@@ -195,13 +195,13 @@
 		padding-right: 17px;
 	}
 	
-	.PuzzlePiece:not(#thePuzzlePiece-urlbar-PP):not([customizing]):not([active]):not(:hover):not([hover]),
-	.PuzzlePiece:not(#thePuzzlePiece-urlbar-PP):not([customizing])[autohide]:not(:hover):not([hover]) {
+	window:not([customizing="true"]) .PuzzlePiece:not(#thePuzzlePiece-urlbar-PP):not([customizing]):not([active]):not(:hover):not([hover]),
+	window:not([customizing="true"]) .PuzzlePiece:not(#thePuzzlePiece-urlbar-PP):not([customizing])[autohide]:not(:hover):not([hover]) {
 		opacity: 0;
 	}
 	
-	.PuzzlePiece:not([noAnimation]):not(#thePuzzlePiece-urlbar-PP):not([customizing]):not([active]):not(:hover):not([hover]),
-	.PuzzlePiece:not([noAnimation]):not(#thePuzzlePiece-urlbar-PP):not([customizing])[autohide]:not(:hover):not([hover]) {
+	window:not([customizing="true"]) .PuzzlePiece:not([noAnimation]):not(#thePuzzlePiece-urlbar-PP):not([customizing]):not([active]):not(:hover):not([hover]),
+	window:not([customizing="true"]) .PuzzlePiece:not([noAnimation]):not(#thePuzzlePiece-urlbar-PP):not([customizing])[autohide]:not(:hover):not([hover]) {
 		-moz-transition: bottom .5s linear .2s, opacity .5s linear .2s, clip .5s linear .2s;
 		transition: bottom .5s linear .2s, opacity .5s linear .2s, clip .5s linear .2s; /* Firefox 16+ */
 	}
@@ -211,7 +211,7 @@
 		-moz-transition: bottom .25s linear 0s, opacity .25s linear 0s, clip .25s linear 0s;
 		transition: bottom .25s linear 0s, opacity .25s linear 0s, clip .25s linear 0s; /* Firefox 16+ */
 	}
-	.PuzzlePiece:not([noAnimation]):not(#thePuzzlePiece-urlbar-PP):not([customizing]):not([active]):not(:hover):not([hover]) image {
+	window:not([customizing="true"]) .PuzzlePiece:not([noAnimation]):not(#thePuzzlePiece-urlbar-PP):not([customizing]):not([active]):not(:hover):not([hover]) image {
 		-moz-transition: -moz-transform .5s linear .2s;
 		transition: transform .5s linear .2s; /* Firefox 16+ */
 	}
@@ -229,11 +229,11 @@
 		-moz-transform: rotate(0deg);
 		transform: rotate(0deg); /* Firefox 16 */
 	}
-	#thePuzzlePiece-left-PP:not([customizing]):not([active]):not(:hover):not([hover]) image {
+	window:not([customizing="true"]) #thePuzzlePiece-left-PP:not([customizing]):not([active]):not(:hover):not([hover]) image {
 		-moz-transform: rotate(-40deg);
 		transform: rotate(-40deg); /* Firefox 16 */
 	}
-	#thePuzzlePiece-right-PP:not([customizing]):not([active]):not(:hover):not([hover]) image {
+	window:not([customizing="true"]) #thePuzzlePiece-right-PP:not([customizing]):not([active]):not(:hover):not([hover]) image {
 		-moz-transform: rotate(40deg);
 		transform: rotate(40deg); /* Firefox 16 */
 	}
@@ -242,11 +242,12 @@
 	.addon-bar:not([noAnimation])[placement="corner"]:hover,
 	.addon-bar:not([noAnimation])[placement="corner"][hover],
 	.addon-bar:not([noAnimation])[placement="corner"][customizing="true"],
+	window[customizing="true"] .addon-bar:not([noAnimation])[placement="corner"],
 	.addon-bar:not([noAnimation])[placement="corner"]:not([collapsed="true"]) {
 		-moz-transition: bottom .25s linear 0s, opacity .25s linear 0s, clip .25s linear 0s;
 		transition: bottom .25s linear 0s, opacity .25s linear 0s, clip .25s linear 0s; /* Firefox 16+ */
 	}
-	.addon-bar:not([noAnimation])[placement="corner"]:not([collapsed="true"])[autohide]:not(:hover):not([hover]):not([customizing="true"]) {
+	window:not([customizing="true"]) .addon-bar:not([noAnimation])[placement="corner"]:not([collapsed="true"])[autohide]:not(:hover):not([hover]):not([customizing="true"]) {
 		-moz-transition: bottom .5s linear .2s, opacity .5s linear .2s, clip .5s linear .2s;
 		transition: bottom .5s linear .2s, opacity .5s linear .2s, clip .5s linear .2s; /* Firefox 16+ */
 	}
@@ -258,11 +259,12 @@
 	.addon-bar:not([noAnimation])[placement="urlbar"]:hover,
 	.addon-bar:not([noAnimation])[placement="urlbar"][hover],
 	.addon-bar:not([noAnimation])[placement="urlbar"][customizing="true"],
+	window[customizing="true"] .addon-bar:not([noAnimation])[placement="urlbar"],
 	.addon-bar:not([noAnimation])[placement="urlbar"]:not([collapsed="true"]) {
 		-moz-transition: opacity .25s linear 0s;
 		transition: opacity .25s linear 0s; /* Firefox 16+ */
 	}
-	.addon-bar:not([noAnimation])[placement="urlbar"]:not([collapsed="true"])[autohide]:not(:hover):not([hover]):not([customizing="true"]) {
+	window:not([customizing="true"]) .addon-bar:not([noAnimation])[placement="urlbar"]:not([collapsed="true"])[autohide]:not(:hover):not([hover]):not([customizing="true"]) {
 		-moz-transition: opacity .5s linear .2s;
 		transition: opacity .5s linear .2s; /* Firefox 16+ */
 	}
@@ -273,11 +275,12 @@
 	
 	.addon-bar:not([collapsed="true"]):hover,
 	.addon-bar:not([collapsed="true"])[hover],
-	.addon-bar[customizing="true"] {
+	.addon-bar[customizing="true"],
+	window[customizing="true"] .addon-bar {
 		opacity: 1;
 	}
 	
-	.addon-bar[autohide]:not([customizing]):not(:hover):not([hover]) {
+	window:not([customizing="true"]) .addon-bar[autohide]:not([customizing]):not(:hover):not([hover]) {
 		opacity: 0;
 	}
 	
