@@ -55,7 +55,8 @@
 		background: url("chrome://global/skin/toolbar/spring.png") no-repeat center;
 	}
 	
-	toolbarseparator[cui-areatype="menu-panel"] {
+	toolbarseparator[cui-areatype="menu-panel"],
+	toolbarseparator.overflowedItem {
 		-moz-appearance: none !important;
 		border-top: 1px solid ThreeDShadow;
 		border-bottom: 1px solid ThreeDHighlight;

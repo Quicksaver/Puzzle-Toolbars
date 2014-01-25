@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.1.0';
+moduleAid.VERSION = '1.1.1';
 
 this.CustomizableUI = null;
 
@@ -9,7 +9,10 @@ this.trackSpecialWidgets = {
 		if(aId.startsWith(objName+'-special-')) {
 			var type = aId.split(objName+'-special-')[1];
 			CustomizableUI.removeWidgetFromArea(aId);
-			CustomizableUI.addWidgetToArea(type, aCurrentArea, aCurrentPosition);
+			
+			if(type != 'spring' || aCurrentArea != 'nav-bar') {
+				CustomizableUI.addWidgetToArea(type, aCurrentArea, aCurrentPosition);
+			}
 			
 			// Note: not setting WIDE_PANEL_CLASS to these widgets, in case they are inserted in the menu-panel,
 			// so they can be more accuratelly placed.

@@ -10,7 +10,7 @@
 		display: none;
 	}
 	
-	/* trying to use our special widgets in the menu-panel */
+	/* trying to use our special widgets in the menu-panel and overflow panel */
 	
 	toolbarspacer[cui-areatype="menu-panel"] {
 		min-width: 7em;
@@ -45,6 +45,17 @@
 		min-width: 21em;
 		width: 21em;
 		max-width: 21em;
+	}
+	
+	toolbarspacer.overflowedItem {
+		min-height: 12px !important;
+	}
+
+	toolbarseparator.overflowedItem {
+		-moz-appearance: none !important;
+		min-height: 0 !important;
+		border-top: 1px solid ThreeDShadow !important;
+		margin: 5px 0 !important;
 	}
 	
 	/* status-bar */
