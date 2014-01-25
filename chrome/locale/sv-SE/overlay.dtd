@@ -1,1 +1,7 @@
 <!ENTITY OptionsMenu.label "Inställningar för The Puzzle Piece">
+<!ENTITY addonBar.name "Tilläggsfältet">
+<!ENTITY addonBar.accesskey "T">
+<!ENTITY statusBar.label "Statusfältet">
+<!ENTITY specialWidget.separator "Avskiljare">
+<!ENTITY specialWidget.spring "Flexibelt mellanrum">
+<!ENTITY specialWidget.spacer "Mellanrum">

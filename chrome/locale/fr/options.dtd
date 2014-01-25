@@ -4,9 +4,12 @@
 <!ENTITY Optabout.label "À propos">
 <!ENTITY GroupPosition.label "Position">
 <!ENTITY GroupBehavior.label "Comportement">
+<!ENTITY OptPlacement.bottomLabel "Placer en bas du navigateur">
+<!ENTITY OptPlacement.cornerLabel "Réduire dans un coin inférieur de la page Web">
+<!ENTITY OptPlacement.urlbarLabel "Déplacer vers la barre d'adresses">
 <!ENTITY OptmoveToRight.label "Placer à droite de la fenêtre du navigateur">
-<!ENTITY OptinURLBar.label "Déplacer la barre des modules dans la barre d'adresse">
 <!ENTITY OptautoHide.label "Masquer automatiquement la barre des modules">
+<!ENTITY OptstatusBar.label "Rétablir la barre d'état">
 <!ENTITY OptKeyboardShortcut.caption "Raccourci clavier">
 <!ENTITY OptKeyboardShortcut.control "Ctrl">
 <!ENTITY OptKeyboardShortcut.shift "Maj">

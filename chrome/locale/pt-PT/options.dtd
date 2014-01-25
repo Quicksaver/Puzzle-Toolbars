@@ -1,15 +1,15 @@
-<!ENTITY Optwindow.style "width: 33.5em;">
+<!ENTITY Optwindow.style "width: 31em;">
 <!ENTITY Options.title "A Peça do Puzzle">
 <!ENTITY Optgeneral.label "Barra de Extras">
 <!ENTITY Optabout.label "Sobre">
-
 <!ENTITY GroupPosition.label "Posição">
 <!ENTITY GroupBehavior.label "Comportamento">
-
+<!ENTITY OptPlacement.bottomLabel "Colocar ao fundo do navegador">
+<!ENTITY OptPlacement.cornerLabel "Encolher num canto ao fundo da página">
+<!ENTITY OptPlacement.urlbarLabel "Mover para a barra de endereço">
 <!ENTITY OptmoveToRight.label "Colocar à direita da janela do navegador">
-<!ENTITY OptinURLBar.label "Mover a barra de extras para a barra de endereço">
 <!ENTITY OptautoHide.label "Esconder a barra de extras automaticamente">
-
+<!ENTITY OptstatusBar.label "Restaurar a barra de estado">
 <!ENTITY OptKeyboardShortcut.caption "Atalho de Teclado">
 <!ENTITY OptKeyboardShortcut.control "Control">
 <!ENTITY OptKeyboardShortcut.shift "Shift">
@@ -26,7 +26,6 @@
 <!ENTITY OptKeyboardShortcut.up "Seta cima">
 <!ENTITY OptKeyboardShortcut.right "Seta direira">
 <!ENTITY OptKeyboardShortcut.down "Seta baixo">
-
 <!ENTITY thepuzzlepieceabout.name "A Peça do Puzzle">
 <!ENTITY thepuzzlepieceabout.by "por Quicksaver">
 <!ENTITY thepuzzlepieceabout.desc "Toda a informação relativa a este extra e ao seu autor pode ser encontrada na página dos Extras do Mozilla. Se gostou da extensão, pode mostrar o seu agrado ao lá deixar um comentário ou pode também fazer uma pequena contribuição para manter o seu desenvolvimento. Sugestões e problemas podem ser comunicados na página de suporte técnico.">

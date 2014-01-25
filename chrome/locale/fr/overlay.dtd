@@ -1,1 +1,7 @@
 <!ENTITY OptionsMenu.label "Options de The Puzzle Piece">
+<!ENTITY addonBar.name "Add-on Bar">
+<!ENTITY addonBar.accesskey "A">
+<!ENTITY statusBar.label "Barre d'état">
+<!ENTITY specialWidget.separator "Séparateur">
+<!ENTITY specialWidget.spring "Espace flexible">
+<!ENTITY specialWidget.spacer "Espace">

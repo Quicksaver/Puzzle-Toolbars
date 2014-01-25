@@ -22,7 +22,7 @@
 			<Description>
 				<em:locale>en-US</em:locale>
 				<em:name>The Puzzle Piece</em:name>
-				<em:description>It controls your add-on bar. Where do you want it? What do you want it to do? You decide!</em:description>
+				<em:description>Bring back your add-on bar in full force! Where do you want it? What do you want it to do? You decide!</em:description>
 				<em:homepageURL>https://addons.mozilla.org/en-US/firefox/addon/the-puzzle-piece/</em:homepageURL>
 			</Description>
 		</em:localized>
@@ -30,7 +30,7 @@
 			<Description>
 				<em:locale>fr</em:locale>
 				<em:name>The Puzzle Piece</em:name>
-				<em:description>Elle contrôle votre barre des modules. Où la voulez-vous ? Que souhaitez-vous qu'elle fasse ? C'est vous qui décidez !</em:description>
+				<em:description>Autorisez le retour en force de votre barre de modules ! Où la voulez-vous ? Que souhaitez-vous qu'elle fasse ? C'est vous qui décidez !</em:description>
 				<em:homepageURL>https://addons.mozilla.org/fr/firefox/addon/the-puzzle-piece/</em:homepageURL>
 				<em:translator>Jojaba - BabelZilla</em:translator>
 			</Description>
@@ -39,7 +39,7 @@
 			<Description>
 				<em:locale>pt-PT</em:locale>
 				<em:name>A Peça do Puzzle</em:name>
-				<em:description>Ela controla a sua barra de extras. Onde a quer? Como lhe quer aceder? Você decide!</em:description>
+				<em:description>Traz de volta a sua barra de extras, ainda melhorada! Como lhe quer aceder? Você decide!</em:description>
 				<em:homepageURL>https://addons.mozilla.org/pt-PT/firefox/addon/the-puzzle-piece/</em:homepageURL>
 				<em:translator>Quicksaver</em:translator>
 			</Description>
@@ -48,7 +48,7 @@
 			<Description>
 				<em:locale>sv-SE</em:locale>
 				<em:name>The Puzzle Piece – Pusselbiten</em:name>
-				<em:description>Kontrollerar ditt tilläggsfält. Var vill du ha den? Vad vill du att den skall göra? Du bestämmer!</em:description>
+				<em:description>Ta tillbaka ditt tilläggsfält – på ditt sätt! Var vill du ha det? Vad skall det göra? Du bestämmer!</em:description>
 				<em:homepageURL>https://addons.mozilla.org/sv-SE/firefox/addon/the-puzzle-piece/</em:homepageURL>
 				<em:translator>Mikael Hiort af Ornäs</em:translator>
 			</Description>

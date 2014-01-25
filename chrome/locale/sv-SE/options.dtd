@@ -4,9 +4,12 @@
 <!ENTITY Optabout.label "Om">
 <!ENTITY GroupPosition.label "Position">
 <!ENTITY GroupBehavior.label "Beteende">
+<!ENTITY OptPlacement.bottomLabel "Placera nederst i webbläsarfönstret">
+<!ENTITY OptPlacement.cornerLabel "Komprimera till ett hörn, nederst på webbläsarsidan">
+<!ENTITY OptPlacement.urlbarLabel "Placera inuti adressfältet">
 <!ENTITY OptmoveToRight.label "Placera till höger om webbläsarfönstret">
-<!ENTITY OptinURLBar.label "Flytta tilläggsfältet till adressfältet">
 <!ENTITY OptautoHide.label "Dölj tilläggsfältet automatiskt">
+<!ENTITY OptstatusBar.label "Återställ statusfältet">
 <!ENTITY OptKeyboardShortcut.caption "Kortkommando">
 <!ENTITY OptKeyboardShortcut.control "Ctrl">
 <!ENTITY OptKeyboardShortcut.shift "Skift">
