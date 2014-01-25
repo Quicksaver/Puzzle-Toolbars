@@ -133,7 +133,7 @@
 			</hbox>
 			<description>&thepuzzlepieceabout.by;</description>
 			<description class="justify">&thepuzzlepieceabout.desc;</description>
-			<label class="text-link closer" href="https://addons.mozilla.org/UserAgentLocale/firefox/addon/the-puzzle-piece/" value="&thepuzzlepieceabout.home;"/>
+			<label class="text-link closer" href="https://addons.mozilla.org/firefox/addon/the-puzzle-piece/" value="&thepuzzlepieceabout.home;"/>
 			<label class="text-link closer" href="https://github.com/Quicksaver/The-Puzzle-Piece/issues" value="&thepuzzlepieceabout.tech;"/>
 		</vbox>
 	</prefpane>
