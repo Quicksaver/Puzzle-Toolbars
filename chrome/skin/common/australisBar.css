@@ -13,22 +13,21 @@
 	/* trying to use our special widgets in the menu-panel and overflow panel */
 	
 	toolbarspacer[cui-areatype="menu-panel"] {
-		min-width: 7em;
-		width: 7em;
-		max-width: 7em;
+		min-width: calc(22.35em /3);
+		width: calc(22.35em /3);
+		max-width: calc(22.35em /3);
 	}
 	
 	toolbarpaletteitem toolbarspacer[cui-areatype="menu-panel"] {
-		min-height: 5em;
-		height: 5em;
-		max-height: 5em;
-		margin-top: -2.5em;
+		min-height: 2.5em;
+		height: 2.5em;
+		max-height: 2.5em;
 	}
 	
 	toolbarspring[cui-areatype="menu-panel"] {
-		min-width: 21em;
-		width: 21em;
-		max-width: 21em;
+		min-width: 22.35em;
+		width: 22.35em;
+		max-width: 22.35em;
 		min-height: 0;
 		height: 0;
 		max-height: 0;
@@ -42,20 +41,22 @@
 	}
 	
 	toolbarseparator[cui-areatype="menu-panel"] {
-		min-width: 21em;
-		width: 21em;
-		max-width: 21em;
+		min-width: 22.35em;
+		width: 22.35em;
+		max-width: 22.35em;
 	}
 	
 	toolbarspacer.overflowedItem {
-		min-height: 12px !important;
+		min-height: 1em !important;
+		margin-top: 6px;
 	}
 
 	toolbarseparator.overflowedItem {
 		-moz-appearance: none !important;
 		min-height: 0 !important;
 		border-top: 1px solid ThreeDShadow !important;
-		margin: 5px 0 !important;
+		border-bottom: 1px solid ThreeDHighlight !important;
+		margin-top: 6px;
 	}
 	
 	/* status-bar */
