@@ -12,6 +12,7 @@
 	
 	/* trying to use our special widgets in the menu-panel and overflow panel */
 	
+	.customization-palette .toolbarbutton-1,
 	toolbarspacer[cui-areatype="menu-panel"] {
 		min-width: calc(22.35em /3);
 		width: calc(22.35em /3);
