@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.1.1';
+moduleAid.VERSION = '1.1.2';
 
 this.CustomizableUI = null;
 
@@ -33,6 +33,7 @@ this.moveStatusBar = function(aWindow) {
 	if(sBar.parentNode == sStack) { return; }
 	
 	aWindow.__statusBar = sBar;
+	if(!sBar._originalParent) { sBar._originalParent = sBar.parentNode; }
 	
 	setAttribute(sBar, 'removable', 'true');
 	CustomizableUI.removeWidgetFromArea('status-bar');
@@ -65,8 +66,14 @@ moduleAid.LOADMODULE = function() {
 			stopAddon(aWindow);
 			
 			var sBar = aWindow.document.getElementById('status-bar') || aWindow.__statusBar;
-			aWindow.document.getElementById('addon-bar').appendChild(sBar);
-			setAttribute('statusBar', 'removable', 'false');
+			if(sBar._originalParent) {
+				if(sBar._originalParent != sBar.parentNode) { sBar._originalParent.appendChild(sBar); }
+			}
+			else { aWindow.document.getElementById('addon-bar').appendChild(sBar); }
+			
+			setAttribute(sBar, 'removable', 'false');
+			
+			delete sBar._originalParent;
 			delete aWindow.__statusBar;
 		}
 	);
