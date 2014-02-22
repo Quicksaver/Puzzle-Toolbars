@@ -1,5 +1,6 @@
-moduleAid.VERSION = '1.1.3';
+moduleAid.VERSION = '1.1.4';
 
+this.__defineGetter__('bottomBox', function() { return $('browser-bottombox'); });
 this.__defineGetter__('addonBar', function() { return (!Australis) ? $('addon-bar') : $(objName+'-addon-bar'); });
 
 this.showWhenMigrated = function() {
@@ -20,8 +21,16 @@ this.togglePlacement = function(e) {
 	// I can't drag from the add-on bar when it's in the url bar, it only drags the whole url bar in this case
 	var customizing = (e && e.type == 'beforecustomization') || trueAttribute(addonBar, 'customizing');
 	
+	if(!customizing && addonBar.parentNode.id == 'customization-palette-container') {
+		bottomBox.insertBefore(addonBar, $('developer-toolbar'));
+	}
+	
 	moduleAid.loadIf('inURLBar', !customizing && prefAid.placement == 'urlbar');
 	setAttribute(addonBar, 'placement', (!customizing) ? prefAid.placement : 'bottom');
+	
+	if(customizing && addonBar.parentNode.id != 'customization-palette-container') {
+		$('customization-palette-container').appendChild(addonBar);
+	}
 };
 
 moduleAid.LOADMODULE = function() {

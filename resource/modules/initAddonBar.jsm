@@ -1,6 +1,5 @@
-moduleAid.VERSION = '1.2.5';
+moduleAid.VERSION = '1.2.6';
 
-this.__defineGetter__('bottomBox', function() { return $('browser-bottombox'); });
 this.__defineGetter__('browserPanel', function() { return $('browser-panel'); });
 this.__defineGetter__('gFindBar', function() { return window.gFindBar; });
 this.__defineGetter__('toggleAddonBar', function() { return window.toggleAddonBar; });
