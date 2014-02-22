@@ -10,6 +10,9 @@
 		display: none;
 	}
 	
+	/* Bugfix: we need our add-on bar always as the last visible element, even if it physically isn't */
+	#thePuzzlePiece-addon-bar[placement="bottom"] { -moz-box-ordinal-group: 10000; }
+	
 	/* trying to use our special widgets in the menu-panel and overflow panel */
 	
 	.customization-palette .toolbarbutton-1,

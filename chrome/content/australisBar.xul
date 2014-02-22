@@ -9,6 +9,8 @@
 	</commandset>
 	
 	<vbox id="browser-bottombox">
+		<!-- Bugfix: there's a weird bug where the puzzle piece will be rendered behind the add-on bar (in the corner)
+		if the bar is not right after developer-toolbar (Status-4-ever add-on triggers this for example, and CTR as well sometimes -->
 		<toolbar id="thePuzzlePiece-addon-bar"
 			toolbarname="&addonBar.name;"
 			accesskey="&addonBar.accesskey;"
@@ -19,6 +21,7 @@
 			class="toolbar-primary chromeclass-toolbar addon-bar"
 			context="toolbar-context-menu"
 			toolboxid="navigator-toolbox"
+			insertafter="developer-toolbar"
 			key="objName-key">
 		</toolbar>
 	</vbox>
