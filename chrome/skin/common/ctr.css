@@ -15,4 +15,9 @@
 		display: none !important;
 	}
 	
+	/* Keep our add-on bar below CTR's customizations */
+	window[customizing="true"] .addon-bar {
+		-moz-box-ordinal-group: 1000000 !important;
+	}
+	
 }
