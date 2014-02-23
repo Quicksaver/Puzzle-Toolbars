@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.1.4';
+moduleAid.VERSION = '1.1.5';
 
 this.__defineGetter__('bottomBox', function() { return $('browser-bottombox'); });
 this.__defineGetter__('addonBar', function() { return (!Australis) ? $('addon-bar') : $(objName+'-addon-bar'); });
@@ -13,8 +13,10 @@ this.showWhenMigrated = function() {
 	}
 };
 
-this.toggleAutoHide = function() {
-	moduleAid.loadIf('autoHide', prefAid.placement != 'bottom' && prefAid.autoHide);
+this.toggleAutoHide = function(e) {
+	var customizing = (e && e.type == 'beforecustomization') || trueAttribute(addonBar, 'customizing');
+	
+	moduleAid.loadIf('autoHide', !customizing && prefAid.placement != 'bottom' && prefAid.autoHide);
 };
 
 this.togglePlacement = function(e) {
@@ -40,6 +42,8 @@ moduleAid.LOADMODULE = function() {
 	
 	listenerAid.add(window, 'beforecustomization', togglePlacement);
 	listenerAid.add(window, 'aftercustomization', togglePlacement);
+	listenerAid.add(window, 'beforecustomization', toggleAutoHide);
+	listenerAid.add(window, 'aftercustomization', toggleAutoHide);
 	
 	prefAid.listen('autoHide', toggleAutoHide);
 	prefAid.listen('placement', toggleAutoHide);
@@ -65,6 +69,8 @@ moduleAid.UNLOADMODULE = function() {
 	
 	listenerAid.remove(window, 'beforecustomization', togglePlacement);
 	listenerAid.remove(window, 'aftercustomization', togglePlacement);
+	listenerAid.remove(window, 'beforecustomization', toggleAutoHide);
+	listenerAid.remove(window, 'aftercustomization', toggleAutoHide);
 	
 	removeAttribute(addonBar, 'placement');
 	

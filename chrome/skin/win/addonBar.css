@@ -32,8 +32,8 @@
 	.PuzzlePiece:not(#thePuzzlePiece-urlbar-PP)[clipped]:hover {
 		clip: rect(0px, 32px, 30px, 0px);
 	}
-	window:not([customizing="true"]) .PuzzlePiece:not(#thePuzzlePiece-urlbar-PP):not([customizing]):not([active]):not(:hover),
-	window:not([customizing="true"]) .PuzzlePiece:not(#thePuzzlePiece-urlbar-PP):not([customizing])[autohide]:not(:hover):not([hover]) {
+	.PuzzlePiece:not(#thePuzzlePiece-urlbar-PP):not([active]):not(:hover),
+	.PuzzlePiece:not(#thePuzzlePiece-urlbar-PP)[autohide]:not(:hover):not([hover]) {
 		clip: rect(0px, 32px, 9px, 0px);
 	}
 	
