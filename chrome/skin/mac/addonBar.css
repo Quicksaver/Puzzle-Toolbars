@@ -15,6 +15,7 @@
 		-moz-border-top-colors: #888;
 		-moz-border-right-colors: #888;
 		-moz-border-left-colors: #888;
+		padding-top: 1px;
 	}
 	
 	.PuzzlePiece:not(#thePuzzlePiece-urlbar-PP):not([active]):not(:hover),
