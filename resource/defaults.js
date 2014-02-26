@@ -1,4 +1,4 @@
-var defaultsVersion = '1.2.2';
+var defaultsVersion = '1.2.3';
 var objName = 'thePuzzlePiece';
 var objPathString = 'thepuzzlepiece';
 var prefList = {
@@ -53,6 +53,8 @@ function onStartup(aReason) {
 	moduleAid.load('keysets');
 	
 	if(!Australis) {
+		moduleAid.load('compatibilityFix/sandboxFixes');
+		
 		// Apply the add-on to every window opened and to be opened
 		windowMediator.callOnAll(startAddon, 'navigator:browser');
 		windowMediator.register(startAddon, 'domwindowopened', 'navigator:browser');
@@ -74,6 +76,8 @@ function onShutdown(aReason) {
 	if(!Australis) {
 		// remove the add-on from all windows
 		windowMediator.callOnAll(stopAddon, null, null, true);
+		
+		moduleAid.unload('compatibilityFix/sandboxFixes');
 	} else {
 		moduleAid.unload('australisSandbox');
 	}
