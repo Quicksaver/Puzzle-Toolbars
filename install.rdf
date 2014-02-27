@@ -57,7 +57,7 @@
 			<Description>
 				<em:locale>zh-CN</em:locale>
 				<em:name>The Puzzle Piece</em:name>
-				<em:description>此扩展可以用来控制附加组件栏。它要出现在哪里？它要做什么？全由你决定！</em:description>
+				<em:description>此扩展恢复附加组件栏的全部功能。它要出现在哪里？它要做什么？全由你决定！</em:description>
 				<em:homepageURL>https://addons.mozilla.org/zh-CN/firefox/addon/the-puzzle-piece/</em:homepageURL>
 				<em:translator>Wang.H.K</em:translator>
 			</Description>
