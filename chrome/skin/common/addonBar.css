@@ -63,7 +63,8 @@
 		-moz-margin-end: 17px !important;
 	}
 	
-	.addon-bar > toolbaritem:not(#fixer-status-bar) { /* #fixer-status-bar selector is from UI Fixer add-on "make status bar movable" feature */
+	/* #fixer-status-bar selector is from UI Fixer add-on "make status bar movable" feature */
+	.addon-bar > toolbaritem:not(#fixer-status-bar):not(#thePuzzlePiece-status-bar-container) {
 		height: 18px;
 	}
 	
