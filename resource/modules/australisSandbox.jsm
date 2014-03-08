@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.1.2';
+moduleAid.VERSION = '1.1.3';
 
 this.CustomizableUI = null;
 
@@ -28,11 +28,11 @@ this.trackStatusBar = function() {
 this.moveStatusBar = function(aWindow) {
 	if(aWindow.closed || aWindow.willClose) { return; }
 	
-	var sBar = aWindow.document.getElementById('status-bar') || aWindow.__statusBar;
+	var sBar = aWindow.document.getElementById('status-bar') || aWindow._thePuzzlePiece_statusBar;
 	var sStack = aWindow.document.getElementById(objName+'-status-bar-stack');
 	if(sBar.parentNode == sStack) { return; }
 	
-	aWindow.__statusBar = sBar;
+	aWindow._thePuzzlePiece_statusBar = sBar;
 	if(!sBar._originalParent) { sBar._originalParent = sBar.parentNode; }
 	
 	setAttribute(sBar, 'removable', 'true');
@@ -65,7 +65,7 @@ moduleAid.LOADMODULE = function() {
 		function(aWindow) {
 			stopAddon(aWindow);
 			
-			var sBar = aWindow.document.getElementById('status-bar') || aWindow.__statusBar;
+			var sBar = aWindow.document.getElementById('status-bar') || aWindow._thePuzzlePiece_statusBar;
 			if(sBar._originalParent) {
 				if(sBar._originalParent != sBar.parentNode) { sBar._originalParent.appendChild(sBar); }
 			}
@@ -74,7 +74,7 @@ moduleAid.LOADMODULE = function() {
 			setAttribute(sBar, 'removable', 'false');
 			
 			delete sBar._originalParent;
-			delete aWindow.__statusBar;
+			delete aWindow._thePuzzlePiece_statusBar;
 		}
 	);
 };
