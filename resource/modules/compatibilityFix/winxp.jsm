@@ -1,10 +1,10 @@
-moduleAid.VERSION = '1.0.2';
+moduleAid.VERSION = '1.0.3';
 
 moduleAid.LOADMODULE = function() {
 	this.backups = {
-		updateWindowResizers: window.gBrowser.updateWindowResizers
+		updateWindowResizers: gBrowser.updateWindowResizers
 	};
-	window.gBrowser.updateWindowResizers = function updateWindowResizers() {
+	gBrowser.updateWindowResizers = function updateWindowResizers() {
 		if(!window.gShowPageResizers) { return; }
 		
 		var show = window.windowState == window.STATE_NORMAL;
@@ -13,13 +13,13 @@ moduleAid.LOADMODULE = function() {
 		}
 	};
 	
-	window.gBrowser.updateWindowResizers();
+	gBrowser.updateWindowResizers();
 };
 
 moduleAid.UNLOADMODULE = function() {
 	if(this.backups) {
-		window.gBrowser.updateWindowResizers = this.backups.updateWindowResizers;
+		gBrowser.updateWindowResizers = this.backups.updateWindowResizers;
 	}
 	
-	window.gBrowser.updateWindowResizers();
+	gBrowser.updateWindowResizers();
 };

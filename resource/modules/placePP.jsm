@@ -1,6 +1,4 @@
-moduleAid.VERSION = '1.1.3';
-
-this.__defineGetter__('gBrowser', function() { return window.gBrowser; });
+moduleAid.VERSION = '1.1.4';
 
 this.__defineGetter__('leftPP', function() { return $(objName+'-left-PP'); });
 this.__defineGetter__('rightPP', function() { return $(objName+'-right-PP'); });

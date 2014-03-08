@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.1.3';
+moduleAid.VERSION = '1.1.4';
 
 this.onMouseOver = function() {
 	setHover(true);
@@ -10,7 +10,7 @@ this.onMouseOut = function() {
 
 this.onDragEnter = function() {
 	setHover(true, 1);
-	listenerAid.add(window.gBrowser, "dragenter", onDragExitAll, false);
+	listenerAid.add(gBrowser, "dragenter", onDragExitAll, false);
 	listenerAid.add(window, "drop", onDragExitAll, false);
 	listenerAid.add(window, "dragend", onDragExitAll, false);
 };
@@ -20,7 +20,7 @@ this.onDragExit = function() {
 };
 
 this.onDragExitAll = function() {
-	listenerAid.remove(window.gBrowser, "dragenter", onDragExitAll, false);
+	listenerAid.remove(gBrowser, "dragenter", onDragExitAll, false);
 	listenerAid.remove(window, "drop", onDragExitAll, false);
 	listenerAid.remove(window, "dragend", onDragExitAll, false);
 	setHover(false);

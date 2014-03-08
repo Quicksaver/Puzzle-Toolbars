@@ -201,6 +201,7 @@
 	}
 	
 	.PuzzlePiece:not(#thePuzzlePiece-urlbar-PP):not([active]):not(:hover):not([hover]),
+	.PuzzlePiece:not(#thePuzzlePiece-urlbar-PP):not([autohide])[statusHide]:not(:hover):not([hover]),
 	.PuzzlePiece:not(#thePuzzlePiece-urlbar-PP)[autohide]:not(:hover):not([hover]) {
 		opacity: 0;
 	}
@@ -280,6 +281,7 @@
 		opacity: 1;
 	}
 	
+	.addon-bar:not([autohide])[statusHide]:not(:hover):not([hover]),
 	.addon-bar[autohide]:not(:hover):not([hover]) {
 		opacity: 0;
 	}
