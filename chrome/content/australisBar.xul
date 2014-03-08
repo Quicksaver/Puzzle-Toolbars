@@ -32,16 +32,19 @@
 			class="toolbarbutton-1 chromeclass-toolbar-additional"
 			label="&specialWidget.separator;"
 			tooltiptext="&specialWidget.separator;"
+			flex="1"
 			type="custom" />
 		<toolbaritem id="objName-special-spring" 
 			class="toolbarbutton-1 chromeclass-toolbar-additional"
 			label="&specialWidget.spring;"
 			tooltiptext="&specialWidget.spring;"
+			flex="1"
 			type="custom" />
 		<toolbaritem id="objName-special-spacer" 
 			class="toolbarbutton-1 chromeclass-toolbar-additional"
 			label="&specialWidget.spacer;"
 			tooltiptext="&specialWidget.spacer;"
+			flex="1"
 			type="custom" />
 			
 		<toolbaritem id="objName-status-bar-container"
