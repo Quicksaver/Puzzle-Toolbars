@@ -58,12 +58,12 @@
 		margin: 5px 0;
 	}
 	
-	toolbarspacer.overflowedItem {
+	toolbarspacer[overflowedItem=true] {
 		min-height: 1em !important;
 		margin-top: 6px;
 	}
 
-	toolbarseparator.overflowedItem {
+	toolbarseparator[overflowedItem=true] {
 		-moz-appearance: none !important;
 		min-height: 0 !important;
 		border-top: 1px solid ThreeDShadow !important;

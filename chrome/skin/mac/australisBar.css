@@ -94,7 +94,7 @@
 	}
 	
 	toolbarseparator[cui-areatype="menu-panel"],
-	toolbarseparator.overflowedItem {
+	toolbarseparator[overflowedItem=true] {
 		background-position: center center;
 	}
 	
