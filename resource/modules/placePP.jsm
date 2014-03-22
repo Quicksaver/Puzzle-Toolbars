@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.1.4';
+moduleAid.VERSION = '1.1.5';
 
 this.__defineGetter__('leftPP', function() { return $(objName+'-left-PP'); });
 this.__defineGetter__('rightPP', function() { return $(objName+'-right-PP'); });
@@ -42,6 +42,7 @@ this.choosePP = function() {
 
 this.activatePPs = function() {
 	toggleAttribute(activePP, 'active', !addonBar.collapsed);
+	toggleAttribute(activePP, 'bottomPlacement', prefAid.placement == 'bottom');
 };
 
 this.customizePP = function(e) {

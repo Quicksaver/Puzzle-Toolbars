@@ -206,6 +206,27 @@
 		opacity: 0;
 	}
 	
+	#thePuzzlePiece-left-PP[bottomPlacement][active]:not(:hover):not([hover]) image {
+		height: 22px;
+		margin-left: 5px;
+		-moz-transform: rotate(-60deg);
+		transform: rotate(-60deg); /* Firefox 16 */
+	}
+	#thePuzzlePiece-right-PP[bottomPlacement][active]:not(:hover):not([hover]) image {
+		height: 22px;
+		margin-right: 5px;
+		-moz-transform: rotate(60deg);
+		transform: rotate(60deg); /* Firefox 16 */
+	}
+	#thePuzzlePiece-right-PP[bottomPlacement]:hover image,
+	#thePuzzlePiece-right-PP[bottomPlacement][hover] image,
+	#thePuzzlePiece-right-PP[bottomPlacement]:not([active]) image,
+	#thePuzzlePiece-left-PP[bottomPlacement]:hover image,
+	#thePuzzlePiece-left-PP[bottomPlacement][hover] image,
+	#thePuzzlePiece-left-PP[bottomPlacement]:not([active]) image {
+		height: 32px;
+	}
+	
 	.PuzzlePiece:not([noAnimation]):not(#thePuzzlePiece-urlbar-PP):not([active]):not(:hover):not([hover]),
 	.PuzzlePiece:not([noAnimation]):not(#thePuzzlePiece-urlbar-PP)[autohide]:not(:hover):not([hover]) {
 		-moz-transition: bottom .5s linear .2s, opacity .5s linear .2s, clip .5s linear .2s;
@@ -218,14 +239,14 @@
 		transition: bottom .25s linear 0s, opacity .25s linear 0s, clip .25s linear 0s; /* Firefox 16+ */
 	}
 	.PuzzlePiece:not([noAnimation]):not(#thePuzzlePiece-urlbar-PP):not([active]):not(:hover):not([hover]) image {
-		-moz-transition: -moz-transform .5s linear .2s;
-		transition: transform .5s linear .2s; /* Firefox 16+ */
+		-moz-transition: -moz-transform .5s linear .2s, margin .5s linear .2s, height .5s linear .2s;
+		transition: transform .5s linear .2s, margin .5s linear .2s, height .5s linear .2s; /* Firefox 16+ */
 	}
 	.PuzzlePiece:not([noAnimation]):not(#thePuzzlePiece-urlbar-PP):hover image,
 	.PuzzlePiece:not([noAnimation]):not(#thePuzzlePiece-urlbar-PP)[hover] image,
 	.PuzzlePiece:not([noAnimation]):not(#thePuzzlePiece-urlbar-PP)[active] image {
-		-moz-transition: -moz-transform .25s linear 0s;
-		transition: transform .25s linear 0s; /* Firefox 16+ */
+		-moz-transition: -moz-transform .25s linear 0s, margin .25s linear 0s, height .25s linear 0s;
+		transition: transform .25s linear 0s, margin .25s linear 0s, height .25s linear 0s; /* Firefox 16+ */
 	}
 	
 	.PuzzlePiece:not(#thePuzzlePiece-urlbar-PP) {
