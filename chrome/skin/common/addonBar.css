@@ -208,13 +208,11 @@
 	}
 	
 	#thePuzzlePiece-left-PP[bottomPlacement][active]:not(:hover):not([hover]) image {
-		height: 22px;
 		margin-left: 5px;
 		-moz-transform: rotate(-60deg);
 		transform: rotate(-60deg); /* Firefox 16 */
 	}
 	#thePuzzlePiece-right-PP[bottomPlacement][active]:not(:hover):not([hover]) image {
-		height: 22px;
 		margin-right: 5px;
 		-moz-transform: rotate(60deg);
 		transform: rotate(60deg); /* Firefox 16 */

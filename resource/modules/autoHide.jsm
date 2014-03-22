@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.1.4';
+moduleAid.VERSION = '1.1.5';
 
 this.onMouseOver = function() {
 	setHover(true);
@@ -63,7 +63,6 @@ this.initHovers = function() {
 };
 
 this.moveAutoHide = function() {
-	var OSoffset = (Services.appinfo.OS != 'WINNT') ? 3 : 6;
 	var barOffset = addonBar.clientHeight +addonBar.clientTop -CLIPBAR;
 	var clipOffHeight = moveBarStyle.clientHeight +moveBarStyle.clientTop;
 	if(moveBarStyle.bottom > 1) { clipOffHeight += moveBarStyle.clientBottom; }
@@ -81,7 +80,6 @@ this.moveAutoHide = function() {
 	sscode += '	window['+objName+'_UUID="'+_UUID+'"] .addon-bar[placement="corner"][autohide]:hover {\n';
 	sscode += '		clip: rect(0px, '+4000+'px, '+clipOffHeight+'px, 0px);\n';
 	sscode += '	}\n';
-	sscode += '	window['+objName+'_UUID="'+_UUID+'"] #browser-bottombox .PuzzlePiece[autohide][active]:not(:hover):not([hover]) { bottom: '+(moveBarStyle.bottom -OSoffset -21)+'px; }\n';
 	sscode += '}';
 	
 	styleAid.load('autoHide_'+_UUID, sscode, true);

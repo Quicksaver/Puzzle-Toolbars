@@ -23,4 +23,8 @@
 		clip: rect(0px, 32px, 14px, 0px);
 	}
 	
+	.PuzzlePiece:not(#thePuzzlePiece-urlbar-PP)[bottomPlacement][active]:not(:hover):not([hover]) image {
+		height: 24px;
+	}
+	
 }

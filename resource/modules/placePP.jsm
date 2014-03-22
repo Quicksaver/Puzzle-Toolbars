@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.1.6';
+moduleAid.VERSION = '1.1.7';
 
 this.__defineGetter__('leftPP', function() { return $(objName+'-left-PP'); });
 this.__defineGetter__('rightPP', function() { return $(objName+'-right-PP'); });
@@ -14,7 +14,15 @@ this.commandPP = function(e) {
 this.movePPs = function() {
 	toggleAttribute(activePP, 'clipped', moveBarStyle.bottom == 1);
 	
-	var OSoffset = (Services.appinfo.OS != 'WINNT') ? 3 : 6;
+	var pieceOffset = (activePP) ? activePP.firstChild.clientHeight -activePP.clientHeight : 0; // I have no idea why it adds a space in the bottom
+	var OSoffset = (Services.appinfo.OS == 'WINNT') ? -2 : 0;
+	
+	// for when the add-on bar is opened on the bottom
+	var shrunkOffset = 0;
+	if(moveBarStyle.clientHeight > 0) {
+		var PPsize = (Services.appinfo.OS == 'WINNT') ? 22 : (Services.appinfo.OS == 'Darwin') ? 24 : 28; // when shrunk
+		shrunkOffset += Math.floor((PPsize -moveBarStyle.clientHeight) /2);
+	}
 	
 	styleAid.unload('positionPPs_'+_UUID);
 	
@@ -23,8 +31,23 @@ this.movePPs = function() {
 	sscode += '@-moz-document url("'+document.baseURI+'") {\n';
 	sscode += '	window['+objName+'_UUID="'+_UUID+'"] #'+objName+'-left-PP { left: '+(moveBarStyle.left -12)+'px; }\n';
 	sscode += '	window['+objName+'_UUID="'+_UUID+'"] #'+objName+'-right-PP { right: '+(moveBarStyle.right -12)+'px; }\n';
-	sscode += '	window['+objName+'_UUID="'+_UUID+'"] #browser-bottombox .PuzzlePiece { bottom: '+(moveBarStyle.bottom -OSoffset)+'px; }\n';
-	sscode += '	window['+objName+'_UUID="'+_UUID+'"] #browser-bottombox .PuzzlePiece:not([active]):not(:hover) { bottom: '+(moveBarStyle.bottom -OSoffset -21)+'px; }\n';
+	sscode += '	window['+objName+'_UUID="'+_UUID+'"] #browser-bottombox .PuzzlePiece {\n';
+	sscode += '		bottom: '+(moveBarStyle.bottom +pieceOffset +OSoffset)+'px;\n';
+	sscode += '	}\n';
+	sscode += '	window['+objName+'_UUID="'+_UUID+'"] #browser-bottombox .PuzzlePiece[bottomPlacement][active]:not(:hover):not([hover]) {\n';
+	sscode += '		bottom: '+(moveBarStyle.bottom +pieceOffset +OSoffset +shrunkOffset)+'px;\n';
+	sscode += '	}\n';
+	sscode += '	@media not all and (-moz-windows-classic) {\n';
+	sscode += '		@media (-moz-windows-default-theme) {\n';
+	sscode += '			window['+objName+'_UUID="'+_UUID+'"][sizemode="normal"] #browser-bottombox .PuzzlePiece[bottomPlacement][active]:not(:hover):not([hover]) {\n';
+	sscode += '				bottom: '+(moveBarStyle.bottom +pieceOffset +OSoffset +shrunkOffset +1)+'px;\n';
+	sscode += '			}\n';
+	sscode += '		}\n';
+	sscode += '	}\n';
+	sscode += '	window['+objName+'_UUID="'+_UUID+'"] #browser-bottombox .PuzzlePiece:not([active]):not(:hover):not([hover]),\n';
+	sscode += '	window['+objName+'_UUID="'+_UUID+'"] #browser-bottombox .PuzzlePiece[autohide][active]:not(:hover):not([hover]) {\n';
+	sscode += '		bottom: '+(moveBarStyle.bottom +pieceOffset +OSoffset -21)+'px;\n';
+	sscode += '	}\n';
 	sscode += '}';
 	
 	styleAid.load('positionPPs_'+_UUID, sscode, true);
