@@ -155,7 +155,8 @@
 		-moz-margin-end: 3px;
 	}
 	
-	window[customizing="true"] .PuzzlePiece {
+	window[customizing="true"] .PuzzlePiece,
+	.PuzzlePiece[hidePP="true"] {
 		display: none;
 	}
 	
@@ -187,16 +188,16 @@
 		width: 18px;
 	}
 	
-	window:not([customizing="true"]) .addon-bar:not([customizing="true"])[placement="bottom"]:not([movetoright]) {
+	window:not([customizing="true"]) .addon-bar:not([hidePP="true"]):not([customizing="true"])[placement="bottom"]:not([movetoright]) {
 		padding-left: 34px;
 	}
-	window:not([customizing="true"]) .addon-bar:not([customizing="true"])[placement="bottom"][movetoright] {
+	window:not([customizing="true"]) .addon-bar:not([hidePP="true"]):not([customizing="true"])[placement="bottom"][movetoright] {
 		padding-right: 34px;
 	}
-	.addon-bar[placement="corner"]:not([movetoright]) {
+	.addon-bar:not([hidePP="true"])[placement="corner"]:not([movetoright]) {
 		padding-left: 17px;
 	}
-	.addon-bar[placement="corner"][movetoright] {
+	.addon-bar:not([hidePP="true"])[placement="corner"][movetoright] {
 		padding-right: 17px;
 	}
 	

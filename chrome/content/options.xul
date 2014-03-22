@@ -12,6 +12,7 @@
 			<preference id="pref-autoHide" name="extensions.thepuzzlepiece.autoHide" type="bool" />
 			<preference id="pref-statusBar" name="extensions.thepuzzlepiece.statusBar" type="bool" />
 			<preference id="pref-placement" name="extensions.thepuzzlepiece.placement" type="string" />
+			<preference id="pref-showPPs" name="extensions.thepuzzlepiece.showPPs" type="bool" />
 			<preference id="pref-addonBarKeycode" name="extensions.thepuzzlepiece.addonBarKeycode" type="string"/>
 			<preference id="pref-addonBarAccel" name="extensions.thepuzzlepiece.addonBarAccel" type="bool"/>
 			<preference id="pref-addonBarShift" name="extensions.thepuzzlepiece.addonBarShift" type="bool"/>
@@ -27,7 +28,8 @@
 					<radio label="&OptPlacement.urlbarLabel;" value="urlbar"/>
 				</vbox>
 			</radiogroup>
-			<checkbox label="&OptmoveToRight.label;" dependson="!pref-placement:urlbar" preference="pref-movetoRight"/>	
+			<checkbox label="&OptshowPPs.label;" dependson="!pref-placement:urlbar" preference="pref-showPPs"/>
+			<checkbox label="&OptmoveToRight.label;" dependson="!pref-placement:urlbar" preference="pref-movetoRight"/>
 		</groupbox>
 		
 		<groupbox align="start">

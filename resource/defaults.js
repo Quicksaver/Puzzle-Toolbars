@@ -1,4 +1,4 @@
-var defaultsVersion = '1.2.3';
+var defaultsVersion = '1.2.4';
 var objName = 'thePuzzlePiece';
 var objPathString = 'thepuzzlepiece';
 var prefList = {
@@ -6,6 +6,7 @@ var prefList = {
 	autoHide: false,
 	placement: 'bottom',
 	statusBar: true,
+	showPPs: true,
 	
 	// hidden preference to not show the addon bar autohiding on startup
 	noInitialShow: false,

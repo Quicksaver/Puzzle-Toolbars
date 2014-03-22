@@ -11,6 +11,7 @@
 <!ENTITY OptPlacement.cornerLabel "Shrink into a corner at the bottom of the webpage">
 <!ENTITY OptPlacement.urlbarLabel "Move into the location bar">
 <!ENTITY OptmoveToRight.label "Place on the right of the browser window">
+<!ENTITY OptshowPPs.label "Show the Puzzle Piece toggle button in the add-on bar">
 <!ENTITY OptautoHide.label "Hide the add-on bar automatically">
 <!ENTITY OptstatusBar.label "Restore the status bar">
 

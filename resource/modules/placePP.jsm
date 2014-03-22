@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.1.5';
+moduleAid.VERSION = '1.1.6';
 
 this.__defineGetter__('leftPP', function() { return $(objName+'-left-PP'); });
 this.__defineGetter__('rightPP', function() { return $(objName+'-right-PP'); });
@@ -49,6 +49,12 @@ this.customizePP = function(e) {
 	toggleAttribute(activePP, 'customizing', (e.type == 'beforecustomization'));
 };
 
+this.showPPs = function() {
+	toggleAttribute(leftPP, 'hidePP', !prefAid.showPPs);
+	toggleAttribute(rightPP, 'hidePP', !prefAid.showPPs);
+	toggleAttribute(addonBar, 'hidePP', !prefAid.showPPs);
+};
+
 this.handleFullScreen = function() {
 	var inFullScreen = !!gBrowser.mCurrentBrowser.contentDocument.mozFullScreenElement;
 	
@@ -78,17 +84,21 @@ moduleAid.LOADMODULE = function() {
 	
 	prefAid.listen('movetoRight', choosePP);
 	prefAid.listen('placement', choosePP);
+	prefAid.listen('showPPs', showPPs);
 	
 	choosePP();
 	movePPs();
+	showPPs();
 	moveAddonBar(); // Prevents a bug where the add-on bar would be cropped on startup
 };
 
 moduleAid.UNLOADMODULE = function() {
 	prefAid.unlisten('movetoRight', choosePP);
 	prefAid.unlisten('placement', choosePP);
+	prefAid.unlisten('showPPs', showPPs);
 	
-	removeAttribute('movetoright');
+	removeAttribute(addonBar, 'movetoright');
+	removeAttribute(addonBar, 'hidePP');
 	if(leftPP) { leftPP.hidden = true; }
 	if(rightPP) { rightPP.hidden = true; }
 	
