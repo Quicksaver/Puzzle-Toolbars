@@ -1,4 +1,4 @@
-<!ENTITY Optwindow.style "width: 30em;">
+<!ENTITY Optwindow.style "width: 31em;">
 <!ENTITY Options.title "The Puzzle Piece">
 <!ENTITY Optgeneral.label "Barre des modules">
 <!ENTITY Optabout.label "À propos">
@@ -8,6 +8,7 @@
 <!ENTITY OptPlacement.cornerLabel "Réduire dans un coin inférieur de la page Web">
 <!ENTITY OptPlacement.urlbarLabel "Déplacer vers la barre d'adresses">
 <!ENTITY OptmoveToRight.label "Placer à droite de la fenêtre du navigateur">
+<!ENTITY OptshowPPs.label "Afficher le bouton d'activation/désactivation Puzzle Piece dans la barre des modules">
 <!ENTITY OptautoHide.label "Masquer automatiquement la barre des modules">
 <!ENTITY OptstatusBar.label "Rétablir la barre d'état">
 <!ENTITY OptKeyboardShortcut.caption "Raccourci clavier">

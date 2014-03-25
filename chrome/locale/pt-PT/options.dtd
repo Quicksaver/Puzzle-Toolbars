@@ -8,6 +8,7 @@
 <!ENTITY OptPlacement.cornerLabel "Encolher num canto ao fundo da página">
 <!ENTITY OptPlacement.urlbarLabel "Mover para a barra de endereço">
 <!ENTITY OptmoveToRight.label "Colocar à direita da janela do navegador">
+<!ENTITY OptshowPPs.label "Mostrar o botão da Peça do Puzzle na barra de extras">
 <!ENTITY OptautoHide.label "Esconder a barra de extras automaticamente">
 <!ENTITY OptstatusBar.label "Restaurar a barra de estado">
 <!ENTITY OptKeyboardShortcut.caption "Atalho de Teclado">

@@ -8,6 +8,7 @@
 <!ENTITY OptPlacement.cornerLabel "Komprimera till ett hörn, nederst på webbläsarsidan">
 <!ENTITY OptPlacement.urlbarLabel "Placera inuti adressfältet">
 <!ENTITY OptmoveToRight.label "Placera till höger om webbläsarfönstret">
+<!ENTITY OptshowPPs.label "Visa växlingsknappen för Puzzle Piece i tilläggsfältet">
 <!ENTITY OptautoHide.label "Dölj tilläggsfältet automatiskt">
 <!ENTITY OptstatusBar.label "Återställ statusfältet">
 <!ENTITY OptKeyboardShortcut.caption "Kortkommando">

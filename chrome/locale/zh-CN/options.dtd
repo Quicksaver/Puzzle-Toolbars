@@ -1,4 +1,4 @@
-<!ENTITY Optwindow.style "width: 26em;">
+<!ENTITY Optwindow.style "width: 27em;">
 <!ENTITY Options.title "The Puzzle Piece">
 <!ENTITY Optgeneral.label "附加组件栏">
 <!ENTITY Optabout.label "关于">
@@ -8,6 +8,7 @@
 <!ENTITY OptPlacement.cornerLabel "缩小到网页底部的角落">
 <!ENTITY OptPlacement.urlbarLabel "移动到地址栏">
 <!ENTITY OptmoveToRight.label "放置在浏览器窗口右端">
+<!ENTITY OptshowPPs.label "在附加组件栏中显示 The Puzzle Piece 切换按钮">
 <!ENTITY OptautoHide.label "自动隐藏附加组件栏">
 <!ENTITY OptstatusBar.label "恢复状态栏">
 <!ENTITY OptKeyboardShortcut.caption "键盘快捷键">
