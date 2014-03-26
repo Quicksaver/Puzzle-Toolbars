@@ -76,6 +76,11 @@
 		margin-top: 6px;
 	}
 	
+	toolbarpaletteitem[place="panel"][id^="wrapper-customizableui-special-"] {
+		width: auto;
+		height: auto;
+	}
+	
 	/* status-bar */
 	
 	#status-bar {
