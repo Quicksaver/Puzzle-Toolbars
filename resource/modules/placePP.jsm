@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.1.7';
+moduleAid.VERSION = '1.1.8';
 
 this.__defineGetter__('leftPP', function() { return $(objName+'-left-PP'); });
 this.__defineGetter__('rightPP', function() { return $(objName+'-right-PP'); });
@@ -11,10 +11,13 @@ this.commandPP = function(e) {
 	dispatch(activePP, { type: 'toggledAddonBarThroughButton', cancelable: false });
 };
 
+this._activePPoffset = 0;
 this.movePPs = function() {
 	toggleAttribute(activePP, 'clipped', moveBarStyle.bottom == 1);
 	
-	var pieceOffset = (activePP) ? activePP.firstChild.clientHeight -activePP.clientHeight : 0; // I have no idea why it adds a space in the bottom
+	if(activePP && activePP.clientHeight) {
+		_activePPoffset = activePP.firstChild.clientHeight -activePP.clientHeight;
+	}
 	var OSoffset = (Services.appinfo.OS == 'WINNT') ? -2 : 0;
 	
 	// for when the add-on bar is opened on the bottom
@@ -32,21 +35,21 @@ this.movePPs = function() {
 	sscode += '	window['+objName+'_UUID="'+_UUID+'"] #'+objName+'-left-PP { left: '+(moveBarStyle.left -12)+'px; }\n';
 	sscode += '	window['+objName+'_UUID="'+_UUID+'"] #'+objName+'-right-PP { right: '+(moveBarStyle.right -12)+'px; }\n';
 	sscode += '	window['+objName+'_UUID="'+_UUID+'"] #browser-bottombox .PuzzlePiece {\n';
-	sscode += '		bottom: '+(moveBarStyle.bottom +pieceOffset +OSoffset)+'px;\n';
+	sscode += '		bottom: '+(moveBarStyle.bottom +_activePPoffset +OSoffset)+'px;\n';
 	sscode += '	}\n';
 	sscode += '	window['+objName+'_UUID="'+_UUID+'"] #browser-bottombox .PuzzlePiece[bottomPlacement][active]:not(:hover):not([hover]) {\n';
-	sscode += '		bottom: '+(moveBarStyle.bottom +pieceOffset +OSoffset +shrunkOffset)+'px;\n';
+	sscode += '		bottom: '+(moveBarStyle.bottom +_activePPoffset +OSoffset +shrunkOffset)+'px;\n';
 	sscode += '	}\n';
 	sscode += '	@media not all and (-moz-windows-classic) {\n';
 	sscode += '		@media (-moz-windows-default-theme) {\n';
 	sscode += '			window['+objName+'_UUID="'+_UUID+'"][sizemode="normal"] #browser-bottombox .PuzzlePiece[bottomPlacement][active]:not(:hover):not([hover]) {\n';
-	sscode += '				bottom: '+(moveBarStyle.bottom +pieceOffset +OSoffset +shrunkOffset +1)+'px;\n';
+	sscode += '				bottom: '+(moveBarStyle.bottom +_activePPoffset +OSoffset +shrunkOffset +1)+'px;\n';
 	sscode += '			}\n';
 	sscode += '		}\n';
 	sscode += '	}\n';
 	sscode += '	window['+objName+'_UUID="'+_UUID+'"] #browser-bottombox .PuzzlePiece:not([active]):not(:hover):not([hover]),\n';
 	sscode += '	window['+objName+'_UUID="'+_UUID+'"] #browser-bottombox .PuzzlePiece[autohide][active]:not(:hover):not([hover]) {\n';
-	sscode += '		bottom: '+(moveBarStyle.bottom +pieceOffset +OSoffset -21)+'px;\n';
+	sscode += '		bottom: '+(moveBarStyle.bottom +_activePPoffset +OSoffset -21)+'px;\n';
 	sscode += '	}\n';
 	sscode += '}';
 	
@@ -76,6 +79,8 @@ this.showPPs = function() {
 	toggleAttribute(leftPP, 'hidePP', !prefAid.showPPs);
 	toggleAttribute(rightPP, 'hidePP', !prefAid.showPPs);
 	toggleAttribute(addonBar, 'hidePP', !prefAid.showPPs);
+	
+	movePPs(); // this is done here because if the PP is hidden, its clientHeight is 0, so it needs to update its position when it's shown
 };
 
 this.handleFullScreen = function() {
@@ -103,6 +108,7 @@ moduleAid.LOADMODULE = function() {
 	listenerAid.add(window, 'beforecustomization', customizePP, false);
 	listenerAid.add(window, 'aftercustomization', customizePP, false);
 	listenerAid.add(window, 'loadedAddonBarOverlay', choosePP);
+	listenerAid.add(window, 'loadedAddonBarOverlay', showPPs);
 	listenerAid.add(window, 'mozfullscreenchange', handleFullScreen);
 	
 	prefAid.listen('movetoRight', choosePP);
@@ -110,8 +116,7 @@ moduleAid.LOADMODULE = function() {
 	prefAid.listen('showPPs', showPPs);
 	
 	choosePP();
-	movePPs();
-	showPPs();
+	showPPs(); // implies movePPs()
 	moveAddonBar(); // Prevents a bug where the add-on bar would be cropped on startup
 };
 
@@ -130,6 +135,7 @@ moduleAid.UNLOADMODULE = function() {
 	listenerAid.remove(window, 'beforecustomization', customizePP, false);
 	listenerAid.remove(window, 'aftercustomization', customizePP, false);
 	listenerAid.remove(window, 'loadedAddonBarOverlay', choosePP);
+	listenerAid.remove(window, 'loadedAddonBarOverlay', showPPs);
 	listenerAid.remove(window, 'mozfullscreenchange', handleFullScreen);
 	
 	delete addonBarContextNodes.activePP;
