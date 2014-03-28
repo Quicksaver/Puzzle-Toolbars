@@ -7,7 +7,7 @@
 	
 	.addon-bar[placement="corner"] {
 		-moz-appearance: none !important;
-		background-color: #E8E8E8 !important;
+		background-color: #E8E8E8;
 		border-radius: 8px 8px 0 0;
 		border-top: 1px solid #888 !important;
 		border-right: 1px solid #888;

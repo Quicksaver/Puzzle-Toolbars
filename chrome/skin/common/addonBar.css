@@ -20,6 +20,7 @@
 		position: fixed;
 		padding: 0px 5px;
 		border-bottom: none;
+		background-color: inherit;
 	}
 	
 	.addon-bar[placement="urlbar"] {

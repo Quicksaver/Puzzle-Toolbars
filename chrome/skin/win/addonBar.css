@@ -9,15 +9,10 @@
 		-moz-border-top-colors: rgba(0,0,0,0.15) rgba(255,255,255,0.15);
 		-moz-border-right-colors: rgba(0,0,0,0.15) rgba(255,255,255,0.15);
 		-moz-border-left-colors: rgba(0,0,0,0.15) rgba(255,255,255,0.15);
-		background-color: -moz-dialog;
 	}
 	
 	@media not all and (-moz-windows-classic) {
 		@media (-moz-windows-default-theme) {
-			.addon-bar[placement="corner"] {
-				background-color: rgb(219,234,249);
-			}
-			
 			.addon-bar dropmarker {
 				-moz-appearance: menulist-button;
 			}
