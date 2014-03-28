@@ -1,4 +1,4 @@
-var defaultsVersion = '1.2.4';
+var defaultsVersion = '1.2.5';
 var objName = 'thePuzzlePiece';
 var objPathString = 'thepuzzlepiece';
 var prefList = {
@@ -31,8 +31,6 @@ function startAddon(window) {
 		window.document.getElementById('addon-bar').hidden = true;
 		
 		window[objName].moduleAid.load(objName, true);
-	} else {
-		window[objName].moduleAid.load('australis', true);
 	}
 }
 
