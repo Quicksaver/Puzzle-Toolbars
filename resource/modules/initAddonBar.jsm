@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.2.7';
+moduleAid.VERSION = '1.2.8';
 
 this.__defineGetter__('browserPanel', function() { return $('browser-panel'); });
 this.__defineGetter__('gFindBar', function() { return window.gFindBar; });
@@ -92,6 +92,9 @@ this.moveWhenStatusBarChanged = function() {
 };
 
 this.moveAddonBar = function() {
+	// there's no point in doing all this in customize mode
+	if(Australis && trueAttribute(addonBar, 'customizing')) { return; }
+	
 	// We should do all these calculations to also position the puzzle pieces, even if the add-on bar is closed
 	moveBarStyle = {
 		maxWidth: -(scrollBarWidth *2),
@@ -318,6 +321,7 @@ moduleAid.LOADMODULE = function() {
 	listenerAid.add(addonBar, 'resize', delayMoveAddonBar);
 	listenerAid.add(addonBar, 'drop', delayMoveAddonBar);
 	listenerAid.add(addonBar, 'load', delayMoveAddonBar);
+	listenerAid.add(window, 'aftercustomization', delayMoveAddonBar);
 	listenerAid.add(addonBar, 'ToggledAddonBar', moveAddonBar);
 	observerAid.add(findPersonaPosition, "lightweight-theme-changed");
 	
@@ -351,6 +355,7 @@ moduleAid.UNLOADMODULE = function() {
 	listenerAid.remove(addonBar, 'resize', delayMoveAddonBar);
 	listenerAid.remove(addonBar, 'drop', delayMoveAddonBar);
 	listenerAid.remove(addonBar, 'load', delayMoveAddonBar);
+	listenerAid.remove(window, 'aftercustomization', delayMoveAddonBar);
 	listenerAid.remove(addonBar, 'ToggledAddonBar', moveAddonBar);
 	listenerAid.remove($('status-bar'), 'load', delayMoveAddonBar, true);
 	
