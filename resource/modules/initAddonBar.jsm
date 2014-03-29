@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.2.8';
+moduleAid.VERSION = '1.2.9';
 
 this.__defineGetter__('browserPanel', function() { return $('browser-panel'); });
 this.__defineGetter__('gFindBar', function() { return window.gFindBar; });
@@ -192,8 +192,8 @@ this.reMoveBar = function() {
 };
 
 this.findPersonaPosition = function() {
-	// Australis isn't really built for the lw-theme footer, plus it might go away someday
-	if(Australis) { return; }
+	// Australis isn't really built for the lw-theme footer, plus it might go away someday.
+	// despite this, I'm keeping it for now, no harm in it after all, and looks nice for personas that still use the footer image.
 	
 	if(!trueAttribute(bottomBox, 'lwthemefooter')) {
 		prefAid.lwthemebgImage = '';
