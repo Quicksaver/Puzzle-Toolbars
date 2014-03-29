@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.1.2';
+moduleAid.VERSION = '1.1.3';
 
 this.__defineGetter__('urlbarContainer', function() { return $('urlbar-container'); });
 this.__defineGetter__('searchContainer', function() { return $('search-container'); });
@@ -25,6 +25,7 @@ this.unloadInURLBar = function() {
 
 this.openURLBarContainer = function() {
 	toggleAttribute(URLBarContainer, 'active', !addonBar.collapsed);
+	toggleAttribute(URLBarContainer, 'hover', trueAttribute(addonBar, 'hover'));
 };
 
 this.lastWidth = 0;

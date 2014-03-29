@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.1.5';
+moduleAid.VERSION = '1.1.6';
 
 this.onMouseOver = function() {
 	setHover(true);
@@ -85,6 +85,13 @@ this.moveAutoHide = function() {
 	styleAid.load('autoHide_'+_UUID, sscode, true);
 };
 
+this.delayInitialShowBar = function() {
+	timerAid.init('delayInitialShowBar', function() {
+		if(typeof(initialShowBar) == 'undefined') { return; }
+		initialShowBar();
+	}, 50);
+};
+
 this.initialShowBar = function() {
 	if(addonBar.collapsed) {
 		setHover(false, 0);
@@ -124,6 +131,7 @@ moduleAid.LOADMODULE = function() {
 	listenerAid.add(addonBar, 'mouseout', onMouseOut);
 	listenerAid.add(addonBar, 'WillMoveAddonBar', moveAutoHide);
 	listenerAid.add(addonBar, 'ToggledAddonBar', initialShowBar);
+	listenerAid.add(addonBar, 'ChangedAddonBarPlacement', delayInitialShowBar);
 	listenerAid.add(window, 'loadedAddonBarOverlay', initHovers);
 	listenerAid.add(window, 'popupshown', holdPopupMenu, false);
 	
@@ -155,6 +163,7 @@ moduleAid.UNLOADMODULE = function() {
 	listenerAid.remove(addonBar, 'mouseout', onMouseOut);
 	listenerAid.remove(addonBar, 'WillMoveAddonBar', moveAutoHide);
 	listenerAid.remove(addonBar, 'ToggledAddonBar', initialShowBar);
+	listenerAid.remove(addonBar, 'ChangedAddonBarPlacement', delayInitialShowBar);
 	listenerAid.remove(window, 'loadedAddonBarOverlay', initHovers);
 	listenerAid.remove(window, 'popupshown', holdPopupMenu, false);
 	

@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.1.6';
+moduleAid.VERSION = '1.1.7';
 
 this.__defineGetter__('gBrowser', function() { return window.gBrowser; });
 this.__defineGetter__('bottomBox', function() { return $('browser-bottombox'); });
@@ -34,6 +34,9 @@ this.togglePlacement = function(e) {
 	if(customizing && addonBar.parentNode.id != 'customization-palette-container') {
 		$('customization-palette-container').appendChild(addonBar);
 	}
+	
+	// it would imediatelly hide the addonBar when toggling placement with autoHide already loaded
+	dispatch(addonBar, { type: 'ChangedAddonBarPlacement', cancelable: false });
 };
 
 moduleAid.LOADMODULE = function() {
