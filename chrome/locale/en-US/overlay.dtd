@@ -2,6 +2,11 @@
 
 <!ENTITY addonBar.name "Add-on Bar">
 <!ENTITY addonBar.accesskey "A">
+<!ENTITY addonBar.menuAdd "Add to Add-on Bar">
+<!ENTITY addonBar.menuMove "Move to Add-on Bar">
+<!ENTITY addonBar.menuRemove "Remove from Add-on Bar">
+<!ENTITY addonBar.menuMain "Move to Toolbar">
+
 <!ENTITY statusBar.label "Status Bar">
 
 <!ENTITY specialWidget.separator "Separator">

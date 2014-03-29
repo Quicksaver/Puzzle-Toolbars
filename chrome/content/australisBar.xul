@@ -22,7 +22,11 @@
 			context="toolbar-context-menu"
 			toolboxid="navigator-toolbox"
 			insertafter="developer-toolbar"
-			key="objName-key">
+			key="objName-key"
+			menuAdd="&addonBar.menuAdd;"
+			menuMove="&addonBar.menuMove;"
+			menuRemove="&addonBar.menuRemove;"
+			menuMain="&addonBar.menuMain;">
 		</toolbar>
 	</vbox>
 	
