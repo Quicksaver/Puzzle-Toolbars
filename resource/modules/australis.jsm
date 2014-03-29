@@ -1,7 +1,6 @@
-moduleAid.VERSION = '1.2.3';
+moduleAid.VERSION = '1.2.4';
 
 this.__defineGetter__('oldBar', function() { return $('addon-bar'); });
-this.__defineGetter__('statusBar', function() { return $('status-bar'); });
 this.__defineGetter__('PrintPreviewListener', function() { return window.PrintPreviewListener; });
 
 this.barBackups = {};
