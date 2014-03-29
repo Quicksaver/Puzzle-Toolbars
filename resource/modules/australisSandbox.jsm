@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.1.4';
+moduleAid.VERSION = '1.1.5';
 
 this.CustomizableUI = null;
 
@@ -19,10 +19,6 @@ this.trackSpecialWidgets = {
 		}
 	}
 };
-
-this.trackStatusBar = function() {
-	windowMediator.callOnAll(moveStatusBar, 'navigator:browser');
-};
 	
 // move the status bar onto our container
 this.moveStatusBar = function(aWindow) {
@@ -40,8 +36,25 @@ this.moveStatusBar = function(aWindow) {
 	}
 	
 	setAttribute(sBar, 'removable', 'true');
-	CustomizableUI.removeWidgetFromArea('status-bar');
-	sStack.insertBefore(sBar, sStack.firstChild);
+	if(CustomizableUI.getWidget('status-bar').areaType) {
+		CustomizableUI.removeWidgetFromArea('status-bar');
+		
+		// because when we do the above command, the node is physically removed from all windows, we have to put it back
+		windowMediator.callOnAll(function(aWindow) {
+			if(!aWindow[objName]) { return; }
+			moveStatusBarNode(aWindow);
+		}, 'navigator:browser');
+	} else {
+		// this should never be triggered, but...
+		moveStatusBarNode(aWindow);
+	}
+};
+
+this.moveStatusBarNode = function(aWindow) {
+	var sStack = aWindow.document.getElementById(objName+'-status-bar-stack');
+	if(!aWindow[objName]._statusBar || aWindow[objName]._statusBar.node.parentNode == sStack) { return; }
+	
+	sStack.insertBefore(aWindow[objName]._statusBar.node, sStack.firstChild);
 };
 
 this.moveStatusBarBack = function(aWindow) {
@@ -81,12 +94,9 @@ moduleAid.LOADMODULE = function() {
 	overlayAid.overlayURI('chrome://browser/content/browser.xul', 'australisBar', null,
 		function(aWindow) {
 			moduleAid.load('compatibilityFix/sandboxFixes'); // We need our add-on bar registered for this
-			
-			prepareObject(window);
+			prepareObject(aWindow);
 			
 			moveStatusBar(aWindow);
-			listenOnce(aWindow, 'unload', trackStatusBar);
-			
 			window[objName].moduleAid.load('australis', true);
 		},
 		function(aWindow) {
