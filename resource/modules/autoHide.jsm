@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.1.6';
+moduleAid.VERSION = '1.1.7';
 
 this.onMouseOver = function() {
 	setHover(true);
@@ -97,7 +97,7 @@ this.initialShowBar = function() {
 		setHover(false, 0);
 	} else {
 		setHover(true);
-		timerAid.init('initialShowBar', function() { if(typeof(setHover) != 'undefined') { setHover(false); } }, 1000);
+		timerAid.init('initialShowBar', function() { if(typeof(setHover) != 'undefined') { setHover(false); } }, 1500);
 	}
 };
 
