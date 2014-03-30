@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.1.3';
+moduleAid.VERSION = '1.1.4';
 
 this.__defineGetter__('urlbarContainer', function() { return $('urlbar-container'); });
 this.__defineGetter__('searchContainer', function() { return $('search-container'); });
@@ -73,16 +73,6 @@ this.autoHideContainer = function() {
 	toggleAttribute(URLBarContainer, 'autohide', prefAid.autoHide);
 };
 
-this.listenForCUIinURLBar = {
-	onWidgetAdded: function(aWidget, aArea) { this.listener(aWidget, aArea); },
-	onWidgetRemoved: function(aWidget, aArea) { this.listener(aWidget, aArea); },
-	listener: function(aWidget, aArea) {
-		if(aArea == addonBar.id) {
-			moveContainer();
-		}
-	}
-};
-
 moduleAid.LOADMODULE = function() {
 	prefAid.listen('autoHide', autoHideContainer);
 	
@@ -102,10 +92,6 @@ moduleAid.LOADMODULE = function() {
 	
 	listenerAid.add(addonBar, 'AddonBarMoved', moveContainer);
 	
-	if(Australis) {
-		CustomizableUI.addListener(listenForCUIinURLBar);
-	}
-	
 	overlayAid.overlayWindow(window, 'inURLBar', null, loadInURLBar, unloadInURLBar);
 };
 
@@ -116,10 +102,6 @@ moduleAid.UNLOADMODULE = function() {
 	prefAid.unlisten('autoHide', autoHideContainer);
 	
 	overlayAid.removeOverlayWindow(window, 'inURLBar');
-	
-	if(Australis) {
-		CustomizableUI.removeListener(listenForCUIinURLBar);
-	}
 	
 	if(flexContainers) {
 		removeAttribute(urlbarContainer, 'width');

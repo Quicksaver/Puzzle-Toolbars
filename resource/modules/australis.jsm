@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.2.4';
+moduleAid.VERSION = '1.2.5';
 
 this.__defineGetter__('oldBar', function() { return $('addon-bar'); });
 this.__defineGetter__('PrintPreviewListener', function() { return window.PrintPreviewListener; });
@@ -29,6 +29,16 @@ this.migrateBackWidgets = function() {
 
 this.toggleStatusBar = function() {
 	$(objName+'-status-bar-container').hidden = !prefAid.statusBar;
+};
+
+this.addonBarCustomized = {
+	onWidgetAdded: function(aWidget, aArea) { this.listener(aWidget, aArea); },
+	onWidgetRemoved: function(aWidget, aArea) { this.listener(aWidget, aArea); },
+	listener: function(aWidget, aArea) {
+		if(aArea == addonBar.id && !trueAttribute(addonBar, 'customizing')) {
+			dispatch(addonBar, { type: 'AddonBarCustomized', cancelable: false });
+		}
+	}
 };
 
 moduleAid.LOADMODULE = function() {
@@ -70,12 +80,16 @@ moduleAid.LOADMODULE = function() {
 	prefAid.listen('statusBar', toggleStatusBar);
 	toggleStatusBar();
 	
+	CustomizableUI.addListener(addonBarCustomized);
+	
 	// since we're starting with this australis-specific module, we Load the rest of the add-on here after everything
 	moduleAid.load(objName);
 };
 
 moduleAid.UNLOADMODULE = function() {
 	moduleAid.unload(objName);
+	
+	CustomizableUI.removeListener(addonBarCustomized);
 	
 	prefAid.unlisten('statusBar', toggleStatusBar);
 	

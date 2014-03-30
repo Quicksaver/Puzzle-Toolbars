@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.2.10';
+moduleAid.VERSION = '1.2.11';
 
 this.__defineGetter__('browserPanel', function() { return $('browser-panel'); });
 this.__defineGetter__('gFindBar', function() { return window.gFindBar; });
@@ -324,6 +324,7 @@ moduleAid.LOADMODULE = function() {
 	listenerAid.add(window, 'aftercustomization', delayMoveAddonBar);
 	listenerAid.add(addonBar, 'ToggledAddonBar', moveAddonBar);
 	observerAid.add(findPersonaPosition, "lightweight-theme-changed");
+	listenerAid.add(addonBar, 'AddonBarCustomized', moveAddonBar);
 	
 	for(var i=0; i<$('status-bar').childNodes.length; i++) {
 		if($('status-bar').childNodes[i].nodeName != 'statusbarpanel' || !$('status-bar').childNodes[i].id) { continue; }
@@ -346,6 +347,7 @@ moduleAid.UNLOADMODULE = function() {
 		objectWatcher.removeAttributeWatcher($('status-bar').childNodes[i], 'hidden', moveWhenStatusBarChanged);
 	}
 	
+	listenerAid.remove(addonBar, 'AddonBarCustomized', moveAddonBar);
 	observerAid.remove(findPersonaPosition, "lightweight-theme-changed");
 	listenerAid.remove(contextMenu, 'popupshowing', setContextMenu);
 	listenerAid.remove(viewMenu, 'popupshown', setViewMenu);

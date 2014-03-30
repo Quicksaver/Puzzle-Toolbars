@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.1.7';
+moduleAid.VERSION = '1.1.8';
 
 this.onMouseOver = function() {
 	setHover(true);
@@ -97,7 +97,8 @@ this.initialShowBar = function() {
 		setHover(false, 0);
 	} else {
 		setHover(true);
-		timerAid.init('initialShowBar', function() { if(typeof(setHover) != 'undefined') { setHover(false); } }, 1500);
+		// don't use timerAid, because if we use multiple initialShowBar()'s it would get stuck open
+		aSync(function() { if(typeof(setHover) != 'undefined') { setHover(false); } }, 1500);
 	}
 };
 
@@ -132,6 +133,7 @@ moduleAid.LOADMODULE = function() {
 	listenerAid.add(addonBar, 'WillMoveAddonBar', moveAutoHide);
 	listenerAid.add(addonBar, 'ToggledAddonBar', initialShowBar);
 	listenerAid.add(addonBar, 'ChangedAddonBarPlacement', delayInitialShowBar);
+	listenerAid.add(addonBar, 'AddonBarCustomized', initialShowBar);
 	listenerAid.add(window, 'loadedAddonBarOverlay', initHovers);
 	listenerAid.add(window, 'popupshown', holdPopupMenu, false);
 	
@@ -164,6 +166,7 @@ moduleAid.UNLOADMODULE = function() {
 	listenerAid.remove(addonBar, 'WillMoveAddonBar', moveAutoHide);
 	listenerAid.remove(addonBar, 'ToggledAddonBar', initialShowBar);
 	listenerAid.remove(addonBar, 'ChangedAddonBarPlacement', delayInitialShowBar);
+	listenerAid.remove(addonBar, 'AddonBarCustomized', initialShowBar);
 	listenerAid.remove(window, 'loadedAddonBarOverlay', initHovers);
 	listenerAid.remove(window, 'popupshown', holdPopupMenu, false);
 	
