@@ -1,6 +1,10 @@
 <!ENTITY OptionsMenu.label "Opções da Peça do Puzzle">
 <!ENTITY addonBar.name "Barra de Extras">
 <!ENTITY addonBar.accesskey "E">
+<!ENTITY addonBar.menuAdd "Adicionar à Barra de Extras">
+<!ENTITY addonBar.menuMove "Mover para a Barra de Extras">
+<!ENTITY addonBar.menuRemove "Remover da Barra de Extras">
+<!ENTITY addonBar.menuMain "Mover para a Barra de Ferramentas">
 <!ENTITY statusBar.label "Barra de Estado">
 <!ENTITY specialWidget.separator "Separador">
 <!ENTITY specialWidget.spring "Espaço Flexível">
