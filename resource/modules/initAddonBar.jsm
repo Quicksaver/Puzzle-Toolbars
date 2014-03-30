@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.2.9';
+moduleAid.VERSION = '1.2.10';
 
 this.__defineGetter__('browserPanel', function() { return $('browser-panel'); });
 this.__defineGetter__('gFindBar', function() { return window.gFindBar; });
@@ -313,10 +313,10 @@ moduleAid.LOADMODULE = function() {
 	prefAid.listen('movetoRight', moveAddonBar);
 	prefAid.listen('placement', moveAddonBar);
 	
-	listenerAid.add(contextMenu, 'popupshown', setContextMenu, false);
-	listenerAid.add(viewMenu, 'popupshown', setViewMenu, false);
-	listenerAid.add(appMenu, 'popupshown', setAppMenu, false);
-	listenerAid.add(customizeMenu, 'popupshown', setCustomizeMenu, false);
+	listenerAid.add(contextMenu, 'popupshowing', setContextMenu);
+	listenerAid.add(viewMenu, 'popupshown', setViewMenu);
+	listenerAid.add(appMenu, 'popupshown', setAppMenu);
+	listenerAid.add(customizeMenu, 'popupshown', setCustomizeMenu);
 	listenerAid.add(browserPanel, 'resize', delayMoveAddonBar);
 	listenerAid.add(addonBar, 'resize', delayMoveAddonBar);
 	listenerAid.add(addonBar, 'drop', delayMoveAddonBar);
@@ -347,10 +347,10 @@ moduleAid.UNLOADMODULE = function() {
 	}
 	
 	observerAid.remove(findPersonaPosition, "lightweight-theme-changed");
-	listenerAid.remove(contextMenu, 'popupshown', setContextMenu, false);
-	listenerAid.remove(viewMenu, 'popupshown', setViewMenu, false);
-	listenerAid.remove(appMenu, 'popupshown', setAppMenu, false);
-	listenerAid.remove(customizeMenu, 'popupshown', setCustomizeMenu, false);
+	listenerAid.remove(contextMenu, 'popupshowing', setContextMenu);
+	listenerAid.remove(viewMenu, 'popupshown', setViewMenu);
+	listenerAid.remove(appMenu, 'popupshown', setAppMenu);
+	listenerAid.remove(customizeMenu, 'popupshown', setCustomizeMenu);
 	listenerAid.remove(browserPanel, 'resize', delayMoveAddonBar);
 	listenerAid.remove(addonBar, 'resize', delayMoveAddonBar);
 	listenerAid.remove(addonBar, 'drop', delayMoveAddonBar);
