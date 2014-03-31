@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.1.8';
+moduleAid.VERSION = '1.1.9';
 
 this.__defineGetter__('leftPP', function() { return $(objName+'-left-PP'); });
 this.__defineGetter__('rightPP', function() { return $(objName+'-right-PP'); });
@@ -76,9 +76,7 @@ this.customizePP = function(e) {
 };
 
 this.showPPs = function() {
-	toggleAttribute(leftPP, 'hidePP', !prefAid.showPPs);
-	toggleAttribute(rightPP, 'hidePP', !prefAid.showPPs);
-	toggleAttribute(addonBar, 'hidePP', !prefAid.showPPs);
+	toggleAttribute(document.documentElement, objName+'-hidePPs', !prefAid.showPPs);
 	
 	movePPs(); // this is done here because if the PP is hidden, its clientHeight is 0, so it needs to update its position when it's shown
 };
@@ -126,7 +124,7 @@ moduleAid.UNLOADMODULE = function() {
 	prefAid.unlisten('showPPs', showPPs);
 	
 	removeAttribute(addonBar, 'movetoright');
-	removeAttribute(addonBar, 'hidePP');
+	removeAttribute(document.documentElement, objName+'-hidePPs');
 	if(leftPP) { leftPP.hidden = true; }
 	if(rightPP) { rightPP.hidden = true; }
 	

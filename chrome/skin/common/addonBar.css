@@ -157,7 +157,7 @@
 	}
 	
 	window[customizing="true"] .PuzzlePiece,
-	.PuzzlePiece[hidePP="true"] {
+	window[thePuzzlePiece-hidePPs] .PuzzlePiece {
 		display: none;
 	}
 	
@@ -189,16 +189,16 @@
 		width: 18px;
 	}
 	
-	window:not([customizing="true"]) .addon-bar:not([hidePP="true"]):not([customizing="true"])[placement="bottom"]:not([movetoright]) {
+	window:not([customizing="true"]):not([thePuzzlePiece-hidePPs]) .addon-bar:not([customizing="true"])[placement="bottom"]:not([movetoright]) {
 		padding-left: 34px;
 	}
-	window:not([customizing="true"]) .addon-bar:not([hidePP="true"]):not([customizing="true"])[placement="bottom"][movetoright] {
+	window:not([customizing="true"]):not([thePuzzlePiece-hidePPs]) .addon-bar:not([customizing="true"])[placement="bottom"][movetoright] {
 		padding-right: 34px;
 	}
-	.addon-bar:not([hidePP="true"])[placement="corner"]:not([movetoright]) {
+	window:not([thePuzzlePiece-hidePPs]) .addon-bar[placement="corner"]:not([movetoright]) {
 		padding-left: 17px;
 	}
-	.addon-bar:not([hidePP="true"])[placement="corner"][movetoright] {
+	window:not([thePuzzlePiece-hidePPs]) .addon-bar[placement="corner"][movetoright] {
 		padding-right: 17px;
 	}
 	

@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.1.4';
+moduleAid.VERSION = '1.1.5';
 
 this.__defineGetter__('urlbarContainer', function() { return $('urlbar-container'); });
 this.__defineGetter__('searchContainer', function() { return $('search-container'); });
@@ -14,7 +14,7 @@ this.loadInURLBar = function() {
 	moveContainer();
 	autoHideContainer();
 	
-	if(prefAid.autoHide) {
+	if(prefAid.autoHide && prefAid.showPPs) {
 		initHovers(); // the button would only be added after this had been called, mousing over it wouldn't work
 	}
 };
@@ -70,11 +70,12 @@ this.moveContainer = function() {
 };
 
 this.autoHideContainer = function() {
-	toggleAttribute(URLBarContainer, 'autohide', prefAid.autoHide);
+	toggleAttribute(URLBarContainer, 'autohide', prefAid.autoHide && prefAid.showPPs);
 };
 
 moduleAid.LOADMODULE = function() {
 	prefAid.listen('autoHide', autoHideContainer);
+	prefAid.listen('showPPs', autoHideContainer);
 	
 	// Prevent the location bar's flex attribute from taking over and moving stuff when we hover/open the add-on bar in it
 	if(Australis
@@ -100,6 +101,7 @@ moduleAid.UNLOADMODULE = function() {
 	listenerAid.remove(addonBar, 'AddonBarMoved', moveContainer);
 	
 	prefAid.unlisten('autoHide', autoHideContainer);
+	prefAid.unlisten('showPPs', autoHideContainer);
 	
 	overlayAid.removeOverlayWindow(window, 'inURLBar');
 	

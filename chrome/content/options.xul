@@ -28,13 +28,13 @@
 					<radio label="&OptPlacement.urlbarLabel;" value="urlbar"/>
 				</vbox>
 			</radiogroup>
-			<checkbox label="&OptshowPPs.label;" dependson="!pref-placement:urlbar" preference="pref-showPPs"/>
+			<checkbox label="&OptshowPPs.label;" preference="pref-showPPs"/>
 			<checkbox label="&OptmoveToRight.label;" dependson="!pref-placement:urlbar" preference="pref-movetoRight"/>
 		</groupbox>
 		
 		<groupbox align="start">
 			<caption label="&GroupBehavior.label;" />
-			<checkbox label="&OptautoHide.label;" dependson="!pref-placement:bottom" preference="pref-autoHide"/>
+			<checkbox label="&OptautoHide.label;" dependson="!pref-placement:bottom,pref-showPPs;pref-placement:corner" preference="pref-autoHide"/>
 			<checkbox id="statusBarCheckbox" label="&OptstatusBar.label;" hidden="true" preference="pref-statusBar"/>
 		</groupbox>
 		

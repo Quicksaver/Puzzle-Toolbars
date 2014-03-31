@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.1.7';
+moduleAid.VERSION = '1.1.8';
 
 this.__defineGetter__('gBrowser', function() { return window.gBrowser; });
 this.__defineGetter__('bottomBox', function() { return $('browser-bottombox'); });
@@ -17,7 +17,11 @@ this.showWhenMigrated = function() {
 this.toggleAutoHide = function(e) {
 	var customizing = (e && e.type == 'beforecustomization') || trueAttribute(addonBar, 'customizing');
 	
-	moduleAid.loadIf('autoHide', !customizing && prefAid.placement != 'bottom' && prefAid.autoHide);
+	moduleAid.loadIf('autoHide',
+		!customizing
+		&& prefAid.placement != 'bottom'
+		&& prefAid.autoHide
+		&& (prefAid.placement == 'corner' || prefAid.showPPs));
 };
 
 this.togglePlacement = function(e) {
@@ -50,6 +54,7 @@ moduleAid.LOADMODULE = function() {
 	listenerAid.add(window, 'aftercustomization', toggleAutoHide);
 	
 	prefAid.listen('autoHide', toggleAutoHide);
+	prefAid.listen('showPPs', toggleAutoHide);
 	prefAid.listen('placement', toggleAutoHide);
 	prefAid.listen('placement', togglePlacement);
 	
@@ -64,6 +69,7 @@ moduleAid.LOADMODULE = function() {
 
 moduleAid.UNLOADMODULE = function() {
 	prefAid.unlisten('autoHide', toggleAutoHide);
+	prefAid.unlisten('showPPs', toggleAutoHide);
 	prefAid.unlisten('placement', toggleAutoHide);
 	prefAid.unlisten('placement', togglePlacement);
 	
