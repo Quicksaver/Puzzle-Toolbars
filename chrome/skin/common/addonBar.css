@@ -45,22 +45,23 @@
 	}
 	
 	/* Inner buttons and other elements display */
-	.addon-bar image.toolbarbutton-icon:not(:hover) {
+	/* !important tags are necessary, especially for inURLBar */
+	.addon-bar .toolbarbutton-icon:not(:hover) {
 		background: none !important;
 		border: none !important;
 		box-shadow: none !important;
 	}
-	.addon-bar image.toolbarbutton-icon {
+	.addon-bar .toolbarbutton-icon {
 		max-height: 18px;
 	}
-	.addon-bar[placement="corner"] image.toolbarbutton-icon {
-		margin: 2px 0 !important;
+	.addon-bar[placement="corner"] .toolbarbutton-icon {
+		margin: 2px 0;
 	}
-	.addon-bar[placement="urlbar"] image.toolbarbutton-icon {
+	.addon-bar[placement="urlbar"] .toolbarbutton-icon {
 		padding: 0 !important;
 		margin: 0 2px !important;
 	}
-	.addon-bar[placement="urlbar"] image[type="menu"].toolbarbutton-icon {
+	.addon-bar[placement="urlbar"] .toolbarbutton-icon[type="menu"] {
 		-moz-margin-end: 17px !important;
 	}
 	
@@ -68,6 +69,10 @@
 	.addon-bar > toolbaritem:not(#fixer-status-bar):not(#thePuzzlePiece-status-bar-container) {
 		height: 18px;
 	}
+	
+	/* the downloads indicator is pretty broken if the add-on bar is in the corner */
+	.addon-bar[placement="corner"] #downloads-button[indicator] { padding-top: 20px; }
+	.addon-bar[placement="corner"] #downloads-button[indicator] #downloads-indicator-anchor { margin-top: -18px; }
 	
 	.addon-bar > toolbarbutton {
 		-moz-appearance: none;
