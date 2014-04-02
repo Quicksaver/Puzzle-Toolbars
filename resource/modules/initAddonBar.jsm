@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.2.11';
+moduleAid.VERSION = '1.2.12';
 
 this.__defineGetter__('browserPanel', function() { return $('browser-panel'); });
 this.__defineGetter__('gFindBar', function() { return window.gFindBar; });
@@ -112,6 +112,23 @@ this.moveAddonBar = function() {
 		moveBarStyle.bottom += document.documentElement.clientHeight -appContentPos.bottom;
 		moveBarStyle.left += appContentPos.left;
 		moveBarStyle.right += document.documentElement.clientWidth -appContentPos.right;
+		
+		// Compatibility with TreeStyleTab
+		var TabsToolbar = $('TabsToolbar');
+		if(TabsToolbar && !TabsToolbar.collapsed
+		&& (TabsToolbar.getAttribute('treestyletab-tabbar-position') == 'left' || TabsToolbar.getAttribute('treestyletab-tabbar-position') == 'right')) {
+			var TabsSplitter = document.getAnonymousElementByAttribute($('content'), 'class', 'treestyletab-splitter');
+			moveBarStyle.maxWidth -= TabsToolbar.clientWidth;
+			moveBarStyle.maxWidth -= TabsSplitter.clientWidth +(TabsSplitter.clientLeft *2);
+			if(!prefAid.movetoRight && TabsToolbar.getAttribute('treestyletab-tabbar-position') == 'left') {
+				moveBarStyle.left += TabsToolbar.clientWidth;
+				moveBarStyle.left += TabsSplitter.clientWidth +(TabsSplitter.clientLeft *2);
+			}
+			if(prefAid.movetoRight && TabsToolbar.getAttribute('treestyletab-tabbar-position') == 'right') {
+				moveBarStyle.right += TabsToolbar.clientWidth;
+				moveBarStyle.right += TabsSplitter.clientWidth +(TabsSplitter.clientLeft *2);
+			}
+		}
 		
 		// Firefox 25 introduces per-tab findbars. The findbar is now a part of appcontent, so I have to account for its height as well
 		if(Services.vc.compare(Services.appinfo.platformVersion, "25.0a1") >= 0

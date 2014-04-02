@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.0.5';
+moduleAid.VERSION = '1.0.6';
 
 moduleAid.LOADMODULE = function() {
 	if(Services.navigator.oscpu == 'Windows NT 5.1' && !Australis) {
@@ -16,6 +16,10 @@ moduleAid.LOADMODULE = function() {
 	AddonManager.getAddonByID("tiletabs@DW-dev", function(addon) {
 		moduleAid.loadIf('compatibilityFix/TileTabs', (addon && addon.isActive));
 	});
+	
+	AddonManager.getAddonByID('treestyletab@piro.sakura.ne.jp', function(addon) {
+		moduleAid.loadIf('compatibilityFix/TreeStyleTab', (addon && addon.isActive));
+	});
 };
 
 moduleAid.UNLOADMODULE = function() {
@@ -23,4 +27,5 @@ moduleAid.UNLOADMODULE = function() {
 	moduleAid.unload('compatibilityFix/noScript');
 	moduleAid.unload('compatibilityFix/S3');
 	moduleAid.unload('compatibilityFix/TileTabs');
+	moduleAid.unload('compatibilityFix/TreeStyleTab');
 };
