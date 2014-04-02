@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.1.8';
+moduleAid.VERSION = '1.1.9';
 
 this.onMouseOver = function() {
 	setHover(true);
@@ -111,8 +111,19 @@ this.initialThroughButton = function() {
 // Keep add-on bar visible when opening menus within it
 this.holdPopupMenu = function(e) {
 	var trigger = e.originalTarget.triggerNode;
+	var hold = isAncestor(trigger, addonBar) || isAncestor(trigger, activePP) || isAncestor(e.originalTarget, addonBar);
 	
-	if(isAncestor(trigger, addonBar) || isAncestor(trigger, activePP) || isAncestor(e.originalTarget, addonBar)) {
+	// could be a CUI panel opening, which doesn't carry a triggerNode, we have to find it ourselves
+	if(!hold && !trigger && e.target.id == 'customizationui-widget-panel') {
+		for(var c=0; c<addonBar.childNodes.length; c++) {
+			if(addonBar.childNodes[c].open) {
+				hold = true;
+				break;
+			}
+		}
+	}
+	
+	if(hold) {
 		setHover(true);
 		var selfRemover = function(ee) {
 			if(ee.originalTarget != e.originalTarget) { return; } //submenus
