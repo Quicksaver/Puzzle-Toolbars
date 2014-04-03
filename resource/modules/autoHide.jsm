@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.1.11';
+moduleAid.VERSION = '1.1.12';
 
 this.onMouseOver = function() {
 	setHover(true);
@@ -92,13 +92,27 @@ this.delayInitialShowBar = function() {
 	}, 50);
 };
 
+this.initialShowings = [];
 this.initialShowBar = function() {
 	if(addonBar.collapsed) {
 		setHover(false, 0);
 	} else {
 		setHover(true);
+		
 		// don't use timerAid, because if we use multiple initialShowBar()'s it would get stuck open
-		aSync(function() { if(typeof(setHover) != 'undefined') { setHover(false); } }, 1500);
+		// we keep a reference to the timer, because otherwise sometimes it would not trigger (go figure...), hopefully this helps with that
+		var thisShowing = aSync(function() {
+			if(typeof(setHover) != 'undefined') {
+				setHover(false);
+				for(var i=0; i<initialShowings.length; i++) {
+					if(initialShowings[i] == thisShowing) {
+						initialShowings.splice(i, 1);
+						break;
+					}
+				}
+			}
+		}, 1500);
+		initialShowings.push(thisShowing);
 	}
 };
 
