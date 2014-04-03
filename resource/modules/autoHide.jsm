@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.1.10';
+moduleAid.VERSION = '1.1.11';
 
 this.onMouseOver = function() {
 	setHover(true);
@@ -54,7 +54,7 @@ this.initHovers = function() {
 	if(!activePP) { return; }
 	
 	setAttribute(activePP, 'autohide', 'true');
-	toggleAttribute(activePP, 'hover', activePP.hovers > 0);
+	toggleAttribute(activePP, 'hover', addonBar.hovers > 0);
 	
 	listenerAid.add(activePP, 'dragenter', onDragEnter);
 	listenerAid.add(activePP, 'mouseover', onMouseOver);
