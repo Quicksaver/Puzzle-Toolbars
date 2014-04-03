@@ -23,6 +23,10 @@
 		display: none !important;
 	}
 	
+	/* the downloads indicator is pretty broken if the add-on bar is in the corner */
+	.addon-bar[placement="corner"] #downloads-button[indicator] { padding-top: 20px; }
+	.addon-bar[placement="corner"] #downloads-button[indicator] #downloads-indicator-anchor { margin-top: -18px; }
+	
 	.PuzzlePiece:not(#thePuzzlePiece-urlbar-PP)[clipped][active],
 	.PuzzlePiece:not(#thePuzzlePiece-urlbar-PP)[clipped]:hover {
 		clip: rect(0px, 32px, 30px, 0px);
