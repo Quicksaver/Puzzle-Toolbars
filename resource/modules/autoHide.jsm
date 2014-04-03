@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.1.9';
+moduleAid.VERSION = '1.1.10';
 
 this.onMouseOver = function() {
 	setHover(true);
@@ -111,7 +111,17 @@ this.initialThroughButton = function() {
 // Keep add-on bar visible when opening menus within it
 this.holdPopupMenu = function(e) {
 	var trigger = e.originalTarget.triggerNode;
-	var hold = isAncestor(trigger, addonBar) || isAncestor(trigger, activePP) || isAncestor(e.originalTarget, addonBar);
+	var hold = false;
+	
+	// special case for the downloadsPanel
+	if(e.target.id == 'downloadsPanel') {
+		hold = isAncestor($('downloads-button'), addonBar);
+	}
+	
+	// check if the trigger node is present in the addonBar
+	if(!hold) {
+		hold = isAncestor(trigger, addonBar) || isAncestor(trigger, activePP) || isAncestor(e.originalTarget, addonBar);
+	}
 	
 	// could be a CUI panel opening, which doesn't carry a triggerNode, we have to find it ourselves
 	if(!hold && !trigger && e.target.id == 'customizationui-widget-panel') {
