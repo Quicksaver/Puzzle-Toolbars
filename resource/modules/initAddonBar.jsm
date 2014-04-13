@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.2.12';
+moduleAid.VERSION = '1.2.13';
 
 this.__defineGetter__('browserPanel', function() { return $('browser-panel'); });
 this.__defineGetter__('gFindBar', function() { return window.gFindBar; });
@@ -86,14 +86,14 @@ this.delayMoveAddonBar = function() {
 };
 
 this.moveWhenStatusBarChanged = function() {
-	if(isAncestor($('status-bar'), addonBar)) {
+	if(isAncestor(statusBar, addonBar)) {
 		delayMoveAddonBar();
 	}
 };
 
 this.moveAddonBar = function() {
 	// there's no point in doing all this in customize mode
-	if(Australis && trueAttribute(addonBar, 'customizing')) { return; }
+	if(Australis && customizing) { return; }
 	
 	// We should do all these calculations to also position the puzzle pieces, even if the add-on bar is closed
 	moveBarStyle = {
@@ -322,7 +322,7 @@ moduleAid.LOADMODULE = function() {
 	toggleAddonBar = function toggleAddonBar() {
 		setToolbarVisibility(addonBar, addonBar.collapsed);
 		if(Australis) {
-			toggleAttribute(addonBar, 'customizing', !addonBar.collapsed && trueAttribute(document.documentElement, 'customizing'));
+			toggleAttribute(addonBar, 'customizing', !addonBar.collapsed && customizing);
 		}
 		dispatch(addonBar, { type: 'ToggledAddonBar', cancelable: false });
 	};
@@ -343,14 +343,14 @@ moduleAid.LOADMODULE = function() {
 	observerAid.add(findPersonaPosition, "lightweight-theme-changed");
 	listenerAid.add(addonBar, 'AddonBarCustomized', moveAddonBar);
 	
-	for(var i=0; i<$('status-bar').childNodes.length; i++) {
-		if($('status-bar').childNodes[i].nodeName != 'statusbarpanel' || !$('status-bar').childNodes[i].id) { continue; }
+	for(var i=0; i<statusBar.childNodes.length; i++) {
+		if(statusBar.childNodes[i].nodeName != 'statusbarpanel' || !statusBar.childNodes[i].id) { continue; }
 		
-		objectWatcher.addAttributeWatcher($('status-bar').childNodes[i], 'hidden', moveWhenStatusBarChanged);
+		objectWatcher.addAttributeWatcher(statusBar.childNodes[i], 'hidden', moveWhenStatusBarChanged);
 	}
 	
 	// Half fix for when the status-bar is changed
-	listenerAid.add($('status-bar'), 'load', delayMoveAddonBar, true);
+	listenerAid.add(statusBar, 'load', delayMoveAddonBar, true);
 	
 	moveAddonBar();
 };
@@ -358,10 +358,10 @@ moduleAid.LOADMODULE = function() {
 moduleAid.UNLOADMODULE = function() {
 	styleAid.unload('positionAddonBar_'+_UUID);
 	
-	for(var i=0; i<$('status-bar').childNodes.length; i++) {
-		if($('status-bar').childNodes[i].nodeName != 'statusbarpanel' || !$('status-bar').childNodes[i].id) { continue; }
+	for(var i=0; i<statusBar.childNodes.length; i++) {
+		if(statusBar.childNodes[i].nodeName != 'statusbarpanel' || !statusBar.childNodes[i].id) { continue; }
 		
-		objectWatcher.removeAttributeWatcher($('status-bar').childNodes[i], 'hidden', moveWhenStatusBarChanged);
+		objectWatcher.removeAttributeWatcher(statusBar.childNodes[i], 'hidden', moveWhenStatusBarChanged);
 	}
 	
 	listenerAid.remove(addonBar, 'AddonBarCustomized', moveAddonBar);
@@ -376,7 +376,7 @@ moduleAid.UNLOADMODULE = function() {
 	listenerAid.remove(addonBar, 'load', delayMoveAddonBar);
 	listenerAid.remove(window, 'aftercustomization', delayMoveAddonBar);
 	listenerAid.remove(addonBar, 'ToggledAddonBar', moveAddonBar);
-	listenerAid.remove($('status-bar'), 'load', delayMoveAddonBar, true);
+	listenerAid.remove(statusBar, 'load', delayMoveAddonBar, true);
 	
 	prefAid.unlisten('movetoRight', moveAddonBar);
 	prefAid.unlisten('placement', moveAddonBar);

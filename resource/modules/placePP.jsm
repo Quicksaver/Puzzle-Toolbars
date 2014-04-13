@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.1.9';
+moduleAid.VERSION = '1.1.10';
 
 this.__defineGetter__('leftPP', function() { return $(objName+'-left-PP'); });
 this.__defineGetter__('rightPP', function() { return $(objName+'-right-PP'); });
@@ -69,10 +69,11 @@ this.choosePP = function() {
 this.activatePPs = function() {
 	toggleAttribute(activePP, 'active', !addonBar.collapsed);
 	toggleAttribute(activePP, 'bottomPlacement', prefAid.placement == 'bottom');
+	customizePP();
 };
 
 this.customizePP = function(e) {
-	toggleAttribute(activePP, 'customizing', (e.type == 'beforecustomization'));
+	toggleAttribute(activePP, 'customizing', (e && e.type == 'beforecustomization') || customizing);
 };
 
 this.showPPs = function() {

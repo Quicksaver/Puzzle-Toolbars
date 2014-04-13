@@ -1,8 +1,11 @@
-moduleAid.VERSION = '1.1.8';
+moduleAid.VERSION = '1.1.9';
 
 this.__defineGetter__('gBrowser', function() { return window.gBrowser; });
 this.__defineGetter__('bottomBox', function() { return $('browser-bottombox'); });
 this.__defineGetter__('addonBar', function() { return (!Australis) ? $('addon-bar') : $(objName+'-addon-bar'); });
+this.__defineGetter__('statusBar', function() { return (Australis) ? _statusBar.node || $('status-bar') : $('status-bar'); });
+
+this.__defineGetter__('customizing', function() { return trueAttribute((Australis) ? document.documentElement : addonBar, 'customizing'); });
 
 this.showWhenMigrated = function() {
 	if(oldBarMigrated) {
@@ -15,10 +18,10 @@ this.showWhenMigrated = function() {
 };
 
 this.toggleAutoHide = function(e) {
-	var customizing = (e && e.type == 'beforecustomization') || trueAttribute(addonBar, 'customizing');
+	var isCustomizing = (e && e.type == 'beforecustomization') || customizing;
 	
 	moduleAid.loadIf('autoHide',
-		!customizing
+		!isCustomizing
 		&& prefAid.placement != 'bottom'
 		&& prefAid.autoHide
 		&& (prefAid.placement == 'corner' || prefAid.showPPs));
@@ -26,16 +29,16 @@ this.toggleAutoHide = function(e) {
 
 this.togglePlacement = function(e) {
 	// I can't drag from the add-on bar when it's in the url bar, it only drags the whole url bar in this case
-	var customizing = (e && e.type == 'beforecustomization') || trueAttribute(addonBar, 'customizing');
+	var isCustomizing = (e && e.type == 'beforecustomization') || customizing;
 	
-	if(!customizing && addonBar.parentNode.id == 'customization-palette-container') {
+	if(!isCustomizing && addonBar.parentNode.id == 'customization-palette-container') {
 		bottomBox.insertBefore(addonBar, $('developer-toolbar'));
 	}
 	
-	moduleAid.loadIf('inURLBar', !customizing && prefAid.placement == 'urlbar');
-	setAttribute(addonBar, 'placement', (!customizing) ? prefAid.placement : 'bottom');
+	moduleAid.loadIf('inURLBar', !isCustomizing && prefAid.placement == 'urlbar');
+	setAttribute(addonBar, 'placement', (!isCustomizing) ? prefAid.placement : 'bottom');
 	
-	if(customizing && addonBar.parentNode.id != 'customization-palette-container') {
+	if(isCustomizing && addonBar.parentNode.id != 'customization-palette-container') {
 		$('customization-palette-container').appendChild(addonBar);
 	}
 	

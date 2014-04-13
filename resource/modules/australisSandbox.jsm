@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.1.5';
+moduleAid.VERSION = '1.1.6';
 
 this.CustomizableUI = null;
 
@@ -24,7 +24,9 @@ this.trackSpecialWidgets = {
 this.moveStatusBar = function(aWindow) {
 	if(aWindow.closed || aWindow.willClose) { return; }
 	
-	var sBar = aWindow.document.getElementById('status-bar') || aWindow[objName]._statusBar.node;
+	var sBar = aWindow.document.getElementById('status-bar') || aWindow[objName+'__statusBar'] || aWindow[objName]._statusBar.node;
+	delete aWindow[objName+'__statusBar'];
+	
 	var sStack = aWindow.document.getElementById(objName+'-status-bar-stack');
 	if(sBar.parentNode == sStack) { return; }
 	
@@ -37,22 +39,30 @@ this.moveStatusBar = function(aWindow) {
 	
 	setAttribute(sBar, 'removable', 'true');
 	if(CustomizableUI.getWidget('status-bar').areaType) {
+		// in case we haven't yet enabled the add-on in other windows, we have to keep a reference to the status bar node,
+		// otherwise we'll lose it when we continue. This will be deleted once the add-on is enabled there.
+		windowMediator.callOnAll(function(bWindow) {
+			if(!bWindow[objName]) {
+				bWindow[objName+'__statusBar'] = bWindow.document.getElementById('status-bar');
+			}
+		}, 'navigator:browser');
+		
 		CustomizableUI.removeWidgetFromArea('status-bar');
 		
 		// because when we do the above command, the node is physically removed from all windows, we have to put it back
-		windowMediator.callOnAll(function(aWindow) {
-			if(!aWindow[objName]) { return; }
-			moveStatusBarNode(aWindow);
+		windowMediator.callOnAll(function(cWindow) {
+			if(!cWindow[objName]) { return; }
+			moveStatusBarNode(cWindow);
 		}, 'navigator:browser');
 	} else {
-		// this should never be triggered, but...
+		// this should happen when enabling the add-on on a second window, that was already opened when we called removeWidgetFromArea above
 		moveStatusBarNode(aWindow);
 	}
 };
 
 this.moveStatusBarNode = function(aWindow) {
 	var sStack = aWindow.document.getElementById(objName+'-status-bar-stack');
-	if(!aWindow[objName]._statusBar || aWindow[objName]._statusBar.node.parentNode == sStack) { return; }
+	if(!aWindow[objName] || !aWindow[objName]._statusBar || aWindow[objName]._statusBar.node.parentNode == sStack) { return; }
 	
 	sStack.insertBefore(aWindow[objName]._statusBar.node, sStack.firstChild);
 };
@@ -97,12 +107,10 @@ moduleAid.LOADMODULE = function() {
 			prepareObject(aWindow);
 			
 			moveStatusBar(aWindow);
-			window[objName].moduleAid.load('australis', true);
+			aWindow[objName].moduleAid.load('australis', true);
 		},
 		function(aWindow) {
 			moveStatusBarBack(aWindow);
-			
-			delete aWindow[objName]._statusBar;
 			removeObject(aWindow);
 		}
 	);
