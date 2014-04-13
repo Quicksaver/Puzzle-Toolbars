@@ -1,11 +1,24 @@
-moduleAid.VERSION = '1.1.9';
+moduleAid.VERSION = '1.1.10';
 
 this.__defineGetter__('gBrowser', function() { return window.gBrowser; });
 this.__defineGetter__('bottomBox', function() { return $('browser-bottombox'); });
 this.__defineGetter__('addonBar', function() { return (!Australis) ? $('addon-bar') : $(objName+'-addon-bar'); });
 this.__defineGetter__('statusBar', function() { return (Australis) ? _statusBar.node || $('status-bar') : $('status-bar'); });
 
-this.__defineGetter__('customizing', function() { return trueAttribute((Australis) ? document.documentElement : addonBar, 'customizing'); });
+this.__defineGetter__('customizing', function() {
+	if(!Australis) { return trueAttribute(addonBar, 'customizing'); }
+	
+	if(trueAttribute(document.documentElement, 'customizing')) { return true; }
+	
+	// this means that the window is still opening and the first tab will open customize mode
+	if(window.gBrowser.mCurrentBrowser
+	&& window.gBrowser.mCurrentBrowser.__SS_restore_data
+	&& window.gBrowser.mCurrentBrowser.__SS_restore_data.url == 'about:customizing') {
+		return true;
+	}
+	
+	return false;
+});
 
 this.showWhenMigrated = function() {
 	if(oldBarMigrated) {
