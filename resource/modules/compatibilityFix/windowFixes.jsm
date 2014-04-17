@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.0.6';
+moduleAid.VERSION = '1.0.7';
 
 moduleAid.LOADMODULE = function() {
 	if(Services.navigator.oscpu == 'Windows NT 5.1' && !Australis) {
@@ -20,6 +20,8 @@ moduleAid.LOADMODULE = function() {
 	AddonManager.getAddonByID('treestyletab@piro.sakura.ne.jp', function(addon) {
 		moduleAid.loadIf('compatibilityFix/TreeStyleTab', (addon && addon.isActive));
 	});
+	
+	moduleAid.load('compatibilityFix/UIEnhancer');
 };
 
 moduleAid.UNLOADMODULE = function() {
@@ -28,4 +30,5 @@ moduleAid.UNLOADMODULE = function() {
 	moduleAid.unload('compatibilityFix/S3');
 	moduleAid.unload('compatibilityFix/TileTabs');
 	moduleAid.unload('compatibilityFix/TreeStyleTab');
+	moduleAid.unload('compatibilityFix/UIEnhancer');
 };

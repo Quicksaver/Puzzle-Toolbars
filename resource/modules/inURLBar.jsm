@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.1.5';
+moduleAid.VERSION = '1.1.6';
 
 this.__defineGetter__('urlbarContainer', function() { return $('urlbar-container'); });
 this.__defineGetter__('searchContainer', function() { return $('search-container'); });
@@ -8,6 +8,7 @@ this.flexContainers = false;
 this.loadInURLBar = function() {
 	URLBarContainer.appendChild(addonBar);
 	listenerAid.add(addonBar, 'ToggledAddonBar', openURLBarContainer);
+	listenerAid.add(addonBar, 'HoverAddonBar', hoverURLBarContainer);
 	
 	moveAddonBar();
 	openURLBarContainer();
@@ -25,6 +26,10 @@ this.unloadInURLBar = function() {
 
 this.openURLBarContainer = function() {
 	toggleAttribute(URLBarContainer, 'active', !addonBar.collapsed);
+	hoverURLBarContainer();
+};
+
+this.hoverURLBarContainer = function() {
 	toggleAttribute(URLBarContainer, 'hover', trueAttribute(addonBar, 'hover'));
 };
 
@@ -98,6 +103,7 @@ moduleAid.LOADMODULE = function() {
 
 moduleAid.UNLOADMODULE = function() {
 	listenerAid.remove(addonBar, 'ToggledAddonBar', openURLBarContainer);
+	listenerAid.remove(addonBar, 'HoverAddonBar', hoverURLBarContainer);
 	listenerAid.remove(addonBar, 'AddonBarMoved', moveContainer);
 	
 	prefAid.unlisten('autoHide', autoHideContainer);

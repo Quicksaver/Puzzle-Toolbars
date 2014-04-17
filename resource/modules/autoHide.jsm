@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.1.12';
+moduleAid.VERSION = '1.1.13';
 
 this.onMouseOver = function() {
 	setHover(true);
@@ -29,9 +29,6 @@ this.onDragExitAll = function() {
 this.setHover = function(hover, force) {
 	if(hover) {
 		addonBar.hovers++;
-		setAttribute(addonBar, 'hover', 'true');
-		setAttribute(activePP, 'hover', 'true');
-		setAttribute(URLBarContainer, 'hover', 'true');
 		if(force != undefined && typeof(force) == 'number') {
 			addonBar.hovers = force;
 		}
@@ -42,12 +39,13 @@ this.setHover = function(hover, force) {
 		} else if(addonBar.hovers > 0) {
 			addonBar.hovers--;
 		}
-		if(addonBar.hovers == 0) {
-			removeAttribute(addonBar, 'hover');
-			removeAttribute(activePP, 'hover');
-			removeAttribute(URLBarContainer, 'hover');
-		}
 	}
+	
+	timerAid.init('setHover', function() {
+		toggleAttribute(addonBar, 'hover', addonBar.hovers > 0);
+		toggleAttribute(activePP, 'hover', addonBar.hovers > 0);
+		dispatch(addonBar, { type: 'HoverAddonBar', cancelable: false });
+	});
 };
 
 this.initHovers = function() {
