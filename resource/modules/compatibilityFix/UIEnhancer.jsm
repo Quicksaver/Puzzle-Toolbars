@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.0.0';
+moduleAid.VERSION = '1.0.1';
 
 this.__defineGetter__('UIEnhancer', function() { return $('UIEnhancer_URLBar'); });
 
@@ -7,11 +7,13 @@ this.UIEnhancerFixer = function(aEnabled) {
 		listenerAid.add(addonBar, 'HoverAddonBar', fixUIEnhancerWidth);
 		listenerAid.add(addonBar, 'ToggledAddonBar', fixUIEnhancerWidth);
 		listenerAid.add(UIEnhancer, 'transitionend', UIEnhancerTransitionEnd);
+		setAttribute($('urlbar'), objName+'-urlbar', 'true');
 		fixUIEnhancerWidth();
 	} else {
 		listenerAid.remove(addonBar, 'HoverAddonBar', fixUIEnhancerWidth);
 		listenerAid.remove(addonBar, 'ToggledAddonBar', fixUIEnhancerWidth);
 		listenerAid.remove(UIEnhancer, 'transitionend', UIEnhancerTransitionEnd);
+		removeAttribute($('urlbar'), objName+'-urlbar');
 		styleAid.unload('UIEnhancer_'+_UUID);
 		removeAttribute(UIEnhancer, 'hover');
 		removeAttribute(UIEnhancer, 'noAnimation');

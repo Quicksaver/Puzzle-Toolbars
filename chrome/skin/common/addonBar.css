@@ -337,11 +337,11 @@
 	}
 	
 	/* fix for UIEnhancer, putting it here because it's easier than finding the right conditions to (un)load a separate style in this case */
-	#UIEnhancer_URLBar:not([noAnimation])[hover] {
+	#urlbar[thePuzzlePiece-urlbar] #UIEnhancer_URLBar:not([noAnimation])[hover] {
 		-moz-transition: width .25s linear 0s;
 		transition: width .25s linear 0s; /* Firefox 16+ */
 	}
-	#UIEnhancer_URLBar:not([noAnimation]):not([hover]) {
+	#urlbar[thePuzzlePiece-urlbar] #UIEnhancer_URLBar:not([noAnimation]):not([hover]) {
 		-moz-transition: width .5s linear .2s;
 		transition: width .5s linear .2s; /* Firefox 16+ */
 	}
