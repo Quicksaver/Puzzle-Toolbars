@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.2.14';
+moduleAid.VERSION = '1.2.15';
 
 this.__defineGetter__('browserPanel', function() { return $('browser-panel'); });
 this.__defineGetter__('gFindBar', function() { return window.gFindBar; });
@@ -85,12 +85,6 @@ this.setCustomizeMenu = function(e) {
 
 this.delayMoveAddonBar = function() {
 	timerAid.init('delayMoveAddonBar', moveAddonBar, 0);
-};
-
-this.moveWhenStatusBarChanged = function() {
-	if(isAncestor(statusBar, addonBar)) {
-		delayMoveAddonBar();
-	}
 };
 
 this.moveAddonBar = function() {
@@ -353,7 +347,7 @@ moduleAid.LOADMODULE = function() {
 			// even if we somehow schedule when there's no need to, moveAddonbar will bail-out midway if there's no difference in the values
 			for(var m=0; m<mutations.length; m++) {
 				if(mutations[m].oldValue != mutations[m].target.getAttribute(mutations[m].attributeName)) {
-					delayMoveAddonBar();
+					moveAddonBar();
 					return;
 				}
 			}
