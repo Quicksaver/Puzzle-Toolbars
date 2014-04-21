@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.2.13';
+moduleAid.VERSION = '1.2.14';
 
 this.__defineGetter__('browserPanel', function() { return $('browser-panel'); });
 this.__defineGetter__('gFindBar', function() { return window.gFindBar; });
@@ -17,6 +17,8 @@ this.getComputedStyle = function(el) { return window.getComputedStyle(el); };
 this.__defineGetter__('URLBarContainer', function() { return $(objName+'-urlbar-addonbar-container'); });
 
 this.CLIPBAR = 6; // ammount of pixels to clip the bar to when it is closed or hidden
+
+this.moveOnHidingAttr = null;
 
 this.addonBarContextNodes = {
 	get addonBar () { return addonBar; }
@@ -343,10 +345,25 @@ moduleAid.LOADMODULE = function() {
 	observerAid.add(findPersonaPosition, "lightweight-theme-changed");
 	listenerAid.add(addonBar, 'AddonBarCustomized', moveAddonBar);
 	
-	for(var i=0; i<statusBar.childNodes.length; i++) {
-		if(statusBar.childNodes[i].nodeName != 'statusbarpanel' || !statusBar.childNodes[i].id) { continue; }
-		
-		objectWatcher.addAttributeWatcher(statusBar.childNodes[i], 'hidden', moveWhenStatusBarChanged);
+	// moveAddonBar won't fire when setting hidden/collapsed in the buttons, unless we make it follow these changes
+	// this only exists in Firefox 14+
+	if(window.MutationObserver) {
+		moveOnHidingAttr = new window.MutationObserver(function(mutations) {
+			// we don't need to schedule for every difference, we only need to schedule if there is any;
+			// even if we somehow schedule when there's no need to, moveAddonbar will bail-out midway if there's no difference in the values
+			for(var m=0; m<mutations.length; m++) {
+				if(mutations[m].oldValue != mutations[m].target.getAttribute(mutations[m].attributeName)) {
+					delayMoveAddonBar();
+					return;
+				}
+			}
+		});
+		moveOnHidingAttr.observe(addonBar, {
+			attributes: true,
+			subtree: true,
+			attributeFilter: ['hidden', 'collapsed'],
+			attributeOldValue: true
+		});
 	}
 	
 	// Half fix for when the status-bar is changed
@@ -358,10 +375,8 @@ moduleAid.LOADMODULE = function() {
 moduleAid.UNLOADMODULE = function() {
 	styleAid.unload('positionAddonBar_'+_UUID);
 	
-	for(var i=0; i<statusBar.childNodes.length; i++) {
-		if(statusBar.childNodes[i].nodeName != 'statusbarpanel' || !statusBar.childNodes[i].id) { continue; }
-		
-		objectWatcher.removeAttributeWatcher(statusBar.childNodes[i], 'hidden', moveWhenStatusBarChanged);
+	if(moveOnHidingAttr) {
+		moveOnHidingAttr.disconnect();
 	}
 	
 	listenerAid.remove(addonBar, 'AddonBarCustomized', moveAddonBar);
