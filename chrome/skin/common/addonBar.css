@@ -61,8 +61,8 @@
 		padding: 0 !important;
 		margin: 0 2px !important;
 	}
-	.addon-bar[placement="urlbar"] .toolbarbutton-icon[type="menu"] {
-		-moz-margin-end: 17px !important;
+	.addon-bar[placement="urlbar"] .toolbarbutton-1[type="menu"] .toolbarbutton-menu-dropmarker {
+		-moz-margin-start: 0 !important;
 	}
 	
 	/* #fixer-status-bar selector is from UI Fixer add-on "make status bar movable" feature */
@@ -126,6 +126,11 @@
 	
 	.addon-bar dropmarker image {
 		padding: 0 !important;
+	}
+	
+	/* don't show the little separator, as it'll be out of place in the add-on bar */
+	.addon-bar .toolbarbutton-1 > .toolbarbutton-menubutton-dropmarker:before {
+		display: none !important;
 	}
 	
 	/* These are for the mouse over effects, !important tags are necessary especially for when inURLBar is true */
