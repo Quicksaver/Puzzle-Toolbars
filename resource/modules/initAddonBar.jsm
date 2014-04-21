@@ -347,6 +347,8 @@ moduleAid.LOADMODULE = function() {
 			// even if we somehow schedule when there's no need to, moveAddonbar will bail-out midway if there's no difference in the values
 			for(var m=0; m<mutations.length; m++) {
 				if(mutations[m].oldValue != mutations[m].target.getAttribute(mutations[m].attributeName)) {
+					// the mutation observer already fires on a "delay" after the attr changes take place,
+					// so there's no need to further delay on our side
 					moveAddonBar();
 					return;
 				}
