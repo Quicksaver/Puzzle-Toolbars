@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.1.6';
+moduleAid.VERSION = '1.1.7';
 
 this.__defineGetter__('urlbarContainer', function() { return $('urlbar-container'); });
 this.__defineGetter__('searchContainer', function() { return $('search-container'); });
@@ -36,13 +36,10 @@ this.hoverURLBarContainer = function() {
 this.lastWidth = 0;
 this.moveContainer = function() {
 	// Bugfix: Endless loop because width of addonBar here is always 0
-	if(trueAttribute($('main-window'), 'disablechrome')) {
-		if(isAncestor(addonBar, $('navigator-toolbox'))
-		&& trueAttribute($('navigator-toolbox'), 'tabsontop')
-		&& !isAncestor(addonBar, $('toolbar-menubar'))
-		&& !isAncestor(addonBar, $('TabsToolbar'))) {
-			return;
-		}
+	if(trueAttribute($('main-window'), 'disablechrome')
+	&& isAncestor(addonBar, $('navigator-toolbox'))
+	&& (Australis || trueAttribute($('navigator-toolbox'), 'tabsontop'))) {
+		return;
 	}
 	
 	// Bugfix for the add-on being completely cutoff at startup
