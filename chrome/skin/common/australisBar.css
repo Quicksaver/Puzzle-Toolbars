@@ -7,7 +7,7 @@
 	
 	/* Vertical Toolbar's spring widget, no need to create a whole module just for this */
 	#wrapper-verticaltoolbar-spring {
-		display: none;
+		visibility: collapse;
 	}
 	
 	/* Bugfix: we need our add-on bar always as the last visible element, even if it physically isn't */
