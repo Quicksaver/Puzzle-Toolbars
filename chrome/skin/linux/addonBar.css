@@ -16,7 +16,7 @@
 	.addon-bar[placement="corner"] #downloads-button[indicator] { padding-top: 22px; }
 	.addon-bar[placement="corner"] #downloads-button[indicator] #downloads-indicator-anchor { margin-top: -18px; }
 	
-	.PuzzlePiece:not(#thePuzzlePiece-urlbar-PP):not([active]):not(:hover),
+	.PuzzlePiece:not(#thePuzzlePiece-urlbar-PP):not([active]):not(:hover):not([hover]),
 	.PuzzlePiece:not(#thePuzzlePiece-urlbar-PP)[autohide]:not(:hover):not([hover]) {
 		clip: rect(0px, 32px, 14px, 0px);
 	}

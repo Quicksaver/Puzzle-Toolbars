@@ -23,7 +23,7 @@
 	.PuzzlePiece:not(#thePuzzlePiece-urlbar-PP)[clipped]:hover {
 		clip: rect(0px, 32px, 30px, 0px);
 	}
-	.PuzzlePiece:not(#thePuzzlePiece-urlbar-PP):not([active]):not(:hover),
+	.PuzzlePiece:not(#thePuzzlePiece-urlbar-PP):not([active]):not(:hover):not([hover]),
 	.PuzzlePiece:not(#thePuzzlePiece-urlbar-PP)[autohide]:not(:hover):not([hover]) {
 		clip: rect(0px, 32px, 9px, 0px);
 	}
