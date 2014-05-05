@@ -4,6 +4,9 @@
 	#toggle_ctr_addon-bar,
 	#ctr_addon-bar,
 	#ctr_toolbar_dummy,
+	#toggle_ctraddon_addon-bar,
+	#ctraddon_addon-bar,
+	#ctraddon_toolbar_dummy,
 	
 	/* we don't want these anywhere if we can use ours */
 	#wrapper-spring,

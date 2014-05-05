@@ -1,41 +1,50 @@
-moduleAid.VERSION = '1.2.0';
+moduleAid.VERSION = '1.2.1';
+
+this.ctrId = 'ctraddon_';
 
 this.trackCTRBar = {
 	onWidgetAdded: function(aId, aCurrentArea) {
-		if(aCurrentArea == 'ctr_addon-bar') {
+		if(aCurrentArea == ctrId+'addon-bar') {
 			CustomizableUI.addWidgetToArea(aId, objName+'-addon-bar');
 		}
 	}
 };
 
 moduleAid.LOADMODULE = function() {
-	styleAid.load('ctr', 'ctr');
-	
-	var ids = CustomizableUI.getWidgetIdsInArea('ctr_addon-bar');
-	
-	// ignore CTR's closebutton and replace with normal special widgets
-	var i = 0;
-	while(i < ids.length) {
-		if(ids[i].startsWith('ctr_')) {
-			if(ids[i] == 'ctr_addonbar-close') {
-				ids.splice(i, 1);
-				continue;
-			}
-			
-			if(ids[i] == 'status-bar') {
-				ids.splice(i, 1);
-				continue;
-			}
+	AddonManager.getAddonByID("ClassicThemeRestorer@ArisT2Noia4dev", function(addon) {
+		// CTR's Ids changed in version 1.1.9beta13, I can remove this eventually in later FF versions when it becomes unlikely that anyone is using old versions
+		if(Services.vc.compare(addon.version, '1.1.9beta13') < 0) {
+			ctrId = 'ctr_';
 		}
-		i++;
-	}
-	
-	for(var i=0; i<ids.length; i++) {
-		CustomizableUI.addWidgetToArea(ids[i], objName+'-addon-bar');
-	}
-	
-	// I don't unregister CTR's add-on bar, instead I just watch for any widgets added to it and migrate them automatically
-	CustomizableUI.addListener(trackCTRBar);
+		
+		styleAid.load('ctr', 'ctr');
+		
+		var ids = CustomizableUI.getWidgetIdsInArea(ctrId+'addon-bar');
+		
+		// ignore CTR's closebutton and replace with normal special widgets
+		var i = 0;
+		while(i < ids.length) {
+			if(ids[i].startsWith(ctrId)) {
+				if(ids[i] == ctrId+'addonbar-close') {
+					ids.splice(i, 1);
+					continue;
+				}
+				
+				if(ids[i] == 'status-bar') {
+					ids.splice(i, 1);
+					continue;
+				}
+			}
+			i++;
+		}
+		
+		for(var i=0; i<ids.length; i++) {
+			CustomizableUI.addWidgetToArea(ids[i], objName+'-addon-bar');
+		}
+		
+		// I don't unregister CTR's add-on bar, instead I just watch for any widgets added to it and migrate them automatically
+		CustomizableUI.addListener(trackCTRBar);
+	});
 };
 
 moduleAid.UNLOADMODULE = function() {
@@ -48,7 +57,7 @@ moduleAid.UNLOADMODULE = function() {
 		var ids = CustomizableUI.getWidgetIdsInArea(objName+'-addon-bar');
 		
 		for(var i=0; i<ids.length; i++) {
-			CustomizableUI.addWidgetToArea(ids[i], 'ctr_addon-bar');
+			CustomizableUI.addWidgetToArea(ids[i], ctrId+'addon-bar');
 		}
 	}
 };
