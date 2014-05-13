@@ -28,6 +28,15 @@
 		</em:localized>
 		<em:localized>
 			<Description>
+				<em:locale>es-ES</em:locale>
+				<em:name>The Puzzle Piece</em:name>
+				<em:description>¡Trae de vuelta la barra de complementos con toda su fuerza! ¿Dónde la quiere? ¿Qué es lo que quiere que haga? ¡Usted decide!</em:description>
+				<em:homepageURL>https://addons.mozilla.org/es-ES/firefox/addon/the-puzzle-piece/</em:homepageURL>
+				<em:translator>strel</em:translator>
+			</Description>
+		</em:localized>
+		<em:localized>
+			<Description>
 				<em:locale>fr</em:locale>
 				<em:name>The Puzzle Piece</em:name>
 				<em:description>Autorisez le retour en force de votre barre de modules ! Où la voulez-vous ? Que souhaitez-vous qu'elle fasse ? C'est vous qui décidez !</em:description>
@@ -42,6 +51,15 @@
 				<em:description>Traz de volta a sua barra de extras, ainda melhorada! Como lhe quer aceder? Você decide!</em:description>
 				<em:homepageURL>https://addons.mozilla.org/pt-PT/firefox/addon/the-puzzle-piece/</em:homepageURL>
 				<em:translator>Quicksaver</em:translator>
+			</Description>
+		</em:localized>
+		<em:localized>
+			<Description>
+				<em:locale>ru</em:locale>
+				<em:name>The Puzzle Piece</em:name>
+				<em:description>Возвращает полную мощь Панели дополнений! Где Вы ее хотите разместить? Что Вы хотите чтобы она выполняла? Вам решать!</em:description>
+				<em:homepageURL>https://addons.mozilla.org/ru/firefox/addon/the-puzzle-piece/</em:homepageURL>
+				<em:translator>Alexander Gvaramiya</em:translator>
 			</Description>
 		</em:localized>
 		<em:localized>

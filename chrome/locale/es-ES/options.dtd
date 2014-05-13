@@ -1,0 +1,34 @@
+<!ENTITY Optwindow.style "width: 35em;">
+<!ENTITY Options.title "The Puzzle Piece">
+<!ENTITY Optgeneral.label "Barra de complementos">
+<!ENTITY Optabout.label "Acerca de">
+<!ENTITY GroupPosition.label "Posición">
+<!ENTITY GroupBehavior.label "Comportamiento">
+<!ENTITY OptPlacement.bottomLabel "Situar al fondo del navegador">
+<!ENTITY OptPlacement.cornerLabel "Contraer en la esquina del fondo de la página web">
+<!ENTITY OptPlacement.urlbarLabel "Mover a la barra de direcciones">
+<!ENTITY OptmoveToRight.label "Situar a la derecha de la ventana del navegador">
+<!ENTITY OptshowPPs.label "Mostrar el botón de accionado de pieza de puzle en la barra de complementos">
+<!ENTITY OptautoHide.label "Ocultar la barra de complementos automáticamente">
+<!ENTITY OptstatusBar.label "Restaurar la barra de estado">
+<!ENTITY OptKeyboardShortcut.caption "Atajo de teclado">
+<!ENTITY OptKeyboardShortcut.control "Control">
+<!ENTITY OptKeyboardShortcut.shift "Mayúsculas">
+<!ENTITY OptKeyboardShortcut.alt "Alt">
+<!ENTITY OptKeyboardShortcut.command "Tecla de comando">
+<!ENTITY OptKeyboardShortcut.option "Opción">
+<!ENTITY OptKeyboardShortcut.none "Ninguno">
+<!ENTITY OptKeyboardShortcut.spacebar "Barra espaciadora">
+<!ENTITY OptKeyboardShortcut.pageup "Avanzar página">
+<!ENTITY OptKeyboardShortcut.pagedown "Retroceder página">
+<!ENTITY OptKeyboardShortcut.end "Fin">
+<!ENTITY OptKeyboardShortcut.home "Inicio">
+<!ENTITY OptKeyboardShortcut.left "Izquierda">
+<!ENTITY OptKeyboardShortcut.up "Arriba">
+<!ENTITY OptKeyboardShortcut.right "Derecha">
+<!ENTITY OptKeyboardShortcut.down "Abajo">
+<!ENTITY thepuzzlepieceabout.name "The Puzzle Piece">
+<!ENTITY thepuzzlepieceabout.by "por Quicksaver">
+<!ENTITY thepuzzlepieceabout.desc "Toda información acerca del complemento y su desarrollador puede encontrarse en su página principal de complementos de Mozilla. Si le gustó el complemento, por favor considere dejar allí una revisión respetuosa o una pequeña contribución para ayudar a sostener su desarrollo continuado. Los informes de errores y sugerencias pueden hacerse en la página web de soporte técnico.">
+<!ENTITY thepuzzlepieceabout.home "Página principal del complemento">
+<!ENTITY thepuzzlepieceabout.tech "Soporte técnico">

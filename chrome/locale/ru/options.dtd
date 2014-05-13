@@ -1,0 +1,34 @@
+<!ENTITY Optwindow.style "width: 32.5em;">
+<!ENTITY Options.title "The Puzzle Piece">
+<!ENTITY Optgeneral.label "Панель дополнений">
+<!ENTITY Optabout.label "О дополнении...">
+<!ENTITY GroupPosition.label "Расположение">
+<!ENTITY GroupBehavior.label "Поведение">
+<!ENTITY OptPlacement.bottomLabel "Поместить внизу окна браузера">
+<!ENTITY OptPlacement.cornerLabel "Сжать в нижний угол окна браузера">
+<!ENTITY OptPlacement.urlbarLabel "Поместить в строку адреса">
+<!ENTITY OptmoveToRight.label "Поместить с правой стороны окна браузера">
+<!ENTITY OptshowPPs.label "Показывать кнопку-переключатель в Панеле дополнений">
+<!ENTITY OptautoHide.label "Автоматически скрывать Панель дополнений">
+<!ENTITY OptstatusBar.label "Восстановить Панель статуса">
+<!ENTITY OptKeyboardShortcut.caption "Горячая клавиша">
+<!ENTITY OptKeyboardShortcut.control "Ctrl">
+<!ENTITY OptKeyboardShortcut.shift "Shift">
+<!ENTITY OptKeyboardShortcut.alt "Alt">
+<!ENTITY OptKeyboardShortcut.command "Command">
+<!ENTITY OptKeyboardShortcut.option "Option">
+<!ENTITY OptKeyboardShortcut.none "None">
+<!ENTITY OptKeyboardShortcut.spacebar "Spacebar">
+<!ENTITY OptKeyboardShortcut.pageup "Page Up">
+<!ENTITY OptKeyboardShortcut.pagedown "Page Down">
+<!ENTITY OptKeyboardShortcut.end "End">
+<!ENTITY OptKeyboardShortcut.home "Home">
+<!ENTITY OptKeyboardShortcut.left "Left">
+<!ENTITY OptKeyboardShortcut.up "Up">
+<!ENTITY OptKeyboardShortcut.right "Right">
+<!ENTITY OptKeyboardShortcut.down "Down">
+<!ENTITY thepuzzlepieceabout.name "The Puzzle Piece">
+<!ENTITY thepuzzlepieceabout.by "by Quicksaver">
+<!ENTITY thepuzzlepieceabout.desc "Всю информацию о дополнении и его авторе можно найти на офицальной странице дополнения. Если Вам понравилось дополнение, оставьте, пожалуйста, хороший отзыв о нем или сделайте скромное пожертвование для поддержки дальнейшей разработки.  Отчеты об ошибках можно оставлять на странице технической поддержки.">
+<!ENTITY thepuzzlepieceabout.home "Страница дополнения">
+<!ENTITY thepuzzlepieceabout.tech "Техническая поддержка">

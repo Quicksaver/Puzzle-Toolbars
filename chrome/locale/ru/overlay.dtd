@@ -1,0 +1,11 @@
+<!ENTITY OptionsMenu.label "Настройки The Puzzle Piece">
+<!ENTITY addonBar.name "Панель дополнений">
+<!ENTITY addonBar.accesskey "A">
+<!ENTITY addonBar.menuAdd "Добавить на Панель дополнений">
+<!ENTITY addonBar.menuMove "Переместить на Панель дополнений">
+<!ENTITY addonBar.menuRemove "Удалить с Панели дополнений">
+<!ENTITY addonBar.menuMain "Переместить на Панель инструментов">
+<!ENTITY statusBar.label "Панель статуса">
+<!ENTITY specialWidget.separator "Разделитель">
+<!ENTITY specialWidget.spring "Динамический разделитель">
+<!ENTITY specialWidget.spacer "Фиксированный разделитель">

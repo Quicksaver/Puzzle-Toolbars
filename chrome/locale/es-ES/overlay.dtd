@@ -1,0 +1,11 @@
+<!ENTITY OptionsMenu.label "Opciones de The Puzzle Piece">
+<!ENTITY addonBar.name "Barra de complementos">
+<!ENTITY addonBar.accesskey "A">
+<!ENTITY addonBar.menuAdd "Añadir a la barra de complementos">
+<!ENTITY addonBar.menuMove "Mover a la barra de complementos">
+<!ENTITY addonBar.menuRemove "Eliminar de la barra de complementos">
+<!ENTITY addonBar.menuMain "Mover a la barra de herramientas">
+<!ENTITY statusBar.label "Barra de estado">
+<!ENTITY specialWidget.separator "Separador">
+<!ENTITY specialWidget.spring "Espacio flexible">
+<!ENTITY specialWidget.spacer "Espacio">
