@@ -128,6 +128,14 @@
 		padding: 0 !important;
 	}
 	
+	/* SDK icons need a little helping fitting in the location bar */
+	#nav-bar .addon-bar[placement="urlbar"] > toolbarbutton[sdk-button="true"][cui-areatype="toolbar"] > .toolbarbutton-icon {
+		width: auto;
+	}
+	/* so do TabUtilities icons */
+	#nav-bar .addon-bar[placement="urlbar"] > #button_tuOptions .toolbarbutton-icon { width: 20px !important; }
+	#nav-bar .addon-bar[placement="urlbar"] > #closetab-button .toolbarbutton-icon { width: 18px !important; }
+	
 	/* don't show the little separator, as it'll be out of place in the add-on bar */
 	.addon-bar .toolbarbutton-1 > .toolbarbutton-menubutton-dropmarker:before {
 		display: none !important;
