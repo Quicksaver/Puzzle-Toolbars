@@ -133,8 +133,11 @@
 		width: auto;
 	}
 	/* so do TabUtilities icons */
-	#nav-bar .addon-bar[placement="urlbar"] > #button_tuOptions .toolbarbutton-icon { width: 20px !important; }
-	#nav-bar .addon-bar[placement="urlbar"] > #closetab-button .toolbarbutton-icon { width: 18px !important; }
+	#nav-bar .addon-bar[placement="urlbar"] > #button_tuOptions .toolbarbutton-icon,
+	#nav-bar .addon-bar[placement="urlbar"] > #closetab-button .toolbarbutton-icon {
+		height: 16px !important;
+		width: 16px !important;
+	}
 	
 	/* don't show the little separator, as it'll be out of place in the add-on bar */
 	.addon-bar .toolbarbutton-1 > .toolbarbutton-menubutton-dropmarker:before {
