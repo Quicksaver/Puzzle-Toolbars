@@ -54,6 +54,11 @@
 	.addon-bar .toolbarbutton-icon {
 		max-height: 18px;
 	}
+	/* try to get all the buttons as aligned as possible */
+	.addon-bar[placement="corner"] > toolbarbutton {
+		min-height: 18px;
+		vertical-align: top;
+	}
 	.addon-bar[placement="corner"] .toolbarbutton-icon {
 		margin: 2px 0;
 	}
@@ -132,11 +137,22 @@
 	#nav-bar .addon-bar[placement="urlbar"] > toolbarbutton[sdk-button="true"][cui-areatype="toolbar"] > .toolbarbutton-icon {
 		width: auto;
 	}
-	/* so do TabUtilities icons */
+	/* so do Tab Utilities icons */
 	#nav-bar .addon-bar[placement="urlbar"] > #button_tuOptions .toolbarbutton-icon,
 	#nav-bar .addon-bar[placement="urlbar"] > #closetab-button .toolbarbutton-icon {
 		height: 16px !important;
 		width: 16px !important;
+	}
+	/* and Quick Locale Switcher *sniff*... */
+	#nav-bar .addon-bar[placement="urlbar"] > #tbtnCavemanQLS .toolbarbutton-icon {
+		padding-top: 4px !important;
+		padding-bottom: 3px !important;
+	}
+	
+	/* And Tab Utilities icons also need help fititng in the corner */
+	.addon-bar[placement="corner"] > #button_tuOptions .toolbarbutton-icon,
+	.addon-bar[placement="corner"] > #closetab-button .toolbarbutton-icon {
+		margin: 2px 0 !important;
 	}
 	
 	/* don't show the little separator, as it'll be out of place in the add-on bar */
