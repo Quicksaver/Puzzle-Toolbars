@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.0.0';
+moduleAid.VERSION = '1.0.1';
 
 this.changeStratiformColor = function() {
 	styleAid.unload('stratiformFix');
@@ -8,7 +8,7 @@ this.changeStratiformColor = function() {
 		
 		var sscode = '/*The Puzzle Piece CSS declarations of variable values*/\n';
 		sscode += '@namespace url(http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul);\n';
-		sscode += '.addon-bar[placement="corner"] { background-color: hsla('+color.H+', '+color.S+'%, '+color.L+'%, 1) !important; }';
+		sscode += '#'+objName+'-corner-container { background-color: hsla('+color.H+', '+color.S+'%, '+color.L+'%, 1) !important; }';
 		
 		styleAid.load('stratiformFix', sscode, true);
 	}

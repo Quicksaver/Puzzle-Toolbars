@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.1.10';
+moduleAid.VERSION = '1.1.11';
 
 this.__defineGetter__('gBrowser', function() { return window.gBrowser; });
 this.__defineGetter__('bottomBox', function() { return $('browser-bottombox'); });
@@ -48,7 +48,16 @@ this.togglePlacement = function(e) {
 		bottomBox.insertBefore(addonBar, $('developer-toolbar'));
 	}
 	
+	// first unload what doesn't need to be loaded, so these don't conflict with each other
+	if(prefAid.placement != 'urlbar') {
+		moduleAid.unload('inURLBar');
+	}
+	if(prefAid.placement != 'corner') {
+		moduleAid.unload('inCorner');
+	}
+	
 	moduleAid.loadIf('inURLBar', !isCustomizing && prefAid.placement == 'urlbar');
+	moduleAid.loadIf('inCorner', !isCustomizing && prefAid.placement == 'corner');
 	setAttribute(addonBar, 'placement', (!isCustomizing) ? prefAid.placement : 'bottom');
 	
 	if(isCustomizing && addonBar.parentNode.id != 'customization-palette-container') {
@@ -102,6 +111,7 @@ moduleAid.UNLOADMODULE = function() {
 	
 	moduleAid.unload('autoHide');
 	moduleAid.unload('inURLBar');
+	moduleAid.unload('inCorner');
 	moduleAid.unload('placePP');
 	moduleAid.unload('initAddonBar');
 	moduleAid.unload('compatibilityFix/windowFixes');

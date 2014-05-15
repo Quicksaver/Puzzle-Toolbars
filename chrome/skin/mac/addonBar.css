@@ -5,11 +5,10 @@
 		box-shadow: none;
 	}
 	
-	.addon-bar[placement="corner"] {
-		-moz-appearance: none !important;
+	#thePuzzlePiece-corner-container {
 		background-color: #E8E8E8;
 		border-radius: 8px 8px 0 0;
-		border-top: 1px solid #888 !important;
+		border-top: 1px solid #888;
 		border-right: 1px solid #888;
 		border-left: 1px solid #888;
 		-moz-border-top-colors: #888;
@@ -17,10 +16,6 @@
 		-moz-border-left-colors: #888;
 		padding-top: 1px;
 	}
-	
-	/* the downloads indicator is pretty broken if the add-on bar is in the corner */
-	.addon-bar[placement="corner"] #downloads-button[indicator] { padding-top: 18px !important; }
-	.addon-bar[placement="corner"] #downloads-button[indicator] #downloads-indicator-anchor { margin-bottom: 20px !important; }
 	
 	.PuzzlePiece:not(#thePuzzlePiece-urlbar-PP):not([active]):not(:hover):not([hover]),
 	.PuzzlePiece:not(#thePuzzlePiece-urlbar-PP)[autohide]:not(:hover):not([hover]) {

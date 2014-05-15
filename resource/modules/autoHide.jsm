@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.1.13';
+moduleAid.VERSION = '1.1.14';
 
 this.onMouseOver = function() {
 	setHover(true);
@@ -61,7 +61,9 @@ this.initHovers = function() {
 };
 
 this.moveAutoHide = function() {
-	var barOffset = addonBar.clientHeight +addonBar.clientTop -CLIPBAR;
+	if(!cornerContainer) { return; }
+	
+	var barOffset = cornerContainer.clientHeight +cornerContainer.clientTop -CLIPBAR;
 	var clipOffHeight = moveBarStyle.clientHeight +moveBarStyle.clientTop;
 	if(moveBarStyle.bottom > 1) { clipOffHeight += moveBarStyle.clientBottom; }
 	
@@ -70,12 +72,12 @@ this.moveAutoHide = function() {
 	var sscode = '/*The Puzzle Piece CSS declarations of variable values*/\n';
 	sscode += '@namespace url(http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul);\n';
 	sscode += '@-moz-document url("'+document.baseURI+'") {\n';
-	sscode += '	window['+objName+'_UUID="'+_UUID+'"] .addon-bar[placement="corner"][autohide]:not([hover]):not(:hover) {\n';
+	sscode += '	window['+objName+'_UUID="'+_UUID+'"] #'+objName+'-corner-container[autohide]:not([hover]):not(:hover) {\n';
 	sscode += '		bottom: '+(moveBarStyle.bottom -barOffset)+'px;\n';
 	sscode += '		clip: rect(0px, '+4000+'px, '+CLIPBAR+'px, 0px);\n';
 	sscode += '	}\n';
-	sscode += '	window['+objName+'_UUID="'+_UUID+'"] .addon-bar[placement="corner"][autohide][hover],\n';
-	sscode += '	window['+objName+'_UUID="'+_UUID+'"] .addon-bar[placement="corner"][autohide]:hover {\n';
+	sscode += '	window['+objName+'_UUID="'+_UUID+'"] #'+objName+'-corner-container[autohide][hover],\n';
+	sscode += '	window['+objName+'_UUID="'+_UUID+'"] #'+objName+'-corner-container[autohide]:hover {\n';
 	sscode += '		clip: rect(0px, '+4000+'px, '+clipOffHeight+'px, 0px);\n';
 	sscode += '	}\n';
 	sscode += '}';
@@ -157,7 +159,6 @@ this.holdPopupMenu = function(e) {
 };
 
 moduleAid.LOADMODULE = function() {
-	setAttribute(addonBar, 'autohide', 'true');
 	addonBar.hovers = 0;
 	
 	listenerAid.add(addonBar, 'dragenter', onDragEnter);
@@ -176,6 +177,7 @@ moduleAid.LOADMODULE = function() {
 	initHovers();
 	moveAutoHide();
 	
+	setAttribute(addonBar, 'autohide', 'true');
 	if(!addonBar.collapsed && (STARTED != APP_STARTUP || !prefAid.noInitialShow)) { initialShowBar(); }
 };
 

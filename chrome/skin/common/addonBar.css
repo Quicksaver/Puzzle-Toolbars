@@ -7,24 +7,24 @@
 	
 	.addon-bar:not([placement="bottom"]) {
 		-moz-appearance: none !important;
-		background-image: none;
+		background: none !important;
 		overflow: hidden;
 		opacity: 1;
 	}
 	
+	#thePuzzlePiece-corner-container:not(:-moz-lwtheme),
 	.addon-bar[placement="corner"]:not(:-moz-lwtheme) {
-		background-image: none !important;
+		background-image: none;
 	}
 	
 	.addon-bar[placement="corner"] {
-		position: fixed;
-		padding: 0px 5px;
-		border-bottom: none;
-		background-color: inherit;
+		padding: 2px 0;
+		margin: 0 5px;
+		-moz-appearance: none !important;
+		border: none !important;
 	}
 	
 	.addon-bar[placement="urlbar"] {
-		background: none !important;
 		border: none;
 		box-shadow: none;
 		padding: 1px 3px 0px 3px;
@@ -32,16 +32,37 @@
 	}
 	
 	.addon-bar:not([placement="bottom"])[collapsed="true"] {
+		display: -moz-box !important;
+		visibility: visible !important;
+		pointer-events: none;
+	}
+	
+	.addon-bar[placement="urlbar"][collapsed="true"],
+	#thePuzzlePiece-corner-container[collapsed="true"] {
 		opacity: 0;
+	}
+	
+	/* special rules for the corner container */
+	#thePuzzlePiece-corner-container {
+		background-color: inherit;
+		position: fixed;
+	}
+	#thePuzzlePiece-corner-container[collapsed="true"] {
 		display: -moz-box !important;
 		visibility: visible !important;
 		pointer-events: none;
 	}
 	
 	/* for fullscreen */
+	#thePuzzlePiece-corner-container[moz-collapsed="true"],
 	.addon-bar:not([placement="bottom"])[moz-collapsed="true"],
 	.addon-bar[placement="bottom"][moz-collapsed="true"]:not([collapsed="true"]) {
 		visibility: visible !important;
+	}
+	
+	/* keep it from jumping around when toggling placements */
+	#browser-bottombox > .addon-bar:not([placement="bottom"]) {
+		visibility: collapse !important;
 	}
 	
 	/* Inner buttons and other elements display */
@@ -53,14 +74,6 @@
 	}
 	.addon-bar .toolbarbutton-icon {
 		max-height: 18px;
-	}
-	/* try to get all the buttons as aligned as possible */
-	.addon-bar[placement="corner"] > toolbarbutton {
-		min-height: 18px;
-		vertical-align: top;
-	}
-	.addon-bar[placement="corner"] .toolbarbutton-icon {
-		margin: 2px 0;
 	}
 	.addon-bar[placement="urlbar"] .toolbarbutton-icon {
 		padding: 0 !important;
@@ -77,14 +90,6 @@
 	
 	.addon-bar > toolbarbutton {
 		-moz-appearance: none;
-	}
-	
-	.addon-bar[placement="corner"] > toolbarseparator,
-	.addon-bar[placement="corner"] > toolbarpaletteitem[type="separator"] {
-		height: 18px;
-		margin-bottom: -18px;
-		position: relative;
-		top: -18px;
 	}
 	
 	.addon-bar > toolbarspring,
@@ -147,12 +152,6 @@
 	#nav-bar .addon-bar[placement="urlbar"] > #tbtnCavemanQLS .toolbarbutton-icon {
 		padding-top: 4px !important;
 		padding-bottom: 3px !important;
-	}
-	
-	/* And Tab Utilities icons also need help fititng in the corner */
-	.addon-bar[placement="corner"] > #button_tuOptions .toolbarbutton-icon,
-	.addon-bar[placement="corner"] > #closetab-button .toolbarbutton-icon {
-		margin: 2px 0 !important;
 	}
 	
 	/* don't show the little separator, as it'll be out of place in the add-on bar */
@@ -233,10 +232,10 @@
 		padding-right: 34px;
 	}
 	window:not([thePuzzlePiece-hidePPs]) .addon-bar[placement="corner"]:not([movetoright]) {
-		padding-left: 17px;
+		margin-left: 17px;
 	}
 	window:not([thePuzzlePiece-hidePPs]) .addon-bar[placement="corner"][movetoright] {
-		padding-right: 17px;
+		margin-right: 17px;
 	}
 	
 	.PuzzlePiece:not(#thePuzzlePiece-urlbar-PP):not([active]):not(:hover):not([hover]),
@@ -303,17 +302,17 @@
 	}
 	
 	/* Animation in corners */
-	.addon-bar:not([noAnimation])[placement="corner"]:hover,
-	.addon-bar:not([noAnimation])[placement="corner"][hover],
-	.addon-bar:not([noAnimation])[placement="corner"]:not([collapsed="true"]) {
+	#thePuzzlePiece-corner-container:not([noAnimation]):hover,
+	#thePuzzlePiece-corner-container:not([noAnimation])[hover],
+	#thePuzzlePiece-corner-container:not([noAnimation]):not([collapsed="true"]) {
 		-moz-transition: bottom .25s linear 0s, opacity .25s linear 0s, clip .25s linear 0s;
 		transition: bottom .25s linear 0s, opacity .25s linear 0s, clip .25s linear 0s; /* Firefox 16+ */
 	}
-	.addon-bar:not([noAnimation])[placement="corner"]:not([collapsed="true"])[autohide]:not(:hover):not([hover]) {
+	#thePuzzlePiece-corner-container:not([noAnimation]):not([collapsed="true"])[autohide]:not(:hover):not([hover]) {
 		-moz-transition: bottom .5s linear .2s, opacity .5s linear .2s, clip .5s linear .2s;
 		transition: bottom .5s linear .2s, opacity .5s linear .2s, clip .5s linear .2s; /* Firefox 16+ */
 	}
-	.addon-bar:not([noAnimation])[placement="corner"][collapsed="true"] {
+	#thePuzzlePiece-corner-container:not([noAnimation])[collapsed="true"] {
 		-moz-transition: bottom .5s linear 0s, opacity .5s linear 0s, clip .5s linear 0s;
 		transition: bottom .5s linear 0s, opacity .5s linear 0s, clip .5s linear 0s; /* Firefox 16+ */
 	}
@@ -333,14 +332,17 @@
 		transition: opacity .5s linear 0s; /* Firefox 16+ */
 	}
 	
-	.addon-bar:not([collapsed="true"]):hover,
-	.addon-bar:not([collapsed="true"])[hover],
+	.addon-bar[placement="urlbar"]:not([collapsed="true"]):hover,
+	.addon-bar[placement="urlbar"]:not([collapsed="true"])[hover],
+	#thePuzzlePiece-corner-container:not([collapsed="true"]):hover,
+	#thePuzzlePiece-corner-container:not([collapsed="true"])[hover],
 	window[customizing="true"] .addon-bar {
 		opacity: 1;
 	}
 	
-	.addon-bar:not([autohide])[statusHide]:not(:hover):not([hover]),
-	.addon-bar[autohide]:not(:hover):not([hover]) {
+	#thePuzzlePiece-corner-container:not([autohide])[statusHide]:not(:hover):not([hover]),
+	#thePuzzlePiece-corner-container[autohide]:not(:hover):not([hover]),
+	.addon-bar[placement="urlbar"][autohide]:not(:hover):not([hover]) {
 		opacity: 0;
 	}
 	

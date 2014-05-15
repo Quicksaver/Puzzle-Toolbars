@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.2.15';
+moduleAid.VERSION = '1.2.16';
 
 this.__defineGetter__('browserPanel', function() { return $('browser-panel'); });
 this.__defineGetter__('gFindBar', function() { return window.gFindBar; });
@@ -15,6 +15,8 @@ this.getComputedStyle = function(el) { return window.getComputedStyle(el); };
 
 /* This only returns non-null when inURLBar is true */
 this.__defineGetter__('URLBarContainer', function() { return $(objName+'-urlbar-addonbar-container'); });
+/* Likewise for corner */
+this.__defineGetter__('cornerContainer', function() { return $(objName+'-corner-container'); });
 
 this.CLIPBAR = 6; // ammount of pixels to clip the bar to when it is closed or hidden
 
@@ -136,8 +138,8 @@ this.moveAddonBar = function() {
 		}
 	}
 	
-	moveBarStyle.clientHeight = addonBar.clientHeight;
-	moveBarStyle.clientTop = addonBar.clientTop;
+	moveBarStyle.clientHeight = (cornerContainer) ? cornerContainer.clientHeight : addonBar.clientHeight;
+	moveBarStyle.clientTop = (cornerContainer) ? cornerContainer.clientTop : addonBar.clientTop;
 	moveBarStyle.movetoRight = prefAid.movetoRight;
 	
 	var addonBarStyle = getComputedStyle(addonBar);
@@ -155,7 +157,7 @@ this.moveAddonBar = function() {
 	
 	dispatch(addonBar, { type: "WillMoveAddonBar", cancelable: false });
 	
-	var barOffset = addonBar.clientHeight +addonBar.clientTop -CLIPBAR;
+	var barOffset = (cornerContainer) ? cornerContainer.clientHeight +cornerContainer.clientTop -CLIPBAR : 0;
 	var clipOffHeight = moveBarStyle.clientHeight +moveBarStyle.clientTop;
 	if(moveBarStyle.bottom > 1) { clipOffHeight += moveBarStyle.clientBottom; }
 	
@@ -167,15 +169,15 @@ this.moveAddonBar = function() {
 	var sscode = '/*The Puzzle Piece CSS declarations of variable values*/\n';
 	sscode += '@namespace url(http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul);\n';
 	sscode += '@-moz-document url("'+document.baseURI+'") {\n';
-	sscode += '	window['+objName+'_UUID="'+_UUID+'"] .addon-bar[placement="corner"] {\n';
+	sscode += '	window['+objName+'_UUID="'+_UUID+'"] #'+objName+'-corner-container {\n';
 	sscode += '		bottom: '+moveBarStyle.bottom+'px;\n';
 	sscode += (!prefAid.movetoRight) ? '		left: '+moveBarStyle.left+'px;\n' : '		right: '+moveBarStyle.right+'px;\n';
 	sscode += '		max-width: '+Math.max(moveBarStyle.maxWidth, 5)+'px;\n';
 	sscode += '	}\n';
-	sscode += '	window['+objName+'_UUID="'+_UUID+'"] .addon-bar[placement="corner"]:not([autohide]) {\n';
+	sscode += '	window['+objName+'_UUID="'+_UUID+'"] #'+objName+'-corner-container:not([autohide]) {\n';
 	sscode += '		clip: rect(0px, '+4000+'px, '+clipOffHeight+'px, 0px);\n';
 	sscode += '	}\n';
-	sscode += '	window['+objName+'_UUID="'+_UUID+'"] .addon-bar[placement="corner"][collapsed="true"] {\n';
+	sscode += '	window['+objName+'_UUID="'+_UUID+'"] #'+objName+'-corner-container[collapsed="true"] {\n';
 	sscode += '		bottom: '+(moveBarStyle.bottom -barOffset)+'px;\n';
 	sscode += '		clip: rect(0px, '+4000+'px, '+CLIPBAR+'px, 0px);\n';
 	sscode += '	}\n';
@@ -282,7 +284,7 @@ this.stylePersonaAddonBar = function() {
 		var sscode = '/*The Puzzle Piece CSS declarations of variable values*/\n';
 		sscode += '@namespace url(http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul);\n';
 		sscode += '@-moz-document url("'+document.baseURI+'") {\n';
-		sscode += '	window['+objName+'_UUID="'+_UUID+'"] .addon-bar[placement="corner"] {\n';
+		sscode += '	window['+objName+'_UUID="'+_UUID+'"] #'+objName+'-corner-container {\n';
 		sscode += '	  background-image: ' + prefAid.lwthemebgImage + ' !important;\n';
 		sscode += '	  background-color: ' + prefAid.lwthemebgColor + ' !important;\n';
 		sscode += '	  color: ' + prefAid.lwthemecolor + ' !important;\n';

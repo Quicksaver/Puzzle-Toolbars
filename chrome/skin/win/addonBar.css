@@ -1,9 +1,9 @@
 @namespace url(http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul);
 @-moz-document url("chrome://browser/content/browser.xul") {
-	
-	.addon-bar[placement="corner"] {
+
+	#thePuzzlePiece-corner-container {
 		border-radius: 8px 8px 2px 2px;
-		border-top: 2px solid rgba(0,0,0,0.15) !important;
+		border-top: 2px solid rgba(0,0,0,0.15);
 		border-right: 2px solid rgba(0,0,0,0.15);
 		border-left: 2px solid rgba(0,0,0,0.15);
 		-moz-border-top-colors: rgba(0,0,0,0.15) rgba(255,255,255,0.15);
@@ -14,10 +14,6 @@
 	.addon-bar #status-bar resizer {
 		display: none !important;
 	}
-	
-	/* the downloads indicator is pretty broken if the add-on bar is in the corner */
-	.addon-bar[placement="corner"] #downloads-button[indicator] { padding-top: 20px; }
-	.addon-bar[placement="corner"] #downloads-button[indicator] #downloads-indicator-anchor { margin-top: -18px; }
 	
 	.PuzzlePiece:not(#thePuzzlePiece-urlbar-PP)[clipped][active],
 	.PuzzlePiece:not(#thePuzzlePiece-urlbar-PP)[clipped]:hover {
