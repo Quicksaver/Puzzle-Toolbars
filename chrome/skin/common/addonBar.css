@@ -84,7 +84,7 @@
 	}
 	
 	/* #fixer-status-bar selector is from UI Fixer add-on "make status bar movable" feature */
-	.addon-bar > toolbaritem:not(#fixer-status-bar):not(#thePuzzlePiece-status-bar-container) {
+	.addon-bar > toolbaritem:not(#fixer-status-bar):not(#thePuzzlePiece-status-bar-container):not(#search-container) {
 		height: 18px;
 	}
 	
@@ -136,6 +136,15 @@
 	
 	.addon-bar dropmarker image {
 		padding: 0 !important;
+	}
+	
+	/* little tweaks to make the search bar fit better */
+	.addon-bar[placement="bottom"] #search-container,
+	.addon-bar[placement="urlbar"] #searchbar /* this one is just so weird to look at though */ {
+		margin: -1px 0 -2px;
+	}
+	.addon-bar[placement="corner"] #search-container {
+		margin: -2px 0;
 	}
 	
 	/* SDK icons need a little helping fitting in the location bar */
@@ -232,10 +241,10 @@
 		padding-right: 34px;
 	}
 	window:not([thePuzzlePiece-hidePPs]) .addon-bar[placement="corner"]:not([movetoright]) {
-		margin-left: 17px;
+		margin-left: 19px;
 	}
 	window:not([thePuzzlePiece-hidePPs]) .addon-bar[placement="corner"][movetoright] {
-		margin-right: 17px;
+		margin-right: 19px;
 	}
 	
 	.PuzzlePiece:not(#thePuzzlePiece-urlbar-PP):not([active]):not(:hover):not([hover]),

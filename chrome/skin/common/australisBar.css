@@ -1,7 +1,7 @@
 @namespace url(http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul);
 @-moz-document url("chrome://browser/content/browser.xul") {
 
-	.addon-bar .toolbarbutton-text,
+	.addon-bar *:not(#zoom-reset-button) > .toolbarbutton-text,
 	window[PrintPreview="true"] .addon-bar,
 	window[PrintPreview="true"] .PuzzlePiece,
 	
