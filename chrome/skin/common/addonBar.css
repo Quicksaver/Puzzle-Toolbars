@@ -109,10 +109,10 @@
 	.addon-bar[placement="corner"] #status-bar {
 		max-height: 18px;
 	}
-	.addon-bar[placement="urlbar"] > *:not(toolbarseparator):not([type="separator"]):not(toolbarspring):not([type="spring"]) {
+	.addon-bar[placement="urlbar"] > *:not(:-moz-any(toolbarseparator, [type="separator"], toolbarspring, [type="spring"])) {
 		max-height: 18px;
 	}
-	.addon-bar[placement="urlbar"] > *:not(toolbarseparator):not([type="separator"]):not(toolbarspring):not([type="spring"]):not([type="menu-button"]) {
+	.addon-bar[placement="urlbar"] > *:not(:-moz-any(toolbarseparator, [type="separator"], toolbarspring, [type="spring"], [type="menu-button"], .toolbaritem-combined-buttons)) {
 		padding: 0px 1px !important;
 	}
 	.addon-bar[placement="urlbar"] > toolbarseparator,
@@ -165,9 +165,6 @@
 	.addon-bar #bookmarks-menu-button dropmarker image {
 		padding: 0 !important;
 	}
-	.addon-bar[placement="urlbar"] #bookmarks-menu-button dropmarker image {
-		margin: 0 2px;
-	}
 	
 	/* SDK icons need a little helping fitting in the location bar */
 	#nav-bar .addon-bar[placement="urlbar"] > toolbarbutton[sdk-button="true"][cui-areatype="toolbar"] > .toolbarbutton-icon {
@@ -186,10 +183,18 @@
 	}
 	/* and the zoom control reset button */
 	#nav-bar .addon-bar[placement="urlbar"] #zoom-reset-button .toolbarbutton-text {
-		padding: 0;
+		padding: 1px 0 0 0;
 		border: none;
 		background: none;
 		box-shadow: none;
+	}
+	/* all combined buttons have a margin in the nav-bar */
+	#nav-bar .addon-bar[placement="urlbar"] .toolbaritem-combined-buttons {
+		margin: 0;
+	}
+	/* greasemonkey shows a little background in the dropmarker when the button is disabled (no idea where it comes from though */
+	#nav-bar .addon-bar[placement="urlbar"] #greasemonkey-tbb[disabled="yes"] > .toolbarbutton-menubutton-dropmarker > .dropmarker-icon {
+		background: none;
 	}
 	
 	/* don't show the little separator, as it'll be out of place in the add-on bar */
