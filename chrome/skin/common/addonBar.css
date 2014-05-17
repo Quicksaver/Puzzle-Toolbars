@@ -77,10 +77,15 @@
 	}
 	.addon-bar[placement="urlbar"] .toolbarbutton-icon {
 		padding: 0 !important;
-		margin: 0 2px !important;
 	}
-	.addon-bar[placement="urlbar"] .toolbarbutton-1[type="menu"] .toolbarbutton-menu-dropmarker {
-		-moz-margin-start: 0 !important;
+	#nav-bar .addon-bar[placement="urlbar"] *:not(.toolbarbutton-menubutton-button):not(.toolbarbutton-combined) > .toolbarbutton-icon {
+		margin: 0 2px;
+	}
+	#nav-bar .addon-bar[placement="urlbar"] .toolbarbutton-1[type="menu"] .toolbarbutton-menu-dropmarker {
+		-moz-margin-start: 0;
+	}
+	#nav-bar .addon-bar[placement="urlbar"] .toolbarbutton-1[type="menu-button"] dropmarker image {
+		border: none;
 	}
 	
 	/* #fixer-status-bar selector is from UI Fixer add-on "make status bar movable" feature */
@@ -106,6 +111,8 @@
 	}
 	.addon-bar[placement="urlbar"] > *:not(toolbarseparator):not([type="separator"]):not(toolbarspring):not([type="spring"]) {
 		max-height: 18px;
+	}
+	.addon-bar[placement="urlbar"] > *:not(toolbarseparator):not([type="separator"]):not(toolbarspring):not([type="spring"]):not([type="menu-button"]) {
 		padding: 0px 1px !important;
 	}
 	.addon-bar[placement="urlbar"] > toolbarseparator,
@@ -129,22 +136,37 @@
 		padding: 0px 3px !important;
 	}
 	
-	.addon-bar dropmarker {
+	.addon-bar *:not(#bookmarks-menu-button) > dropmarker {
 		padding: 0 2px !important;
 		border: none;
 	}
 	
-	.addon-bar dropmarker image {
+	.addon-bar *:not(#bookmarks-menu-button) > dropmarker image {
 		padding: 0 !important;
 	}
 	
 	/* little tweaks to make the search bar fit better */
+	.addon-bar:not([placement="bottom"]) #search-container {
+		min-width: calc(54px + 22ch);
+	}
 	.addon-bar[placement="bottom"] #search-container,
 	.addon-bar[placement="urlbar"] #searchbar /* this one is just so weird to look at though */ {
 		margin: -1px 0 -2px;
 	}
 	.addon-bar[placement="corner"] #search-container {
 		margin: -2px 0;
+	}
+	
+	/* the bookmarks button is a special case because of its dropmarker */
+	.addon-bar #bookmarks-menu-button dropmarker {
+		padding: 0 3px !important;
+		border: none;
+	}
+	.addon-bar #bookmarks-menu-button dropmarker image {
+		padding: 0 !important;
+	}
+	.addon-bar[placement="urlbar"] #bookmarks-menu-button dropmarker image {
+		margin: 0 2px;
 	}
 	
 	/* SDK icons need a little helping fitting in the location bar */
@@ -161,6 +183,13 @@
 	#nav-bar .addon-bar[placement="urlbar"] > #tbtnCavemanQLS .toolbarbutton-icon {
 		padding-top: 4px !important;
 		padding-bottom: 3px !important;
+	}
+	/* and the zoom control reset button */
+	#nav-bar .addon-bar[placement="urlbar"] #zoom-reset-button .toolbarbutton-text {
+		padding: 0;
+		border: none;
+		background: none;
+		box-shadow: none;
 	}
 	
 	/* don't show the little separator, as it'll be out of place in the add-on bar */
