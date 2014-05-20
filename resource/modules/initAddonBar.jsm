@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.2.16';
+moduleAid.VERSION = '1.2.17';
 
 this.__defineGetter__('browserPanel', function() { return $('browser-panel'); });
 this.__defineGetter__('gFindBar', function() { return window.gFindBar; });
@@ -85,6 +85,13 @@ this.setCustomizeMenu = function(e) {
 	setAttribute(customizeMenu.getElementsByAttribute('toolbarId', objName+'-addon-bar')[0], 'command', objName+':ToggleAddonBar');
 };
 
+this.tabSelectMoveAddonBar = function() {
+	var findbar = !(window.gFindBarInitialized && !gFindBar.hidden && gFindBar.getAttribute('position') != 'top' && !trueAttribute(gFindBar, 'movetotop'));
+	if(moveBarStyle && moveBarStyle.findbarHidden != findbar) {
+		delayMoveAddonBar();
+	}
+};
+
 this.delayMoveAddonBar = function() {
 	timerAid.init('delayMoveAddonBar', moveAddonBar, 0);
 };
@@ -95,6 +102,7 @@ this.moveAddonBar = function() {
 	
 	// We should do all these calculations to also position the puzzle pieces, even if the add-on bar is closed
 	moveBarStyle = {
+		findbarHidden: true,
 		maxWidth: -(scrollBarWidth *2),
 		left: 2,
 		right: 2,
@@ -134,6 +142,7 @@ this.moveAddonBar = function() {
 		&& !gFindBar.hidden
 		&& gFindBar.getAttribute('position') != 'top'
 		&& !trueAttribute(gFindBar, 'movetotop')) {
+			moveBarStyle.findbarHidden = false;
 			moveBarStyle.bottom += gFindBar.clientHeight +gFindBar.clientTop;
 		}
 	}
@@ -340,6 +349,7 @@ moduleAid.LOADMODULE = function() {
 	listenerAid.add(addonBar, 'ToggledAddonBar', moveAddonBar);
 	observerAid.add(findPersonaPosition, "lightweight-theme-changed");
 	listenerAid.add(addonBar, 'AddonBarCustomized', moveAddonBar);
+	gBrowser.tabContainer.addEventListener('TabSelect', tabSelectMoveAddonBar);
 	
 	// moveAddonBar won't fire when setting hidden/collapsed in the buttons, unless we make it follow these changes
 	// this only exists in Firefox 14+
@@ -377,6 +387,7 @@ moduleAid.UNLOADMODULE = function() {
 		moveOnHidingAttr.disconnect();
 	}
 	
+	gBrowser.tabContainer.removeEventListener('TabSelect', tabSelectMoveAddonBar);
 	listenerAid.remove(addonBar, 'AddonBarCustomized', moveAddonBar);
 	observerAid.remove(findPersonaPosition, "lightweight-theme-changed");
 	listenerAid.remove(contextMenu, 'popupshowing', setContextMenu);
