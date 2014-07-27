@@ -1,9 +1,6 @@
 @namespace url(http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul);
 @-moz-document url("chrome://browser/content/browser.xul") {
 
-	#toggle_ctr_addon-bar,
-	#ctr_addon-bar,
-	#ctr_toolbar_dummy,
 	#toggle_ctraddon_addon-bar,
 	#ctraddon_addon-bar,
 	#ctraddon_toolbar_dummy,

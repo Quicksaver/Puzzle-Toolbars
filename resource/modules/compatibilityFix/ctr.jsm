@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.2.1';
+moduleAid.VERSION = '1.3.0';
 
 this.ctrId = 'ctraddon_';
 
@@ -12,11 +12,6 @@ this.trackCTRBar = {
 
 moduleAid.LOADMODULE = function() {
 	AddonManager.getAddonByID("ClassicThemeRestorer@ArisT2Noia4dev", function(addon) {
-		// CTR's Ids changed in version 1.1.9beta13, I can remove this eventually in later FF versions when it becomes unlikely that anyone is using old versions
-		if(Services.vc.compare(addon.version, '1.1.9beta13') < 0) {
-			ctrId = 'ctr_';
-		}
-		
 		styleAid.load('ctr', 'ctr');
 		
 		var ids = CustomizableUI.getWidgetIdsInArea(ctrId+'addon-bar');
@@ -38,8 +33,8 @@ moduleAid.LOADMODULE = function() {
 			i++;
 		}
 		
-		for(var i=0; i<ids.length; i++) {
-			CustomizableUI.addWidgetToArea(ids[i], objName+'-addon-bar');
+		for(var i in ids) {
+			CustomizableUI.addWidgetToArea(i, objName+'-addon-bar');
 		}
 		
 		// I don't unregister CTR's add-on bar, instead I just watch for any widgets added to it and migrate them automatically
@@ -56,8 +51,8 @@ moduleAid.UNLOADMODULE = function() {
 	if(UNLOADED == ADDON_DISABLE && CustomizableUI.getAreaType(objName+'-addon-bar')) {
 		var ids = CustomizableUI.getWidgetIdsInArea(objName+'-addon-bar');
 		
-		for(var i=0; i<ids.length; i++) {
-			CustomizableUI.addWidgetToArea(ids[i], ctrId+'addon-bar');
+		for(var i in ids) {
+			CustomizableUI.addWidgetToArea(i, ctrId+'addon-bar');
 		}
 	}
 };

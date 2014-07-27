@@ -1,5 +1,6 @@
-moduleAid.VERSION = '1.1.3';
-moduleAid.LAZY = true;
+moduleAid.VERSION = '1.3.1';
+moduleAid.UTILS = true;
+moduleAid.BASEUTILS = true;
 
 // keydownPanel - 	Panel elements don't support keyboard navigation by default; this object fixes that.
 // 			This aid does NOT self-clean, so make sure to remove every call and set object on it.
@@ -37,7 +38,7 @@ this.keydownPanel = {
 				if(e[keycode] && e[keycode] == e.which
 				&& panel._toggleKeyset.shift == e.shiftKey
 				&& panel._toggleKeyset.alt == e.altKey
-				&& panel._toggleKeyset.accel == ((Services.appinfo.OS == 'Darwin') ? e.metaKey : e.ctrlKey)) {
+				&& panel._toggleKeyset.accel == (DARWIN ? e.metaKey : e.ctrlKey)) {
 					e.preventDefault();
 					e.stopPropagation();
 					
@@ -201,9 +202,7 @@ this.keydownPanel = {
 	},
 	
 	closeSubView: function() {
-		if(Australis) {
-			window.PanelUI.multiView.showMainView();
-		}
+		window.PanelUI.multiView.showMainView();
 	},
 	
 	menuItemAccesskeyCode: function(str, e) {

@@ -1,11 +1,10 @@
-moduleAid.VERSION = '1.2.17';
+moduleAid.VERSION = '1.3.0';
 
 this.__defineGetter__('browserPanel', function() { return $('browser-panel'); });
 this.__defineGetter__('gFindBar', function() { return window.gFindBar; });
 this.__defineGetter__('toggleAddonBar', function() { return window.toggleAddonBar; });
 this.__defineSetter__('toggleAddonBar', function(v) { return window.toggleAddonBar = v; });
 this.__defineGetter__('setToolbarVisibility', function() { return window.setToolbarVisibility; });
-this.__defineGetter__('appMenu', function() { return $('appmenu_customizeMenu'); });
 this.__defineGetter__('customizeMenu', function() { return $('customization-toolbar-menu'); });
 this.__defineGetter__('viewMenu', function() { return $('viewToolbarsMenu').firstChild; });
 this.__defineGetter__('contextMenu', function() { return $('toolbar-context-menu'); });
@@ -35,7 +34,7 @@ this.__defineGetter__('scrollBarWidth', function() {
 		
 		_scrollBarWidth = 100 -scrollDiv.clientWidth;
 		
-		browserPanel.removeChild(scrollDiv);
+		scrollDiv.remove();
 	}
 	
 	return _scrollBarWidth;
@@ -59,28 +58,13 @@ this.setContextMenu = function(e) {
 	}
 	toggleAttribute(contextOptions, 'hidden', !notHidden);
 	toggleAttribute(contextSeparator, 'hidden', !notHidden);
-	
-	if(!Australis) {
-		setAttribute(contextMenu.getElementsByAttribute('toolbarId', 'addon-bar')[0], 'command', 'Browser:ToggleAddonBar');
-	} else {
-		setAttribute(contextMenu.getElementsByAttribute('toolbarId', objName+'-addon-bar')[0], 'command', objName+':ToggleAddonBar');
-	}
+	setAttribute(contextMenu.getElementsByAttribute('toolbarId', objName+'-addon-bar')[0], 'command', objName+':ToggleAddonBar');
 };
 
 this.setViewMenu = function(e) {
-	if(!Australis) {
-		setAttribute(viewMenu.getElementsByAttribute('toolbarId', 'addon-bar')[0], 'command', 'Browser:ToggleAddonBar');
-	} else {
-		setAttribute(viewMenu.getElementsByAttribute('toolbarId', objName+'-addon-bar')[0], 'command', objName+':ToggleAddonBar');
-	}
+	setAttribute(viewMenu.getElementsByAttribute('toolbarId', objName+'-addon-bar')[0], 'command', objName+':ToggleAddonBar');
 };
 
-// Appmenu doesn't exist in Australis
-this.setAppMenu = function(e) {
-	setAttribute(appMenu.getElementsByAttribute('toolbarId', 'addon-bar')[0], 'command', 'Browser:ToggleAddonBar');
-};
-
-// customizeMenu only exists in Australis
 this.setCustomizeMenu = function(e) {
 	setAttribute(customizeMenu.getElementsByAttribute('toolbarId', objName+'-addon-bar')[0], 'command', objName+':ToggleAddonBar');
 };
@@ -98,7 +82,7 @@ this.delayMoveAddonBar = function() {
 
 this.moveAddonBar = function() {
 	// there's no point in doing all this in customize mode
-	if(Australis && customizing) { return; }
+	if(customizing) { return; }
 	
 	// We should do all these calculations to also position the puzzle pieces, even if the add-on bar is closed
 	moveBarStyle = {
@@ -136,9 +120,8 @@ this.moveAddonBar = function() {
 			}
 		}
 		
-		// Firefox 25 introduces per-tab findbars. The findbar is now a part of appcontent, so I have to account for its height as well
-		if(Services.vc.compare(Services.appinfo.platformVersion, "25.0a1") >= 0
-		&& window.gFindBarInitialized
+		// Firefox 25 introduced per-tab findbars. The findbar is now a part of appcontent, so we have to account for its height as well
+		if(window.gFindBarInitialized
 		&& !gFindBar.hidden
 		&& gFindBar.getAttribute('position') != 'top'
 		&& !trueAttribute(gFindBar, 'movetotop')) {
@@ -261,7 +244,7 @@ this.findPersonaWidth = function() {
 
 this.stylePersonaAddonBar = function() {
 	// Unload current stylesheet if it's been loaded
-	styleAid.unload('personaFindBar_'+_UUID);
+	styleAid.unload('personaAddonBar_'+_UUID);
 	
 	if(prefAid.lwthemebgImage != '') {
 		var boxStyle = getComputedStyle(bottomBox);
@@ -303,7 +286,7 @@ this.stylePersonaAddonBar = function() {
 		sscode += '	}\n';
 		sscode += '}';
 		
-		styleAid.load('personaFindBar_'+_UUID, sscode, true);
+		styleAid.load('personaAddonBar_'+_UUID, sscode, true);
 	}
 };
 
@@ -319,18 +302,11 @@ moduleAid.LOADMODULE = function() {
 		}
 	);
 	
-	// Australis doesn't have this method anymore
-	if(!Australis) {
-		this.backups = {
-			toggleAddonBar: toggleAddonBar
-		};
-	}
-	
+	// the browser had this method pre-australis, I'm keeping the same name in case some add-on needs it for compatibility
 	toggleAddonBar = function toggleAddonBar() {
 		setToolbarVisibility(addonBar, addonBar.collapsed);
-		if(Australis) {
-			toggleAttribute(addonBar, 'customizing', !addonBar.collapsed && customizing);
-		}
+		toggleAttribute(addonBar, 'customizing', !addonBar.collapsed && customizing);
+		
 		dispatch(addonBar, { type: 'ToggledAddonBar', cancelable: false });
 	};
 	
@@ -339,7 +315,6 @@ moduleAid.LOADMODULE = function() {
 	
 	listenerAid.add(contextMenu, 'popupshowing', setContextMenu);
 	listenerAid.add(viewMenu, 'popupshown', setViewMenu);
-	listenerAid.add(appMenu, 'popupshown', setAppMenu);
 	listenerAid.add(customizeMenu, 'popupshown', setCustomizeMenu);
 	listenerAid.add(browserPanel, 'resize', delayMoveAddonBar);
 	listenerAid.add(addonBar, 'resize', delayMoveAddonBar);
@@ -352,27 +327,24 @@ moduleAid.LOADMODULE = function() {
 	gBrowser.tabContainer.addEventListener('TabSelect', tabSelectMoveAddonBar);
 	
 	// moveAddonBar won't fire when setting hidden/collapsed in the buttons, unless we make it follow these changes
-	// this only exists in Firefox 14+
-	if(window.MutationObserver) {
-		moveOnHidingAttr = new window.MutationObserver(function(mutations) {
-			// we don't need to schedule for every difference, we only need to schedule if there is any;
-			// even if we somehow schedule when there's no need to, moveAddonbar will bail-out midway if there's no difference in the values
-			for(var m=0; m<mutations.length; m++) {
-				if(mutations[m].oldValue != mutations[m].target.getAttribute(mutations[m].attributeName)) {
-					// the mutation observer already fires on a "delay" after the attr changes take place,
-					// so there's no need to further delay on our side
-					moveAddonBar();
-					return;
-				}
+	moveOnHidingAttr = new window.MutationObserver(function(mutations) {
+		// we don't need to schedule for every difference, we only need to schedule if there is any;
+		// even if we somehow schedule when there's no need to, moveAddonbar will bail-out midway if there's no difference in the values
+		for(var m of mutations) {
+			if(m.oldValue != m.target.getAttribute(m.attributeName)) {
+				// the mutation observer already fires on a "delay" after the attr changes take place,
+				// so there's no need to further delay on our side
+				moveAddonBar();
+				return;
 			}
-		});
-		moveOnHidingAttr.observe(addonBar, {
-			attributes: true,
-			subtree: true,
-			attributeFilter: ['hidden', 'collapsed'],
-			attributeOldValue: true
-		});
-	}
+		}
+	});
+	moveOnHidingAttr.observe(addonBar, {
+		attributes: true,
+		subtree: true,
+		attributeFilter: ['hidden', 'collapsed'],
+		attributeOldValue: true
+	});
 	
 	// Half fix for when the status-bar is changed
 	listenerAid.add(statusBar, 'load', delayMoveAddonBar, true);
@@ -382,17 +354,15 @@ moduleAid.LOADMODULE = function() {
 
 moduleAid.UNLOADMODULE = function() {
 	styleAid.unload('positionAddonBar_'+_UUID);
+	styleAid.unload('personaAddonBar_'+_UUID);
 	
-	if(moveOnHidingAttr) {
-		moveOnHidingAttr.disconnect();
-	}
+	moveOnHidingAttr.disconnect();
 	
 	gBrowser.tabContainer.removeEventListener('TabSelect', tabSelectMoveAddonBar);
 	listenerAid.remove(addonBar, 'AddonBarCustomized', moveAddonBar);
 	observerAid.remove(findPersonaPosition, "lightweight-theme-changed");
 	listenerAid.remove(contextMenu, 'popupshowing', setContextMenu);
 	listenerAid.remove(viewMenu, 'popupshown', setViewMenu);
-	listenerAid.remove(appMenu, 'popupshown', setAppMenu);
 	listenerAid.remove(customizeMenu, 'popupshown', setCustomizeMenu);
 	listenerAid.remove(browserPanel, 'resize', delayMoveAddonBar);
 	listenerAid.remove(addonBar, 'resize', delayMoveAddonBar);
@@ -405,24 +375,10 @@ moduleAid.UNLOADMODULE = function() {
 	prefAid.unlisten('movetoRight', moveAddonBar);
 	prefAid.unlisten('placement', moveAddonBar);
 	
-	if(!Australis) {
-		removeAttribute(contextMenu.getElementsByAttribute('toolbarId', 'addon-bar')[0], 'command');
-		removeAttribute(viewMenu.getElementsByAttribute('toolbarId', 'addon-bar')[0], 'command');
-		if(appMenu) { removeAttribute(appMenu.getElementsByAttribute('toolbarId', 'addon-bar')[0], 'command'); }
-	} else {
-		removeAttribute(contextMenu.getElementsByAttribute('toolbarId', objName+'-addon-bar')[0], 'command');
-		removeAttribute(viewMenu.getElementsByAttribute('toolbarId', objName+'-addon-bar')[0], 'command');
-	}
+	removeAttribute(contextMenu.getElementsByAttribute('toolbarId', objName+'-addon-bar')[0], 'command');
+	removeAttribute(viewMenu.getElementsByAttribute('toolbarId', objName+'-addon-bar')[0], 'command');
 	
-	// Australis doesn't have this method anymore
-	if(!Australis) {
-		if(this.backups) {
-			toggleAddonBar = this.backups.toggleAddonBar;
-			delete this.backups;
-		}
-	} else {
-		delete window.toggleAddonBar;
-	}
+	delete window.toggleAddonBar;
 	
 	overlayAid.removeOverlayWindow(window, 'addonBar');
 	addonBar.hidden = false;

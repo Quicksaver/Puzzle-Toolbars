@@ -1,13 +1,11 @@
-moduleAid.VERSION = '1.1.11';
+moduleAid.VERSION = '1.2.0';
 
 this.__defineGetter__('gBrowser', function() { return window.gBrowser; });
 this.__defineGetter__('bottomBox', function() { return $('browser-bottombox'); });
-this.__defineGetter__('addonBar', function() { return (!Australis) ? $('addon-bar') : $(objName+'-addon-bar'); });
-this.__defineGetter__('statusBar', function() { return (Australis) ? _statusBar.node || $('status-bar') : $('status-bar'); });
+this.__defineGetter__('addonBar', function() { return $(objName+'-addon-bar'); });
+this.__defineGetter__('statusBar', function() { return _statusBar.node || $('status-bar'); });
 
 this.__defineGetter__('customizing', function() {
-	if(!Australis) { return trueAttribute(addonBar, 'customizing'); }
-	
 	if(trueAttribute(document.documentElement, 'customizing')) { return true; }
 	
 	// this means that the window is still opening and the first tab will open customize mode
@@ -86,10 +84,8 @@ moduleAid.LOADMODULE = function() {
 	togglePlacement();
 	toggleAutoHide();
 	
-	if(Australis) {
-		listenerAid.add(window, 'MigratedFromAddonBar', showWhenMigrated);
-		showWhenMigrated();
-	}
+	listenerAid.add(window, 'MigratedFromAddonBar', showWhenMigrated);
+	showWhenMigrated();
 };
 
 moduleAid.UNLOADMODULE = function() {
@@ -98,9 +94,7 @@ moduleAid.UNLOADMODULE = function() {
 	prefAid.unlisten('placement', toggleAutoHide);
 	prefAid.unlisten('placement', togglePlacement);
 	
-	if(Australis) {
-		listenerAid.remove(window, 'MigratedFromAddonBar', showWhenMigrated);
-	}
+	listenerAid.remove(window, 'MigratedFromAddonBar', showWhenMigrated);
 	
 	listenerAid.remove(window, 'beforecustomization', togglePlacement);
 	listenerAid.remove(window, 'aftercustomization', togglePlacement);

@@ -1,10 +1,6 @@
-moduleAid.VERSION = '1.0.7';
+moduleAid.VERSION = '1.0.8';
 
 moduleAid.LOADMODULE = function() {
-	if(Services.navigator.oscpu == 'Windows NT 5.1' && !Australis) {
-		moduleAid.load('compatibilityFix/winxp');
-	}
-	
 	AddonManager.getAddonByID("{73a6fe31-595d-460b-a920-fcc0f8843232}", function(addon) {
 		moduleAid.loadIf('compatibilityFix/noScript', (addon && addon.isActive));
 	});
@@ -25,7 +21,6 @@ moduleAid.LOADMODULE = function() {
 };
 
 moduleAid.UNLOADMODULE = function() {
-	moduleAid.unload('compatibilityFix/winxp');
 	moduleAid.unload('compatibilityFix/noScript');
 	moduleAid.unload('compatibilityFix/S3');
 	moduleAid.unload('compatibilityFix/TileTabs');

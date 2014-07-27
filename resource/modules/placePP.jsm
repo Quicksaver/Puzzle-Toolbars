@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.1.10';
+moduleAid.VERSION = '1.2.0';
 
 this.__defineGetter__('leftPP', function() { return $(objName+'-left-PP'); });
 this.__defineGetter__('rightPP', function() { return $(objName+'-right-PP'); });
@@ -18,12 +18,12 @@ this.movePPs = function() {
 	if(activePP && activePP.clientHeight) {
 		_activePPoffset = activePP.firstChild.clientHeight -activePP.clientHeight;
 	}
-	var OSoffset = (Services.appinfo.OS == 'WINNT') ? -2 : 0;
+	var OSoffset = (WINNT) ? -2 : 0;
 	
 	// for when the add-on bar is opened on the bottom
 	var shrunkOffset = 0;
 	if(moveBarStyle.clientHeight > 0) {
-		var PPsize = (Services.appinfo.OS == 'WINNT') ? 22 : (Services.appinfo.OS == 'Darwin') ? 24 : 28; // when shrunk
+		var PPsize = (WINNT) ? 22 : (DARWIN) ? 24 : 28; // when shrunk
 		shrunkOffset += Math.floor((PPsize -moveBarStyle.clientHeight) /2);
 	}
 	
@@ -82,15 +82,13 @@ this.showPPs = function() {
 	movePPs(); // this is done here because if the PP is hidden, its clientHeight is 0, so it needs to update its position when it's shown
 };
 
-this.handleFullScreen = function() {
-	var inFullScreen = !!gBrowser.mCurrentBrowser.contentDocument.mozFullScreenElement;
-	
+this.handleFullScreen = function(m) {
 	setAttribute(addonBar, 'noAnimation', 'true');
 	setAttribute(activePP, 'noAnimation', 'true');
 	setAttribute(URLBarContainer, 'noAnimation', 'true');
 	
-	if(URLBarContainer) { URLBarContainer.hidden = inFullScreen; } else { addonBar.hidden = inFullScreen; }
-	activePP.hidden = inFullScreen;
+	if(URLBarContainer) { URLBarContainer.hidden = m.data; } else { addonBar.hidden = m.data; }
+	activePP.hidden = m.data;
 	
 	aSync(function() {
 		removeAttribute(addonBar, 'noAnimation');
@@ -102,14 +100,16 @@ this.handleFullScreen = function() {
 moduleAid.LOADMODULE = function() {
 	addonBarContextNodes.__defineGetter__('activePP', function() { return activePP; });
 	
+	messenger.messageWindow(window, 'load', 'placePP');
+	messenger.listenWindow(window, 'inFullScreen', handleFullScreen);
+	
 	listenerAid.add(addonBar, 'WillMoveAddonBar', movePPs);
 	listenerAid.add(addonBar, 'ToggledAddonBar', activatePPs);
 	listenerAid.add(window, 'beforecustomization', customizePP, false);
 	listenerAid.add(window, 'aftercustomization', customizePP, false);
 	listenerAid.add(window, 'loadedAddonBarOverlay', choosePP);
 	listenerAid.add(window, 'loadedAddonBarOverlay', showPPs);
-	listenerAid.add(window, 'mozfullscreenchange', handleFullScreen);
-	
+		
 	prefAid.listen('movetoRight', choosePP);
 	prefAid.listen('placement', choosePP);
 	prefAid.listen('showPPs', showPPs);
@@ -135,8 +135,10 @@ moduleAid.UNLOADMODULE = function() {
 	listenerAid.remove(window, 'aftercustomization', customizePP, false);
 	listenerAid.remove(window, 'loadedAddonBarOverlay', choosePP);
 	listenerAid.remove(window, 'loadedAddonBarOverlay', showPPs);
-	listenerAid.remove(window, 'mozfullscreenchange', handleFullScreen);
 	
+	messenger.unlistenWindow(window, 'inFullScreen', handleFullScreen);
+	messenger.messageWindow(window, 'unload', 'placePP');
+		
 	delete addonBarContextNodes.activePP;
 	
 	styleAid.unload('positionPPs_'+_UUID);

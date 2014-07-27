@@ -35,7 +35,7 @@
 		<groupbox align="start">
 			<caption label="&GroupBehavior.label;" />
 			<checkbox label="&OptautoHide.label;" dependson="!pref-placement:bottom,pref-showPPs;pref-placement:corner" preference="pref-autoHide"/>
-			<checkbox id="statusBarCheckbox" label="&OptstatusBar.label;" hidden="true" preference="pref-statusBar"/>
+			<checkbox id="statusBarCheckbox" label="&OptstatusBar.label;" preference="pref-statusBar"/>
 		</groupbox>
 		
 		<groupbox align="center">

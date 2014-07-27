@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.1.7';
+moduleAid.VERSION = '1.1.8';
 
 this.__defineGetter__('urlbarContainer', function() { return $('urlbar-container'); });
 this.__defineGetter__('searchContainer', function() { return $('search-container'); });
@@ -36,9 +36,7 @@ this.hoverURLBarContainer = function() {
 this.lastWidth = 0;
 this.moveContainer = function() {
 	// Bugfix: Endless loop because width of addonBar here is always 0
-	if(trueAttribute($('main-window'), 'disablechrome')
-	&& isAncestor(addonBar, $('navigator-toolbox'))
-	&& (Australis || trueAttribute($('navigator-toolbox'), 'tabsontop'))) {
+	if(trueAttribute($('main-window'), 'disablechrome') && isAncestor(addonBar, $('navigator-toolbox'))) {
 		return;
 	}
 	
@@ -80,8 +78,7 @@ moduleAid.LOADMODULE = function() {
 	prefAid.listen('showPPs', autoHideContainer);
 	
 	// Prevent the location bar's flex attribute from taking over and moving stuff when we hover/open the add-on bar in it
-	if(Australis
-	&& urlbarContainer
+	if(urlbarContainer
 	&& searchContainer
 	&& urlbarContainer.parentNode == searchContainer.parentNode
 	&& !urlbarContainer.getAttribute('width')

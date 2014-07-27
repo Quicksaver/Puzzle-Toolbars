@@ -1,10 +1,6 @@
 @namespace url(http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul);
 @-moz-document url("chrome://browser/content/browser.xul") {
 
-	#addonbar-closebutton {
-		display: none !important;
-	}
-	
 	.addon-bar:not([placement="bottom"]) {
 		-moz-appearance: none !important;
 		background: none !important;
@@ -209,12 +205,9 @@
 		background-position: left, left, right !important;
 		background-size: auto, 1px 100%, 1px 100% !important;
 		background-repeat: no-repeat !important;
-		background-image:	-moz-linear-gradient(bottom, transparent, rgba(0,0,0,.15)),
-					-moz-linear-gradient(bottom, transparent, rgba(0,0,0,.15) 30%),
-		        		-moz-linear-gradient(bottom, transparent, rgba(0,0,0,.15) 30%) !important;
 		background-image:	linear-gradient(to top, transparent, rgba(0,0,0,.15)),
 					linear-gradient(to top, transparent, rgba(0,0,0,.15) 30%),
-		        		linear-gradient(to top, transparent, rgba(0,0,0,.15) 30%) !important; /* Firefox 16 */
+		        		linear-gradient(to top, transparent, rgba(0,0,0,.15) 30%) !important;
 	}
 	
 	.addon-bar toolbarbutton:not([disabled]):hover image,
@@ -289,13 +282,11 @@
 	
 	#thePuzzlePiece-left-PP[bottomPlacement][active]:not(:hover):not([hover]) image {
 		margin-left: 5px;
-		-moz-transform: rotate(-60deg);
-		transform: rotate(-60deg); /* Firefox 16 */
+		transform: rotate(-60deg);
 	}
 	#thePuzzlePiece-right-PP[bottomPlacement][active]:not(:hover):not([hover]) image {
 		margin-right: 5px;
-		-moz-transform: rotate(60deg);
-		transform: rotate(60deg); /* Firefox 16 */
+		transform: rotate(60deg);
 	}
 	#thePuzzlePiece-right-PP[bottomPlacement]:hover image,
 	#thePuzzlePiece-right-PP[bottomPlacement][hover] image,
@@ -308,71 +299,58 @@
 	
 	.PuzzlePiece:not([noAnimation]):not(#thePuzzlePiece-urlbar-PP):not([active]):not(:hover):not([hover]),
 	.PuzzlePiece:not([noAnimation]):not(#thePuzzlePiece-urlbar-PP)[autohide]:not(:hover):not([hover]) {
-		-moz-transition: bottom .5s linear .2s, opacity .5s linear .2s, clip .5s linear .2s;
-		transition: bottom .5s linear .2s, opacity .5s linear .2s, clip .5s linear .2s; /* Firefox 16+ */
+		transition: bottom .5s linear .2s, opacity .5s linear .2s, clip .5s linear .2s;
 	}
 	.PuzzlePiece:not([noAnimation]):not(#thePuzzlePiece-urlbar-PP):hover,
 	.PuzzlePiece:not([noAnimation]):not(#thePuzzlePiece-urlbar-PP)[hover],
 	.PuzzlePiece:not([noAnimation]):not(#thePuzzlePiece-urlbar-PP)[active] {
-		-moz-transition: bottom .25s linear 0s, opacity .25s linear 0s, clip .25s linear 0s;
-		transition: bottom .25s linear 0s, opacity .25s linear 0s, clip .25s linear 0s; /* Firefox 16+ */
+		transition: bottom .25s linear 0s, opacity .25s linear 0s, clip .25s linear 0s;
 	}
 	.PuzzlePiece:not([noAnimation]):not(#thePuzzlePiece-urlbar-PP):not([active]):not(:hover):not([hover]) image {
-		-moz-transition: -moz-transform .5s linear .2s, margin .5s linear .2s, height .5s linear .2s;
-		transition: transform .5s linear .2s, margin .5s linear .2s, height .5s linear .2s; /* Firefox 16+ */
+		transition: transform .5s linear .2s, margin .5s linear .2s, height .5s linear .2s;
 	}
 	.PuzzlePiece:not([noAnimation]):not(#thePuzzlePiece-urlbar-PP):hover image,
 	.PuzzlePiece:not([noAnimation]):not(#thePuzzlePiece-urlbar-PP)[hover] image,
 	.PuzzlePiece:not([noAnimation]):not(#thePuzzlePiece-urlbar-PP)[active] image {
-		-moz-transition: -moz-transform .25s linear 0s, margin .25s linear 0s, height .25s linear 0s;
-		transition: transform .25s linear 0s, margin .25s linear 0s, height .25s linear 0s; /* Firefox 16+ */
+		transition: transform .25s linear 0s, margin .25s linear 0s, height .25s linear 0s;
 	}
 	
 	.PuzzlePiece:not(#thePuzzlePiece-urlbar-PP) {
 		clip: rect(0px, 32px, 32px, 0px);
 	}
 	.PuzzlePiece:not(#thePuzzlePiece-urlbar-PP) image {
-		-moz-transform: rotate(0deg);
-		transform: rotate(0deg); /* Firefox 16 */
+		transform: rotate(0deg);
 	}
 	#thePuzzlePiece-left-PP:not([active]):not(:hover):not([hover]) image {
-		-moz-transform: rotate(-40deg);
-		transform: rotate(-40deg); /* Firefox 16 */
+		transform: rotate(-40deg);
 	}
 	#thePuzzlePiece-right-PP:not([active]):not(:hover):not([hover]) image {
-		-moz-transform: rotate(40deg);
-		transform: rotate(40deg); /* Firefox 16 */
+		transform: rotate(40deg);
 	}
 	
 	/* Animation in corners */
 	#thePuzzlePiece-corner-container:not([noAnimation]):hover,
 	#thePuzzlePiece-corner-container:not([noAnimation])[hover],
 	#thePuzzlePiece-corner-container:not([noAnimation]):not([collapsed="true"]) {
-		-moz-transition: bottom .25s linear 0s, opacity .25s linear 0s, clip .25s linear 0s;
-		transition: bottom .25s linear 0s, opacity .25s linear 0s, clip .25s linear 0s; /* Firefox 16+ */
+		transition: bottom .25s linear 0s, opacity .25s linear 0s, clip .25s linear 0s;
 	}
 	#thePuzzlePiece-corner-container:not([noAnimation]):not([collapsed="true"])[autohide]:not(:hover):not([hover]) {
-		-moz-transition: bottom .5s linear .2s, opacity .5s linear .2s, clip .5s linear .2s;
-		transition: bottom .5s linear .2s, opacity .5s linear .2s, clip .5s linear .2s; /* Firefox 16+ */
+		transition: bottom .5s linear .2s, opacity .5s linear .2s, clip .5s linear .2s;
 	}
 	#thePuzzlePiece-corner-container:not([noAnimation])[collapsed="true"] {
-		-moz-transition: bottom .5s linear 0s, opacity .5s linear 0s, clip .5s linear 0s;
-		transition: bottom .5s linear 0s, opacity .5s linear 0s, clip .5s linear 0s; /* Firefox 16+ */
+		transition: bottom .5s linear 0s, opacity .5s linear 0s, clip .5s linear 0s;
 	}
 	
 	.addon-bar:not([noAnimation])[placement="urlbar"]:hover,
 	.addon-bar:not([noAnimation])[placement="urlbar"][hover],
 	.addon-bar:not([noAnimation])[placement="urlbar"]:not([collapsed="true"]) {
-		-moz-transition: opacity .25s linear 0s;
-		transition: opacity .25s linear 0s; /* Firefox 16+ */
+		transition: opacity .25s linear 0s;
 	}
 	.addon-bar:not([noAnimation])[placement="urlbar"]:not([collapsed="true"])[autohide]:not(:hover):not([hover]) {
-		-moz-transition: opacity .5s linear .2s;
-		transition: opacity .5s linear .2s; /* Firefox 16+ */
+		transition: opacity .5s linear .2s;
 	}
 	.addon-bar:not([noAnimation])[placement="urlbar"][collapsed="true"] {
-		-moz-transition: opacity .5s linear 0s;
-		transition: opacity .5s linear 0s; /* Firefox 16+ */
+		transition: opacity .5s linear 0s;
 	}
 	
 	.addon-bar[placement="urlbar"]:not([collapsed="true"]):hover,
@@ -400,27 +378,22 @@
 	}
 	
 	#thePuzzlePiece-urlbar-addonbar-container:not([noAnimation])[active] {
-		-moz-transition: width .25s linear 0s;
-		transition: width .25s linear 0s; /* Firefox 16+ */
+		transition: width .25s linear 0s;
 	}
 	#thePuzzlePiece-urlbar-addonbar-container:not([noAnimation]):not([active]) {
 		/* These transitions aren't working for some reason! */
-		-moz-transition: width .5s linear 0s;
-		transition: width .5s linear 0s; /* Firefox 16+ */
+		transition: width .5s linear 0s;
 	}
 	#thePuzzlePiece-urlbar-addonbar-container:not([noAnimation])[autohide]:not(:hover):not([hover]) {
-		-moz-transition: width .5s linear .2s;
-		transition: width .5s linear .2s; /* Firefox 16+ */
+		transition: width .5s linear .2s;
 	}
 	
 	/* fix for UIEnhancer, putting it here because it's easier than finding the right conditions to (un)load a separate style in this case */
 	#urlbar[thePuzzlePiece-urlbar] #UIEnhancer_URLBar:not([noAnimation])[hover] {
-		-moz-transition: width .25s linear 0s;
-		transition: width .25s linear 0s; /* Firefox 16+ */
+		transition: width .25s linear 0s;
 	}
 	#urlbar[thePuzzlePiece-urlbar] #UIEnhancer_URLBar:not([noAnimation]):not([hover]) {
-		-moz-transition: width .5s linear .2s;
-		transition: width .5s linear .2s; /* Firefox 16+ */
+		transition: width .5s linear .2s;
 	}
 	
 }

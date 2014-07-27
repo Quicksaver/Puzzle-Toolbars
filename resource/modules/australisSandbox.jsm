@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.1.6';
+moduleAid.VERSION = '1.2.0';
 
 this.CustomizableUI = null;
 
@@ -94,13 +94,12 @@ moduleAid.LOADMODULE = function() {
 	// Make sure our special widgets aren't actually appended anywhere, they are just placeholders
 	CustomizableUI.addListener(trackSpecialWidgets);
 	
-	for(var i=0; i<specialWidgets.length; i++) {
-		CustomizableUI.removeWidgetFromArea(objName+'-special-'+specialWidgets[i]);
+	for(var i of specialWidgets) {
+		CustomizableUI.removeWidgetFromArea(objName+'-special-'+i);
 	}
 	
 	alwaysRunOnShutdown.push(preventLosingCustomizeData);
 	
-	overlayAid.overlayURI('chrome://'+objPathString+'/content/options.xul', 'optionsAustralis');
 	overlayAid.overlayURI('chrome://browser/content/browser.xul', 'australisBar', null,
 		function(aWindow) {
 			moduleAid.load('compatibilityFix/sandboxFixes'); // We need our add-on bar registered for this
@@ -120,7 +119,6 @@ moduleAid.UNLOADMODULE = function() {
 	moduleAid.unload('compatibilityFix/sandboxFixes');
 	
 	overlayAid.removeOverlayURI('chrome://browser/content/browser.xul', 'australisBar');
-	overlayAid.removeOverlayURI('chrome://'+objPathString+'/content/options.xul', 'optionsAustralis');
 	
 	preventLosingCustomizeData();
 	

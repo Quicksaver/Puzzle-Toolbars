@@ -1,4 +1,4 @@
-var defaultsVersion = '1.2.6';
+var defaultsVersion = '1.3.0';
 var objName = 'thePuzzlePiece';
 var objPathString = 'thepuzzlepiece';
 var prefList = {
@@ -25,13 +25,6 @@ var prefList = {
 
 function startAddon(window) {
 	prepareObject(window);
-	
-	if(!Australis) {
-		// Prevent things from jumping around on startup
-		window.document.getElementById('addon-bar').hidden = true;
-		
-		window[objName].moduleAid.load(objName, true);
-	}
 }
 
 function stopAddon(window) {
@@ -50,16 +43,7 @@ function startConditions(aReason) {
 
 function onStartup(aReason) {
 	moduleAid.load('keysets');
-	
-	if(!Australis) {
-		moduleAid.load('compatibilityFix/sandboxFixes');
-		
-		// Apply the add-on to every window opened and to be opened
-		windowMediator.callOnAll(startAddon, 'navigator:browser');
-		windowMediator.register(startAddon, 'domwindowopened', 'navigator:browser');
-	} else {
-		moduleAid.load('australisSandbox');
-	}
+	moduleAid.load('australisSandbox');
 	
 	// Apply the add-on to every preferences window opened and to be opened
 	windowMediator.callOnAll(startPreferences, null, "chrome://"+objPathString+"/content/options.xul");
@@ -69,17 +53,6 @@ function onStartup(aReason) {
 }
 
 function onShutdown(aReason) {
-	if(!Australis) {
-		// Placing these here prevents an error which I couldn't figure out why the closeCustomize() in overlayAid weren't already preventing.
-		closeCustomize();
-		
-		// remove the add-on from all windows
-		windowMediator.callOnAll(stopAddon, null, null, true);
-		
-		moduleAid.unload('compatibilityFix/sandboxFixes');
-	} else {
-		moduleAid.unload('australisSandbox');
-	}
-	
+	moduleAid.unload('australisSandbox');
 	moduleAid.unload('keysets');
 }

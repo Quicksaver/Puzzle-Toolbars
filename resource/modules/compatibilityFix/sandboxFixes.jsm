@@ -1,11 +1,9 @@
-moduleAid.VERSION = '1.0.1';
+moduleAid.VERSION = '1.0.2';
 
 moduleAid.LOADMODULE = function() {
-	if(Australis) {
-		AddonManager.getAddonByID("ClassicThemeRestorer@ArisT2Noia4dev", function(addon) {
-			moduleAid.loadIf('compatibilityFix/ctr', (addon && addon.isActive));
-		});
-	}
+	AddonManager.getAddonByID("ClassicThemeRestorer@ArisT2Noia4dev", function(addon) {
+		moduleAid.loadIf('compatibilityFix/ctr', (addon && addon.isActive));
+	});
 	
 	AddonManager.getAddonByID("Stratiform@SoapySpew", function(addon) {
 		moduleAid.loadIf('compatibilityFix/stratiform', (addon && addon.isActive));

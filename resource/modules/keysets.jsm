@@ -1,8 +1,8 @@
-moduleAid.VERSION = '1.0.2';
+moduleAid.VERSION = '1.0.3';
 
 this.addonBarKey = {
 	id: objName+'-key',
-	command: (!Australis) ? 'Browser:ToggleAddonBar' : objName+':ToggleAddonBar',
+	command: objName+':ToggleAddonBar',
 	get keycode () { return prefAid.addonBarKeycode; },
 	get accel () { return prefAid.addonBarAccel; },
 	get shift () { return prefAid.addonBarShift; },

@@ -1,10 +1,9 @@
-moduleAid.VERSION = '1.0.0';
+moduleAid.VERSION = '1.0.1';
 
 this.__defineGetter__('menuPopup', function() { return $('addonBarKeyset-menupopup'); });
 
 this.isStillAvailable = function(key, list) {
 	if(key.keycode != 'none' && !list[key.keycode]) { return false; }
-	
 	return true;
 };
 
@@ -53,7 +52,7 @@ this.fillKeycodes = function() {
 };
 
 moduleAid.LOADMODULE = function() {
-	if(Services.appinfo.OS == 'Darwin') {
+	if(DARWIN) {
 		overlayAid.overlayWindow(window, 'optionsMac');
 	}
 	

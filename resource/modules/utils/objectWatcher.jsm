@@ -1,5 +1,6 @@
-moduleAid.VERSION = '2.1.3';
-moduleAid.LAZY = true;
+moduleAid.VERSION = '2.3.0';
+moduleAid.UTILS = true;
+moduleAid.BASEUTILS = true;
 
 // objectWatcher - This acts as a replacement for the event DOM Attribute Modified, works for both attributes and object properties
 //	addPropertyWatcher(obj, prop, handler, capture) - registers handler as a watcher for obj property prop changes
@@ -16,7 +17,7 @@ moduleAid.LAZY = true;
 //		(optional) capture - when (bool) true it cancels setting the attribute if handler returns (bool) false, defaults to (bool) false
 //		(optional) iterateAll -	when (bool) false only triggers handler for the last change in the attribute, merging all the changes queued in between.
 //					when (bool) true triggers handler for every attribute change in the queue. Defaults to (bool) true.
-//					will always act as (bool) true if capture is (bool) true or if on Firefox 13- .
+//					will always act as (bool) true if capture is (bool) true.
 //	removeAttributeWatcher(obj, attr, handler, capture, iterateAll) - unregisters handler as a watcher for object attribute attr changes
 //		see addAttributeWatcher()
 // All handlers expect function(obj, prop, oldVal, newVal), where:
@@ -25,7 +26,6 @@ moduleAid.LAZY = true;
 //	oldVal - the current value of prop
 //	newVal - the new value of prop
 // Note: deleting a watched property does not trigger the watchers, so don't do it! Set it to undefined instead if you wish to delete it after removing the watchers.
-// DOM Mutation Observers were implemented in Firefox 14. In previous versions it uses the DOMAttrModified event.
 this.objectWatcher = {
 	// Properties part, works by replacing the get and set accessor methods of a property with custom ones
 	addPropertyWatcher: function(obj, prop, handler, capture) {
@@ -176,52 +176,6 @@ this.objectWatcher = {
 		if(!obj.ownerDocument) { return true; }
 		
 		obj._propWatchers.attributes = {};
-		
-		// For compatibility with Firefox 13- , I probably will remove this bit one day 
-		if(!obj.ownerDocument.defaultView.MutationObserver) {
-			obj._propWatchers.callAttrWatchers = function(e) {
-				for(var attr in obj._propWatchers.attributes) {
-					if(attr == e.attrName) {
-						obj._propWatchers.disconnect();
-						
-						var continueHandlers = true;
-						for(var h=0; h<obj._propWatchers.attributes[attr].length; h++) {
-							if(obj._propWatchers.attributes[attr][h].capture) {
-								try { continueHandlers = obj._propWatchers.attributes[attr][h].handler(obj, attr, e.prevValue, e.newValue); }
-								catch(ex) { Cu.reportError(ex); }
-								if(!continueHandlers) {
-									toggleAttribute(obj, attr, e.attrChange != e.ADDITION, e.prevValue);
-									break;
-								}
-							}
-						}
-						
-						if(continueHandlers) {
-							for(var h=0; h<obj._propWatchers.attributes[attr].length; h++) {
-								if(!obj._propWatchers.attributes[attr][h].capture) {
-									try { obj._propWatchers.attributes[attr][h].handler(obj, attr, e.prevValue, e.newValue); }
-									catch(ex) { Cu.reportError(ex); }
-								}
-							}
-						}
-						
-						obj._propWatchers.reconnect();
-					}
-				}
-			};
-			
-			obj._propWatchers.reconnect = function() {
-				obj.addEventListener('DOMAttrModified', obj._propWatchers.callAttrWatchers, true);
-			};
-			obj._propWatchers.disconnect = function() {
-				obj.removeEventListener('DOMAttrModified', obj._propWatchers.callAttrWatchers, true);
-			};
-			
-			obj._propWatchers.reconnect();
-			
-			return true;
-		};
-			
 		obj._propWatchers.mutations = [];
 		obj._propWatchers.scheduler = null;
 		obj._propWatchers.reconnect = function() {
@@ -232,9 +186,9 @@ this.objectWatcher = {
 			if(attrList.length > 0) {
 				var observerProperties = {
 					attributes: true,
-					attributeOldValue: true
+					attributeOldValue: true,
+					attributeFilter: attrList
 				};
-				observerProperties.attributeFilter = attrList;
 				this.mutationObserver.observe(obj, observerProperties);
 			}
 		};
@@ -247,8 +201,8 @@ this.objectWatcher = {
 				obj._propWatchers.schedule = null;
 			}
 			
-			for(var m=0; m<mutations.length; m++) {
-				obj._propWatchers.mutations.push(mutations[m]);
+			for(var m of mutations) {
+				obj._propWatchers.mutations.push(m);
 			}
 			
 			// the script could become really heavy if it called the main function everytime (width attribute on sidebar and dragging it for instance)

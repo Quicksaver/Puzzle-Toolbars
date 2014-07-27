@@ -1,5 +1,5 @@
-moduleAid.VERSION = '2.7.7';
-moduleAid.LAZY = true;
+moduleAid.VERSION = '2.11.5';
+moduleAid.UTILS = true;
 
 // overlayAid - to use overlays in my bootstraped add-ons. The behavior is as similar to what is described in https://developer.mozilla.org/en/XUL_Tutorial/Overlays as I could manage.
 // When a window with an overlay is opened, the elements in both the window and the overlay with the same ids are combined together.
@@ -20,6 +20,7 @@ moduleAid.LAZY = true;
 //	If the overlay's element contains an position attribute, the element is added at the one-based index specified in this attribute.
 //	Otherwise, the element is added as the last child.
 // If you would like to remove an element that is already in the XUL file, create elements with removeelement attribute.
+// Attention: this won't work in customizable elements, such as toolbars or palette items!
 // To move an already existant node to another place, add a newparent attribute with the id of the new parent element. If it exists, it will be moved there. This can be used
 //	together with insertafter, insertbefore and position attributes, which will be relative to the new parent and consequently new siblings.
 // For overlaying preferences dialogs, you can add new preferences in an unnamed <preferences> element. They will be added to an already existing <preferences> element if present,
@@ -27,13 +28,13 @@ moduleAid.LAZY = true;
 // Elements with a getchildrenof attribute will inherit all the children from the elements specified by the comma-separated list of element ids.
 // Every occurence of (string) objName and (string) objPathString in every attribute in the overlay will be properly replaced with this object's objName and objPathString.
 // I can also overlay other overlays provided they are loaded through the overlayAid object (either from this add-on or another implementing it).
-// Now in Australis, if the toolbar element in the overlays has the following attributes, the system will add the corresponding customize context menu items:
+// If the toolbar element in the overlays has the following attributes, the system will add the corresponding customize context menu items:
 //	menuAdd : "Add to X" context menu entries
 //	menuMove : "Move to X" context menu entries
 //	menuRemove : "Remove from X" context menu entries
 //	menuMain : "Move to Toolbar" context menu entries, that will move widgets to the nav-bar
 // All of these attributes above can be complemented with the corresponding menuXXXAccesskey attribute.
-// Attention: avoid using "removeelement" in toolbars and widgets; this probably won't play well with Australis as I haven't tested a lot here.
+// If a toolbar element has a ignoreCUI=true attribute, it won't be registered in the CustomizableUI module.
 // 
 // overlayURI(aURI, aWith, beforeload, onload, onunload) - overlays aWith in all windows with aURI
 //	aURI - (string) uri to be overlayed
@@ -233,23 +234,6 @@ this.overlayAid = {
 			}
 		}
 		
-		if(!Australis) {
-			if(node.nodeName == 'toolbar' && node.id) {
-				if(!overlay.persist[node.id]) {
-					overlay.persist[node.id] = {};
-				}
-				overlay.persist[node.id]['currentset'] = true;
-			}
-			
-			if(node.parentNode && node.parentNode.nodeName == 'toolbarpalette') {
-				if(!overlay.persist[node.id]) {
-					overlay.persist[node.id] = {};
-				}
-				overlay.persist[node.id]['insertInToolbar'] = true;
-				overlay.persist[node.id]['_toolbarSet'] = true;
-			}
-		}
-		
 		if(node.nodeName == 'xml-stylesheet') {
 			replaceObjStrings(node, 'textContent');
 		}
@@ -260,7 +244,7 @@ this.overlayAid = {
 			|| (curChild.nodeName == 'script' && node.nodeName != 'overlay') // remove script tags that won't be inserted into the overlayed document
 			) {
 				var nextChild = curChild.nextSibling;
-				node.removeChild(curChild);
+				curChild.remove();
 				curChild = nextChild;
 				continue;
 			}
@@ -330,38 +314,11 @@ this.overlayAid = {
 		if(!allRes[uri]) { return; }
 		var toolboxes = aWindow.document.querySelectorAll('toolbox');
 		
-		if(!Australis) {
-			for(var id in overlay.persist) {
-				if(overlay.persist[id]['insertInToolbar'] && (!allRes[uri][id] || !allRes[uri][id]['insertInToolbar'])) {
-					var node = aWindow.document.getElementById(id);
-					if(!node) {
-						toolboxes_loop: for(var t=0; t<toolboxes.length; t++) {
-							if(!toolboxes[t].palette) { continue; }
-							
-							for(var c=0; c<toolboxes[t].palette.childNodes.length; c++) {
-								if(toolboxes[t].palette.childNodes[c].id == id) {
-									node = toolboxes[t].palette.childNodes[c];
-									break toolboxes_loop;
-								}
-							}
-						}
-					}
-					
-					if(!allRes[uri][id]) {
-						allRes[uri][id] = {};
-					}
-					allRes[uri][id]['insertInToolbar'] = (node && node.getAttribute('insertInToolbar')) ? node.getAttribute('insertInToolbar') : '__empty';
-					allRes[uri][id]['_toolbarSet'] = (node && node.getAttribute('_toolbarSet')) ? node.getAttribute('_toolbarSet') : '__empty';
-				}
-			}
-		}
-		
 		for(var id in allRes[uri]) {
 			var node = aWindow.document.getElementById(id);
 			
 			if(this.isPersist(overlay, id)) {
 				if(!node) {
-					if(!Australis && !this.isPersist(overlay, id, 'insertInToolbar')) { continue; }
 					toolboxes_loop: for(var t=0; t<toolboxes.length; t++) {
 						if(!toolboxes[t].palette) { continue; }
 						
@@ -383,202 +340,10 @@ this.overlayAid = {
 						} else {
 							toggleAttribute(node, attr, allRes[uri][id][attr], allRes[uri][id][attr]);
 						}
-						
-						if(Australis) { continue; }
-						
-						if(attr == 'currentset'
-						&& allRes[uri][id][attr]
-						&& allRes[uri][id][attr] != '__empty'
-						&& node.nodeName == 'toolbar'
-						&& trueAttribute(node, 'customizable')
-						&& node.getAttribute('toolboxid')
-						&& aWindow.document.getElementById(node.getAttribute('toolboxid'))
-						&& (this.tracedAction(aWindow, 'appendChild', node) || this.tracedAction(aWindow, 'insertBefore', node))) {
-							aWindow.document.persist(id, 'currentset');
-							
-							var palette = aWindow.document.getElementById(node.getAttribute('toolboxid')).palette;
-							if(!palette) { continue; }
-							if(!Australis) { closeCustomize(); }
-							
-							var currentset = node.getAttribute('currentset').split(',');
-							currentset_loop: for(var c=0; c<currentset.length; c++) {
-								if(currentset[c] == 'separator' || currentset[c] == 'spring' || currentset[c] == 'spacer') {
-									var newNode = aWindow.document.createElement('toolbar'+currentset[c]);
-									var newNodeID = new Date().getTime();
-									while(aWindow.document.getElementById(currentset[c]+newNodeID)) {
-										newNodeID++;
-									}
-									newNode.id = currentset[c]+newNodeID;
-									newNode.setAttribute('removable', 'true');
-									if(currentset[c] == 'spring') {
-										newNode.setAttribute('flex', '1');
-									}
-									node.appendChild(newNode);
-									continue;
-								}
-								
-								var button = palette.firstChild;
-								while(button) {
-									if(button.id == currentset[c]) {
-										var addButton = button;
-										var updateListButton = this.updateOverlayedNodes(aWindow, addButton);
-										button = button.nextSibling;
-										// insertItem doesn't seem to be defined until the toolbar becomes visible
-										if(node.insertItem) { node.insertItem(addButton.id); }
-										else { addButton = node.appendChild(addButton); }
-										this.updateOverlayedNodes(aWindow, addButton, updateListButton);
-										continue currentset_loop;
-									}
-									button = button.nextSibling;
-								}
-								
-								// Fix for TotalToolbar creating a browser palette node as a child of the navigator-toolbox element.
-								button = aWindow.document.getElementById(currentset[c]);
-								if(button && button.parentNode.id == palette.id) {
-									var addButton = button;
-									var updateListButton = this.updateOverlayedNodes(aWindow, addButton);
-									addButton = palette.appendChild(addButton);
-									// insertItem doesn't seem to be defined until the toolbar becomes visible
-									if(node.insertItem) { node.insertItem(addButton.id); }
-									else { addButton = node.appendChild(addButton); }
-									this.updateOverlayedNodes(aWindow, addButton, updateListButton);
-									continue currentset_loop;
-								}
-								
-								// Bugfix: some buttons, like LastPass toolbar button, force themselves into the default toolbar on startup.
-								if(button) {
-									this.moveAround(aWindow, button, null, node);
-								}
-							}
-						}
-						
-						else if(attr == 'insertInToolbar') {
-							if(node.parentNode.nodeName == 'toolbarpalette' && node.getAttribute(attr)) {
-								var toolbar = aWindow.document.getElementById(node.getAttribute(attr));
-								if(toolbar) {
-									var b4 = null;
-									var shift = -1;
-									var toolbarSet = allRes[uri][id]['_toolbarSet'] || node.getAttribute('_toolbarSet');
-									if(toolbarSet) {
-										toolbarSet = toolbarSet.split(',');
-										for(var s=0; s<toolbarSet.length; s++) {
-											if(shift == -1) {
-												if(toolbarSet[s] == id) { shift = 0; }
-												continue;
-											}
-											
-											if(toolbarSet[s] == 'separator' || toolbarSet[s] == 'spring' || toolbarSet[s] == 'spacer') {
-												shift++;
-												continue;
-											}
-											
-											b4 = aWindow.document.getElementById(toolbarSet[s]);
-											if(b4 && b4.parentNode != toolbar) { b4 = null; }
-											
-											if(b4) { break; }
-										}
-									}
-									
-									while(shift > 0) {
-										if(!b4) {
-											b4 = toolbar.lastChild;
-											if(!b4) { break; }
-											shift--;
-											continue;
-										}
-										
-										if(!b4.previousSibling) {
-											shift = 0;
-											break;
-										}
-										
-										if(b4.previousSibling.nodeName == 'toolbarseparator'
-										|| b4.previousSibling.nodeName == 'toolbarspring'
-										|| b4.previousSibling.nodeName == 'toolbarspacer') {
-											b4 = b4.previousSibling;
-											shift--;
-										}
-									}
-									
-									var updateListButton = this.updateOverlayedNodes(aWindow, node);
-									// insertItem doesn't seem to be defined until the toolbar becomes visible
-									if(b4) {
-										if(toolbar.insertItem) { toolbar.insertItem(node.id, b4); }
-										else { node = toolbar.insertBefore(node, b4); }
-									} else {
-										if(toolbar.insertItem) { toolbar.insertItem(node.id); }
-										else { node = toolbar.appendChild(node); }
-									}
-									this.updateOverlayedNodes(aWindow, node, updateListButton);
-									
-									setAttribute(toolbar, 'currentset', toolbar.currentSet);
-									aWindow.document.persist(toolbar.id, 'currentset');
-								}
-							}
-							
-							this.persistToolbarButton(aWindow, node);
-						}
 					}
 				}
 			}
 		}
-	},
-	
-	persistToolbarButton: function(aWindow, aNode) {
-		var aNodeID = aNode.id;
-		
-		var persistListener = function() {
-			var node = aWindow.document.getElementById(aNodeID);
-			var testNode = node;
-			if(!node) {
-				var toolboxes = aWindow.document.querySelectorAll('toolbox');
-				toolboxes_loop: for(var t=0; t<toolboxes.length; t++) {
-					if(!toolboxes[t].palette) { continue; }
-					
-					for(var c=0; c<toolboxes[t].palette.childNodes.length; c++) {
-						if(toolboxes[t].palette.childNodes[c].id == aNodeID) {
-							node = toolboxes[t].palette.childNodes[c];
-							break toolboxes_loop;
-						}
-					}
-				}
-			}
-			if(!node) { return; } // Fail-safe
-			
-			if(node.parentNode.nodeName == 'toolbarpalette') {
-				setAttribute(node, 'insertInToolbar', '');
-				setAttribute(node, '_toolbarSet', '');
-			} else {
-				setAttribute(node, 'insertInToolbar', node.parentNode.id);
-				setAttribute(node, '_toolbarSet', node.parentNode.getAttribute('currentset'));
-			}
-			
-			if(!testNode) {
-				var tempNode = aWindow.document.createElement('toolbarbutton'); // most common will be toolbarbutton, even though element type doesn't really matter here
-				tempNode.id = aNodeID;
-				tempNode.hidden = true;
-				tempNode = aWindow.document.documentElement.appendChild(tempNode);
-			}
-			
-			aWindow.document.persist(aNodeID, 'insertInToolbar');
-			aWindow.document.persist(aNodeID, '_toolbarSet');
-			
-			if(!testNode) {
-				tempNode.parentNode.removeChild(tempNode);
-			}
-		};
-		
-		aNode._removePersistListener = function() {
-			aWindow.removeEventListener('aftercustomization', persistListener);
-		};
-		
-		aWindow.addEventListener('aftercustomization', persistListener);
-		persistListener();
-		
-		this.traceBack(aWindow, {
-			action: 'persistToolbarButton',
-			node: aNode
-		});
 	},
 	
 	observingSchedules: function(aSubject, aTopic) {
@@ -631,7 +396,7 @@ this.overlayAid = {
 	unloadSome: function(aWindow, aWith) {
 		var i = this.loadedWindow(aWindow, aWith);
 		if(i !== false) {
-			this.removeInOrder(aWindow, aWindow['_OVERLAYS_'+objName][i].time);
+			this.removeInOrder(aWindow, aWindow['_OVERLAYS_'+objName][i]);
 			if(!aWindow.closed && !aWindow.willClose) {
 				aWindow._RESCHEDULE_OVERLAY = true;
 			}
@@ -642,7 +407,7 @@ this.overlayAid = {
 		if(typeof(aWindow['_OVERLAYS_'+objName]) != 'undefined') {
 			if(aWindow['_OVERLAYS_'+objName].length > 0) {
 				// only need to check for the first entry from this array, all subsequent will be unloaded before this one and reloaded afterwards if needed
-				overlayAid.removeInOrder(aWindow, aWindow['_OVERLAYS_'+objName][0].time);
+				overlayAid.removeInOrder(aWindow, aWindow['_OVERLAYS_'+objName][0], true);
 			}
 					
 			delete aWindow['_OVERLAYS_'+objName];
@@ -694,34 +459,6 @@ this.overlayAid = {
 		return false;
 	},
 	
-	updateOverlayedNodes: function(aWindow, node, nodeList) {
-		if(nodeList != undefined) {
-			for(var k = 0; k < nodeList.length; k++) {
-				aWindow[nodeList[k].x][nodeList[k].i].traceBack[nodeList[k].j][nodeList[k].nodeField] = node;
-			}
-			return true;
-		}
-		
-		nodeList = [];
-		var allAttr = this.getAllInAttr(aWindow);
-		for(var y=0; y<allAttr.length; y++) {
-			var x = '_OVERLAYS_'+allAttr[y];
-			if(!aWindow[x]) { continue; }
-			
-			for(var i = 0; i < aWindow[x].length; i++) {
-				for(var j = 0; j < aWindow[x][i].traceBack.length; j++) {
-					if(aWindow[x][i].traceBack[j].node && aWindow[x][i].traceBack[j].node == node) {
-						nodeList.push({ x: x, i: i, j: j, nodeField: 'node' });
-					}
-					else if(aWindow[x][i].traceBack[j].originalParent && aWindow[x][i].traceBack[j].originalParent == node) {
-						nodeList.push({ x: x, i: i, j: j, nodeField: 'originalParent' });
-					}
-				}
-			}
-		}
-		return nodeList;
-	},
-	
 	getNewOrder: function(aWindow) {
 		var time = new Date().getTime();
 		var allAttr = this.getAllInAttr(aWindow);
@@ -738,8 +475,8 @@ this.overlayAid = {
 		return time;
 	},
 	
-	removeInOrder: function(aWindow, first) {
-		if(first === 0) { return; } // already unloaded
+	removeInOrder: function(aWindow, toUnload, allFromHere) {
+		if(!toUnload.loaded) { return; } // already unloaded
 		
 		// I need to check, in the off-chance another add-on started overlaying at roughly the same time, setting this var first
 		if(typeof(aWindow._BEING_OVERLAYED) == 'undefined') {
@@ -747,21 +484,9 @@ this.overlayAid = {
 		}
 		
 		var overlayList = [];
-		// Right now I don't have any overlays that conflict between add-ons. I need to change this routine, to make it so it
-		// unloads only the conflicting overlays. But it's not an immediate need, so I'm restricting it only to the current
-		// add-on overlays for now (it will make it faster and less prone to errors when entering customize mode).
-		//var allAttr = this.getAllInAttr(aWindow);
-		var allAttr = [objName];
-		for(var y=0; y<allAttr.length; y++) {
-			var x = '_OVERLAYS_'+allAttr[y];
-			if(!aWindow[x]) { continue; }
-			
-			for(var i=0; i<aWindow[x].length; i++) {
-				if(aWindow[x][i].time >= first) {
-					overlayList.push({ x: x, i: i, time: aWindow[x][i].time });
-				}
-			}
-		}
+		this.removeMoreRecent(aWindow, toUnload, overlayList, allFromHere);
+		
+		// sort the list so we unload the most recent overlays first, going back to the one we want to unload
 		overlayList.sort(function(a,b) { return b.time-a.time; });
 		
 		for(var u=0; u<overlayList.length; u++) {
@@ -772,6 +497,105 @@ this.overlayAid = {
 		if(aWindow._BEING_OVERLAYED && aWindow._BEING_OVERLAYED == 'removing_'+objName) {
 			delete aWindow._BEING_OVERLAYED;
 		}
+	},
+	
+	removeMoreRecent: function(aWindow, toUnload, overlayList, allFromHere) {
+		var allAttr = this.getAllInAttr(aWindow);
+		for(var y=0; y<allAttr.length; y++) {
+			var x = '_OVERLAYS_'+allAttr[y];
+			if(!aWindow[x]) { continue; }
+			
+			main_overlayLoop: for(var i=0; i<aWindow[x].length; i++) {
+				// we already checked this overlay
+				for(var l=0; l<overlayList.length; l++) {
+					if(overlayList[l].x == x && overlayList[l].i == i) { continue main_overlayLoop; }
+				}
+				
+				// obviously, if the overlay we're checking is the overlay we want to remove, it should be removed
+				if(aWindow[x][i].uri == toUnload.uri) {
+					overlayList.push({ x: x, i: i, time: aWindow[x][i].time });
+					continue;
+				}
+				
+				// we only need to unload overlays that were loaded after the one we're unloading
+				if(aWindow[x][i].time >= toUnload.time) {
+					// we add this overlay to the list in case:
+					//   a) it's from the same add-on and we want to unload all of its overlays
+					//   b) it's from another add-on and it will conflict with our target overlay to unload
+					if((allFromHere && x == '_OVERLAYS_'+objName)
+					|| this.unloadConflicts(aWindow, toUnload, aWindow[x][i])) {
+						overlayList.push({ x: x, i: i, time: aWindow[x][i].time });
+						
+						this.removeMoreRecent(aWindow, aWindow[x][i], overlayList);
+					}		
+				}
+			}
+		}
+	},
+	
+	unloadConflicts: function(aWindow, aOverlay, bOverlay) {
+		// if bOverlay is overlaying aOverlay directly, then of course it needs to be removed as well
+		if(bOverlay.overlayingUri && bOverlay.overlayingUri == aOverlay.uri) {
+			return true;
+		}
+		
+		// skip these as they never conflict (I hope)
+		var skipActions = ['appendXMLSS', 'sizeToContent', 'addPreferencesElement', 'addPreference', 'appendButton', 'addToolbar'];
+		var conflictingFields = ['node', 'originalParent'];
+		
+		// we need to go through their traceBack's to see if any of them might conflict with each other
+		for(var aT=0; aT<aOverlay.traceBack.length; aT++) {
+			if(skipActions.indexOf(aOverlay.traceBack[aT].action) > -1) { continue; }
+			var aAction = this.fixTraceBackNodes(aWindow, aOverlay.traceBack[aT]);
+			
+			for(var bT=0; bT<bOverlay.traceBack.length; bT++) {
+				if(skipActions.indexOf(bOverlay.traceBack[bT].action) > -1) { continue; }
+				var bAction = this.fixTraceBackNodes(aWindow, bOverlay.traceBack[bT]);
+				
+				// if any of the nodes overlap, we consider them conflicting
+				for(var aa=0; aa<conflictingFields.length; aa++) {
+					for(var bb=0; bb<conflictingFields.length; bb++) {
+						if(isAncestor(aAction[conflictingFields[aa]], bAction[conflictingFields[bb]])
+						|| isAncestor(bAction[conflictingFields[bb]], aAction[conflictingFields[aa]])) {
+							return true;
+						}
+					}
+				}
+			}
+		}
+		
+		return false;
+	},
+	
+	fixTraceBackNodes: function(aWindow, action) {
+		if(action.nodeID) { action.node = action.node || aWindow.document.getElementById(action.nodeID); }
+		if(action.originalParentID) { action.originalParent = action.originalParent || aWindow.document.getElementById(action.originalParentID); }
+		if(action.paletteID && !action.palette) {
+			var toolbox = aWindow.document.querySelectorAll('toolbox');
+			for(var a=0; a<toolbox.length; a++) {
+				if(toolbox[a].palette) {
+					if(toolbox[a].palette.id == action.paletteID) {
+						action.palette = toolbox[a].palette;
+					} else if(toolbox[a].palette == aWindow.gCustomizeMode.visiblePalette
+					&& aWindow.gCustomizeMode._stowedPalette.id == action.paletteID) {
+						action.palette = aWindow.gCustomizeMode._stowedPalette;
+					}
+					
+					if(!action.node && action.nodeID) {
+						for(var c=0; c<action.palette.childNodes.length; c++) {
+							if(action.palette.childNodes[c].id == action.nodeID) {
+								action.node = action.palette.childNodes[c];
+								break;
+							}
+						}
+					}
+					
+					break;
+				}
+			}
+		}
+		
+		return action;
 	},
 	
 	removeOverlay: function(aWindow, overlay) {
@@ -805,41 +629,8 @@ this.overlayAid = {
 			return;
 		}
 		
-		var toolboxes = aWindow.document.querySelectorAll('toolbox');
-		
 		for(var j = aWindow[x][i].traceBack.length -1; j >= 0; j--) {
-			var action = aWindow[x][i].traceBack[j];
-			if(action.nodeID) { action.node = action.node || aWindow.document.getElementById(action.nodeID); }
-			if(action.originalParentID) { action.originalParent = action.originalParent || aWindow.document.getElementById(action.originalParentID); }
-			if(action.paletteID && !action.palette) {
-				var toolbox = aWindow.document.querySelectorAll('toolbox');
-				for(var a=0; a<toolbox.length; a++) {
-					if(toolbox[a].palette) {
-						if(toolbox[a].palette.id == action.paletteID) {
-							action.palette = toolbox[a].palette;
-						} else if(Australis
-						&& toolbox[a].palette == aWindow.gCustomizeMode.visiblePalette
-						&& aWindow.gCustomizeMode._stowedPalette.id == action.paletteID) {
-							action.palette = aWindow.gCustomizeMode._stowedPalette;
-						}
-						
-						if(!action.node && action.nodeID) {
-							for(var c=0; c<action.palette.childNodes.length; c++) {
-								if(action.palette.childNodes[c].id == action.nodeID) {
-									action.node = action.palette.childNodes[c];
-									break;
-								}
-							}
-						}
-						
-						break;
-					}
-				}
-			}
-			
-			if(action.node) {
-				var updateList = this.updateOverlayedNodes(aWindow, action.node);
-			}
+			var action = this.fixTraceBackNodes(aWindow, aWindow[x][i].traceBack[j]);
 			
 			try {
 				switch(action.action) {
@@ -852,18 +643,12 @@ this.overlayAid = {
 								}
 								var browserList = this.swapBrowsers(aWindow, action.node);
 								
-								action.node = action.originalParent.insertBefore(action.node, sibling);
+								action.originalParent.insertBefore(action.node, sibling);
 								
 								this.swapBrowsers(aWindow, action.node, browserList);
-								if(!Australis) {
-									if(action.originalParent.nodeName == 'toolbar') {
-										setAttribute(action.originalParent, 'currentset', action.originalParent.currentSet);
-										aWindow.document.persist(action.originalParent.id, 'currentset');
-									}
-								}
 							}
-							else if(action.node.parentNode) {
-								action.node = action.node.parentNode.removeChild(action.node);
+							else {
+								action.node.remove();
 							}
 						}
 						break;
@@ -883,31 +668,23 @@ this.overlayAid = {
 							var browserList = this.swapBrowsers(aWindow, action.node);
 							
 							if(action.originalPos < action.node.parentNode.childNodes.length) {
-								action.node = action.originalParent.insertBefore(action.node, action.originalParent.childNodes[action.originalPos]);
+								action.originalParent.insertBefore(action.node, action.originalParent.childNodes[action.originalPos]);
 							} else {
-								action.node = action.originalParent.appendChild(action.node);
+								action.originalParent.appendChild(action.node);
 							}
 							
 							this.swapBrowsers(aWindow, action.node, browserList);
-							if(!Australis) {
-								if(action.originalParent.nodeName == 'toolbar') {
-									setAttribute(action.originalParent, 'currentset', action.originalParent.currentSet);
-									aWindow.document.persist(action.originalParent.id, 'currentset');
-								}
-							}
 						}
 						break;
 					
 					case 'removeChild':
 						if(action.node && action.originalParent) {
-							if(Australis) {
-								this.registerAreas(aWindow, node);
-							}
+							this.registerAreas(aWindow, node);
 							
 							if(action.originalPos < action.originalParent.childNodes.length) {
-								action.node = action.originalParent.insertBefore(action.node, action.originalParent.childNodes[action.originalPos]);
+								action.originalParent.insertBefore(action.node, action.originalParent.childNodes[action.originalPos]);
 							} else {
-								action.node = action.originalParent.appendChild(action.node);
+								action.originalParent.appendChild(action.node);
 							}
 						}
 						break;
@@ -921,14 +698,14 @@ this.overlayAid = {
 						break;
 					
 					case 'appendXMLSS':
-						if(action.node && action.node.parentNode) {
-							action.node = action.node.parentNode.removeChild(action.node);
+						if(action.node) {
+							action.node.remove();
 						}
 						break;
 					
 					case 'addPreferencesElement':
 						if(action.prefs) {
-							action.prefs.parentNode.removeChild(action.prefs);
+							action.prefs.remove();
 						}
 						break;
 					
@@ -938,7 +715,7 @@ this.overlayAid = {
 							// the pref.preferences property becomes null.
 							// I can't get rid of the log message but at least this way nothing should be affected by it failing
 							action.pref.preferences.rootBranchInternal.removeObserver(action.pref.name, action.pref.preferences);
-							action.pref.parentNode.removeChild(action.pref);
+							action.pref.remove();
 						}
 						break;
 					
@@ -947,89 +724,31 @@ this.overlayAid = {
 						break;
 					
 					case 'appendButton':
-						if(!Australis) { closeCustomize(); }
-						
 						if(action.node) {
-							if(!Australis || (action.node.parentNode && action.node.parentNode.nodeName == 'toolbarpalette')) {
-								action.node = action.node.parentNode.removeChild(action.node);
+							if(action.node.parentNode && action.node.parentNode.nodeName == 'toolbarpalette') {
+								action.node.remove();
 							}
 							
-							if(Australis) {
-								var widget = aWindow.CustomizableUI.getWidget(action.node.id);
-								if(widget && widget.provider == aWindow.CustomizableUI.PROVIDER_API) {
-									// see note below (on createWidget)
-									var placement = aWindow.CustomizableUI.getPlacementOfWidget(action.node.id, aWindow);
-									var areaType = (placement) ? aWindow.CustomizableUI.getAreaType(placement.area) : null;
-									if(areaType == aWindow.CustomizableUI.TYPE_TOOLBAR) {
-										windowMediator.callOnAll(function(bWindow) {
-											var wToolbar = bWindow.document.getElementById(placement.area);
-											if(wToolbar && !wToolbar._init) {
-												overlayAid.tempAppendToolbar(bWindow, wToolbar);
-											}
-										}, aWindow.document.documentElement.getAttribute('windowtype'));
-									}
-									
-									try { aWindow.CustomizableUI.destroyWidget(action.node.id); }
-									catch(ex) { Cu.reportError(ex); }
-									
-									if(areaType == aWindow.CustomizableUI.TYPE_TOOLBAR) {
-										windowMediator.callOnAll(function(bWindow) {
-											var wToolbar = bWindow.document.getElementById(placement.area);
-											if(wToolbar) {
-												overlayAid.tempRestoreToolbar(wToolbar);
-											}
-										}, aWindow.document.documentElement.getAttribute('windowtype'));
-									}
+							var widget = aWindow.CustomizableUI.getWidget(action.node.id);
+							if(widget && widget.provider == aWindow.CustomizableUI.PROVIDER_API) {
+								// see note below (on createWidget)
+								var placement = aWindow.CustomizableUI.getPlacementOfWidget(action.node.id, aWindow);
+								var areaType = (placement) ? aWindow.CustomizableUI.getAreaType(placement.area) : null;
+								if(areaType == aWindow.CustomizableUI.TYPE_TOOLBAR) {
+									this.tempAppendAllToolbars(aWindow, placement.area);
 								}
-								break;
-							}
-						}
-						break;
-					
-					case 'removeButton':
-						if(!Australis) { closeCustomize(); }
-						
-						if(action.node && action.palette) {
-							action.node = action.palette.appendChild(action.node);
-							
-							if(Australis) {
-								if(!aWindow.CustomizableUI.getWidget(action.node.id)) {
-									aWindow.CustomizableUI.createWidget(this.getWidgetData(aWindow, action.node, action.palette));
-								} else {
-									aWindow.CustomizableUI.ensureWidgetPlacedInWindow(action.node.id, aWindow);
-								}
-								break;
-							}
-							
-							var toolbars = aWindow.document.querySelectorAll("toolbar");
-							toolbar_loop: for(var a=0; a<toolbars.length; a++) {
-								var currentset = toolbars[a].getAttribute('currentset').split(",");
-								if(currentset.indexOf(action.node.id) > -1) {
-									for(var e=0; e<currentset.length; e++) {
-										if(currentset[e] == action.node.id) {
-											for(var l=e+1; l<currentset.length; l++) {
-												var beforeEl = aWindow.document.getElementById(currentset[l]);
-												if(beforeEl) {
-													// insertItem doesn't seem to be defined until the toolbar becomes visible
-													if(toolbars[a].insertItem) { toolbars[a].insertItem(action.node.id, beforeEl); }
-													else { action.node = toolbars[a].insertBefore(action.node, beforeEl); }
-													break toolbar_loop;
-												}
-											}
-											// insertItem doesn't seem to be defined until the toolbar becomes visible
-											if(toolbars[a].insertItem) { toolbars[a].insertItem(action.node.id, null, null, false); }
-											else { action.node = toolbars[a].appendChild(action.node); }
-											break toolbar_loop;
-										}
-									}
+								
+								try { aWindow.CustomizableUI.destroyWidget(action.node.id); }
+								catch(ex) { Cu.reportError(ex); }
+								
+								if(areaType == aWindow.CustomizableUI.TYPE_TOOLBAR) {
+									this.tempRestoreAllToolbars(aWindow, placement.area);
 								}
 							}
 						}
 						break;
 					
 					case 'addToolbar':
-						if(!Australis) { closeCustomize(); }
-						
 						if(action.node) {
 							if(action.toolboxid) {
 								var toolbox = aWindow.document.getElementById(action.toolboxid);
@@ -1043,139 +762,57 @@ this.overlayAid = {
 								}
 							}
 							
-							if(Australis) {
-								aWindow.removeEventListener('unload', action.node._menuEntries.onClose);
-								
-								// remove the context menu entries associated with this toolbar
-								var contextMenu = aWindow.document.getElementById('toolbar-context-menu');
-								var panelMenu = aWindow.document.getElementById('customizationPanelItemContextMenu');
-								var paletteMenu = aWindow.document.getElementById('customizationPaletteItemContextMenu');
-								
-								if(action.node._menuEntries.add.str) {
-									action.node._menuEntries.add.palette.remove();
-								}
-								
-								if(action.node._menuEntries.move.str) {
-									contextMenu.removeEventListener('popupshowing', action.node._menuEntries.move.context._popupShowing);
-									panelMenu.removeEventListener('popupshowing', action.node._menuEntries.move.panel._popupShowing);
-									action.node._menuEntries.move.context.remove();
-									action.node._menuEntries.move.panel.remove();
-								}
-								if(action.node._menuEntries.remove.str) {
-									contextMenu.removeEventListener('popupshowing', action.node._menuEntries.remove._popupShowing);
-									if(action.node._menuEntries.remove.context.getAttribute('label') == action.node._menuEntries.remove.str) {
-										setAttribute(action.node._menuEntries.remove.context, 'label',
-											action.node._menuEntries.remove.context.getAttribute('originalLabel'));
-										toggleAttribute(action.node._menuEntries.remove.context, 'accesskey',
-											action.node._menuEntries.remove.context.hasAttribute('originalAccesskey'),
-											action.node._menuEntries.remove.context.getAttribute('originalAccesskey'));
-										removeAttribute(action.node._menuEntries.remove.context, 'originalLabel');
-										removeAttribute(action.node._menuEntries.remove.context, 'originalAccesskey');
-									}
-								}
-								if(action.node._menuEntries.main.str) {
-									action.node._menuEntries.main.context.remove();
-								}
-
-								delete action.node._menuEntries;
-								
-								if(aWindow.CustomizableUI.getAreaType(action.node.id)) {
-									// see note in runRegisterToolbar(), we need this in all toolbars as well
-									windowMediator.callOnAll(function(bWindow) {
-										var wToolbar = bWindow.document.getElementById(action.node.id);
-										if(wToolbar && !wToolbar._init) {
-											overlayAid.tempAppendToolbar(bWindow, wToolbar);
-										}
-									}, aWindow.document.documentElement.getAttribute('windowtype'));
-									
-									try { aWindow.CustomizableUI.unregisterArea(action.node.id); }
-									catch(ex) { Cu.reportError(ex); }
-									
-									windowMediator.callOnAll(function(bWindow) {
-										var wToolbar = bWindow.document.getElementById(action.node.id);
-										if(wToolbar) {
-											overlayAid.tempRestoreToolbar(wToolbar);
-										}
-									}, aWindow.document.documentElement.getAttribute('windowtype'));
-								}
-								break;
-							}
-						
-							// Move the buttons to the palette first, so they can still be accessed afterwards
-							if(action.palette) {
-								var button = action.node.firstChild;
-								while(button) {
-									if(button.nodeName == 'toolbarbutton') {
-										var addedButton = button;
-										button = button.nextSibling;
-										var updateListButton = this.updateOverlayedNodes(aWindow, addedButton);
-										addedButton = action.palette.appendChild(addedButton);
-										this.updateOverlayedNodes(aWindow, addedButton, updateListButton);
-										continue;
-									}
-									button = button.nextSibling;
-								}
-							}
-						}
-						break;
-					
-					case 'removeToolbar':
-						if(action.node) {
-							if(action.toolboxid) {
-								var toolbox = aWindow.document.getElementById(action.toolboxid);
-								if(toolbox) {
-									toggleAttribute(action.node, 'mode', toolbox.getAttribute('mode'), toolbox.getAttribute('mode'));
-									
-									if(toolbox != action.node.parentNode) {
-										var addExternal = true;
-										for(var t=0; t<toolbox.externalToolbars.length; t++) {
-											if(toolbox.externalToolbars[t] == action.node) {
-												addExternal = false;
-												break;
-											}
-										}
-										if(addExternal) {
-											toolbox.externalToolbars.push(action.node);
-										}
-									}
-								}
+							aWindow.removeEventListener('unload', action.node._menuEntries.onClose);
+							
+							// remove the context menu entries associated with this toolbar
+							var contextMenu = aWindow.document.getElementById('toolbar-context-menu');
+							var panelMenu = aWindow.document.getElementById('customizationPanelItemContextMenu');
+							var paletteMenu = aWindow.document.getElementById('customizationPaletteItemContextMenu');
+							
+							if(action.node._menuEntries.add.str) {
+								action.node._menuEntries.add.palette.remove();
 							}
 							
-							if(Australis) {
-								this.runRegisterToolbar(aWindow, node);
+							if(action.node._menuEntries.move.str) {
+								contextMenu.removeEventListener('popupshowing', action.node._menuEntries.move.context._popupShowing);
+								panelMenu.removeEventListener('popupshowing', action.node._menuEntries.move.panel._popupShowing);
+								action.node._menuEntries.move.context.remove();
+								action.node._menuEntries.move.panel.remove();
+							}
+							if(action.node._menuEntries.remove.str) {
+								contextMenu.removeEventListener('popupshowing', action.node._menuEntries.remove._popupShowing);
+								if(action.node._menuEntries.remove.context.getAttribute('label') == action.node._menuEntries.remove.str) {
+									setAttribute(action.node._menuEntries.remove.context, 'label',
+										action.node._menuEntries.remove.context.getAttribute('originalLabel'));
+									toggleAttribute(action.node._menuEntries.remove.context, 'accesskey',
+										action.node._menuEntries.remove.context.hasAttribute('originalAccesskey'),
+										action.node._menuEntries.remove.context.getAttribute('originalAccesskey'));
+									removeAttribute(action.node._menuEntries.remove.context, 'originalLabel');
+									removeAttribute(action.node._menuEntries.remove.context, 'originalAccesskey');
+								}
+							}
+							if(action.node._menuEntries.main.str) {
+								action.node._menuEntries.main.context.remove();
+							}
+							
+							delete action.node._menuEntries;
+							
+							if(aWindow.CustomizableUI.getAreaType(action.node.id)) {
+								// see note in runRegisterToolbar(), we need this in all toolbars as well
+								this.tempAppendAllToolbars(aWindow, action.node.id);
+								
+								try { aWindow.CustomizableUI.unregisterArea(action.node.id); }
+								catch(ex) { Cu.reportError(ex); }
+								
+								this.tempRestoreAllToolbars(aWindow, action.node.id);
 							}
 						}
 						break;
 					
-					/* Not used in Australis */
-					case 'persistToolbarButton':
-						if(!action.node) {
-							toolboxes_loop: for(var t=0; t<toolboxes.length; t++) {
-								if(!toolboxes[t].palette) { continue; }
-								
-								for(var c=0; c<toolboxes[t].palette.childNodes.length; c++) {
-									if(toolboxes[t].palette.childNodes[c].id == action.nodeID) {
-										action.node = toolboxes[t].palette.childNodes[c];
-										var updateList = this.updateOverlayedNodes(aWindow, action.node);
-										break toolboxes_loop;
-									}
-								}
-							}
-						}
-						
-						if(action.node && action.node._removePersistListener) {
-							action.node._removePersistListener();
-						}
-						break;
-								
 					default: break;
 				}
 			} catch(ex) {
 				Cu.reportError(ex);
-			}
-			
-			if(action.node) {
-				this.updateOverlayedNodes(aWindow, action.node, updateList);
 			}
 		}
 		
@@ -1312,7 +949,7 @@ this.overlayAid = {
 						if(!aWindow[x]) { continue; }
 						if(i < aWindow[x].length && aWindow[x][i].uri == aWindow._UNLOAD_OVERLAYS[0]) { break; }
 					}
-					this.removeInOrder(aWindow, aWindow[x][i].time);
+					this.removeInOrder(aWindow, aWindow[x][i]);
 					rescheduleOverlay = true;
 				}
 				aWindow._UNLOAD_OVERLAYS.shift();
@@ -1345,6 +982,7 @@ this.overlayAid = {
 			&& (aWindow.document.baseURI.indexOf(this.overlays[i].uri) == 0 || this.loadedWindow(aWindow, this.overlays[i].uri, true) !== false)) {
 				aWindow._BEING_OVERLAYED = aWindow['_OVERLAYS_'+objName].push({
 					uri: this.overlays[i].overlay,
+					overlayingUri: this.overlays[i].uri,
 					traceBack: [],
 					removeMe: function() { overlayAid.removeOverlay(aWindow, this); },
 					time: 0,
@@ -1437,7 +1075,7 @@ this.overlayAid = {
 				var toolbox = aWindow.document.querySelectorAll('toolbox');
 				for(var a=0; a<toolbox.length; a++) {
 					var palette = toolbox[a].palette;
-					if(Australis && palette
+					if(palette
 					&& aWindow.gCustomizeMode._stowedPalette
 					&& aWindow.gCustomizeMode._stowedPalette.id == overlayNode.id
 					&& palette == aWindow.gCustomizeMode.visiblePalette) {
@@ -1452,42 +1090,15 @@ this.overlayAid = {
 								
 								// If it's a placeholder created by us to deal with CustomizableUI, just use it.
 								if(trueAttribute(existButton, 'CUI_placeholder')) {
-									this.reAppendPlaceholder(aWindow, existButton, palette);
+									removeAttribute(existButton, 'CUI_placeholder');
+									hideIt(existButton, true);
+									this.appendButton(aWindow, palette, existButton);
 									continue buttons_loop;
 								}
 								
-								// change or remove the button on the toolbar if it is found in the document
+								// we shouldn't be changing widgets, or adding with same id as other nodes
 								if(existButton) {
-									if(trueAttribute(button, 'removeelement')) {
-										this.removeButton(aWindow, palette, existButton);
-										continue buttons_loop;
-									}
-									
-									for(var c=0; c<button.attributes.length; c++) {
-										// Why bother, id is the same already
-										if(button.attributes[c].name == 'id') { continue; }
-										
-										this.setAttribute(aWindow, existButton, button.attributes[c]);
-									}
 									continue buttons_loop;
-								}
-								
-								// change or remove in the palette if it exists there
-								for(var b=0; b<palette.childNodes.length; b++) {
-									if(palette.childNodes[b].id == button.id) {
-										if(trueAttribute(button, 'removeelement')) {
-											this.removeButton(aWindow, palette, palette.childNodes[b]);
-											continue buttons_loop;
-										}
-										
-										for(var c=0; c<button.attributes.length; c++) {
-											// Why bother, id is the same already
-											if(button.attributes[c].name == 'id') { continue; }
-											
-											this.setAttribute(aWindow, palette.childNodes[b], button.attributes[c]);
-										}
-										continue buttons_loop;
-									}
 								}
 								
 								// Save a copy of the widget node in the sandbox,
@@ -1497,7 +1108,7 @@ this.overlayAid = {
 								}
 								
 								// add the button if not found either in a toolbar or the palette
-								button = aWindow.document.importNode(button, true); // Firefox 9- deep argument is mandatory
+								button = aWindow.document.importNode(button, true);
 								this.appendButton(aWindow, palette, button);
 							}
 						}
@@ -1511,22 +1122,16 @@ this.overlayAid = {
 			
 			// Handle if node with same id was found
 			if(node) {
-				// We could have found a placeholder from CUI's handling. We need to ensure the process continues as normal (append the button) in that case
-				if(trueAttribute(node, 'CUI_placeholder') && node.collapsed) {
-					this.reAppendPlaceholder(aWindow, node, node.parentNode);
-					continue;
-				}
-				
 				// Don't process if id mismatches nodename or if parents mismatch; I should just make sure this doesn't happen in my overlays
 				if(node.nodeName != overlayNode.nodeName) { continue; }
 				if(overlayNode.parentNode.nodeName != 'overlay' && node.parentNode.id != overlayNode.parentNode.id) { continue; }
 				
 				// If removeelement attribute is true, remove the element and do nothing else
 				if(trueAttribute(overlayNode, 'removeelement')) {
-					// Check if we are removing any toolbars so we also remove it from the toolbox
-					this.removeToolbars(aWindow, node);
-					
-					node = this.removeChild(aWindow, node);
+					// Check if we are removing any toolbars, we can't do this
+					if(!this.removingToolbars(aWindow, node)) {
+						this.removeChild(aWindow, node);
+					}
 					
 					continue;
 				}
@@ -1540,7 +1145,7 @@ this.overlayAid = {
 				}
 				
 				// Move the node around if necessary
-				node = this.moveAround(aWindow, node, overlayNode, node.parentNode);
+				this.moveAround(aWindow, node, overlayNode, node.parentNode);
 				
 				// Get Children of an Element's ID into this node
 				this.getChildrenOf(aWindow, node);
@@ -1549,15 +1154,13 @@ this.overlayAid = {
 				this.loadInto(aWindow, overlay.childNodes[i]);
 			}
 			else if(overlayNode.parentNode.nodeName != 'overlay') {
-				var node = aWindow.document.importNode(overlayNode, true); // Firefox 9- deep argument is mandatory
+				var node = aWindow.document.importNode(overlayNode, true);
 				
 				// We need to register the customization area before we append the node
-				if(Australis) {
-					this.registerAreas(aWindow, node);
-				}
+				this.registerAreas(aWindow, node);
 				
 				// Add the node to the correct place
-				node = this.moveAround(aWindow, node, overlayNode, aWindow.document.getElementById(overlayNode.parentNode.id));
+				this.moveAround(aWindow, node, overlayNode, aWindow.document.getElementById(overlayNode.parentNode.id));
 				
 				// Check if we are adding any toolbars so we remove it later from the toolbox
 				this.addToolbars(aWindow, node);
@@ -1566,25 +1169,24 @@ this.overlayAid = {
 				this.getChildrenOf(aWindow, node);
 				
 				// Surf through all the children of node for the getchildrenof attribute
-				var allGetChildrenOf = node.getElementsByAttribute('getchildrenof', '*');
-				for(var gco = 0; gco < allGetChildrenOf.length; gco++) {
-					this.getChildrenOf(aWindow, allGetChildrenOf[gco]);
+				if(node.getElementsByAttribute) {
+					var allGetChildrenOf = node.getElementsByAttribute('getchildrenof', '*');
+					for(var gco = 0; gco < allGetChildrenOf.length; gco++) {
+						this.getChildrenOf(aWindow, allGetChildrenOf[gco]);
+					}
 				}
 			}
 		}
 	},
 	
 	registerAreas: function(aWindow, node) {
-		if(node.nodeName == 'toolbar' && node.id && !aWindow.CustomizableUI.getAreaType(node.id)) {
+		if(node.nodeName == 'toolbar' && node.id && !trueAttribute(node, 'ignoreCUI') && !aWindow.CustomizableUI.getAreaType(node.id)) {
 			try {
 				var barArgs = {
-					type: CustomizableUI.TYPE_TOOLBAR,
+					type: aWindow.CustomizableUI.TYPE_TOOLBAR,
 					legacy: true,
 					defaultCollapsed: null
 				};
-				if(Services.vc.compare(Services.appinfo.platformVersion, "30.0a1") < 0) {
-					delete barArgs.defaultCollapsed;
-				}
 				aWindow.CustomizableUI.registerArea(node.id, barArgs);
 			} catch(ex) { Cu.reportError(ex); }
 		}
@@ -1616,9 +1218,9 @@ this.overlayAid = {
 		};
 		
 		setAttribute(node.tempAppend.container, 'style', 'position: fixed; top: 4000px; left: 4000px; opacity: 0.001;');
-		node.tempAppend.container = aWindow.document.documentElement.appendChild(node.tempAppend.container);
+		aWindow.document.documentElement.appendChild(node.tempAppend.container);
 		
-		try { node = node.tempAppend.container.appendChild(node); } catch(ex) { Cu.reportError(ex); }
+		try { node.tempAppend.container.appendChild(node); } catch(ex) { Cu.reportError(ex); }
 	},
 	tempRestoreToolbar: function(node) {
 		if(node.tempAppend) {
@@ -1628,6 +1230,35 @@ this.overlayAid = {
 			node.tempAppend.container.parentNode.removeChild(node.tempAppend.container);
 			delete node.tempAppend;
 		}
+	},
+	
+	tempAppendAllToolbars: function(aWindow, aToolbarId) {
+		windowMediator.callOnAll(function(bWindow) {
+			var wToolbar = bWindow.document.getElementById(aToolbarId);
+			if(wToolbar && !wToolbar._init) {
+				overlayAid.tempAppendToolbar(bWindow, wToolbar);
+			}
+		}, aWindow.document.documentElement.getAttribute('windowtype'));
+	},
+	tempRestoreAllToolbars: function(aWindow, aToolbarId) {
+		windowMediator.callOnAll(function(bWindow) {
+			var wToolbar = bWindow.document.getElementById(aToolbarId);
+			if(wToolbar) {
+				overlayAid.tempRestoreToolbar(wToolbar);
+			}
+		}, aWindow.document.documentElement.getAttribute('windowtype'));
+	},
+	
+	// moves a toolbar without triggering its _init() method
+	safeMoveToolbar: function(aToolbar, aParent, aSibling) {
+		var backupInit = aToolbar._init;
+		aToolbar._init = function() { return; }
+		if(aSibling) {
+			aParent.insertBefore(aToolbar, aSibling);
+		} else {
+			aParent.appendChild(aToolbar);
+		}
+		aToolbar._init = backupInit;
 	},
 	
 	addToolbars: function(aWindow, node) {
@@ -1658,189 +1289,187 @@ this.overlayAid = {
 			
 			// The toolbar doesn't run the constructor until it is visible. And we want it to run regardless if it is visible or not.
 			// This will just do nothing if it has been run already.
-			if(Australis) {
-				this.runRegisterToolbar(aWindow, node);
+			this.runRegisterToolbar(aWindow, node);
+			
+			// CUI doesn't add these entries automatically to the menus, they're a nice addition to the UX
+			node._menuEntries = {
+				toolbarID: node.id,
+				add: { str: node.getAttribute('menuAdd'), key: node.getAttribute('menuAddAccesskey') },
+				move: { str: node.getAttribute('menuMove'), key: node.getAttribute('menuMoveAccesskey') },
+				remove: { str: node.getAttribute('menuRemove'), key: node.getAttribute('menuRemoveAccesskey') },
+				main: { str: node.getAttribute('menuMain'), key: node.getAttribute('menuMainAccesskey') },
 				
-				// CUI doesn't add these entries automatically to the menus, they're a nice addition to the UX
-				node._menuEntries = {
-					toolbarID: node.id,
-					add: { str: node.getAttribute('menuAdd'), key: node.getAttribute('menuAddAccesskey') },
-					move: { str: node.getAttribute('menuMove'), key: node.getAttribute('menuMoveAccesskey') },
-					remove: { str: node.getAttribute('menuRemove'), key: node.getAttribute('menuRemoveAccesskey') },
-					main: { str: node.getAttribute('menuMain'), key: node.getAttribute('menuMainAccesskey') },
+				getNode: function(aNode) {
+					aNode = aWindow.gCustomizeMode._getCustomizableChildForNode(aNode);
+					if(aNode && aNode.localName == "toolbarpaletteitem" && aNode.firstChild) {
+						aNode = aNode.firstChild;
+					}
+					return aNode;
+				},
+				
+				getInToolbar: function(aNode, toolbar) {
+					var walk = aNode;
+					while(walk) {
+						if(walk.tagName == 'toolbar') {
+							return (walk == toolbar);
+						}
+						walk = walk.parentNode;
+					}
+					return false;
+				},
+				
+				disableEntry: function(aNode, entry) {
+					// if we're customizing and the node is already wrapped, we can quickly check for the wrapper's removable tag
+					if(aNode.nodeName == 'toolbarpaletteitem' && aNode.id.startsWith('wrapper-')) {
+						entry.disabled = !trueAttribute(aNode, 'removable');
+						return;
+					}
 					
-					getNode: function(aNode) {
-						aNode = aWindow.gCustomizeMode._getCustomizableChildForNode(aNode);
-						if(aNode && aNode.localName == "toolbarpaletteitem" && aNode.firstChild) {
-							aNode = aNode.firstChild;
-						}
-						return aNode;
-					},
+					aNode = this.getNode(aNode);
 					
-					getInToolbar: function(aNode, toolbar) {
-						var walk = aNode;
-						while(walk) {
-							if(walk.tagName == 'toolbar') {
-								return (walk == toolbar);
-							}
-							walk = walk.parentNode;
-						}
-						return false;
-					},
+					if(!aNode) {
+						entry.disabled = true;
+						return;
+					}
 					
-					disableEntry: function(aNode, entry) {
-						// if we're customizing and the node is already wrapped, we can quickly check for the wrapper's removable tag
-						if(aNode.nodeName == 'toolbarpaletteitem' && aNode.id.startsWith('wrapper-')) {
-							entry.disabled = !trueAttribute(aNode, 'removable');
-							return;
-						}
-						
-						aNode = this.getNode(aNode);
-						
-						if(!aNode) {
-							entry.disabled = true;
-							return;
-						}
-						
-						// special case for the PanelUI-button, until https://bugzilla.mozilla.org/show_bug.cgi?id=996571 is resolved
-						if(aNode.id == 'PanelUI-button' || aNode.id == 'nav-bar-overflow-button') {
-							entry.disabled = !trueAttribute(aNode, 'removable');
-							return;
-						}
-						
-						entry.disabled = !CustomizableUI.isWidgetRemovable(aNode.id);
-					},
+					// special case for the PanelUI-button, until https://bugzilla.mozilla.org/show_bug.cgi?id=996571 is resolved
+					if(aNode.id == 'PanelUI-button' || aNode.id == 'nav-bar-overflow-button') {
+						entry.disabled = !trueAttribute(aNode, 'removable');
+						return;
+					}
 					
-					hideOnSelf: function(aNode, entry) {
-						aNode = this.getNode(aNode);
-						entry.hidden = !aNode || this.getInToolbar(aNode, node);
-					},
+					entry.disabled = !CustomizableUI.isWidgetRemovable(aNode.id);
+				},
+				
+				hideOnSelf: function(aNode, entry) {
+					aNode = this.getNode(aNode);
+					entry.hidden = !aNode || this.getInToolbar(aNode, node);
+				},
+				
+				// because if there's multiple toolbars added through this time, there will also be multiple of these entries,
+				// we only need to show one of these
+				showOnlyFirstMain: function(menu, aNode) {
+					var hide = !aNode || this.getInToolbar(aNode, aWindow.document.getElementById('nav-bar'));
 					
-					// because if there's multiple toolbars added through this time, there will also be multiple of these entries,
-					// we only need to show one of these
-					showOnlyFirstMain: function(menu, aNode) {
-						var hide = !aNode || this.getInToolbar(aNode, aWindow.document.getElementById('nav-bar'));
-						
-						var mains = menu.getElementsByClassName('customize-context-moveToToolbar');
-						for(var m=0; m<mains.length; m++) {
-							mains[m].hidden = hide;
-							if(!hide) {
-								this.disableEntry(aNode, mains[m]);
-							}
-							hide = true;
+					var mains = menu.getElementsByClassName('customize-context-moveToToolbar');
+					for(var m=0; m<mains.length; m++) {
+						mains[m].hidden = hide;
+						if(!hide) {
+							this.disableEntry(aNode, mains[m]);
 						}
-					},
+						hide = true;
+					}
+				},
+				
+				addCommand: function(aNode) {
+					aNode = this.getNode(aNode);
+					aWindow.CustomizableUI.addWidgetToArea(aNode.id, this.toolbarID);
+					if(!aWindow.gCustomizeMode._customizing) {
+						aWindow.CustomizableUI.dispatchToolboxEvent("customizationchange");
+					}
+				},
+				
+				onClose: function() {
+					aWindow.removeEventListener('unload', node._menuEntries.onClose);
 					
-					addCommand: function(aNode) {
-						aNode = this.getNode(aNode);
-						aWindow.CustomizableUI.addWidgetToArea(aNode.id, this.toolbarID);
-						if(!aWindow.gCustomizeMode._customizing) {
-							aWindow.CustomizableUI.dispatchToolboxEvent("customizationchange");
-						}
-					},
+					var contextMenu = aWindow.document.getElementById('toolbar-context-menu');
+					var panelMenu = aWindow.document.getElementById('customizationPanelItemContextMenu');
 					
-					onClose: function() {
-						aWindow.removeEventListener('unload', node._menuEntries.onClose);
-						
-						var contextMenu = aWindow.document.getElementById('toolbar-context-menu');
-						var panelMenu = aWindow.document.getElementById('customizationPanelItemContextMenu');
-						
-						if(node._menuEntries.move.str) {
-							contextMenu.removeEventListener('popupshowing', node._menuEntries.move.context._popupShowing);
-							panelMenu.removeEventListener('popupshowing', node._menuEntries.move.panel._popupShowing);
+					if(node._menuEntries.move.str) {
+						contextMenu.removeEventListener('popupshowing', node._menuEntries.move.context._popupShowing);
+						panelMenu.removeEventListener('popupshowing', node._menuEntries.move.panel._popupShowing);
+					}
+					
+					if(node._menuEntries.remove.str) {
+						contextMenu.removeEventListener('popupshowing', node._menuEntries.remove._popupShowing);
+					}
+				}
+			};
+			
+			// all of these menu entries listeners would cause a ZC if we closed a window without removing them
+			aWindow.addEventListener('unload', node._menuEntries.onClose);
+			
+			var contextMenu = aWindow.document.getElementById('toolbar-context-menu');
+			var panelMenu = aWindow.document.getElementById('customizationPanelItemContextMenu');
+			var paletteMenu = aWindow.document.getElementById('customizationPaletteItemContextMenu');
+			
+			if(node._menuEntries.add.str) {
+				node._menuEntries.add.palette = aWindow.document.createElement('menuitem');
+				node._menuEntries.add.palette._toolbar = node;
+				setAttribute(node._menuEntries.add.palette, 'class', 'customize-context-addTo-'+node.id);
+				setAttribute(node._menuEntries.add.palette, 'oncommand', 'this._toolbar._menuEntries.addCommand(document.popupNode);');
+				setAttribute(node._menuEntries.add.palette, 'label', node._menuEntries.add.str);
+				toggleAttribute(node._menuEntries.add.palette, 'accesskey', node._menuEntries.add.key, node._menuEntries.add.key);
+				paletteMenu.appendChild(node._menuEntries.add.palette);
+			}
+			
+			if(node._menuEntries.move.str) {
+				node._menuEntries.move.context = aWindow.document.createElement('menuitem');
+				node._menuEntries.move.context._toolbar = node;
+				setAttribute(node._menuEntries.move.context, 'class', 'customize-context-moveTo-'+node.id);
+				setAttribute(node._menuEntries.move.context, 'oncommand', 'this._toolbar._menuEntries.addCommand(document.popupNode);');
+				setAttribute(node._menuEntries.move.context, 'label', node._menuEntries.move.str);
+				toggleAttribute(node._menuEntries.move.context, 'accesskey', node._menuEntries.move.key, node._menuEntries.move.key);
+				
+				node._menuEntries.move.context._popupShowing = function(e) {
+					if(e.target.id != 'toolbar-context-menu') { return; }
+					node._menuEntries.hideOnSelf(aWindow.document.popupNode, node._menuEntries.move.context);
+					node._menuEntries.disableEntry(aWindow.document.popupNode, node._menuEntries.move.context);
+					node._menuEntries.showOnlyFirstMain(e.target, aWindow.document.popupNode);
+				};
+				
+				contextMenu.insertBefore(node._menuEntries.move.context, contextMenu.getElementsByClassName('customize-context-removeFromToolbar')[0]);
+				contextMenu.addEventListener('popupshowing', node._menuEntries.move.context._popupShowing);
+				
+				node._menuEntries.move.panel = aWindow.document.createElement('menuitem');
+				node._menuEntries.move.panel._toolbar = node;
+				setAttribute(node._menuEntries.move.panel, 'class', 'customize-context-moveTo-'+node.id);
+				setAttribute(node._menuEntries.move.panel, 'oncommand', 'this._toolbar._menuEntries.addCommand(document.popupNode);');
+				setAttribute(node._menuEntries.move.panel, 'label', node._menuEntries.move.str);
+				toggleAttribute(node._menuEntries.move.panel, 'accesskey', node._menuEntries.move.key, node._menuEntries.move.key);
+				
+				node._menuEntries.move.panel._popupShowing = function(e) {
+					if(e.target.id != 'customizationPanelItemContextMenu') { return; }
+					node._menuEntries.disableEntry(aWindow.document.popupNode, node._menuEntries.move.panel);
+				};
+				
+				panelMenu.insertBefore(node._menuEntries.move.panel, panelMenu.getElementsByClassName('customize-context-removeFromPanel')[0]);
+				panelMenu.addEventListener('popupshowing', node._menuEntries.move.panel._popupShowing);
+			}
+			
+			if(node._menuEntries.remove.str) {
+				node._menuEntries.remove.context = contextMenu.getElementsByClassName('customize-context-removeFromToolbar')[0];
+				node._menuEntries.remove._popupShowing = function(e) {
+					if(e.target.id != 'toolbar-context-menu') { return; }
+					var entry = node._menuEntries.remove.context;
+					var aNode = node._menuEntries.getNode(aWindow.document.popupNode);
+					
+					if(isAncestor(aNode, node)) {
+						if(!entry.getAttribute('originalLabel')) {
+							setAttribute(entry, 'originalLabel', entry.getAttribute('label'));
+							toggleAttribute(entry, 'originalAccesskey', entry.hasAttribute('accesskey'), entry.getAttribute('accesskey'));
 						}
-						
-						if(node._menuEntries.remove.str) {
-							contextMenu.removeEventListener('popupshowing', node._menuEntries.remove._popupShowing);
-						}
+						setAttribute(entry, 'label', node._menuEntries.remove.str);
+						toggleAttribute(entry, 'accesskey', node._menuEntries.remove.key, node._menuEntries.remove.key);
+					} else if(entry.getAttribute('label') == node._menuEntries.remove.str) {
+						setAttribute(entry, 'label', entry.getAttribute('originalLabel'));
+						toggleAttribute(entry, 'accesskey', entry.hasAttribute('originalAccesskey'), entry.getAttribute('originalAccesskey'));
+						removeAttribute(entry, 'originalLabel');
+						removeAttribute(entry, 'originalAccesskey');
 					}
 				};
 				
-				// all of these menu entries listeners would cause a ZC if we closed a window without removing them
-				aWindow.addEventListener('unload', node._menuEntries.onClose);
+				contextMenu.addEventListener('popupshowing', node._menuEntries.remove._popupShowing);
+			}
+			
+			if(node._menuEntries.main.str) {
+				node._menuEntries.main.context = aWindow.document.createElement('menuitem');
+				setAttribute(node._menuEntries.main.context, 'class', 'customize-context-moveToToolbar');
+				setAttribute(node._menuEntries.main.context, 'oncommand', 'gCustomizeMode.addToToolbar(document.popupNode)');
+				setAttribute(node._menuEntries.main.context, 'label', node._menuEntries.main.str);
+				toggleAttribute(node._menuEntries.main.context, 'accesskey', node._menuEntries.main.key, node._menuEntries.main.key);
 				
-				var contextMenu = aWindow.document.getElementById('toolbar-context-menu');
-				var panelMenu = aWindow.document.getElementById('customizationPanelItemContextMenu');
-				var paletteMenu = aWindow.document.getElementById('customizationPaletteItemContextMenu');
-				
-				if(node._menuEntries.add.str) {
-					node._menuEntries.add.palette = aWindow.document.createElement('menuitem');
-					node._menuEntries.add.palette._toolbar = node;
-					setAttribute(node._menuEntries.add.palette, 'class', 'customize-context-addTo-'+node.id);
-					setAttribute(node._menuEntries.add.palette, 'oncommand', 'this._toolbar._menuEntries.addCommand(document.popupNode);');
-					setAttribute(node._menuEntries.add.palette, 'label', node._menuEntries.add.str);
-					toggleAttribute(node._menuEntries.add.palette, 'accesskey', node._menuEntries.add.key, node._menuEntries.add.key);
-					paletteMenu.appendChild(node._menuEntries.add.palette);
-				}
-				
-				if(node._menuEntries.move.str) {
-					node._menuEntries.move.context = aWindow.document.createElement('menuitem');
-					node._menuEntries.move.context._toolbar = node;
-					setAttribute(node._menuEntries.move.context, 'class', 'customize-context-moveTo-'+node.id);
-					setAttribute(node._menuEntries.move.context, 'oncommand', 'this._toolbar._menuEntries.addCommand(document.popupNode);');
-					setAttribute(node._menuEntries.move.context, 'label', node._menuEntries.move.str);
-					toggleAttribute(node._menuEntries.move.context, 'accesskey', node._menuEntries.move.key, node._menuEntries.move.key);
-					
-					node._menuEntries.move.context._popupShowing = function(e) {
-						if(e.target.id != 'toolbar-context-menu') { return; }
-						node._menuEntries.hideOnSelf(aWindow.document.popupNode, node._menuEntries.move.context);
-						node._menuEntries.disableEntry(aWindow.document.popupNode, node._menuEntries.move.context);
-						node._menuEntries.showOnlyFirstMain(e.target, aWindow.document.popupNode);
-					};
-					
-					contextMenu.insertBefore(node._menuEntries.move.context, contextMenu.getElementsByClassName('customize-context-removeFromToolbar')[0]);
-					contextMenu.addEventListener('popupshowing', node._menuEntries.move.context._popupShowing);
-					
-					node._menuEntries.move.panel = aWindow.document.createElement('menuitem');
-					node._menuEntries.move.panel._toolbar = node;
-					setAttribute(node._menuEntries.move.panel, 'class', 'customize-context-moveTo-'+node.id);
-					setAttribute(node._menuEntries.move.panel, 'oncommand', 'this._toolbar._menuEntries.addCommand(document.popupNode);');
-					setAttribute(node._menuEntries.move.panel, 'label', node._menuEntries.move.str);
-					toggleAttribute(node._menuEntries.move.panel, 'accesskey', node._menuEntries.move.key, node._menuEntries.move.key);
-					
-					node._menuEntries.move.panel._popupShowing = function(e) {
-						if(e.target.id != 'customizationPanelItemContextMenu') { return; }
-						node._menuEntries.disableEntry(aWindow.document.popupNode, node._menuEntries.move.panel);
-					};
-					
-					panelMenu.insertBefore(node._menuEntries.move.panel, panelMenu.getElementsByClassName('customize-context-removeFromPanel')[0]);
-					panelMenu.addEventListener('popupshowing', node._menuEntries.move.panel._popupShowing);
-				}
-				
-				if(node._menuEntries.remove.str) {
-					node._menuEntries.remove.context = contextMenu.getElementsByClassName('customize-context-removeFromToolbar')[0];
-					node._menuEntries.remove._popupShowing = function(e) {
-						if(e.target.id != 'toolbar-context-menu') { return; }
-						var entry = node._menuEntries.remove.context;
-						var aNode = node._menuEntries.getNode(aWindow.document.popupNode);
-						
-						if(isAncestor(aNode, node)) {
-							if(!entry.getAttribute('originalLabel')) {
-								setAttribute(entry, 'originalLabel', entry.getAttribute('label'));
-								toggleAttribute(entry, 'originalAccesskey', entry.hasAttribute('accesskey'), entry.getAttribute('accesskey'));
-							}
-							setAttribute(entry, 'label', node._menuEntries.remove.str);
-							toggleAttribute(entry, 'accesskey', node._menuEntries.remove.key, node._menuEntries.remove.key);
-						} else if(entry.getAttribute('label') == node._menuEntries.remove.str) {
-							setAttribute(entry, 'label', entry.getAttribute('originalLabel'));
-							toggleAttribute(entry, 'accesskey', entry.hasAttribute('originalAccesskey'), entry.getAttribute('originalAccesskey'));
-							removeAttribute(entry, 'originalLabel');
-							removeAttribute(entry, 'originalAccesskey');
-						}
-					};
-					
-					contextMenu.addEventListener('popupshowing', node._menuEntries.remove._popupShowing);
-				}
-				
-				if(node._menuEntries.main.str) {
-					node._menuEntries.main.context = aWindow.document.createElement('menuitem');
-					setAttribute(node._menuEntries.main.context, 'class', 'customize-context-moveToToolbar');
-					setAttribute(node._menuEntries.main.context, 'oncommand', 'gCustomizeMode.addToToolbar(document.popupNode)');
-					setAttribute(node._menuEntries.main.context, 'label', node._menuEntries.main.str);
-					toggleAttribute(node._menuEntries.main.context, 'accesskey', node._menuEntries.main.key, node._menuEntries.main.key);
-					
-					contextMenu.insertBefore(node._menuEntries.main.context, contextMenu.firstChild);
-				}
+				contextMenu.insertBefore(node._menuEntries.main.context, contextMenu.firstChild);
 			}
 			
 			var palette = toolbox.palette;
@@ -1857,90 +1486,21 @@ this.overlayAid = {
 		}
 	},
 	
-	removeToolbars: function(aWindow, node) {
-		if(node.nodeName == 'toolbar' && node.id) {
-			if(Australis) {
-				aWindow.CustomizableUI.unregisterArea(node.id);
-			}
-			
-			if(node.getAttribute('toolboxid') || node.parentNode.nodeName == 'toolbox') {
-				var toolbox = node.getAttribute('toolboxid') ? aWindow.document.getElementById(node.getAttribute('toolboxid')) : node.parentNode;
-				if(toolbox) {
-					for(var et=0; et<toolbox.externalToolbars.length; et++) {
-						if(toolbox.externalToolbars[et] == node) {
-							toolbox.externalToolbars.splice(et, 1);
-							break;
-						}
-					}
-					
-					this.traceBack(aWindow, {
-						action: 'removeToolbar',
-						node: node,
-						toolboxid: toolbox.id
-					});
-				}
-			}
+	removingToolbars: function(aWindow, node) {
+		if(node.nodeName == 'toolbar' && node.id && node.getAttribute('toolboxid')) {
+			return true;
 		}
 		
 		for(var nc=0; nc<node.childNodes.length; nc++) {
-			this.removeToolbars(aWindow, node.childNodes[nc]);
+			if(this.removingToolbars(aWindow, node.childNodes[nc])) {
+				return true;
+			}
 		}
+		
+		return false;
 	},
 	
 	moveAround: function(aWindow, node, overlayNode, parent) {
-		if(!Australis && parent.nodeName == 'toolbar' && parent.getAttribute('currentset')) {
-			var ret = null;
-			var originalParent = node.parentNode;
-			var currentset = parent.getAttribute('currentset').split(',');
-			for(var c = 0; c < currentset.length; c++) {
-				if(currentset[c] == node.id) {
-					var shift = 0;
-					var beforeEl = null;
-					for(var s = c+1; s < currentset.length; s++) {
-						if(currentset[s] == 'separator' || currentset[s] == 'spring' || currentset[s] == 'spacer') {
-							shift++;
-							continue;
-						}
-						
-						beforeEl = aWindow.document.getElementById(currentset[s]);
-						if(beforeEl) {
-							if(beforeEl.parentNode != parent) {
-								beforeEl = null;
-								continue;
-							}
-							
-							while(shift > 0 && beforeEl.previousSibling) {
-								if(beforeEl.previousSibling.nodeName != 'toolbarseparator'
-								&& beforeEl.previousSibling.nodeName != 'toolbarspring'
-								&& beforeEl.previousSibling.nodeName != 'toolbarspacer') {
-									break;
-								}
-								beforeEl = beforeEl.previousSibling;
-								shift--;
-							}
-							break;
-						}
-					}
-					
-					ret = this.insertBefore(aWindow, node, parent, beforeEl);
-					if(ret && originalParent && originalParent.id && originalParent.nodeName == 'toolbar') {
-						setAttribute(originalParent, 'currentset', originalParent.currentSet);
-						aWindow.document.persist(originalParent.id, 'currentset');
-					}
-					return ret;
-				}
-			}
-		}
-		else if(Australis && parent.nodeName == 'toolbar' && parent != node.parentNode) {
-			// Save a copy of the widget node in the sandbox,
-			// so CUI can use it when opening a new window without having to wait for the overlay.
-			if(!Globals.widgets[overlayNode.id]) {
-				Globals.widgets[overlayNode.id] = overlayNode;
-			}
-			
-			return this.appendButton(aWindow, parent, node);
-		}
-		
 		var newParent = null;
 		if(overlayNode.getAttribute('newparent')) {
 			newParent = aWindow.document.getElementById(overlayNode.getAttribute('newparent'));
@@ -2012,14 +1572,12 @@ this.overlayAid = {
 	
 	appendChild: function(aWindow, node, parent) {
 		var originalParent = node.parentNode;
-		var updateList = this.updateOverlayedNodes(aWindow, node);
 		var browserList = this.swapBrowsers(aWindow, node);
 		
-		try { node = parent.appendChild(node); }
-		catch(ex) { Cu.reportError(ex); node = null; }
+		try { parent.appendChild(node); }
+		catch(ex) { Cu.reportError(ex); }
 		
 		this.swapBrowsers(aWindow, node, browserList);
-		this.updateOverlayedNodes(aWindow, node, updateList);
 		this.traceBack(aWindow, {
 			action: 'appendChild',
 			node: node,
@@ -2038,14 +1596,12 @@ this.overlayAid = {
 				}
 			}
 		}
-		var updateList = this.updateOverlayedNodes(aWindow, node);
 		var browserList = this.swapBrowsers(aWindow, node);
 		
-		try { node = parent.insertBefore(node, sibling); }
-		catch(ex) { Cu.reportError(ex); return null; }
+		try { parent.insertBefore(node, sibling); }
+		catch(ex) { Cu.reportError(ex); }
 		
 		this.swapBrowsers(aWindow, node, browserList);
-		this.updateOverlayedNodes(aWindow, node, updateList);
 		if(!originalParent) {
 			this.traceBack(aWindow, {
 				action: 'appendChild',
@@ -2131,14 +1687,14 @@ this.overlayAid = {
 							//Cu.reportError('Failed to swap inner browser in '+browsers[b].tagName+' '+browsers[b].id);
 							//Cu.reportError(ex);
 							this.cleanTempBrowsers(innerDone);
-							newTemp.parentNode.removeChild(newTemp);
+							newTemp.remove();
 							continue tempBrowsersLoop;
 						}
 						
 						innerDone.unshift({ // unshift instead of push so we undo in the reverse order
 							sibling: inners[i].nextSibling,
 							parent: inners[i].parentNode,
-							browser: inners[i].parentNode.removeChild(inners[i]),
+							browser: inners[i].remove(),
 							temp: newTemp
 						});
 					}
@@ -2167,14 +1723,14 @@ this.overlayAid = {
 							//Cu.reportError('Failed to swap iframe in '+browsers[b].tagName+' '+browsers[b].id);
 							//Cu.reportError(ex);
 							this.cleanTempBrowsers(iframesDone);
-							newTemp.parentNode.removeChild(newTemp);
+							newTemp.remove();
 							continue tempBrowsersLoop;
 						}
 						
 						iframesDone.unshift({ // unshift instead of push so we undo in the reverse order
 							sibling: iframes[i].nextSibling,
 							parent: iframes[i].parentNode,
-							browser: iframes[i].parentNode.removeChild(iframes[i]),
+							browser: iframes[i].remove(),
 							iframe: true,
 							temp: newTemp
 						});
@@ -2191,7 +1747,7 @@ this.overlayAid = {
 					//Cu.reportError('Failed to swap '+browsers[b].tagName+' '+browsers[b].id);
 					//Cu.reportError(ex);
 					this.cleanTempBrowsers(innerDone);
-					newTemp.parentNode.removeChild(newTemp);
+					newTemp.remove();
 					continue;
 				}
 					
@@ -2214,7 +1770,7 @@ this.overlayAid = {
 		newTemp.collapsed = true;
 		setAttribute(newTemp, 'type', type || 'chrome');
 		setAttribute(newTemp, 'src', 'about:blank');
-		newTemp = aWindow.document.documentElement.appendChild(newTemp);
+		aWindow.document.documentElement.appendChild(newTemp);
 		newTemp.docShell.createAboutBlankContentViewer(null);
 		return newTemp;
 	},
@@ -2241,7 +1797,7 @@ this.overlayAid = {
 			}
 			catch(ex) { /* nothing we can do at this point */  }
 			
-			list[l].temp.parentNode.removeChild(list[l].temp);
+			list[l].temp.remove();
 		}
 	},
 	
@@ -2265,7 +1821,6 @@ this.overlayAid = {
 	},
 	
 	removeChild: function(aWindow, node) {
-		var updateList = this.updateOverlayedNodes(aWindow, node);
 		var originalParent = node.parentNode;
 		
 		var o = 0;
@@ -2277,9 +1832,9 @@ this.overlayAid = {
 			}
 		}
 		
-		try { node = node.parentNode.removeChild(node); } catch(ex) { Cu.reportError(ex); node = null; }
+		try { node.remove(); }
+		catch(ex) { Cu.reportError(ex); }
 		
-		this.updateOverlayedNodes(aWindow, node, updateList);
 		this.traceBack(aWindow, {
 			action: 'removeChild',
 			node: node,
@@ -2310,10 +1865,10 @@ this.overlayAid = {
 	
 	appendXMLSS: function(aWindow, node) {
 		try {
-			node = aWindow.document.importNode(node, true); // Firefox 9- deep argument is mandatory
+			node = aWindow.document.importNode(node, true);
 			// these have to come before the actual window element
-			node = aWindow.document.insertBefore(node, aWindow.document.documentElement);
-		} catch(ex) { node = null; }
+			aWindow.document.insertBefore(node, aWindow.document.documentElement);
+		} catch(ex) {}
 		this.traceBack(aWindow, {
 			action: 'appendXMLSS',
 			node: node
@@ -2328,9 +1883,9 @@ this.overlayAid = {
 		var prefElements = prefPane.getElementsByTagName('preferences');
 		if(prefElements.length == 0) {
 			try {
-				var prefs = aWindow.document.importNode(node, true); // Firefox 9- deep argument is mandatory
-				prefs = prefPane.appendChild(prefs);
-			} catch(ex) { prefs = null; }
+				var prefs = aWindow.document.importNode(node, true);
+				prefPane.appendChild(prefs);
+			} catch(ex) {}
 			this.traceBack(aWindow, {
 				action: 'addPreferencesElement',
 				prefs: prefs
@@ -2343,9 +1898,9 @@ this.overlayAid = {
 			if(!node.childNodes[p].id) { continue; }
 			
 			try {
-				var pref = aWindow.document.importNode(node.childNodes[p], true); // Firefox 9- deep argument is mandatory
-				pref = prefs.appendChild(pref);
-			} catch(ex) { pref = null; }
+				var pref = aWindow.document.importNode(node.childNodes[p], true);
+				prefs.appendChild(pref);
+			} catch(ex) {}
 			this.traceBack(aWindow, {
 				action: 'addPreference',
 				pref: pref
@@ -2372,156 +1927,57 @@ this.overlayAid = {
 		}
 	},
 	
-	reAppendPlaceholder: function(aWindow, node, palette) {
-		removeAttribute(node, 'CUI_placeholder');
-		hideIt(node, true);
-		this.appendButton(aWindow, palette, node);
-	},
-	
 	appendButton: function(aWindow, palette, node) {
-		if(!Australis) { closeCustomize(); }
-		var updateList = this.updateOverlayedNodes(aWindow, node);
-		
-		if(!Australis || !node.parentNode
-		|| (node.parentNode != palette && node.parentNode.id != 'wrapper-'+node.id && palette.nodeName == 'toolbarpalette')) {
-			node = palette.appendChild(node);
+		if(!node.parentNode) {
+			palette.appendChild(node);
 		}
 		var id = node.id;
 		
-		if(!Australis) {
-			var toolbars = aWindow.document.querySelectorAll("toolbar");
-			toolbar_loop: for(var a=0; a<toolbars.length; a++) {
-				var currentset = toolbars[a].getAttribute('currentset').split(",");
-				if(currentset.indexOf(node.id) > -1) {
-					for(var e=0; e<currentset.length; e++) {
-						if(currentset[e] == node.id) {
-							var shift = 0;
-							for(var i=e+1; i<currentset.length; i++) {
-								if(currentset[i] == 'separator' || currentset[i] == 'spring' || currentset[i] == 'spacer') {
-									shift++;
-									continue;
-								}
-								
-								var beforeEl = aWindow.document.getElementById(currentset[i]);
-								if(beforeEl) {
-									while(shift > 0 && beforeEl.previousSibling) {
-										if(beforeEl.previousSibling.nodeName != 'toolbarseparator'
-										&& beforeEl.previousSibling.nodeName != 'toolbarspring'
-										&& beforeEl.previousSibling.nodeName != 'toolbarspacer') {
-											break;
-										}
-										beforeEl = beforeEl.previousSibling;
-										shift--;
-									}
-									// insertItem doesn't seem to be defined until the toolbar becomes visible
-									if(toolbars[a].insertItem) { toolbars[a].insertItem(node.id, beforeEl); }
-									else { node = toolbars[a].insertBefore(node, beforeEl); }
-									break toolbar_loop;
-								}
-							}
-							// insertItem doesn't seem to be defined until the toolbar becomes visible
-							if(toolbars[a].insertItem) { toolbars[a].insertItem(node.id, null, null, false); }
-							else { node = toolbars[a].appendChild(node); }
-							break toolbar_loop;
-						}
-					}
-				}
-			}
-		}
-		else {
-			// see note in runRegisterToolbar()
-			if(palette.nodeName == 'toolbar' && !palette._init) {
-				this.tempAppendToolbar(aWindow, palette);
-			}
-			
-			var created = false;
-			var widget = aWindow.CustomizableUI.getWidget(id);
-			if(!widget || widget.provider != aWindow.CustomizableUI.PROVIDER_API) {
-				// this needs the binding applied on the toolbar in order for the widget to be immediatelly placed there,
-				// and since its placements won't be restored until it's created, we have to search for it in all existing areas
-				var areaId = null;
-				var areas = CustomizableUI.areas;
-				for(var a=0; a<areas.length; a++) {
-					var inArea = aWindow.CustomizableUI.getWidgetIdsInArea(areas[a]);
-					if(inArea.indexOf(id) > -1) {
-						if(aWindow.CustomizableUI.getAreaType(areas[a]) != aWindow.CustomizableUI.TYPE_TOOLBAR) { break; }
-						
-						areaId = areas[a];
-						windowMediator.callOnAll(function(bWindow) {
-							var wToolbar = bWindow.document.getElementById(areaId);
-							if(wToolbar && wToolbar != palette && !wToolbar._init) {
-								overlayAid.tempAppendToolbar(bWindow, wToolbar);
-							}
-						}, aWindow.document.documentElement.getAttribute('windowtype'));
-						break;
-					}
-				}
-				
-				try { aWindow.CustomizableUI.createWidget(this.getWidgetData(aWindow, node, palette)); }
-				catch(ex) {Cu.reportError(ex); }
-				created = true;
-				
-				if(areaId) {
-					windowMediator.callOnAll(function(bWindow) {
-						var wToolbar = bWindow.document.getElementById(areaId);
-						if(wToolbar && wToolbar != palette) {
-							overlayAid.tempRestoreToolbar(wToolbar);
-						}
-					}, aWindow.document.documentElement.getAttribute('windowtype'));
+		var widget = aWindow.CustomizableUI.getWidget(id);
+		if(!widget || widget.provider != aWindow.CustomizableUI.PROVIDER_API) {
+			// this needs the binding applied on the toolbar in order for the widget to be immediatelly placed there,
+			// and since its placements won't be restored until it's created, we have to search for it in all existing areas
+			var areaId = null;
+			var areas = CustomizableUI.areas;
+			for(var a=0; a<areas.length; a++) {
+				var inArea = aWindow.CustomizableUI.getWidgetIdsInArea(areas[a]);
+				if(inArea.indexOf(id) > -1) {
+					if(aWindow.CustomizableUI.getAreaType(areas[a]) != aWindow.CustomizableUI.TYPE_TOOLBAR) { break; }
+					
+					areaId = areas[a];
+					this.tempAppendAllToolbars(aWindow, areaId);
+					break;
 				}
 			}
 			
-			else {
-				var placement = aWindow.CustomizableUI.getPlacementOfWidget(id, aWindow);
-				var areaNode = (placement) ? aWindow.document.getElementById(placement.area) : null;
-				if(areaNode && areaNode.nodeName == 'toolbar' && !areaNode._init && areaNode != palette) {
-					this.tempAppendToolbar(aWindow, areaNode);
-				}
-				
-				try { aWindow.CustomizableUI.ensureWidgetPlacedInWindow(id, aWindow); }
-				catch(ex) { Cu.reportError(ex); }
-				
-				if(areaNode && areaNode != palette) {
-					this.tempRestoreToolbar(areaNode);
-				}
+			try { aWindow.CustomizableUI.createWidget(this.getWidgetData(aWindow, node, palette)); }
+			catch(ex) { Cu.reportError(ex); }
+			
+			if(areaId) {
+				this.tempRestoreAllToolbars(aWindow, areaId);
 			}
-			
-			// CUI always gets the widget from the Globals.widgets object in this case
-			if(palette.nodeName == 'toolbar') {
-				node = aWindow.document.getElementById(id);
-				removeAttribute(node, 'CUI_placeholder');
-				hideIt(node, true);
-			}
-			
-			this.tempRestoreToolbar(palette);
-			
-			if(!node) { node = aWindow.document.getElementById(id); }
 		}
 		
-		this.updateOverlayedNodes(aWindow, node, updateList);
+		else {
+			var placement = aWindow.CustomizableUI.getPlacementOfWidget(id, aWindow);
+			var areaNode = (placement) ? aWindow.document.getElementById(placement.area) : null;
+			if(areaNode && areaNode.nodeName == 'toolbar' && !areaNode._init) {
+				this.tempAppendToolbar(aWindow, areaNode);
+			}
+			
+			try { aWindow.CustomizableUI.ensureWidgetPlacedInWindow(id, aWindow); }
+			catch(ex) { Cu.reportError(ex); }
+			
+			if(areaNode) {
+				this.tempRestoreToolbar(areaNode);
+			}
+		}
+		
 		this.traceBack(aWindow, {
 			action: 'appendButton',
 			node: node
 		});
 		return node;
-	},
-	
-	removeButton: function(aWindow, palette, node) {
-		if(!Australis) { closeCustomize(); }
-		var updateList = this.updateOverlayedNodes(aWindow, node);
-		
-		node = node.parentNode.removeChild(node);
-		
-		if(Australis) {
-			aWindow.CustomizableUI.destroyWidget(node.id);
-		}
-		
-		this.updateOverlayedNodes(aWindow, node, updateList);
-		this.traceBack(aWindow, {
-			action: 'removeButton',
-			node: node,
-			palette: palette
-		});
 	},
 	
 	addToAttr: function(aWindow) {

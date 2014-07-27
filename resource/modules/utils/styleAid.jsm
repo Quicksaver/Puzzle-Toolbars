@@ -1,5 +1,6 @@
-moduleAid.VERSION = '2.0.2';
-moduleAid.LAZY = true;
+moduleAid.VERSION = '2.1.0';
+moduleAid.UTILS = true;
+moduleAid.BASEUTILS = true;
 
 // styleAid - handle loading and unloading of stylesheets in a quick and easy way
 // load(aName, aPath, isData) - loads aPath css stylesheet with type AGENT_SHEET
@@ -19,7 +20,6 @@ moduleAid.LAZY = true;
 //	see load()
 // loaded(aName, aPath) - returns (int) with corresponding sheet index in sheets[] if aName or aPath has been loaded, returns (bool) false otherwise
 //	see unload()
-// Note: Firefox 16 implements a bunch of unprefixed declarations, in particular gradients which I use a lot
 this.styleAid = {
 	sheets: [],
 	

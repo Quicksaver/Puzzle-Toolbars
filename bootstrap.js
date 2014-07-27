@@ -9,7 +9,6 @@
 //	chrome.manifest file with content, locale and skin declarations properly set
 // handleDeadObject(ex) - 	expects [nsIScriptError object] ex. Shows dead object notices as warnings only in the console.
 //				If the code can handle them accordingly and firefox does its thing, they shouldn't cause any problems.
-//				Of course this method will only return true in Firefox 15+.
 // prepareObject(window, aName) - initializes a window-dependent add-on object with utils loaded into it, returns the newly created object
 //	window - (xul object) the window object to be initialized
 //	(optional) aName - (string) the object name, defaults to objName
@@ -26,14 +25,14 @@
 //	aSubject - (xul object) to execute aCallback on
 //	aCallback - (function(aSubject)) to be called on aSubject
 // disable() - disables the add-on, in general the add-on disabling itself is a bad idea so I shouldn't use it
-// Note: Firefox 8 is the minimum version supported as the bootstrap requires the chrome.manifest file to be loaded, which was implemented in Firefox 8.
+// Note: Firefox 30 is the minimum version supported as the modules assume we're in a version with Australis already,
+// along with a minor assumption in overlayAid about a small change introduced to CustomizableUI in FF30.
 
-let bootstrapVersion = '1.2.16';
+let bootstrapVersion = '1.4.2';
 let UNLOADED = false;
 let STARTED = false;
 let Addon = {};
 let AddonData = null;
-let UserAgentLocale = 'en-US';
 let observerLOADED = false;
 let onceListeners = [];
 let alwaysRunOnShutdown = [];
@@ -42,19 +41,15 @@ let alwaysRunOnShutdown = [];
 let Globals = {};
 
 const {classes: Cc, interfaces: Ci, utils: Cu, manager: Cm} = Components;
-Cu.import("resource://gre/modules/AddonManager.jsm");
 Cu.import("resource://gre/modules/Services.jsm");
 Cu.import("resource://gre/modules/XPCOMUtils.jsm");
-Cu.import("resource://gre/modules/PlacesUtils.jsm");
-Cu.import("resource://gre/modules/PluralForm.jsm");
 
-// This will be defined in builds with Australis enabled, easier than version checking in case they change this again.
-// I will change/remove this in the future when this is more certain
-let Australis = null;
-try { Australis = Cu.import("resource:///modules/CustomizableUI.jsm"); } catch(ex) {}
+XPCOMUtils.defineLazyModuleGetter(this, "AddonManager", "resource://gre/modules/AddonManager.jsm");
+XPCOMUtils.defineLazyModuleGetter(this, "PlacesUtils", "resource://gre/modules/PlacesUtils.jsm");
+XPCOMUtils.defineLazyModuleGetter(this, "PluralForm", "resource://gre/modules/PluralForm.jsm");
+XPCOMUtils.defineLazyModuleGetter(this, "PrivateBrowsingUtils", "resource://gre/modules/PrivateBrowsingUtils.jsm");
+XPCOMUtils.defineLazyModuleGetter(this, "Promise", "resource://gre/modules/Promise.jsm");
 
-// For some reason, PlacesUIUtils.jsm disappeared in FF21 (probably has to do with the whole PB restructuring that is going on)
-// So I'm adding the tools needed in it manually, makes no practical difference as far as I can tell
 // Note: defining the localStore lazy getter on the Services object causes a ZC if it's never called.
 let PlacesUIUtils = {};
 XPCOMUtils.defineLazyServiceGetter(PlacesUIUtils, "RDF", "@mozilla.org/rdf/rdf-service;1", "nsIRDFService");
@@ -64,13 +59,10 @@ XPCOMUtils.defineLazyServiceGetter(Services, "fuel", "@mozilla.org/fuel/applicat
 XPCOMUtils.defineLazyServiceGetter(Services, "navigator", "@mozilla.org/network/protocol;1?name=http", "nsIHttpProtocolHandler");
 XPCOMUtils.defineLazyServiceGetter(Services, "stylesheet", "@mozilla.org/content/style-sheet-service;1", "nsIStyleSheetService");
 
-// Per-window private browsing was implemented as of FF20
-if(Services.vc.compare(Services.appinfo.platformVersion, "20.0") < 0) {
-	// This will only be called in FF19- for compatibility purposes
-	XPCOMUtils.defineLazyServiceGetter(Services, "privateBrowsing", "@mozilla.org/privatebrowsing;1", "nsIPrivateBrowsingService");
-} else {
-	Cu.import("resource://gre/modules/PrivateBrowsingUtils.jsm");
-}
+// I check these pretty much everywhere, so might as well keep a single reference to them
+let WINNT = Services.appinfo.OS == 'WINNT';
+let DARWIN = Services.appinfo.OS == 'Darwin';
+let LINUX = Services.appinfo.OS != 'WINNT' && Services.appinfo.OS != 'Darwin';
 
 function handleDeadObject(ex) {
 	if(ex.message == "can't access dead object") {
@@ -89,10 +81,14 @@ function prepareObject(window, aName) {
 	let objectName = aName || objName;
 	if(window[objectName]) { return; }
 	
+	var rtl = window.getComputedStyle(window.document.documentElement).getPropertyValue('direction') == 'rtl';
+	
 	window[objectName] = {
 		objName: objectName,
 		objPathString: objPathString,
 		_UUID: new Date().getTime(),
+		RTL: rtl,
+		LTR: !rtl,
 		
 		// every supposedly global variable is inaccessible because bootstraped means sandboxed, so I have to reference all these;
 		// it's easier to reference more specific objects from within the modules for better control, only setting these two here because they're more generalized
@@ -103,6 +99,7 @@ function prepareObject(window, aName) {
 	};
 	
 	Services.scriptloader.loadSubScript("resource://"+objPathString+"/modules/utils/moduleAid.jsm", window[objectName]);
+	Services.scriptloader.loadSubScript("resource://"+objPathString+"/modules/utils/windowUtilsPreload.jsm", window[objectName]);
 	window[objectName].moduleAid.load("utils/windowUtils");
 	
 	setAttribute(window.document.documentElement, objectName+'_UUID', window[objectName]._UUID);
@@ -172,12 +169,6 @@ function callOnLoad(aSubject, aCallback, arg1) {
 }
 
 function setResourceHandler() {
-	// chrome.manifest files are loaded automatically in Firefox 10+.
-	// Got it from https://developer.mozilla.org/en-US/docs/XPCOM_Interface_Reference/nsIComponentManager#addBootstrappedManifestLocation()
-	if(Services.vc.compare(Services.appinfo.platformVersion, "10.0") < 0) {
-		Cm.addBootstrappedManifestLocation(AddonData.installPath);
-	}
-	
 	let alias = Services.io.newFileURI(AddonData.installPath);
 	let resourceURI = (AddonData.installPath.isDirectory()) ? alias.spec : 'jar:' + alias.spec + '!/';
 	resourceURI += 'resource/';
@@ -191,6 +182,7 @@ function setResourceHandler() {
 	
 	// Get the utils.jsm module into our sandbox
 	Services.scriptloader.loadSubScript("resource://"+objPathString+"/modules/utils/moduleAid.jsm", this);
+	Services.scriptloader.loadSubScript("resource://"+objPathString+"/modules/utils/sandboxUtilsPreload.jsm", this);
 	moduleAid.load("utils/sandboxUtils");
 }
 
@@ -199,12 +191,6 @@ function removeResourceHandler() {
 	
 	let resource = Services.io.getProtocolHandler("resource").QueryInterface(Ci.nsIResProtocolHandler);
 	resource.setSubstitution(objPathString, null);
-	
-	// chrome.manifest files are loaded automatically in Firefox 10+.
-	// Got it from https://developer.mozilla.org/en-US/docs/XPCOM_Interface_Reference/nsIComponentManager#addBootstrappedManifestLocation()
-	if(Services.vc.compare(Services.appinfo.platformVersion, "10.0") < 0) {
-		Cm.removeBootstrappedManifestLocation(AddonData.installPath);
-	}
 }
 
 function disable() {
@@ -230,9 +216,6 @@ function startup(aData, aReason) {
 	
 	// add resource:// protocol handler so I can access my modules
 	setResourceHandler();
-	
-	// Get the current application locale
-	UserAgentLocale = Services.fuel.prefs.get('general.useragent.locale').value;
 	
 	// set add-on preferences defaults
 	// This should come before startConditions() so we can use it in there

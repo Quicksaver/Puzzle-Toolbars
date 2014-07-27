@@ -1,5 +1,5 @@
-moduleAid.VERSION = '1.2.0';
-moduleAid.LAZY = true;
+moduleAid.VERSION = '1.4.1';
+moduleAid.UTILS = true;
 
 // keysetAid - handles editable keysets for the add-on
 //	register(key) - registers a keyset from object key
@@ -374,8 +374,8 @@ this.keysetAid = {
 		}
 			
 		var keyset = aWindow.document.getElementById(objName+'-keyset');
-		if(keyset && keyset.parentNode) {
-			keyset.parentNode.removeChild(keyset);
+		if(keyset) {
+			keyset.remove();
 		}
 		
 		if(UNLOADED) { return; }
