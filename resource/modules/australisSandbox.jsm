@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.2.0';
+moduleAid.VERSION = '1.2.1';
 
 this.CustomizableUI = null;
 
@@ -19,23 +19,46 @@ this.trackSpecialWidgets = {
 		}
 	}
 };
+
+// move the status bar onto our container
+this.prepareStatusBar = function(aWindow) {
+	if(aWindow.closed || aWindow.willClose) { return; }
+	
+	var sBar = aWindow.document.getElementById('status-bar') || aWindow[objName+'__statusBar'] || aWindow[objName]._statusBar.node;
+	delete aWindow[objName+'__statusBar'];
+	if(!sBar) {
+		sBar = aWindow.document.getElementById('navigator-toolbox').palette.getElementsByAttribute('id', 'status-bar')[0];
+	}
+	
+	if(!aWindow[objName]._statusBar) {
+		aWindow[objName]._statusBar = {
+			node: sBar,
+			originalParent: null,
+			originalRemovable: null
+		};
+	}
+	
+	moveStatusBar(aWindow);
+};
 	
 // move the status bar onto our container
 this.moveStatusBar = function(aWindow) {
 	if(aWindow.closed || aWindow.willClose) { return; }
 	
-	var sBar = aWindow.document.getElementById('status-bar') || aWindow[objName+'__statusBar'] || aWindow[objName]._statusBar.node;
-	delete aWindow[objName+'__statusBar'];
+	var sContainer = aWindow.document.getElementById(objName+'-status-bar-container');
+	sContainer.hidden = !prefAid.statusBar;
 	
-	var sStack = aWindow.document.getElementById(objName+'-status-bar-stack');
-	if(sBar.parentNode == sStack) { return; }
-	
-	if(!aWindow[objName]._statusBar) {
-		aWindow[objName]._statusBar = {
-			node: sBar,
-			originalParent: sBar.parentNode
-		};
+	if(!prefAid.statusBar) {
+		moveStatusBarBack(aWindow);
+		return;
 	}
+	
+	var sBar = aWindow.document.getElementById('status-bar') || aWindow[objName]._statusBar.node;
+	var sStack = aWindow.document.getElementById(objName+'-status-bar-stack');
+	if(!sBar || sBar.parentNode == sStack) { return; }
+	
+	aWindow[objName]._statusBar.originalParent = sBar.parentNode;
+	aWindow[objName]._statusBar.originalRemovable = sBar.getAttribute('removable');
 	
 	setAttribute(sBar, 'removable', 'true');
 	if(CustomizableUI.getWidget('status-bar').areaType) {
@@ -60,6 +83,13 @@ this.moveStatusBar = function(aWindow) {
 	}
 };
 
+this.moveAllStatusBars = function() {
+	windowMediator.callOnAll(function(cWindow) {
+		if(!cWindow[objName]) { return; }
+		moveStatusBar(cWindow);
+	}, 'navigator:browser');
+};
+
 this.moveStatusBarNode = function(aWindow) {
 	var sStack = aWindow.document.getElementById(objName+'-status-bar-stack');
 	if(!aWindow[objName] || !aWindow[objName]._statusBar || aWindow[objName]._statusBar.node.parentNode == sStack) { return; }
@@ -68,13 +98,12 @@ this.moveStatusBarNode = function(aWindow) {
 };
 
 this.moveStatusBarBack = function(aWindow) {
-	if(aWindow[objName]) {
+	if(aWindow[objName] && aWindow[objName]._statusBar.originalParent) {
 		var sBar = aWindow.document.getElementById('status-bar') || aWindow[objName]._statusBar.node;
-		if(aWindow[objName]._statusBar.originalParent) {
-			if(aWindow[objName]._statusBar.originalParent != sBar.parentNode) { aWindow[objName]._statusBar.originalParent.appendChild(sBar); }
-		}
-		else { aWindow.document.getElementById('addon-bar').appendChild(sBar); }
-		setAttribute(sBar, 'removable', 'false');
+		if(aWindow[objName]._statusBar.originalParent != sBar.parentNode) { aWindow[objName]._statusBar.originalParent.appendChild(sBar); }
+		if(aWindow[objName]._statusBar.originalRemovable) { setAttribute(sBar, 'removable', aWindow[objName]._statusBar.originalRemovable); }
+		aWindow[objName]._statusBar.originalParent = null;
+		aWindow[objName]._statusBar.originalRemovable = null;
 	}
 };
 
@@ -100,12 +129,14 @@ moduleAid.LOADMODULE = function() {
 	
 	alwaysRunOnShutdown.push(preventLosingCustomizeData);
 	
+	prefAid.listen('statusBar', moveAllStatusBars);
+	
 	overlayAid.overlayURI('chrome://browser/content/browser.xul', 'australisBar', null,
 		function(aWindow) {
 			moduleAid.load('compatibilityFix/sandboxFixes'); // We need our add-on bar registered for this
 			prepareObject(aWindow);
 			
-			moveStatusBar(aWindow);
+			prepareStatusBar(aWindow);
 			aWindow[objName].moduleAid.load('australis', true);
 		},
 		function(aWindow) {
@@ -117,6 +148,8 @@ moduleAid.LOADMODULE = function() {
 
 moduleAid.UNLOADMODULE = function() {
 	moduleAid.unload('compatibilityFix/sandboxFixes');
+	
+	prefAid.unlisten('statusBar', moveAllStatusBars);
 	
 	overlayAid.removeOverlayURI('chrome://browser/content/browser.xul', 'australisBar');
 	
