@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.2.0';
+moduleAid.VERSION = '1.2.1';
 
 this.__defineGetter__('leftPP', function() { return $(objName+'-left-PP'); });
 this.__defineGetter__('rightPP', function() { return $(objName+'-right-PP'); });
@@ -100,7 +100,7 @@ this.handleFullScreen = function(m) {
 moduleAid.LOADMODULE = function() {
 	addonBarContextNodes.__defineGetter__('activePP', function() { return activePP; });
 	
-	messenger.messageWindow(window, 'load', 'placePP');
+	messenger.loadInWindow(window, 'placePP');
 	messenger.listenWindow(window, 'inFullScreen', handleFullScreen);
 	
 	listenerAid.add(addonBar, 'WillMoveAddonBar', movePPs);
@@ -137,7 +137,7 @@ moduleAid.UNLOADMODULE = function() {
 	listenerAid.remove(window, 'loadedAddonBarOverlay', showPPs);
 	
 	messenger.unlistenWindow(window, 'inFullScreen', handleFullScreen);
-	messenger.messageWindow(window, 'unload', 'placePP');
+	messenger.unloadFromWindow(window, 'placePP');
 		
 	delete addonBarContextNodes.activePP;
 	
