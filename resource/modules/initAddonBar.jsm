@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.3.0';
+moduleAid.VERSION = '1.3.1';
 
 this.__defineGetter__('browserPanel', function() { return $('browser-panel'); });
 this.__defineGetter__('gFindBar', function() { return window.gFindBar; });
@@ -198,6 +198,10 @@ this.reMoveBar = function() {
 	}, 500);
 };
 
+this.personaChanged = function() {
+	aSync(findPersonaPosition);
+};
+
 this.findPersonaPosition = function() {
 	// Australis isn't really built for the lw-theme footer, plus it might go away someday.
 	// despite this, I'm keeping it for now, no harm in it after all, and looks nice for personas that still use the footer image.
@@ -322,7 +326,7 @@ moduleAid.LOADMODULE = function() {
 	listenerAid.add(addonBar, 'load', delayMoveAddonBar);
 	listenerAid.add(window, 'aftercustomization', delayMoveAddonBar);
 	listenerAid.add(addonBar, 'ToggledAddonBar', moveAddonBar);
-	observerAid.add(findPersonaPosition, "lightweight-theme-changed");
+	observerAid.add(personaChanged, "lightweight-theme-styling-update");
 	listenerAid.add(addonBar, 'AddonBarCustomized', moveAddonBar);
 	gBrowser.tabContainer.addEventListener('TabSelect', tabSelectMoveAddonBar);
 	
@@ -360,7 +364,7 @@ moduleAid.UNLOADMODULE = function() {
 	
 	gBrowser.tabContainer.removeEventListener('TabSelect', tabSelectMoveAddonBar);
 	listenerAid.remove(addonBar, 'AddonBarCustomized', moveAddonBar);
-	observerAid.remove(findPersonaPosition, "lightweight-theme-changed");
+	observerAid.remove(personaChanged, "lightweight-theme-styling-update");
 	listenerAid.remove(contextMenu, 'popupshowing', setContextMenu);
 	listenerAid.remove(viewMenu, 'popupshown', setViewMenu);
 	listenerAid.remove(customizeMenu, 'popupshown', setCustomizeMenu);
