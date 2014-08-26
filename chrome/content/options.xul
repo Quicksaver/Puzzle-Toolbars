@@ -10,6 +10,7 @@
 		<preferences>
 			<preference id="pref-movetoRight" name="extensions.thepuzzlepiece.movetoRight" type="bool" />
 			<preference id="pref-autoHide" name="extensions.thepuzzlepiece.autoHide" type="bool" />
+			<preference id="pref-autoHideWhenFocused" name="extensions.thepuzzlepiece.autoHideWhenFocused" type="bool" />
 			<preference id="pref-statusBar" name="extensions.thepuzzlepiece.statusBar" type="bool" />
 			<preference id="pref-placement" name="extensions.thepuzzlepiece.placement" type="string" />
 			<preference id="pref-showPPs" name="extensions.thepuzzlepiece.showPPs" type="bool" />
@@ -34,8 +35,9 @@
 		
 		<groupbox align="start">
 			<caption label="&GroupBehavior.label;" />
-			<checkbox label="&OptautoHide.label;" dependson="!pref-placement:bottom,pref-showPPs;pref-placement:corner" preference="pref-autoHide"/>
 			<checkbox id="statusBarCheckbox" label="&OptstatusBar.label;" preference="pref-statusBar"/>
+			<checkbox label="&OptautoHide.label;" dependson="!pref-placement:bottom,pref-showPPs;pref-placement:corner" preference="pref-autoHide"/>
+			<checkbox label="&OptautoHideWhenFocused.label;" dependson="pref-placement:urlbar,pref-showPPs,pref-autoHide" preference="pref-autoHideWhenFocused"/>
 		</groupbox>
 		
 		<groupbox align="center">

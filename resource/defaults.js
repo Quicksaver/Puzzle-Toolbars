@@ -1,9 +1,10 @@
-var defaultsVersion = '1.3.0';
+var defaultsVersion = '1.3.1';
 var objName = 'thePuzzlePiece';
 var objPathString = 'thepuzzlepiece';
 var prefList = {
 	movetoRight: true,
 	autoHide: false,
+	autoHideWhenFocused: false,
 	placement: 'bottom',
 	statusBar: true,
 	showPPs: true,

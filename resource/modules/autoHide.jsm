@@ -1,4 +1,6 @@
-moduleAid.VERSION = '1.1.14';
+moduleAid.VERSION = '1.1.15';
+
+this.__defineGetter__('gURLBar', function() { return window.gURLBar; });
 
 this.onMouseOver = function() {
 	setHover(true);
@@ -158,6 +160,11 @@ this.holdPopupMenu = function(e) {
 	}
 };
 
+// only autohide when the location bar is focused
+this.autoHideWhenFocused = function() {
+	toggleAttribute(gURLBar, 'autoHideWhenFocused', prefAid.autoHideWhenFocused);
+};
+
 moduleAid.LOADMODULE = function() {
 	addonBar.hovers = 0;
 	
@@ -173,11 +180,13 @@ moduleAid.LOADMODULE = function() {
 	
 	prefAid.listen('movetoRight', initHovers);
 	prefAid.listen('placement', initHovers);
+	prefAid.listen('autoHideWhenFocused', autoHideWhenFocused);
 	
 	initHovers();
 	moveAutoHide();
 	
 	setAttribute(addonBar, 'autohide', 'true');
+	autoHideWhenFocused();
 	if(!addonBar.collapsed && (STARTED != APP_STARTUP || !prefAid.noInitialShow)) { initialShowBar(); }
 };
 
@@ -186,6 +195,7 @@ moduleAid.UNLOADMODULE = function() {
 	
 	prefAid.unlisten('movetoRight', initHovers);
 	prefAid.unlisten('placement', initHovers);
+	prefAid.unlisten('autoHideWhenFocused', autoHideWhenFocused);
 	
 	removeAttribute(addonBar, 'hover');
 	removeAttribute(activePP, 'hover');
@@ -193,6 +203,7 @@ moduleAid.UNLOADMODULE = function() {
 	removeAttribute(addonBar, 'autohide');
 	removeAttribute(leftPP, 'autohide');
 	removeAttribute(rightPP, 'autohide');
+	removeAttribute(gURLBar, 'autoHideWhenFocused');
 	delete addonBar.hovers;
 	
 	listenerAid.remove(addonBar, 'dragenter', onDragEnter);

@@ -13,6 +13,7 @@
 <!ENTITY OptmoveToRight.label "Place on the right of the browser window">
 <!ENTITY OptshowPPs.label "Show the Puzzle Piece toggle button in the add-on bar">
 <!ENTITY OptautoHide.label "Hide the add-on bar automatically">
+<!ENTITY OptautoHideWhenFocused.label "Only when the location bar has focus">
 <!ENTITY OptstatusBar.label "Restore the status bar">
 
 <!ENTITY OptKeyboardShortcut.caption "Keyboard Shortcut">

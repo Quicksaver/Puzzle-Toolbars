@@ -346,7 +346,7 @@
 	.addon-bar:not([noAnimation])[placement="urlbar"]:not([collapsed="true"]) {
 		transition: opacity .25s linear 0s;
 	}
-	.addon-bar:not([noAnimation])[placement="urlbar"]:not([collapsed="true"])[autohide]:not(:hover):not([hover]) {
+	#urlbar:-moz-any(:not([autoHideWhenFocused]),[focused]) .addon-bar:not([noAnimation])[placement="urlbar"]:not([collapsed="true"])[autohide]:not(:hover):not([hover]) {
 		transition: opacity .5s linear .2s;
 	}
 	.addon-bar:not([noAnimation])[placement="urlbar"][collapsed="true"] {
@@ -363,7 +363,7 @@
 	
 	#thePuzzlePiece-corner-container:not([autohide])[statusHide]:not(:hover):not([hover]),
 	#thePuzzlePiece-corner-container[autohide]:not(:hover):not([hover]),
-	.addon-bar[placement="urlbar"][autohide]:not(:hover):not([hover]) {
+	#urlbar:-moz-any(:not([autoHideWhenFocused]),[focused]) .addon-bar[placement="urlbar"][autohide]:not(:hover):not([hover]) {
 		opacity: 0;
 	}
 	
@@ -373,7 +373,7 @@
 	}
 	
 	#thePuzzlePiece-urlbar-addonbar-container:not([active]),
-	#thePuzzlePiece-urlbar-addonbar-container[autohide]:not(:hover):not([hover]) {
+	#urlbar:-moz-any(:not([autoHideWhenFocused]),[focused]) #thePuzzlePiece-urlbar-addonbar-container[autohide]:not(:hover):not([hover]) {
 		width: 0px;
 	}
 	
@@ -384,7 +384,7 @@
 		/* These transitions aren't working for some reason! */
 		transition: width .5s linear 0s;
 	}
-	#thePuzzlePiece-urlbar-addonbar-container:not([noAnimation])[autohide]:not(:hover):not([hover]) {
+	#urlbar:-moz-any(:not([autoHideWhenFocused]),[focused]) #thePuzzlePiece-urlbar-addonbar-container:not([noAnimation])[autohide]:not(:hover):not([hover]) {
 		transition: width .5s linear .2s;
 	}
 	
