@@ -34,7 +34,7 @@
 	<!-- so we have separators, springs and spacers to add to the add-on bar -->
 	<toolbarpalette id="BrowserToolbarPalette">
 		<toolbaritem id="objName-placeholder-separator" 
-			class="toolbarbutton-1 chromeclass-toolbar-additional"
+			class="toolbarbutton-1 chromeclass-toolbar-additional panel-wide-item"
 			label="&specialWidget.separator;"
 			tooltiptext="&specialWidget.separator;"
 			flex="1"

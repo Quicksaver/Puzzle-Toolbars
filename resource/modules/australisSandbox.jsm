@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.3.0';
+moduleAid.VERSION = '1.3.1';
 
 this.CustomizableUI = null;
 this.CUIBackstage = null;
@@ -8,34 +8,71 @@ this.specialWidgets = ['separator', 'spring', 'spacer'];
 this.ourSpecialWidgets = [];
 
 this.addWidgetToArea = function(aWidgetId, aArea, aPosition, aInitialAdd) {
-	if(aWidgetId.startsWith(objName+'-special-') && (!CUIBackstage.gAreas.has(aArea) || CUIBackstage.gAreas.get(aArea).get("type") != CustomizableUI.TYPE_MENU_PANEL)) {
-		CustomizableUI.removeWidgetFromArea(aWidgetId);
-		destroyOurSpecialWidget(aWidgetId);
+	if(aWidgetId.startsWith(objName+'-placeholder-')) {
 		aWidgetId = aWidgetId.match(/spring|spacer|separator/)[0];
+		
+		if(aWidgetId == 'spring' && (aArea == CustomizableUI.AREA_NAVBAR || aArea == CustomizableUI.AREA_PANEL)) {
+			return;
+		}
 	}
 	
-	if(this.isSpecialWidget(aWidgetId) && CUIBackstage.gAreas.has(aArea) && CUIBackstage.gAreas.get(aArea).get("type") == CustomizableUI.TYPE_MENU_PANEL) {
-		var placement = CustomizableUI.getPlacementOfWidget(aWidgetId);
-		if(placement && placement.area != aArea) {
-			CustomizableUI.removeWidgetFromArea(aWidgetId);
+	if(aWidgetId.startsWith(objName+'-special-')) {
+		if(aArea != CustomizableUI.AREA_PANEL) {
+			this.removeWidgetFromArea(aWidgetId);
+			destroyOurSpecialWidget(aWidgetId);
+			aWidgetId = aWidgetId.match(/spring|spacer|separator/)[0];
+		}
+		else if(ourSpecialWidgets.indexOf(aWidgetId) == -1) {
+			aWidgetId = createOurSpecialWidget(aWidgetId);
+		}
+	}
+	
+	if(this.isSpecialWidget(aWidgetId)) {
+		if(aWidgetId.contains('spring') && (aArea == CustomizableUI.AREA_NAVBAR || aArea == CustomizableUI.AREA_PANEL)) {
+			this.removeWidgetFromArea(aWidgetId);
+			return;
 		}
 		
-		var wId = createOurSpecialWidget(aWidgetId);
-		return this._addWidgetToArea(wId, aArea, aPosition, aInitialAdd);
+		if(aArea == CustomizableUI.AREA_PANEL) {
+			var placement = this.getPlacementOfWidget(aWidgetId, true);
+			if(placement && placement.area != aArea) {
+				this.removeWidgetFromArea(aWidgetId);
+			}
+			
+			var wId = createOurSpecialWidget(aWidgetId);
+			return this._addWidgetToArea(wId, aArea, aPosition, aInitialAdd);
+		}
 	}
-		
+	
 	return this._addWidgetToArea(aWidgetId, aArea, aPosition, aInitialAdd);
 };
 
 this.canWidgetMoveToArea = function(aWidgetId, aArea) {
-	var placement = this.getPlacementOfWidget(aWidgetId);
-	if((!placement || placement.area != aArea)
-	&& this.isSpecialWidget(aWidgetId)
-	&& CUIBackstage.gAreas.has(aArea) && CUIBackstage.gAreas.get(aArea).get("type") == CustomizableUI.TYPE_MENU_PANEL) {
-		return true;
+	if(this.isSpecialWidget(aWidgetId)) {
+		var placement = this.getPlacementOfWidget(aWidgetId);
+		if((!placement || placement.area != aArea)
+		&& CUIBackstage.gAreas.has(aArea) && CUIBackstage.gAreas.get(aArea).get("type") == CustomizableUI.TYPE_MENU_PANEL) {
+			return true;
+		}
+		
+		if(aWidgetId.contains('spring') && (aArea == CustomizableUI.AREA_NAVBAR || aArea == CustomizableUI.AREA_PANEL)) {
+			return false;
+		}
 	}
 	
 	return this._canWidgetMoveToArea(aWidgetId, aArea);
+};
+
+this.buildArea = function(aArea, aPlacements, aAreaNode) {
+	if(CUIBackstage.gUndoResetting && aArea == CustomizableUI.AREA_PANEL) {
+		for(var wId of aPlacements) {
+			if(wId.startsWith(objName+'-special-') && ourSpecialWidgets.indexOf(wId) == -1) {
+				createOurSpecialWidget(wId);
+			}
+		}
+	}
+	
+	this._buildArea(aArea, aPlacements, aAreaNode);
 };
 
 this.createOurSpecialWidget = function(aId) {
@@ -71,17 +108,11 @@ this.destroyOurSpecialWidget = function(aId) {
 };
 
 this.trackSpecialWidgets = {
-	onWidgetAdded: function(aId, aCurrentArea, aCurrentPosition) {
-		if(aId.startsWith(objName+'-placeholder-')) {
-			var type = aId.split(objName+'-placeholder-')[1];
-			CustomizableUI.removeWidgetFromArea(aId);
-			
-			if(type != 'spring' || aCurrentArea != 'nav-bar') {
-				CustomizableUI.addWidgetToArea(type, aCurrentArea, aCurrentPosition);
-			}
-			
-			// Note: not setting WIDE_PANEL_CLASS to these widgets, in case they are inserted in the menu-panel,
-			// so they can be more accuratelly placed.
+	onWidgetAfterDOMChange: function(aNode, aNextNode, aContainer, aIsRemoval) {
+		if(!aIsRemoval && aNode && aNode.id
+		&& (CustomizableUI.isSpecialWidget(aNode.id) || aNode.id.startsWith(objName+'-special-'))
+		&& aNode.id.contains('separator')) {
+			aNode.classList.add(CustomizableUI.WIDE_PANEL_CLASS);
 		}
 	},
 	
@@ -89,6 +120,14 @@ this.trackSpecialWidgets = {
 		// aSync so this happens only after it's dragged (if sync, dragging to palette would still keep the node even though it's been destroyed)
 		// see https://bugzilla.mozilla.org/show_bug.cgi?id=1062014
 		aSync(function() { destroyOurSpecialWidget(aId); });
+	},
+	
+	onAreaReset: function(aArea) {
+		if(aArea == CustomizableUI.AREA_PANEL) {
+			while(ourSpecialWidgets.length > 0) {
+				CustomizableUI.destroyWidget(ourSpecialWidgets.pop());
+			}
+		}
 	}
 };
 
@@ -210,8 +249,10 @@ moduleAid.LOADMODULE = function() {
 	
 	CUIInternalNew._addWidgetToArea = CUIInternalNew.addWidgetToArea;
 	CUIInternalNew._canWidgetMoveToArea = CUIInternalNew.canWidgetMoveToArea;
+	CUIInternalNew._buildArea = CUIInternalNew.buildArea;
 	CUIInternalNew.addWidgetToArea = addWidgetToArea;
 	CUIInternalNew.canWidgetMoveToArea = canWidgetMoveToArea;
+	CUIInternalNew.buildArea = buildArea;
 	
 	CUIBackstage.CustomizableUIInternal = CUIInternalNew;
 	
@@ -222,7 +263,6 @@ moduleAid.LOADMODULE = function() {
 		}
 	}
 	
-	// Make sure our special widgets aren't actually appended anywhere, they are just placeholders
 	CustomizableUI.addListener(trackSpecialWidgets);
 	
 	for(var i of specialWidgets) {

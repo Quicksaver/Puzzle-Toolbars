@@ -73,9 +73,12 @@
 	}
 	
 	toolbarpaletteitem[place="palette"] toolbarspring,
-	toolbarpaletteitem[place="palette"] #thePuzzlePiece-placeholder-spring,
-	toolbarpaletteitem toolbarspring[cui-areatype="menu-panel"] {
+	toolbarpaletteitem[place="palette"] #thePuzzlePiece-placeholder-spring {
 		background: url("chrome://global/skin/toolbar/spring.png") no-repeat center;
+	}
+	
+	toolbarseparator[cui-areatype="menu-panel"] {
+		opacity: 0.5;
 	}
 	
 	/* status-bar */

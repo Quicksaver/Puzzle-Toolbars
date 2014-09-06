@@ -34,22 +34,7 @@
 		min-height: 2.5em;
 		height: 2.5em;
 		max-height: 2.5em;
-	}
-	
-	toolbarspring[cui-areatype="menu-panel"] {
-		min-width: 22.35em;
-		width: 22.35em;
-		max-width: 22.35em;
-		min-height: 0;
-		height: 0;
-		max-height: 0;
-	}
-	
-	toolbarpaletteitem toolbarspring[cui-areatype="menu-panel"] {
-		min-height: 2em;
-		height: 2em;
-		max-height: 2em;
-		margin-top: -1em;
+		opacity: 0.5;
 	}
 	
 	toolbarseparator[cui-areatype="menu-panel"] {

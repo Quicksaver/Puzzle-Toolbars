@@ -65,8 +65,7 @@
 	}
 	
 	toolbarpaletteitem toolbarspring,
-	toolbarpaletteitem #thePuzzlePiece-placeholder-spring,
-	toolbarpaletteitem toolbarspring[cui-areatype="menu-panel"] {
+	toolbarpaletteitem #thePuzzlePiece-placeholder-spring {
 		border: 1px solid #A3A3A3;
 		background: url("chrome://global/skin/toolbar/spring.png") #FFFFFF no-repeat center;
 		width: calc(22.35em /3);
