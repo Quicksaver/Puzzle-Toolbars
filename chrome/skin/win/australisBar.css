@@ -41,8 +41,8 @@
 	
 	toolbarpaletteitem toolbarspacer,
 	toolbarpaletteitem toolbarspring,
-	toolbarpaletteitem #thePuzzlePiece-special-spacer,
-	toolbarpaletteitem #thePuzzlePiece-special-spring {
+	toolbarpaletteitem #thePuzzlePiece-placeholder-spacer,
+	toolbarpaletteitem #thePuzzlePiece-placeholder-spring {
 		border: 1px solid #808080;
 		background-color: #FFF !important;
 	}
@@ -52,7 +52,7 @@
 	}
 	
 	toolbarpaletteitem[place="palette"] toolbarseparator,
-	toolbarpaletteitem[place="palette"] #thePuzzlePiece-special-separator {
+	toolbarpaletteitem[place="palette"] #thePuzzlePiece-placeholder-separator {
 		-moz-appearance: separator;
 		border-top: 2px solid transparent;
 		border-bottom: 2px solid transparent;
@@ -67,13 +67,13 @@
 	
 	toolbarpaletteitem[place="palette"] toolbarspacer,
 	toolbarpaletteitem[place="palette"] toolbarspring,
-	toolbarpaletteitem[place="palette"] #thePuzzlePiece-special-spacer,
-	toolbarpaletteitem[place="palette"] #thePuzzlePiece-special-spring {
+	toolbarpaletteitem[place="palette"] #thePuzzlePiece-placeholder-spacer,
+	toolbarpaletteitem[place="palette"] #thePuzzlePiece-placeholder-spring {
 		margin-bottom: 2px;
 	}
 	
 	toolbarpaletteitem[place="palette"] toolbarspring,
-	toolbarpaletteitem[place="palette"] #thePuzzlePiece-special-spring,
+	toolbarpaletteitem[place="palette"] #thePuzzlePiece-placeholder-spring,
 	toolbarpaletteitem toolbarspring[cui-areatype="menu-panel"] {
 		background: url("chrome://global/skin/toolbar/spring.png") no-repeat center;
 	}

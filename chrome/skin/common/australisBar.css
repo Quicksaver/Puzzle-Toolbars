@@ -18,9 +18,9 @@
 	
 	/* trying to use our special widgets in the menu-panel and overflow panel */
 	
-	.customization-palette #thePuzzlePiece-special-separator,
-	.customization-palette #thePuzzlePiece-special-spacer,
-	.customization-palette #thePuzzlePiece-special-spring {
+	.customization-palette #thePuzzlePiece-placeholder-separator,
+	.customization-palette #thePuzzlePiece-placeholder-spacer,
+	.customization-palette #thePuzzlePiece-placeholder-spring {
 		margin: 2px 1em;
 	}
 	
