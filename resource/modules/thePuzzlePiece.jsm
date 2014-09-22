@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.2.0';
+moduleAid.VERSION = '1.2.1';
 
 this.__defineGetter__('gBrowser', function() { return window.gBrowser; });
 this.__defineGetter__('bottomBox', function() { return $('browser-bottombox'); });
@@ -42,10 +42,6 @@ this.togglePlacement = function(e) {
 	// I can't drag from the add-on bar when it's in the url bar, it only drags the whole url bar in this case
 	var isCustomizing = (e && e.type == 'beforecustomization') || customizing;
 	
-	if(!isCustomizing && addonBar.parentNode.id == 'customization-palette-container') {
-		bottomBox.insertBefore(addonBar, $('developer-toolbar'));
-	}
-	
 	// first unload what doesn't need to be loaded, so these don't conflict with each other
 	if(prefAid.placement != 'urlbar') {
 		moduleAid.unload('inURLBar');
@@ -57,10 +53,6 @@ this.togglePlacement = function(e) {
 	moduleAid.loadIf('inURLBar', !isCustomizing && prefAid.placement == 'urlbar');
 	moduleAid.loadIf('inCorner', !isCustomizing && prefAid.placement == 'corner');
 	setAttribute(addonBar, 'placement', (!isCustomizing) ? prefAid.placement : 'bottom');
-	
-	if(isCustomizing && addonBar.parentNode.id != 'customization-palette-container') {
-		$('customization-palette-container').appendChild(addonBar);
-	}
 	
 	// it would imediatelly hide the addonBar when toggling placement with autoHide already loaded
 	dispatch(addonBar, { type: 'ChangedAddonBarPlacement', cancelable: false });
