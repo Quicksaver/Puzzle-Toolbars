@@ -112,6 +112,18 @@
 		margin-right: 8px;
 	}
 	
+	.addon-bar toolbarseparator {
+		margin-top: 0;
+		margin-bottom: 0;
+		min-height: 16px;
+	}
+	
+	#main-window[customizing] toolbarpaletteitem[place="toolbar"] toolbarseparator {
+		min-width: 12px;
+		-moz-padding-start: 6px;
+		background-origin: content-box;
+	}
+	
 	/* status-bar */
 	
 	#status-bar {
