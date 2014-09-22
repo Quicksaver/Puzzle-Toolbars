@@ -1,14 +1,11 @@
 @namespace url(http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul);
 @-moz-document url("chrome://browser/content/browser.xul") {
 
-	#toggle_ctraddon_addon-bar,
-	#ctraddon_addon-bar,
-	#ctraddon_toolbar_dummy,
-	
 	/* we don't want these anywhere if we can use ours */
 	#wrapper-spring,
 	#wrapper-spacer,
 	#wrapper-separator,
+	#wrapper-ctraddon_puib_separator,
 	.ctr_flexspaces,
 	.ctr_spaces,
 	.ctr_separators {
@@ -16,7 +13,7 @@
 	}
 	
 	/* Keep our add-on bar below CTR's customizations */
-	window[customizing="true"] .addon-bar {
+	#browser-bottombox #thePuzzlePiece-addon-bar {
 		-moz-box-ordinal-group: 1000000 !important;
 	}
 	

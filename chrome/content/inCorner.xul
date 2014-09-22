@@ -2,7 +2,7 @@
 <overlay id="inCorner-overlay" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul" >
 	
 	<vbox id="browser-bottombox">
-		<box id="objName-corner-container" insertafter="objName-addon-bar,addon-bar">
+		<box id="objName-corner-container" insertbefore="ctraddon_addon-bar,ctraddon_toolbar_dummy" insertafter="objName-addon-bar,addon-bar">
 			<observes element="objName-addon-bar" attribute="collapsed" />
 			<observes element="objName-addon-bar" attribute="autohide" />
 			<observes element="objName-addon-bar" attribute="hover" />

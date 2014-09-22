@@ -22,7 +22,7 @@
 			iconsize="small"
 			context="toolbar-context-menu"
 			toolboxid="navigator-toolbox"
-			insertafter="developer-toolbar"
+			insertafter="ctraddon_toolbar_dummy,ctraddon_addon-bar,developer-toolbar"
 			key="objName-key"
 			menuAdd="&addonBar.menuAdd;"
 			menuMove="&addonBar.menuMove;"
