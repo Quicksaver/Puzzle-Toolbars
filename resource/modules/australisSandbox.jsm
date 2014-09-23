@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.3.1';
+moduleAid.VERSION = '1.3.2';
 
 this.CustomizableUI = null;
 this.CUIBackstage = null;
@@ -271,13 +271,13 @@ moduleAid.LOADMODULE = function() {
 	
 	alwaysRunOnShutdown.push(preventLosingCustomizeData);
 	
+	moduleAid.load('compatibilityFix/sandboxFixes');
+	
 	prefAid.listen('statusBar', moveAllStatusBars);
 	
 	overlayAid.overlayURI('chrome://browser/content/browser.xul', 'australisBar', null,
 		function(aWindow) {
-			moduleAid.load('compatibilityFix/sandboxFixes'); // We need our add-on bar registered for this
 			prepareObject(aWindow);
-			
 			prepareStatusBar(aWindow);
 			aWindow[objName].moduleAid.load('australis', true);
 		},
