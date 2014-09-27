@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.0.0';
+moduleAid.VERSION = '1.0.1';
 
 // Special widgets aren't allowed in the menu panel by default, so we need to override this behavior (and hope we don't clash with other add-ons doing the same).
 // I hope I can remove this soon. See:
@@ -122,7 +122,9 @@ this.trackSpecialWidgets = {
 	onWidgetRemoved: function(aId) {
 		// aSync so this happens only after it's dragged (if sync, dragging to palette would still keep the node even though it's been destroyed)
 		// see https://bugzilla.mozilla.org/show_bug.cgi?id=1062014
-		aSync(function() { destroyOurSpecialWidget(aId); });
+		if(!UNLOADED) {
+			aSync(function() { destroyOurSpecialWidget(aId); });
+		}
 	},
 	
 	onAreaReset: function(aArea) {
