@@ -1,4 +1,4 @@
-var defaultsVersion = '1.4.0';
+var defaultsVersion = '1.4.1';
 var objName = 'thePuzzlePiece';
 var objPathString = 'thepuzzlepiece';
 var prefList = {
@@ -37,11 +37,7 @@ function startPreferences(window) {
 	window[objName].moduleAid.load('options');
 }
 
-function startConditions(aReason) {
-	return true;
-}
-
-function onStartup(aReason) {
+function onStartup() {
 	CUIBackstage = Cu.import("resource:///modules/CustomizableUI.jsm", self);
 	
 	moduleAid.load('compatibilityFix/sandboxFixes');
@@ -58,7 +54,7 @@ function onStartup(aReason) {
 	browserMediator.register(startPreferences, 'pageshow', "chrome://"+objPathString+"/content/options.xul");
 }
 
-function onShutdown(aReason) {
+function onShutdown() {
 	// deinitialization is also don inside statusBar, just like above
 	
 	moduleAid.unload('statusBar');
