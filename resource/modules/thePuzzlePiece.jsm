@@ -1,5 +1,6 @@
-moduleAid.VERSION = '1.2.1';
+moduleAid.VERSION = '1.3.0';
 
+this.__defineGetter__('PrintPreviewListener', function() { return window.PrintPreviewListener; });
 this.__defineGetter__('gBrowser', function() { return window.gBrowser; });
 this.__defineGetter__('bottomBox', function() { return $('browser-bottombox'); });
 this.__defineGetter__('addonBar', function() { return $(objName+'-addon-bar'); });
@@ -18,13 +19,13 @@ this.__defineGetter__('customizing', function() {
 	return false;
 });
 
-this.showWhenMigrated = function() {
-	if(oldBarMigrated) {
-		if(addonBar.collapsed) {
-			toggleAddonBar();
+this.addonBarCustomized = {
+	onWidgetAdded: function(aWidget, aArea) { this.listener(aWidget, aArea); },
+	onWidgetRemoved: function(aWidget, aArea) { this.listener(aWidget, aArea); },
+	listener: function(aWidget, aArea) {
+		if(aArea == addonBar.id && !trueAttribute(addonBar, 'customizing')) {
+			dispatch(addonBar, { type: 'AddonBarCustomized', cancelable: false });
 		}
-		
-		oldBarMigrated = false;
 	}
 };
 
@@ -59,6 +60,20 @@ this.togglePlacement = function(e) {
 };
 
 moduleAid.LOADMODULE = function() {
+	// The add-on bar needs to be hidden when entering print preview mode
+	PrintPreviewListener.__hideChrome = PrintPreviewListener._hideChrome;
+	PrintPreviewListener.__showChrome = PrintPreviewListener._showChrome;
+	PrintPreviewListener._hideChrome = function() {
+		setAttribute(document.documentElement, 'PrintPreview', 'true');
+		this.__hideChrome();
+	};
+	PrintPreviewListener._showChrome = function() {
+		removeAttribute(document.documentElement, 'PrintPreview');
+		this.__showChrome();
+	};
+	
+	CustomizableUI.addListener(addonBarCustomized);
+	
 	moduleAid.load('compatibilityFix/windowFixes');
 	moduleAid.load('initAddonBar');
 	moduleAid.load('placePP');
@@ -75,9 +90,6 @@ moduleAid.LOADMODULE = function() {
 	
 	togglePlacement();
 	toggleAutoHide();
-	
-	listenerAid.add(window, 'MigratedFromAddonBar', showWhenMigrated);
-	showWhenMigrated();
 };
 
 moduleAid.UNLOADMODULE = function() {
@@ -85,8 +97,6 @@ moduleAid.UNLOADMODULE = function() {
 	prefAid.unlisten('showPPs', toggleAutoHide);
 	prefAid.unlisten('placement', toggleAutoHide);
 	prefAid.unlisten('placement', togglePlacement);
-	
-	listenerAid.remove(window, 'MigratedFromAddonBar', showWhenMigrated);
 	
 	listenerAid.remove(window, 'beforecustomization', togglePlacement);
 	listenerAid.remove(window, 'aftercustomization', togglePlacement);
@@ -101,4 +111,13 @@ moduleAid.UNLOADMODULE = function() {
 	moduleAid.unload('placePP');
 	moduleAid.unload('initAddonBar');
 	moduleAid.unload('compatibilityFix/windowFixes');
+	
+	CustomizableUI.removeListener(addonBarCustomized);
+	
+	PrintPreviewListener._hideChrome = PrintPreviewListener.__hideChrome;
+	PrintPreviewListener._showChrome = PrintPreviewListener.__showChrome;
+	delete PrintPreviewListener.__hideChrome;
+	delete PrintPreviewListener.__showChrome;
+	
+	removeAttribute(document.documentElement, 'PrintPreview');
 };

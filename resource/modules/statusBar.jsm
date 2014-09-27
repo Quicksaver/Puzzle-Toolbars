@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.0.0';
+moduleAid.VERSION = '1.0.1';
 
 // move the status bar onto our container
 this.prepareStatusBar = function(aWindow) {
@@ -117,7 +117,7 @@ moduleAid.LOADMODULE = function() {
 		function(aWindow) {
 			prepareObject(aWindow);
 			prepareStatusBar(aWindow);
-			aWindow[objName].moduleAid.load('australis', true);
+			aWindow[objName].moduleAid.load(objName, true);
 		},
 		function(aWindow) {
 			moveStatusBarBack(aWindow);
