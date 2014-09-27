@@ -1,0 +1,76 @@
+@namespace url(http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul);
+@-moz-document url("chrome://browser/content/browser.xul") {
+
+	toolbarpaletteitem toolbarspacer {
+		min-width: calc(22.35em /3) !important;
+	}
+	
+	toolbarpaletteitem toolbarspacer,
+	toolbarpaletteitem #thePuzzlePiece-placeholder-spacer {
+		border: 1px solid #A3A3A3;
+		background: url("chrome://global/skin/10pct_transparent_grey.png") repeat;
+		width: calc(22.35em /3);
+		margin-top: 18px;
+	}
+	
+	toolbarpaletteitem toolbarspring,
+	toolbarpaletteitem #thePuzzlePiece-placeholder-spring {
+		border: 1px solid #A3A3A3;
+		background: url("chrome://global/skin/toolbar/spring.png") #FFFFFF no-repeat center;
+		width: calc(22.35em /3);
+		margin-top: 18px;
+	}
+	
+	toolbarpaletteitem[place="toolbar"] toolbarspring {
+		background: url("chrome://global/skin/10pct_transparent_grey.png") repeat;
+	}
+	
+	toolbarpaletteitem[place="toolbar"] toolbarspacer,
+	toolbarpaletteitem[place="toolbar"] toolbarspring {
+		margin: 2px;
+	}
+	
+	toolbarpaletteitem[place="palette"] toolbarseparator,
+	toolbarpaletteitem[place="palette"] #thePuzzlePiece-placeholder-separator {
+		-moz-appearance: none;
+		margin: 3px 4px;
+		background: url("chrome://global/skin/toolbar/toolbar-separator.png") transparent repeat-y center;
+		padding: 0;
+		min-width: 1px !important;
+		width: 1px !important;
+		max-width: 1px !important;
+	}
+	
+	toolbarseparator[cui-areatype="menu-panel"],
+	toolbarseparator[overflowedItem=true] {
+		background-position: center center;
+	}
+	
+	toolbarpaletteitem[place="palette"] toolbarspacer,
+	toolbarpaletteitem[place="palette"] toolbarspring,
+	toolbarpaletteitem[place="palette"] #thePuzzlePiece-placeholder-spacer,
+	toolbarpaletteitem[place="palette"] #thePuzzlePiece-placeholder-spring {
+		margin-top: 0;
+		margin-bottom: 2px;
+	}
+	
+	toolbarpaletteitem[place="palette"] toolbarspring,
+	toolbarpaletteitem[place="palette"] #thePuzzlePiece-placeholder-spring {
+		background-position: center;
+		margin-left: 8px;
+		margin-right: 8px;
+	}
+	
+	.addon-bar toolbarseparator {
+		margin-top: 0;
+		margin-bottom: 0;
+		min-height: 16px;
+	}
+	
+	#main-window[customizing] toolbarpaletteitem[place="toolbar"] toolbarseparator {
+		min-width: 12px;
+		-moz-padding-start: 6px;
+		background-origin: content-box;
+	}
+
+}

@@ -1,0 +1,57 @@
+@namespace url(http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul);
+@-moz-document url("chrome://browser/content/browser.xul") {
+
+	/* Vertical Toolbar's spring widget, no need to create a whole module just for this */
+	#wrapper-verticaltoolbar-spring {
+		visibility: collapse;
+	}
+	
+	.customization-palette #thePuzzlePiece-placeholder-separator,
+	.customization-palette #thePuzzlePiece-placeholder-spacer,
+	.customization-palette #thePuzzlePiece-placeholder-spring {
+		margin: 2px 1em;
+	}
+	
+	toolbarspacer[cui-areatype="menu-panel"] {
+		min-width: calc(22.35em /3);
+		width: calc(22.35em /3);
+		max-width: calc(22.35em /3);
+	}
+	
+	toolbarpaletteitem toolbarspacer[cui-areatype="menu-panel"] {
+		min-height: 2.5em;
+		height: 2.5em;
+		max-height: 2.5em;
+		opacity: 0.5;
+	}
+	
+	toolbarseparator[cui-areatype="menu-panel"] {
+		min-width: 22.35em;
+		width: 22.35em;
+		max-width: 22.35em;
+		
+		-moz-appearance: none;
+		min-height: 0;
+		border-top: 1px solid ThreeDShadow;
+		margin: 5px 0;
+	}
+	
+	toolbarspacer[overflowedItem=true] {
+		min-height: 1em !important;
+		margin-top: 6px;
+	}
+
+	toolbarseparator[overflowedItem=true] {
+		-moz-appearance: none !important;
+		min-height: 0 !important;
+		border-top: 1px solid ThreeDShadow !important;
+		border-bottom: 1px solid ThreeDHighlight !important;
+		margin-top: 6px;
+	}
+	
+	toolbarpaletteitem[place="panel"][id^="wrapper-customizableui-special-"] {
+		width: auto;
+		height: auto;
+	}
+	
+}

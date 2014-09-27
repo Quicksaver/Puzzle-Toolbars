@@ -31,34 +31,8 @@
 		</toolbar>
 	</vbox>
 	
-	<!-- so we have separators, springs and spacers to add to the add-on bar -->
 	<toolbarpalette id="BrowserToolbarPalette">
-		<toolbaritem id="objName-placeholder-separator" 
-			class="toolbarbutton-1 chromeclass-toolbar-additional panel-wide-item"
-			label="&specialWidget.separator;"
-			tooltiptext="&specialWidget.separator;"
-			flex="1"
-			type="custom" />
-		<toolbaritem id="objName-placeholder-spring" 
-			class="toolbarbutton-1 chromeclass-toolbar-additional"
-			label="&specialWidget.spring;"
-			tooltiptext="&specialWidget.spring;"
-			flex="1"
-			type="custom" />
-		<toolbaritem id="objName-placeholder-spacer" 
-			class="toolbarbutton-1 chromeclass-toolbar-additional"
-			label="&specialWidget.spacer;"
-			tooltiptext="&specialWidget.spacer;"
-			flex="1"
-			type="custom" />
-			
-		<toolbaritem id="objName-status-bar-container"
-			label="&statusBar.label;"
-			removable="false"
-			hidden="true"
-			defaultArea="objName-addon-bar"
-			type="custom">
-			
+		<toolbaritem id="objName-status-bar-container" label="&statusBar.label;" type="custom">
 			<stack id="objName-status-bar-stack">
 				<label id="objName-status-bar-placeholder" value="&statusBar.label;"/>
 			</stack>

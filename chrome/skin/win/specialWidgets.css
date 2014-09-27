@@ -1,0 +1,71 @@
+@namespace url(http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul);
+@-moz-document url("chrome://browser/content/browser.xul") {
+	
+	toolbarpaletteitem toolbarspacer,
+	toolbarpaletteitem toolbarspring,
+	toolbarpaletteitem #thePuzzlePiece-placeholder-spacer,
+	toolbarpaletteitem #thePuzzlePiece-placeholder-spring {
+		border: 1px solid #808080;
+		background-color: #FFF !important;
+	}
+	
+	toolbarpaletteitem[place="toolbar"] > toolbarspacer {
+		width: 11px;
+	}
+	
+	toolbarpaletteitem[place="palette"] toolbarseparator,
+	toolbarpaletteitem[place="palette"] #thePuzzlePiece-placeholder-separator {
+		-moz-appearance: separator;
+		border-top: 2px solid transparent;
+		border-bottom: 2px solid transparent;
+		border-left: 3px solid transparent;
+		border-right: 3px solid transparent;
+		-moz-border-left-colors  : transparent transparent ThreeDShadow;
+		-moz-border-right-colors : transparent transparent ThreeDHighlight;
+		min-width: 2px;
+		max-width: 2px;
+		width: 2px;
+	}
+	
+	toolbarpaletteitem[place="palette"] toolbarspacer,
+	toolbarpaletteitem[place="palette"] toolbarspring,
+	toolbarpaletteitem[place="palette"] #thePuzzlePiece-placeholder-spacer,
+	toolbarpaletteitem[place="palette"] #thePuzzlePiece-placeholder-spring {
+		margin-bottom: 2px;
+	}
+	
+	toolbarpaletteitem[place="palette"] toolbarspring,
+	toolbarpaletteitem[place="palette"] #thePuzzlePiece-placeholder-spring {
+		background: url("chrome://global/skin/toolbar/spring.png") no-repeat center;
+	}
+	
+	toolbarseparator[overflowedItem=true],
+	toolbarseparator[cui-areatype="menu-panel"] {
+		opacity: 0.5;
+	}
+	
+	#navigator-toolbox :not(#TabsToolbar):not(#toolbar-menubar):not(.addon-bar) toolbarseparator {
+		-moz-appearance: none;
+		border: none;
+		width: 2px;
+		/* this is copied from PanelUI-button's background */
+		background-color: transparent;
+		background-image:	linear-gradient(to bottom, hsla(0,0%,100%,0), hsla(0,0%,100%,.3) 30%, hsla(0,0%,100%,.3) 70%, hsla(0,0%,100%,0)),
+					linear-gradient(to bottom, hsla(210,54%,20%,0), hsla(210,54%,20%,.3) 30%, hsla(210,54%,20%,.3) 70%, hsla(210,54%,20%,0)),
+					linear-gradient(to bottom, hsla(0,0%,100%,0), hsla(0,0%,100%,.3) 30%, hsla(0,0%,100%,.3) 70%, hsla(0,0%,100%,0));
+		background-size: 1px calc(100% - 1px), 1px calc(100% - 1px), 1px  calc(100% - 1px);
+		background-position: 0px 0px, 1px 0px, 2px 0px;
+		background-repeat: no-repeat;
+		background-origin: content-box;
+	}
+	
+	#main-window[customizing] toolbarpaletteitem[place="toolbar"] toolbarseparator {
+		min-width: 12px;
+		-moz-padding-start: 5px;
+	}
+	
+	#main-window:not([customizing]) .addon-bar toolbarseparator { -moz-margin-start: 1px; }
+	#main-window[customizing] .addon-bar toolbarpaletteitem[place="toolbar"][id^="wrapper-customizableui-special-separator"] { -moz-padding-start: 5px; }
+	#main-window[customizing] .addon-bar toolbarpaletteitem[place="toolbar"] toolbarseparator { min-width: 9px; }
+	
+}

@@ -1,7 +1,10 @@
-moduleAid.VERSION = '1.3.2';
+moduleAid.VERSION = '1.0.0';
 
-this.CustomizableUI = null;
-this.CUIBackstage = null;
+// Special widgets aren't allowed in the menu panel by default, so we need to override this behavior (and hope we don't clash with other add-ons doing the same).
+// I hope I can remove this soon. See:
+// https://bugzilla.mozilla.org/show_bug.cgi?id=1058990
+// https://bugzilla.mozilla.org/show_bug.cgi?id=1003588
+
 this.CUIInternalOriginal = null;
 
 this.specialWidgets = ['separator', 'spring', 'spacer'];
@@ -131,107 +134,7 @@ this.trackSpecialWidgets = {
 	}
 };
 
-// move the status bar onto our container
-this.prepareStatusBar = function(aWindow) {
-	if(aWindow.closed || aWindow.willClose) { return; }
-	
-	var sBar = aWindow.document.getElementById('status-bar') || aWindow[objName+'__statusBar'] || aWindow[objName]._statusBar.node;
-	delete aWindow[objName+'__statusBar'];
-	if(!sBar) {
-		sBar = aWindow.document.getElementById('navigator-toolbox').palette.getElementsByAttribute('id', 'status-bar')[0];
-	}
-	
-	if(!aWindow[objName]._statusBar) {
-		aWindow[objName]._statusBar = {
-			node: sBar,
-			originalParent: null,
-			originalRemovable: null
-		};
-	}
-	
-	moveStatusBar(aWindow);
-};
-	
-// move the status bar onto our container
-this.moveStatusBar = function(aWindow) {
-	if(aWindow.closed || aWindow.willClose) { return; }
-	
-	var sContainer = aWindow.document.getElementById(objName+'-status-bar-container');
-	sContainer.hidden = !prefAid.statusBar;
-	
-	if(!prefAid.statusBar) {
-		moveStatusBarBack(aWindow);
-		return;
-	}
-	
-	var sBar = aWindow.document.getElementById('status-bar') || aWindow[objName]._statusBar.node;
-	var sStack = aWindow.document.getElementById(objName+'-status-bar-stack');
-	if(!sBar || sBar.parentNode == sStack) { return; }
-	
-	aWindow[objName]._statusBar.originalParent = sBar.parentNode;
-	aWindow[objName]._statusBar.originalRemovable = sBar.getAttribute('removable');
-	
-	setAttribute(sBar, 'removable', 'true');
-	if(CustomizableUI.getWidget('status-bar').areaType) {
-		// in case we haven't yet enabled the add-on in other windows, we have to keep a reference to the status bar node,
-		// otherwise we'll lose it when we continue. This will be deleted once the add-on is enabled there.
-		windowMediator.callOnAll(function(bWindow) {
-			if(!bWindow[objName]) {
-				bWindow[objName+'__statusBar'] = bWindow.document.getElementById('status-bar');
-			}
-		}, 'navigator:browser');
-		
-		CustomizableUI.removeWidgetFromArea('status-bar');
-		
-		// because when we do the above command, the node is physically removed from all windows, we have to put it back
-		windowMediator.callOnAll(function(cWindow) {
-			if(!cWindow[objName]) { return; }
-			moveStatusBarNode(cWindow);
-		}, 'navigator:browser');
-	} else {
-		// this should happen when enabling the add-on on a second window, that was already opened when we called removeWidgetFromArea above
-		moveStatusBarNode(aWindow);
-	}
-};
-
-this.moveAllStatusBars = function() {
-	windowMediator.callOnAll(function(cWindow) {
-		if(!cWindow[objName]) { return; }
-		moveStatusBar(cWindow);
-	}, 'navigator:browser');
-};
-
-this.moveStatusBarNode = function(aWindow) {
-	var sStack = aWindow.document.getElementById(objName+'-status-bar-stack');
-	if(!aWindow[objName] || !aWindow[objName]._statusBar || aWindow[objName]._statusBar.node.parentNode == sStack) { return; }
-	
-	sStack.insertBefore(aWindow[objName]._statusBar.node, sStack.firstChild);
-};
-
-this.moveStatusBarBack = function(aWindow) {
-	if(aWindow[objName] && aWindow[objName]._statusBar.originalParent) {
-		var sBar = aWindow.document.getElementById('status-bar') || aWindow[objName]._statusBar.node;
-		if(aWindow[objName]._statusBar.originalParent != sBar.parentNode) { aWindow[objName]._statusBar.originalParent.appendChild(sBar); }
-		if(aWindow[objName]._statusBar.originalRemovable) { setAttribute(sBar, 'removable', aWindow[objName]._statusBar.originalRemovable); }
-		aWindow[objName]._statusBar.originalParent = null;
-		aWindow[objName]._statusBar.originalRemovable = null;
-	}
-};
-
-// see https://bugzilla.mozilla.org/show_bug.cgi?id=989338
-this.preventLosingCustomizeData = function() {
-	windowMediator.callOnAll(function(aWindow) {
-		moveStatusBarBack(aWindow);
-	}, 'navigator:browser');
-	try { CustomizableUI.addWidgetToArea('status-bar', 'addon-bar'); } catch(ex) {}
-};
-
 moduleAid.LOADMODULE = function() {
-	// Special widgets aren't allowed in the menu panel by default, so we need to override this behavior (and hope we don't clash with other add-ons doing the same).
-	// I hope I can remove this soon. See:
-	// https://bugzilla.mozilla.org/show_bug.cgi?id=1058990
-	// https://bugzilla.mozilla.org/show_bug.cgi?id=1003588
-	
 	CUIBackstage = Cu.import("resource:///modules/CustomizableUI.jsm", self);
 	CUIInternalOriginal = CUIBackstage.CustomizableUIInternal;
 	
@@ -269,33 +172,11 @@ moduleAid.LOADMODULE = function() {
 		CustomizableUI.removeWidgetFromArea(objName+'-placeholder-'+i);
 	}
 	
-	alwaysRunOnShutdown.push(preventLosingCustomizeData);
-	
-	moduleAid.load('compatibilityFix/sandboxFixes');
-	
-	prefAid.listen('statusBar', moveAllStatusBars);
-	
-	overlayAid.overlayURI('chrome://browser/content/browser.xul', 'australisBar', null,
-		function(aWindow) {
-			prepareObject(aWindow);
-			prepareStatusBar(aWindow);
-			aWindow[objName].moduleAid.load('australis', true);
-		},
-		function(aWindow) {
-			moveStatusBarBack(aWindow);
-			removeObject(aWindow);
-		}
-	);
+	overlayAid.overlayURI('chrome://browser/content/browser.xul', 'specialWidgets');
 };
 
 moduleAid.UNLOADMODULE = function() {
-	moduleAid.unload('compatibilityFix/sandboxFixes');
-	
-	prefAid.unlisten('statusBar', moveAllStatusBars);
-	
-	overlayAid.removeOverlayURI('chrome://browser/content/browser.xul', 'australisBar');
-	
-	preventLosingCustomizeData();
+	overlayAid.removeOverlayURI('chrome://browser/content/browser.xul', 'specialWidgets');
 	
 	CustomizableUI.removeListener(trackSpecialWidgets);
 	

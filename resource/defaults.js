@@ -1,4 +1,4 @@
-var defaultsVersion = '1.3.1';
+var defaultsVersion = '1.4.0';
 var objName = 'thePuzzlePiece';
 var objPathString = 'thepuzzlepiece';
 var prefList = {
@@ -6,7 +6,6 @@ var prefList = {
 	autoHide: false,
 	autoHideWhenFocused: false,
 	placement: 'bottom',
-	statusBar: true,
 	showPPs: true,
 	
 	// hidden preference to not show the addon bar autohiding on startup
@@ -24,9 +23,9 @@ var prefList = {
 	lwthemebgColor: ''
 };
 
-function startAddon(window) {
-	prepareObject(window);
-}
+// CustomizableUI will be imported in the specialWidgets module
+var CustomizableUI = null;
+var CUIBackstage = null;
 
 function stopAddon(window) {
 	removeObject(window);
@@ -43,8 +42,14 @@ function startConditions(aReason) {
 }
 
 function onStartup(aReason) {
+	CUIBackstage = Cu.import("resource:///modules/CustomizableUI.jsm", self);
+	
+	moduleAid.load('compatibilityFix/sandboxFixes');
 	moduleAid.load('keysets');
-	moduleAid.load('australisSandbox');
+	moduleAid.load('specialWidgets');
+	moduleAid.load('statusBar');
+	
+	// the add-on initialization is done inside the statusBar module so it can correctly handle the status-bar in all windows
 	
 	// Apply the add-on to every preferences window opened and to be opened
 	windowMediator.callOnAll(startPreferences, null, "chrome://"+objPathString+"/content/options.xul");
@@ -54,6 +59,10 @@ function onStartup(aReason) {
 }
 
 function onShutdown(aReason) {
-	moduleAid.unload('australisSandbox');
+	// deinitialization is also don inside statusBar, just like above
+	
+	moduleAid.unload('statusBar');
+	moduleAid.unload('specialWidgets');
 	moduleAid.unload('keysets');
+	moduleAid.unload('compatibilityFix/sandboxFixes');
 }
