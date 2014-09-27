@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.0.3';
+moduleAid.VERSION = '1.0.4';
 
 this.addonBarKey = {
 	id: objName+'-key',
@@ -15,12 +15,12 @@ this.setKeys = function() {
 };
 
 moduleAid.LOADMODULE = function() {
-	overlayAid.overlayURI('chrome://browser/content/browser.xul', 'keyset', null, setKeys);
-	
 	prefAid.listen('addonBarKeycode', setKeys);
 	prefAid.listen('addonBarAccel', setKeys);
 	prefAid.listen('addonBarShift', setKeys);
 	prefAid.listen('addonBarAlt', setKeys);
+	
+	setKeys();
 };
 
 moduleAid.UNLOADMODULE = function() {
@@ -30,5 +30,4 @@ moduleAid.UNLOADMODULE = function() {
 	prefAid.unlisten('addonBarAlt', setKeys);
 	
 	keysetAid.unregister(addonBarKey);
-	overlayAid.removeOverlayURI('chrome://browser/content/browser.xul', 'keyset');
 };
