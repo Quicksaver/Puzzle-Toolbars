@@ -1,4 +1,4 @@
-var defaultsVersion = '1.5.0';
+var defaultsVersion = '1.5.1';
 var objName = 'puzzleBars';
 var objPathString = 'puzzlebars';
 var prefList = {
@@ -28,6 +28,9 @@ var prefList = {
 	urlbar_shift: false,
 	urlbar_alt: false,
 	
+	// for migrateLegacy, probably safe to remove in the future, see note in that module
+	migratedLegacy: false,
+	
 	// hidden preference to not show the addon bar autohiding on startup
 	noInitialShow: false
 };
@@ -51,6 +54,7 @@ function onStartup() {
 	
 	moduleAid.load('compatibilityFix/sandboxFixes');
 	moduleAid.load('specialWidgets');
+	moduleAid.load('migrateLegacy');
 	moduleAid.load('statusBar');
 	
 	// the add-on initialization is done inside the statusBar module so it can correctly handle the status-bar in all windows
@@ -66,6 +70,7 @@ function onShutdown() {
 	// deinitialization is also don inside statusBar, just like above
 	
 	moduleAid.unload('statusBar');
+	moduleAid.unload('migrateLegacy');
 	moduleAid.unload('specialWidgets');
 	moduleAid.unload('compatibilityFix/sandboxFixes');
 }
