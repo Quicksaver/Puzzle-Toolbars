@@ -32,11 +32,6 @@
 		-moz-appearance: none;
 	}
 	
-	.addon-bar > toolbarspring,
-	.addon-bar > toolbarpaletteitem[type="spring"] {
-		min-width: 10px;
-	}
-	
 	.addon-bar #status-bar label {
 		margin-top: 0px;
 		margin-bottom: 0px;

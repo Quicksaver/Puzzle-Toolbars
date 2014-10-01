@@ -24,6 +24,8 @@
 <!ENTITY OptAutoHide.tooltip "Hide the toolbar automatically when it's not needed.">
 <!ENTITY OptWhenFocused.label "Hide only when the location bar has focus">
 <!ENTITY OptWhenFocused.tooltip "With this enabled, the toolbar will only hide automatically when the cursor is in the location bar.">
+<!ENTITY OptExtend.label "Extend over all the available space">
+<!ENTITY OptExtend.tooltip "This option shows the toolbar over the maximum available space in the browser window, even if it doesn't have enough items or widgets to cover it; especially useful if you want to use flexible spaces in it.">
 
 <!ENTITY OptKeyboardShortcut.captionA "Keyboard shortcut for enabling or disabling">
 <!ENTITY OptKeyboardShortcut.control "Control">

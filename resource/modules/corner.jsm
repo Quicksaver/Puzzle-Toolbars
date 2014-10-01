@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.0.0';
+moduleAid.VERSION = '1.0.1';
 
 // ammount of pixels to clip the bar to when it is closed or hidden
 this.CLIPBAR = 6;
@@ -26,7 +26,7 @@ this.setCornerKey = function() {
 var cornerStyle = {};
 this.cornerMove = function() {
 	var appContentPos = $('content').getBoundingClientRect();
-	cornerStyle.maxWidth = -(scrollBarWidth *2) +appContentPos.width;
+	cornerStyle.maxWidth = -(scrollBarWidth *2) +appContentPos.width -12 /* account for the puzzle piece */;
 	cornerStyle.bottom = document.documentElement.clientHeight -appContentPos.bottom;
 	cornerStyle.left = scrollBarWidth +appContentPos.left;
 	cornerStyle.right = scrollBarWidth +document.documentElement.clientWidth -appContentPos.right;
@@ -95,6 +95,9 @@ this.cornerMove = function() {
 	sscode += '	window['+objName+'_UUID="'+_UUID+'"]:not([customizing="true"]) #'+objName+'-corner-container {\n';
 	sscode += '		bottom: '+cornerStyle.bottom+'px;\n';
 	sscode += '		max-width: '+Math.max(cornerStyle.maxWidth, 5)+'px;\n';
+	sscode += '	}\n';
+	sscode += '	window['+objName+'_UUID="'+_UUID+'"]:not([customizing="true"]) #'+objName+'-corner-container[extend] {\n';
+	sscode += '		min-width: '+Math.max(cornerStyle.maxWidth, 5)+'px;\n';
 	sscode += '	}\n';
 	sscode += '	window['+objName+'_UUID="'+_UUID+'"]:not([customizing="true"]) #'+objName+'-corner-container:not([autohide]),\n';
 	sscode += '	window['+objName+'_UUID="'+_UUID+'"]:not([customizing="true"]) #'+objName+'-corner-container[autohide]:-moz-any([hover],:hover) {\n';
@@ -218,6 +221,10 @@ this.cornerAutoHide = function() {
 	}
 };
 
+this.cornerExtend = function() {
+	toggleAttribute(cornerContainer, 'extend', prefAid.corner_extend);
+};
+
 this.cornerOnLoad = function() {
 	listenerAid.add(window, 'PuzzleBarsMoved', cornerMove);
 	listenerAid.add(gBrowser.tabContainer, 'TabSelect', tabSelectCornerBar);
@@ -225,6 +232,7 @@ this.cornerOnLoad = function() {
 	
 	cornerTogglePP(); // implies cornerMove()
 	cornerRight();
+	cornerExtend();
 	cornerAutoHide();
 	
 	initBar(cornerBar, cornerPP);
@@ -260,6 +268,7 @@ moduleAid.LOADMODULE = function() {
 	prefAid.listen('corner_pp', cornerTogglePP);
 	prefAid.listen('corner_right', cornerRight);
 	prefAid.listen('corner_autohide', cornerAutoHide);
+	prefAid.listen('corner_extend', cornerExtend);
 	prefAid.listen('corner_keycode', setCornerKey);
 	prefAid.listen('corner_accel', setCornerKey);
 	prefAid.listen('corner_shift', setCornerKey);
@@ -277,6 +286,8 @@ moduleAid.UNLOADMODULE = function() {
 	
 	prefAid.unlisten('corner_pp', cornerTogglePP);
 	prefAid.unlisten('corner_right', cornerRight);
+	prefAid.unlisten('corner_autohide', cornerAutoHide);
+	prefAid.unlisten('corner_extend', cornerExtend);
 	prefAid.unlisten('corner_keycode', setCornerKey);
 	prefAid.unlisten('corner_accel', setCornerKey);
 	prefAid.unlisten('corner_shift', setCornerKey);

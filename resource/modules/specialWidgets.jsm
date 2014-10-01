@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.0.2';
+moduleAid.VERSION = '1.0.3';
 
 // Special widgets aren't allowed in the menu panel by default, so we need to override this behavior (and hope we don't clash with other add-ons doing the same).
 // I hope I can remove this soon. See:
@@ -8,7 +8,7 @@ moduleAid.VERSION = '1.0.2';
 this.CUIInternalOriginal = null;
 
 this.specialWidgets = ['separator', 'spring', 'spacer'];
-this.forbiddenSprings = ['nav-bar', 'PanelUI-contents', objName+'-corner-bar', objName+'-urlbar-bar'];
+this.forbiddenSprings = ['nav-bar', 'PanelUI-contents', objName+'-urlbar-bar'];
 this.ourSpecialWidgets = [];
 
 this.addWidgetToArea = function(aWidgetId, aArea, aPosition, aInitialAdd) {

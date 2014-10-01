@@ -59,6 +59,13 @@
 		margin-right: 19px;
 	}
 	
+	window:not([customizing="true"]) #puzzleBars-corner-container[extend] #puzzleBars-corner-bar:not([hidePP]) {
+		width: calc(100% - 24px);
+	}
+	window:not([customizing="true"]) #puzzleBars-corner-container[extend] #puzzleBars-corner-bar[hidePP] {
+		width: calc(100% - 10px);
+	}
+	
 	/* Puzzle Pieces */
 	
 	#puzzleBars-corner-PP {

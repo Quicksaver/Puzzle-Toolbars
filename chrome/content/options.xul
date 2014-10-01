@@ -130,6 +130,7 @@
 			<preference id="pref-corner_pp" name="extensions.puzzlebars.corner_pp" type="bool" />
 			<preference id="pref-corner_right" name="extensions.puzzlebars.corner_right" type="bool" />
 			<preference id="pref-corner_autohide" name="extensions.puzzlebars.corner_autohide" type="bool" />
+			<preference id="pref-corner_extend" name="extensions.puzzlebars.corner_extend" type="bool" />
 			<preference id="pref-corner_keycode" name="extensions.puzzlebars.corner_keycode" type="string"/>
 			<preference id="pref-corner_accel" name="extensions.puzzlebars.corner_accel" type="bool"/>
 			<preference id="pref-corner_shift" name="extensions.puzzlebars.corner_shift" type="bool"/>
@@ -141,6 +142,7 @@
 		<groupbox align="start">
 			<caption label="&GroupPosition.label;"/>
 			<checkbox label="&OptRight.label;" tooltiptext="&OptRight.tooltip;" dependson="pref-corner_bar" preference="pref-corner_right"/>
+			<checkbox label="&OptExtend.label;" tooltiptext="&OptExtend.tooltip;" dependson="pref-corner_bar" preference="pref-corner_extend"/>
 		</groupbox>
 		
 		<groupbox align="start">
