@@ -24,9 +24,9 @@ this.Ci = Components.interfaces;
 this.Cu = Components.utils;
 this.Cm = Components.manager;
 
-this.thePuzzlePiece = {
-	objName: 'thePuzzlePiece',
-	objPathString: 'thepuzzlepiece',
+this.puzzleBars = {
+	objName: 'puzzleBars',
+	objPathString: 'puzzlebars',
 	
 	initialized: false,
 	
@@ -148,4 +148,4 @@ this.thePuzzlePiece = {
 	}
 };
 
-thePuzzlePiece.init();
+puzzleBars.init();

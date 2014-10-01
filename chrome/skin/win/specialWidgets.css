@@ -3,8 +3,8 @@
 	
 	toolbarpaletteitem toolbarspacer,
 	toolbarpaletteitem toolbarspring,
-	toolbarpaletteitem #thePuzzlePiece-placeholder-spacer,
-	toolbarpaletteitem #thePuzzlePiece-placeholder-spring {
+	toolbarpaletteitem #puzzleBars-placeholder-spacer,
+	toolbarpaletteitem #puzzleBars-placeholder-spring {
 		border: 1px solid #808080;
 		background-color: #FFF !important;
 	}
@@ -14,7 +14,7 @@
 	}
 	
 	toolbarpaletteitem[place="palette"] toolbarseparator,
-	toolbarpaletteitem[place="palette"] #thePuzzlePiece-placeholder-separator {
+	toolbarpaletteitem[place="palette"] #puzzleBars-placeholder-separator {
 		-moz-appearance: separator;
 		border-top: 2px solid transparent;
 		border-bottom: 2px solid transparent;
@@ -29,13 +29,13 @@
 	
 	toolbarpaletteitem[place="palette"] toolbarspacer,
 	toolbarpaletteitem[place="palette"] toolbarspring,
-	toolbarpaletteitem[place="palette"] #thePuzzlePiece-placeholder-spacer,
-	toolbarpaletteitem[place="palette"] #thePuzzlePiece-placeholder-spring {
+	toolbarpaletteitem[place="palette"] #puzzleBars-placeholder-spacer,
+	toolbarpaletteitem[place="palette"] #puzzleBars-placeholder-spring {
 		margin-bottom: 2px;
 	}
 	
 	toolbarpaletteitem[place="palette"] toolbarspring,
-	toolbarpaletteitem[place="palette"] #thePuzzlePiece-placeholder-spring {
+	toolbarpaletteitem[place="palette"] #puzzleBars-placeholder-spring {
 		background: url("chrome://global/skin/toolbar/spring.png") no-repeat center;
 	}
 	

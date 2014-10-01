@@ -1,8 +1,8 @@
-moduleAid.VERSION = '1.0.1';
+moduleAid.VERSION = '1.0.2';
 
 this.listenForTreeStyleTab = function() {
-	if(prefAid.placement == 'corner' && !addonBar.collapsed && typeof(moveAddonBar) != 'undefined') {
-		moveAddonBar();
+	if(prefAid.corner_bar && typeof(cornerBar) != 'undefined' && cornerBar && !cornerBar.collapsed && !customizing) {
+		cornerMove();
 	}
 };
 

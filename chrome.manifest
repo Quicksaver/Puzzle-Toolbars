@@ -1,15 +1,15 @@
-content   thepuzzlepiece                    chrome/content/
+content   puzzlebars                    chrome/content/
 
-locale    thepuzzlepiece-en   en-US         chrome/locale/en-US/
-locale    thepuzzlepiece      en-US         chrome/locale/en-US/
-locale    thepuzzlepiece      es-ES         chrome/locale/es-ES/
-locale    thepuzzlepiece      fr            chrome/locale/fr/
-locale    thepuzzlepiece      pt-PT         chrome/locale/pt-PT/
-locale    thepuzzlepiece      ru            chrome/locale/ru/
-locale    thepuzzlepiece      sv-SE         chrome/locale/sv-SE/
-locale    thepuzzlepiece      zh-CN         chrome/locale/zh-CN/
+locale    puzzlebars-en   en-US         chrome/locale/en-US/
+locale    puzzlebars      en-US         chrome/locale/en-US/
+locale    puzzlebars      es-ES         chrome/locale/es-ES/
+locale    puzzlebars      fr            chrome/locale/fr/
+locale    puzzlebars      pt-PT         chrome/locale/pt-PT/
+locale    puzzlebars      ru            chrome/locale/ru/
+locale    puzzlebars      sv-SE         chrome/locale/sv-SE/
+locale    puzzlebars      zh-CN         chrome/locale/zh-CN/
 
-skin      thepuzzlepiece      classic/1.0   chrome/skin/common/
-skin      thepuzzlepiece-os   classic/1.0   chrome/skin/linux/
-skin      thepuzzlepiece-os   classic/1.0   chrome/skin/win/     os=WINNT
-skin      thepuzzlepiece-os   classic/1.0   chrome/skin/mac/     os=Darwin
+skin      puzzlebars      classic/1.0   chrome/skin/common/
+skin      puzzlebars-os   classic/1.0   chrome/skin/linux/
+skin      puzzlebars-os   classic/1.0   chrome/skin/win/     os=WINNT
+skin      puzzlebars-os   classic/1.0   chrome/skin/mac/     os=Darwin

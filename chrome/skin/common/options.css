@@ -7,7 +7,7 @@ textbox[type="number"] input {
 }
 
 #logo {
-	list-style-image: url("chrome://thepuzzlepiece/skin/icon.png");
+	list-style-image: url("chrome://puzzlebars/skin/icon.png");
 	margin-top: 20px;
 	margin-bottom: 20px;
 }
@@ -29,7 +29,7 @@ prefpane > .content-box {
 	margin: 1px 5px 2px 5px;
 }
 .paneSelector radio[pane] {
-	list-style-image: url("chrome://thepuzzlepiece/skin/panes.png");
+	list-style-image: url("chrome://puzzlebars/skin/panes.png");
 	padding: 5px 3px 1px;
 }
 .paneSelector radio[pane="generalPane"] {
@@ -38,3 +38,6 @@ prefpane > .content-box {
 .paneSelector radio[pane="aboutPane"] {
 	-moz-image-region: rect(0px 64px 32px 32px);
 }
+
+
+.paneSelector radio .paneButtonIcon { display: none; }

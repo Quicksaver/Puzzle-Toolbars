@@ -1,26 +1,35 @@
-var defaultsVersion = '1.4.1';
-var objName = 'thePuzzlePiece';
-var objPathString = 'thepuzzlepiece';
+var defaultsVersion = '1.5.0';
+var objName = 'puzzleBars';
+var objPathString = 'puzzlebars';
 var prefList = {
-	movetoRight: true,
-	autoHide: false,
-	autoHideWhenFocused: false,
-	placement: 'bottom',
-	showPPs: true,
+	bottom_bar: true,
+	bottom_pp: true,
+	bottom_right: false,
+	bottom_keycode: '/',
+	bottom_accel: true,
+	bottom_shift: false,
+	bottom_alt: false,
+	
+	corner_bar: false,
+	corner_pp: true,
+	corner_right: true,
+	corner_autohide: true,
+	corner_keycode: 'VK_F2',
+	corner_accel: false,
+	corner_shift: false,
+	corner_alt: false,
+	
+	urlbar_bar: false,
+	urlbar_pp: true,
+	urlbar_autohide: true,
+	urlbar_whenfocused: false,
+	urlbar_keycode: 'none',
+	urlbar_accel: false,
+	urlbar_shift: false,
+	urlbar_alt: false,
 	
 	// hidden preference to not show the addon bar autohiding on startup
-	noInitialShow: false,
-	
-	addonBarKeycode: '/',
-	addonBarAccel: true,
-	addonBarShift: false,
-	addonBarAlt: false,
-	
-	lwthemebgImage: '',
-	lwthemebgWidth: 0,
-	lwthemebgHeight: 0,
-	lwthemecolor: '',
-	lwthemebgColor: ''
+	noInitialShow: false
 };
 
 // CustomizableUI will be imported in the specialWidgets module
@@ -41,7 +50,6 @@ function onStartup() {
 	CUIBackstage = Cu.import("resource:///modules/CustomizableUI.jsm", self);
 	
 	moduleAid.load('compatibilityFix/sandboxFixes');
-	moduleAid.load('keysets');
 	moduleAid.load('specialWidgets');
 	moduleAid.load('statusBar');
 	
@@ -59,6 +67,5 @@ function onShutdown() {
 	
 	moduleAid.unload('statusBar');
 	moduleAid.unload('specialWidgets');
-	moduleAid.unload('keysets');
 	moduleAid.unload('compatibilityFix/sandboxFixes');
 }

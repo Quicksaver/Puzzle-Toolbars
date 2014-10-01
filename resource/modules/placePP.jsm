@@ -1,145 +1,35 @@
-moduleAid.VERSION = '1.2.1';
+moduleAid.VERSION = '2.0.0';
 
-this.__defineGetter__('leftPP', function() { return $(objName+'-left-PP'); });
-this.__defineGetter__('rightPP', function() { return $(objName+'-right-PP'); });
-this.__defineGetter__('urlbarPP', function() { return $(objName+'-urlbar-PP'); });
-this.__defineGetter__('activePP', function() { return (prefAid.placement == 'urlbar') ? urlbarPP : (prefAid.movetoRight) ? rightPP : leftPP; });
-
-this.commandPP = function(e) {
+this.commandPP = function(e, button) {
 	if(e.button != 0) { return; }
-	toggleAddonBar();
-	dispatch(activePP, { type: 'toggledAddonBarThroughButton', cancelable: false });
+	toggleBar(button._bar.id);
+	dispatch(button, { type: 'ToggledPuzzleBarThroughButton', cancelable: false });
 };
 
-this._activePPoffset = 0;
-this.movePPs = function() {
-	toggleAttribute(activePP, 'clipped', moveBarStyle.bottom == 1);
-	
-	if(activePP && activePP.clientHeight) {
-		_activePPoffset = activePP.firstChild.clientHeight -activePP.clientHeight;
-	}
-	var OSoffset = (WINNT) ? -2 : 0;
-	
-	// for when the add-on bar is opened on the bottom
-	var shrunkOffset = 0;
-	if(moveBarStyle.clientHeight > 0) {
-		var PPsize = (WINNT) ? 22 : (DARWIN) ? 24 : 28; // when shrunk
-		shrunkOffset += Math.floor((PPsize -moveBarStyle.clientHeight) /2);
-	}
-	
-	styleAid.unload('positionPPs_'+_UUID);
-	
-	var sscode = '/*The Puzzle Piece CSS declarations of variable values*/\n';
-	sscode += '@namespace url(http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul);\n';
-	sscode += '@-moz-document url("'+document.baseURI+'") {\n';
-	sscode += '	window['+objName+'_UUID="'+_UUID+'"] #'+objName+'-left-PP { left: '+(moveBarStyle.left -12)+'px; }\n';
-	sscode += '	window['+objName+'_UUID="'+_UUID+'"] #'+objName+'-right-PP { right: '+(moveBarStyle.right -12)+'px; }\n';
-	sscode += '	window['+objName+'_UUID="'+_UUID+'"] #browser-bottombox .PuzzlePiece {\n';
-	sscode += '		bottom: '+(moveBarStyle.bottom +_activePPoffset +OSoffset)+'px;\n';
-	sscode += '	}\n';
-	sscode += '	window['+objName+'_UUID="'+_UUID+'"] #browser-bottombox .PuzzlePiece[bottomPlacement][active]:not(:hover):not([hover]) {\n';
-	sscode += '		bottom: '+(moveBarStyle.bottom +_activePPoffset +OSoffset +shrunkOffset)+'px;\n';
-	sscode += '	}\n';
-	sscode += '	@media not all and (-moz-windows-classic) {\n';
-	sscode += '		@media (-moz-windows-default-theme) {\n';
-	sscode += '			window['+objName+'_UUID="'+_UUID+'"][sizemode="normal"] #browser-bottombox .PuzzlePiece[bottomPlacement][active]:not(:hover):not([hover]) {\n';
-	sscode += '				bottom: '+(moveBarStyle.bottom +_activePPoffset +OSoffset +shrunkOffset +1)+'px;\n';
-	sscode += '			}\n';
-	sscode += '		}\n';
-	sscode += '	}\n';
-	sscode += '	window['+objName+'_UUID="'+_UUID+'"] #browser-bottombox .PuzzlePiece:not([active]):not(:hover):not([hover]),\n';
-	sscode += '	window['+objName+'_UUID="'+_UUID+'"] #browser-bottombox .PuzzlePiece[autohide][active]:not(:hover):not([hover]) {\n';
-	sscode += '		bottom: '+(moveBarStyle.bottom +_activePPoffset +OSoffset -21)+'px;\n';
-	sscode += '	}\n';
-	sscode += '}';
-	
-	styleAid.load('positionPPs_'+_UUID, sscode, true);
-};
-
-this.choosePP = function() {
-	if(!leftPP || !rightPP) { return; }
-	
-	toggleAttribute(addonBar, 'movetoright', prefAid.movetoRight);
-	leftPP.hidden = (prefAid.placement == 'urlbar') || prefAid.movetoRight;
-	rightPP.hidden = (prefAid.placement == 'urlbar') || !prefAid.movetoRight;
-	
-	activatePPs();
-};
-
-this.activatePPs = function() {
-	toggleAttribute(activePP, 'active', !addonBar.collapsed);
-	toggleAttribute(activePP, 'bottomPlacement', prefAid.placement == 'bottom');
-	customizePP();
-};
-
-this.customizePP = function(e) {
-	toggleAttribute(activePP, 'customizing', (e && e.type == 'beforecustomization') || customizing);
-};
-
-this.showPPs = function() {
-	toggleAttribute(document.documentElement, objName+'-hidePPs', !prefAid.showPPs);
-	
-	movePPs(); // this is done here because if the PP is hidden, its clientHeight is 0, so it needs to update its position when it's shown
+this.activatePPs = function(e) {
+	toggleAttribute(e.target._pp, 'active', !e.target.collapsed);
 };
 
 this.handleFullScreen = function(m) {
-	setAttribute(addonBar, 'noAnimation', 'true');
-	setAttribute(activePP, 'noAnimation', 'true');
-	setAttribute(URLBarContainer, 'noAnimation', 'true');
-	
-	if(URLBarContainer) { URLBarContainer.hidden = m.data; } else { addonBar.hidden = m.data; }
-	activePP.hidden = m.data;
-	
+	setAttribute(window, objName+'-noAnimation', 'true');
+	toggleAttribute(window, objName+'-fullscreen', m.data);
 	aSync(function() {
-		removeAttribute(addonBar, 'noAnimation');
-		removeAttribute(activePP, 'noAnimation');
-		removeAttribute(URLBarContainer, 'noAnimation');
+		removeAttribute(window, objName+'-noAnimation');
 	});
 };
 
 moduleAid.LOADMODULE = function() {
-	addonBarContextNodes.__defineGetter__('activePP', function() { return activePP; });
-	
 	messenger.loadInWindow(window, 'placePP');
 	messenger.listenWindow(window, 'inFullScreen', handleFullScreen);
 	
-	listenerAid.add(addonBar, 'WillMoveAddonBar', movePPs);
-	listenerAid.add(addonBar, 'ToggledAddonBar', activatePPs);
-	listenerAid.add(window, 'beforecustomization', customizePP, false);
-	listenerAid.add(window, 'aftercustomization', customizePP, false);
-	listenerAid.add(window, 'loadedAddonBarOverlay', choosePP);
-	listenerAid.add(window, 'loadedAddonBarOverlay', showPPs);
-		
-	prefAid.listen('movetoRight', choosePP);
-	prefAid.listen('placement', choosePP);
-	prefAid.listen('showPPs', showPPs);
-	
-	choosePP();
-	showPPs(); // implies movePPs()
-	moveAddonBar(); // Prevents a bug where the add-on bar would be cropped on startup
+	listenerAid.add(window, 'ToggledPuzzleBar', activatePPs);
+	listenerAid.add(window, 'LoadedPuzzleBar', activatePPs);
 };
 
 moduleAid.UNLOADMODULE = function() {
-	prefAid.unlisten('movetoRight', choosePP);
-	prefAid.unlisten('placement', choosePP);
-	prefAid.unlisten('showPPs', showPPs);
-	
-	removeAttribute(addonBar, 'movetoright');
-	removeAttribute(document.documentElement, objName+'-hidePPs');
-	if(leftPP) { leftPP.hidden = true; }
-	if(rightPP) { rightPP.hidden = true; }
-	
-	listenerAid.remove(addonBar, 'WillMoveAddonBar', movePPs);
-	listenerAid.remove(addonBar, 'ToggledAddonBar', activatePPs);
-	listenerAid.remove(window, 'beforecustomization', customizePP, false);
-	listenerAid.remove(window, 'aftercustomization', customizePP, false);
-	listenerAid.remove(window, 'loadedAddonBarOverlay', choosePP);
-	listenerAid.remove(window, 'loadedAddonBarOverlay', showPPs);
+	listenerAid.remove(window, 'ToggledPuzzleBar', activatePPs);
+	listenerAid.remove(window, 'LoadedPuzzleBar', activatePPs);
 	
 	messenger.unlistenWindow(window, 'inFullScreen', handleFullScreen);
 	messenger.unloadFromWindow(window, 'placePP');
-		
-	delete addonBarContextNodes.activePP;
-	
-	styleAid.unload('positionPPs_'+_UUID);
 };

@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.0.1';
+moduleAid.VERSION = '1.1.0';
 
 // move the status bar onto our container
 this.prepareStatusBar = function(aWindow) {
@@ -113,21 +113,30 @@ moduleAid.LOADMODULE = function() {
 	
 	CustomizableUI.addListener(trackStatusBar);
 	
-	overlayAid.overlayURI('chrome://browser/content/browser.xul', 'australisBar', null,
+	overlayAid.overlayURI('chrome://browser/content/browser.xul', 'statusBar', null,
 		function(aWindow) {
 			prepareObject(aWindow);
 			prepareStatusBar(aWindow);
-			aWindow[objName].moduleAid.load(objName, true);
 		},
 		function(aWindow) {
 			moveStatusBarBack(aWindow);
 			removeObject(aWindow);
 		}
 	);
+	
+	overlayAid.overlayURI('chrome://'+objPathString+'/content/statusBar.xul', objName, null,
+		function(aWindow) {
+			aWindow[objName].moduleAid.load(objName, true);
+		},
+		function(aWindow) {
+			aWindow[objName].moduleAid.unload(objName);
+		}
+	);
 };
 
 moduleAid.UNLOADMODULE = function() {
-	overlayAid.removeOverlayURI('chrome://browser/content/browser.xul', 'australisBar');
+	overlayAid.removeOverlayURI('chrome://'+objPathString+'/content/statusBar.xul', objName);
+	overlayAid.removeOverlayURI('chrome://browser/content/browser.xul', 'statusBar');
 	
 	CustomizableUI.removeListener(trackStatusBar);
 	

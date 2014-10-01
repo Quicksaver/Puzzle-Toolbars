@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet href="chrome://puzzlebars/skin/bottom.css" type="text/css"?>
+<?xml-stylesheet href="chrome://puzzlebars-os/skin/bottom.css" type="text/css"?>
+<!DOCTYPE overlay SYSTEM "chrome://puzzlebars/locale/overlay.dtd">
+<overlay id="bottom-overlay" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul" >
+
+	<commandset id="mainCommandSet">
+		<command id="objName:ToggleBottomBar" oncommand="objName.toggleBar('objName-bottom-bar');"/>
+	</commandset>
+	
+	<vbox id="browser-bottombox">
+		<toolbar id="puzzleBars-bottom-bar"
+			toolbarname="&bottom.name;"
+			accesskey="&bottom.accesskey;"
+			customizable="true"
+			hidden="true"
+			collapsed="false"
+			persist="collapsed"
+			class="toolbar-primary chromeclass-toolbar addon-bar"
+			iconsize="small"
+			context="toolbar-context-menu"
+			menucommand="objName:ToggleBottomBar"
+			toolboxid="navigator-toolbox"
+			insertafter="ctraddon_toolbar_dummy,ctraddon_addon-bar,developer-toolbar"
+			menuAdd="&bottom.menuAdd;"
+			menuMove="&bottom.menuMove;"
+			menuRemove="&bottom.menuRemove;"
+			menuMain="&allbars.menuMain;">
+		</toolbar>
+		
+		<box id="objName-bottom-PP"
+			class="PuzzlePiece"
+			context="toolbar-context-menu"
+			insertafter="objName-bottom-bar"
+			hidden="true">
+			
+			<observes element="objName-bottom-bar" attribute="movetoright" />
+			
+			<image onclick="objName.commandPP(event, this.parentNode);" />
+		</box>
+	</vbox>
+	
+</overlay>

@@ -1,25 +1,13 @@
 @namespace url(http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul);
 @-moz-document url("chrome://browser/content/browser.xul") {
 
-	/* style the add-on bar */
-	
-	#thePuzzlePiece-addon-bar {
-		min-height: 20px;
-	}
-	
-	#thePuzzlePiece-addon-bar[placement="bottom"] {
-		box-shadow: 0 1px 0 rgba(0,0,0,.15) inset;
-	}
-	
-	/* status-bar */
-	
 	#status-bar {
 		min-height: 0;
 		background-color: transparent;
 		border: none;
 	}
 	
-	#thePuzzlePiece-status-bar-placeholder {
+	#puzzleBars-status-bar-placeholder {
 		background-color: #FFF;
 		background-image: repeating-linear-gradient(135deg, rgba(255,255,255,.15), rgba(255,255,255,.15) 5px, rgba(128,128,128,.15) 5px, rgba(128,128,128,.15) 10px);
 		box-shadow: inset 0 0 1px 1px #808080;

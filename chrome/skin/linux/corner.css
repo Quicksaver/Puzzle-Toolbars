@@ -1,7 +1,7 @@
 @namespace url(http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul);
 @-moz-document url("chrome://browser/content/browser.xul") {
 
-	#thePuzzlePiece-corner-container {
+	window:not([customizing="true"]) #puzzleBars-corner-container {
 		border-radius: 8px 8px 2px 2px;
 		border-top: 2px solid threedshadow;
 		border-right: 2px solid threedshadow;
@@ -11,13 +11,10 @@
 		-moz-border-left-colors: threedshadow threedhighlight;
 	}
 	
-	.PuzzlePiece:not(#thePuzzlePiece-urlbar-PP):not([active]):not(:hover):not([hover]),
-	.PuzzlePiece:not(#thePuzzlePiece-urlbar-PP)[autohide]:not(:hover):not([hover]) {
+	#puzzleBars-corner-PP:not([active]):not(:hover):not([hover]),
+	#puzzleBars-corner-PP[autohide]:not(:hover):not([hover]) {
 		clip: rect(0px, 32px, 14px, 0px);
 	}
 	
-	.PuzzlePiece:not(#thePuzzlePiece-urlbar-PP)[bottomPlacement][active]:not(:hover):not([hover]) image {
-		height: 28px;
-	}
 	
 }

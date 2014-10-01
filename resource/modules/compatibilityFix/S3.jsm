@@ -1,8 +1,8 @@
-moduleAid.VERSION = '1.0.0';
+moduleAid.VERSION = '1.0.1';
 
 this.watchS3Bar = function() {
-	if(prefAid.placement == 'corner' && !addonBar.collapsed && typeof(moveAddonBar) != 'undefined') {
-		moveAddonBar();
+	if(prefAid.corner_bar && typeof(cornerBar) != 'undefined' && cornerBar && !cornerBar.collapsed && !customizing) {
+		cornerMove();
 	}
 };
 

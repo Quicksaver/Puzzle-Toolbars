@@ -1,10 +1,6 @@
-moduleAid.VERSION = '1.0.8';
+moduleAid.VERSION = '1.0.9';
 
 moduleAid.LOADMODULE = function() {
-	AddonManager.getAddonByID("{73a6fe31-595d-460b-a920-fcc0f8843232}", function(addon) {
-		moduleAid.loadIf('compatibilityFix/noScript', (addon && addon.isActive));
-	});
-	
 	AddonManager.getAddonByID("s3download@statusbar", function(addon) {
 		moduleAid.loadIf('compatibilityFix/S3', (addon && addon.isActive));
 	});
@@ -21,7 +17,6 @@ moduleAid.LOADMODULE = function() {
 };
 
 moduleAid.UNLOADMODULE = function() {
-	moduleAid.unload('compatibilityFix/noScript');
 	moduleAid.unload('compatibilityFix/S3');
 	moduleAid.unload('compatibilityFix/TileTabs');
 	moduleAid.unload('compatibilityFix/TreeStyleTab');

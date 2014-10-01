@@ -1,9 +1,10 @@
-moduleAid.VERSION = '1.0.0';
+moduleAid.VERSION = '1.0.1';
 
 this.TileTabsStatusText = function() {
+	if(!prefAid.corner_bar || typeof(cornerBar) == 'undefined') { return; }
+	
 	var field = gBrowser.getStatusPanel();
-	toggleAttribute(activePP, 'statusHide', field.label && prefAid.placement == 'corner');
-	toggleAttribute(addonBar, 'statusHide', field.label && prefAid.placement == 'corner');
+	toggleAttribute(cornerBar, 'statusHide', field.label);
 };
 
 moduleAid.LOADMODULE = function() {

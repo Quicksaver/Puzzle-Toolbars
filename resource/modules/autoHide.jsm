@@ -1,230 +1,184 @@
-moduleAid.VERSION = '1.1.15';
-
-this.__defineGetter__('gURLBar', function() { return window.gURLBar; });
-
-this.onMouseOver = function() {
-	setHover(true);
-};
-
-this.onMouseOut = function() {
-	setHover(false);
-};
-
-this.onDragEnter = function() {
-	setHover(true, 1);
-	listenerAid.add(gBrowser, "dragenter", onDragExitAll, false);
-	listenerAid.add(window, "drop", onDragExitAll, false);
-	listenerAid.add(window, "dragend", onDragExitAll, false);
-};
-
-this.onDragExit = function() {
-	setHover(false);
-};
+moduleAid.VERSION = '2.0.0';
 
 this.onDragExitAll = function() {
 	listenerAid.remove(gBrowser, "dragenter", onDragExitAll, false);
 	listenerAid.remove(window, "drop", onDragExitAll, false);
 	listenerAid.remove(window, "dragend", onDragExitAll, false);
-	setHover(false);
+	
+	for(var b in bars) {
+		if(bars[b]._autohide) {
+			setHover(bars[b], false);
+		}
+	}
 };
 
-this.setHover = function(hover, force) {
+this.setHover = function(bar, hover, force) {
 	if(hover) {
-		addonBar.hovers++;
+		bar.hovers++;
 		if(force != undefined && typeof(force) == 'number') {
-			addonBar.hovers = force;
+			bar.hovers = force;
 		}
 	}
 	else {
 		if(force != undefined && typeof(force) == 'number') {
-			addonBar.hovers = force;
-		} else if(addonBar.hovers > 0) {
-			addonBar.hovers--;
+			bar.hovers = force;
+		} else if(bar.hovers > 0) {
+			bar.hovers--;
 		}
 	}
 	
-	timerAid.init('setHover', function() {
-		toggleAttribute(addonBar, 'hover', addonBar.hovers > 0);
-		toggleAttribute(activePP, 'hover', addonBar.hovers > 0);
-		dispatch(addonBar, { type: 'HoverAddonBar', cancelable: false });
+	timerAid.init('setHover_'+bar.id, function() {
+		toggleAttribute(bar, 'hover', bar.hovers > 0);
+		dispatch(bar, { type: 'HoverAddonBar', cancelable: false });
 	});
 };
 
-this.initHovers = function() {
-	if(!activePP) { return; }
+this.initialShowBar = function(e) {
+	var bar = e.target;
 	
-	setAttribute(activePP, 'autohide', 'true');
-	toggleAttribute(activePP, 'hover', addonBar.hovers > 0);
-	
-	listenerAid.add(activePP, 'dragenter', onDragEnter);
-	listenerAid.add(activePP, 'mouseover', onMouseOver);
-	listenerAid.add(activePP, 'mouseout', onMouseOut);
-	listenerAid.add(activePP, 'toggledAddonBarThroughButton', initialThroughButton);
-};
-
-this.moveAutoHide = function() {
-	if(!cornerContainer) { return; }
-	
-	var barOffset = cornerContainer.clientHeight +cornerContainer.clientTop -CLIPBAR;
-	var clipOffHeight = moveBarStyle.clientHeight +moveBarStyle.clientTop;
-	if(moveBarStyle.bottom > 1) { clipOffHeight += moveBarStyle.clientBottom; }
-	
-	styleAid.unload('autoHide_'+_UUID);
-	
-	var sscode = '/*The Puzzle Piece CSS declarations of variable values*/\n';
-	sscode += '@namespace url(http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul);\n';
-	sscode += '@-moz-document url("'+document.baseURI+'") {\n';
-	sscode += '	window['+objName+'_UUID="'+_UUID+'"] #'+objName+'-corner-container[autohide]:not([hover]):not(:hover) {\n';
-	sscode += '		bottom: '+(moveBarStyle.bottom -barOffset)+'px;\n';
-	sscode += '		clip: rect(0px, '+4000+'px, '+CLIPBAR+'px, 0px);\n';
-	sscode += '	}\n';
-	sscode += '	window['+objName+'_UUID="'+_UUID+'"] #'+objName+'-corner-container[autohide][hover],\n';
-	sscode += '	window['+objName+'_UUID="'+_UUID+'"] #'+objName+'-corner-container[autohide]:hover {\n';
-	sscode += '		clip: rect(0px, '+4000+'px, '+clipOffHeight+'px, 0px);\n';
-	sscode += '	}\n';
-	sscode += '}';
-	
-	styleAid.load('autoHide_'+_UUID, sscode, true);
-};
-
-this.delayInitialShowBar = function() {
-	timerAid.init('delayInitialShowBar', function() {
-		if(typeof(initialShowBar) == 'undefined') { return; }
-		initialShowBar();
-	}, 50);
-};
-
-this.initialShowings = [];
-this.initialShowBar = function() {
-	if(addonBar.collapsed) {
-		setHover(false, 0);
+	if(bar.collapsed) {
+		setHover(bar, false, 0);
 	} else {
-		setHover(true);
+		setHover(bar, true);
 		
 		// don't use timerAid, because if we use multiple initialShowBar()'s it would get stuck open
 		// we keep a reference to the timer, because otherwise sometimes it would not trigger (go figure...), hopefully this helps with that
 		var thisShowing = aSync(function() {
-			if(typeof(setHover) != 'undefined') {
-				setHover(false);
-				for(var i=0; i<initialShowings.length; i++) {
-					if(initialShowings[i] == thisShowing) {
-						initialShowings.splice(i, 1);
+			if(typeof(setHover) != 'undefined' && bar._initialShowings) {
+				setHover(bar, false);
+				for(var i=0; i<bar._initialShowings.length; i++) {
+					if(bar._initialShowings[i] == thisShowing) {
+						bar._initialShowings.splice(i, 1);
 						break;
 					}
 				}
 			}
 		}, 1500);
-		initialShowings.push(thisShowing);
+		bar._initialShowings.push(thisShowing);
 	}
 };
 
-this.initialThroughButton = function() {
-	if(!addonBar.collapsed) {
-		setHover(true, 2);
+this.initialThroughButton = function(e) {
+	if(!e.target._bar || e.target._bar.collapsed) {
+		setHover(e.target._bar, true, 2);
 	}
 };
 
-// Keep add-on bar visible when opening menus within it
+// Keep toolbar visible when opening menus within it
 this.holdPopupMenu = function(e) {
 	var trigger = e.originalTarget.triggerNode;
-	var hold = false;
+	var hold = null;
 	
 	// special case for the downloadsPanel
 	if(e.target.id == 'downloadsPanel') {
-		hold = isAncestor($('downloads-button'), addonBar);
-	}
-	
-	// check if the trigger node is present in the addonBar
-	if(!hold) {
-		hold = isAncestor(trigger, addonBar) || isAncestor(trigger, activePP) || isAncestor(e.originalTarget, addonBar);
-	}
-	
-	// could be a CUI panel opening, which doesn't carry a triggerNode, we have to find it ourselves
-	if(!hold && !trigger && e.target.id == 'customizationui-widget-panel') {
-		for(var c=0; c<addonBar.childNodes.length; c++) {
-			if(addonBar.childNodes[c].open) {
-				hold = true;
+		for(var b in bars) {
+			if(isAncestor($('downloads-button'), bars[b])) {
+				hold = bars[b];
 				break;
 			}
 		}
 	}
 	
-	if(hold) {
-		setHover(true);
+	// check if the trigger node is present in the addonBar
+	if(!hold) {
+		for(var b in bars) {
+			if(isAncestor(trigger, bars[b]) || isAncestor(trigger, bars[b]._pp) || isAncestor(e.originalTarget, bars[b])) {
+				hold = bars[b];
+				break;
+			}
+		}
+	}
+	
+	// could be a CUI panel opening, which doesn't carry a triggerNode, we have to find it ourselves
+	if(!hold && !trigger && e.target.id == 'customizationui-widget-panel') {
+		barsLoop:
+		for(var b in bars) {
+			for(var child of bars[b].childNodes) {
+				if(child.open) {
+					hold = bars[b];
+					break barsLoop;
+				}
+			}
+		}
+	}
+	
+	// some menus, like NoScript's button menu, like to open multiple times (I think), or at least they don't actually open the first time... or something...
+	if(hold && e.target.state == 'open') {
+		setHover(hold, true);
 		var selfRemover = function(ee) {
 			if(ee.originalTarget != e.originalTarget) { return; } //submenus
-			setHover(false);
+			setHover(hold, false);
 			listenerAid.remove(e.target, 'popuphidden', selfRemover);
 		}
 		listenerAid.add(e.target, 'popuphidden', selfRemover);
 	}
 };
 
-// only autohide when the location bar is focused
-this.autoHideWhenFocused = function() {
-	toggleAttribute(gURLBar, 'autoHideWhenFocused', prefAid.autoHideWhenFocused);
+this.initAutoHide = function(bar, nodes) {
+	if(bar.autohide) { return; }
+	
+	bar._autohide = [];
+	bar._initialShowings = [];
+	bar.hovers = 0;
+	
+	listenerAid.add(bar, 'ToggledPuzzleBar', initialShowBar);
+	listenerAid.add(bar, 'PuzzleBarCustomized', initialShowBar);
+	listenerAid.add(bar._pp, 'ToggledPuzzleBarThroughButton', initialThroughButton);
+	
+	bar._onMouseOver = function() {
+		setHover(bar, true);
+	};
+	
+	bar._onMouseOut = function() {
+		setHover(bar, false);
+	};
+	
+	bar._onDragEnter = function() {
+		setHover(bar, true, 1);
+		listenerAid.add(gBrowser, "dragenter", onDragExitAll, false);
+		listenerAid.add(window, "drop", onDragExitAll, false);
+		listenerAid.add(window, "dragend", onDragExitAll, false);
+	};
+	
+	for(var node of nodes) {
+		listenerAid.add(node, 'dragenter', bar._onDragEnter);
+		listenerAid.add(node, 'mouseover', bar._onMouseOver);
+		listenerAid.add(node, 'mouseout', bar._onMouseOut);
+		bar._autohide.push(node);
+	}
+	
+	setAttribute(bar, 'autohide', 'true');
+	
+	if(!prefAid.noInitialShow) {
+		initialShowBar({ target: bar });
+	}
+};
+
+this.deinitAutoHide = function(bar) {
+	if(!bar._autohide) { return; }
+	
+	removeAttribute(bar, 'autohide');
+	removeAttribute(bar, 'hover');
+	
+	for(var node of bar._autohide) {
+		listenerAid.remove(node, 'dragenter', bar._onDragEnter);
+		listenerAid.remove(node, 'mouseover', bar._onMouseOver);
+		listenerAid.remove(node, 'mouseout', bar._onMouseOut);
+	}
+	
+	listenerAid.remove(bar, 'ToggledPuzzleBar', initialShowBar);
+	listenerAid.remove(bar, 'PuzzleBarCustomized', initialShowBar);
+	listenerAid.remove(bar._pp, 'ToggledPuzzleBarThroughButton', initialThroughButton);
+	
+	delete bar.hovers;
+	delete bar._initialShowings;
+	delete bar._autohide;
 };
 
 moduleAid.LOADMODULE = function() {
-	addonBar.hovers = 0;
-	
-	listenerAid.add(addonBar, 'dragenter', onDragEnter);
-	listenerAid.add(addonBar, 'mouseover', onMouseOver);
-	listenerAid.add(addonBar, 'mouseout', onMouseOut);
-	listenerAid.add(addonBar, 'WillMoveAddonBar', moveAutoHide);
-	listenerAid.add(addonBar, 'ToggledAddonBar', initialShowBar);
-	listenerAid.add(addonBar, 'ChangedAddonBarPlacement', delayInitialShowBar);
-	listenerAid.add(addonBar, 'AddonBarCustomized', initialShowBar);
-	listenerAid.add(window, 'loadedAddonBarOverlay', initHovers);
 	listenerAid.add(window, 'popupshown', holdPopupMenu, false);
-	
-	prefAid.listen('movetoRight', initHovers);
-	prefAid.listen('placement', initHovers);
-	prefAid.listen('autoHideWhenFocused', autoHideWhenFocused);
-	
-	initHovers();
-	moveAutoHide();
-	
-	setAttribute(addonBar, 'autohide', 'true');
-	autoHideWhenFocused();
-	if(!addonBar.collapsed && (STARTED != APP_STARTUP || !prefAid.noInitialShow)) { initialShowBar(); }
 };
 
 moduleAid.UNLOADMODULE = function() {
-	styleAid.unload('autoHide_'+_UUID);
-	
-	prefAid.unlisten('movetoRight', initHovers);
-	prefAid.unlisten('placement', initHovers);
-	prefAid.unlisten('autoHideWhenFocused', autoHideWhenFocused);
-	
-	removeAttribute(addonBar, 'hover');
-	removeAttribute(activePP, 'hover');
-	removeAttribute(URLBarContainer, 'hover');
-	removeAttribute(addonBar, 'autohide');
-	removeAttribute(leftPP, 'autohide');
-	removeAttribute(rightPP, 'autohide');
-	removeAttribute(gURLBar, 'autoHideWhenFocused');
-	delete addonBar.hovers;
-	
-	listenerAid.remove(addonBar, 'dragenter', onDragEnter);
-	listenerAid.remove(addonBar, 'mouseover', onMouseOver);
-	listenerAid.remove(addonBar, 'mouseout', onMouseOut);
-	listenerAid.remove(addonBar, 'WillMoveAddonBar', moveAutoHide);
-	listenerAid.remove(addonBar, 'ToggledAddonBar', initialShowBar);
-	listenerAid.remove(addonBar, 'ChangedAddonBarPlacement', delayInitialShowBar);
-	listenerAid.remove(addonBar, 'AddonBarCustomized', initialShowBar);
-	listenerAid.remove(window, 'loadedAddonBarOverlay', initHovers);
 	listenerAid.remove(window, 'popupshown', holdPopupMenu, false);
-	
-	listenerAid.remove(leftPP, 'dragenter', onDragEnter);
-	listenerAid.remove(leftPP, 'toggledAddonBarThroughButton', initialThroughButton);
-	listenerAid.remove(leftPP, 'mouseover', onMouseOver);
-	listenerAid.remove(leftPP, 'mouseout', onMouseOut);
-	listenerAid.remove(rightPP, 'dragenter', onDragEnter);
-	listenerAid.remove(rightPP, 'toggledAddonBarThroughButton', initialThroughButton);
-	listenerAid.remove(rightPP, 'mouseover', onMouseOver);
-	listenerAid.remove(rightPP, 'mouseout', onMouseOut);
-	listenerAid.remove(urlbarPP, 'dragenter', onDragEnter);
-	listenerAid.remove(urlbarPP, 'mouseover', onMouseOver);
-	listenerAid.remove(urlbarPP, 'mouseout', onMouseOut);
 };

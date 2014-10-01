@@ -1,0 +1,21 @@
+@namespace url(http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul);
+@-moz-document url("chrome://browser/content/browser.xul") {
+	
+	/* style the add-on bar */
+	
+	#puzzleBars-bottom-bar {
+		padding-top: 1px;
+	}
+	
+	/* Puzzle Pieces */
+	
+	#puzzleBars-bottom-PP:not([active]):not(:hover),
+	#puzzleBars-bottom-PP[autohide]:not(:hover) {
+		clip: rect(0px, 32px, 9px, 0px);
+	}
+	
+	#puzzleBars-bottom-PP[active]:not(:hover) image {
+		height: 22px;
+	}
+	
+}

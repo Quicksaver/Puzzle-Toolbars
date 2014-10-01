@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet href="chrome://puzzlebars/skin/corner.css" type="text/css"?>
+<?xml-stylesheet href="chrome://puzzlebars-os/skin/corner.css" type="text/css"?>
+<!DOCTYPE overlay SYSTEM "chrome://puzzlebars/locale/overlay.dtd">
+<overlay id="corner-overlay" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul" >
+	
+	<commandset id="mainCommandSet">
+		<command id="objName:ToggleCornerBar" oncommand="objName.toggleBar('objName-corner-bar');"/>
+	</commandset>
+	
+	<!-- Bugfix: there's a weird bug where the puzzle piece will be rendered behind the add-on bar (in the corner)
+	if the bar is not right after developer-toolbar (Status-4-ever add-on triggers this for example, and CTR as well sometimes -->
+	<vbox id="browser-bottombox">
+		<box id="objName-corner-container" insertbefore="ctraddon_addon-bar,ctraddon_toolbar_dummy" insertafter="developer-toolbar">
+			<observes element="objName-corner-bar" attribute="collapsed" />
+			<observes element="objName-corner-bar" attribute="movetoright" />
+			<observes element="objName-corner-bar" attribute="autohide" />
+			<observes element="objName-corner-bar" attribute="hover" />
+			<observes element="objName-corner-bar" attribute="statusHide" />
+			<observes element="objName-corner-bar" attribute="moz-collapsed" />
+			
+			<toolbar id="puzzleBars-corner-bar"
+				toolbarname="&corner.name;"
+				accesskey="&corner.accesskey;"
+				customizable="true"
+				hidden="true"
+				collapsed="false"
+				persist="collapsed"
+				class="toolbar-primary chromeclass-toolbar addon-bar"
+				iconsize="small"
+				context="toolbar-context-menu"
+				menucommand="objName:ToggleCornerBar"
+				toolboxid="navigator-toolbox"
+				menuAdd="&corner.menuAdd;"
+				menuMove="&corner.menuMove;"
+				menuRemove="&corner.menuRemove;"
+				menuMain="&allbars.menuMain;">
+			</toolbar>
+		</box>
+		
+		<box id="objName-corner-PP"
+			class="PuzzlePiece"
+			context="toolbar-context-menu"
+			insertafter="objName-corner-container"
+			hidden="true">
+			
+			<observes element="objName-corner-bar" attribute="autohide" />
+			<observes element="objName-corner-bar" attribute="hover" />
+			<observes element="objName-corner-bar" attribute="movetoright" />
+			
+			<image onclick="objName.commandPP(event, this.parentNode);" />
+		</box>
+	</vbox>
+	
+</overlay>

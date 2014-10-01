@@ -1,8 +1,12 @@
 <?xml version="1.0"?>
-<!DOCTYPE overlay SYSTEM "chrome://thepuzzlepiece/locale/options.dtd">
+<!DOCTYPE overlay SYSTEM "chrome://puzzlebars/locale/options.dtd">
 <overlay id="optionsMac-overlay" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
 	
-	<checkbox id="accelCheckbox" label="&OptKeyboardShortcut.command;"/>
-	<checkbox id="altCheckbox" label="&OptKeyboardShortcut.option;"/>
+	<checkbox id="bottom_accelCheckbox" label="&OptKeyboardShortcut.command;"/>
+	<checkbox id="bottom_altCheckbox" label="&OptKeyboardShortcut.option;"/>
+	<checkbox id="corner_accelCheckbox" label="&OptKeyboardShortcut.command;"/>
+	<checkbox id="corner_altCheckbox" label="&OptKeyboardShortcut.option;"/>
+	<checkbox id="urlbar_accelCheckbox" label="&OptKeyboardShortcut.command;"/>
+	<checkbox id="urlbar_altCheckbox" label="&OptKeyboardShortcut.option;"/>
 	
 </overlay>

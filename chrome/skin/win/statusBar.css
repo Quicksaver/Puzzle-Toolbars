@@ -1,0 +1,21 @@
+@namespace url(http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul);
+@-moz-document url("chrome://browser/content/browser.xul") {
+	
+	#status-bar {
+		background-color: transparent;
+		border: none;
+		min-height: 0;
+	}
+	
+	#puzzleBars-status-bar-placeholder {
+		background-color: #FFF;
+		background-image: repeating-linear-gradient(135deg, rgba(255,255,255,.15), rgba(255,255,255,.15) 5px, rgba(128,128,128,.15) 5px, rgba(128,128,128,.15) 10px);
+		box-shadow: inset 0 0 1px 1px #808080;
+		padding: 0 10px;
+	}
+	
+	.addon-bar #status-bar resizer {
+		display: none !important;
+	}
+	
+}

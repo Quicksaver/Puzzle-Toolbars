@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet href="chrome://puzzlebars/skin/urlbar.css" type="text/css"?>
+<?xml-stylesheet href="chrome://puzzlebars-os/skin/urlbar.css" type="text/css"?>
+<!DOCTYPE overlay SYSTEM "chrome://puzzlebars/locale/overlay.dtd">
+<overlay id="urlbar-overlay" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul" >
+	
+	<commandset id="mainCommandSet">
+		<command id="objName:ToggleURLBarBar" oncommand="objName.toggleBar('objName-urlbar-bar');"/>
+	</commandset>
+	
+	<hbox id="urlbar-icons">
+		<box id="objName-urlbar-container" position="1">
+			<observes element="objName-urlbar-bar" attribute="autohide" />
+			<observes element="objName-urlbar-bar" attribute="hover" />
+			<observes element="objName-urlbar-bar" attribute="moz-collapsed" />
+			
+			<toolbar id="puzzleBars-urlbar-bar"
+				toolbarname="&urlbar.name;"
+				accesskey="&urlbar.accesskey;"
+				customizable="true"
+				hidden="true"
+				collapsed="false"
+				persist="collapsed"
+				class="toolbar-primary chromeclass-toolbar addon-bar"
+				iconsize="small"
+				context="toolbar-context-menu"
+				menucommand="objName:ToggleURLBarBar"
+				toolboxid="navigator-toolbox"
+				menuAdd="&urlbar.menuAdd;"
+				menuMove="&urlbar.menuMove;"
+				menuRemove="&urlbar.menuRemove;"
+				menuMain="&allbars.menuMain;">
+			</toolbar>
+		</box>
+		
+		<box id="objName-urlbar-PP"
+			class="PuzzlePiece"
+			context="toolbar-context-menu"
+			position="2">
+			<image onclick="objName.commandPP(event, this.parentNode);" />
+		</box>
+	</hbox>
+	
+</overlay>

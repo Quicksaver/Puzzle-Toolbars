@@ -6,9 +6,9 @@
 		visibility: collapse;
 	}
 	
-	.customization-palette #thePuzzlePiece-placeholder-separator,
-	.customization-palette #thePuzzlePiece-placeholder-spacer,
-	.customization-palette #thePuzzlePiece-placeholder-spring {
+	.customization-palette #puzzleBars-placeholder-separator,
+	.customization-palette #puzzleBars-placeholder-spacer,
+	.customization-palette #puzzleBars-placeholder-spring {
 		margin: 2px 1em;
 	}
 	

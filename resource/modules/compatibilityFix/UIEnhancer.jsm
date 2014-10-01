@@ -1,19 +1,21 @@
-moduleAid.VERSION = '1.0.1';
+moduleAid.VERSION = '1.1.0';
+
+/* I'm actually not sure if any of this is working, UIEnhancer seems to be having some problems in Nightly... */
 
 this.__defineGetter__('UIEnhancer', function() { return $('UIEnhancer_URLBar'); });
 
 this.UIEnhancerFixer = function(aEnabled) {
 	if(aEnabled) {
-		listenerAid.add(addonBar, 'HoverAddonBar', fixUIEnhancerWidth);
-		listenerAid.add(addonBar, 'ToggledAddonBar', fixUIEnhancerWidth);
+		listenerAid.add(urlbarBar, 'HoverAddonBar', fixUIEnhancerWidth);
+		listenerAid.add(urlbarBar, 'ToggledAddonBar', fixUIEnhancerWidth);
 		listenerAid.add(UIEnhancer, 'transitionend', UIEnhancerTransitionEnd);
-		setAttribute($('urlbar'), objName+'-urlbar', 'true');
+		setAttribute($('urlbar'), objName+'-UIEnhancer', 'true');
 		fixUIEnhancerWidth();
 	} else {
-		listenerAid.remove(addonBar, 'HoverAddonBar', fixUIEnhancerWidth);
-		listenerAid.remove(addonBar, 'ToggledAddonBar', fixUIEnhancerWidth);
+		listenerAid.remove(urlbarBar, 'HoverAddonBar', fixUIEnhancerWidth);
+		listenerAid.remove(urlbarBar, 'ToggledAddonBar', fixUIEnhancerWidth);
 		listenerAid.remove(UIEnhancer, 'transitionend', UIEnhancerTransitionEnd);
-		removeAttribute($('urlbar'), objName+'-urlbar');
+		removeAttribute($('urlbar'), objName+'-UIEnhancer');
 		styleAid.unload('UIEnhancer_'+_UUID);
 		removeAttribute(UIEnhancer, 'hover');
 		removeAttribute(UIEnhancer, 'noAnimation');
@@ -21,7 +23,7 @@ this.UIEnhancerFixer = function(aEnabled) {
 };
 
 this.fixUIEnhancerWidth = function() {
-	var hover = !addonBar.collapsed && (!prefAid.autoHide || trueAttribute(addonBar, 'hover'));
+	var hover = !urlbarBar.collapsed && (!prefAid.urlbar_autohide || trueAttribute(urlbarBar, 'hover'));
 	if(hover == trueAttribute(UIEnhancer, 'hover')) { return; }
 	
 	removeAttribute(UIEnhancer, 'noAnimation');
@@ -29,8 +31,8 @@ this.fixUIEnhancerWidth = function() {
 	toggleAttribute(UIEnhancer, 'hover', hover);
 	
 	// if the size of the add-on bar is above the available space to it, resize the UIEnhancer box
-	if(hover && addonBar.clientWidth > $('urlbar').inputField.clientWidth) {
-		var newWidth = parseInt(UIEnhancer.style.width) -addonBar.clientWidth +$('urlbar').inputField.clientWidth;
+	if(hover && urlbarBar.clientWidth > $('urlbar').inputField.clientWidth) {
+		var newWidth = parseInt(UIEnhancer.style.width) -urlbarBar.clientWidth +$('urlbar').inputField.clientWidth;
 		
 		var sscode = '/*The Puzzle Piece CSS declarations of variable values*/\n';
 		sscode += '@namespace url(http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul);\n';
@@ -58,8 +60,10 @@ this.UIEnhancerListener = {
 	}
 };
 
-this.toggleUIEnhancerListener = function(unloaded) {
-	if(!UNLOADED && !unloaded && prefAid.placement == 'urlbar') {
+this.toggleUIEnhancerListener = function(e) {
+	if(typeof(urlbarBar) == 'undefined' || urlbarBar != e.target) { return; }
+	
+	if(!UNLOADED && (!e.type || e.type == 'LoadedPuzzleBar')) {
 		AddonManager.addAddonListener(UIEnhancerListener);
 		AddonManager.getAddonByID('UIEnhancer@girishsharma', function(addon) {
 			if(addon && addon.isActive) { UIEnhancerFixer(true); }
@@ -71,13 +75,19 @@ this.toggleUIEnhancerListener = function(unloaded) {
 };
 
 moduleAid.LOADMODULE = function() {
-	prefAid.listen('placement', toggleUIEnhancerListener);
+	listenerAid.add(window, 'LoadedPuzzleBar', toggleUIEnhancerListener);
+	listenerAid.add(window, 'UnloadedPuzzleBar', toggleUIEnhancerListener);
 	
-	toggleUIEnhancerListener();
+	if(prefAid.urlbar_bar && typeof(urlbarBar) != 'undefined' && urlbarBar) {
+		toggleUIEnhancerListener({ target: urlbarBar });
+	}
 };
 
 moduleAid.UNLOADMODULE = function() {
-	toggleUIEnhancerListener(true);
+	if(prefAid.urlbar_bar && typeof(urlbarBar) != 'undefined' && urlbarBar) {
+		toggleUIEnhancerListener();
+	}
 	
-	prefAid.unlisten('placement', toggleUIEnhancerListener);
+	listenerAid.remove(window, 'LoadedPuzzleBar', toggleUIEnhancerListener);
+	listenerAid.remove(window, 'UnloadedPuzzleBar', toggleUIEnhancerListener);
 };

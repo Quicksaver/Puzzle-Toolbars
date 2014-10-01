@@ -1,7 +1,7 @@
 @namespace url(http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul);
 @-moz-document url("chrome://browser/content/browser.xul") {
 
-	#thePuzzlePiece-corner-container {
+	window:not([customizing="true"]) #puzzleBars-corner-container {
 		border-radius: 8px 8px 2px 2px;
 		border-top: 2px solid rgba(0,0,0,0.15);
 		border-right: 2px solid rgba(0,0,0,0.15);
@@ -11,21 +11,13 @@
 		-moz-border-left-colors: rgba(0,0,0,0.15) rgba(255,255,255,0.15);
 	}
 	
-	.addon-bar #status-bar resizer {
-		display: none !important;
-	}
-	
-	.PuzzlePiece:not(#thePuzzlePiece-urlbar-PP)[clipped][active],
-	.PuzzlePiece:not(#thePuzzlePiece-urlbar-PP)[clipped]:hover {
+	#puzzleBars-corner-PP[clipped][active],
+	#puzzleBars-corner-PP[clipped]:hover {
 		clip: rect(0px, 32px, 30px, 0px);
 	}
-	.PuzzlePiece:not(#thePuzzlePiece-urlbar-PP):not([active]):not(:hover):not([hover]),
-	.PuzzlePiece:not(#thePuzzlePiece-urlbar-PP)[autohide]:not(:hover):not([hover]) {
+	#puzzleBars-corner-PP:not([active]):not(:hover):not([hover]),
+	#puzzleBars-corner-PP[autohide]:not(:hover):not([hover]) {
 		clip: rect(0px, 32px, 9px, 0px);
-	}
-	
-	.PuzzlePiece:not(#thePuzzlePiece-urlbar-PP)[bottomPlacement][active]:not(:hover):not([hover]) image {
-		height: 22px;
 	}
 	
 }

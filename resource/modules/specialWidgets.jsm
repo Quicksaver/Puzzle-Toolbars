@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.0.1';
+moduleAid.VERSION = '1.0.2';
 
 // Special widgets aren't allowed in the menu panel by default, so we need to override this behavior (and hope we don't clash with other add-ons doing the same).
 // I hope I can remove this soon. See:
@@ -8,13 +8,14 @@ moduleAid.VERSION = '1.0.1';
 this.CUIInternalOriginal = null;
 
 this.specialWidgets = ['separator', 'spring', 'spacer'];
+this.forbiddenSprings = ['nav-bar', 'PanelUI-contents', objName+'-corner-bar', objName+'-urlbar-bar'];
 this.ourSpecialWidgets = [];
 
 this.addWidgetToArea = function(aWidgetId, aArea, aPosition, aInitialAdd) {
 	if(aWidgetId.startsWith(objName+'-placeholder-')) {
 		aWidgetId = aWidgetId.match(/spring|spacer|separator/)[0];
 		
-		if(aWidgetId == 'spring' && (aArea == CustomizableUI.AREA_NAVBAR || aArea == CustomizableUI.AREA_PANEL)) {
+		if(aWidgetId == 'spring' && forbiddenSprings.indexOf(aArea) > -1) {
 			return;
 		}
 	}
@@ -31,7 +32,7 @@ this.addWidgetToArea = function(aWidgetId, aArea, aPosition, aInitialAdd) {
 	}
 	
 	if(this.isSpecialWidget(aWidgetId)) {
-		if(aWidgetId.contains('spring') && (aArea == CustomizableUI.AREA_NAVBAR || aArea == CustomizableUI.AREA_PANEL)) {
+		if(aWidgetId.contains('spring') && forbiddenSprings.indexOf(aArea) > -1) {
 			this.removeWidgetFromArea(aWidgetId);
 			return;
 		}
@@ -58,7 +59,7 @@ this.canWidgetMoveToArea = function(aWidgetId, aArea) {
 			return true;
 		}
 		
-		if(aWidgetId.contains('spring') && (aArea == CustomizableUI.AREA_NAVBAR || aArea == CustomizableUI.AREA_PANEL)) {
+		if(aWidgetId.contains('spring') && forbiddenSprings.indexOf(aArea) > -1) {
 			return false;
 		}
 	}

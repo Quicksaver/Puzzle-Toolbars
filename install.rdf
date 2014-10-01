@@ -5,9 +5,9 @@
 		<em:version>1.3.8</em:version>
 		<em:type>2</em:type>
 		<em:creator>Quicksaver</em:creator>
-		<em:iconURL>chrome://thepuzzlepiece/skin/icon.png</em:iconURL>
-		<em:optionsURL>chrome://thepuzzlepiece/content/options.xul</em:optionsURL>
-		<em:name>The Puzzle Piece</em:name>
+		<em:iconURL>chrome://puzzlebars/skin/icon.png</em:iconURL>
+		<em:optionsURL>chrome://puzzlebars/content/options.xul</em:optionsURL>
+		<em:name>Puzzle Toolbars</em:name>
 		<em:bootstrap>true</em:bootstrap>
 		<em:multiprocessCompatible>true</em:multiprocessCompatible>
 		
@@ -22,8 +22,8 @@
 		<em:localized>
 			<Description>
 				<em:locale>en-US</em:locale>
-				<em:name>The Puzzle Piece</em:name>
-				<em:description>Bring back your add-on bar in full force! Where do you want it? What do you want it to do? You decide!</em:description>
+				<em:name>Puzzle Toolbars</em:name>
+				<em:description>Piece all of your add-on buttons and extras into the browser window in exactly the way you like it!</em:description>
 				<em:homepageURL>https://addons.mozilla.org/en-US/firefox/addon/the-puzzle-piece/</em:homepageURL>
 			</Description>
 		</em:localized>

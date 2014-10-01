@@ -1,21 +1,31 @@
 <!ENTITY Optwindow.style "width: 31em;">
 
-<!ENTITY Options.title "The Puzzle Piece">
-<!ENTITY Optgeneral.label "Add-on Bar">
-<!ENTITY Optabout.label "About">
+<!ENTITY Options.title "Puzzle Toolbars">
+<!ENTITY bottom.title "Bottom">
+<!ENTITY corner.title "Corner">
+<!ENTITY urlbar.title "Location Bar">
+<!ENTITY about.title "About">
 
 <!ENTITY GroupPosition.label "Position">
 <!ENTITY GroupBehavior.label "Behavior">
 
-<!ENTITY OptPlacement.bottomLabel "Place at the bottom of the browser">
-<!ENTITY OptPlacement.cornerLabel "Shrink into a corner at the bottom of the webpage">
-<!ENTITY OptPlacement.urlbarLabel "Move into the location bar">
-<!ENTITY OptmoveToRight.label "Place on the right of the browser window">
-<!ENTITY OptshowPPs.label "Show the Puzzle Piece toggle button in the add-on bar">
-<!ENTITY OptautoHide.label "Hide the add-on bar automatically">
-<!ENTITY OptautoHideWhenFocused.label "Only when the location bar has focus">
+<!ENTITY OptBottom.label "Enable Bottom Toolbar">
+<!ENTITY OptBottom.tooltip "Adds a customizable toolbar to the bottom of the browser window, much like the old add-on bar.">
+<!ENTITY OptCorner.label "Enable Corner Toolbar">
+<!ENTITY OptCorner.tooltip "Adds a narrow toolbar to the bottom corner of the browser window, useful to maximize your browsing screen space.">
+<!ENTITY OptUrlbar.label "Enable Location Bar Toolbar">
+<!ENTITY OptUrlbar.tooltip "Adds a small and tidy toolbar inside the location bar, great if you usually have a lot of free space there and want to take advantage of it.">
 
-<!ENTITY OptKeyboardShortcut.caption "Keyboard Shortcut">
+<!ENTITY OptShowPiece.label "Show Puzzle Piece">
+<!ENTITY OptShowPiece.tooltip "The puzzle piece is a button which you can use to quickly open or close its toolbar.">
+<!ENTITY OptRight.label "Place on the right">
+<!ENTITY OptRight.tooltip "Enable this to placed it on the right side of your browser window.">
+<!ENTITY OptAutoHide.label "Auto-Hide">
+<!ENTITY OptAutoHide.tooltip "Hide the toolbar automatically when it's not needed.">
+<!ENTITY OptWhenFocused.label "Hide only when the location bar has focus">
+<!ENTITY OptWhenFocused.tooltip "With this enabled, the toolbar will only hide automatically when the cursor is in the location bar.">
+
+<!ENTITY OptKeyboardShortcut.captionA "Keyboard shortcut for enabling or disabling">
 <!ENTITY OptKeyboardShortcut.control "Control">
 <!ENTITY OptKeyboardShortcut.shift "Shift">
 <!ENTITY OptKeyboardShortcut.alt "Alt">
@@ -32,8 +42,8 @@
 <!ENTITY OptKeyboardShortcut.right "Right">
 <!ENTITY OptKeyboardShortcut.down "Down">
 
-<!ENTITY thepuzzlepieceabout.name "The Puzzle Piece">
-<!ENTITY thepuzzlepieceabout.by "by Quicksaver">
-<!ENTITY thepuzzlepieceabout.desc "All information about the add-on and its developer can be found in its Mozilla Add-ons Homepage. If you liked the add-on, please consider leaving there a nice review or a small contribution to help support its continued development. Bug reports and suggestions can be made in the technical support webpage.">
-<!ENTITY thepuzzlepieceabout.home "Add-on Homepage">
-<!ENTITY thepuzzlepieceabout.tech "Technical Support">
+<!ENTITY puzzlebarsabout.name "Puzzle Toolbars">
+<!ENTITY puzzlebarsabout.by "by Quicksaver">
+<!ENTITY puzzlebarsabout.desc "All information about the add-on and its developer can be found in its Mozilla Add-ons Homepage. If you liked the add-on, please consider leaving there a nice review or a small contribution to help support its continued development. Bug reports and suggestions can be made in the technical support webpage.">
+<!ENTITY puzzlebarsabout.home "Add-on Homepage">
+<!ENTITY puzzlebarsabout.tech "Technical Support">

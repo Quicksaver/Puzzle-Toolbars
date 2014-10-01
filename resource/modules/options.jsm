@@ -1,56 +1,89 @@
-moduleAid.VERSION = '1.0.1';
+moduleAid.VERSION = '1.1.0';
 
-this.__defineGetter__('menuPopup', function() { return $('addonBarKeyset-menupopup'); });
-
-this.isStillAvailable = function(key, list) {
-	if(key.keycode != 'none' && !list[key.keycode]) { return false; }
-	return true;
-};
+this.keys = [
+	{
+		id: objName+'-bottom-key',
+		get disabled () { return trueAttribute($('bottom_keycodeMenu'), 'disabled'); },
+		get keycode () { return $('bottom_keycodeMenu').value; },
+		get accel () { return $('bottom_accelCheckbox').checked; },
+		get shift () { return $('bottom_shiftCheckbox').checked; },
+		get alt () { return $('bottom_altCheckbox').checked; },
+		get menu () { return $('bottom_keycodeMenupopup'); }
+	},
+	{
+		id: objName+'-corner-key',
+		get disabled () { return trueAttribute($('corner_keycodeMenu'), 'disabled'); },
+		get keycode () { return $('corner_keycodeMenu').value; },
+		get accel () { return $('corner_accelCheckbox').checked; },
+		get shift () { return $('corner_shiftCheckbox').checked; },
+		get alt () { return $('corner_altCheckbox').checked; },
+		get menu () { return $('corner_keycodeMenupopup'); }
+	},
+	{
+		id: objName+'-urlbar-key',
+		get disabled () { return trueAttribute($('urlbar_keycodeMenu'), 'disabled'); },
+		get keycode () { return $('urlbar_keycodeMenu').value; },
+		get accel () { return $('urlbar_accelCheckbox').checked; },
+		get shift () { return $('urlbar_shiftCheckbox').checked; },
+		get alt () { return $('urlbar_altCheckbox').checked; },
+		get menu () { return $('urlbar_keycodeMenupopup'); }
+	}
+];
 
 this.fillKeycodes = function() {
-	var addonBarKey = {
-		keycode: $('addonBarKeyset-menu').value,
-		accel: $('accelCheckbox').checked,
-		shift: $('shiftCheckbox').checked,
-		alt: $('altCheckbox').checked
-	};
-	
-	var available = keysetAid.getAvailable(addonBarKey, true);
-	if(!isStillAvailable(addonBarKey, available)) {
-		addonBarKey.keycode = 'none';
-	}
-	
-	var item = menuPopup.firstChild.nextSibling;
-	while(item) {
-		item.setAttribute('hidden', 'true');
-		item.setAttribute('disabled', 'true');
-		item = item.nextSibling;
-	}
-	if(addonBarKey.keycode == 'none') {
-		menuPopup.parentNode.selectedItem = menuPopup.firstChild;
-		$(menuPopup.parentNode.getAttribute('preference')).value = 'none';
-	}
-	
-	for(var i=1; i<menuPopup.childNodes.length; i++) {
-		var item = menuPopup.childNodes[i];
-		var keycode = item.getAttribute('value');
-		if(!available[keycode]) {
-			continue;
+	for(var key of keys) {
+		var available = keysetAid.getAvailable(key, keys);
+		if(!isStillAvailable(key, available)) {
+			key.keycode = 'none';
 		}
 		
-		item.removeAttribute('hidden');
-		item.removeAttribute('disabled');
-		if(keycode == addonBarKey.keycode) {
-			menuPopup.parentNode.selectedItem = item;
-			// It has the annoying habit of re-selecting the first (none) entry when selecting a menuitem with '*' as value
-			if(keycode == '*') {
-				var itemIndex = menuPopup.parentNode.selectedIndex;
-				aSync(function() { menuPopup.parentNode.selectedIndex = itemIndex; });
+		var item = key.menu.firstChild.nextSibling;
+		while(item) {
+			item.setAttribute('hidden', 'true');
+			item.setAttribute('disabled', 'true');
+			item = item.nextSibling;
+		}
+		if(key.keycode == 'none') {
+			key.menu.parentNode.selectedItem = key.menu.firstChild;
+			$(key.menu.parentNode.getAttribute('preference')).value = 'none';
+		}
+		
+		for(var item of key.menu.childNodes) {
+			var keycode = item.getAttribute('value');
+			if(!available[keycode]) { continue; }
+			
+			item.removeAttribute('hidden');
+			item.removeAttribute('disabled');
+			if(keycode == key.keycode) {
+				key.menu.parentNode.selectedItem = item;
+				// It has the annoying habit of re-selecting the first (none) entry when selecting a menuitem with '*' as value
+				if(keycode == '*') {
+					var itemIndex = key.menu.parentNode.selectedIndex;
+					aSync(function() { key.menu.parentNode.selectedIndex = itemIndex; });
+				}
 			}
 		}
 	}
 };
 
+this.isStillAvailable = function(key, list) {
+	if(!list[key.keycode]) { return false; }
+	return true;
+};
+
+this.urlbarCheckboxes = function() {
+	timerAid.init('urlbarCheckboxes', function() {
+		var pp = $(objName+'-urlbar-ppCheckbox');
+		var autohide = $(objName+'-urlbar-autohideCheckbox');
+		var whenfocused = $(objName+'-urlbar-whenfocusedCheckbox');
+		
+		if(autohide.checked && !pp.checked && !whenfocused.checked) {
+			autohide.checked = false;
+			autohide.doCommand(); // trigger dependencies
+		}
+	});
+};
+	
 moduleAid.LOADMODULE = function() {
 	if(DARWIN) {
 		overlayAid.overlayWindow(window, 'optionsMac');

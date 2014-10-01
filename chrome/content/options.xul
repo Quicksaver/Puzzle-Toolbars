@@ -1,51 +1,52 @@
 <?xml version="1.0"?>
 <?xml-stylesheet href="chrome://global/skin/global.css" type="text/css"?>
-<?xml-stylesheet href="chrome://thepuzzlepiece/skin/options.css" type="text/css"?>
-<!DOCTYPE options SYSTEM "chrome://thepuzzlepiece/locale/options.dtd">
+<?xml-stylesheet href="chrome://puzzlebars/skin/options.css" type="text/css"?>
+<!DOCTYPE options SYSTEM "chrome://puzzlebars/locale/options.dtd">
 <prefwindow xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
-			id="thepuzzlepiece-options-window"
+			id="puzzleBars-options-window"
 			title="&Options.title;">
 
-	<prefpane id="generalPane" label="&Optgeneral.label;" style="&Optwindow.style;">
+	<prefpane id="bottomPane" label="&bottom.title;" style="&Optwindow.style;">
 		<preferences>
-			<preference id="pref-movetoRight" name="extensions.thepuzzlepiece.movetoRight" type="bool" />
-			<preference id="pref-autoHide" name="extensions.thepuzzlepiece.autoHide" type="bool" />
-			<preference id="pref-autoHideWhenFocused" name="extensions.thepuzzlepiece.autoHideWhenFocused" type="bool" />
-			<preference id="pref-placement" name="extensions.thepuzzlepiece.placement" type="string" />
-			<preference id="pref-showPPs" name="extensions.thepuzzlepiece.showPPs" type="bool" />
-			<preference id="pref-addonBarKeycode" name="extensions.thepuzzlepiece.addonBarKeycode" type="string"/>
-			<preference id="pref-addonBarAccel" name="extensions.thepuzzlepiece.addonBarAccel" type="bool"/>
-			<preference id="pref-addonBarShift" name="extensions.thepuzzlepiece.addonBarShift" type="bool"/>
-			<preference id="pref-addonBarAlt" name="extensions.thepuzzlepiece.addonBarAlt" type="bool"/>
+			<preference id="pref-bottom_bar" name="extensions.puzzlebars.bottom_bar" type="bool" />
+			<preference id="pref-bottom_pp" name="extensions.puzzlebars.bottom_pp" type="bool" />
+			<preference id="pref-bottom_right" name="extensions.puzzlebars.bottom_right" type="bool" />
+			<preference id="pref-bottom_keycode" name="extensions.puzzlebars.bottom_keycode" type="string"/>
+			<preference id="pref-bottom_accel" name="extensions.puzzlebars.bottom_accel" type="bool"/>
+			<preference id="pref-bottom_shift" name="extensions.puzzlebars.bottom_shift" type="bool"/>
+			<preference id="pref-bottom_alt" name="extensions.puzzlebars.bottom_alt" type="bool"/>
 		</preferences>
 		
+		<checkbox label="&OptBottom.label;" tooltiptext="&OptBottom.tooltip;" preference="pref-bottom_bar"/>
 		<groupbox align="start">
-			<caption label="&GroupPosition.label;" />
-			<radiogroup preference="pref-placement">
-				<vbox align="start">
-					<radio label="&OptPlacement.bottomLabel;" value="bottom"/>
-					<radio label="&OptPlacement.cornerLabel;" value="corner"/>
-					<radio label="&OptPlacement.urlbarLabel;" value="urlbar"/>
-				</vbox>
-			</radiogroup>
-			<checkbox label="&OptshowPPs.label;" preference="pref-showPPs"/>
-			<checkbox label="&OptmoveToRight.label;" dependson="!pref-placement:urlbar" preference="pref-movetoRight"/>
-		</groupbox>
-		
-		<groupbox align="start">
-			<caption label="&GroupBehavior.label;" />
-			<checkbox label="&OptautoHide.label;" dependson="!pref-placement:bottom,pref-showPPs;pref-placement:corner" preference="pref-autoHide"/>
-			<checkbox label="&OptautoHideWhenFocused.label;" dependson="pref-placement:urlbar,pref-showPPs,pref-autoHide" preference="pref-autoHideWhenFocused"/>
+			<caption><checkbox label="&OptShowPiece.label;" tooltiptext="&OptShowPiece.tooltip;" dependson="pref-bottom_bar" preference="pref-bottom_pp"/></caption>
+			<checkbox label="&OptRight.label;" tooltiptext="&OptRight.tooltip;" dependson="pref-bottom_bar" preference="pref-bottom_right"/>
 		</groupbox>
 		
 		<groupbox align="center">
-			<caption label="&OptKeyboardShortcut.caption;"/>
+			<caption label="&OptKeyboardShortcut.captionA;"/>
 			<hbox>
-				<checkbox id="accelCheckbox" oncommand="objName.fillKeycodes();" label="&OptKeyboardShortcut.control;" preference="pref-addonBarAccel"/>
-				<checkbox id="altCheckbox" oncommand="objName.fillKeycodes();" label="&OptKeyboardShortcut.alt;" preference="pref-addonBarAlt"/>
-				<checkbox id="shiftCheckbox" oncommand="objName.fillKeycodes();" label="&OptKeyboardShortcut.shift;" preference="pref-addonBarShift"/>
-				<menulist id="addonBarKeyset-menu" oncommand="objName.fillKeycodes();" preference="pref-addonBarKeycode">
-					<menupopup id="addonBarKeyset-menupopup">
+				<checkbox id="bottom_accelCheckbox"
+					oncommand="objName.fillKeycodes();"
+					label="&OptKeyboardShortcut.control;"
+					dependson="pref-bottom_bar"
+					preference="pref-bottom_accel"/>
+				<checkbox id="bottom_altCheckbox"
+					oncommand="objName.fillKeycodes();"
+					label="&OptKeyboardShortcut.alt;"
+					dependson="pref-bottom_bar"
+					preference="pref-bottom_alt"/>
+				<checkbox id="bottom_shiftCheckbox"
+					oncommand="objName.fillKeycodes();"
+					label="&OptKeyboardShortcut.shift;"
+					dependson="pref-bottom_bar"
+					preference="pref-bottom_shift"/>
+				<menulist id="bottom_keycodeMenu"
+					oncommand="objName.fillKeycodes();"
+					dependson="pref-bottom_bar"
+					preference="pref-bottom_keycode">
+					
+					<menupopup id="bottom_keycodeMenupopup">
 						<menuitem value="none" label="&OptKeyboardShortcut.none;"/>
 						<menuitem value="A" label="A"/>
 						<menuitem value="B" label="B"/>
@@ -123,7 +124,269 @@
 		</groupbox>
 	</prefpane>
 	
-	<prefpane id="aboutPane" label="&Optabout.label;" align="center" style="&Optwindow.style;">
+	<prefpane id="cornerPane" label="&corner.title;" style="&Optwindow.style;">
+		<preferences>
+			<preference id="pref-corner_bar" name="extensions.puzzlebars.corner_bar" type="bool" />
+			<preference id="pref-corner_pp" name="extensions.puzzlebars.corner_pp" type="bool" />
+			<preference id="pref-corner_right" name="extensions.puzzlebars.corner_right" type="bool" />
+			<preference id="pref-corner_autohide" name="extensions.puzzlebars.corner_autohide" type="bool" />
+			<preference id="pref-corner_keycode" name="extensions.puzzlebars.corner_keycode" type="string"/>
+			<preference id="pref-corner_accel" name="extensions.puzzlebars.corner_accel" type="bool"/>
+			<preference id="pref-corner_shift" name="extensions.puzzlebars.corner_shift" type="bool"/>
+			<preference id="pref-corner_alt" name="extensions.puzzlebars.corner_alt" type="bool"/>
+		</preferences>
+		
+		<checkbox label="&OptCorner.label;" tooltiptext="&OptCorner.tooltip;" preference="pref-corner_bar"/>
+		
+		<groupbox align="start">
+			<caption label="&GroupPosition.label;"/>
+			<checkbox label="&OptRight.label;" tooltiptext="&OptRight.tooltip;" dependson="pref-corner_bar" preference="pref-corner_right"/>
+		</groupbox>
+		
+		<groupbox align="start">
+			<caption label="&GroupBehavior.label;"/>
+			<checkbox label="&OptShowPiece.label;" tooltiptext="&OptShowPiece.tooltip;" dependson="pref-corner_bar" preference="pref-corner_pp"/>
+			<checkbox label="&OptAutoHide.label;" tooltiptext="&OptAutoHide.tooltip;" dependson="pref-corner_bar" preference="pref-corner_autohide"/>
+		</groupbox>
+		
+		<groupbox align="center">
+			<caption label="&OptKeyboardShortcut.captionA;"/>
+			<hbox>
+				<checkbox id="corner_accelCheckbox"
+					oncommand="objName.fillKeycodes();"
+					label="&OptKeyboardShortcut.control;"
+					dependson="pref-corner_bar"
+					preference="pref-corner_accel"/>
+				<checkbox id="corner_altCheckbox"
+					oncommand="objName.fillKeycodes();"
+					label="&OptKeyboardShortcut.alt;"
+					dependson="pref-corner_bar"
+					preference="pref-corner_alt"/>
+				<checkbox id="corner_shiftCheckbox"
+					oncommand="objName.fillKeycodes();"
+					label="&OptKeyboardShortcut.shift;"
+					dependson="pref-corner_bar"
+					preference="pref-corner_shift"/>
+				<menulist id="corner_keycodeMenu"
+					oncommand="objName.fillKeycodes();"
+					dependson="pref-corner_bar"
+					preference="pref-corner_keycode">
+					
+					<menupopup id="corner_keycodeMenupopup">
+						<menuitem value="none" label="&OptKeyboardShortcut.none;"/>
+						<menuitem value="A" label="A"/>
+						<menuitem value="B" label="B"/>
+						<menuitem value="C" label="C"/>
+						<menuitem value="D" label="D"/>
+						<menuitem value="E" label="E"/>
+						<menuitem value="F" label="F"/>
+						<menuitem value="G" label="G"/>
+						<menuitem value="H" label="H"/>
+						<menuitem value="I" label="I"/>
+						<menuitem value="J" label="J"/>
+						<menuitem value="K" label="K"/>
+						<menuitem value="L" label="L"/>
+						<menuitem value="M" label="M"/>
+						<menuitem value="N" label="N"/>
+						<menuitem value="O" label="O"/>
+						<menuitem value="P" label="P"/>
+						<menuitem value="Q" label="Q"/>
+						<menuitem value="R" label="R"/>
+						<menuitem value="S" label="S"/>
+						<menuitem value="T" label="T"/>
+						<menuitem value="U" label="U"/>
+						<menuitem value="V" label="V"/>
+						<menuitem value="W" label="W"/>
+						<menuitem value="X" label="X"/>
+						<menuitem value="Y" label="Y"/>
+						<menuitem value="Z" label="Z"/>
+						<menuitem value=" " label="&OptKeyboardShortcut.spacebar;"/>
+						<menuitem value="VK_PAGE_UP" label="&OptKeyboardShortcut.pageup;"/>
+						<menuitem value="VK_PAGE_DOWN" label="&OptKeyboardShortcut.pagedown;"/>
+						<menuitem value="VK_HOME" label="&OptKeyboardShortcut.home;"/>
+						<menuitem value="VK_END" label="&OptKeyboardShortcut.end;"/>
+						<menuitem value="VK_UP" label="&OptKeyboardShortcut.up;"/>
+						<menuitem value="VK_DOWN" label="&OptKeyboardShortcut.down;"/>
+						<menuitem value="VK_LEFT" label="&OptKeyboardShortcut.left;"/>
+						<menuitem value="VK_RIGHT" label="&OptKeyboardShortcut.right;"/>
+						<menuitem value="." label="."/>
+						<menuitem value="," label=","/>
+						<menuitem value=";" label=";"/>
+						<menuitem value="/" label="/"/>
+						<menuitem value="\" label="\"/>
+						<menuitem value="=" label="="/>
+						<menuitem value="+" label="+"/>
+						<menuitem value="-" label="-"/>
+						<menuitem value="*" label="*"/>
+						<menuitem value="&lt;" label="&lt;"/>
+						<menuitem value="&gt;" label="&gt;"/>
+						<menuitem value="VK_F1" label="F1"/>
+						<menuitem value="VK_F2" label="F2"/>
+						<menuitem value="VK_F3" label="F3"/>
+						<menuitem value="VK_F4" label="F4"/>
+						<menuitem value="VK_F5" label="F5"/>
+						<menuitem value="VK_F6" label="F6"/>
+						<menuitem value="VK_F7" label="F7"/>
+						<menuitem value="VK_F8" label="F8"/>
+						<menuitem value="VK_F9" label="F9"/>
+						<menuitem value="VK_F10" label="F10"/>
+						<menuitem value="VK_F11" label="F11"/>
+						<menuitem value="VK_F12" label="F12"/>
+						<menuitem value="VK_F13" label="F13"/>
+						<menuitem value="VK_F14" label="F14"/>
+						<menuitem value="VK_F15" label="F15"/>
+						<menuitem value="VK_F16" label="F16"/>
+						<menuitem value="VK_F17" label="F17"/>
+						<menuitem value="VK_F18" label="F18"/>
+						<menuitem value="VK_F19" label="F19"/>
+						<menuitem value="VK_F20" label="F20"/>
+						<menuitem value="VK_F21" label="F21"/>
+						<menuitem value="VK_F22" label="F22"/>
+						<menuitem value="VK_F23" label="F23"/>
+						<menuitem value="VK_F24" label="F24"/>
+					</menupopup>
+				</menulist>
+			</hbox>
+		</groupbox>
+	</prefpane>
+	
+	<prefpane id="urlbarPane" label="&urlbar.title;" style="&Optwindow.style;">
+		<preferences>
+			<preference id="pref-urlbar_bar" name="extensions.puzzlebars.urlbar_bar" type="bool" />
+			<preference id="pref-urlbar_pp" name="extensions.puzzlebars.urlbar_pp" type="bool" />
+			<preference id="pref-urlbar_autohide" name="extensions.puzzlebars.urlbar_autohide" type="bool" />
+			<preference id="pref-urlbar_whenfocused" name="extensions.puzzlebars.urlbar_whenfocused" type="bool" />
+			<preference id="pref-urlbar_keycode" name="extensions.puzzlebars.urlbar_keycode" type="string"/>
+			<preference id="pref-urlbar_accel" name="extensions.puzzlebars.urlbar_accel" type="bool"/>
+			<preference id="pref-urlbar_shift" name="extensions.puzzlebars.urlbar_shift" type="bool"/>
+			<preference id="pref-urlbar_alt" name="extensions.puzzlebars.urlbar_alt" type="bool"/>
+		</preferences>
+		
+		<checkbox label="&OptUrlbar.label;" tooltiptext="&OptUrlbar.tooltip;" preference="pref-urlbar_bar"/>
+		
+		<groupbox align="start">
+			<caption label="&GroupBehavior.label;"/>
+			<checkbox id="objName-urlbar-ppCheckbox"
+				label="&OptShowPiece.label;"
+				tooltiptext="&OptShowPiece.tooltip;"
+				dependson="pref-urlbar_bar,!pref-urlbar_autohide;pref-urlbar_whenfocused"
+				preference="pref-urlbar_pp"/>
+			<checkbox id="objName-urlbar-autohideCheckbox"
+				label="&OptAutoHide.label;"
+				tooltiptext="&OptAutoHide.tooltip;"
+				dependson="pref-urlbar_bar,pref-urlbar_pp"
+				preference="pref-urlbar_autohide"
+				oncommand="objName.urlbarCheckboxes(); return true;"/>
+			<checkbox id="objName-urlbar-whenfocusedCheckbox"
+				label="&OptWhenFocused.label;"
+				tooltiptext="&OptWhenFocused.tooltip;"
+				dependson="pref-urlbar_bar,pref-urlbar_autohide"
+				preference="pref-urlbar_whenfocused"
+				oncommand="objName.urlbarCheckboxes(); return true;"/>
+		</groupbox>
+		
+		<groupbox align="center">
+			<caption label="&OptKeyboardShortcut.captionA;"/>
+			<hbox>
+				<checkbox id="urlbar_accelCheckbox"
+					oncommand="objName.fillKeycodes();"
+					label="&OptKeyboardShortcut.control;"
+					dependson="pref-urlbar_bar"
+					preference="pref-urlbar_accel"/>
+				<checkbox id="urlbar_altCheckbox"
+					oncommand="objName.fillKeycodes();"
+					label="&OptKeyboardShortcut.alt;"
+					dependson="pref-urlbar_bar"
+					preference="pref-urlbar_alt"/>
+				<checkbox id="urlbar_shiftCheckbox"
+					oncommand="objName.fillKeycodes();"
+					label="&OptKeyboardShortcut.shift;"
+					dependson="pref-urlbar_bar"
+					preference="pref-urlbar_shift"/>
+				<menulist id="urlbar_keycodeMenu"
+					oncommand="objName.fillKeycodes();"
+					dependson="pref-urlbar_bar"
+					preference="pref-urlbar_keycode">
+					
+					<menupopup id="urlbar_keycodeMenupopup">
+						<menuitem value="none" label="&OptKeyboardShortcut.none;"/>
+						<menuitem value="A" label="A"/>
+						<menuitem value="B" label="B"/>
+						<menuitem value="C" label="C"/>
+						<menuitem value="D" label="D"/>
+						<menuitem value="E" label="E"/>
+						<menuitem value="F" label="F"/>
+						<menuitem value="G" label="G"/>
+						<menuitem value="H" label="H"/>
+						<menuitem value="I" label="I"/>
+						<menuitem value="J" label="J"/>
+						<menuitem value="K" label="K"/>
+						<menuitem value="L" label="L"/>
+						<menuitem value="M" label="M"/>
+						<menuitem value="N" label="N"/>
+						<menuitem value="O" label="O"/>
+						<menuitem value="P" label="P"/>
+						<menuitem value="Q" label="Q"/>
+						<menuitem value="R" label="R"/>
+						<menuitem value="S" label="S"/>
+						<menuitem value="T" label="T"/>
+						<menuitem value="U" label="U"/>
+						<menuitem value="V" label="V"/>
+						<menuitem value="W" label="W"/>
+						<menuitem value="X" label="X"/>
+						<menuitem value="Y" label="Y"/>
+						<menuitem value="Z" label="Z"/>
+						<menuitem value=" " label="&OptKeyboardShortcut.spacebar;"/>
+						<menuitem value="VK_PAGE_UP" label="&OptKeyboardShortcut.pageup;"/>
+						<menuitem value="VK_PAGE_DOWN" label="&OptKeyboardShortcut.pagedown;"/>
+						<menuitem value="VK_HOME" label="&OptKeyboardShortcut.home;"/>
+						<menuitem value="VK_END" label="&OptKeyboardShortcut.end;"/>
+						<menuitem value="VK_UP" label="&OptKeyboardShortcut.up;"/>
+						<menuitem value="VK_DOWN" label="&OptKeyboardShortcut.down;"/>
+						<menuitem value="VK_LEFT" label="&OptKeyboardShortcut.left;"/>
+						<menuitem value="VK_RIGHT" label="&OptKeyboardShortcut.right;"/>
+						<menuitem value="." label="."/>
+						<menuitem value="," label=","/>
+						<menuitem value=";" label=";"/>
+						<menuitem value="/" label="/"/>
+						<menuitem value="\" label="\"/>
+						<menuitem value="=" label="="/>
+						<menuitem value="+" label="+"/>
+						<menuitem value="-" label="-"/>
+						<menuitem value="*" label="*"/>
+						<menuitem value="&lt;" label="&lt;"/>
+						<menuitem value="&gt;" label="&gt;"/>
+						<menuitem value="VK_F1" label="F1"/>
+						<menuitem value="VK_F2" label="F2"/>
+						<menuitem value="VK_F3" label="F3"/>
+						<menuitem value="VK_F4" label="F4"/>
+						<menuitem value="VK_F5" label="F5"/>
+						<menuitem value="VK_F6" label="F6"/>
+						<menuitem value="VK_F7" label="F7"/>
+						<menuitem value="VK_F8" label="F8"/>
+						<menuitem value="VK_F9" label="F9"/>
+						<menuitem value="VK_F10" label="F10"/>
+						<menuitem value="VK_F11" label="F11"/>
+						<menuitem value="VK_F12" label="F12"/>
+						<menuitem value="VK_F13" label="F13"/>
+						<menuitem value="VK_F14" label="F14"/>
+						<menuitem value="VK_F15" label="F15"/>
+						<menuitem value="VK_F16" label="F16"/>
+						<menuitem value="VK_F17" label="F17"/>
+						<menuitem value="VK_F18" label="F18"/>
+						<menuitem value="VK_F19" label="F19"/>
+						<menuitem value="VK_F20" label="F20"/>
+						<menuitem value="VK_F21" label="F21"/>
+						<menuitem value="VK_F22" label="F22"/>
+						<menuitem value="VK_F23" label="F23"/>
+						<menuitem value="VK_F24" label="F24"/>
+					</menupopup>
+				</menulist>
+			</hbox>
+		</groupbox>
+	</prefpane>
+	
+	<prefpane id="aboutPane" label="&about.title;" align="center" style="&Optwindow.style;">
 		<hbox align="center">
 			<label flex="1" value=" "/>
 			<image id="logo"/>
@@ -132,13 +395,13 @@
 		
 		<vbox align="end">
 			<hbox>
-				<description class="closer">&thepuzzlepieceabout.name;</description>
+				<description class="closer">&puzzlebarsabout.name;</description>
 				<description id="addonVersion" hidden="true" class="closer"></description>
 			</hbox>
-			<description>&thepuzzlepieceabout.by;</description>
-			<description class="justify">&thepuzzlepieceabout.desc;</description>
-			<label class="text-link closer" href="https://addons.mozilla.org/firefox/addon/the-puzzle-piece/" value="&thepuzzlepieceabout.home;"/>
-			<label class="text-link closer" href="https://github.com/Quicksaver/The-Puzzle-Piece/issues" value="&thepuzzlepieceabout.tech;"/>
+			<description>&puzzlebarsabout.by;</description>
+			<description class="justify">&puzzlebarsabout.desc;</description>
+			<label class="text-link closer" href="https://addons.mozilla.org/firefox/addon/the-puzzle-piece/" value="&puzzlebarsabout.home;"/>
+			<label class="text-link closer" href="https://github.com/Quicksaver/The-Puzzle-Piece/issues" value="&puzzlebarsabout.tech;"/>
 		</vbox>
 	</prefpane>
 </prefwindow>

@@ -1,12 +1,24 @@
-<!ENTITY OptionsMenu.label "The Puzzle Piece Options">
+<!ENTITY OptionsMenu.label "Puzzle Toolbars Options">
 
-<!ENTITY addonBar.name "Add-on Bar">
-<!ENTITY addonBar.accesskey "A">
-<!ENTITY addonBar.menuAdd "Add to Add-on Bar">
-<!ENTITY addonBar.menuMove "Move to Add-on Bar">
-<!ENTITY addonBar.menuRemove "Remove from Add-on Bar">
-<!ENTITY addonBar.menuMain "Move to Toolbar">
+<!ENTITY bottom.name "Bottom Puzzle Bar">
+<!ENTITY bottom.accesskey "t">
+<!ENTITY bottom.menuAdd "Add to Bottom Puzzle Bar">
+<!ENTITY bottom.menuMove "Move to Bottom Puzzle Bar">
+<!ENTITY bottom.menuRemove "Remove from Bottom Puzzle Bar">
 
+<!ENTITY corner.name "Corner Puzzle Bar">
+<!ENTITY corner.accesskey "r">
+<!ENTITY corner.menuAdd "Add to Corner Puzzle Bar">
+<!ENTITY corner.menuMove "Move to Corner Puzzle Bar">
+<!ENTITY corner.menuRemove "Remove from Corner Puzzle Bar">
+
+<!ENTITY urlbar.name "Location Bar Puzzle Bar">
+<!ENTITY urlbar.accesskey "L">
+<!ENTITY urlbar.menuAdd "Add to Location Bar Puzzle Bar">
+<!ENTITY urlbar.menuMove "Move to Location Bar Puzzle Bar">
+<!ENTITY urlbar.menuRemove "Remove from Location Bar Puzzle Bar">
+
+<!ENTITY allbars.menuMain "Move to Toolbar">
 <!ENTITY statusBar.label "Status Bar">
 
 <!ENTITY specialWidget.separator "Separator">
