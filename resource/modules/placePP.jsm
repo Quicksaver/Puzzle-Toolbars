@@ -1,4 +1,4 @@
-moduleAid.VERSION = '2.0.0';
+moduleAid.VERSION = '2.0.1';
 
 this.commandPP = function(e, button) {
 	if(e.button != 0) { return; }
@@ -11,10 +11,10 @@ this.activatePPs = function(e) {
 };
 
 this.handleFullScreen = function(m) {
-	setAttribute(window, objName+'-noAnimation', 'true');
-	toggleAttribute(window, objName+'-fullscreen', m.data);
+	setAttribute(document.documentElement, objName+'-noAnimation', 'true');
+	toggleAttribute(document.documentElement, objName+'-fullscreen', m.data);
 	aSync(function() {
-		removeAttribute(window, objName+'-noAnimation');
+		removeAttribute(document.documentElement, objName+'-noAnimation');
 	});
 };
 
