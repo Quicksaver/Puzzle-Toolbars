@@ -1,11 +1,9 @@
-moduleAid.VERSION = '1.0.3';
+moduleAid.VERSION = '1.0.4';
 
 // Special widgets aren't allowed in the menu panel by default, so we need to override this behavior (and hope we don't clash with other add-ons doing the same).
 // I hope I can remove this soon. See:
 // https://bugzilla.mozilla.org/show_bug.cgi?id=1058990
 // https://bugzilla.mozilla.org/show_bug.cgi?id=1003588
-
-this.CUIInternalOriginal = null;
 
 this.specialWidgets = ['separator', 'spring', 'spacer'];
 this.forbiddenSprings = ['nav-bar', 'PanelUI-contents', objName+'-urlbar-bar'];
@@ -138,29 +136,12 @@ this.trackSpecialWidgets = {
 };
 
 moduleAid.LOADMODULE = function() {
-	CUIBackstage = Cu.import("resource:///modules/CustomizableUI.jsm", self);
-	CUIInternalOriginal = CUIBackstage.CustomizableUIInternal;
-	
-	var CUIInternalNew = {};
-	for(var p in CUIBackstage.CustomizableUIInternal) {
-		if(CUIBackstage.CustomizableUIInternal.hasOwnProperty(p)) {
-			var propGetter = CUIBackstage.CustomizableUIInternal.__lookupGetter__(p);
-			if(propGetter) {
-				CUIInternalNew.__defineGetter__(p, propGetter);
-			} else {
-				CUIInternalNew[p] = CUIBackstage.CustomizableUIInternal[p];
-			}
-		}
-	}
-	
-	CUIInternalNew._addWidgetToArea = CUIInternalNew.addWidgetToArea;
-	CUIInternalNew._canWidgetMoveToArea = CUIInternalNew.canWidgetMoveToArea;
-	CUIInternalNew._buildArea = CUIInternalNew.buildArea;
-	CUIInternalNew.addWidgetToArea = addWidgetToArea;
-	CUIInternalNew.canWidgetMoveToArea = canWidgetMoveToArea;
-	CUIInternalNew.buildArea = buildArea;
-	
-	CUIBackstage.CustomizableUIInternal = CUIInternalNew;
+	CUIBackstage.CustomizableUIInternal._addWidgetToArea = CUIBackstage.CustomizableUIInternal.addWidgetToArea;
+	CUIBackstage.CustomizableUIInternal._canWidgetMoveToArea = CUIBackstage.CustomizableUIInternal.canWidgetMoveToArea;
+	CUIBackstage.CustomizableUIInternal._buildArea = CUIBackstage.CustomizableUIInternal.buildArea;
+	CUIBackstage.CustomizableUIInternal.addWidgetToArea = addWidgetToArea;
+	CUIBackstage.CustomizableUIInternal.canWidgetMoveToArea = canWidgetMoveToArea;
+	CUIBackstage.CustomizableUIInternal.buildArea = buildArea;
 	
 	var panelIds = CustomizableUI.getWidgetIdsInArea(CustomizableUI.AREA_PANEL);
 	for(var wId of panelIds) {
@@ -187,5 +168,10 @@ moduleAid.UNLOADMODULE = function() {
 		CustomizableUI.destroyWidget(wId);
 	}
 	
-	CUIBackstage.CustomizableUIInternal = CUIInternalOriginal;
+	CUIBackstage.CustomizableUIInternal.addWidgetToArea = CUIBackstage.CustomizableUIInternal._addWidgetToArea;
+	CUIBackstage.CustomizableUIInternal.canWidgetMoveToArea = CUIBackstage.CustomizableUIInternal._canWidgetMoveToArea;
+	CUIBackstage.CustomizableUIInternal.buildArea = CUIBackstage.CustomizableUIInternal._buildArea;
+	delete CUIBackstage.CustomizableUIInternal._addWidgetToArea;
+	delete CUIBackstage.CustomizableUIInternal._canWidgetMoveToArea;
+	delete CUIBackstage.CustomizableUIInternal._buildArea;
 };

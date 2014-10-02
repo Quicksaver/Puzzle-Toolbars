@@ -19,6 +19,7 @@
 <!ENTITY urlbar.menuRemove "Remove from Location Bar Puzzle Bar">
 
 <!ENTITY allbars.menuMain "Move to Toolbar">
+<!ENTITY allbars.overflow "Show more...">
 <!ENTITY statusBar.label "Status Bar">
 
 <!ENTITY specialWidget.separator "Separator">

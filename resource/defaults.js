@@ -1,4 +1,4 @@
-var defaultsVersion = '1.5.2';
+var defaultsVersion = '1.5.3';
 var objName = 'puzzleBars';
 var objPathString = 'puzzlebars';
 var prefList = {
@@ -36,10 +36,6 @@ var prefList = {
 	noInitialShow: false
 };
 
-// CustomizableUI will be imported in the specialWidgets module
-var CustomizableUI = null;
-var CUIBackstage = null;
-
 function stopAddon(window) {
 	removeObject(window);
 }
@@ -51,8 +47,6 @@ function startPreferences(window) {
 }
 
 function onStartup() {
-	CUIBackstage = Cu.import("resource:///modules/CustomizableUI.jsm", self);
-	
 	moduleAid.load('compatibilityFix/sandboxFixes');
 	moduleAid.load('specialWidgets');
 	moduleAid.load('migrateLegacy');

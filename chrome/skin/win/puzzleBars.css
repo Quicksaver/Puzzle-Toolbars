@@ -33,4 +33,12 @@
 		background-repeat: no-repeat;
 	}
 	
+	/* overflow panels */
+	
+	@media (-moz-windows-theme: luna-silver) {
+		.puzzleBars-overflow-button {
+			list-style-image: url("chrome://browser/skin/Toolbar-lunaSilver.png");
+		}
+	}
+	
 }

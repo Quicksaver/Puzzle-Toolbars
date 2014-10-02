@@ -8,6 +8,22 @@
 		<command id="objName:ToggleBottomBar" oncommand="objName.toggleBar('objName-bottom-bar');"/>
 	</commandset>
 	
+	<popupset id="mainPopupSet">
+		<panel id="objName-bottom-overflow"
+			class="objName-overflow"
+			role="group"
+			type="arrow"
+			noautofocus="true"
+			context="toolbar-context-menu"
+			position="topcenter bottomright"
+			hidden="true">
+			
+			<vbox id="objName-bottom-overflow-scroller" class="objName-overflow-scroller">
+			<vbox id="objName-bottom-overflow-list" class="widget-overflow-list objName-overflow-list" overflowfortoolbar="objName-bottom-bar"/>
+			</vbox>
+		</panel>
+	</popupset>
+	
 	<vbox id="browser-bottombox">
 		<toolbar id="puzzleBars-bottom-bar"
 			toolbarname="&bottom.name;"
@@ -22,10 +38,22 @@
 			menucommand="objName:ToggleBottomBar"
 			toolboxid="navigator-toolbox"
 			insertafter="ctraddon_toolbar_dummy,ctraddon_addon-bar,developer-toolbar"
+			customizationtarget="objName-bottom-customization-target"
+			overflowable="true"
+			overflowbutton="objName-bottom-overflow-button"
+			overflowtarget="objName-bottom-overflow-list"
+			overflowpanel="objName-bottom-overflow"
 			menuAdd="&bottom.menuAdd;"
 			menuMove="&bottom.menuMove;"
 			menuRemove="&bottom.menuRemove;"
 			menuMain="&allbars.menuMain;">
+			
+			<hbox id="objName-bottom-customization-target" flex="1"/>
+			
+			<toolbarbutton id="objName-bottom-overflow-button"
+				class="toolbarbutton-1 chromeclass-toolbar-additional overflow-button puzzleBars-overflow-button"
+				skipintoolbarset="true"
+				tooltiptext="&allbars.overflow;"/>
 		</toolbar>
 		
 		<box id="objName-bottom-PP"

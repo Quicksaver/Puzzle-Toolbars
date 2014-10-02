@@ -49,6 +49,10 @@
 		margin-top: 6px;
 	}
 	
+	toolbarspring[overflowedItem=true] {
+		display: none;
+	}
+	
 	toolbarpaletteitem[place="panel"][id^="wrapper-customizableui-special-"] {
 		width: auto;
 		height: auto;
