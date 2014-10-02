@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.0.1';
+moduleAid.VERSION = '1.0.2';
 
 // ammount of pixels to clip the bar to when it is closed or hidden
 this.CLIPBAR = 6;
@@ -226,6 +226,9 @@ this.cornerExtend = function() {
 };
 
 this.cornerOnLoad = function() {
+	// bugfix: on startup the toolbar and puzzle piece would slide down across the whole window
+	setAttribute(document.documentElement, objName+'-noAnimation', 'true');
+	
 	listenerAid.add(window, 'PuzzleBarsMoved', cornerMove);
 	listenerAid.add(gBrowser.tabContainer, 'TabSelect', tabSelectCornerBar);
 	observerAid.add(personaChanged, "lightweight-theme-styling-update");
@@ -240,6 +243,10 @@ this.cornerOnLoad = function() {
 	listenerAid.add(window, 'beforecustomization', cornerCustomize);
 	listenerAid.add(window, 'aftercustomization', cornerCustomize);
 	cornerCustomize(customizing);
+	
+	aSync(function() {
+		removeAttribute(document.documentElement, objName+'-noAnimation');
+	});
 };
 
 this.cornerOnUnload = function() {
