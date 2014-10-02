@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.1.0';
+moduleAid.VERSION = '1.1.1';
 
 // move the status bar onto our container
 this.prepareStatusBar = function(aWindow) {
@@ -104,8 +104,28 @@ this.trackStatusBar = {
 		}
 	},
 	
+	waitForIt: function(aWindow) {
+		if(!aWindow.document.getElementById(objName+'-status-bar-stack')) {
+			aSync(function() {
+				try { trackStatusBar.waitForIt(aWindow); } catch(ex) { Cu.reportError(ex); }
+			});
+			return;
+		}
+		moveStatusBar(aWindow);
+	},
+	
 	onWidgetAdded: function(aWidgetId, aArea) { this.handler(aWidgetId, aArea); },
-	onWidgetRemoved: function(aWidgetId) { this.handler(aWidgetId); }
+	onWidgetRemoved: function(aWidgetId) { this.handler(aWidgetId); },
+	
+	onAreaNodeRegistered: function(aArea, aContainer) {
+		this.waitForIt(aContainer.ownerDocument.defaultView);
+	},
+	
+	onAreaNodeUnregistered: function(aArea, aContainer, aReason) {
+		if(aReason == CustomizableUI.REASON_AREA_UNREGISTERED) {
+			moveStatusBar(aContainer.ownerDocument.defaultView);
+		}
+	}
 };
 
 moduleAid.LOADMODULE = function() {
