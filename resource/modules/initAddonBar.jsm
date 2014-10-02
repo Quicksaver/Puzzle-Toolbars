@@ -1,9 +1,8 @@
-moduleAid.VERSION = '2.0.0';
+moduleAid.VERSION = '2.0.1';
 
 this.__defineGetter__('PrintPreviewListener', function() { return window.PrintPreviewListener; });
 this.__defineGetter__('browserPanel', function() { return $('browser-panel'); });
 this.__defineGetter__('statusBar', function() { return _statusBar.node || $('status-bar'); });
-this.__defineGetter__('setToolbarVisibility', function() { return window.setToolbarVisibility; });
 this.__defineGetter__('customizeMenu', function() { return $('customization-toolbar-menu'); });
 this.__defineGetter__('viewMenu', function() { return $('viewToolbarsMenu').firstChild; });
 this.__defineGetter__('contextMenu', function() { return $('toolbar-context-menu'); });
@@ -42,7 +41,7 @@ this.barCustomized = {
 
 this.toggleBar = function(id) {
 	if(bars[id]) {
-		setToolbarVisibility(bars[id], bars[id].collapsed);
+		CustomizableUI.setToolbarVisibility(id, bars[id].collapsed);
 		toggleAttribute(bars[id], 'customizing', !bars[id].collapsed && customizing);
 		
 		dispatch(bars[id], { type: 'ToggledPuzzleBar', cancelable: false });
