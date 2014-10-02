@@ -32,7 +32,7 @@
 			hidden="true"
 			collapsed="false"
 			persist="collapsed"
-			class="toolbar-primary chromeclass-toolbar addon-bar"
+			class="toolbar-primary chromeclass-toolbar puzzleBars-bar"
 			iconsize="small"
 			context="toolbar-context-menu"
 			menucommand="objName:ToggleBottomBar"

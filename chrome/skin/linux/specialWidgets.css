@@ -69,6 +69,6 @@
 		-moz-padding-start: 4px;
 	}
 	
-	#main-window:not([customizing]) .addon-bar toolbarseparator { -moz-margin-end: 2px; }
+	#main-window:not([customizing]) .puzzleBars-bar toolbarseparator { -moz-margin-end: 2px; }
 	
 }

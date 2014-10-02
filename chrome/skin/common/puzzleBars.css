@@ -1,8 +1,8 @@
 @namespace url(http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul);
 @-moz-document url("chrome://browser/content/browser.xul") {
 
-	.addon-bar *:not(#zoom-reset-button) > .toolbarbutton-text,
-	window:-moz-any([PrintPreview="true"],[puzzleBars-fullscreen]) .addon-bar,
+	.puzzleBars-bar *:not(#zoom-reset-button) > .toolbarbutton-text,
+	window:-moz-any([PrintPreview="true"],[puzzleBars-fullscreen]) .puzzleBars-bar,
 	window:-moz-any([PrintPreview="true"],[puzzleBars-fullscreen]) .PuzzlePiece {
 		visibility: collapse;
 	}
@@ -13,70 +13,70 @@
 	/* Inner buttons and other elements display */
 	
 	/* !important tags are necessary, especially for inURLBar */
-	.addon-bar .toolbarbutton-icon:not(:hover) {
+	.puzzleBars-bar .toolbarbutton-icon:not(:hover) {
 		background: none !important;
 		border: none !important;
 		box-shadow: none !important;
 	}
 	
-	.addon-bar .toolbarbutton-icon {
+	.puzzleBars-bar .toolbarbutton-icon {
 		max-height: 18px;
 	}
 	
 	/* #fixer-status-bar selector is from UI Fixer add-on "make status bar movable" feature */
-	.addon-bar > toolbaritem:not(#fixer-status-bar):not(#puzzleBars-status-bar-container):not(#search-container),
-	.addon-bar > .customization-target > toolbaritem:not(#fixer-status-bar):not(#puzzleBars-status-bar-container):not(#search-container) {
+	.puzzleBars-bar > toolbaritem:not(#fixer-status-bar):not(#puzzleBars-status-bar-container):not(#search-container),
+	.puzzleBars-bar > .customization-target > toolbaritem:not(#fixer-status-bar):not(#puzzleBars-status-bar-container):not(#search-container) {
 		height: 18px;
 	}
 	
-	.addon-bar > toolbarbutton,
-	.addon-bar > .customization-target > toolbarbutton {
+	.puzzleBars-bar > toolbarbutton,
+	.puzzleBars-bar > .customization-target > toolbarbutton {
 		-moz-appearance: none;
 	}
 	
-	.addon-bar #status-bar label {
+	.puzzleBars-bar #status-bar label {
 		margin-top: 0px;
 		margin-bottom: 0px;
 	}
 	
-	.addon-bar > *:not(.customization-target) > toolbarbutton,
-	.addon-bar > .customization-target > * > toolbarbutton {
+	.puzzleBars-bar > *:not(.customization-target) > toolbarbutton,
+	.puzzleBars-bar > .customization-target > * > toolbarbutton {
 		-moz-appearance: none;
 		border: none;
 	}
 	
-	.addon-bar > *:not(.customization-target) toolbarbutton,
-	.addon-bar > .customization-target > * toolbarbutton {
+	.puzzleBars-bar > *:not(.customization-target) toolbarbutton,
+	.puzzleBars-bar > .customization-target > * toolbarbutton {
 		padding: 0px 3px !important;
 	}
 	
-	.addon-bar *:not(#bookmarks-menu-button) > dropmarker {
+	.puzzleBars-bar *:not(#bookmarks-menu-button) > dropmarker {
 		padding: 0 2px !important;
 		border: none;
 	}
 	
-	.addon-bar *:not(#bookmarks-menu-button) > dropmarker image {
+	.puzzleBars-bar *:not(#bookmarks-menu-button) > dropmarker image {
 		padding: 0 !important;
 	}
 	
 	/* the bookmarks button is a special case because of its dropmarker */
-	.addon-bar #bookmarks-menu-button dropmarker {
+	.puzzleBars-bar #bookmarks-menu-button dropmarker {
 		padding: 0 3px !important;
 		border: none;
 	}
-	.addon-bar #bookmarks-menu-button dropmarker image {
+	.puzzleBars-bar #bookmarks-menu-button dropmarker image {
 		padding: 0 !important;
 	}
 	
 	/* don't show the little separator, as it'll be out of place in the add-on bar */
-	.addon-bar .toolbarbutton-1 > .toolbarbutton-menubutton-dropmarker:before {
+	.puzzleBars-bar .toolbarbutton-1 > .toolbarbutton-menubutton-dropmarker:before {
 		display: none !important;
 	}
 	
 	/* These are for the mouse over effects, !important tags are necessary especially for when inURLBar is true */
-	.addon-bar toolbarbutton:not([disabled]):hover,
-	.addon-bar toolbarbutton[open],
-	.addon-bar toolbarbutton > .toolbarbutton-menubutton-button:not([disabled]):hover {
+	.puzzleBars-bar toolbarbutton:not([disabled]):hover,
+	.puzzleBars-bar toolbarbutton[open],
+	.puzzleBars-bar toolbarbutton > .toolbarbutton-menubutton-button:not([disabled]):hover {
 		background-position: left, left, right !important;
 		background-size: auto, 1px 100%, 1px 100% !important;
 		background-repeat: no-repeat !important;
@@ -84,9 +84,9 @@
 					linear-gradient(to top, transparent, rgba(0,0,0,.15) 30%),
 		        		linear-gradient(to top, transparent, rgba(0,0,0,.15) 30%) !important;
 	}
-	.addon-bar toolbarbutton:not([disabled]):hover image,
-	.addon-bar toolbarbutton[open] image,
-	.addon-bar toolbarbutton > .toolbarbutton-menubutton-button:not([disabled]):hover image {
+	.puzzleBars-bar toolbarbutton:not([disabled]):hover image,
+	.puzzleBars-bar toolbarbutton[open] image,
+	.puzzleBars-bar toolbarbutton > .toolbarbutton-menubutton-button:not([disabled]):hover image {
 		border-color: transparent !important;
 		box-shadow: none !important;
 		background: none !important;

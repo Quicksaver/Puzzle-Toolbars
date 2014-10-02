@@ -44,7 +44,7 @@
 		opacity: 0.5;
 	}
 	
-	#navigator-toolbox :not(#TabsToolbar):not(#toolbar-menubar):not(.addon-bar) toolbarseparator {
+	#navigator-toolbox :not(#TabsToolbar):not(#toolbar-menubar):not(.puzzleBars-bar) toolbarseparator {
 		-moz-appearance: none;
 		border: none;
 		width: 2px;
@@ -64,8 +64,8 @@
 		-moz-padding-start: 5px;
 	}
 	
-	#main-window:not([customizing]) .addon-bar toolbarseparator { -moz-margin-start: 1px; }
-	#main-window[customizing] .addon-bar toolbarpaletteitem[place="toolbar"][id^="wrapper-customizableui-special-separator"] { -moz-padding-start: 5px; }
-	#main-window[customizing] .addon-bar toolbarpaletteitem[place="toolbar"] toolbarseparator { min-width: 9px; }
+	#main-window:not([customizing]) .puzzleBars-bar toolbarseparator { -moz-margin-start: 1px; }
+	#main-window[customizing] .puzzleBars-bar toolbarpaletteitem[place="toolbar"][id^="wrapper-customizableui-special-separator"] { -moz-padding-start: 5px; }
+	#main-window[customizing] .puzzleBars-bar toolbarpaletteitem[place="toolbar"] toolbarseparator { min-width: 9px; }
 	
 }
