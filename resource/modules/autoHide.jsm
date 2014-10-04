@@ -1,4 +1,4 @@
-moduleAid.VERSION = '2.0.0';
+moduleAid.VERSION = '2.0.1';
 
 this.onDragExitAll = function() {
 	listenerAid.remove(gBrowser, "dragenter", onDragExitAll, false);
@@ -59,7 +59,7 @@ this.initialShowBar = function(e) {
 };
 
 this.initialThroughButton = function(e) {
-	if(!e.target._bar || e.target._bar.collapsed) {
+	if(e.target._bar && !e.target._bar.collapsed) {
 		setHover(e.target._bar, true, 2);
 	}
 };
