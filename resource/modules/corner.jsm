@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.0.2';
+moduleAid.VERSION = '1.0.3';
 
 // ammount of pixels to clip the bar to when it is closed or hidden
 this.CLIPBAR = 6;
@@ -252,7 +252,6 @@ this.cornerOnLoad = function() {
 this.cornerOnUnload = function() {
 	listenerAid.remove(window, 'beforecustomization', cornerCustomize);
 	listenerAid.remove(window, 'aftercustomization', cornerCustomize);
-	
 	overlayAid.removeOverlayWindow(window, 'cornerCustomize');
 	
 	deinitAutoHide(cornerBar);
@@ -261,6 +260,8 @@ this.cornerOnUnload = function() {
 	listenerAid.remove(window, 'PuzzleBarsMoved', cornerMove);
 	listenerAid.remove(gBrowser.tabContainer, 'TabSelect', tabSelectCornerBar);
 	observerAid.remove(personaChanged, "lightweight-theme-styling-update");
+	
+	removeAttribute(document.documentElement, objName+'-noAnimation');
 };
 
 this.cornerCustomize = function(e, force) {

@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.1.1';
+moduleAid.VERSION = '1.1.2';
 
 // move the status bar onto our container
 this.prepareStatusBar = function(aWindow) {
@@ -107,6 +107,7 @@ this.trackStatusBar = {
 	waitForIt: function(aWindow) {
 		if(!aWindow.document.getElementById(objName+'-status-bar-stack')) {
 			aSync(function() {
+				if(typeof(trackStatusBar) == 'undefined') { return; }
 				try { trackStatusBar.waitForIt(aWindow); } catch(ex) { Cu.reportError(ex); }
 			});
 			return;

@@ -1,4 +1,4 @@
-moduleAid.VERSION = '2.0.1';
+moduleAid.VERSION = '2.0.2';
 
 this.__defineGetter__('PrintPreviewListener', function() { return window.PrintPreviewListener; });
 this.__defineGetter__('browserPanel', function() { return $('browser-panel'); });
@@ -158,6 +158,7 @@ this.deinitBar = function(bar, pp) {
 	listenerAid.remove(bar, 'load', delayMoveBars);
 	
 	delete pp._bar;
+	delete bar._moveOnHidingAttr;
 	delete bar._pp;
 	delete bars[bars.id];
 };

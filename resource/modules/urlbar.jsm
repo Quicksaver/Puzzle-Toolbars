@@ -105,7 +105,6 @@ this.urlbarOnLoad = function() {
 this.urlbarOnUnload = function() {
 	listenerAid.remove(window, 'beforecustomization', urlbarCustomize);
 	listenerAid.remove(window, 'aftercustomization', urlbarCustomize);
-	
 	overlayAid.removeOverlayWindow(window, 'urlbarCustomize');
 	
 	deinitAutoHide(urlbarBar);
