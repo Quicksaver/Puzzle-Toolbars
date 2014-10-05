@@ -1,0 +1,75 @@
+@namespace url(http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul);
+@-moz-document url("chrome://browser/content/browser.xul") {
+	
+	/* special widgets */
+
+	#puzzleBars-lateral-bar toolbarseparator,
+	#puzzleBars-lateral-bar separator {
+		background-position: center center;
+		background-repeat: repeat-x;
+		background-image: url("chrome://puzzlebars-os/skin/toolbar-separator-vertical.png");
+		margin-left: 0;
+		margin-right: 0;
+		min-width: 16px;
+		min-height: 1px;
+	}
+	
+	#puzzleBars-lateral-bar toolbarspacer,
+	#puzzleBars-lateral-bar toolbarspring {
+		width: auto;
+		min-width: 0 !important;
+	}
+	
+	#puzzleBars-lateral-bar separator {
+		height: 1px;
+		background-clip: border-box;
+		background-size: auto auto;
+		margin-top: 1px;
+		margin-bottom: 1px;
+	}
+	
+	#puzzleBars-lateral-bar .toolbaritem-combined-buttons:hover > separator {
+		display: -moz-box;
+	}
+	
+	/* style the toolbar */
+	
+	#puzzleBars-lateral-bar {
+		-moz-appearance: none;
+		background-color: #e2e7ed;
+		min-width: 28px;
+	}
+	
+	#puzzleBars-lateral-bar {
+		background-color: #e2e7ed;
+	}
+	
+	#puzzleBars-lateral-bar:-moz-window-inactive {
+		background-color: #e8e8e8;
+	}
+	
+	#puzzleBars-lateral-bar:not([movetoright]):-moz-any(:not([sidebarOpen]),[autohide]) {
+		box-shadow: inset -1px 0 0 #ababab;
+	}
+	
+	#puzzleBars-lateral-bar[movetoright]:-moz-any(:not([sidebarOpen]),[autohide]) {
+		box-shadow: inset 1px 0 0 #ababab;
+	}
+	
+	/* Puzzle Pieces */
+	
+	#puzzleBars-lateral-PP:not([movetoright]):not([active]):not(:hover):not([hover]),
+	#puzzleBars-lateral-PP:not([movetoright])[autohide]:not(:hover):not([hover]) {
+		clip: rect(0px, 32px, 32px, 18px);
+	}
+	
+	#puzzleBars-lateral-PP[movetoright]:not([active]):not(:hover):not([hover]),
+	#puzzleBars-lateral-PP[movetoright][autohide]:not(:hover):not([hover]) {
+		clip: rect(0px, 14px, 32px, 0px);
+	}
+	
+	#puzzleBars-lateral-PP[active]:not(:hover) image {
+		width: 24px;
+	}
+
+}

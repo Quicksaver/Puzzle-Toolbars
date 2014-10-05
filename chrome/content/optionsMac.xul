@@ -8,5 +8,7 @@
 	<checkbox id="corner_altCheckbox" label="&OptKeyboardShortcut.option;"/>
 	<checkbox id="urlbar_accelCheckbox" label="&OptKeyboardShortcut.command;"/>
 	<checkbox id="urlbar_altCheckbox" label="&OptKeyboardShortcut.option;"/>
+	<checkbox id="lateral_accelCheckbox" label="&OptKeyboardShortcut.command;"/>
+	<checkbox id="lateral_altCheckbox" label="&OptKeyboardShortcut.option;"/>
 	
 </overlay>

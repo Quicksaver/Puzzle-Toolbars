@@ -23,12 +23,6 @@
 		max-height: 18px;
 	}
 	
-	/* #fixer-status-bar selector is from UI Fixer add-on "make status bar movable" feature */
-	.puzzleBars-bar > toolbaritem:not(#fixer-status-bar):not(#puzzleBars-status-bar-container):not(#search-container),
-	.puzzleBars-bar > .customization-target > toolbaritem:not(#fixer-status-bar):not(#puzzleBars-status-bar-container):not(#search-container) {
-		height: 18px;
-	}
-	
 	.puzzleBars-bar > toolbarbutton,
 	.puzzleBars-bar > .customization-target > toolbarbutton {
 		-moz-appearance: none;
@@ -43,11 +37,6 @@
 	.puzzleBars-bar > .customization-target > * > toolbarbutton {
 		-moz-appearance: none;
 		border: none;
-	}
-	
-	.puzzleBars-bar > *:not(.customization-target) toolbarbutton,
-	.puzzleBars-bar > .customization-target > * toolbarbutton {
-		padding: 0px 3px !important;
 	}
 	
 	.puzzleBars-bar *:not(#bookmarks-menu-button) > dropmarker {
@@ -102,6 +91,9 @@
 		list-style-image: url("chrome://puzzlebars/skin/pp.png");
 		cursor: pointer;
 	}
+	
+	/* try to keep the hovered puzzle piece on top of the others */
+	.PuzzlePiece:not([position]):hover { -moz-box-ordinal-group: 10; }
 	
 	/* overflow panels */
 	

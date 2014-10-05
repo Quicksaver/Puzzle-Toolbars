@@ -1,7 +1,7 @@
-moduleAid.VERSION = '1.0.3';
+moduleAid.VERSION = '1.0.4';
 
 // ammount of pixels to clip the bar to when it is closed or hidden
-this.CLIPBAR = 6;
+this.CLIPBAR_CORNER = 6;
 
 this.__defineGetter__('gFindBar', function() { return window.gFindBar; });
 this.__defineGetter__('bottomBox', function() { return $('browser-bottombox'); });
@@ -70,8 +70,8 @@ this.cornerMove = function() {
 	cornerStyle.left += 12;
 	cornerStyle.right += 12;
 	
-	var barOffset = cornerContainer.clientHeight +cornerContainer.clientTop -CLIPBAR;
 	var clipOffHeight = cornerContainer.clientHeight +cornerContainer.clientTop;
+	var barOffset = clipOffHeight -CLIPBAR_CORNER;
 	if(cornerStyle.bottom > 1) { clipOffHeight += cornerBarBorderBottom; }
 	
 	var OSoffset = (WINNT) ? -2 : 0;
@@ -106,7 +106,7 @@ this.cornerMove = function() {
 	sscode += '	window['+objName+'_UUID="'+_UUID+'"]:not([customizing="true"]) #'+objName+'-corner-container[collapsed="true"],\n';
 	sscode += '	window['+objName+'_UUID="'+_UUID+'"]:not([customizing="true"]) #'+objName+'-corner-container[autohide]:not([hover]):not(:hover) {\n';
 	sscode += '		bottom: '+(cornerStyle.bottom -barOffset)+'px;\n';
-	sscode += '		clip: rect(0px, '+4000+'px, '+CLIPBAR+'px, 0px);\n';
+	sscode += '		clip: rect(0px, '+4000+'px, '+CLIPBAR_CORNER+'px, 0px);\n';
 	sscode += '	}\n';
 	
 	sscode += '	window['+objName+'_UUID="'+_UUID+'"] #'+objName+'-corner-PP:not([movetoright]) { left: '+(cornerStyle.left -12)+'px; }\n';

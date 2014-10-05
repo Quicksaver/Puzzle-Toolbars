@@ -21,6 +21,19 @@
 		background-repeat: no-repeat;
 	}
 	
+	/* Inner buttons and other elements display */
+	
+	/* #fixer-status-bar selector is from UI Fixer add-on "make status bar movable" feature */
+	.puzzleBars-bar > toolbaritem:not(#fixer-status-bar):not(#puzzleBars-status-bar-container):not(#search-container),
+	.puzzleBars-bar > .customization-target > toolbaritem:not(#fixer-status-bar):not(#puzzleBars-status-bar-container):not(#search-container) {
+		height: 18px;
+	}
+	
+	.puzzleBars-bar > *:not(.customization-target):not(toolbarpaletteitem) toolbarbutton,
+	.puzzleBars-bar > .customization-target > *:not(toolbarpaletteitem) toolbarbutton {
+		padding: 0px 3px !important;
+	}
+	
 	/* style the toolbars like the old add-on bar */
 	
 	.puzzleBars-bar {

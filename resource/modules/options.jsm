@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.1.0';
+moduleAid.VERSION = '1.1.1';
 
 this.keys = [
 	{
@@ -27,6 +27,15 @@ this.keys = [
 		get shift () { return $('urlbar_shiftCheckbox').checked; },
 		get alt () { return $('urlbar_altCheckbox').checked; },
 		get menu () { return $('urlbar_keycodeMenupopup'); }
+	},
+	{
+		id: objName+'-lateral-key',
+		get disabled () { return trueAttribute($('lateral_keycodeMenu'), 'disabled'); },
+		get keycode () { return $('lateral_keycodeMenu').value; },
+		get accel () { return $('lateral_accelCheckbox').checked; },
+		get shift () { return $('lateral_shiftCheckbox').checked; },
+		get alt () { return $('lateral_altCheckbox').checked; },
+		get menu () { return $('lateral_keycodeMenupopup'); }
 	}
 ];
 

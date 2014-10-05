@@ -1,0 +1,102 @@
+@namespace url(http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul);
+@-moz-document url("chrome://browser/content/browser.xul") {
+	
+	/* special widgets */
+	
+	#puzzleBars-lateral-bar separator,
+	#puzzleBars-lateral-bar toolbarseparator {
+		border: none;
+		height: 2px;
+		background-color: transparent;
+		background-image:	linear-gradient(to right, hsla(210,54%,20%,0), hsla(210,54%,20%,.3) 30%, hsla(210,54%,20%,.3) 70%, hsla(210,54%,20%,0)),
+					linear-gradient(to right, hsla(0,0%,100%,0), hsla(0,0%,100%,.3) 30%, hsla(0,0%,100%,.3) 70%, hsla(0,0%,100%,0)),
+					linear-gradient(to right, hsla(210,54%,20%,0), hsla(210,54%,20%,.3) 30%, hsla(210,54%,20%,.3) 70%, hsla(210,54%,20%,0));
+		background-size: calc(100% - 1px) 1px, calc(100% - 1px) 1px, calc(100% - 1px) 1px;
+		background-position: 0px 0px, 0px 1px, 0px 2px;
+		background-repeat: no-repeat;
+		background-origin: content-box;
+	}
+	
+	#main-window[customizing] #puzzleBars-lateral-bar toolbarpaletteitem[place="toolbar"] toolbarseparator {
+		min-height: 2px;
+		-moz-padding-start: 0;
+	}
+	
+	#main-window:not([customizing]) #puzzleBars-lateral-bar toolbarseparator {
+		-moz-margin-start: 0;
+		margin-top: 1px;
+	}
+	
+	#main-window[customizing] #puzzleBars-lateral-bar toolbarpaletteitem[place="toolbar"][id^="wrapper-customizableui-special-separator"] {
+		-moz-padding-start: 0;
+		padding-top: 4px;
+		padding-bottom: 2px;
+	}
+	
+	/* Inner buttons and other elements display */
+	
+	#puzzleBars-lateral-bar #status-bar > * {
+		padding-top: 1px;
+		padding-bottom: 1px;
+	}
+	
+	/* style the toolbar */
+	
+	#puzzleBars-lateral-bar {
+		min-width: 24px;
+		background-color: -moz-dialog;
+		background-size: 2px 100%;
+		background-repeat: no-repeat;
+	}
+	
+	#puzzleBars-lateral-bar:not([movetoright]):-moz-any(:not([sidebarOpen]),[autohide]) {
+		box-shadow: inset -1px 0 0 ThreeDShadow, inset 0 1px 0 ThreeDHighlight;
+	}
+	#puzzleBars-lateral-bar[movetoright]:-moz-any(:not([sidebarOpen]),[autohide]) {
+		box-shadow: inset 1px 0 0 ThreeDShadow, inset 0 1px 0 ThreeDHighlight;
+	}
+	#puzzleBars-lateral-bar[sidebarOpen]:not([autohide]) {
+		box-shadow: inset 0 1px 0 ThreeDHighlight;
+	}
+	
+	@media	(-moz-os-version: windows-vista),
+		(-moz-os-version: windows-win7) {
+			
+		#puzzleBars-lateral-bar { background-color: #EEF3FA; }
+		
+		@media (-moz-windows-default-theme) {
+			#puzzleBars-lateral-bar:not([movetoright]):-moz-any(:not([sidebarOpen]),[autohide]) {
+				box-shadow: inset -1px 0 0 #aabccf, inset 0 1px 0 ThreeDHighlight;
+			}
+			#puzzleBars-lateral-bar[movetoright]:-moz-any(:not([sidebarOpen]),[autohide]) {
+				box-shadow: inset 1px 0 0 #aabccf, inset 0 1px 0 ThreeDHighlight;
+			}
+			#puzzleBars-lateral-bar[sidebarOpen]:not([autohide]) {
+				box-shadow: inset 0 1px 0 ThreeDHighlight;
+			}
+		}
+	}
+	
+	/* Puzzle Pieces */
+	
+	#puzzleBars-lateral-PP:not([movetoright]):not([active]):not(:hover):not([hover]),
+	#puzzleBars-lateral-PP:not([movetoright])[autohide]:not(:hover):not([hover]) {
+		clip: rect(0px, 32px, 32px, 23px);
+	}
+	
+	#puzzleBars-lateral-PP[movetoright]:not([active]):not(:hover):not([hover]),
+	#puzzleBars-lateral-PP[movetoright][autohide]:not(:hover):not([hover]) {
+		clip: rect(0px, 9px, 32px, 0px);
+	}
+	
+	#puzzleBars-lateral-PP[active]:not(:hover) image {
+		width: 22px;
+	}
+	
+	/* customize mode */
+	/* extra selectors for specificity */
+	#main-window[customizing] #puzzleBars-lateral-customization-target.customization-target:not(#PanelUI-contents) {
+		min-width: 24px;
+	}
+	
+}

@@ -1,4 +1,4 @@
-moduleAid.VERSION = '2.0.1';
+moduleAid.VERSION = '2.0.2';
 
 this.onDragExitAll = function() {
 	listenerAid.remove(gBrowser, "dragenter", onDragExitAll, false);
@@ -28,7 +28,7 @@ this.setHover = function(bar, hover, force) {
 	}
 	
 	timerAid.init('setHover_'+bar.id, function() {
-		toggleAttribute(bar, 'hover', bar.hovers > 0);
+		toggleAttribute(bar, 'hover', bar.hovers > 0 && !bar.collapsed);
 		dispatch(bar, { type: 'HoverAddonBar', cancelable: false });
 	});
 };

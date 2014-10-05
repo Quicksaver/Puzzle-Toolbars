@@ -1,4 +1,4 @@
-var defaultsVersion = '1.5.3';
+var defaultsVersion = '1.5.4';
 var objName = 'puzzleBars';
 var objPathString = 'puzzlebars';
 var prefList = {
@@ -28,6 +28,16 @@ var prefList = {
 	urlbar_accel: false,
 	urlbar_shift: false,
 	urlbar_alt: false,
+	
+	lateral_bar: true,
+	lateral_pp: true,
+	lateral_bottom: false,
+	lateral_right: false,
+	lateral_autohide: false,
+	lateral_keycode: 'none',
+	lateral_accel: false,
+	lateral_shift: false,
+	lateral_alt: false,
 	
 	// for migrateLegacy, probably safe to remove in the future, see note in that module
 	migratedLegacy: false,
@@ -62,7 +72,7 @@ function onStartup() {
 }
 
 function onShutdown() {
-	// deinitialization is also don inside statusBar, just like above
+	// deinitialization is also done inside statusBar, just like above
 	
 	moduleAid.unload('statusBar');
 	moduleAid.unload('migrateLegacy');

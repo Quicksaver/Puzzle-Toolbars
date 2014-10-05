@@ -1,0 +1,220 @@
+@namespace url(http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul);
+@-moz-document url("chrome://browser/content/browser.xul") {
+	
+	/* special widgets */
+
+	#puzzleBars-lateral-bar toolbarseparator {
+		-moz-appearance: none;
+		min-height: 0;
+		margin-top: 1px;
+		margin-bottom: 1px;
+	}
+	
+	#puzzleBars-lateral-bar toolbarspacer {
+		height: 15px;
+	}
+	
+	#main-window[customizing] #puzzleBars-lateral-bar toolbarpaletteitem[place="toolbar"] toolbarseparator,
+	#main-window[customizing] #puzzleBars-lateral-bar toolbarpaletteitem[place="toolbar"] toolbarspacer {
+		min-width: 24px;
+	}
+	
+	/* Inner buttons and other elements display */
+	
+	#puzzleBars-lateral-bar,
+	#puzzleBars-lateral-customization-target,
+	#puzzleBars-lateral-customization-target > *,
+	#puzzleBars-lateral-bar #status-bar,
+	#puzzleBars-lateral-bar #status-bar > *,
+	#main-window[customizing] #puzzleBars-lateral-bar toolbarpaletteitem[place="toolbar"] > * {
+		-moz-box-orient: vertical;
+	}
+	
+	/* These are for the mouse over effects */
+	#puzzleBars-lateral-bar:not([movetoright]):-moz-any(:not([sidebarOpen]),[autohide]) toolbarbutton:not([disabled]):hover,
+	#puzzleBars-lateral-bar:not([movetoright]):-moz-any(:not([sidebarOpen]),[autohide]) toolbarbutton[open],
+	#puzzleBars-lateral-bar:not([movetoright]):-moz-any(:not([sidebarOpen]),[autohide]) toolbarbutton > .toolbarbutton-menubutton-button:not([disabled]):hover {
+		background-position: top, top, bottom !important;
+		background-size: auto, 100% 1px, 100% 1px !important;
+		background-image:	linear-gradient(to right, transparent, rgba(0,0,0,.15)),
+					linear-gradient(to right, transparent, rgba(0,0,0,.15) 30%),
+		        		linear-gradient(to right, transparent, rgba(0,0,0,.15) 30%) !important;
+	}
+	#puzzleBars-lateral-bar:not([movetoright])[sidebarOpen]:not([autohide]) toolbarbutton:not([disabled]):hover,
+	#puzzleBars-lateral-bar:not([movetoright])[sidebarOpen]:not([autohide]) toolbarbutton[open],
+	#puzzleBars-lateral-bar:not([movetoright])[sidebarOpen]:not([autohide]) toolbarbutton > .toolbarbutton-menubutton-button:not([disabled]):hover {
+		background-position: top, top, bottom, right !important;
+		background-size: auto, 100% 1px, 100% 1px, 1px 100% !important;
+		background-image:	linear-gradient(to right, transparent, rgba(0,0,0,.15)),
+					linear-gradient(to right, transparent, rgba(0,0,0,.15) 30%),
+		        		linear-gradient(to right, transparent, rgba(0,0,0,.15) 30%),
+		        		linear-gradient(to left, rgba(0,0,0,.15) 1px, transparent) !important;
+	}
+	#puzzleBars-lateral-bar[movetoright]:-moz-any(:not([sidebarOpen]),[autohide]) toolbarbutton:not([disabled]):hover,
+	#puzzleBars-lateral-bar[movetoright]:-moz-any(:not([sidebarOpen]),[autohide]) toolbarbutton[open],
+	#puzzleBars-lateral-bar[movetoright]:-moz-any(:not([sidebarOpen]),[autohide]) toolbarbutton > .toolbarbutton-menubutton-button:not([disabled]):hover {
+		background-position: top, top, bottom !important;
+		background-size: auto, 100% 1px, 100% 1px !important;
+		background-image:	linear-gradient(to left, transparent, rgba(0,0,0,.15)),
+					linear-gradient(to left, transparent, rgba(0,0,0,.15) 30%),
+		        		linear-gradient(to left, transparent, rgba(0,0,0,.15) 30%) !important;
+	}
+	#puzzleBars-lateral-bar[movetoright][sidebarOpen]:not([autohide]) toolbarbutton:not([disabled]):hover,
+	#puzzleBars-lateral-bar[movetoright][sidebarOpen]:not([autohide]) toolbarbutton[open],
+	#puzzleBars-lateral-bar[movetoright][sidebarOpen]:not([autohide]) toolbarbutton > .toolbarbutton-menubutton-button:not([disabled]):hover {
+		background-position: top, top, bottom, left !important;
+		background-size: auto, 100% 1px, 100% 1px, 1px 100% !important;
+		background-image:	linear-gradient(to left, transparent, rgba(0,0,0,.15)),
+					linear-gradient(to left, transparent, rgba(0,0,0,.15) 30%),
+		        		linear-gradient(to left, transparent, rgba(0,0,0,.15) 30%),
+		        		linear-gradient(to right, rgba(0,0,0,.15) 1px, transparent) !important;
+	}
+	
+	#puzzleBars-lateral-bar .toolbarbutton-1,
+	#puzzleBars-lateral-bar .toolbarbutton-1 > .toolbarbutton-menubutton-button {
+		padding-top: 2px;
+		padding-bottom: 2px;
+	}
+	
+	/* style the toolbar */
+	
+	window:not([customizing="true"]) #puzzleBars-lateral-bar:not([hidePP]):not([movetobottom]) {
+		padding-top: 34px;
+	}
+	
+	window:not([customizing="true"]) #puzzleBars-lateral-bar:not([hidePP])[movetobottom] {
+		padding-bottom: 30px;
+	}
+	
+	/* puzzle piece */
+	
+	#puzzleBars-lateral-PP {
+		position: fixed;
+	}
+	
+	#puzzleBars-lateral-PP:not([movetoright]) image { -moz-image-region: rect(0px, 32px, 32px, 0px); }
+	#puzzleBars-lateral-PP:not([movetoright]):hover image { -moz-image-region: rect(32px, 32px, 64px, 0px); }
+	#puzzleBars-lateral-PP[movetoright] image { -moz-image-region: rect(0px, 64px, 32px, 32px); }
+	#puzzleBars-lateral-PP[movetoright]:hover image { -moz-image-region: rect(32px, 64px, 64px, 32px); }
+	
+	#puzzleBars-lateral-PP { clip: rect(0px, 32px, 32px, 0px); }
+	#puzzleBars-lateral-PP image { transform: rotate(0deg); }
+	#puzzleBars-lateral-PP:not([movetoright]):not([active]):not(:hover) image { transform: rotate(-40deg); }
+	#puzzleBars-lateral-PP[movetoright]:not([active]):not(:hover) image { transform: rotate(40deg); }
+	
+	#puzzleBars-lateral-PP:not([active]):not(:hover):not([hover]),
+	#puzzleBars-lateral-PP[autohide]:not(:hover):not([hover]) {
+		opacity: 0;
+	}
+	
+	#puzzleBars-lateral-PP:not([movetoright])[active]:not(:hover) image {
+		transform: rotate(-60deg);
+	}
+	#puzzleBars-lateral-PP[movetoright][active]:not(:hover) image {
+		transform: rotate(60deg);
+	}
+	
+	#puzzleBars-lateral-PP[active]:not([movetobottom]):not(:hover) image { margin-top: 5px; }
+	#puzzleBars-lateral-PP[active][movetobottom]:not(:hover) image { margin-bottom: 5px; }
+	
+	#puzzleBars-lateral-PP:hover image,
+	#puzzleBars-lateral-PP:not([active]) image {
+		width: 32px;
+	}
+	
+	window:not([puzzleBars-noAnimation]) #puzzleBars-lateral-PP:not([active]):not(:hover):not([hover]),
+	window:not([puzzleBars-noAnimation]) #puzzleBars-lateral-PP[autohide]:not(:hover):not([hover]) {
+		transition: left .5s linear .2s, right .5s linear .2s, opacity .5s linear .2s, clip .5s linear .2s;
+	}
+	window:not([puzzleBars-noAnimation]) #puzzleBars-lateral-PP:hover,
+	window:not([puzzleBars-noAnimation]) #puzzleBars-lateral-PP[hover],
+	window:not([puzzleBars-noAnimation]) #puzzleBars-lateral-PP[active] {
+		transition: left .25s linear 0s, right .25s linear 0s, opacity .25s linear 0s, clip .25s linear 0s;
+	}
+	window:not([puzzleBars-noAnimation]) #puzzleBars-lateral-PP:not([active]):not(:hover):not([hover]) image,
+	window:not([puzzleBars-noAnimation]) #puzzleBars-lateral-PP[autohide]:not(:hover):not([hover]) image {
+		transition: transform .5s linear .2s, margin .5s linear .2s, width .5s linear .2s;
+	}
+	window:not([puzzleBars-noAnimation]) #puzzleBars-lateral-PP:hover image,
+	window:not([puzzleBars-noAnimation]) #puzzleBars-lateral-PP[hover] image,
+	window:not([puzzleBars-noAnimation]) #puzzleBars-lateral-PP[active] image {
+		transition: transform .25s linear 0s, margin .25s linear 0s, width .25s linear 0s;
+	}
+	
+	/* autohide */
+	
+	window:not([customizing="true"]) #puzzleBars-lateral-container[autohide] {
+		position: fixed;
+	}
+	
+	window:not([customizing="true"]) #puzzleBars-lateral-bar[autohide] {
+		height: 100%;
+	}
+	
+	window:not([customizing="true"]) #puzzleBars-lateral-container[autohide][collapsed="true"],
+	window:not([customizing="true"]) #puzzleBars-lateral-bar[autohide][collapsed="true"] {
+		display: -moz-box !important;
+		visibility: visible !important;
+		pointer-events: none;
+	}
+	
+	window:not([customizing="true"]) #puzzleBars-lateral-container[autohide][collapsed="true"] {
+		opacity: 0;
+	}
+	
+	/* for fullscreen */
+	#puzzleBars-lateral-container[moz-collapsed="true"],
+	#puzzleBars-lateral-bar[moz-collapsed="true"] {
+		visibility: visible !important;
+	}
+	
+	/* animation */
+	
+	window:not([puzzleBars-noAnimation]) #puzzleBars-lateral-container:hover,
+	window:not([puzzleBars-noAnimation]) #puzzleBars-lateral-container[hover],
+	window:not([puzzleBars-noAnimation]) #puzzleBars-lateral-container:not([collapsed="true"]) {
+		transition: left .25s linear 0s, right .25s linear 0s, opacity .25s linear 0s, clip .25s linear 0s;
+	}
+	window:not([puzzleBars-noAnimation]) #puzzleBars-lateral-container:not([collapsed="true"])[autohide]:not(:hover):not([hover]) {
+		transition: left .5s linear .2s, right .5s linear .2s, opacity .5s linear .2s, clip .5s linear .2s;
+	}
+	window:not([puzzleBars-noAnimation]) #puzzleBars-lateral-container[collapsed="true"] {
+		transition: left .5s linear 0s, right .5s linear 0s, opacity .5s linear 0s, clip .5s linear 0s;
+	}
+	
+	#puzzleBars-lateral-container:not([collapsed="true"]):hover,
+	#puzzleBars-lateral-container:not([collapsed="true"])[hover] {
+		opacity: 1;
+	}
+	
+	window:not([customizing="true"]) #puzzleBars-lateral-container[autohide]:not(:hover):not([hover]) {
+		opacity: 0;
+	}
+	
+	/* overflow panel */
+	
+	#puzzleBars-lateral-overflow-button > .toolbarbutton-icon {
+		transform: rotate(90deg);
+	}
+	
+	/* customize dialog */
+	/* extra selectors for specificity */
+	#main-window[customizing] #puzzleBars-lateral-customization-target.customization-target:not(#PanelUI-contents) {
+		min-width: 18px;
+	}
+	
+	#main-window[customizing] #puzzleBars-lateral-customization-target {
+		min-height: 60px !important;
+		padding: 10px 0px !important;
+	}
+	
+	#puzzleBars-lateral-bar toolbarpaletteitem {
+		border-top: 0px solid transparent;
+		border-bottom: 0px solid transparent;
+	}
+	
+	#main-window[customizing] #puzzleBars-lateral-PP {
+		display: none;
+	}
+	
+}

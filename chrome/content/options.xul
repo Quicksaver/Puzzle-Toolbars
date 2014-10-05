@@ -20,7 +20,7 @@
 		<checkbox label="&OptBottom.label;" tooltiptext="&OptBottom.tooltip;" preference="pref-bottom_bar"/>
 		<groupbox align="start">
 			<caption><checkbox label="&OptShowPiece.label;" tooltiptext="&OptShowPiece.tooltip;" dependson="pref-bottom_bar" preference="pref-bottom_pp"/></caption>
-			<checkbox label="&OptRight.label;" tooltiptext="&OptRight.tooltip;" dependson="pref-bottom_bar" preference="pref-bottom_right"/>
+			<checkbox label="&OptRight.label;" tooltiptext="&OptRight.tooltip;" dependson="pref-bottom_bar,pref-bottom_pp" preference="pref-bottom_right"/>
 		</groupbox>
 		
 		<groupbox align="center">
@@ -311,6 +311,134 @@
 					preference="pref-urlbar_keycode">
 					
 					<menupopup id="urlbar_keycodeMenupopup">
+						<menuitem value="none" label="&OptKeyboardShortcut.none;"/>
+						<menuitem value="A" label="A"/>
+						<menuitem value="B" label="B"/>
+						<menuitem value="C" label="C"/>
+						<menuitem value="D" label="D"/>
+						<menuitem value="E" label="E"/>
+						<menuitem value="F" label="F"/>
+						<menuitem value="G" label="G"/>
+						<menuitem value="H" label="H"/>
+						<menuitem value="I" label="I"/>
+						<menuitem value="J" label="J"/>
+						<menuitem value="K" label="K"/>
+						<menuitem value="L" label="L"/>
+						<menuitem value="M" label="M"/>
+						<menuitem value="N" label="N"/>
+						<menuitem value="O" label="O"/>
+						<menuitem value="P" label="P"/>
+						<menuitem value="Q" label="Q"/>
+						<menuitem value="R" label="R"/>
+						<menuitem value="S" label="S"/>
+						<menuitem value="T" label="T"/>
+						<menuitem value="U" label="U"/>
+						<menuitem value="V" label="V"/>
+						<menuitem value="W" label="W"/>
+						<menuitem value="X" label="X"/>
+						<menuitem value="Y" label="Y"/>
+						<menuitem value="Z" label="Z"/>
+						<menuitem value=" " label="&OptKeyboardShortcut.spacebar;"/>
+						<menuitem value="VK_PAGE_UP" label="&OptKeyboardShortcut.pageup;"/>
+						<menuitem value="VK_PAGE_DOWN" label="&OptKeyboardShortcut.pagedown;"/>
+						<menuitem value="VK_HOME" label="&OptKeyboardShortcut.home;"/>
+						<menuitem value="VK_END" label="&OptKeyboardShortcut.end;"/>
+						<menuitem value="VK_UP" label="&OptKeyboardShortcut.up;"/>
+						<menuitem value="VK_DOWN" label="&OptKeyboardShortcut.down;"/>
+						<menuitem value="VK_LEFT" label="&OptKeyboardShortcut.left;"/>
+						<menuitem value="VK_RIGHT" label="&OptKeyboardShortcut.right;"/>
+						<menuitem value="." label="."/>
+						<menuitem value="," label=","/>
+						<menuitem value=";" label=";"/>
+						<menuitem value="/" label="/"/>
+						<menuitem value="\" label="\"/>
+						<menuitem value="=" label="="/>
+						<menuitem value="+" label="+"/>
+						<menuitem value="-" label="-"/>
+						<menuitem value="*" label="*"/>
+						<menuitem value="&lt;" label="&lt;"/>
+						<menuitem value="&gt;" label="&gt;"/>
+						<menuitem value="VK_F1" label="F1"/>
+						<menuitem value="VK_F2" label="F2"/>
+						<menuitem value="VK_F3" label="F3"/>
+						<menuitem value="VK_F4" label="F4"/>
+						<menuitem value="VK_F5" label="F5"/>
+						<menuitem value="VK_F6" label="F6"/>
+						<menuitem value="VK_F7" label="F7"/>
+						<menuitem value="VK_F8" label="F8"/>
+						<menuitem value="VK_F9" label="F9"/>
+						<menuitem value="VK_F10" label="F10"/>
+						<menuitem value="VK_F11" label="F11"/>
+						<menuitem value="VK_F12" label="F12"/>
+						<menuitem value="VK_F13" label="F13"/>
+						<menuitem value="VK_F14" label="F14"/>
+						<menuitem value="VK_F15" label="F15"/>
+						<menuitem value="VK_F16" label="F16"/>
+						<menuitem value="VK_F17" label="F17"/>
+						<menuitem value="VK_F18" label="F18"/>
+						<menuitem value="VK_F19" label="F19"/>
+						<menuitem value="VK_F20" label="F20"/>
+						<menuitem value="VK_F21" label="F21"/>
+						<menuitem value="VK_F22" label="F22"/>
+						<menuitem value="VK_F23" label="F23"/>
+						<menuitem value="VK_F24" label="F24"/>
+					</menupopup>
+				</menulist>
+			</hbox>
+		</groupbox>
+	</prefpane>
+	
+	<prefpane id="lateralPane" label="&lateral.title;" style="&Optwindow.style;">
+		<preferences>
+			<preference id="pref-lateral_bar" name="extensions.puzzlebars.lateral_bar" type="bool" />
+			<preference id="pref-lateral_pp" name="extensions.puzzlebars.lateral_pp" type="bool" />
+			<preference id="pref-lateral_bottom" name="extensions.puzzlebars.lateral_bottom" type="bool" />
+			<preference id="pref-lateral_right" name="extensions.puzzlebars.lateral_right" type="bool" />
+			<preference id="pref-lateral_autohide" name="extensions.puzzlebars.lateral_autohide" type="bool" />
+			<preference id="pref-lateral_keycode" name="extensions.puzzlebars.lateral_keycode" type="string"/>
+			<preference id="pref-lateral_accel" name="extensions.puzzlebars.lateral_accel" type="bool"/>
+			<preference id="pref-lateral_shift" name="extensions.puzzlebars.lateral_shift" type="bool"/>
+			<preference id="pref-lateral_alt" name="extensions.puzzlebars.lateral_alt" type="bool"/>
+		</preferences>
+		
+		<checkbox label="&OptLateral.label;" tooltiptext="&OptLateral.tooltip;" preference="pref-lateral_bar"/>
+		
+		<groupbox align="start">
+			<caption label="&GroupPosition.label;"/>
+			<checkbox label="&OptRight.label;" tooltiptext="&OptRight.tooltip;" dependson="pref-lateral_bar" preference="pref-lateral_right"/>
+		</groupbox>
+		
+		<groupbox align="start">
+			<caption label="&GroupBehavior.label;"/>
+			<checkbox label="&OptShowPiece.label;" tooltiptext="&OptShowPiece.tooltip;" dependson="pref-lateral_bar" preference="pref-lateral_pp"/>
+			<checkbox label="&OptMoveBottom.label;" tooltiptext="&OptMoveBottom.tooltip;" dependson="pref-lateral_bar,pref-lateral_pp" preference="pref-lateral_bottom"/>
+			<checkbox label="&OptAutoHide.label;" tooltiptext="&OptAutoHide.tooltip;" dependson="pref-lateral_bar" preference="pref-lateral_autohide"/>
+		</groupbox>
+		
+		<groupbox align="center">
+			<caption label="&OptKeyboardShortcut.captionA;"/>
+			<hbox>
+				<checkbox id="lateral_accelCheckbox"
+					oncommand="objName.fillKeycodes();"
+					label="&OptKeyboardShortcut.control;"
+					dependson="pref-lateral_bar"
+					preference="pref-lateral_accel"/>
+				<checkbox id="lateral_altCheckbox"
+					oncommand="objName.fillKeycodes();"
+					label="&OptKeyboardShortcut.alt;"
+					dependson="pref-lateral_bar"
+					preference="pref-lateral_alt"/>
+				<checkbox id="lateral_shiftCheckbox"
+					oncommand="objName.fillKeycodes();"
+					label="&OptKeyboardShortcut.shift;"
+					dependson="pref-lateral_bar"
+					preference="pref-lateral_shift"/>
+				<menulist id="lateral_keycodeMenu"
+					oncommand="objName.fillKeycodes();"
+					dependson="pref-lateral_bar"
+					preference="pref-lateral_keycode">
+					
+					<menupopup id="lateral_keycodeMenupopup">
 						<menuitem value="none" label="&OptKeyboardShortcut.none;"/>
 						<menuitem value="A" label="A"/>
 						<menuitem value="B" label="B"/>

@@ -18,6 +18,12 @@
 <!ENTITY urlbar.menuMove "Move to Location Bar Puzzle Bar">
 <!ENTITY urlbar.menuRemove "Remove from Location Bar Puzzle Bar">
 
+<!ENTITY lateral.name "Lateral Puzzle Bar">
+<!ENTITY lateral.accesskey "L">
+<!ENTITY lateral.menuAdd "Add to Lateral Puzzle Bar">
+<!ENTITY lateral.menuMove "Move to Lateral Puzzle Bar">
+<!ENTITY lateral.menuRemove "Remove from Lateral Puzzle Bar">
+
 <!ENTITY allbars.menuMain "Move to Toolbar">
 <!ENTITY allbars.overflow "Show more...">
 <!ENTITY statusBar.label "Status Bar">
