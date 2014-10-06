@@ -118,6 +118,10 @@
 		width: 18px;
 	}
 	
+	#puzzleBars-urlbar-PP:hover image {
+		-moz-image-region: rect(32px, 96px, 64px, 64px);
+	}
+	
 	/* Animation */
 	
 	window:not([puzzleBars-noAnimation]) #puzzleBars-urlbar-bar:hover,
