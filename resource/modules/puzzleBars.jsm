@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.0.1';
+moduleAid.VERSION = '1.0.2';
 
 this.__defineGetter__('gBrowser', function() { return window.gBrowser; });
 
@@ -44,8 +44,8 @@ moduleAid.LOADMODULE = function() {
 	
 	toggleBottom();
 	toggleCorner();
-	toggleUrlbar();
 	toggleLateral();
+	toggleUrlbar();
 };
 
 moduleAid.UNLOADMODULE = function() {
@@ -55,6 +55,7 @@ moduleAid.UNLOADMODULE = function() {
 	prefAid.unlisten('lateral_bar', toggleLateral);
 	
 	moduleAid.unload('urlbar');
+	moduleAid.unload('lateral');
 	moduleAid.unload('corner');
 	moduleAid.unload('bottom');
 	moduleAid.unload('autoHide');
