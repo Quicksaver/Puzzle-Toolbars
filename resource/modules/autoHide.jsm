@@ -1,4 +1,4 @@
-moduleAid.VERSION = '2.0.2';
+moduleAid.VERSION = '2.0.3';
 
 this.onDragExitAll = function() {
 	listenerAid.remove(gBrowser, "dragenter", onDragExitAll, false);
@@ -165,6 +165,10 @@ this.deinitAutoHide = function(bar) {
 		listenerAid.remove(node, 'mouseover', bar._onMouseOver);
 		listenerAid.remove(node, 'mouseout', bar._onMouseOut);
 	}
+	
+	delete bar._onMouseOver;
+	delete bar._onMouseOut;
+	delete bar._onDragEnter;
 	
 	listenerAid.remove(bar, 'ToggledPuzzleBar', initialShowBar);
 	listenerAid.remove(bar, 'PuzzleBarCustomized', initialShowBar);

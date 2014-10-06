@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.0.0';
+moduleAid.VERSION = '1.0.1';
 
 // ammount of pixels to clip the bar to when it is closed or hidden
 this.CLIPBAR_LATERAL = 4;
@@ -361,6 +361,9 @@ this.OTonLazyResize = function() {
 };
 
 this.OTmoveItemsBackToTheirOrigin = function(shouldMoveAllItems) {
+	// means we've disabled the add-on, this is unnecessary
+	if(typeof(CUIBackstage) == 'undefined') { return; }
+	
 	let placements = CUIBackstage.gPlacements.get(this._toolbar.id);
 	while(this._list.firstChild) {
 		let child = this._list.firstChild;
@@ -411,7 +414,10 @@ this.lateralInitOverflow = function(bar) {
 		setAttribute(bar, 'overflowable', 'true');
 	}
 	
-	// there's no point in keeping backups or undoing this, the toolbar node will be destroyed anyway
+	// need to keep backups and restore them afterwards, to prevent a ZC
+	bar.overflowable._onOverflow = bar.overflowable.onOverflow;
+	bar.overflowable.__onLazyResize = bar.overflowable._onLazyResize;
+	bar.overflowable.__moveItemsBackToTheirOrigin = bar.overflowable._moveItemsBackToTheirOrigin;
 	bar.overflowable.onOverflow = OTonOverflow;
 	bar.overflowable._onLazyResize = OTonLazyResize;
 	bar.overflowable._moveItemsBackToTheirOrigin = OTmoveItemsBackToTheirOrigin;
@@ -421,6 +427,23 @@ this.lateralInitOverflow = function(bar) {
 	if(bar.customizationTarget.scrollTopMax > 0) {
 		bar.overflowable.onOverflow();
 	}
+};
+
+this.lateralDeinitOverflow = function(bar) {
+	// can happen when closing a window
+	if(!bar.overflowable) { return; }
+	
+	if(bar.overflowable.initialized) {
+		bar.overflowable.uninit();
+		bar.overflowable._lazyResizeHandler = null;
+	}
+	
+	bar.overflowable.onOverflow = bar.overflowable._onOverflow;
+	bar.overflowable._onLazyResize = bar.overflowable.__onLazyResize;
+	bar.overflowable._moveItemsBackToTheirOrigin = bar.overflowable.__moveItemsBackToTheirOrigin;
+	delete bar.overflowable._onOverflow;
+	delete bar.overflowable.__onLazyResize;
+	delete bar.overflowable.__moveItemsBackToTheirOrigin;
 };
 
 this.lateralTogglePP = function() {
@@ -467,6 +490,7 @@ this.lateralOnUnload = function() {
 	overlayAid.removeOverlayWindow(window, 'lateralCustomize');
 	
 	deinitAutoHide(lateralBar);
+	lateralDeinitOverflow(lateralBar);
 	deinitBar(lateralBar, lateralPP);
 	
 	listenerAid.remove(window, 'PuzzleBarsMoved', lateralMove);
