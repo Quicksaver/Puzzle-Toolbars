@@ -260,65 +260,60 @@
 		</groupbox>
 	</prefpane>
 	
-	<prefpane id="urlbarPane" label="&urlbar.title;" style="&Optwindow.style;">
+	<prefpane id="lateralPane" label="&lateral.title;" style="&Optwindow.style;">
 		<preferences>
-			<preference id="pref-urlbar_bar" name="extensions.puzzlebars.urlbar_bar" type="bool" />
-			<preference id="pref-urlbar_pp" name="extensions.puzzlebars.urlbar_pp" type="bool" />
-			<preference id="pref-urlbar_autohide" name="extensions.puzzlebars.urlbar_autohide" type="bool" />
-			<preference id="pref-urlbar_whenfocused" name="extensions.puzzlebars.urlbar_whenfocused" type="bool" />
-			<preference id="pref-urlbar_keycode" name="extensions.puzzlebars.urlbar_keycode" type="string"/>
-			<preference id="pref-urlbar_accel" name="extensions.puzzlebars.urlbar_accel" type="bool"/>
-			<preference id="pref-urlbar_shift" name="extensions.puzzlebars.urlbar_shift" type="bool"/>
-			<preference id="pref-urlbar_alt" name="extensions.puzzlebars.urlbar_alt" type="bool"/>
+			<preference id="pref-lateral_bar" name="extensions.puzzlebars.lateral_bar" type="bool" />
+			<preference id="pref-lateral_pp" name="extensions.puzzlebars.lateral_pp" type="bool" />
+			<preference id="pref-lateral_bottom" name="extensions.puzzlebars.lateral_bottom" type="bool" />
+			<preference id="pref-lateral_placement" name="extensions.puzzlebars.lateral_placement" type="string" />
+			<preference id="pref-lateral_autohide" name="extensions.puzzlebars.lateral_autohide" type="bool" />
+			<preference id="pref-lateral_keycode" name="extensions.puzzlebars.lateral_keycode" type="string"/>
+			<preference id="pref-lateral_accel" name="extensions.puzzlebars.lateral_accel" type="bool"/>
+			<preference id="pref-lateral_shift" name="extensions.puzzlebars.lateral_shift" type="bool"/>
+			<preference id="pref-lateral_alt" name="extensions.puzzlebars.lateral_alt" type="bool"/>
 		</preferences>
 		
-		<checkbox label="&OptUrlbar.label;" tooltiptext="&OptUrlbar.tooltip;" preference="pref-urlbar_bar"/>
+		<checkbox label="&OptLateral.label;" tooltiptext="&OptLateral.tooltip;" preference="pref-lateral_bar"/>
+		
+		<groupbox align="center">
+			<caption label="&GroupPosition.label;"/>
+			<radiogroup preference="pref-lateral_placement"><hbox class="ltr">
+				<radio label="&OptPlacement.left;" tooltiptext="&OptPlacement.tooltip;" dependson="pref-lateral_bar" value="left"/>
+				<radio label="&OptPlacement.right;" tooltiptext="&OptPlacement.tooltip;" dependson="pref-lateral_bar" value="right"/>
+			</hbox></radiogroup>
+		</groupbox>
 		
 		<groupbox align="start">
 			<caption label="&GroupBehavior.label;"/>
-			<checkbox id="objName-urlbar-ppCheckbox"
-				label="&OptShowPiece.label;"
-				tooltiptext="&OptShowPiece.tooltip;"
-				dependson="pref-urlbar_bar,!pref-urlbar_autohide;pref-urlbar_whenfocused"
-				preference="pref-urlbar_pp"/>
-			<checkbox id="objName-urlbar-autohideCheckbox"
-				label="&OptAutoHide.label;"
-				tooltiptext="&OptAutoHide.tooltip;"
-				dependson="pref-urlbar_bar,pref-urlbar_pp"
-				preference="pref-urlbar_autohide"
-				oncommand="objName.urlbarCheckboxes(); return true;"/>
-			<checkbox id="objName-urlbar-whenfocusedCheckbox"
-				label="&OptWhenFocused.label;"
-				tooltiptext="&OptWhenFocused.tooltip;"
-				dependson="pref-urlbar_bar,pref-urlbar_autohide"
-				preference="pref-urlbar_whenfocused"
-				oncommand="objName.urlbarCheckboxes(); return true;"/>
+			<checkbox label="&OptShowPiece.label;" tooltiptext="&OptShowPiece.tooltip;" dependson="pref-lateral_bar" preference="pref-lateral_pp"/>
+			<checkbox label="&OptMoveBottom.label;" tooltiptext="&OptMoveBottom.tooltip;" dependson="pref-lateral_bar,pref-lateral_pp" preference="pref-lateral_bottom"/>
+			<checkbox label="&OptAutoHide.label;" tooltiptext="&OptAutoHide.tooltip;" dependson="pref-lateral_bar" preference="pref-lateral_autohide"/>
 		</groupbox>
 		
 		<groupbox align="center">
 			<caption label="&OptKeyboardShortcut.captionA;"/>
 			<hbox>
-				<checkbox id="urlbar_accelCheckbox"
+				<checkbox id="lateral_accelCheckbox"
 					oncommand="objName.fillKeycodes();"
 					label="&OptKeyboardShortcut.control;"
-					dependson="pref-urlbar_bar"
-					preference="pref-urlbar_accel"/>
-				<checkbox id="urlbar_altCheckbox"
+					dependson="pref-lateral_bar"
+					preference="pref-lateral_accel"/>
+				<checkbox id="lateral_altCheckbox"
 					oncommand="objName.fillKeycodes();"
 					label="&OptKeyboardShortcut.alt;"
-					dependson="pref-urlbar_bar"
-					preference="pref-urlbar_alt"/>
-				<checkbox id="urlbar_shiftCheckbox"
+					dependson="pref-lateral_bar"
+					preference="pref-lateral_alt"/>
+				<checkbox id="lateral_shiftCheckbox"
 					oncommand="objName.fillKeycodes();"
 					label="&OptKeyboardShortcut.shift;"
-					dependson="pref-urlbar_bar"
-					preference="pref-urlbar_shift"/>
-				<menulist id="urlbar_keycodeMenu"
+					dependson="pref-lateral_bar"
+					preference="pref-lateral_shift"/>
+				<menulist id="lateral_keycodeMenu"
 					oncommand="objName.fillKeycodes();"
-					dependson="pref-urlbar_bar"
-					preference="pref-urlbar_keycode">
+					dependson="pref-lateral_bar"
+					preference="pref-lateral_keycode">
 					
-					<menupopup id="urlbar_keycodeMenupopup">
+					<menupopup id="lateral_keycodeMenupopup">
 						<menuitem value="none" label="&OptKeyboardShortcut.none;"/>
 						<menuitem value="A" label="A"/>
 						<menuitem value="B" label="B"/>
@@ -396,60 +391,65 @@
 		</groupbox>
 	</prefpane>
 	
-	<prefpane id="lateralPane" label="&lateral.title;" style="&Optwindow.style;">
+	<prefpane id="urlbarPane" label="&urlbar.title;" style="&Optwindow.style;">
 		<preferences>
-			<preference id="pref-lateral_bar" name="extensions.puzzlebars.lateral_bar" type="bool" />
-			<preference id="pref-lateral_pp" name="extensions.puzzlebars.lateral_pp" type="bool" />
-			<preference id="pref-lateral_bottom" name="extensions.puzzlebars.lateral_bottom" type="bool" />
-			<preference id="pref-lateral_placement" name="extensions.puzzlebars.lateral_placement" type="string" />
-			<preference id="pref-lateral_autohide" name="extensions.puzzlebars.lateral_autohide" type="bool" />
-			<preference id="pref-lateral_keycode" name="extensions.puzzlebars.lateral_keycode" type="string"/>
-			<preference id="pref-lateral_accel" name="extensions.puzzlebars.lateral_accel" type="bool"/>
-			<preference id="pref-lateral_shift" name="extensions.puzzlebars.lateral_shift" type="bool"/>
-			<preference id="pref-lateral_alt" name="extensions.puzzlebars.lateral_alt" type="bool"/>
+			<preference id="pref-urlbar_bar" name="extensions.puzzlebars.urlbar_bar" type="bool" />
+			<preference id="pref-urlbar_pp" name="extensions.puzzlebars.urlbar_pp" type="bool" />
+			<preference id="pref-urlbar_autohide" name="extensions.puzzlebars.urlbar_autohide" type="bool" />
+			<preference id="pref-urlbar_whenfocused" name="extensions.puzzlebars.urlbar_whenfocused" type="bool" />
+			<preference id="pref-urlbar_keycode" name="extensions.puzzlebars.urlbar_keycode" type="string"/>
+			<preference id="pref-urlbar_accel" name="extensions.puzzlebars.urlbar_accel" type="bool"/>
+			<preference id="pref-urlbar_shift" name="extensions.puzzlebars.urlbar_shift" type="bool"/>
+			<preference id="pref-urlbar_alt" name="extensions.puzzlebars.urlbar_alt" type="bool"/>
 		</preferences>
 		
-		<checkbox label="&OptLateral.label;" tooltiptext="&OptLateral.tooltip;" preference="pref-lateral_bar"/>
-		
-		<groupbox align="center">
-			<caption label="&GroupPosition.label;"/>
-			<radiogroup preference="pref-lateral_placement"><hbox class="ltr">
-				<radio label="&OptPlacement.left;" tooltiptext="&OptPlacement.tooltip;" dependson="pref-lateral_bar" value="left"/>
-				<radio label="&OptPlacement.right;" tooltiptext="&OptPlacement.tooltip;" dependson="pref-lateral_bar" value="right"/>
-			</hbox></radiogroup>
-		</groupbox>
+		<checkbox label="&OptUrlbar.label;" tooltiptext="&OptUrlbar.tooltip;" preference="pref-urlbar_bar"/>
 		
 		<groupbox align="start">
 			<caption label="&GroupBehavior.label;"/>
-			<checkbox label="&OptShowPiece.label;" tooltiptext="&OptShowPiece.tooltip;" dependson="pref-lateral_bar" preference="pref-lateral_pp"/>
-			<checkbox label="&OptMoveBottom.label;" tooltiptext="&OptMoveBottom.tooltip;" dependson="pref-lateral_bar,pref-lateral_pp" preference="pref-lateral_bottom"/>
-			<checkbox label="&OptAutoHide.label;" tooltiptext="&OptAutoHide.tooltip;" dependson="pref-lateral_bar" preference="pref-lateral_autohide"/>
+			<checkbox id="objName-urlbar-ppCheckbox"
+				label="&OptShowPiece.label;"
+				tooltiptext="&OptShowPiece.tooltip;"
+				dependson="pref-urlbar_bar,!pref-urlbar_autohide;pref-urlbar_whenfocused"
+				preference="pref-urlbar_pp"/>
+			<checkbox id="objName-urlbar-autohideCheckbox"
+				label="&OptAutoHide.label;"
+				tooltiptext="&OptAutoHide.tooltip;"
+				dependson="pref-urlbar_bar,pref-urlbar_pp"
+				preference="pref-urlbar_autohide"
+				oncommand="objName.urlbarCheckboxes(); return true;"/>
+			<checkbox id="objName-urlbar-whenfocusedCheckbox"
+				label="&OptWhenFocused.label;"
+				tooltiptext="&OptWhenFocused.tooltip;"
+				dependson="pref-urlbar_bar,pref-urlbar_autohide"
+				preference="pref-urlbar_whenfocused"
+				oncommand="objName.urlbarCheckboxes(); return true;"/>
 		</groupbox>
 		
 		<groupbox align="center">
 			<caption label="&OptKeyboardShortcut.captionA;"/>
 			<hbox>
-				<checkbox id="lateral_accelCheckbox"
+				<checkbox id="urlbar_accelCheckbox"
 					oncommand="objName.fillKeycodes();"
 					label="&OptKeyboardShortcut.control;"
-					dependson="pref-lateral_bar"
-					preference="pref-lateral_accel"/>
-				<checkbox id="lateral_altCheckbox"
+					dependson="pref-urlbar_bar"
+					preference="pref-urlbar_accel"/>
+				<checkbox id="urlbar_altCheckbox"
 					oncommand="objName.fillKeycodes();"
 					label="&OptKeyboardShortcut.alt;"
-					dependson="pref-lateral_bar"
-					preference="pref-lateral_alt"/>
-				<checkbox id="lateral_shiftCheckbox"
+					dependson="pref-urlbar_bar"
+					preference="pref-urlbar_alt"/>
+				<checkbox id="urlbar_shiftCheckbox"
 					oncommand="objName.fillKeycodes();"
 					label="&OptKeyboardShortcut.shift;"
-					dependson="pref-lateral_bar"
-					preference="pref-lateral_shift"/>
-				<menulist id="lateral_keycodeMenu"
+					dependson="pref-urlbar_bar"
+					preference="pref-urlbar_shift"/>
+				<menulist id="urlbar_keycodeMenu"
 					oncommand="objName.fillKeycodes();"
-					dependson="pref-lateral_bar"
-					preference="pref-lateral_keycode">
+					dependson="pref-urlbar_bar"
+					preference="pref-urlbar_keycode">
 					
-					<menupopup id="lateral_keycodeMenupopup">
+					<menupopup id="urlbar_keycodeMenupopup">
 						<menuitem value="none" label="&OptKeyboardShortcut.none;"/>
 						<menuitem value="A" label="A"/>
 						<menuitem value="B" label="B"/>
