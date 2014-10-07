@@ -11,13 +11,19 @@
 		-moz-border-left-colors: rgba(0,0,0,0.15) rgba(255,255,255,0.15);
 	}
 	
+	/* Puzzle Pieces */
+	
 	#puzzleBars-corner-PP[clipped][active],
 	#puzzleBars-corner-PP[clipped]:hover {
 		clip: rect(0px, 32px, 30px, 0px);
 	}
-	#puzzleBars-corner-PP:not([active]):not(:hover):not([hover]),
+	#puzzleBars-corner-PP:not([active]):not(:hover),
 	#puzzleBars-corner-PP[autohide]:not(:hover):not([hover]) {
 		clip: rect(0px, 32px, 9px, 0px);
+	}
+	
+	#puzzleBars-corner-PP[active]:not(:hover) image {
+		height: 22px;
 	}
 	
 }

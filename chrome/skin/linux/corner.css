@@ -11,9 +11,15 @@
 		-moz-border-left-colors: threedshadow threedhighlight;
 	}
 	
-	#puzzleBars-corner-PP:not([active]):not(:hover):not([hover]),
+	/* Puzzle Pieces */
+	
+	#puzzleBars-corner-PP:not([active]):not(:hover),
 	#puzzleBars-corner-PP[autohide]:not(:hover):not([hover]) {
 		clip: rect(0px, 32px, 14px, 0px);
+	}
+	
+	#puzzleBars-corner-PP[active]:not(:hover) image {
+		height: 28px;
 	}
 	
 	

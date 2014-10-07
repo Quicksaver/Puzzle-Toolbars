@@ -6,7 +6,6 @@
 	}
 	
 	window:not([customizing="true"]) #puzzleBars-corner-container {
-		background-color: #E8E8E8;
 		border-radius: 8px 8px 0 0;
 		border-top: 1px solid #888;
 		border-right: 1px solid #888;
@@ -17,9 +16,19 @@
 		padding-top: 1px;
 	}
 	
-	#puzzleBars-corner-PP:not([active]):not(:hover):not([hover]),
+	window:not([customizing="true"]) #puzzleBars-corner-container:not(:-moz-lwtheme) {
+		background: url(chrome://browser/skin/Toolbar-background-noise.png) hsl(0,0%,83%);
+	}
+	
+	/* Puzzle Pieces */
+	
+	#puzzleBars-corner-PP:not([active]):not(:hover),
 	#puzzleBars-corner-PP[autohide]:not(:hover):not([hover]) {
 		clip: rect(0px, 32px, 14px, 0px);
+	}
+	
+	#puzzleBars-corner-PP[active]:not(:hover) image {
+		height: 24px;
 	}
 	
 }

@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.0.2';
+moduleAid.VERSION = '1.0.3';
 
 this.__defineGetter__('bottomBar', function() { return $(objName+'-bottom-bar'); });
 this.__defineGetter__('bottomPP', function() { return $(objName+'-bottom-PP'); });
@@ -61,18 +61,18 @@ this.bottomMove = function() {
 	sscode += '	window['+objName+'_UUID="'+_UUID+'"] #'+objName+'-bottom-PP[active] {\n';
 	sscode += '		bottom: '+(bottom +ppOffset +OSoffset +shrunkOffsetHover)+'px;\n';
 	sscode += '	}\n';
-	sscode += '	window['+objName+'_UUID="'+_UUID+'"] #'+objName+'-bottom-PP[active]:not(:hover):not([hover]) {\n';
+	sscode += '	window['+objName+'_UUID="'+_UUID+'"] #'+objName+'-bottom-PP[active]:not(:hover) {\n';
 	sscode += '		bottom: '+(bottom +ppOffset +OSoffset +shrunkOffset)+'px;\n';
 	sscode += '	}\n';
 	sscode += '	@media not all and (-moz-windows-classic) {\n';
 	sscode += '		@media (-moz-windows-default-theme) {\n';
-	sscode += '			window['+objName+'_UUID="'+_UUID+'"][sizemode="normal"] #'+objName+'-bottom-PP[active]:not(:hover):not([hover]) {\n';
+	sscode += '			window['+objName+'_UUID="'+_UUID+'"][sizemode="normal"] #'+objName+'-bottom-PP[active]:not(:hover) {\n';
 	sscode += '				bottom: '+(bottom +ppOffset +OSoffset +shrunkOffset +1)+'px;\n';
 	sscode += '			}\n';
 	sscode += '		}\n';
 	sscode += '	}\n';
-	sscode += '	window['+objName+'_UUID="'+_UUID+'"] #'+objName+'-bottom-PP:not([active]):not(:hover):not([hover]),\n';
-	sscode += '	window['+objName+'_UUID="'+_UUID+'"] #'+objName+'-bottom-PP[autohide][active]:not(:hover):not([hover]) {\n';
+	sscode += '	window['+objName+'_UUID="'+_UUID+'"] #'+objName+'-bottom-PP:not([active]):not(:hover),\n';
+	sscode += '	window['+objName+'_UUID="'+_UUID+'"] #'+objName+'-bottom-PP[autohide][active]:not(:hover) {\n';
 	sscode += '		bottom: '+(bottom +ppOffset +OSoffset -21)+'px;\n';
 	sscode += '	}\n';
 	sscode += '}';

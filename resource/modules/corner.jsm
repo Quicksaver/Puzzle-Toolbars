@@ -1,7 +1,8 @@
-moduleAid.VERSION = '1.0.5';
+moduleAid.VERSION = '1.0.6';
 
 // ammount of pixels to clip the bar to when it is closed or hidden
 this.CLIPBAR_CORNER = 6;
+this.PP_OFFSET_CORNER = 0;
 
 this.__defineGetter__('gFindBar', function() { return window.gFindBar; });
 this.__defineGetter__('bottomBox', function() { return $('browser-bottombox'); });
@@ -26,7 +27,7 @@ this.setCornerKey = function() {
 var cornerStyle = {};
 this.cornerMove = function() {
 	var appContentPos = $('content').getBoundingClientRect();
-	cornerStyle.maxWidth = -(scrollBarWidth *2) +appContentPos.width -12 /* account for the puzzle piece */;
+	cornerStyle.maxWidth = -(scrollBarWidth *2) +appContentPos.width -PP_OFFSET_CORNER /* account for the puzzle piece */;
 	cornerStyle.bottom = document.documentElement.clientHeight -appContentPos.bottom;
 	cornerStyle.left = scrollBarWidth +appContentPos.left;
 	cornerStyle.right = scrollBarWidth +document.documentElement.clientWidth -appContentPos.right;
@@ -67,8 +68,8 @@ this.cornerMove = function() {
 	if(cornerStyle.bottom > 1) { cornerStyle.bottom--; }
 	
 	// Account for the puzzle piece
-	cornerStyle.left += 12;
-	cornerStyle.right += 12;
+	cornerStyle.left += PP_OFFSET_CORNER;
+	cornerStyle.right += PP_OFFSET_CORNER;
 	
 	var clipOffHeight = cornerContainer.clientHeight +cornerContainer.clientTop;
 	var barOffset = clipOffHeight -CLIPBAR_CORNER;
@@ -78,9 +79,11 @@ this.cornerMove = function() {
 	var ppOffset = cornerPP.lastChild.clientHeight -cornerPP.clientHeight;
 	
 	var shrunkOffset = 0;
+	var shrunkOffsetHover = 0;
 	if(cornerContainer.clientHeight > 0) {
 		var PPsize = (WINNT) ? 22 : (DARWIN) ? 24 : 28; // when shrunk
-		shrunkOffset += Math.floor((PPsize -cornerContainer.clientHeight) /2);
+		shrunkOffset -= Math.floor((PPsize -cornerContainer.clientHeight) /2);
+		shrunkOffsetHover -= Math.min(Math.floor((PPsize -ppOffset -cornerContainer.clientHeight) /2), 0);
 	}
 	
 	toggleAttribute(cornerPP, 'clipped', cornerStyle.bottom == 1);
@@ -109,12 +112,25 @@ this.cornerMove = function() {
 	sscode += '		clip: rect(0px, '+4000+'px, '+CLIPBAR_CORNER+'px, 0px);\n';
 	sscode += '	}\n';
 	
-	sscode += '	window['+objName+'_UUID="'+_UUID+'"] #'+objName+'-corner-PP:not([movetoright]) { left: '+(cornerStyle.left -12)+'px; }\n';
-	sscode += '	window['+objName+'_UUID="'+_UUID+'"] #'+objName+'-corner-PP[movetoright] { right: '+(cornerStyle.right -12)+'px; }\n';
+	sscode += '	window['+objName+'_UUID="'+_UUID+'"] #'+objName+'-corner-PP:not([movetoright]) { left: '+(cornerStyle.left -PP_OFFSET_CORNER)+'px; }\n';
+	sscode += '	window['+objName+'_UUID="'+_UUID+'"] #'+objName+'-corner-PP[movetoright] { right: '+(cornerStyle.right -PP_OFFSET_CORNER)+'px; }\n';
 	sscode += '	window['+objName+'_UUID="'+_UUID+'"] #'+objName+'-corner-PP {\n';
 	sscode += '		bottom: '+(cornerStyle.bottom +ppOffset +OSoffset)+'px;\n';
 	sscode += '	}\n';
-	sscode += '	window['+objName+'_UUID="'+_UUID+'"] #'+objName+'-corner-PP:not([active]):not(:hover):not([hover]),\n';
+	sscode += '	window['+objName+'_UUID="'+_UUID+'"] #'+objName+'-corner-PP[active] {\n';
+	sscode += '		bottom: '+(cornerStyle.bottom +ppOffset +OSoffset +shrunkOffsetHover)+'px;\n';
+	sscode += '	}\n';
+	sscode += '	window['+objName+'_UUID="'+_UUID+'"] #'+objName+'-corner-PP[active]:not(:hover) {\n';
+	sscode += '		bottom: '+(cornerStyle.bottom +ppOffset +OSoffset +shrunkOffset)+'px;\n';
+	sscode += '	}\n';
+	sscode += '	@media not all and (-moz-windows-classic) {\n';
+	sscode += '		@media (-moz-windows-default-theme) {\n';
+	sscode += '			window['+objName+'_UUID="'+_UUID+'"][sizemode="normal"] #'+objName+'-corner-PP[active]:not(:hover) {\n';
+	sscode += '				bottom: '+(cornerStyle.bottom +ppOffset +OSoffset +shrunkOffset +1)+'px;\n';
+	sscode += '			}\n';
+	sscode += '		}\n';
+	sscode += '	}\n';
+	sscode += '	window['+objName+'_UUID="'+_UUID+'"] #'+objName+'-corner-PP:not([active]):not(:hover),\n';
 	sscode += '	window['+objName+'_UUID="'+_UUID+'"] #'+objName+'-corner-PP[autohide][active]:not(:hover):not([hover]) {\n';
 	sscode += '		bottom: '+(cornerStyle.bottom +ppOffset +OSoffset -21)+'px;\n';
 	sscode += '	}\n';

@@ -53,16 +53,16 @@
 	/* style the toolbar */
 	
 	window:not([customizing="true"]) #puzzleBars-corner-bar:not([hidePP]):not([movetoright]) {
-		margin-left: 19px;
+		margin-left: 27px;
 	}
 	window:not([customizing="true"]) #puzzleBars-corner-bar:not([hidePP])[movetoright] {
-		margin-right: 19px;
+		margin-right: 27px;
 	}
 	
 	window:not([customizing="true"]) #puzzleBars-corner-container[extend] #puzzleBars-corner-bar:not([hidePP]) {
-		width: calc(100% - 24px);
+		width: calc(100% - 32px);
 	}
-	window:not([customizing="true"]) #puzzleBars-corner-container[extend] #puzzleBars-corner-bar[hidePP] {
+	window:not([customizing="true"]) #puzzleBars-corner-container[extend] #puzzleBars-corner-bar {
 		width: calc(100% - 10px);
 	}
 	
@@ -83,9 +83,28 @@
 		opacity: 0;
 	}
 	
+	#puzzleBars-corner-PP:not([movetoright])[active]:not(:hover) image {
+		margin-left: 5px;
+		transform: rotate(-60deg);
+	}
+	
+	#puzzleBars-corner-PP[movetoright][active]:not(:hover) image {
+		margin-right: 5px;
+		transform: rotate(60deg);
+	}
+	
+	#puzzleBars-corner-PP:hover image,
+	#puzzleBars-corner-PP:not([active]) image {
+		height: 32px;
+	}
+	
 	/* Animation */
 	
-	window:not([puzzleBars-noAnimation]) #puzzleBars-corner-PP:not([active]):not(:hover):not([hover]),
+	#puzzleBars-corner-PP[autohide][active]:not(:hover):not([hover]) {
+		clip: rect(0px, 32px, 0px, 0px);
+	}
+	
+	window:not([puzzleBars-noAnimation]) #puzzleBars-corner-PP:not([active]):not(:hover),
 	window:not([puzzleBars-noAnimation]) #puzzleBars-corner-PP[autohide]:not(:hover):not([hover]) {
 		transition: bottom .5s linear .2s, opacity .5s linear .2s, clip .5s linear .2s;
 	}
@@ -103,18 +122,10 @@
 		transition: transform .25s linear 0s, margin .25s linear 0s, height .25s linear 0s;
 	}
 	
-	#puzzleBars-corner-PP {
-		clip: rect(0px, 32px, 32px, 0px);
-	}
-	#puzzleBars-corner-PP image {
-		transform: rotate(0deg);
-	}
-	#puzzleBars-corner-PP:not([movetoright]):not([active]):not(:hover):not([hover]) image {
-		transform: rotate(-40deg);
-	}
-	#puzzleBars-corner-PP[movetoright]:not([active]):not(:hover):not([hover]) image {
-		transform: rotate(40deg);
-	}
+	#puzzleBars-corner-PP { clip: rect(0px, 32px, 32px, 0px); }
+	#puzzleBars-corner-PP image { transform: rotate(0deg); }
+	#puzzleBars-corner-PP:not([movetoright]):not([active]):not(:hover) image { transform: rotate(-40deg); }
+	#puzzleBars-corner-PP[movetoright]:not([active]):not(:hover) image { transform: rotate(40deg); }
 	
 	window:not([puzzleBars-noAnimation]) #puzzleBars-corner-container:hover,
 	window:not([puzzleBars-noAnimation]) #puzzleBars-corner-container[hover],

@@ -1,10 +1,16 @@
 @namespace url(http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul);
 @-moz-document url("chrome://browser/content/browser.xul") {
 	
+	#puzzleBars-bottom-bar:not(:-moz-lwtheme) {
+		-moz-appearance: none;
+		background: url(chrome://browser/skin/Toolbar-background-noise.png) hsl(0,0%,83%);
+		border-top: 1px solid #888;
+	}
+	
 	/* Puzzle Pieces */
 	
-	#puzzleBars-bottom-PP:not([active]):not(:hover):not([hover]),
-	#puzzleBars-bottom-PP[autohide]:not(:hover):not([hover]) {
+	#puzzleBars-bottom-PP:not([active]):not(:hover),
+	#puzzleBars-bottom-PP[autohide]:not(:hover) {
 		clip: rect(0px, 32px, 14px, 0px);
 	}
 	

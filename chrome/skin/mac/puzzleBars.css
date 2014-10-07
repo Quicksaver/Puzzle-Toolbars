@@ -59,10 +59,6 @@
 		min-height: 18px;
 	}
 	
-	.puzzleBars-bar:not(:-moz-lwtheme) {
-		-moz-appearance: statusbar;
-	}
-	
 	/* overflow panels */
 	
 	.puzzleBars-overflow-button:hover:active:not([disabled="true"]) {
