@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.0.1';
+moduleAid.VERSION = '1.0.2';
 
 // ammount of pixels to clip the bar to when it is closed or hidden
 this.CLIPBAR_LATERAL = 4;
@@ -24,7 +24,7 @@ this.setLateralKey = function() {
 };
 
 this.lateralSidebarOpen = function() {
-	toggleAttribute(lateralBar, 'sidebarOpen', sidebarOpen && LTR == !prefAid.lateral_right);
+	toggleAttribute(lateralBar, 'sidebarOpen', sidebarOpen && LTR == (prefAid.lateral_placement == 'left'));
 };
 
 this.lateralStyle = {};
@@ -472,7 +472,7 @@ this.lateralOnLoad = function() {
 	
 	lateralSidebarOpen();
 	lateralToggleBottom();
-	lateralRight();
+	lateralPlacement();
 	lateralTogglePP(); // implies lateralMove()
 	lateralAutoHide();
 	
@@ -508,8 +508,8 @@ this.lateralCustomize = function(e, force) {
 	}
 };
 
-this.lateralRight = function() {
-	if(LTR == prefAid.lateral_right) {
+this.lateralPlacement = function() {
+	if(LTR == (prefAid.lateral_placement == 'right')) {
 		overlayAid.overlayURI('chrome://'+objPathString+'/content/lateral.xul', 'lateralRight');
 		overlayAid.overlayURI('chrome://'+objPathString+'/content/lateralCustomize.xul', 'lateralRightCustomize');
 	} else {
@@ -517,14 +517,14 @@ this.lateralRight = function() {
 		overlayAid.removeOverlayURI('chrome://'+objPathString+'/content/lateralCustomize.xul', 'lateralRightCustomize');
 	}
 	
-	toggleAttribute(lateralBar, 'movetoright', prefAid.lateral_right);
+	toggleAttribute(lateralBar, 'movetoright', prefAid.lateral_placement == 'right');
 };
 
 moduleAid.LOADMODULE = function() {
 	prefAid.listen('lateral_pp', lateralTogglePP);
 	prefAid.listen('lateral_bottom', lateralToggleBottom);
-	prefAid.listen('lateral_right', lateralRight);
-	prefAid.listen('lateral_right', lateralSidebarOpen);
+	prefAid.listen('lateral_placement', lateralPlacement);
+	prefAid.listen('lateral_placement', lateralSidebarOpen);
 	prefAid.listen('lateral_autohide', lateralAutoHide);
 	prefAid.listen('lateral_keycode', setLateralKey);
 	prefAid.listen('lateral_accel', setLateralKey);
@@ -557,8 +557,8 @@ moduleAid.UNLOADMODULE = function() {
 	
 	prefAid.unlisten('lateral_pp', lateralTogglePP);
 	prefAid.unlisten('lateral_bottom', lateralToggleBottom);
-	prefAid.unlisten('lateral_right', lateralRight);
-	prefAid.unlisten('lateral_right', lateralSidebarOpen);
+	prefAid.unlisten('lateral_placement', lateralPlacement);
+	prefAid.unlisten('lateral_placement', lateralSidebarOpen);
 	prefAid.unlisten('lateral_autohide', lateralAutoHide);
 	prefAid.unlisten('lateral_keycode', setLateralKey);
 	prefAid.unlisten('lateral_accel', setLateralKey);

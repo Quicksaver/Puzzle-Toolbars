@@ -21,8 +21,9 @@
 
 <!ENTITY OptShowPiece.label "Show Puzzle Piece">
 <!ENTITY OptShowPiece.tooltip "The puzzle piece is a button which you can use to quickly open or close its toolbar.">
-<!ENTITY OptRight.label "Place on the right">
-<!ENTITY OptRight.tooltip "Enable this to place it on the right side of your browser window.">
+<!ENTITY OptPlacement.left "Place on the left">
+<!ENTITY OptPlacement.right "Place on the right">
+<!ENTITY OptPlacement.tooltip "Toggle in which side of your browser window to place it.">
 <!ENTITY OptAutoHide.label "Auto-Hide">
 <!ENTITY OptAutoHide.tooltip "Hide the toolbar automatically when it's not needed.">
 <!ENTITY OptWhenFocused.label "Hide only when the location bar has focus">

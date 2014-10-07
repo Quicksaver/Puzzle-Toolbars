@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.0.1';
+moduleAid.VERSION = '1.0.2';
 
 this.__defineGetter__('bottomBar', function() { return $(objName+'-bottom-bar'); });
 this.__defineGetter__('bottomPP', function() { return $(objName+'-bottom-PP'); });
@@ -25,8 +25,8 @@ this.bottomTogglePP = function() {
 	bottomMove();
 };
 
-this.bottomRight = function() {
-	toggleAttribute(bottomBar, 'movetoright', prefAid.bottom_right);
+this.bottomPlacement = function() {
+	toggleAttribute(bottomBar, 'movetoright', prefAid.bottom_placement == 'right');
 };
 
 this.bottomMove = function() {
@@ -84,7 +84,7 @@ this.bottomOnLoad = function() {
 	listenerAid.add(window, 'PuzzleBarsMoved', bottomMove);
 	
 	bottomTogglePP(); // implies bottomMove()
-	bottomRight();
+	bottomPlacement();
 	
 	initBar(bottomBar, bottomPP);
 };
@@ -97,7 +97,7 @@ this.bottomOnUnload = function() {
 
 moduleAid.LOADMODULE = function() {
 	prefAid.listen('bottom_pp', bottomTogglePP);
-	prefAid.listen('bottom_right', bottomRight);
+	prefAid.listen('bottom_placement', bottomPlacement);
 	prefAid.listen('bottom_keycode', setBottomKey);
 	prefAid.listen('bottom_accel', setBottomKey);
 	prefAid.listen('bottom_shift', setBottomKey);
@@ -113,7 +113,7 @@ moduleAid.UNLOADMODULE = function() {
 	styleAid.unload('bottomMove_'+_UUID);
 	
 	prefAid.unlisten('bottom_pp', bottomTogglePP);
-	prefAid.unlisten('bottom_right', bottomRight);
+	prefAid.unlisten('bottom_placement', bottomPlacement);
 	prefAid.unlisten('bottom_keycode', setBottomKey);
 	prefAid.unlisten('bottom_accel', setBottomKey);
 	prefAid.unlisten('bottom_shift', setBottomKey);

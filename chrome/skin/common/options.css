@@ -16,6 +16,10 @@ textbox[type="number"] input {
 	text-align: justify;
 }
 
+/* keep left and right radio boxes on the actual left and right */
+.ltr:-moz-locale-dir(rtl) { direction: ltr; }
+.ltr > *:-moz-locale-dir(rtl) { direction: rtl; }
+
 #addonVersion {
 	-moz-margin-start: 3px;
 }

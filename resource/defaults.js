@@ -1,10 +1,10 @@
-var defaultsVersion = '1.5.4';
+var defaultsVersion = '1.5.5';
 var objName = 'puzzleBars';
 var objPathString = 'puzzlebars';
 var prefList = {
 	bottom_bar: true,
 	bottom_pp: true,
-	bottom_right: false,
+	bottom_placement: 'left',
 	bottom_keycode: '/',
 	bottom_accel: true,
 	bottom_shift: false,
@@ -12,7 +12,7 @@ var prefList = {
 	
 	corner_bar: false,
 	corner_pp: true,
-	corner_right: true,
+	corner_placement: 'right',
 	corner_autohide: true,
 	corner_extend: false,
 	corner_keycode: 'VK_F2',
@@ -32,7 +32,7 @@ var prefList = {
 	lateral_bar: true,
 	lateral_pp: true,
 	lateral_bottom: false,
-	lateral_right: false,
+	lateral_placement: 'left',
 	lateral_autohide: false,
 	lateral_keycode: 'none',
 	lateral_accel: false,

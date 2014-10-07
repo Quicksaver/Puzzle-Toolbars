@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.0.4';
+moduleAid.VERSION = '1.0.5';
 
 // ammount of pixels to clip the bar to when it is closed or hidden
 this.CLIPBAR_CORNER = 6;
@@ -161,7 +161,7 @@ this.styleCornerPersona = function() {
 	styleAid.unload('cornerPersona_'+_UUID);
 	
 	if(lwtheme.bgImage != '') {
-		if(!prefAid.corner_right) {
+		if(prefAid.corner_placement == 'left') {
 			var offsetPersonaX = -cornerStyle.left -cornerContainer.clientLeft +parseInt(boxStyle.getPropertyValue('border-left-width'));
 		} else {
 			var offsetPersonaX =
@@ -209,8 +209,8 @@ this.cornerTogglePP = function() {
 	cornerMove();
 };
 
-this.cornerRight = function() {
-	toggleAttribute(cornerBar, 'movetoright', prefAid.corner_right);
+this.cornerPlacement = function() {
+	toggleAttribute(cornerBar, 'movetoright', prefAid.corner_placement == 'right');
 };
 
 this.cornerAutoHide = function() {
@@ -234,7 +234,7 @@ this.cornerOnLoad = function() {
 	observerAid.add(personaChanged, "lightweight-theme-styling-update");
 	
 	cornerTogglePP(); // implies cornerMove()
-	cornerRight();
+	cornerPlacement();
 	cornerExtend();
 	cornerAutoHide();
 	
@@ -274,7 +274,7 @@ this.cornerCustomize = function(e, force) {
 
 moduleAid.LOADMODULE = function() {
 	prefAid.listen('corner_pp', cornerTogglePP);
-	prefAid.listen('corner_right', cornerRight);
+	prefAid.listen('corner_placement', cornerPlacement);
 	prefAid.listen('corner_autohide', cornerAutoHide);
 	prefAid.listen('corner_extend', cornerExtend);
 	prefAid.listen('corner_keycode', setCornerKey);
@@ -293,7 +293,7 @@ moduleAid.UNLOADMODULE = function() {
 	styleAid.unload('cornerPersona_'+_UUID);
 	
 	prefAid.unlisten('corner_pp', cornerTogglePP);
-	prefAid.unlisten('corner_right', cornerRight);
+	prefAid.unlisten('corner_placement', cornerPlacement);
 	prefAid.unlisten('corner_autohide', cornerAutoHide);
 	prefAid.unlisten('corner_extend', cornerExtend);
 	prefAid.unlisten('corner_keycode', setCornerKey);
