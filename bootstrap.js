@@ -278,7 +278,3 @@ function uninstall(aData, aReason) {
 		onUninstall(aData, aReason);
 	}
 }
-function doLog(str) {
-	if(!str) { str = typeof(str)+': '+str; }
-	Services.console.logStringMessage('CHROME :: '+str);
-}
