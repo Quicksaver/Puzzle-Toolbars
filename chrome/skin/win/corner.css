@@ -26,4 +26,7 @@
 		height: 22px;
 	}
 	
+	#puzzleBars-corner-PP:not([movetoright])[active]:not(:hover) image { margin-left: 5px; }
+	#puzzleBars-corner-PP[movetoright][active]:not(:hover) image { margin-right: 5px; }
+	
 }

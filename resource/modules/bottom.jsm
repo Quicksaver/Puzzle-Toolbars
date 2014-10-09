@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.0.3';
+moduleAid.VERSION = '1.0.4';
 
 this.__defineGetter__('bottomBar', function() { return $(objName+'-bottom-bar'); });
 this.__defineGetter__('bottomPP', function() { return $(objName+'-bottom-PP'); });
@@ -43,7 +43,7 @@ this.bottomMove = function() {
 	var shrunkOffset = 0;
 	var shrunkOffsetHover = 0;
 	if(bottomBar.clientHeight > 0) {
-		var PPsize = (WINNT) ? 22 : (DARWIN) ? 24 : 28; // when shrunk
+		var PPsize = (WINNT) ? 22 : (DARWIN) ? 24 : 25; // when shrunk
 		shrunkOffset -= Math.floor((PPsize -bottomBar.clientHeight) /2);
 		shrunkOffsetHover -= Math.min(Math.floor((PPsize -ppOffset -bottomBar.clientHeight) /2), 0);
 	}
@@ -71,8 +71,7 @@ this.bottomMove = function() {
 	sscode += '			}\n';
 	sscode += '		}\n';
 	sscode += '	}\n';
-	sscode += '	window['+objName+'_UUID="'+_UUID+'"] #'+objName+'-bottom-PP:not([active]):not(:hover),\n';
-	sscode += '	window['+objName+'_UUID="'+_UUID+'"] #'+objName+'-bottom-PP[autohide][active]:not(:hover) {\n';
+	sscode += '	window['+objName+'_UUID="'+_UUID+'"] #'+objName+'-bottom-PP:not([active]):not(:hover) {\n';
 	sscode += '		bottom: '+(bottom +ppOffset +OSoffset -21)+'px;\n';
 	sscode += '	}\n';
 	sscode += '}';

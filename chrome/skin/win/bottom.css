@@ -9,13 +9,15 @@
 	
 	/* Puzzle Pieces */
 	
-	#puzzleBars-bottom-PP:not([active]):not(:hover),
-	#puzzleBars-bottom-PP[autohide]:not(:hover) {
+	#puzzleBars-bottom-PP:not([active]):not(:hover) {
 		clip: rect(0px, 32px, 9px, 0px);
 	}
 	
 	#puzzleBars-bottom-PP[active]:not(:hover) image {
 		height: 22px;
 	}
+	
+	#puzzleBars-bottom-PP:not([movetoright])[active]:not(:hover) image { margin-left: 5px; }
+	#puzzleBars-bottom-PP[movetoright][active]:not(:hover) image { margin-right: 5px; }
 	
 }

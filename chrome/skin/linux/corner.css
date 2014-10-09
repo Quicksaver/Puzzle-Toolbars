@@ -19,8 +19,11 @@
 	}
 	
 	#puzzleBars-corner-PP[active]:not(:hover) image {
-		height: 28px;
+		height: 25px;
 	}
+	
+	#puzzleBars-corner-PP:not([movetoright])[active]:not(:hover) image { margin-left: 4px; }
+	#puzzleBars-corner-PP[movetoright][active]:not(:hover) image { margin-right: 4px; }
 	
 	
 }

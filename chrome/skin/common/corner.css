@@ -83,15 +83,8 @@
 		opacity: 0;
 	}
 	
-	#puzzleBars-corner-PP:not([movetoright])[active]:not(:hover) image {
-		margin-left: 5px;
-		transform: rotate(-60deg);
-	}
-	
-	#puzzleBars-corner-PP[movetoright][active]:not(:hover) image {
-		margin-right: 5px;
-		transform: rotate(60deg);
-	}
+	#puzzleBars-corner-PP:not([movetoright])[active]:not(:hover) image { transform: rotate(-60deg); }
+	#puzzleBars-corner-PP[movetoright][active]:not(:hover) image { transform: rotate(60deg); }
 	
 	#puzzleBars-corner-PP:hover image,
 	#puzzleBars-corner-PP:not([active]) image {

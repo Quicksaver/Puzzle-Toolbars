@@ -107,15 +107,8 @@
 		opacity: 0;
 	}
 	
-	#puzzleBars-lateral-PP:not([movetoright])[active]:not(:hover) image {
-		transform: rotate(-60deg);
-	}
-	#puzzleBars-lateral-PP[movetoright][active]:not(:hover) image {
-		transform: rotate(60deg);
-	}
-	
-	#puzzleBars-lateral-PP[active]:not([movetobottom]):not(:hover) image { margin-top: 5px; }
-	#puzzleBars-lateral-PP[active][movetobottom]:not(:hover) image { margin-bottom: 5px; }
+	#puzzleBars-lateral-PP:not([movetoright])[active]:not(:hover) image { transform: rotate(-60deg); }
+	#puzzleBars-lateral-PP[movetoright][active]:not(:hover) image { transform: rotate(60deg); }
 	
 	#puzzleBars-lateral-PP:hover image,
 	#puzzleBars-lateral-PP:not([active]) image {

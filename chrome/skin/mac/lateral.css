@@ -48,11 +48,13 @@
 		background-color: #e8e8e8;
 	}
 	
-	#puzzleBars-lateral-bar:not([movetoright]):-moz-any(:not([sidebarOpen]),[autohide]) {
+	#puzzleBars-lateral-bar:not([movetoright]):-moz-any(:not([sidebarOpen]),[autohide]),
+	window[customizing="true"] #puzzleBars-lateral-bar:not([movetoright]) {
 		box-shadow: inset -1px 0 0 #ababab;
 	}
 	
-	#puzzleBars-lateral-bar[movetoright]:-moz-any(:not([sidebarOpen]),[autohide]) {
+	#puzzleBars-lateral-bar[movetoright]:-moz-any(:not([sidebarOpen]),[autohide]),
+	window[customizing="true"] #puzzleBars-lateral-bar[movetoright] {
 		box-shadow: inset 1px 0 0 #ababab;
 	}
 	
@@ -71,5 +73,8 @@
 	#puzzleBars-lateral-PP[active]:not(:hover) image {
 		width: 24px;
 	}
+	
+	#puzzleBars-lateral-PP:not([movetobottom])[active]:not(:hover) image { margin-top: 4px; }
+	#puzzleBars-lateral-PP[movetobottom][active]:not(:hover) image { margin-bottom: 4px; }
 
 }

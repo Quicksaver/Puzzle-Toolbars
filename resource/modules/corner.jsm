@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.0.6';
+moduleAid.VERSION = '1.0.7';
 
 // ammount of pixels to clip the bar to when it is closed or hidden
 this.CLIPBAR_CORNER = 6;
@@ -24,7 +24,7 @@ this.setCornerKey = function() {
 	else { keysetAid.unregister(cornerKey); }
 };
 
-var cornerStyle = {};
+this.cornerStyle = {};
 this.cornerMove = function() {
 	var appContentPos = $('content').getBoundingClientRect();
 	cornerStyle.maxWidth = -(scrollBarWidth *2) +appContentPos.width -PP_OFFSET_CORNER /* account for the puzzle piece */;
@@ -81,7 +81,7 @@ this.cornerMove = function() {
 	var shrunkOffset = 0;
 	var shrunkOffsetHover = 0;
 	if(cornerContainer.clientHeight > 0) {
-		var PPsize = (WINNT) ? 22 : (DARWIN) ? 24 : 28; // when shrunk
+		var PPsize = (WINNT) ? 22 : (DARWIN) ? 24 : 25; // when shrunk
 		shrunkOffset -= Math.floor((PPsize -cornerContainer.clientHeight) /2);
 		shrunkOffsetHover -= Math.min(Math.floor((PPsize -ppOffset -cornerContainer.clientHeight) /2), 0);
 	}

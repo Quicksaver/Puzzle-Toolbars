@@ -7,15 +7,23 @@
 		border-top: 1px solid #888;
 	}
 	
+	/* style the toolbar */
+	
+	#puzzleBars-bottom-bar {
+		min-height: 25px;
+	}
+	
 	/* Puzzle Pieces */
 	
-	#puzzleBars-bottom-PP:not([active]):not(:hover),
-	#puzzleBars-bottom-PP[autohide]:not(:hover) {
+	#puzzleBars-bottom-PP:not([active]):not(:hover) {
 		clip: rect(0px, 32px, 14px, 0px);
 	}
 	
 	#puzzleBars-bottom-PP[active]:not(:hover) image {
 		height: 24px;
 	}
+	
+	#puzzleBars-bottom-PP:not([movetoright])[active]:not(:hover) image { margin-left: 4px; }
+	#puzzleBars-bottom-PP[movetoright][active]:not(:hover) image { margin-right: 4px; }
 
 }

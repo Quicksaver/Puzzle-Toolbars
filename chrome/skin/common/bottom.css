@@ -40,28 +40,19 @@
 	#puzzleBars-bottom-PP:not([movetoright]):not([active]):not(:hover) image { transform: rotate(-40deg); }
 	#puzzleBars-bottom-PP[movetoright]:not([active]):not(:hover) image { transform: rotate(40deg); }
 	
-	#puzzleBars-bottom-PP:not([active]):not(:hover),
-	#puzzleBars-bottom-PP[autohide]:not(:hover) {
+	#puzzleBars-bottom-PP:not([active]):not(:hover) {
 		opacity: 0;
 	}
 	
-	#puzzleBars-bottom-PP:not([movetoright])[active]:not(:hover) image {
-		margin-left: 5px;
-		transform: rotate(-60deg);
-	}
-	
-	#puzzleBars-bottom-PP[movetoright][active]:not(:hover) image {
-		margin-right: 5px;
-		transform: rotate(60deg);
-	}
+	#puzzleBars-bottom-PP:not([movetoright])[active]:not(:hover) image { transform: rotate(-60deg); }
+	#puzzleBars-bottom-PP[movetoright][active]:not(:hover) image { transform: rotate(60deg); }
 	
 	#puzzleBars-bottom-PP:hover image,
 	#puzzleBars-bottom-PP:not([active]) image {
 		height: 32px;
 	}
 	
-	window:not([puzzleBars-noAnimation]) #puzzleBars-bottom-PP:not([active]):not(:hover),
-	window:not([puzzleBars-noAnimation]) #puzzleBars-bottom-PP[autohide]:not(:hover) {
+	window:not([puzzleBars-noAnimation]) #puzzleBars-bottom-PP:not([active]):not(:hover) {
 		transition: bottom .5s linear .2s, opacity .5s linear .2s, clip .5s linear .2s;
 	}
 	window:not([puzzleBars-noAnimation]) #puzzleBars-bottom-PP:hover,

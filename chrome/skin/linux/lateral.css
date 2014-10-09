@@ -24,11 +24,13 @@
 		background-color: -moz-dialog;
 	}
 	
-	#puzzleBars-lateral-bar:not([movetoright]):-moz-any(:not([sidebarOpen]),[autohide]) {
+	#puzzleBars-lateral-bar:not([movetoright]):-moz-any(:not([sidebarOpen]),[autohide]),
+	window[customizing="true"] #puzzleBars-lateral-bar:not([movetoright]) {
 		box-shadow: inset -1px 0 0 ThreeDShadow;
 	}
 	
-	#puzzleBars-lateral-bar[movetoright]:-moz-any(:not([sidebarOpen]),[autohide]) {
+	#puzzleBars-lateral-bar[movetoright]:-moz-any(:not([sidebarOpen]),[autohide]),
+	window[customizing="true"] #puzzleBars-lateral-bar[movetoright] {
 		box-shadow: inset 1px 0 0 ThreeDShadow;
 	}
 	
@@ -47,5 +49,8 @@
 	#puzzleBars-lateral-PP[active]:not(:hover) image {
 		width: 22px;
 	}
+	
+	#puzzleBars-lateral-PP:not([movetobottom])[active]:not(:hover) image { margin-top: 5px; }
+	#puzzleBars-lateral-PP[movetobottom][active]:not(:hover) image { margin-bottom: 5px; }
 	
 }
