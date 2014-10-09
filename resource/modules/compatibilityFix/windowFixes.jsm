@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.0.10';
+moduleAid.VERSION = '1.0.11';
 
 moduleAid.LOADMODULE = function() {
 	AddonManager.getAddonByID("s3download@statusbar", function(addon) {
@@ -14,6 +14,7 @@ moduleAid.LOADMODULE = function() {
 	});
 	
 	moduleAid.load('compatibilityFix/UIEnhancer');
+	moduleAid.load('compatibilityFix/theFoxOnlyBetter');
 	
 	toggleAttribute(document.documentElement, objName+'-FF34', Services.vc.compare(Services.appinfo.version, "34.0a1") >= 0);
 };
@@ -25,4 +26,5 @@ moduleAid.UNLOADMODULE = function() {
 	moduleAid.unload('compatibilityFix/TileTabs');
 	moduleAid.unload('compatibilityFix/TreeStyleTab');
 	moduleAid.unload('compatibilityFix/UIEnhancer');
+	moduleAid.unload('compatibilityFix/theFoxOnlyBetter');
 };

@@ -397,6 +397,8 @@
 			<preference id="pref-top_bar" name="extensions.puzzlebars.top_bar" type="bool" />
 			<preference id="pref-top_pp" name="extensions.puzzlebars.top_pp" type="bool" />
 			<preference id="pref-top_placement" name="extensions.puzzlebars.top_placement" type="string" />
+			<preference id="pref-top_slimChrome" name="extensions.puzzlebars.top_slimChrome" type="bool" />
+			<preference id="pref-tFOB" name="extensions.puzzlebars.tFOB" type="bool" />
 			<preference id="pref-top_keycode" name="extensions.puzzlebars.top_keycode" type="string"/>
 			<preference id="pref-top_accel" name="extensions.puzzlebars.top_accel" type="bool"/>
 			<preference id="pref-top_shift" name="extensions.puzzlebars.top_shift" type="bool"/>
@@ -411,6 +413,11 @@
 				<radio label="&OptPlacement.left;" tooltiptext="&OptPlacement.tooltip;" dependson="pref-top_bar,pref-top_pp" value="left"/>
 				<radio label="&OptPlacement.right;" tooltiptext="&OptPlacement.tooltip;" dependson="pref-top_bar,pref-top_pp" value="right"/>
 			</hbox></radiogroup>
+		</groupbox>
+		
+		<groupbox align="start">
+			<caption label="&GroupBehavior.label;"/>
+			<checkbox label="&OptTopSlimChrome.label;" tooltiptext="&OptTopSlimChrome.tooltip;" dependson="pref-top_bar,pref-tFOB" preference="pref-top_slimChrome"/>
 		</groupbox>
 		
 		<groupbox align="center">

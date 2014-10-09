@@ -1,4 +1,4 @@
-var defaultsVersion = '1.5.6';
+var defaultsVersion = '1.5.7';
 var objName = 'puzzleBars';
 var objPathString = 'puzzlebars';
 var prefList = {
@@ -42,10 +42,14 @@ var prefList = {
 	top_bar: false,
 	top_pp: true,
 	top_placement: 'right',
+	top_slimChrome: true,
 	top_keycode: 'none',
 	top_accel: false,
 	top_shift: false,
 	top_alt: false,
+	
+	// for compatibility with The Fox, Only Better add-on
+	tFOB: false,
 	
 	// for migrateLegacy, probably safe to remove in the future, see note in that module
 	migratedLegacy: false,

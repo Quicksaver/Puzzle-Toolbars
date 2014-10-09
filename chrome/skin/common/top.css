@@ -6,7 +6,10 @@
 		position: relative;
 		-moz-box-ordinal-group: 10000;
 	}
-	#navigator-toolbox:after { -moz-box-ordinal-group: 10001; }
+	#navigator-toolbox:after,
+	#theFoxOnlyBetter-slimChrome-container {
+		-moz-box-ordinal-group: 10001;
+	}
 	
 	/* for fullscreen */
 	#puzzleBars-top-bar[moz-collapsed="true"]:not([collapsed="true"]) {
@@ -35,11 +38,11 @@
 	
 	/* style the toolbar */
 	
-	window:not([customizing="true"]) #puzzleBars-top-bar:not([hidePP]):not([movetoright]) {
+	window:not([customizing="true"]) #puzzleBars-top-bar:not([slimChrome]):not([hidePP]):not([movetoright]) {
 		padding-left: 34px;
 	}
 	
-	window:not([customizing="true"]) #puzzleBars-top-bar:not([hidePP])[movetoright] {
+	window:not([customizing="true"]) #puzzleBars-top-bar:not([slimChrome]):not([hidePP])[movetoright] {
 		padding-right: 34px;
 	}
 	
@@ -86,6 +89,9 @@
 	window:not([puzzleBars-noAnimation]) #puzzleBars-top-PP[active] image {
 		transition: transform .25s linear 0s, margin .25s linear 0s, height .25s linear 0s;
 	}
+	
+	/* don't show the puzzle piece if the toolbar is being hidden by Slim Chrome */
+	#puzzleBars-top-PP[slimChrome] { display: none; }
 	
 	/* overflow panel */
 	

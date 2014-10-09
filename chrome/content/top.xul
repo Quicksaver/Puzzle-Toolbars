@@ -61,6 +61,7 @@
 			hidden="true">
 			
 			<observes element="objName-top-bar" attribute="movetoright" />
+			<observes element="objName-top-bar" attribute="slimChrome" />
 			
 			<image onclick="objName.commandPP(event, this.parentNode);" />
 		</box>

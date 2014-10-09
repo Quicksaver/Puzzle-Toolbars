@@ -21,6 +21,8 @@
 <!ENTITY OptLateral.tooltip "Adds a vertical toolbar at the margin of the browser window, a perfect companion for the heavy user of the sidebar.">
 <!ENTITY OptTop.label "Enable Top Toolbar">
 <!ENTITY OptTop.tooltip "Adds a customizable toolbar to the top area of the browser window, below the navigation bar.">
+<!ENTITY OptTopSlimChrome.label "Include in Slim Chrome's hidden toolbars">
+<!ENTITY OptTopSlimChrome.tooltip "Recommended! For use my other add-on The Fox, Only Better; the toolbar will be hidden with the rest of the top toolbars when Slim Chrome is enabled. Please note that in this case the puzzle piece button cannot be used.">
 
 <!ENTITY OptShowPiece.label "Show Puzzle Piece">
 <!ENTITY OptShowPiece.tooltip "The puzzle piece is a button which you can use to quickly open or close its toolbar.">
