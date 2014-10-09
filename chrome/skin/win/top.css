@@ -1,0 +1,24 @@
+@namespace url(http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul);
+@-moz-document url("chrome://browser/content/browser.xul") {
+	
+	/* style the add-on bar */
+	
+	#puzzleBars-top-bar {
+		padding-top: 1px;
+		background-image: none;
+	}
+	
+	/* Puzzle Pieces */
+	
+	#puzzleBars-top-PP:not([active]):not(:hover) {
+		clip: rect(23px, 32px, 32px, 0px);
+	}
+	
+	#puzzleBars-top-PP[active]:not(:hover) image {
+		height: 22px;
+	}
+	
+	#puzzleBars-top-PP:not([movetoright])[active]:not(:hover) image { margin-left: 5px; }
+	#puzzleBars-top-PP[movetoright][active]:not(:hover) image { margin-right: 5px; }
+	
+}

@@ -1,4 +1,4 @@
-var defaultsVersion = '1.5.5';
+var defaultsVersion = '1.5.6';
 var objName = 'puzzleBars';
 var objPathString = 'puzzlebars';
 var prefList = {
@@ -38,6 +38,14 @@ var prefList = {
 	lateral_accel: false,
 	lateral_shift: false,
 	lateral_alt: false,
+	
+	top_bar: false,
+	top_pp: true,
+	top_placement: 'right',
+	top_keycode: 'none',
+	top_accel: false,
+	top_shift: false,
+	top_alt: false,
 	
 	// for migrateLegacy, probably safe to remove in the future, see note in that module
 	migratedLegacy: false,

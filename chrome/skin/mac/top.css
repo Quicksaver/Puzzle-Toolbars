@@ -1,0 +1,27 @@
+@namespace url(http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul);
+@-moz-document url("chrome://browser/content/browser.xul") {
+	
+	/* style the toolbar */
+	
+	#puzzleBars-top-bar {
+		min-height: 24px;
+	}
+	
+	/* Puzzle Pieces */
+	
+	#puzzleBars-top-PP {
+		z-index: 3;
+	}
+	
+	#puzzleBars-top-PP:not([active]):not(:hover) {
+		clip: rect(18px, 32px, 32px, 0px);
+	}
+	
+	#puzzleBars-top-PP[active]:not(:hover) image {
+		height: 24px;
+	}
+	
+	#puzzleBars-top-PP:not([movetoright])[active]:not(:hover) image { margin-left: 4px; }
+	#puzzleBars-top-PP[movetoright][active]:not(:hover) image { margin-right: 4px; }
+
+}

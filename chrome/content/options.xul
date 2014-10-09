@@ -18,6 +18,7 @@
 		</preferences>
 		
 		<checkbox label="&OptBottom.label;" tooltiptext="&OptBottom.tooltip;" preference="pref-bottom_bar"/>
+		
 		<groupbox align="center">
 			<caption><checkbox label="&OptShowPiece.label;" tooltiptext="&OptShowPiece.tooltip;" dependson="pref-bottom_bar" preference="pref-bottom_pp"/></caption>
 			<radiogroup preference="pref-bottom_placement"><hbox class="ltr">
@@ -314,6 +315,128 @@
 					preference="pref-lateral_keycode">
 					
 					<menupopup id="lateral_keycodeMenupopup">
+						<menuitem value="none" label="&OptKeyboardShortcut.none;"/>
+						<menuitem value="A" label="A"/>
+						<menuitem value="B" label="B"/>
+						<menuitem value="C" label="C"/>
+						<menuitem value="D" label="D"/>
+						<menuitem value="E" label="E"/>
+						<menuitem value="F" label="F"/>
+						<menuitem value="G" label="G"/>
+						<menuitem value="H" label="H"/>
+						<menuitem value="I" label="I"/>
+						<menuitem value="J" label="J"/>
+						<menuitem value="K" label="K"/>
+						<menuitem value="L" label="L"/>
+						<menuitem value="M" label="M"/>
+						<menuitem value="N" label="N"/>
+						<menuitem value="O" label="O"/>
+						<menuitem value="P" label="P"/>
+						<menuitem value="Q" label="Q"/>
+						<menuitem value="R" label="R"/>
+						<menuitem value="S" label="S"/>
+						<menuitem value="T" label="T"/>
+						<menuitem value="U" label="U"/>
+						<menuitem value="V" label="V"/>
+						<menuitem value="W" label="W"/>
+						<menuitem value="X" label="X"/>
+						<menuitem value="Y" label="Y"/>
+						<menuitem value="Z" label="Z"/>
+						<menuitem value=" " label="&OptKeyboardShortcut.spacebar;"/>
+						<menuitem value="VK_PAGE_UP" label="&OptKeyboardShortcut.pageup;"/>
+						<menuitem value="VK_PAGE_DOWN" label="&OptKeyboardShortcut.pagedown;"/>
+						<menuitem value="VK_HOME" label="&OptKeyboardShortcut.home;"/>
+						<menuitem value="VK_END" label="&OptKeyboardShortcut.end;"/>
+						<menuitem value="VK_UP" label="&OptKeyboardShortcut.up;"/>
+						<menuitem value="VK_DOWN" label="&OptKeyboardShortcut.down;"/>
+						<menuitem value="VK_LEFT" label="&OptKeyboardShortcut.left;"/>
+						<menuitem value="VK_RIGHT" label="&OptKeyboardShortcut.right;"/>
+						<menuitem value="." label="."/>
+						<menuitem value="," label=","/>
+						<menuitem value=";" label=";"/>
+						<menuitem value="/" label="/"/>
+						<menuitem value="\" label="\"/>
+						<menuitem value="=" label="="/>
+						<menuitem value="+" label="+"/>
+						<menuitem value="-" label="-"/>
+						<menuitem value="*" label="*"/>
+						<menuitem value="&lt;" label="&lt;"/>
+						<menuitem value="&gt;" label="&gt;"/>
+						<menuitem value="VK_F1" label="F1"/>
+						<menuitem value="VK_F2" label="F2"/>
+						<menuitem value="VK_F3" label="F3"/>
+						<menuitem value="VK_F4" label="F4"/>
+						<menuitem value="VK_F5" label="F5"/>
+						<menuitem value="VK_F6" label="F6"/>
+						<menuitem value="VK_F7" label="F7"/>
+						<menuitem value="VK_F8" label="F8"/>
+						<menuitem value="VK_F9" label="F9"/>
+						<menuitem value="VK_F10" label="F10"/>
+						<menuitem value="VK_F11" label="F11"/>
+						<menuitem value="VK_F12" label="F12"/>
+						<menuitem value="VK_F13" label="F13"/>
+						<menuitem value="VK_F14" label="F14"/>
+						<menuitem value="VK_F15" label="F15"/>
+						<menuitem value="VK_F16" label="F16"/>
+						<menuitem value="VK_F17" label="F17"/>
+						<menuitem value="VK_F18" label="F18"/>
+						<menuitem value="VK_F19" label="F19"/>
+						<menuitem value="VK_F20" label="F20"/>
+						<menuitem value="VK_F21" label="F21"/>
+						<menuitem value="VK_F22" label="F22"/>
+						<menuitem value="VK_F23" label="F23"/>
+						<menuitem value="VK_F24" label="F24"/>
+					</menupopup>
+				</menulist>
+			</hbox>
+		</groupbox>
+	</prefpane>
+	
+	<prefpane id="topPane" label="&top.title;" style="&Optwindow.style;">
+		<preferences>
+			<preference id="pref-top_bar" name="extensions.puzzlebars.top_bar" type="bool" />
+			<preference id="pref-top_pp" name="extensions.puzzlebars.top_pp" type="bool" />
+			<preference id="pref-top_placement" name="extensions.puzzlebars.top_placement" type="string" />
+			<preference id="pref-top_keycode" name="extensions.puzzlebars.top_keycode" type="string"/>
+			<preference id="pref-top_accel" name="extensions.puzzlebars.top_accel" type="bool"/>
+			<preference id="pref-top_shift" name="extensions.puzzlebars.top_shift" type="bool"/>
+			<preference id="pref-top_alt" name="extensions.puzzlebars.top_alt" type="bool"/>
+		</preferences>
+		
+		<checkbox label="&OptTop.label;" tooltiptext="&OptTop.tooltip;" preference="pref-top_bar"/>
+		
+		<groupbox align="center">
+			<caption><checkbox label="&OptShowPiece.label;" tooltiptext="&OptShowPiece.tooltip;" dependson="pref-top_bar" preference="pref-top_pp"/></caption>
+			<radiogroup preference="pref-top_placement"><hbox class="ltr">
+				<radio label="&OptPlacement.left;" tooltiptext="&OptPlacement.tooltip;" dependson="pref-top_bar,pref-top_pp" value="left"/>
+				<radio label="&OptPlacement.right;" tooltiptext="&OptPlacement.tooltip;" dependson="pref-top_bar,pref-top_pp" value="right"/>
+			</hbox></radiogroup>
+		</groupbox>
+		
+		<groupbox align="center">
+			<caption label="&OptKeyboardShortcut.captionA;"/>
+			<hbox>
+				<checkbox id="top_accelCheckbox"
+					oncommand="objName.fillKeycodes();"
+					label="&OptKeyboardShortcut.control;"
+					dependson="pref-top_bar"
+					preference="pref-top_accel"/>
+				<checkbox id="top_altCheckbox"
+					oncommand="objName.fillKeycodes();"
+					label="&OptKeyboardShortcut.alt;"
+					dependson="pref-top_bar"
+					preference="pref-top_alt"/>
+				<checkbox id="top_shiftCheckbox"
+					oncommand="objName.fillKeycodes();"
+					label="&OptKeyboardShortcut.shift;"
+					dependson="pref-top_bar"
+					preference="pref-top_shift"/>
+				<menulist id="top_keycodeMenu"
+					oncommand="objName.fillKeycodes();"
+					dependson="pref-top_bar"
+					preference="pref-top_keycode">
+					
+					<menupopup id="top_keycodeMenupopup">
 						<menuitem value="none" label="&OptKeyboardShortcut.none;"/>
 						<menuitem value="A" label="A"/>
 						<menuitem value="B" label="B"/>

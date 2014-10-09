@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet href="chrome://puzzlebars/skin/top.css" type="text/css"?>
+<?xml-stylesheet href="chrome://puzzlebars-os/skin/top.css" type="text/css"?>
+<!DOCTYPE overlay SYSTEM "chrome://puzzlebars/locale/overlay.dtd">
+<overlay id="top-overlay" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul" >
+
+	<commandset id="mainCommandSet">
+		<command id="objName:ToggleTopBar" oncommand="objName.toggleBar('objName-top-bar');"/>
+	</commandset>
+	
+	<popupset id="mainPopupSet">
+		<panel id="objName-top-overflow"
+			class="objName-overflow"
+			role="group"
+			type="arrow"
+			noautofocus="true"
+			context="toolbar-context-menu"
+			position="bottomcenter topright"
+			hidden="true">
+			
+			<vbox id="objName-top-overflow-scroller" class="objName-overflow-scroller">
+			<vbox id="objName-top-overflow-list" class="widget-overflow-list objName-overflow-list" overflowfortoolbar="objName-top-bar"/>
+			</vbox>
+		</panel>
+	</popupset>
+	
+	<toolbox id="navigator-toolbox">
+		<toolbar id="puzzleBars-top-bar"
+			toolbarname="&top.name;"
+			accesskey="&top.accesskey;"
+			customizable="true"
+			hidden="true"
+			collapsed="false"
+			persist="collapsed"
+			class="toolbar-primary chromeclass-toolbar puzzleBars-bar"
+			iconsize="small"
+			context="toolbar-context-menu"
+			menucommand="objName:ToggleTopBar"
+			customizationtarget="objName-top-customization-target"
+			overflowable="true"
+			overflowbutton="objName-top-overflow-button"
+			overflowtarget="objName-top-overflow-list"
+			overflowpanel="objName-top-overflow"
+			menuAdd="&top.menuAdd;"
+			menuMove="&top.menuMove;"
+			menuRemove="&top.menuRemove;"
+			menuMain="&allbars.menuMain;">
+			
+			<hbox id="objName-top-customization-target" flex="1"/>
+			
+			<toolbarbutton id="objName-top-overflow-button"
+				class="toolbarbutton-1 chromeclass-toolbar-additional overflow-button puzzleBars-overflow-button"
+				skipintoolbarset="true"
+				tooltiptext="&allbars.overflow;"/>
+		</toolbar>
+		
+		<box id="objName-top-PP"
+			class="PuzzlePiece"
+			context="toolbar-context-menu"
+			insertafter="objName-top-bar"
+			hidden="true">
+			
+			<observes element="objName-top-bar" attribute="movetoright" />
+			
+			<image onclick="objName.commandPP(event, this.parentNode);" />
+		</box>
+	</toolbox>
+	
+</overlay>

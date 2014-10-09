@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.0.2';
+moduleAid.VERSION = '1.0.3';
 
 this.__defineGetter__('gBrowser', function() { return window.gBrowser; });
 
@@ -31,6 +31,10 @@ this.toggleLateral = function() {
 	moduleAid.loadIf('lateral', prefAid.lateral_bar);
 };
 
+this.toggleTop = function() {
+	moduleAid.loadIf('top', prefAid.top_bar);
+};
+
 moduleAid.LOADMODULE = function() {
 	moduleAid.load('compatibilityFix/windowFixes');
 	moduleAid.load('initAddonBar');
@@ -41,10 +45,12 @@ moduleAid.LOADMODULE = function() {
 	prefAid.listen('corner_bar', toggleCorner);
 	prefAid.listen('urlbar_bar', toggleUrlbar);
 	prefAid.listen('lateral_bar', toggleLateral);
+	prefAid.listen('top_bar', toggleTop);
 	
 	toggleBottom();
 	toggleCorner();
 	toggleLateral();
+	toggleTop();
 	toggleUrlbar();
 };
 
@@ -53,8 +59,10 @@ moduleAid.UNLOADMODULE = function() {
 	prefAid.unlisten('corner_bar', toggleCorner);
 	prefAid.unlisten('urlbar_bar', toggleUrlbar);
 	prefAid.unlisten('lateral_bar', toggleLateral);
+	prefAid.unlisten('top_bar', toggleTop);
 	
 	moduleAid.unload('urlbar');
+	moduleAid.unload('top');
 	moduleAid.unload('lateral');
 	moduleAid.unload('corner');
 	moduleAid.unload('bottom');

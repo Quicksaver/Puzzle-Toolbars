@@ -5,6 +5,7 @@
 <!ENTITY corner.title "Corner">
 <!ENTITY urlbar.title "Location Bar">
 <!ENTITY lateral.title "Lateral">
+<!ENTITY top.title "Top">
 <!ENTITY about.title "About">
 
 <!ENTITY GroupPosition.label "Position">
@@ -18,6 +19,8 @@
 <!ENTITY OptUrlbar.tooltip "Adds a small and tidy toolbar inside the location bar, great if you usually have a lot of free space there and want to take advantage of it.">
 <!ENTITY OptLateral.label "Enable Lateral Toolbar">
 <!ENTITY OptLateral.tooltip "Adds a vertical toolbar at the margin of the browser window, a perfect companion for the heavy user of the sidebar.">
+<!ENTITY OptTop.label "Enable Top Toolbar">
+<!ENTITY OptTop.tooltip "Adds a customizable toolbar to the top area of the browser window, below the navigation bar.">
 
 <!ENTITY OptShowPiece.label "Show Puzzle Piece">
 <!ENTITY OptShowPiece.tooltip "The puzzle piece is a button which you can use to quickly open or close its toolbar.">

@@ -1,7 +1,7 @@
 <!ENTITY OptionsMenu.label "Puzzle Toolbars Options">
 
 <!ENTITY bottom.name "Bottom Puzzle Bar">
-<!ENTITY bottom.accesskey "t">
+<!ENTITY bottom.accesskey "z">
 <!ENTITY bottom.menuAdd "Add to Bottom Puzzle Bar">
 <!ENTITY bottom.menuMove "Move to Bottom Puzzle Bar">
 <!ENTITY bottom.menuRemove "Remove from Bottom Puzzle Bar">
@@ -13,7 +13,7 @@
 <!ENTITY corner.menuRemove "Remove from Corner Puzzle Bar">
 
 <!ENTITY urlbar.name "Location Bar Puzzle Bar">
-<!ENTITY urlbar.accesskey "L">
+<!ENTITY urlbar.accesskey "i">
 <!ENTITY urlbar.menuAdd "Add to Location Bar Puzzle Bar">
 <!ENTITY urlbar.menuMove "Move to Location Bar Puzzle Bar">
 <!ENTITY urlbar.menuRemove "Remove from Location Bar Puzzle Bar">
@@ -23,6 +23,12 @@
 <!ENTITY lateral.menuAdd "Add to Lateral Puzzle Bar">
 <!ENTITY lateral.menuMove "Move to Lateral Puzzle Bar">
 <!ENTITY lateral.menuRemove "Remove from Lateral Puzzle Bar">
+
+<!ENTITY top.name "Top Puzzle Bar">
+<!ENTITY top.accesskey "p">
+<!ENTITY top.menuAdd "Add to Top Puzzle Bar">
+<!ENTITY top.menuMove "Move to Top Puzzle Bar">
+<!ENTITY top.menuRemove "Remove from Top Puzzle Bar">
 
 <!ENTITY allbars.menuMain "Move to Toolbar">
 <!ENTITY allbars.overflow "Show more...">
