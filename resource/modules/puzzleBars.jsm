@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.0.3';
+moduleAid.VERSION = '1.0.4';
 
 this.__defineGetter__('gBrowser', function() { return window.gBrowser; });
 
@@ -14,6 +14,10 @@ this.__defineGetter__('customizing', function() {
 	
 	return false;
 });
+
+this.doOpenOptions = function() {
+	openOptions();
+};
 
 this.toggleBottom = function() {
 	moduleAid.loadIf('bottom', prefAid.bottom_bar);
@@ -36,6 +40,7 @@ this.toggleTop = function() {
 };
 
 moduleAid.LOADMODULE = function() {
+	moduleAid.load('whatsNew');
 	moduleAid.load('compatibilityFix/windowFixes');
 	moduleAid.load('initAddonBar');
 	moduleAid.load('placePP');
@@ -70,4 +75,5 @@ moduleAid.UNLOADMODULE = function() {
 	moduleAid.unload('placePP');
 	moduleAid.unload('initAddonBar');
 	moduleAid.unload('compatibilityFix/windowFixes');
+	moduleAid.unload('whatsNew');
 };

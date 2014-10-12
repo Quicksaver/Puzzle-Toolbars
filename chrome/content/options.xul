@@ -671,8 +671,18 @@
 			</hbox>
 			<description>&puzzlebarsabout.by;</description>
 			<description class="justify">&puzzlebarsabout.desc;</description>
-			<label class="text-link closer" href="https://addons.mozilla.org/firefox/addon/the-puzzle-piece/" value="&puzzlebarsabout.home;"/>
-			<label class="text-link closer" href="https://github.com/Quicksaver/The-Puzzle-Piece/issues" value="&puzzlebarsabout.tech;"/>
+			<label	class="text-link closer"
+					tooltiptext="https://addons.mozilla.org/firefox/addon/the-puzzle-piece/"
+					href="https://addons.mozilla.org/firefox/addon/the-puzzle-piece/"
+					value="&puzzlebarsabout.home;"/>
+			<label	class="text-link closer"
+					tooltiptext="https://github.com/Quicksaver/The-Puzzle-Piece/issues"
+					href="https://github.com/Quicksaver/The-Puzzle-Piece/issues"
+					value="&puzzlebarsabout.tech;"/>
+			<label	id="releaseNotesLink"
+					class="text-link closer"
+					tooltiptext="about:objPathString"
+					value="&puzzlebarsabout.notes;"/>
 		</vbox>
 	</prefpane>
 </prefwindow>

@@ -1,0 +1,175 @@
+{
+	"current":"1.3.8",
+	"releases": {
+		"1.3.8":{
+			"date":"May 20, 2014",
+			"notes":[
+				["bugfix","Sometimes switching between tabs with the find bar open, the add-on bar would be left floating in mid air"]
+			]
+		},
+		"1.3.7":{
+			"date":"May 20, 2014",
+			"notes":[
+				["new","es-ES and ru locales"],
+				["bugfix","Clicking \"Restore defaults\" in customize mode shouldn't collapse the add-on bar (much less leave a Puzzle Piece hanging alone in the corner)"],
+				["bugfix","Some buttons appear too wide in the location bar (SDK add-ons and Tab Utilities)"],
+				["bugfix","All the buttons in the add-on bar in the corner should be properly aligned and the same height (whenever possible)"],
+				["bugfix","Zoom control wouldn't show current zoom level text"],
+				["bugfix","Tweaked slightly the search bar in the add-on bar so it fits there better"],
+				["","Many appearance tweaks for buttons in the add-on bar"]
+			]
+		},
+		"1.3.6":{
+			"date":"May 6, 2014",
+			"notes":[
+				["bugfix","Get rid of some annoying (but harmless) messages in the console"],
+				["bugfix","Compatibility with the latest versions of the Classic Theme Restorer add-on"]
+			]
+		},
+		"1.3.5":{
+			"date":"May 6, 2014",
+			"notes":[
+				["bugfix","Compatibility with Clickless Menu add-on, and possibly others: TPP failed to initialize and the customization area would be empty"]
+			]
+		},
+		"1.3.4":{
+			"date":"May 6, 2014",
+			"notes":[
+				["bugfix","Compatibility with Location Bar Enhancer add-on together with positioning the add-on bar in the location bar; this isn't perfect but it's the best I could do from my side"],
+				["bugfix","Tweaked styling of buttons with dropmarkers a bit when add-on bar is moved to the location bar"],
+				["bugfix","Some changes to the add-on bar (dynamic showing/hiding of buttons) would not update its width when it was moved to the location bar"],
+				["bugfix","Compatibility with Tile Tabs: if setting add-on bar keyboard shortcut to the same shortcut as one of the TT's function keys, the add-on bar shortcut wouldn't work after a restart"],
+				["bugfix","The Puzzle Piece icon in the corner would be clipped too quickly if the add-on bar was closed and autohide was enabled"],
+				["","Some minor code clean-up"]
+			]
+		},
+		"1.3.3":{
+			"date":"April 15, 2014",
+			"notes":[
+				["","<b>Important note!</b> If you're updating from a previous version, you may have to restart your browser for the update to fully take effect."],
+				["bugfix","(Australis) should no longer close the customize dialog by itself every now and then"],
+				["bugfix","(Australis) better handling when entering/exiting customize mode"],
+				["bugfix","(Australis) customize context menu entries shouldn't be enabled when right clicking the PanelUI button or the overflow button"]
+			]
+		},
+		"1.3.2":{
+			"date":"April 15, 2014",
+			"notes":[
+				["bugfix","(Australis) customize context menu entries in the menu panel would sometimes be wrongly disabled"],
+				["bugfix","(Australis) the add-on bar shouldn't hide automatically if a panel from a widget in it is open"],
+				["bugfix","Compatibility with Tree Style Tab add-on"],
+				["bugfix","Placing the downloads indicator in the add-on bar in the corner would not show it correctly"],
+				["bugfix","The add-on bar would auto-hide when opening the downloads panel from it"],
+				["bugfix","(Australis) zombie compartment would remain after disabling the add-on"],
+				["bugfix","Add-on could fail to (re)load after disabling/updating one of my other add-ons"],
+				["bugfix","When placed in the corner, the puzzle piece icon could hide faster than the add-on bar sometimes"],
+				["bugfix","Sometimes when starting firefox, the add-on bar would get stuck open if it was set to auto-hide (if this still happens to anyone please let me know!)"]
+			]
+		},
+		"1.3.1":{
+			"date":"April 14, 2014",
+			"notes":[
+				["changed","Can also hide the Puzzle Piece toggle button in the location bar (won't automatically hide in this case)"]
+			]
+		},
+		"1.3":{
+			"date":"April 14, 2014",
+			"notes":[
+				["new","(Australis) customize context menu entries to add and remove widgets to and from the add-on bar"],
+				["new","Can hide the Puzzle Piece toggle button from the add-on bar"],
+				["updated","zh-CN locale"],
+				["changed","When the add-on bar is placed on the bottom, the Puzzle Piece icon shrinks, so it doesn't cover any webpage content"],
+				["changed","(Australis) support lightweight themes (personas) when the add-on bar is in the corner"],
+				["bugfix","The green puzzle piece icon would sometimes cover the add-on bar's content"],
+				["bugfix","(Australis) not working when opening a new window"],
+				["bugfix","(Australis) toolbar separators were not appearing in the menu panel in the latest builds"],
+				["bugfix","(Australis) toolbar spacers and separators were not appearing in the nav-bar's overflow panel in the latest builds"],
+				["bugfix","(Australis) all widgets in the customize palette were distorted"],
+				["bugfix","Compatibility with Tile Tabs add-on: status text would be shown behind the add-on bar when placed in the corner"],
+				["bugfix","(Australis) the latest builds displays the separators and flexible spaces incorrectly in the menu panel while customizing"],
+				["bugfix","(Australis) after restarting from safe mode to a normal session, you would lose the customization state of the add-on bar"],
+				["bugfix","(Australis) fixed add-on bar color in Windows 8 when in the color (and probably better integration with some themes as well)"],
+				["bugfix","(Australis) status bar would fail to appear in new windows or would disappear from previous windows when opening new windows"],
+				["bugfix","(Australis) sometimes the add-on bar, when positioned in the corner, would not be placed correctly after exiting customize mode"],
+				["bugfix","(Australis) positioning the add-on bar in the location bar and doing \"Remove from Toolbar\" on any of its widgets would leave empty spaces"],
+				["bugfix","When the add-on bar was placed in the location bar, it would be hidden instantaneously when toggling its placement or when exiting customize mode"],
+				["bugfix","The toolbar context menu would stutter a moment when opening sometimes"],
+				["","Other minor appearance tweaks"],
+				["","Addressed a comment from the last version's AMO review"]
+			]
+		},
+		"1.2.2":{
+			"date":"February 26, 2014",
+			"notes":[
+				["bugfix","Sometimes the green puzzle piece icon would appear behind the add-on bar when it was in the corner of the screen"],
+				["bugfix","(Australis) toggling the add-on bar while in customize mode would make the puzzle piece get stuck"],
+				["bugfix","Compatibility with S3. Download Statusbar add-on: place the add-on bar correctly when moving the S3 bar"],
+				["bugfix","Compatibility with Stratiform add-on"],
+				["bugfix","(Australis) compatibility with latest Classic Theme Restorer add-on: double separators/spacers/springs in customization palette; automatically migrate widgets added to CTR's add-on bar to TPP's add-on bar; compatibility with CTR's new \"Restore status bar\" feature"],
+				["bugfix","(Australis) compatibility with latest Nightly and Aurora builds: failing to uninitialize properly; special icons in the palette wrongly displayed; place the add-on bar together with the rest of the UI when in customizing"],
+				["","Other minor appearance tweaks"]
+			]
+		},
+		"1.2.1":{
+			"date":"January 27, 2014",
+			"notes":[
+				["bugfix","Minor appearance fixes for latest Nightly"]
+			]
+		},
+		"1.2":{
+			"date":"January 27, 2014",
+			"notes":[
+				["new","Restore the add-on bar in the new Australis theme! It should automatically restore most of the current items in your add-on bar when you update your firefox"],
+				["new","Fully compatible with the Classic Theme Restorer add-on"],
+				["new","Restore the separator/space/flexible space items in the customization dialog"],
+				["new","Option to restore the status bar into the add-on bar as well"],
+				["new","Add version information to about tab in the preferences dialog"],
+				["bugfix","The link in the About tab (in TPP's preferences) to the AMO page would not be built correctly sometimes"],
+				["","Other minor fixes and improvements"]
+			]
+		},
+		"1.1.2":{
+			"date":"August 5, 2013",
+			"notes":[
+				["bugfix","Installing the add-on could fail the first try"],
+				["bugfix","Disabling the add-on could fail causing memory issues"],
+				["","Minor appearance tweaks"]
+			]
+		},
+		"1.1":{
+			"date":"July 21, 2013",
+			"notes":[
+				["new","fr locale"],
+				["updated","Rewrote preferences dialog"],
+				["bugfix","Compatibility with Firefox 25: findbar would be behind the add-on bar"],
+				["bugfix","Add-on bar shouldn't be visible when content is shown fullscreen"],
+				["bugfix","When autohiding, the puzzle piece could get stuck in the corner when disabling or updating another of my add-ons"],
+				["bugfix","On Max OS, disabling the add-on would cause the add-on bar to disappear"],
+				["bugfix","Add-on bar and find bar borders had a wrong color"]
+			]
+		},
+		"1.0.2":{
+			"date":"May 30, 2013",
+			"notes":[
+				["new","sv-SE locale"],
+				["updated","Replaced some old deprecated methods with new ones"]
+			]
+		},
+		"1.0.1":{
+			"date":"May 18, 2013",
+			"notes":[
+				["new","zh-CN locale"],
+				["bugfix","Window elements would jump around for a moment during startup"],
+				["bugfix","Add-on bar could be cut off when its content changed and after startup"],
+				["bugfix","High CPU rate in add-on manager when add-on bar is in the location bar"],
+				["bugfix","Add-on bar height incorrect in small windows sometimes"]
+			]
+		},
+		"1":{
+			"date":"May 16, 2013",
+			"notes":[
+				["","Initial release"]
+			]
+		}
+	}
+}

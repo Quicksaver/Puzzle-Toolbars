@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.1.2';
+moduleAid.VERSION = '1.1.3';
 
 this.keys = [
 	{
@@ -101,6 +101,25 @@ this.urlbarCheckboxes = function() {
 		}
 	});
 };
+
+this.openReleaseNotesTab = function(aWindow) {
+	aWindow.gBrowser.selectedTab = aWindow.gBrowser.addTab('about:'+objPathString);
+	aWindow.gBrowser.selectedTab.loadOnStartup = true; // for Tab Mix Plus
+};
+
+this.openReleaseNotes = function(e) {
+	if(e.type == 'click' && e.which != 1) { return; }
+	if(e.type == 'keypress' && e.keycode != e.DOM_VK_RETURN) { return; }
+	
+	if(window.opener && window.opener instanceof window.opener.ChromeWindow) {
+		openReleaseNotesTab(window.opener);
+	} else {
+		windowMediator.callOnMostRecent(openReleaseNotesTab, 'navigator:browser');
+	}
+	
+	e.preventDefault();
+	e.stopPropagation();
+};
 	
 moduleAid.LOADMODULE = function() {
 	if(DARWIN) {
@@ -109,4 +128,7 @@ moduleAid.LOADMODULE = function() {
 	
 	fillKeycodes();
 	fillVersion($('addonVersion'));
+	
+	listenerAid.add($('releaseNotesLink'), 'keypress', openReleaseNotes, true);
+	listenerAid.add($('releaseNotesLink'), 'click', openReleaseNotes, true);
 };

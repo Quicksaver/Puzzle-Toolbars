@@ -1,4 +1,4 @@
-var defaultsVersion = '1.5.7';
+var defaultsVersion = '1.5.8';
 var objName = 'puzzleBars';
 var objPathString = 'puzzlebars';
 var prefList = {
@@ -53,6 +53,10 @@ var prefList = {
 	
 	// for migrateLegacy, probably safe to remove in the future, see note in that module
 	migratedLegacy: false,
+	
+	// for the what's new tab, it's better they're here so they're automatically carried over to content
+	lastVersionNotify: '0',
+	notifyOnUpdates: true,
 	
 	// hidden preference to not show the addon bar autohiding on startup
 	noInitialShow: false

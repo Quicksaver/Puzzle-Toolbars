@@ -1,4 +1,4 @@
-moduleAid.VERSION = '2.0.2';
+moduleAid.VERSION = '2.0.3';
 
 this.__defineGetter__('PrintPreviewListener', function() { return window.PrintPreviewListener; });
 this.__defineGetter__('browserPanel', function() { return $('browser-panel'); });
@@ -11,10 +11,6 @@ this.__defineGetter__('contextSeparator', function() { return $(objName+'-contex
 this.getComputedStyle = function(el) { return window.getComputedStyle(el); };
 
 this.bars = {};
-
-this.doOpenOptions = function() {
-	openOptions();
-};
 
 // trick to find out the acurate width of the vertical scrollbar
 this._scrollBarWidth = null;
