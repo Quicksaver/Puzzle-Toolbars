@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.1.2';
+moduleAid.VERSION = '1.1.3';
 
 // move the status bar onto our container
 this.prepareStatusBar = function(aWindow) {
@@ -104,11 +104,11 @@ this.trackStatusBar = {
 		}
 	},
 	
-	waitForIt: function(aWindow) {
-		if(!aWindow.document.getElementById(objName+'-status-bar-stack')) {
+	waitForIt: function(aWindow, aArea) {
+		if(!aWindow.document.getElementById(aArea)) {
 			aSync(function() {
 				if(typeof(trackStatusBar) == 'undefined') { return; }
-				try { trackStatusBar.waitForIt(aWindow); } catch(ex) { Cu.reportError(ex); }
+				try { trackStatusBar.waitForIt(aWindow, aArea); } catch(ex) { Cu.reportError(ex); }
 			});
 			return;
 		}
@@ -119,7 +119,7 @@ this.trackStatusBar = {
 	onWidgetRemoved: function(aWidgetId) { this.handler(aWidgetId); },
 	
 	onAreaNodeRegistered: function(aArea, aContainer) {
-		this.waitForIt(aContainer.ownerDocument.defaultView);
+		this.waitForIt(aContainer.ownerDocument.defaultView, aArea);
 	},
 	
 	onAreaNodeUnregistered: function(aArea, aContainer, aReason) {
