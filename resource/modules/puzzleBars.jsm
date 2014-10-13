@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.0.4';
+moduleAid.VERSION = '1.0.5';
 
 this.__defineGetter__('gBrowser', function() { return window.gBrowser; });
 
@@ -14,6 +14,14 @@ this.__defineGetter__('customizing', function() {
 	
 	return false;
 });
+
+this.possibleBars = [
+	objName+'-bottom-bar',
+	objName+'-corner-bar',
+	objName+'-lateral-bar',
+	objName+'-top-bar',
+	objName+'-urlbar-bar'
+];
 
 this.doOpenOptions = function() {
 	openOptions();
