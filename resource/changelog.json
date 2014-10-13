@@ -11,12 +11,12 @@
 			"date":"May 20, 2014",
 			"notes":[
 				["new","es-ES and ru locales"],
+				["updated","Many appearance tweaks for buttons in the add-on bar"],
 				["bugfix","Clicking \"Restore defaults\" in customize mode shouldn't collapse the add-on bar (much less leave a Puzzle Piece hanging alone in the corner)"],
 				["bugfix","Some buttons appear too wide in the location bar (SDK add-ons and Tab Utilities)"],
 				["bugfix","All the buttons in the add-on bar in the corner should be properly aligned and the same height (whenever possible)"],
 				["bugfix","Zoom control wouldn't show current zoom level text"],
-				["bugfix","Tweaked slightly the search bar in the add-on bar so it fits there better"],
-				["","Many appearance tweaks for buttons in the add-on bar"]
+				["bugfix","Tweaked slightly the search bar in the add-on bar so it fits there better"]
 			]
 		},
 		"1.3.6":{
@@ -40,7 +40,7 @@
 				["bugfix","Some changes to the add-on bar (dynamic showing/hiding of buttons) would not update its width when it was moved to the location bar"],
 				["bugfix","Compatibility with Tile Tabs: if setting add-on bar keyboard shortcut to the same shortcut as one of the TT's function keys, the add-on bar shortcut wouldn't work after a restart"],
 				["bugfix","The Puzzle Piece icon in the corner would be clipped too quickly if the add-on bar was closed and autohide was enabled"],
-				["","Some minor code clean-up"]
+				["general","Some minor code clean-up"]
 			]
 		},
 		"1.3.3":{
@@ -94,8 +94,8 @@
 				["bugfix","(Australis) positioning the add-on bar in the location bar and doing \"Remove from Toolbar\" on any of its widgets would leave empty spaces"],
 				["bugfix","When the add-on bar was placed in the location bar, it would be hidden instantaneously when toggling its placement or when exiting customize mode"],
 				["bugfix","The toolbar context menu would stutter a moment when opening sometimes"],
-				["","Other minor appearance tweaks"],
-				["","Addressed a comment from the last version's AMO review"]
+				["updated","Other minor appearance tweaks"],
+				["general","Addressed a comment from the last version's AMO review"]
 			]
 		},
 		"1.2.2":{
@@ -107,7 +107,7 @@
 				["bugfix","Compatibility with Stratiform add-on"],
 				["bugfix","(Australis) compatibility with latest Classic Theme Restorer add-on: double separators/spacers/springs in customization palette; automatically migrate widgets added to CTR's add-on bar to TPP's add-on bar; compatibility with CTR's new \"Restore status bar\" feature"],
 				["bugfix","(Australis) compatibility with latest Nightly and Aurora builds: failing to uninitialize properly; special icons in the palette wrongly displayed; place the add-on bar together with the rest of the UI when in customizing"],
-				["","Other minor appearance tweaks"]
+				["updated","Other minor appearance tweaks"]
 			]
 		},
 		"1.2.1":{
@@ -125,7 +125,7 @@
 				["new","Option to restore the status bar into the add-on bar as well"],
 				["new","Add version information to about tab in the preferences dialog"],
 				["bugfix","The link in the About tab (in TPP's preferences) to the AMO page would not be built correctly sometimes"],
-				["","Other minor fixes and improvements"]
+				["updated","Other minor fixes and improvements"]
 			]
 		},
 		"1.1.2":{
@@ -133,7 +133,7 @@
 			"notes":[
 				["bugfix","Installing the add-on could fail the first try"],
 				["bugfix","Disabling the add-on could fail causing memory issues"],
-				["","Minor appearance tweaks"]
+				["updated","Minor appearance tweaks"]
 			]
 		},
 		"1.1":{
