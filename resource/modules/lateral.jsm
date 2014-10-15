@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.0.2';
+moduleAid.VERSION = '1.0.3';
 
 // ammount of pixels to clip the bar to when it is closed or hidden
 this.CLIPBAR_LATERAL = 4;
@@ -415,12 +415,9 @@ this.lateralInitOverflow = function(bar) {
 	}
 	
 	// need to keep backups and restore them afterwards, to prevent a ZC
-	bar.overflowable._onOverflow = bar.overflowable.onOverflow;
-	bar.overflowable.__onLazyResize = bar.overflowable._onLazyResize;
-	bar.overflowable.__moveItemsBackToTheirOrigin = bar.overflowable._moveItemsBackToTheirOrigin;
-	bar.overflowable.onOverflow = OTonOverflow;
-	bar.overflowable._onLazyResize = OTonLazyResize;
-	bar.overflowable._moveItemsBackToTheirOrigin = OTmoveItemsBackToTheirOrigin;
+	piggyback.add('lateral', bar.overflowable, 'onOverflow', OTonOverflow);
+	piggyback.add('lateral', bar.overflowable, '_onLazyResize', OTonLazyResize);
+	piggyback.add('lateral', bar.overflowable, '_moveItemsBackToTheirOrigin', OTmoveItemsBackToTheirOrigin);
 	
 	bar.overflowable.init();
 	bar.overflowable._enabled = true;
@@ -438,12 +435,9 @@ this.lateralDeinitOverflow = function(bar) {
 		bar.overflowable._lazyResizeHandler = null;
 	}
 	
-	bar.overflowable.onOverflow = bar.overflowable._onOverflow;
-	bar.overflowable._onLazyResize = bar.overflowable.__onLazyResize;
-	bar.overflowable._moveItemsBackToTheirOrigin = bar.overflowable.__moveItemsBackToTheirOrigin;
-	delete bar.overflowable._onOverflow;
-	delete bar.overflowable.__onLazyResize;
-	delete bar.overflowable.__moveItemsBackToTheirOrigin;
+	piggyback.revert('lateral', bar.overflowable, 'onOverflow');
+	piggyback.revert('lateral', bar.overflowable, '_onLazyResize');
+	piggyback.revert('lateral', bar.overflowable, '_moveItemsBackToTheirOrigin');
 };
 
 this.lateralTogglePP = function() {
@@ -460,7 +454,7 @@ this.lateralToggleBottom = function() {
 
 this.lateralAutoHide = function() {
 	if(prefAid.lateral_autohide && !customizing) {
-		initAutoHide(lateralBar, [lateralContainer, lateralPP]);
+		initAutoHide(lateralBar, [lateralContainer, lateralPP], lateralContainer, 'opacity');
 	} else {
 		deinitAutoHide(lateralBar);
 	}
@@ -534,12 +528,9 @@ moduleAid.LOADMODULE = function() {
 	setLateralKey();
 	
 	// http://mxr.mozilla.org/mozilla-central/source/browser/components/customizableui/CustomizeMode.jsm
-	gCustomizeMode.__onDragOver = gCustomizeMode._onDragOver;
-	gCustomizeMode.__setDragActive = gCustomizeMode._setDragActive;
-	gCustomizeMode.__cancelDragActive = gCustomizeMode._cancelDragActive;
-	gCustomizeMode._onDragOver = CModeOnDragOver;
-	gCustomizeMode._setDragActive = CModeSetDragActive;
-	gCustomizeMode._cancelDragActive = CModeCancelDragActive;
+	piggyback.add('lateral', gCustomizeMode, '_onDragOver', CModeOnDragOver);
+	piggyback.add('lateral', gCustomizeMode, '_setDragActive', CModeSetDragActive);
+	piggyback.add('lateral', gCustomizeMode, '_cancelDragActive', CModeCancelDragActive);
 	
 	overlayAid.overlayWindow(window, 'lateral', null, lateralOnLoad, lateralOnUnload);
 };
@@ -548,12 +539,9 @@ moduleAid.UNLOADMODULE = function() {
 	overlayAid.removeOverlayWindow(window, 'lateral');
 	styleAid.unload('lateralMove_'+_UUID);
 	
-	gCustomizeMode._onDragOver = gCustomizeMode.__onDragOver;
-	gCustomizeMode._setDragActive = gCustomizeMode.__setDragActive;
-	gCustomizeMode._cancelDragActive = gCustomizeMode.__cancelDragActive;
-	delete gCustomizeMode.__onDragOver;
-	delete gCustomizeMode.__setDragActive;
-	delete gCustomizeMode.__cancelDragActive;
+	piggyback.revert('lateral', gCustomizeMode, '_onDragOver');
+	piggyback.revert('lateral', gCustomizeMode, '_setDragActive');
+	piggyback.revert('lateral', gCustomizeMode, '_cancelDragActive');
 	
 	prefAid.unlisten('lateral_pp', lateralTogglePP);
 	prefAid.unlisten('lateral_bottom', lateralToggleBottom);

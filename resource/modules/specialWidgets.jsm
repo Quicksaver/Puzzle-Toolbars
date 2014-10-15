@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.0.5';
+moduleAid.VERSION = '1.0.6';
 
 // Special widgets aren't allowed in the menu panel by default, so we need to override this behavior (and hope we don't clash with other add-ons doing the same).
 // I hope I can remove this soon. See:
@@ -136,9 +136,9 @@ this.trackSpecialWidgets = {
 };
 
 moduleAid.LOADMODULE = function() {
-	CUIAid.modify('addWidgetToArea', addWidgetToArea);
-	CUIAid.modify('canWidgetMoveToArea', canWidgetMoveToArea);
-	CUIAid.modify('buildArea', buildArea);
+	piggyback.add('specialWidgets', CUIBackstage.CustomizableUIInternal, 'addWidgetToArea', addWidgetToArea);
+	piggyback.add('specialWidgets', CUIBackstage.CustomizableUIInternal, 'canWidgetMoveToArea', canWidgetMoveToArea);
+	piggyback.add('specialWidgets', CUIBackstage.CustomizableUIInternal, 'buildArea', buildArea);
 	
 	var panelIds = CustomizableUI.getWidgetIdsInArea(CustomizableUI.AREA_PANEL);
 	for(var wId of panelIds) {
@@ -165,7 +165,7 @@ moduleAid.UNLOADMODULE = function() {
 		CustomizableUI.destroyWidget(wId);
 	}
 	
-	CUIAid.revert('addWidgetToArea');
-	CUIAid.revert('canWidgetMoveToArea');
-	CUIAid.revert('buildArea');
+	piggyback.remove('specialWidgets', CUIBackstage.CustomizableUIInternal, 'addWidgetToArea');
+	piggyback.remove('specialWidgets', CUIBackstage.CustomizableUIInternal, 'canWidgetMoveToArea');
+	piggyback.remove('specialWidgets', CUIBackstage.CustomizableUIInternal, 'buildArea');
 };

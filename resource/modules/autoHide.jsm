@@ -1,4 +1,4 @@
-moduleAid.VERSION = '2.0.3';
+moduleAid.VERSION = '2.1.0';
 
 this.onDragExitAll = function() {
 	listenerAid.remove(gBrowser, "dragenter", onDragExitAll, false);
@@ -46,12 +46,7 @@ this.initialShowBar = function(e) {
 		var thisShowing = aSync(function() {
 			if(typeof(setHover) != 'undefined' && bar._initialShowings) {
 				setHover(bar, false);
-				for(var i=0; i<bar._initialShowings.length; i++) {
-					if(bar._initialShowings[i] == thisShowing) {
-						bar._initialShowings.splice(i, 1);
-						break;
-					}
-				}
+				bar._initialShowings.splice(bar._initialShowings.indexOf(thisShowing), 1);
 			}
 		}, 1500);
 		bar._initialShowings.push(thisShowing);
@@ -65,24 +60,37 @@ this.initialThroughButton = function(e) {
 };
 
 // Keep toolbar visible when opening menus within it
+this.holdPopupNodes = [];
 this.holdPopupMenu = function(e) {
-	var trigger = e.originalTarget.triggerNode;
-	var hold = null;
+	// don't do anything on tooltips! the UI might collapse altogether
+	if(!e.target || e.target.nodeName == 'window' || e.target.nodeName == 'tooltip') { return; }
 	
-	// special case for the downloadsPanel
-	if(e.target.id == 'downloadsPanel') {
-		for(var b in bars) {
-			if(isAncestor($('downloads-button'), bars[b])) {
-				hold = bars[b];
-				break;
-			}
+	var trigger = e.originalTarget.triggerNode;
+	var target = e.target;
+	
+	// don't bother with any of this if the opened popup is a child of any currently opened panel
+	for(p of holdPopupNodes) {
+		if(target != p.popup && isAncestor(target, p.popup)) { return; }
+	}
+	
+	// check if the trigger node is present in our toolbars;
+	// there's no need to check the overflow panel here, as it will likely be open already in these cases
+	var hold = null;
+	for(var b in bars) {
+		if(!bars[b]._autohide) { continue; }
+		
+		if(isAncestor(trigger, bars[b]) || isAncestor(trigger, bars[b]._pp) || isAncestor(e.originalTarget, bars[b])) {
+			hold = bars[b];
+			break;
 		}
 	}
 	
-	// check if the trigger node is present in the addonBar
-	if(!hold) {
+	// try to use the anchor specified when opening the popup, if any; ditto from above for overflow panel nodes
+	if(!hold && target.anchorNode) {
 		for(var b in bars) {
-			if(isAncestor(trigger, bars[b]) || isAncestor(trigger, bars[b]._pp) || isAncestor(e.originalTarget, bars[b])) {
+			if(!bars[b]._autohide) { continue; }
+			
+			if(isAncestor(target.anchorNode, bars[b])) {
 				hold = bars[b];
 				break;
 			}
@@ -90,32 +98,135 @@ this.holdPopupMenu = function(e) {
 	}
 	
 	// could be a CUI panel opening, which doesn't carry a triggerNode, we have to find it ourselves
-	if(!hold && !trigger && e.target.id == 'customizationui-widget-panel') {
-		barsLoop:
-		for(var b in bars) {
-			for(var child of bars[b].childNodes) {
-				if(child.open) {
+	if(!hold && !trigger) {
+		if(target.id == 'customizationui-widget-panel') {
+			barsLoop:
+			for(var b in bars) {
+				if(!bars[b]._autohide) { continue; }
+				
+				var widgets = CustomizableUI.getWidgetsInArea(b.id);
+				for(var w=0; w<widgets.length; w++) {
+					var widget = widgets[w].forWindow(window);
+					if(!widget || !widget.node || !widget.node.open) { continue; }
+					
 					hold = bars[b];
 					break barsLoop;
+				}
+			}
+		}
+		
+		// let's just assume all panels that are children from these toolbars are opening from them
+		else {
+			for(var b in bars) {
+				if(!bars[b]._autohide) { continue; }
+				
+				if(isAncestor(target, bars[b])) {
+					hold = bars[b];
+					
+					// the search engine selection menu is an anonymous child of the searchbar: e.target == $('searchbar'),
+					// so we need to explicitely get the actual menu to use
+					if(target.id == 'searchbar') {
+						target = document.getAnonymousElementByAttribute(target, 'anonid', 'searchbar-popup');
+					}
+					
+					break;
+				}
+			}
+		}
+	}
+	
+	// nothing "native" is opening this popup, so let's see if someone claims it
+	if(!hold) {
+		trigger = askForOwner(target);
+		if(trigger && typeof(trigger) == 'string') {
+			trigger = $(trigger);
+			
+			if(trigger) {
+				for(var b in bars) {
+					if(!bars[b]._autohide) { continue; }
+					
+					// trigger could be either in the toolbars themselves or in the overflow panel
+					if(isAncestor(trigger, bars[b]) || isAncestor(trigger, bars[b]._overflowTarget)) {
+						hold = bars[b];
+						break;
+					}
 				}
 			}
 		}
 	}
 	
 	// some menus, like NoScript's button menu, like to open multiple times (I think), or at least they don't actually open the first time... or something...
-	if(hold && e.target.state == 'open') {
+	if(hold && target.state == 'open') {
+		// if we're opening the toolbar now, the anchor may move, so we need to reposition the popup when it does
+		holdPopupNodes.push(target);
+		
+		if(!trueAttribute(hold, 'hover')) {
+			hideIt(target);
+			hold._transition.add(popupsFinishedVisible);
+			timerAid.init('ensureHoldPopupShows', popupsFinishedVisible, 400);
+		}
+		
 		setHover(hold, true);
+		
 		var selfRemover = function(ee) {
 			if(ee.originalTarget != e.originalTarget) { return; } //submenus
+			listenerAid.remove(target, 'popuphidden', selfRemover);
+			popupsRemoveListeners();
+			
+			// making sure we don't collapse it permanently
+			hideIt(target, true);
+			
 			setHover(hold, false);
-			listenerAid.remove(e.target, 'popuphidden', selfRemover);
+			
+			aSync(function() {
+				if(typeof(holdPopupNodes) != 'undefined' && holdPopupNodes.indexOf(target) > -1) {
+					holdPopupNodes.splice(holdPopupNodes.indexOf(target), 1);
+				}
+			}, 150);
 		}
-		listenerAid.add(e.target, 'popuphidden', selfRemover);
+		listenerAid.add(target, 'popuphidden', selfRemover);
 	}
 };
 
-this.initAutoHide = function(bar, nodes) {
-	if(bar.autohide) { return; }
+this.popupsRemoveListeners = function() {
+	timerAid.cancel('ensureHoldPopupShows');
+	for(var b in bars) {
+		if(bars[b]._autohide) {
+			bars[b]._transition.remove(popupsFinishedVisible);
+		}
+	}
+};
+
+this.popupsFinishedVisible = function() {
+	popupsRemoveListeners();
+	if(holdPopupNodes.length > 0) {
+		for(var popup of holdPopupNodes) {
+			// don't bother if the popup was never hidden to begin with,
+			// it's not needed (the toolbar was already visible when it opened), so the popup is already properly placed,
+			// also this prevents some issues, for example the context menu jumping to the top left corner
+			if(!popup.collapsed) { continue; }
+			
+			// obviously we won't need to move it if it isn't open
+			if(popup.open || popup.state == 'open') {
+				popup.moveTo(-1,-1);
+				hideIt(popup, true);
+			}
+		}
+		
+		// in case opening the popup triggered the toolbar to show, and the mouse just so happens to be in that area, we need to make sure the mouse leaving
+		// won't hide the toolbar with the popup still shown
+		for(var b in bars) {
+			if(!bars[b]._autohide || !trueAttribute(bars[b], 'hover')) { continue; }
+			
+			if(bars[b].hovers === 1 && $$('#'+b+':hover')[0]) {
+				setHover(bars[b], true);
+			}
+		}
+	}
+};
+
+this.initAutoHide = function(bar, nodes, transitionNode, transitionProperty) {
+	if(bar._autohide) { return; }
 	
 	bar._autohide = [];
 	bar._initialShowings = [];
@@ -147,6 +258,32 @@ this.initAutoHide = function(bar, nodes) {
 		bar._autohide.push(node);
 	}
 	
+	// for use to call certain methods when the bar is actually shown (after the CSS transition)
+	bar._transition = {
+		node: transitionNode,
+		prop: transitionProperty,
+		listeners: [],
+		add: function(listener) {
+			this.listeners.push(listener);
+		},
+		remove: function(listener) {
+			if(this.listeners.indexOf(listener) > -1) {
+				this.listeners.splice(this.listeners.indexOf(listener), 1);
+			}
+		}
+	};
+	bar._transition.onEnd = function(e) {
+		if(e.target != bar._transition.node || e.propertyName != bar._transition.prop || !trueAttribute(bar, 'hover')) { return; }
+		
+		for(var listener of bar._transition.listeners) {
+			try {
+				listener(e);
+			}
+			catch(ex) { Cu.reportError(ex); }
+		}
+	};
+	listenerAid.add(bar._transition.node, 'transitionend', bar._transition.onEnd);
+	
 	setAttribute(bar, 'autohide', 'true');
 	
 	if(!prefAid.noInitialShow) {
@@ -174,15 +311,18 @@ this.deinitAutoHide = function(bar) {
 	listenerAid.remove(bar, 'PuzzleBarCustomized', initialShowBar);
 	listenerAid.remove(bar._pp, 'ToggledPuzzleBarThroughButton', initialThroughButton);
 	
+	listenerAid.remove(bar._transition.node, 'transitionend', bar._transition.onEnd);
+	delete bar._transition;
+	
 	delete bar.hovers;
 	delete bar._initialShowings;
 	delete bar._autohide;
 };
 
 moduleAid.LOADMODULE = function() {
-	listenerAid.add(window, 'popupshown', holdPopupMenu, false);
+	listenerAid.add(window, 'popupshown', holdPopupMenu);
 };
 
 moduleAid.UNLOADMODULE = function() {
-	listenerAid.remove(window, 'popupshown', holdPopupMenu, false);
+	listenerAid.remove(window, 'popupshown', holdPopupMenu);
 };

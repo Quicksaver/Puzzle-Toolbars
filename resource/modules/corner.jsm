@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.0.7';
+moduleAid.VERSION = '1.0.8';
 
 // ammount of pixels to clip the bar to when it is closed or hidden
 this.CLIPBAR_CORNER = 6;
@@ -231,7 +231,7 @@ this.cornerPlacement = function() {
 
 this.cornerAutoHide = function() {
 	if(prefAid.corner_autohide) {
-		initAutoHide(cornerBar, [cornerContainer, cornerPP]);
+		initAutoHide(cornerBar, [cornerContainer, cornerPP], cornerContainer, 'opacity');
 	} else {
 		deinitAutoHide(cornerBar);
 	}

@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.0.12';
+moduleAid.VERSION = '1.0.13';
 
 moduleAid.LOADMODULE = function() {
 	AddonManager.getAddonByID("s3download@statusbar", function(addon) {
@@ -13,6 +13,7 @@ moduleAid.LOADMODULE = function() {
 		moduleAid.loadIf('compatibilityFix/TreeStyleTab', (addon && addon.isActive));
 	});
 	
+	moduleAid.load('compatibilityFix/downloadsIndicator');
 	moduleAid.load('compatibilityFix/bookmarkedItem');
 	moduleAid.load('compatibilityFix/UIEnhancer');
 	moduleAid.load('compatibilityFix/theFoxOnlyBetter');
@@ -26,6 +27,7 @@ moduleAid.UNLOADMODULE = function() {
 	moduleAid.unload('compatibilityFix/S3');
 	moduleAid.unload('compatibilityFix/TileTabs');
 	moduleAid.unload('compatibilityFix/TreeStyleTab');
+	moduleAid.unload('compatibilityFix/downloadsIndicator');
 	moduleAid.unload('compatibilityFix/bookmarkedItem');
 	moduleAid.unload('compatibilityFix/UIEnhancer');
 	moduleAid.unload('compatibilityFix/theFoxOnlyBetter');

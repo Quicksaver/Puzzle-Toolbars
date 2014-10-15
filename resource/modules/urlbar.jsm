@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.0.0';
+moduleAid.VERSION = '1.0.1';
 
 this.__defineGetter__('gURLBar', function() { return window.gURLBar; });
 this.__defineGetter__('locationContainer', function() { return $('urlbar-container'); });
@@ -74,7 +74,7 @@ this.urlbarTogglePP = function() {
 
 this.urlbarAutoHide = function() {
 	if(prefAid.urlbar_autohide) {
-		initAutoHide(urlbarBar, [urlbarContainer, urlbarPP]);
+		initAutoHide(urlbarBar, [urlbarContainer, urlbarPP], urlbarBar, 'opacity');
 	} else {
 		deinitAutoHide(urlbarBar);
 	}

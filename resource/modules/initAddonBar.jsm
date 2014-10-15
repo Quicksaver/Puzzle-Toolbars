@@ -1,4 +1,4 @@
-moduleAid.VERSION = '2.0.3';
+moduleAid.VERSION = '2.0.4';
 
 this.__defineGetter__('PrintPreviewListener', function() { return window.PrintPreviewListener; });
 this.__defineGetter__('browserPanel', function() { return $('browser-panel'); });
@@ -115,6 +115,10 @@ this.initBar = function(bar, pp) {
 	bar._pp = pp;
 	pp._bar = bar;
 	
+	if(trueAttribute(bar, 'overflowable') && bar.getAttribute('overflowtarget')) {
+		bar._overflowTarget = $(bar.getAttribute('overflowtarget'));
+	}
+	
 	listenerAid.add(bar, 'resize', delayMoveBars);
 	listenerAid.add(bar, 'drop', delayMoveBars);
 	listenerAid.add(bar, 'load', delayMoveBars);
@@ -153,6 +157,7 @@ this.deinitBar = function(bar, pp) {
 	listenerAid.remove(bar, 'drop', delayMoveBars);
 	listenerAid.remove(bar, 'load', delayMoveBars);
 	
+	delete bar._overflowTarget;
 	delete pp._bar;
 	delete bar._moveOnHidingAttr;
 	delete bar._pp;
@@ -161,16 +166,14 @@ this.deinitBar = function(bar, pp) {
 
 moduleAid.LOADMODULE = function() {
 	// The add-on bar needs to be hidden when entering print preview mode
-	PrintPreviewListener.__hideChrome = PrintPreviewListener._hideChrome;
-	PrintPreviewListener.__showChrome = PrintPreviewListener._showChrome;
-	PrintPreviewListener._hideChrome = function() {
+	piggyback.add('initAddonbar', PrintPreviewListener, '_hideChrome', function() {
 		setAttribute(document.documentElement, 'PrintPreview', 'true');
-		this.__hideChrome();
-	};
-	PrintPreviewListener._showChrome = function() {
+		return true;
+	}, piggyback.MODE_BEFORE);
+	piggyback.add('initAddonbar', PrintPreviewListener, '_showChrome', function() {
 		removeAttribute(document.documentElement, 'PrintPreview');
-		this.__showChrome();
-	};
+		return true;
+	}, piggyback.MODE_BEFORE);
 	
 	CustomizableUI.addListener(barCustomized);
 	
@@ -200,9 +203,7 @@ moduleAid.UNLOADMODULE = function() {
 	
 	CustomizableUI.removeListener(barCustomized);
 	
-	PrintPreviewListener._hideChrome = PrintPreviewListener.__hideChrome;
-	PrintPreviewListener._showChrome = PrintPreviewListener.__showChrome;
-	delete PrintPreviewListener.__hideChrome;
-	delete PrintPreviewListener.__showChrome;
+	piggyback.revert('initAddonbar', PrintPreviewListener, '_hideChrome');
+	piggyback.revert('initAddonbar', PrintPreviewListener, '_showChrome');
 	removeAttribute(document.documentElement, 'PrintPreview');
 };
