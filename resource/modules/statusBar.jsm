@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.1.3';
+moduleAid.VERSION = '1.1.4';
 
 // move the status bar onto our container
 this.prepareStatusBar = function(aWindow) {
@@ -69,6 +69,10 @@ this.moveAllStatusBars = function() {
 
 this.moveStatusBarNode = function(aWindow) {
 	var sStack = aWindow.document.getElementById(objName+'-status-bar-stack');
+	
+	// I have no idea how this is possible, but it happens when disabling and re-enabling the add-on...
+	if(!sStack) { return; }
+	
 	if(!aWindow[objName] || !aWindow[objName]._statusBar || aWindow[objName]._statusBar.node.parentNode == sStack) { return; }
 	
 	sStack.insertBefore(aWindow[objName]._statusBar.node, sStack.firstChild);
