@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.0.0';
+moduleAid.VERSION = '1.0.1';
 
 this.__defineGetter__('theFoxOnlyBetter', function() { return window.theFoxOnlyBetter; });
 this.__defineGetter__('gNavToolbox', function() { return window.gNavToolbox; });
@@ -23,7 +23,7 @@ this.slimChromeFixer = function(aEnabled) {
 		}
 		
 		// so our UI is shown as it should depending on where the toolbar is
-		if(prefAid.top_bar && typeof(topBar) != 'undefined') {
+		if(prefAid.top_bar && typeof(topBar) != 'undefined' && topBar) {
 			var toggle = !UNLOADED && prefAid.top_slimChrome && isAncestor(topBar, theFoxOnlyBetter.slimChromeContainer);
 			toggleAttribute(topBar, 'slimChrome', toggle);
 			toggleAttribute(theFoxOnlyBetter.slimChromeContainer, 'topPuzzleBar', !toggle && !topBar.collapsed);
@@ -48,6 +48,7 @@ this.slimChromePuzzleBarListener = function(e) {
 			if(gNavToolbox.externalToolbars.indexOf(topBar) == -1) {
 				gNavToolbox.externalToolbars.push(topBar);
 			}
+			theFoxOnlyBetter.slimChromeInitOverflowable(topBar);
 			setAttribute(topBar, 'slimChrome', 'true');
 			removeAttribute(theFoxOnlyBetter.slimChromeContainer, 'topPuzzleBar');
 		}
@@ -56,6 +57,8 @@ this.slimChromePuzzleBarListener = function(e) {
 			if(i != -1) {
 				gNavToolbox.externalToolbars.splice(i, 1);
 			}
+			
+			theFoxOnlyBetter.slimChromeDeinitOverflowable(topBar);
 			
 			if(window.closed || window.willClose) {
 				overlayAid.safeMoveToolbar(topBar, gNavToolbox);
