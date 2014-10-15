@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.1.3';
+moduleAid.VERSION = '1.1.4';
 
 this.keys = [
 	{
@@ -103,7 +103,9 @@ this.urlbarCheckboxes = function() {
 };
 
 this.openReleaseNotesTab = function(aWindow) {
-	aWindow.gBrowser.selectedTab = aWindow.gBrowser.addTab('about:'+objPathString);
+	// this doesn't work in e10s yet
+	//aWindow.gBrowser.selectedTab = aWindow.gBrowser.addTab('about:'+objPathString);
+	aWindow.gBrowser.selectedTab = aWindow.gBrowser.addTab('chrome://'+objPathString+'/content/whatsnew.xhtml');
 	aWindow.gBrowser.selectedTab.loadOnStartup = true; // for Tab Mix Plus
 };
 
