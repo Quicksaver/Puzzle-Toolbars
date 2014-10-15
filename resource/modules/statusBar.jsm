@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.1.4';
+moduleAid.VERSION = '1.1.5';
 
 // move the status bar onto our container
 this.prepareStatusBar = function(aWindow) {
@@ -23,7 +23,7 @@ this.prepareStatusBar = function(aWindow) {
 	
 // move the status bar onto our container
 this.moveStatusBar = function(aWindow) {
-	if(aWindow.closed || aWindow.willClose) { return; }
+	if(aWindow.closed || aWindow.willClose || !aWindow[objName]) { return; }
 	
 	if(!CustomizableUI.getPlacementOfWidget(objName+'-status-bar-container')) {
 		moveStatusBarBack(aWindow);
