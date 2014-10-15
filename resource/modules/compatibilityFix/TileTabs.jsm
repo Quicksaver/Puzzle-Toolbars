@@ -9,6 +9,7 @@ this.TileTabsStatusText = function() {
 
 moduleAid.LOADMODULE = function() {
 	toCode.modify(window.XULBrowserWindow, 'window.XULBrowserWindow.updateStatusField', [
+		// to ensure TileTabsStatusText() is run everytime the status text is set, to show/hide the corner toolbar appropriately so it doesn't hide the status text
 		['field.label = text;', 'field.label = text; TileTabsStatusText();']
 	]);
 };
