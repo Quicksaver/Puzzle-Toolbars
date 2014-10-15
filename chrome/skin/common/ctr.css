@@ -2,6 +2,7 @@
 @-moz-document url("chrome://browser/content/browser.xul") {
 
 	/* we don't want these anywhere if we can use ours */
+	#ctraddon_statusbar,
 	#wrapper-spring,
 	#wrapper-spacer,
 	#wrapper-separator,
