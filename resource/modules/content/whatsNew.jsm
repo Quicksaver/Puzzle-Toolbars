@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.1.0';
+moduleAid.VERSION = '1.1.1';
 
 this.__defineGetter__('whatsNewURL', function() { return 'chrome://'+objPathString+'/content/whatsnew.xhtml'; });
 this.__defineGetter__('whatsNewAbout', function() { return 'about:'+objPathString; });
@@ -169,6 +169,8 @@ this.whatsNewProgressListener = {
 	QueryInterface: XPCOMUtils.generateQI([Ci.nsIWebProgressListener, Ci.nsISupportsWeakReference]),
 	
 	onLocationChange: function(aProgress, aRequest, aURI) {
+		if(aProgress.DOMWindow != content) { return; }
+		
 		if(aURI.spec.startsWith(whatsNewURL) || aURI.spec.startsWith(whatsNewAbout)) {
 			whatsNewInit();
 		}
@@ -176,6 +178,8 @@ this.whatsNewProgressListener = {
 };
 
 this.whatsNewLoadListener = function(e) {
+	if(e.originalTarget != document) { return; }
+	
 	if(document.baseURI.startsWith(whatsNewURL) || document.baseURI.startsWith(whatsNewAbout)) {
 		whatsNewInit();
 	}
