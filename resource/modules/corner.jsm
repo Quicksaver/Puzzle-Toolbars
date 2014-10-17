@@ -1,7 +1,5 @@
-moduleAid.VERSION = '1.0.8';
+moduleAid.VERSION = '1.1.0';
 
-// ammount of pixels to clip the bar to when it is closed or hidden
-this.CLIPBAR_CORNER = 6;
 this.PP_OFFSET_CORNER = 0;
 
 this.__defineGetter__('gFindBar', function() { return window.gFindBar; });
@@ -26,6 +24,8 @@ this.setCornerKey = function() {
 
 this.cornerStyle = {};
 this.cornerMove = function() {
+	timerAid.cancel('delayCornerMove');
+	
 	var appContentPos = $('content').getBoundingClientRect();
 	cornerStyle.maxWidth = -(scrollBarWidth *2) +appContentPos.width -PP_OFFSET_CORNER /* account for the puzzle piece */;
 	cornerStyle.bottom = document.documentElement.clientHeight -appContentPos.bottom;
@@ -72,7 +72,7 @@ this.cornerMove = function() {
 	cornerStyle.right += PP_OFFSET_CORNER;
 	
 	var clipOffHeight = cornerContainer.clientHeight +cornerContainer.clientTop;
-	var barOffset = clipOffHeight -CLIPBAR_CORNER;
+	var barOffset = clipOffHeight -prefAid.corner_hotspotHeight;
 	if(cornerStyle.bottom > 1) { clipOffHeight += cornerBarBorderBottom; }
 	
 	var OSoffset = (WINNT) ? -2 : 0;
@@ -85,6 +85,10 @@ this.cornerMove = function() {
 		shrunkOffset -= Math.floor((PPsize -cornerContainer.clientHeight) /2);
 		shrunkOffsetHover -= Math.min(Math.floor((PPsize -ppOffset -cornerContainer.clientHeight) /2), 0);
 	}
+	
+	var ppActiveHiddenOffset = -27 +prefAid.corner_hotspotHeight;
+	var ppHiddenOffset = -21;
+	var ppActiveHiddenClip = -6 +prefAid.corner_hotspotHeight;
 	
 	toggleAttribute(cornerPP, 'clipped', cornerStyle.bottom == 1);
 	
@@ -109,7 +113,7 @@ this.cornerMove = function() {
 	sscode += '	window['+objName+'_UUID="'+_UUID+'"]:not([customizing="true"]) #'+objName+'-corner-container[collapsed="true"],\n';
 	sscode += '	window['+objName+'_UUID="'+_UUID+'"]:not([customizing="true"]) #'+objName+'-corner-container[autohide]:not([hover]):not(:hover) {\n';
 	sscode += '		bottom: '+(cornerStyle.bottom -barOffset)+'px;\n';
-	sscode += '		clip: rect(0px, '+4000+'px, '+CLIPBAR_CORNER+'px, 0px);\n';
+	sscode += '		clip: rect(0px, '+4000+'px, '+prefAid.corner_hotspotHeight+'px, 0px);\n';
 	sscode += '	}\n';
 	
 	sscode += '	window['+objName+'_UUID="'+_UUID+'"] #'+objName+'-corner-PP:not([movetoright]) { left: '+(cornerStyle.left -PP_OFFSET_CORNER)+'px; }\n';
@@ -130,13 +134,23 @@ this.cornerMove = function() {
 	sscode += '			}\n';
 	sscode += '		}\n';
 	sscode += '	}\n';
-	sscode += '	window['+objName+'_UUID="'+_UUID+'"] #'+objName+'-corner-PP:not([active]):not(:hover),\n';
-	sscode += '	window['+objName+'_UUID="'+_UUID+'"] #'+objName+'-corner-PP[autohide][active]:not(:hover):not([hover]) {\n';
-	sscode += '		bottom: '+(cornerStyle.bottom +ppOffset +OSoffset -21)+'px;\n';
+	sscode += '	window['+objName+'_UUID="'+_UUID+'"] #'+objName+'-corner-PP:not([active]):not(:hover) {\n';
+	sscode += '		bottom: '+(cornerStyle.bottom +ppOffset +OSoffset +ppHiddenOffset)+'px;\n';
 	sscode += '	}\n';
+	sscode += '	window['+objName+'_UUID="'+_UUID+'"] #'+objName+'-corner-PP[autohide][active]:not(:hover):not([hover]) {\n';
+	sscode += '		bottom: '+(cornerStyle.bottom +ppOffset +OSoffset +ppActiveHiddenOffset)+'px;\n';
+	sscode += '	}\n';
+	sscode += '	window['+objName+'_UUID="'+_UUID+'"] #'+objName+'-corner-PP[autohide][active]:not(:hover):not([hover]) {\n';
+	sscode += '		clip: rect(0px, 32px, '+ppActiveHiddenClip+'px, 0px);\n';
+	sscode += '	}\n';
+	
 	sscode += '}';
 	
 	styleAid.load('cornerMove_'+_UUID, sscode, true);
+};
+
+this.delayCornerMove = function() {
+	timerAid.init('delayCornerMove', cornerMove, 250);
 };
 
 this.tabSelectCornerBar = function() {
@@ -292,6 +306,7 @@ moduleAid.LOADMODULE = function() {
 	prefAid.listen('corner_pp', cornerTogglePP);
 	prefAid.listen('corner_placement', cornerPlacement);
 	prefAid.listen('corner_autohide', cornerAutoHide);
+	prefAid.listen('corner_hotspotHeight', delayCornerMove);
 	prefAid.listen('corner_extend', cornerExtend);
 	prefAid.listen('corner_keycode', setCornerKey);
 	prefAid.listen('corner_accel', setCornerKey);
@@ -311,6 +326,7 @@ moduleAid.UNLOADMODULE = function() {
 	prefAid.unlisten('corner_pp', cornerTogglePP);
 	prefAid.unlisten('corner_placement', cornerPlacement);
 	prefAid.unlisten('corner_autohide', cornerAutoHide);
+	prefAid.unlisten('corner_hotspotHeight', delayCornerMove);
 	prefAid.unlisten('corner_extend', cornerExtend);
 	prefAid.unlisten('corner_keycode', setCornerKey);
 	prefAid.unlisten('corner_accel', setCornerKey);

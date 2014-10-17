@@ -134,6 +134,7 @@
 			<preference id="pref-corner_pp" name="extensions.puzzlebars.corner_pp" type="bool" />
 			<preference id="pref-corner_placement" name="extensions.puzzlebars.corner_placement" type="string" />
 			<preference id="pref-corner_autohide" name="extensions.puzzlebars.corner_autohide" type="bool" />
+			<preference id="pref-corner_hotspotHeight" name="extensions.puzzlebars.corner_hotspotHeight" type="int" />
 			<preference id="pref-corner_extend" name="extensions.puzzlebars.corner_extend" type="bool" />
 			<preference id="pref-corner_keycode" name="extensions.puzzlebars.corner_keycode" type="string"/>
 			<preference id="pref-corner_accel" name="extensions.puzzlebars.corner_accel" type="bool"/>
@@ -154,10 +155,25 @@
 			</vbox>
 		</groupbox>
 		
-		<groupbox align="start">
+		<groupbox>
 			<caption label="&GroupBehavior.label;"/>
 			<checkbox label="&OptShowPiece.label;" tooltiptext="&OptShowPiece.tooltip;" dependson="pref-corner_bar" preference="pref-corner_pp"/>
 			<checkbox label="&OptAutoHide.label;" tooltiptext="&OptAutoHide.tooltip;" dependson="pref-corner_bar" preference="pref-corner_autohide"/>
+			<hbox tooltiptext="&OptHotspot.tooltip;" align="center">
+				<label value="&OptHotspot.label;" dependson="pref-corner_bar,pref-corner_autohide"/>
+				<hbox flex="1"/>
+				<label value="&OptHotspot.low;" dependson="pref-corner_bar,pref-corner_autohide"/>
+				<scale id="hotspotScale" dependson="pref-corner_bar,pref-corner_autohide"
+					dir="normal"
+					width="150"
+					min="6"
+					max="18"
+					value="6"
+					increment="1"
+					pageincrement="4"
+					preference="pref-corner_hotspotHeight"/>
+				<label value="&OptHotspot.high;" dependson="pref-corner_bar,pref-corner_autohide"/>
+			</hbox>
 		</groupbox>
 		
 		<groupbox align="center">

@@ -1,4 +1,4 @@
-var defaultsVersion = '1.5.8';
+var defaultsVersion = '1.5.9';
 var objName = 'puzzleBars';
 var objPathString = 'puzzlebars';
 var prefList = {
@@ -14,6 +14,7 @@ var prefList = {
 	corner_pp: true,
 	corner_placement: 'right',
 	corner_autohide: true,
+	corner_hotspotHeight: 6,
 	corner_extend: false,
 	corner_keycode: 'VK_F2',
 	corner_accel: false,

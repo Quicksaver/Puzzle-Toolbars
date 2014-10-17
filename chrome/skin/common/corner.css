@@ -93,10 +93,6 @@
 	
 	/* Animation */
 	
-	#puzzleBars-corner-PP[autohide][active]:not(:hover):not([hover]) {
-		clip: rect(0px, 32px, 0px, 0px);
-	}
-	
 	window:not([puzzleBars-noAnimation]) #puzzleBars-corner-PP:not([active]):not(:hover),
 	window:not([puzzleBars-noAnimation]) #puzzleBars-corner-PP[autohide]:not(:hover):not([hover]) {
 		transition: bottom .5s linear .2s, opacity .5s linear .2s, clip .5s linear .2s;

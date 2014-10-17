@@ -31,6 +31,10 @@
 <!ENTITY OptPlacement.tooltip "Toggle in which side of your browser window to place it.">
 <!ENTITY OptAutoHide.label "Auto-Hide">
 <!ENTITY OptAutoHide.tooltip "Hide the toolbar automatically when it's not needed.">
+<!ENTITY OptHotspot.label "Active mouse area">
+<!ENTITY OptHotspot.tooltip "Defines how big will be the area reactive to mouse movement to show the toolbar.">
+<!ENTITY OptHotspot.low "Smaller">
+<!ENTITY OptHotspot.high "Bigger">
 <!ENTITY OptWhenFocused.label "Hide only when the location bar has focus">
 <!ENTITY OptWhenFocused.tooltip "With this enabled, the toolbar will only hide automatically when the cursor is in the location bar.">
 <!ENTITY OptExtend.label "Extend over all the available space">
