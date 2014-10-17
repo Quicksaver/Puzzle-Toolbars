@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.0.0';
+moduleAid.VERSION = '1.0.1';
 
 this.__defineGetter__('topBar', function() { return $(objName+'-top-bar'); });
 this.__defineGetter__('topPP', function() { return $(objName+'-top-PP'); });
@@ -90,6 +90,9 @@ this.topOnLoad = function() {
 	
 	topTogglePP(); // implies topMove()
 	topPlacement();
+	
+	// make sure it gets the brighttext attribute whenever needed, as this toolbar doesn't add attribute watchers like the others
+	window.ToolbarIconColor.inferFromText();
 	
 	initBar(topBar, topPP);
 };

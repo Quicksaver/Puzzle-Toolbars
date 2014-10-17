@@ -21,6 +21,14 @@
 		background-repeat: no-repeat;
 	}
 	
+	.puzzleBars-bar[brighttext="true"] .toolbarbutton-1:not([disabled]):hover,
+	.puzzleBars-bar[brighttext="true"] .toolbarbutton-1[open],
+	.puzzleBars-bar[brighttext="true"] .toolbarbutton-1 > .toolbarbutton-menubutton-button:not([disabled]):hover {
+		background-image:	linear-gradient(to top, transparent, rgba(255,255,255,.45)),
+					linear-gradient(to top, transparent, rgba(255,255,255,.45) 30%),
+					linear-gradient(to top, transparent, rgba(255,255,255,.45) 30%);
+	}
+	
 	/* Inner buttons and other elements display */
 	
 	/* #fixer-status-bar selector is from UI Fixer add-on "make status bar movable" feature */

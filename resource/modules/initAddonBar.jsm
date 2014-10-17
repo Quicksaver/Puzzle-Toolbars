@@ -1,7 +1,8 @@
-moduleAid.VERSION = '2.0.4';
+moduleAid.VERSION = '2.0.5';
 
 this.__defineGetter__('PrintPreviewListener', function() { return window.PrintPreviewListener; });
 this.__defineGetter__('browserPanel', function() { return $('browser-panel'); });
+this.__defineGetter__('gNavBar', function() { return $('nav-bar'); });
 this.__defineGetter__('statusBar', function() { return _statusBar.node || $('status-bar'); });
 this.__defineGetter__('customizeMenu', function() { return $('customization-toolbar-menu'); });
 this.__defineGetter__('viewMenu', function() { return $('viewToolbarsMenu').firstChild; });

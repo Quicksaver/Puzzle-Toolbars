@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.1.0';
+moduleAid.VERSION = '1.1.1';
 
 this.PP_OFFSET_CORNER = 0;
 
@@ -231,6 +231,10 @@ this.styleCornerPersona = function() {
 	}
 };
 
+this.cornerBrightText = function() {
+	toggleAttribute(cornerBar, 'brighttext', trueAttribute(gNavBar, 'brighttext'));
+};
+
 this.cornerTogglePP = function() {
 	cornerPP.hidden = !prefAid.corner_pp;
 	toggleAttribute(cornerBar, 'hidePP', !prefAid.corner_pp);
@@ -262,11 +266,13 @@ this.cornerOnLoad = function() {
 	listenerAid.add(window, 'PuzzleBarsMoved', cornerMove);
 	listenerAid.add(gBrowser.tabContainer, 'TabSelect', tabSelectCornerBar);
 	observerAid.add(personaChanged, "lightweight-theme-styling-update");
+	objectWatcher.addAttributeWatcher(gNavBar, 'brighttext', cornerBrightText);
 	
 	cornerTogglePP(); // implies cornerMove()
 	cornerPlacement();
 	cornerExtend();
 	cornerAutoHide();
+	cornerBrightText();
 	
 	initBar(cornerBar, cornerPP);
 	
@@ -287,6 +293,7 @@ this.cornerOnUnload = function() {
 	deinitAutoHide(cornerBar);
 	deinitBar(cornerBar, cornerPP);
 	
+	objectWatcher.removeAttributeWatcher(gNavBar, 'brighttext', cornerBrightText);
 	listenerAid.remove(window, 'PuzzleBarsMoved', cornerMove);
 	listenerAid.remove(gBrowser.tabContainer, 'TabSelect', tabSelectCornerBar);
 	observerAid.remove(personaChanged, "lightweight-theme-styling-update");
