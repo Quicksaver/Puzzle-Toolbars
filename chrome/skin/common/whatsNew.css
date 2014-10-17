@@ -323,6 +323,21 @@
 		margin: 0 0 0.5em 20px;
 	}
 	
+	#a2a_iframe {
+		width: 320px;
+		height: 270px;
+		border: none;
+		position: absolute;
+		left: -100px;
+	}
+	
+	#a2a_div {
+		width: 220px;
+		height: 50px;
+		overflow: visible;
+		position: relative;
+	}
+	
 	@media only screen and (min-width:784px) and (max-width:1024px) {
 		#sidebar {
 			margin: 0 10px 0 70px;
@@ -336,6 +351,19 @@
 			padding-bottom: 20px;
 			margin: 0 10px;
 		}
+		
+		#a2a_div {
+			width: auto;
+		}
+		
+		#a2a_iframe {
+			width: 310px;
+			left: 0px;
+		}
+	}
+	
+	@media only screen and (min-width:504px) and (max-width:784px) {
+		#a2a_iframe { width: 418px; }
 	}
 	
 }

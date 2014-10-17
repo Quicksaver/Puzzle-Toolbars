@@ -37,6 +37,9 @@ this.whatsNewInit = function() {
 	
 	// need to get the changelog in order to populate it
 	message('changeLog');
+	
+	// init AddToAny stuff, this is init'ed in a type="content" iframe, through a data: src attr for running in an unprivileged context
+	//whatsNewA2A();
 };
 
 this.whatsNewCommand = function(str) {
@@ -172,6 +175,17 @@ this.whatsNewFillChangeLog = function(version) {
 		$('allVersions').hidden = true;
 	}
 };
+
+// set the iframe src attribute using the data: protocol is so the script is run with no chrome privileges;
+// https://developer.mozilla.org/en-US/docs/Displaying_web_content_in_an_extension_without_security_issues#Not_giving_privileges_to_documents_that_contain_untrusted_data
+// the iframe also has a sandbox attribute, as discussed on #amo-editors, and should be safe to use like this
+/*this.whatsNewA2A = function() {
+	xmlHttpRequest('chrome://'+objName+'/content/a2a.xhtml', function(xmlhttp) {
+		if(xmlhttp.readyState == 4) {
+			setAttribute($('a2a_iframe'), 'src', 'data:text/html,'+encodeURIComponent(xmlhttp.responseText));
+		}
+	});
+};*/
 
 this.whatsNewProgressListener = {
 	// this is needed in content progress listeners (for some reason)
