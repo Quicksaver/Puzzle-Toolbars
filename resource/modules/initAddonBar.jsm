@@ -1,4 +1,4 @@
-moduleAid.VERSION = '2.0.5';
+moduleAid.VERSION = '2.1.0';
 
 this.__defineGetter__('PrintPreviewListener', function() { return window.PrintPreviewListener; });
 this.__defineGetter__('browserPanel', function() { return $('browser-panel'); });
@@ -25,6 +25,31 @@ this.__defineGetter__('scrollBarWidth', function() {
 	}
 	return _scrollBarWidth;
 });
+
+// some bars need to properly force autohide on when in full screen, this is just a helper to ease this process
+this.inFullScreen = window.fullScreen;
+this.onFullScreen = {
+	handlers: [],
+	
+	add: function(h) {
+		if(this.handlers.indexOf(h) == -1) {
+			this.handlers.push(h);
+		}
+	},
+	
+	remove: function(h) {
+		if(this.handlers.indexOf(h) > -1) {
+			this.handlers.splice(this.handlers.indexOf(h), 1);
+		}
+	},
+	
+	listener: function() {
+		inFullScreen = !window.fullScreen;
+		for(var h of onFullScreen.handlers) {
+			h();
+		}
+	}
+};
 
 this.barCustomized = {
 	onWidgetAdded: function(aWidget, aArea) { this.handler(aWidget, aArea); },
@@ -185,6 +210,7 @@ moduleAid.LOADMODULE = function() {
 	listenerAid.add(window, 'aftercustomization', delayMoveBars);
 	listenerAid.add(window, 'ToggledPuzzleBar', moveBars);
 	listenerAid.add(window, 'PuzzleBarCustomized', moveBars);
+	listenerAid.add(window, 'fullscreen', onFullScreen.listener);
 	
 	// Half fix for when the status-bar is changed
 	listenerAid.add(statusBar, 'load', delayMoveBars, true);
@@ -200,6 +226,7 @@ moduleAid.UNLOADMODULE = function() {
 	listenerAid.remove(window, 'aftercustomization', delayMoveBars);
 	listenerAid.remove(window, 'ToggledPuzzleBar', moveBars);
 	listenerAid.remove(window, 'PuzzleBarCustomized', moveBars);
+	listenerAid.remove(window, 'fullscreen', onFullScreen.listener);
 	listenerAid.remove(statusBar, 'load', delayMoveBars, true);
 	
 	CustomizableUI.removeListener(barCustomized);

@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.1.1';
+moduleAid.VERSION = '1.1.2';
 
 this.PP_OFFSET_CORNER = 0;
 
@@ -91,8 +91,6 @@ this.cornerMove = function() {
 	var ppActiveHiddenClip = -6 +prefAid.corner_hotspotHeight;
 	
 	toggleAttribute(cornerPP, 'clipped', cornerStyle.bottom == 1);
-	
-	styleAid.unload('cornerMove_'+_UUID);
 	
 	var sscode = '/*The Puzzle Piece CSS declarations of variable values*/\n';
 	sscode += '@namespace url(http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul);\n';
@@ -187,7 +185,7 @@ this.styleCornerPersona = function() {
 		}
 	}
 	
-	// Unload current stylesheet if it's been loaded
+	// Unload current stylesheet if it's been loaded, just in case we're changing personas
 	styleAid.unload('cornerPersona_'+_UUID);
 	
 	if(lwtheme.bgImage != '') {
@@ -248,7 +246,7 @@ this.cornerPlacement = function() {
 };
 
 this.cornerAutoHide = function() {
-	if(prefAid.corner_autohide) {
+	if(prefAid.corner_autohide || (!DARWIN && inFullScreen && prefAid['fullscreen.autohide'])) {
 		initAutoHide(cornerBar, [cornerContainer, cornerPP], cornerContainer, 'opacity');
 	} else {
 		deinitAutoHide(cornerBar);
@@ -319,6 +317,8 @@ moduleAid.LOADMODULE = function() {
 	prefAid.listen('corner_accel', setCornerKey);
 	prefAid.listen('corner_shift', setCornerKey);
 	prefAid.listen('corner_alt', setCornerKey);
+	prefAid.listen('fullscreen.autohide', cornerAutoHide);
+	onFullScreen.add(cornerAutoHide);
 	
 	setCornerKey();
 	
@@ -330,6 +330,8 @@ moduleAid.UNLOADMODULE = function() {
 	styleAid.unload('cornerMove_'+_UUID);
 	styleAid.unload('cornerPersona_'+_UUID);
 	
+	onFullScreen.remove(cornerAutoHide);
+	prefAid.unlisten('fullscreen.autohide', cornerAutoHide);
 	prefAid.unlisten('corner_pp', cornerTogglePP);
 	prefAid.unlisten('corner_placement', cornerPlacement);
 	prefAid.unlisten('corner_autohide', cornerAutoHide);

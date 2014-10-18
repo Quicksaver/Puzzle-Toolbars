@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.0.1';
+moduleAid.VERSION = '1.0.2';
 
 this.__defineGetter__('topBar', function() { return $(objName+'-top-bar'); });
 this.__defineGetter__('topPP', function() { return $(objName+'-top-PP'); });
@@ -53,8 +53,6 @@ this.topMove = function() {
 		shrunkOffset -= Math.floor((PPsize +ppOffset -topBar.clientHeight) /2);
 		shrunkOffsetHover -= Math.min(Math.floor((PPsize -ppOffset -topBar.clientHeight) /2), 0);
 	}
-	
-	styleAid.unload('topMove_'+_UUID);
 	
 	var sscode = '/*The Puzzle Piece CSS declarations of variable values*/\n';
 	sscode += '@namespace url(http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul);\n';

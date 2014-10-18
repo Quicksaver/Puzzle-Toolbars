@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.0.3';
+moduleAid.VERSION = '1.0.4';
 
 // ammount of pixels to clip the bar to when it is closed or hidden
 this.CLIPBAR_LATERAL = 4;
@@ -64,8 +64,6 @@ this.lateralMove = function() {
 		shrunkOffset -= Math.floor((PPsize -lateralBar.clientWidth) /2);
 		shrunkOffsetHover -= Math.min(Math.floor((PPsize +((32-PPsize) /2) -lateralBar.clientWidth) /2), 0);
 	}
-	
-	styleAid.unload('lateralMove_'+_UUID);
 	
 	var sscode = '/*The Puzzle Piece CSS declarations of variable values*/\n';
 	sscode += '@namespace url(http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul);\n';
@@ -453,7 +451,7 @@ this.lateralToggleBottom = function() {
 };
 
 this.lateralAutoHide = function() {
-	if(prefAid.lateral_autohide && !customizing) {
+	if(!customizing && (prefAid.lateral_autohide || (!DARWIN && inFullScreen && prefAid['fullscreen.autohide']))) {
 		initAutoHide(lateralBar, [lateralContainer, lateralPP], lateralContainer, 'opacity');
 	} else {
 		deinitAutoHide(lateralBar);
@@ -524,6 +522,8 @@ moduleAid.LOADMODULE = function() {
 	prefAid.listen('lateral_accel', setLateralKey);
 	prefAid.listen('lateral_shift', setLateralKey);
 	prefAid.listen('lateral_alt', setLateralKey);
+	prefAid.listen('fullscreen.autohide', lateralAutoHide);
+	onFullScreen.add(lateralAutoHide);
 	
 	setLateralKey();
 	
@@ -543,6 +543,8 @@ moduleAid.UNLOADMODULE = function() {
 	piggyback.revert('lateral', gCustomizeMode, '_setDragActive');
 	piggyback.revert('lateral', gCustomizeMode, '_cancelDragActive');
 	
+	onFullScreen.remove(lateralAutoHide);
+	prefAid.unlisten('fullscreen.autohide', lateralAutoHide);
 	prefAid.unlisten('lateral_pp', lateralTogglePP);
 	prefAid.unlisten('lateral_bottom', lateralToggleBottom);
 	prefAid.unlisten('lateral_placement', lateralPlacement);

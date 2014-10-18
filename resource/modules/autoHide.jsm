@@ -1,4 +1,4 @@
-moduleAid.VERSION = '2.1.0';
+moduleAid.VERSION = '2.1.1';
 
 this.onDragExitAll = function() {
 	listenerAid.remove(gBrowser, "dragenter", onDragExitAll, false);
@@ -320,6 +320,10 @@ this.deinitAutoHide = function(bar) {
 };
 
 moduleAid.LOADMODULE = function() {
+	var fullscreenDefaults = {};
+	fullscreenDefaults['fullscreen.autohide'] = true;
+	prefAid.setDefaults(fullscreenDefaults, 'browser', '');
+	
 	listenerAid.add(window, 'popupshown', holdPopupMenu);
 };
 

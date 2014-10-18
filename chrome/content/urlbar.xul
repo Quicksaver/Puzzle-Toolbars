@@ -12,7 +12,6 @@
 		<box id="objName-urlbar-container" position="1">
 			<observes element="objName-urlbar-bar" attribute="autohide" />
 			<observes element="objName-urlbar-bar" attribute="hover" />
-			<observes element="objName-urlbar-bar" attribute="moz-collapsed" />
 			
 			<toolbar id="puzzleBars-urlbar-bar"
 				toolbarname="&urlbar.name;"

@@ -1,5 +1,6 @@
-moduleAid.VERSION = '1.0.5';
+moduleAid.VERSION = '1.0.6';
 
+this.__defineGetter__('bottomBox', function() { return $('browser-bottombox'); });
 this.__defineGetter__('bottomBar', function() { return $(objName+'-bottom-bar'); });
 this.__defineGetter__('bottomPP', function() { return $(objName+'-bottom-PP'); });
 
@@ -48,8 +49,6 @@ this.bottomMove = function() {
 		shrunkOffsetHover -= Math.min(Math.floor((PPsize -ppOffset -bottomBar.clientHeight) /2), 0);
 	}
 	
-	styleAid.unload('bottomMove_'+_UUID);
-	
 	var sscode = '/*The Puzzle Piece CSS declarations of variable values*/\n';
 	sscode += '@namespace url(http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul);\n';
 	sscode += '@-moz-document url("'+document.baseURI+'") {\n';
@@ -74,6 +73,11 @@ this.bottomMove = function() {
 	sscode += '	window['+objName+'_UUID="'+_UUID+'"] #'+objName+'-bottom-PP:not([active]):not(:hover) {\n';
 	sscode += '		bottom: '+(bottom +ppOffset +OSoffset -21)+'px;\n';
 	sscode += '	}\n';
+	
+	sscode += '	window['+objName+'_UUID="'+_UUID+'"] #'+objName+'-bottom-PP[autohide][active]:not(:hover):not([hover]),\n';
+	sscode += '	window['+objName+'_UUID="'+_UUID+'"] #'+objName+'-bottom-bar[autohide]:not(:hover):not([hover]) {\n';
+	sscode += '		margin-bottom: '+(1 -bottomBar.clientHeight)+'px;\n';
+	sscode += '	}\n';
 	sscode += '}';
 	
 	styleAid.load('bottomMove_'+_UUID, sscode, true);
@@ -83,6 +87,18 @@ this.bottomBrightText = function() {
 	toggleAttribute(bottomBar, 'brighttext', trueAttribute(gNavBar, 'brighttext'));
 };
 
+this.bottomAutoHide = function() {
+	if(!DARWIN && inFullScreen && prefAid['fullscreen.autohide']) {
+		initAutoHide(bottomBar, [bottomBar, bottomPP], bottomBar, 'margin');
+		
+		// this would cause the bottom toolbar to appear invisible
+		removeAttribute(bottomBox, 'layer');
+	} else {
+		setAttribute(bottomBox, 'layer', 'true');
+		deinitAutoHide(bottomBar);
+	}
+};
+
 this.bottomOnLoad = function() {
 	listenerAid.add(window, 'PuzzleBarsMoved', bottomMove);
 	objectWatcher.addAttributeWatcher(gNavBar, 'brighttext', bottomBrightText);
@@ -90,11 +106,15 @@ this.bottomOnLoad = function() {
 	bottomTogglePP(); // implies bottomMove()
 	bottomPlacement();
 	bottomBrightText();
+	bottomAutoHide();
 	
 	initBar(bottomBar, bottomPP);
 };
 
 this.bottomOnUnload = function() {
+	setAttribute(bottomBox, 'layer', 'true');
+	
+	deinitAutoHide(bottomBar);
 	deinitBar(bottomBar, bottomPP);
 	
 	objectWatcher.removeAttributeWatcher(gNavBar, 'brighttext', bottomBrightText);
@@ -108,6 +128,8 @@ moduleAid.LOADMODULE = function() {
 	prefAid.listen('bottom_accel', setBottomKey);
 	prefAid.listen('bottom_shift', setBottomKey);
 	prefAid.listen('bottom_alt', setBottomKey);
+	prefAid.listen('fullscreen.autohide', bottomAutoHide);
+	onFullScreen.add(bottomAutoHide);
 	
 	setBottomKey();
 	
@@ -118,6 +140,8 @@ moduleAid.UNLOADMODULE = function() {
 	overlayAid.removeOverlayWindow(window, 'bottom');
 	styleAid.unload('bottomMove_'+_UUID);
 	
+	onFullScreen.remove(bottomAutoHide);
+	prefAid.unlisten('fullscreen.autohide', bottomAutoHide);
 	prefAid.unlisten('bottom_pp', bottomTogglePP);
 	prefAid.unlisten('bottom_placement', bottomPlacement);
 	prefAid.unlisten('bottom_keycode', setBottomKey);

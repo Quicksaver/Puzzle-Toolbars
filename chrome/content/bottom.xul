@@ -62,6 +62,8 @@
 			insertafter="objName-bottom-bar"
 			hidden="true">
 			
+			<observes element="objName-bottom-bar" attribute="autohide" />
+			<observes element="objName-bottom-bar" attribute="hover" />
 			<observes element="objName-bottom-bar" attribute="movetoright" />
 			
 			<image onclick="objName.commandPP(event, this.parentNode);" />

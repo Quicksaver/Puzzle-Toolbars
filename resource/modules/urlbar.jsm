@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.0.1';
+moduleAid.VERSION = '1.0.2';
 
 this.__defineGetter__('gURLBar', function() { return window.gURLBar; });
 this.__defineGetter__('locationContainer', function() { return $('urlbar-container'); });
@@ -42,8 +42,6 @@ this.urlbarMove = function() {
 	// if we always reset this sheet, the animation wouldn't happen when toggling on the toolbar
 	if(lastWidth != urlbarBar.clientWidth) {
 		lastWidth = urlbarBar.clientWidth;
-		
-		styleAid.unload('urlbarMove_'+_UUID);
 		
 		var sscode = '/*The Puzzle Piece CSS declarations of variable values*/\n';
 		sscode += '@namespace url(http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul);\n';
