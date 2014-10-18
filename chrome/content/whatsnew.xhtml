@@ -62,20 +62,18 @@
 							<a target="_blank" href="https://addons.mozilla.org/firefox/user/quicksaver/">&whatsNew.profile;</a>
 						</p>
 					</div>
-					<!--<div id="share">
+					<div id="share">
 						<h5>&whatsNew.share;</h5>
 						<p>&whatsNew.friends;</p>
-						<div id="a2a_div">
-							-this is in an iframe, as the page inside loads a remote script, the data: protocol is so it is run with no chrome privileges;
-								 https://developer.mozilla.org/en-US/docs/Displaying_web_content_in_an_extension_without_security_issues#Not_giving_privileges_to_documents_that_contain_untrusted_data
-								 sandbox attribute should be safe to use like this, as discussed on #amo-editors -
-							- actually not acceptable... to work the iframe sandbox needs allow-same-origin, which will give it the same privileges as this page -
-							<iframe id="a2a_iframe"
-								type="content"
-								src="data:text/html,%3Chtml%3E%3Cbody%3E%3C/body%3E%3C/html%3E"
-								sandbox="allow-forms allow-popups allow-scripts"/>
+						<div id="a2a_div" linkname="&whatsNew.tryit;" linkurl="https://addons.mozilla.org/firefox/addon/the-puzzle-piece">
+							<a class="a2a_link" href="https://www.addtoany.com/add_to/facebook" target="_blank" title="Facebook"><span class="a2a_s_facebook"/></a>
+							<a class="a2a_link" href="https://www.addtoany.com/add_to/twitter" target="_blank" title="Twitter"><span class="a2a_s_twitter"/></a>
+							<a class="a2a_link" href="https://www.addtoany.com/add_to/google_plus" target="_blank" title="Google+"><span class="a2a_s_google_plus"/></a>
+							<a class="a2a_link" href="https://www.addtoany.com/add_to/blogger_post" target="_blank" title="Blogger"><span class="a2a_s_blogger"/></a>
+							<a class="a2a_link" href="https://www.addtoany.com/add_to/wordpress" target="_blank" title="WordPress"><span class="a2a_s_wordpress"/></a>
+							<a class="a2a_link" href="https://www.addtoany.com/share_save" target="_blank" title="&whatsNew.moreshare;"><span class="a2a_s_a2a"/></a>
 						</div>
-					</div>-->
+					</div>
 				</div>
 			</main>
 		</div>

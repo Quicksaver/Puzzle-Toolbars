@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.1.2';
+moduleAid.VERSION = '1.1.3';
 
 this.__defineGetter__('whatsNewURL', function() { return 'chrome://'+objPathString+'/content/whatsnew.xhtml'; });
 this.__defineGetter__('whatsNewAbout', function() { return 'about:'+objPathString; });
@@ -39,7 +39,7 @@ this.whatsNewInit = function() {
 	message('changeLog');
 	
 	// init AddToAny stuff, this is init'ed in a type="content" iframe, through a data: src attr for running in an unprivileged context
-	//whatsNewA2A();
+	whatsNewA2A();
 };
 
 this.whatsNewCommand = function(str) {
@@ -176,16 +176,18 @@ this.whatsNewFillChangeLog = function(version) {
 	}
 };
 
-// set the iframe src attribute using the data: protocol is so the script is run with no chrome privileges;
-// https://developer.mozilla.org/en-US/docs/Displaying_web_content_in_an_extension_without_security_issues#Not_giving_privileges_to_documents_that_contain_untrusted_data
-// the iframe also has a sandbox attribute, as discussed on #amo-editors, and should be safe to use like this
-/*this.whatsNewA2A = function() {
-	xmlHttpRequest('chrome://'+objName+'/content/a2a.xhtml', function(xmlhttp) {
-		if(xmlhttp.readyState == 4) {
-			setAttribute($('a2a_iframe'), 'src', 'data:text/html,'+encodeURIComponent(xmlhttp.responseText));
-		}
-	});
-};*/
+this.whatsNewA2A = function() {
+	// Since I can't use a local iframe to load remote content, I have to include and build the buttons myself.
+	// Build the buttons href's with the link to the add-on and the phrase to be used as default when sharing
+	var linkurl = $('a2a_div').getAttribute('linkurl');
+	var linkname = $('a2a_div').getAttribute('linkname');
+	var as = $$('.a2a_link');
+	for(var a of as) {
+		var href = a.getAttribute('href');
+		href += '?linkurl='+encodeURIComponent(linkurl)+'&linkname='+encodeURIComponent(linkname);
+		setAttribute(a, 'href', href);
+	}
+};
 
 this.whatsNewProgressListener = {
 	// this is needed in content progress listeners (for some reason)
