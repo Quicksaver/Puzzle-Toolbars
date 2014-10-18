@@ -95,6 +95,11 @@
 		pointer-events: none;
 	}
 	
+	/* for Hide Caption Titlebar Plus, its elements have the windowdragbox binding, which keeps them from capturing mouse events (thus showing autohiding toolbars) */
+	.puzzleBars-bar .hcp-dragbox-binding {
+		-moz-binding: none !important;
+	}
+	
 	/* Puzzle Pieces */
 	
 	window[customizing="true"] .PuzzlePiece {
