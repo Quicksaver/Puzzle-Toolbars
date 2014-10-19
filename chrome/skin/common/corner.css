@@ -151,8 +151,15 @@
 		width: 100%;
 	}
 	
-	#puzzleBars-corner-customize-stack > label { margin: 2px 15px; }
+	#puzzleBars-corner-customize-stack > label {
+		margin: 2px 15px;
+		color: #777;
+	}
 	#puzzleBars-corner-customize-stack:-moz-locale-dir(ltr) > label { text-align: right; }
 	#puzzleBars-corner-customize-stack:-moz-locale-dir(rtl) > label { text-align: left; }
+	
+	#puzzleBars-corner-customize-stack #puzzleBars-corner-bar {
+		margin: 0;
+	}
 	
 }
