@@ -17,6 +17,19 @@
 		-moz-appearance: none;
 	}
 	
+	#puzzleBars-status-bar-placeholder {
+		background-color: #FFF;
+		background-image: repeating-linear-gradient(135deg, rgba(255,255,255,.15), rgba(255,255,255,.15) 5px, rgba(128,128,128,.15) 5px, rgba(128,128,128,.15) 10px);
+		padding: 0 10px;
+	}
+	
+	toolbarpaletteitem[place="palette"] #puzzleBars-status-bar-placeholder {
+		background-image:	url("chrome://puzzlebars/skin/status-pp.png"),
+					repeating-linear-gradient(135deg, rgba(255,255,255,.15), rgba(255,255,255,.15) 5px, rgba(128,128,128,.15) 5px, rgba(128,128,128,.15) 10px);
+		background-position: center center;
+		background-repeat: no-repeat;
+	}
+	
 	window[customizing="true"] #status-bar,
 	window:not([customizing="true"]) #puzzleBars-status-bar-placeholder {
 		display: none;
