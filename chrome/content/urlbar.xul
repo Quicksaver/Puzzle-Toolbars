@@ -29,6 +29,8 @@
 				menuMove="&urlbar.menuMove;"
 				menuRemove="&urlbar.menuRemove;"
 				menuMain="&allbars.menuMain;">
+				
+				<observes element="main-window" attribute="customizing" />
 			</toolbar>
 		</box>
 		

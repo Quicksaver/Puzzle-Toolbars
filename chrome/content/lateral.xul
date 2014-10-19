@@ -55,6 +55,8 @@
 				menuRemove="&lateral.menuRemove;"
 				menuMain="&allbars.menuMain;">
 				
+				<observes element="main-window" attribute="customizing" />
+				
 				<hbox id="objName-lateral-customization-target" flex="1"/>
 				
 				<toolbarbutton id="objName-lateral-overflow-button"

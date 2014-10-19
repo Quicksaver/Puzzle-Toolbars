@@ -48,6 +48,8 @@
 			menuRemove="&bottom.menuRemove;"
 			menuMain="&allbars.menuMain;">
 			
+			<observes element="main-window" attribute="customizing" />
+			
 			<hbox id="objName-bottom-customization-target" flex="1"/>
 			
 			<toolbarbutton id="objName-bottom-overflow-button"

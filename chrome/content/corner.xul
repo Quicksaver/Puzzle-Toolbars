@@ -35,6 +35,8 @@
 				menuMove="&corner.menuMove;"
 				menuRemove="&corner.menuRemove;"
 				menuMain="&allbars.menuMain;">
+				
+				<observes element="main-window" attribute="customizing" />
 			</toolbar>
 		</box>
 		

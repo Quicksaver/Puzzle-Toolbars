@@ -1,4 +1,4 @@
-Modules.VERSION = '2.1.1';
+Modules.VERSION = '2.1.2';
 
 this.__defineGetter__('PrintPreviewListener', function() { return window.PrintPreviewListener; });
 this.__defineGetter__('browserPanel', function() { return $('browser-panel'); });
@@ -64,8 +64,6 @@ this.barCustomized = {
 this.toggleBar = function(id) {
 	if(bars[id]) {
 		CustomizableUI.setToolbarVisibility(id, bars[id].collapsed);
-		toggleAttribute(bars[id], 'customizing', !bars[id].collapsed && customizing);
-		
 		dispatch(bars[id], { type: 'ToggledPuzzleBar', cancelable: false });
 		return;
 	}

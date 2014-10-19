@@ -46,6 +46,8 @@
 			menuRemove="&top.menuRemove;"
 			menuMain="&allbars.menuMain;">
 			
+			<observes element="main-window" attribute="customizing" />
+			
 			<hbox id="objName-top-customization-target" flex="1"/>
 			
 			<toolbarbutton id="objName-top-overflow-button"
