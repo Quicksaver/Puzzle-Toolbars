@@ -1,9 +1,9 @@
-moduleAid.VERSION = '2.1.1';
+Modules.VERSION = '2.1.2';
 
 this.onDragExitAll = function() {
-	listenerAid.remove(gBrowser, "dragenter", onDragExitAll, false);
-	listenerAid.remove(window, "drop", onDragExitAll, false);
-	listenerAid.remove(window, "dragend", onDragExitAll, false);
+	Listeners.remove(gBrowser, "dragenter", onDragExitAll, false);
+	Listeners.remove(window, "drop", onDragExitAll, false);
+	Listeners.remove(window, "dragend", onDragExitAll, false);
 	
 	for(var b in bars) {
 		if(bars[b]._autohide) {
@@ -27,7 +27,7 @@ this.setHover = function(bar, hover, force) {
 		}
 	}
 	
-	timerAid.init('setHover_'+bar.id, function() {
+	Timers.init('setHover_'+bar.id, function() {
 		toggleAttribute(bar, 'hover', bar.hovers > 0 && !bar.collapsed);
 		dispatch(bar, { type: 'HoverAddonBar', cancelable: false });
 	});
@@ -41,7 +41,7 @@ this.initialShowBar = function(e) {
 	} else {
 		setHover(bar, true);
 		
-		// don't use timerAid, because if we use multiple initialShowBar()'s it would get stuck open
+		// don't use Timers, because if we use multiple initialShowBar()'s it would get stuck open
 		// we keep a reference to the timer, because otherwise sometimes it would not trigger (go figure...), hopefully this helps with that
 		var thisShowing = aSync(function() {
 			if(typeof(setHover) != 'undefined' && bar._initialShowings) {
@@ -163,14 +163,14 @@ this.holdPopupMenu = function(e) {
 		if(!trueAttribute(hold, 'hover')) {
 			hideIt(target);
 			hold._transition.add(popupsFinishedVisible);
-			timerAid.init('ensureHoldPopupShows', popupsFinishedVisible, 400);
+			Timers.init('ensureHoldPopupShows', popupsFinishedVisible, 400);
 		}
 		
 		setHover(hold, true);
 		
 		var selfRemover = function(ee) {
 			if(ee.originalTarget != e.originalTarget) { return; } //submenus
-			listenerAid.remove(target, 'popuphidden', selfRemover);
+			Listeners.remove(target, 'popuphidden', selfRemover);
 			popupsRemoveListeners();
 			
 			// making sure we don't collapse it permanently
@@ -184,12 +184,12 @@ this.holdPopupMenu = function(e) {
 				}
 			}, 150);
 		}
-		listenerAid.add(target, 'popuphidden', selfRemover);
+		Listeners.add(target, 'popuphidden', selfRemover);
 	}
 };
 
 this.popupsRemoveListeners = function() {
-	timerAid.cancel('ensureHoldPopupShows');
+	Timers.cancel('ensureHoldPopupShows');
 	for(var b in bars) {
 		if(bars[b]._autohide) {
 			bars[b]._transition.remove(popupsFinishedVisible);
@@ -232,9 +232,9 @@ this.initAutoHide = function(bar, nodes, transitionNode, transitionProperty) {
 	bar._initialShowings = [];
 	bar.hovers = 0;
 	
-	listenerAid.add(bar, 'ToggledPuzzleBar', initialShowBar);
-	listenerAid.add(bar, 'PuzzleBarCustomized', initialShowBar);
-	listenerAid.add(bar._pp, 'ToggledPuzzleBarThroughButton', initialThroughButton);
+	Listeners.add(bar, 'ToggledPuzzleBar', initialShowBar);
+	Listeners.add(bar, 'PuzzleBarCustomized', initialShowBar);
+	Listeners.add(bar._pp, 'ToggledPuzzleBarThroughButton', initialThroughButton);
 	
 	bar._onMouseOver = function() {
 		setHover(bar, true);
@@ -246,15 +246,15 @@ this.initAutoHide = function(bar, nodes, transitionNode, transitionProperty) {
 	
 	bar._onDragEnter = function() {
 		setHover(bar, true, 1);
-		listenerAid.add(gBrowser, "dragenter", onDragExitAll, false);
-		listenerAid.add(window, "drop", onDragExitAll, false);
-		listenerAid.add(window, "dragend", onDragExitAll, false);
+		Listeners.add(gBrowser, "dragenter", onDragExitAll, false);
+		Listeners.add(window, "drop", onDragExitAll, false);
+		Listeners.add(window, "dragend", onDragExitAll, false);
 	};
 	
 	for(var node of nodes) {
-		listenerAid.add(node, 'dragenter', bar._onDragEnter);
-		listenerAid.add(node, 'mouseover', bar._onMouseOver);
-		listenerAid.add(node, 'mouseout', bar._onMouseOut);
+		Listeners.add(node, 'dragenter', bar._onDragEnter);
+		Listeners.add(node, 'mouseover', bar._onMouseOver);
+		Listeners.add(node, 'mouseout', bar._onMouseOut);
 		bar._autohide.push(node);
 	}
 	
@@ -282,11 +282,11 @@ this.initAutoHide = function(bar, nodes, transitionNode, transitionProperty) {
 			catch(ex) { Cu.reportError(ex); }
 		}
 	};
-	listenerAid.add(bar._transition.node, 'transitionend', bar._transition.onEnd);
+	Listeners.add(bar._transition.node, 'transitionend', bar._transition.onEnd);
 	
 	setAttribute(bar, 'autohide', 'true');
 	
-	if(!prefAid.noInitialShow) {
+	if(!Prefs.noInitialShow) {
 		initialShowBar({ target: bar });
 	}
 };
@@ -298,20 +298,20 @@ this.deinitAutoHide = function(bar) {
 	removeAttribute(bar, 'hover');
 	
 	for(var node of bar._autohide) {
-		listenerAid.remove(node, 'dragenter', bar._onDragEnter);
-		listenerAid.remove(node, 'mouseover', bar._onMouseOver);
-		listenerAid.remove(node, 'mouseout', bar._onMouseOut);
+		Listeners.remove(node, 'dragenter', bar._onDragEnter);
+		Listeners.remove(node, 'mouseover', bar._onMouseOver);
+		Listeners.remove(node, 'mouseout', bar._onMouseOut);
 	}
 	
 	delete bar._onMouseOver;
 	delete bar._onMouseOut;
 	delete bar._onDragEnter;
 	
-	listenerAid.remove(bar, 'ToggledPuzzleBar', initialShowBar);
-	listenerAid.remove(bar, 'PuzzleBarCustomized', initialShowBar);
-	listenerAid.remove(bar._pp, 'ToggledPuzzleBarThroughButton', initialThroughButton);
+	Listeners.remove(bar, 'ToggledPuzzleBar', initialShowBar);
+	Listeners.remove(bar, 'PuzzleBarCustomized', initialShowBar);
+	Listeners.remove(bar._pp, 'ToggledPuzzleBarThroughButton', initialThroughButton);
 	
-	listenerAid.remove(bar._transition.node, 'transitionend', bar._transition.onEnd);
+	Listeners.remove(bar._transition.node, 'transitionend', bar._transition.onEnd);
 	delete bar._transition;
 	
 	delete bar.hovers;
@@ -319,14 +319,14 @@ this.deinitAutoHide = function(bar) {
 	delete bar._autohide;
 };
 
-moduleAid.LOADMODULE = function() {
+Modules.LOADMODULE = function() {
 	var fullscreenDefaults = {};
 	fullscreenDefaults['fullscreen.autohide'] = true;
-	prefAid.setDefaults(fullscreenDefaults, 'browser', '');
+	Prefs.setDefaults(fullscreenDefaults, 'browser', '');
 	
-	listenerAid.add(window, 'popupshown', holdPopupMenu);
+	Listeners.add(window, 'popupshown', holdPopupMenu);
 };
 
-moduleAid.UNLOADMODULE = function() {
-	listenerAid.remove(window, 'popupshown', holdPopupMenu);
+Modules.UNLOADMODULE = function() {
+	Listeners.remove(window, 'popupshown', holdPopupMenu);
 };

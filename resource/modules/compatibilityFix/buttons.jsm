@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.0.0';
+Modules.VERSION = '1.0.1';
 
 // list of buttons that will be forced to have the toolbarbutton-1 class when in our toolbars
 this.buttonsClassForce = ['cookiesafe-button'];
@@ -17,10 +17,10 @@ this.buttonsListener = {
 	}
 };
 
-moduleAid.LOADMODULE = function() {
+Modules.LOADMODULE = function() {
 	CustomizableUI.addListener(buttonsListener);
 };
 
-moduleAid.UNLOADMODULE = function() {
+Modules.UNLOADMODULE = function() {
 	CustomizableUI.removeListener(buttonsListener);
 };

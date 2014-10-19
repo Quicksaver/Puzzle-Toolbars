@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.0.4';
+Modules.VERSION = '1.0.5';
 
 // ammount of pixels to clip the bar to when it is closed or hidden
 this.CLIPBAR_LATERAL = 4;
@@ -12,19 +12,19 @@ this.__defineGetter__('sidebarOpen', function() { return $('sidebar-box') ? !$('
 this.lateralKey = {
 	id: objName+'-lateral-key',
 	command: objName+':ToggleLateralBar',
-	get keycode () { return prefAid.lateral_keycode; },
-	get accel () { return prefAid.lateral_accel; },
-	get shift () { return prefAid.lateral_shift; },
-	get alt () { return prefAid.lateral_alt; }
+	get keycode () { return Prefs.lateral_keycode; },
+	get accel () { return Prefs.lateral_accel; },
+	get shift () { return Prefs.lateral_shift; },
+	get alt () { return Prefs.lateral_alt; }
 };
 
 this.setLateralKey = function() {
-	if(lateralKey.keycode != 'none') { keysetAid.register(lateralKey); }
-	else { keysetAid.unregister(lateralKey); }
+	if(lateralKey.keycode != 'none') { Keysets.register(lateralKey); }
+	else { Keysets.unregister(lateralKey); }
 };
 
 this.lateralSidebarOpen = function() {
-	toggleAttribute(lateralBar, 'sidebarOpen', sidebarOpen && LTR == (prefAid.lateral_placement == 'left'));
+	toggleAttribute(lateralBar, 'sidebarOpen', sidebarOpen && LTR == (Prefs.lateral_placement == 'left'));
 };
 
 this.lateralStyle = {};
@@ -142,7 +142,7 @@ this.lateralMove = function() {
 	
 	sscode += '}';
 	
-	styleAid.load('lateralMove_'+_UUID, sscode, true);
+	Styles.load('lateralMove_'+_UUID, sscode, true);
 };
 
 // need this for our custom handlers below
@@ -413,9 +413,9 @@ this.lateralInitOverflow = function(bar) {
 	}
 	
 	// need to keep backups and restore them afterwards, to prevent a ZC
-	piggyback.add('lateral', bar.overflowable, 'onOverflow', OTonOverflow);
-	piggyback.add('lateral', bar.overflowable, '_onLazyResize', OTonLazyResize);
-	piggyback.add('lateral', bar.overflowable, '_moveItemsBackToTheirOrigin', OTmoveItemsBackToTheirOrigin);
+	Piggyback.add('lateral', bar.overflowable, 'onOverflow', OTonOverflow);
+	Piggyback.add('lateral', bar.overflowable, '_onLazyResize', OTonLazyResize);
+	Piggyback.add('lateral', bar.overflowable, '_moveItemsBackToTheirOrigin', OTmoveItemsBackToTheirOrigin);
 	
 	bar.overflowable.init();
 	bar.overflowable._enabled = true;
@@ -433,25 +433,25 @@ this.lateralDeinitOverflow = function(bar) {
 		bar.overflowable._lazyResizeHandler = null;
 	}
 	
-	piggyback.revert('lateral', bar.overflowable, 'onOverflow');
-	piggyback.revert('lateral', bar.overflowable, '_onLazyResize');
-	piggyback.revert('lateral', bar.overflowable, '_moveItemsBackToTheirOrigin');
+	Piggyback.revert('lateral', bar.overflowable, 'onOverflow');
+	Piggyback.revert('lateral', bar.overflowable, '_onLazyResize');
+	Piggyback.revert('lateral', bar.overflowable, '_moveItemsBackToTheirOrigin');
 };
 
 this.lateralTogglePP = function() {
-	lateralPP.hidden = !prefAid.lateral_pp;
-	toggleAttribute(lateralBar, 'hidePP', !prefAid.lateral_pp);
+	lateralPP.hidden = !Prefs.lateral_pp;
+	toggleAttribute(lateralBar, 'hidePP', !Prefs.lateral_pp);
 	
 	// this is done here because if the PP is hidden, its clientWidth is 0, so it needs to update its position when it's shown
 	lateralMove();
 };
 
 this.lateralToggleBottom = function() {
-	toggleAttribute(lateralBar, 'movetobottom', prefAid.lateral_bottom);
+	toggleAttribute(lateralBar, 'movetobottom', Prefs.lateral_bottom);
 };
 
 this.lateralAutoHide = function() {
-	if(!customizing && (prefAid.lateral_autohide || (!DARWIN && inFullScreen && prefAid['fullscreen.autohide']))) {
+	if(!customizing && (Prefs.lateral_autohide || (!DARWIN && inFullScreen && Prefs['fullscreen.autohide']))) {
 		initAutoHide(lateralBar, [lateralContainer, lateralPP], lateralContainer, 'opacity');
 	} else {
 		deinitAutoHide(lateralBar);
@@ -459,8 +459,8 @@ this.lateralAutoHide = function() {
 };
 
 this.lateralOnLoad = function() {
-	listenerAid.add(window, 'PuzzleBarsMoved', lateralMove);
-	objectWatcher.addAttributeWatcher($('sidebar-box'), 'hidden', lateralSidebarOpen);
+	Listeners.add(window, 'PuzzleBarsMoved', lateralMove);
+	Watchers.addAttributeWatcher($('sidebar-box'), 'hidden', lateralSidebarOpen);
 	
 	lateralSidebarOpen();
 	lateralToggleBottom();
@@ -471,93 +471,93 @@ this.lateralOnLoad = function() {
 	initBar(lateralBar, lateralPP);
 	lateralInitOverflow(lateralBar);
 	
-	listenerAid.add(window, 'beforecustomization', lateralCustomize);
-	listenerAid.add(window, 'aftercustomization', lateralCustomize);
+	Listeners.add(window, 'beforecustomization', lateralCustomize);
+	Listeners.add(window, 'aftercustomization', lateralCustomize);
 	lateralCustomize(customizing);
 };
 
 this.lateralOnUnload = function() {
-	listenerAid.remove(window, 'beforecustomization', lateralCustomize);
-	listenerAid.remove(window, 'aftercustomization', lateralCustomize);
-	overlayAid.removeOverlayWindow(window, 'lateralCustomize');
+	Listeners.remove(window, 'beforecustomization', lateralCustomize);
+	Listeners.remove(window, 'aftercustomization', lateralCustomize);
+	Overlays.removeOverlayWindow(window, 'lateralCustomize');
 	
 	deinitAutoHide(lateralBar);
 	lateralDeinitOverflow(lateralBar);
 	deinitBar(lateralBar, lateralPP);
 	
-	listenerAid.remove(window, 'PuzzleBarsMoved', lateralMove);
-	objectWatcher.removeAttributeWatcher($('sidebar-box'), 'hidden', lateralSidebarOpen);
+	Listeners.remove(window, 'PuzzleBarsMoved', lateralMove);
+	Watchers.removeAttributeWatcher($('sidebar-box'), 'hidden', lateralSidebarOpen);
 };
 
 this.lateralCustomize = function(e, force) {
 	if(e === true || e.type == 'beforecustomization') {
 		// I have to disable autohide, or it screws up the layout when leaving customize mode, no idea why though...
 		deinitAutoHide(lateralBar);
-		overlayAid.overlayWindow(window, 'lateralCustomize');
+		Overlays.overlayWindow(window, 'lateralCustomize');
 	} else {
-		overlayAid.removeOverlayWindow(window, 'lateralCustomize');
+		Overlays.removeOverlayWindow(window, 'lateralCustomize');
 		lateralAutoHide();
 	}
 };
 
 this.lateralPlacement = function() {
-	if(LTR == (prefAid.lateral_placement == 'right')) {
-		overlayAid.overlayURI('chrome://'+objPathString+'/content/lateral.xul', 'lateralRight');
-		overlayAid.overlayURI('chrome://'+objPathString+'/content/lateralCustomize.xul', 'lateralRightCustomize');
+	if(LTR == (Prefs.lateral_placement == 'right')) {
+		Overlays.overlayURI('chrome://'+objPathString+'/content/lateral.xul', 'lateralRight');
+		Overlays.overlayURI('chrome://'+objPathString+'/content/lateralCustomize.xul', 'lateralRightCustomize');
 	} else {
-		overlayAid.removeOverlayURI('chrome://'+objPathString+'/content/lateral.xul', 'lateralRight');
-		overlayAid.removeOverlayURI('chrome://'+objPathString+'/content/lateralCustomize.xul', 'lateralRightCustomize');
+		Overlays.removeOverlayURI('chrome://'+objPathString+'/content/lateral.xul', 'lateralRight');
+		Overlays.removeOverlayURI('chrome://'+objPathString+'/content/lateralCustomize.xul', 'lateralRightCustomize');
 	}
 	
-	toggleAttribute(lateralBar, 'movetoright', prefAid.lateral_placement == 'right');
+	toggleAttribute(lateralBar, 'movetoright', Prefs.lateral_placement == 'right');
 };
 
-moduleAid.LOADMODULE = function() {
-	prefAid.listen('lateral_pp', lateralTogglePP);
-	prefAid.listen('lateral_bottom', lateralToggleBottom);
-	prefAid.listen('lateral_placement', lateralPlacement);
-	prefAid.listen('lateral_placement', lateralSidebarOpen);
-	prefAid.listen('lateral_autohide', lateralAutoHide);
-	prefAid.listen('lateral_keycode', setLateralKey);
-	prefAid.listen('lateral_accel', setLateralKey);
-	prefAid.listen('lateral_shift', setLateralKey);
-	prefAid.listen('lateral_alt', setLateralKey);
-	prefAid.listen('fullscreen.autohide', lateralAutoHide);
+Modules.LOADMODULE = function() {
+	Prefs.listen('lateral_pp', lateralTogglePP);
+	Prefs.listen('lateral_bottom', lateralToggleBottom);
+	Prefs.listen('lateral_placement', lateralPlacement);
+	Prefs.listen('lateral_placement', lateralSidebarOpen);
+	Prefs.listen('lateral_autohide', lateralAutoHide);
+	Prefs.listen('lateral_keycode', setLateralKey);
+	Prefs.listen('lateral_accel', setLateralKey);
+	Prefs.listen('lateral_shift', setLateralKey);
+	Prefs.listen('lateral_alt', setLateralKey);
+	Prefs.listen('fullscreen.autohide', lateralAutoHide);
 	onFullScreen.add(lateralAutoHide);
 	
 	setLateralKey();
 	
 	// http://mxr.mozilla.org/mozilla-central/source/browser/components/customizableui/CustomizeMode.jsm
-	piggyback.add('lateral', gCustomizeMode, '_onDragOver', CModeOnDragOver);
-	piggyback.add('lateral', gCustomizeMode, '_setDragActive', CModeSetDragActive);
-	piggyback.add('lateral', gCustomizeMode, '_cancelDragActive', CModeCancelDragActive);
+	Piggyback.add('lateral', gCustomizeMode, '_onDragOver', CModeOnDragOver);
+	Piggyback.add('lateral', gCustomizeMode, '_setDragActive', CModeSetDragActive);
+	Piggyback.add('lateral', gCustomizeMode, '_cancelDragActive', CModeCancelDragActive);
 	
-	overlayAid.overlayWindow(window, 'lateral', null, lateralOnLoad, lateralOnUnload);
+	Overlays.overlayWindow(window, 'lateral', null, lateralOnLoad, lateralOnUnload);
 };
 
-moduleAid.UNLOADMODULE = function() {
-	overlayAid.removeOverlayWindow(window, 'lateral');
-	styleAid.unload('lateralMove_'+_UUID);
+Modules.UNLOADMODULE = function() {
+	Overlays.removeOverlayWindow(window, 'lateral');
+	Styles.unload('lateralMove_'+_UUID);
 	
-	piggyback.revert('lateral', gCustomizeMode, '_onDragOver');
-	piggyback.revert('lateral', gCustomizeMode, '_setDragActive');
-	piggyback.revert('lateral', gCustomizeMode, '_cancelDragActive');
+	Piggyback.revert('lateral', gCustomizeMode, '_onDragOver');
+	Piggyback.revert('lateral', gCustomizeMode, '_setDragActive');
+	Piggyback.revert('lateral', gCustomizeMode, '_cancelDragActive');
 	
 	onFullScreen.remove(lateralAutoHide);
-	prefAid.unlisten('fullscreen.autohide', lateralAutoHide);
-	prefAid.unlisten('lateral_pp', lateralTogglePP);
-	prefAid.unlisten('lateral_bottom', lateralToggleBottom);
-	prefAid.unlisten('lateral_placement', lateralPlacement);
-	prefAid.unlisten('lateral_placement', lateralSidebarOpen);
-	prefAid.unlisten('lateral_autohide', lateralAutoHide);
-	prefAid.unlisten('lateral_keycode', setLateralKey);
-	prefAid.unlisten('lateral_accel', setLateralKey);
-	prefAid.unlisten('lateral_shift', setLateralKey);
-	prefAid.unlisten('lateral_alt', setLateralKey);
+	Prefs.unlisten('fullscreen.autohide', lateralAutoHide);
+	Prefs.unlisten('lateral_pp', lateralTogglePP);
+	Prefs.unlisten('lateral_bottom', lateralToggleBottom);
+	Prefs.unlisten('lateral_placement', lateralPlacement);
+	Prefs.unlisten('lateral_placement', lateralSidebarOpen);
+	Prefs.unlisten('lateral_autohide', lateralAutoHide);
+	Prefs.unlisten('lateral_keycode', setLateralKey);
+	Prefs.unlisten('lateral_accel', setLateralKey);
+	Prefs.unlisten('lateral_shift', setLateralKey);
+	Prefs.unlisten('lateral_alt', setLateralKey);
 	
-	if(UNLOADED || !prefAid.lateral_bar) {
-		overlayAid.removeOverlayURI('chrome://'+objPathString+'/content/lateral.xul', 'lateralRight');
-		overlayAid.removeOverlayURI('chrome://'+objPathString+'/content/lateralCustomize.xul', 'lateralRightCustomize');
-		keysetAid.unregister(lateralKey);
+	if(UNLOADED || !Prefs.lateral_bar) {
+		Overlays.removeOverlayURI('chrome://'+objPathString+'/content/lateral.xul', 'lateralRight');
+		Overlays.removeOverlayURI('chrome://'+objPathString+'/content/lateralCustomize.xul', 'lateralRightCustomize');
+		Keysets.unregister(lateralKey);
 	}
 };

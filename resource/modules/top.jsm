@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.0.2';
+Modules.VERSION = '1.0.3';
 
 this.__defineGetter__('topBar', function() { return $(objName+'-top-bar'); });
 this.__defineGetter__('topPP', function() { return $(objName+'-top-PP'); });
@@ -6,27 +6,27 @@ this.__defineGetter__('topPP', function() { return $(objName+'-top-PP'); });
 this.topKey = {
 	id: objName+'-top-key',
 	command: objName+':ToggleTopBar',
-	get keycode () { return prefAid.top_keycode; },
-	get accel () { return prefAid.top_accel; },
-	get shift () { return prefAid.top_shift; },
-	get alt () { return prefAid.top_alt; }
+	get keycode () { return Prefs.top_keycode; },
+	get accel () { return Prefs.top_accel; },
+	get shift () { return Prefs.top_shift; },
+	get alt () { return Prefs.top_alt; }
 };
 
 this.setTopKey = function() {
-	if(topKey.keycode != 'none') { keysetAid.register(topKey); }
-	else { keysetAid.unregister(topKey); }
+	if(topKey.keycode != 'none') { Keysets.register(topKey); }
+	else { Keysets.unregister(topKey); }
 };
 
 this.topTogglePP = function() {
-	topPP.hidden = !prefAid.top_pp;
-	toggleAttribute(topBar, 'hidePP', !prefAid.top_pp);
+	topPP.hidden = !Prefs.top_pp;
+	toggleAttribute(topBar, 'hidePP', !Prefs.top_pp);
 	
 	// this is done here because if the PP is hidden, its clientHeight is 0, so it needs to update its position when it's shown
 	topMove();
 };
 
 this.topPlacement = function() {
-	toggleAttribute(topBar, 'movetoright', prefAid.top_placement == 'right');
+	toggleAttribute(topBar, 'movetoright', Prefs.top_placement == 'right');
 };
 
 this.topStyle = {};
@@ -80,11 +80,11 @@ this.topMove = function() {
 	sscode += '	}\n';
 	sscode += '}';
 	
-	styleAid.load('topMove_'+_UUID, sscode, true);
+	Styles.load('topMove_'+_UUID, sscode, true);
 };
 
 this.topOnLoad = function() {
-	listenerAid.add(window, 'PuzzleBarsMoved', topMove);
+	Listeners.add(window, 'PuzzleBarsMoved', topMove);
 	
 	topTogglePP(); // implies topMove()
 	topPlacement();
@@ -98,34 +98,34 @@ this.topOnLoad = function() {
 this.topOnUnload = function() {
 	deinitBar(topBar, topPP);
 	
-	listenerAid.remove(window, 'PuzzleBarsMoved', topMove);
+	Listeners.remove(window, 'PuzzleBarsMoved', topMove);
 };
 
-moduleAid.LOADMODULE = function() {
-	prefAid.listen('top_pp', topTogglePP);
-	prefAid.listen('top_placement', topPlacement);
-	prefAid.listen('top_keycode', setTopKey);
-	prefAid.listen('top_accel', setTopKey);
-	prefAid.listen('top_shift', setTopKey);
-	prefAid.listen('top_alt', setTopKey);
+Modules.LOADMODULE = function() {
+	Prefs.listen('top_pp', topTogglePP);
+	Prefs.listen('top_placement', topPlacement);
+	Prefs.listen('top_keycode', setTopKey);
+	Prefs.listen('top_accel', setTopKey);
+	Prefs.listen('top_shift', setTopKey);
+	Prefs.listen('top_alt', setTopKey);
 	
 	setTopKey();
 	
-	overlayAid.overlayWindow(window, 'top', null, topOnLoad, topOnUnload);
+	Overlays.overlayWindow(window, 'top', null, topOnLoad, topOnUnload);
 };
 
-moduleAid.UNLOADMODULE = function() {
-	overlayAid.removeOverlayWindow(window, 'top');
-	styleAid.unload('topMove_'+_UUID);
+Modules.UNLOADMODULE = function() {
+	Overlays.removeOverlayWindow(window, 'top');
+	Styles.unload('topMove_'+_UUID);
 	
-	prefAid.unlisten('top_pp', topTogglePP);
-	prefAid.unlisten('top_placement', topPlacement);
-	prefAid.unlisten('top_keycode', setTopKey);
-	prefAid.unlisten('top_accel', setTopKey);
-	prefAid.unlisten('top_shift', setTopKey);
-	prefAid.unlisten('top_alt', setTopKey);
+	Prefs.unlisten('top_pp', topTogglePP);
+	Prefs.unlisten('top_placement', topPlacement);
+	Prefs.unlisten('top_keycode', setTopKey);
+	Prefs.unlisten('top_accel', setTopKey);
+	Prefs.unlisten('top_shift', setTopKey);
+	Prefs.unlisten('top_alt', setTopKey);
 	
-	if(UNLOADED || !prefAid.top_bar) {
-		keysetAid.unregister(topKey);
+	if(UNLOADED || !Prefs.top_bar) {
+		Keysets.unregister(topKey);
 	}
 };

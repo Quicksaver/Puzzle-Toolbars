@@ -1,4 +1,4 @@
-moduleAid.VERSION = '2.0.1';
+Modules.VERSION = '2.0.2';
 
 this.commandPP = function(e, button) {
 	if(e.button != 0) { return; }
@@ -18,18 +18,18 @@ this.handleFullScreen = function(m) {
 	});
 };
 
-moduleAid.LOADMODULE = function() {
-	messenger.loadInWindow(window, 'placePP');
-	messenger.listenWindow(window, 'inFullScreen', handleFullScreen);
+Modules.LOADMODULE = function() {
+	Messenger.loadInWindow(window, 'placePP');
+	Messenger.listenWindow(window, 'inFullScreen', handleFullScreen);
 	
-	listenerAid.add(window, 'ToggledPuzzleBar', activatePPs);
-	listenerAid.add(window, 'LoadedPuzzleBar', activatePPs);
+	Listeners.add(window, 'ToggledPuzzleBar', activatePPs);
+	Listeners.add(window, 'LoadedPuzzleBar', activatePPs);
 };
 
-moduleAid.UNLOADMODULE = function() {
-	listenerAid.remove(window, 'ToggledPuzzleBar', activatePPs);
-	listenerAid.remove(window, 'LoadedPuzzleBar', activatePPs);
+Modules.UNLOADMODULE = function() {
+	Listeners.remove(window, 'ToggledPuzzleBar', activatePPs);
+	Listeners.remove(window, 'LoadedPuzzleBar', activatePPs);
 	
-	messenger.unlistenWindow(window, 'inFullScreen', handleFullScreen);
-	messenger.unloadFromWindow(window, 'placePP');
+	Messenger.unlistenWindow(window, 'inFullScreen', handleFullScreen);
+	Messenger.unloadFromWindow(window, 'placePP');
 };

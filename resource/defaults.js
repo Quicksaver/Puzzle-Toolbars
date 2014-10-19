@@ -1,4 +1,4 @@
-var defaultsVersion = '1.5.9';
+var defaultsVersion = '1.5.10';
 var objName = 'puzzleBars';
 var objPathString = 'puzzlebars';
 var prefList = {
@@ -70,29 +70,29 @@ function stopAddon(window) {
 function startPreferences(window) {
 	replaceObjStrings(window.document);
 	preparePreferences(window);
-	window[objName].moduleAid.load('options');
+	window[objName].Modules.load('options');
 }
 
 function onStartup() {
-	moduleAid.load('compatibilityFix/sandboxFixes');
-	moduleAid.load('specialWidgets');
-	moduleAid.load('migrateLegacy');
-	moduleAid.load('statusBar');
+	Modules.load('compatibilityFix/sandboxFixes');
+	Modules.load('specialWidgets');
+	Modules.load('migrateLegacy');
+	Modules.load('statusBar');
 	
 	// the add-on initialization is done inside the statusBar module so it can correctly handle the status-bar in all windows
 	
 	// Apply the add-on to every preferences window opened and to be opened
-	windowMediator.callOnAll(startPreferences, null, "chrome://"+objPathString+"/content/options.xul");
-	windowMediator.register(startPreferences, 'domwindowopened', null, "chrome://"+objPathString+"/content/options.xul");
-	browserMediator.callOnAll(startPreferences, "chrome://"+objPathString+"/content/options.xul");
-	browserMediator.register(startPreferences, 'pageshow', "chrome://"+objPathString+"/content/options.xul");
+	Windows.callOnAll(startPreferences, null, "chrome://"+objPathString+"/content/options.xul");
+	Windows.register(startPreferences, 'domwindowopened', null, "chrome://"+objPathString+"/content/options.xul");
+	Browsers.callOnAll(startPreferences, "chrome://"+objPathString+"/content/options.xul");
+	Browsers.register(startPreferences, 'pageshow', "chrome://"+objPathString+"/content/options.xul");
 }
 
 function onShutdown() {
 	// deinitialization is also done inside statusBar, just like above
 	
-	moduleAid.unload('statusBar');
-	moduleAid.unload('migrateLegacy');
-	moduleAid.unload('specialWidgets');
-	moduleAid.unload('compatibilityFix/sandboxFixes');
+	Modules.unload('statusBar');
+	Modules.unload('migrateLegacy');
+	Modules.unload('specialWidgets');
+	Modules.unload('compatibilityFix/sandboxFixes');
 }

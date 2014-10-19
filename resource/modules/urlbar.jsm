@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.0.2';
+Modules.VERSION = '1.0.3';
 
 this.__defineGetter__('gURLBar', function() { return window.gURLBar; });
 this.__defineGetter__('locationContainer', function() { return $('urlbar-container'); });
@@ -12,15 +12,15 @@ this.flexContainers = false;
 this.urlbarKey = {
 	id: objName+'-urlbar-key',
 	command: objName+':ToggleURLBarBar',
-	get keycode () { return prefAid.urlbar_keycode; },
-	get accel () { return prefAid.urlbar_accel; },
-	get shift () { return prefAid.urlbar_shift; },
-	get alt () { return prefAid.urlbar_alt; }
+	get keycode () { return Prefs.urlbar_keycode; },
+	get accel () { return Prefs.urlbar_accel; },
+	get shift () { return Prefs.urlbar_shift; },
+	get alt () { return Prefs.urlbar_alt; }
 };
 
 this.setUrlbarKey = function() {
-	if(urlbarKey.keycode != 'none') { keysetAid.register(urlbarKey); }
-	else { keysetAid.unregister(urlbarKey); }
+	if(urlbarKey.keycode != 'none') { Keysets.register(urlbarKey); }
+	else { Keysets.unregister(urlbarKey); }
 };
 
 this.urlbarOpen = function() {
@@ -51,7 +51,7 @@ this.urlbarMove = function() {
 		sscode += '	}\n';
 		sscode += '}';
 		
-		styleAid.load('urlbarMove_'+_UUID, sscode, true);
+		Styles.load('urlbarMove_'+_UUID, sscode, true);
 	}
 	
 	// Bugfix for the add-on being partially cutoff at startup
@@ -66,12 +66,12 @@ this.urlbarMove = function() {
 };
 
 this.urlbarTogglePP = function() {
-	urlbarPP.hidden = !prefAid.urlbar_pp;
-	toggleAttribute(urlbarBar, 'hidePP', !prefAid.urlbar_pp);
+	urlbarPP.hidden = !Prefs.urlbar_pp;
+	toggleAttribute(urlbarBar, 'hidePP', !Prefs.urlbar_pp);
 };
 
 this.urlbarAutoHide = function() {
-	if(prefAid.urlbar_autohide) {
+	if(Prefs.urlbar_autohide) {
 		initAutoHide(urlbarBar, [urlbarContainer, urlbarPP], urlbarBar, 'opacity');
 	} else {
 		deinitAutoHide(urlbarBar);
@@ -80,12 +80,12 @@ this.urlbarAutoHide = function() {
 
 // only autohide when the location bar is focused
 this.urlbarWhenFocused = function() {
-	toggleAttribute(gURLBar, objName+'-WhenFocused', prefAid.urlbar_whenfocused);
+	toggleAttribute(gURLBar, objName+'-WhenFocused', Prefs.urlbar_whenfocused);
 };
 
 this.urlbarOnLoad = function() {
-	listenerAid.add(urlbarBar, 'ToggledPuzzleBar', urlbarOpen);
-	listenerAid.add(window, 'PuzzleBarsMoved', urlbarMove);
+	Listeners.add(urlbarBar, 'ToggledPuzzleBar', urlbarOpen);
+	Listeners.add(window, 'PuzzleBarsMoved', urlbarMove);
 	
 	urlbarTogglePP();
 	urlbarOpen();
@@ -95,44 +95,44 @@ this.urlbarOnLoad = function() {
 	
 	initBar(urlbarBar, urlbarPP);
 	
-	listenerAid.add(window, 'beforecustomization', urlbarCustomize);
-	listenerAid.add(window, 'aftercustomization', urlbarCustomize);
+	Listeners.add(window, 'beforecustomization', urlbarCustomize);
+	Listeners.add(window, 'aftercustomization', urlbarCustomize);
 	urlbarCustomize(customizing);
 };
 
 this.urlbarOnUnload = function() {
-	listenerAid.remove(window, 'beforecustomization', urlbarCustomize);
-	listenerAid.remove(window, 'aftercustomization', urlbarCustomize);
-	overlayAid.removeOverlayWindow(window, 'urlbarCustomize');
+	Listeners.remove(window, 'beforecustomization', urlbarCustomize);
+	Listeners.remove(window, 'aftercustomization', urlbarCustomize);
+	Overlays.removeOverlayWindow(window, 'urlbarCustomize');
 	
 	deinitAutoHide(urlbarBar);
 	deinitBar(urlbarBar, urlbarPP);
 	removeAttribute(gURLBar, objName+'-WhenFocused');
 	
-	listenerAid.remove(urlbarBar, 'ToggledPuzzleBar', urlbarOpen);
-	listenerAid.remove(window, 'PuzzleBarsMoved', urlbarMove);
+	Listeners.remove(urlbarBar, 'ToggledPuzzleBar', urlbarOpen);
+	Listeners.remove(window, 'PuzzleBarsMoved', urlbarMove);
 };
 
 this.urlbarCustomize = function(e, force) {
 	if(e === true || e.type == 'beforecustomization') {
-		overlayAid.overlayWindow(window, 'urlbarCustomize');
+		Overlays.overlayWindow(window, 'urlbarCustomize');
 	} else {
-		overlayAid.removeOverlayWindow(window, 'urlbarCustomize');
+		Overlays.removeOverlayWindow(window, 'urlbarCustomize');
 	}
 };
 
-moduleAid.LOADMODULE = function() {
-	prefAid.listen('urlbar_pp', urlbarTogglePP);
-	prefAid.listen('urlbar_pp', urlbarAutoHide);
-	prefAid.listen('urlbar_autohide', urlbarTogglePP);
-	prefAid.listen('urlbar_autohide', urlbarAutoHide);
-	prefAid.listen('urlbar_whenfocused', urlbarTogglePP);
-	prefAid.listen('urlbar_whenfocused', urlbarAutoHide);
-	prefAid.listen('urlbar_whenfocused', urlbarWhenFocused);
-	prefAid.listen('urlbar_keycode', setUrlbarKey);
-	prefAid.listen('urlbar_accel', setUrlbarKey);
-	prefAid.listen('urlbar_shift', setUrlbarKey);
-	prefAid.listen('urlbar_alt', setUrlbarKey);
+Modules.LOADMODULE = function() {
+	Prefs.listen('urlbar_pp', urlbarTogglePP);
+	Prefs.listen('urlbar_pp', urlbarAutoHide);
+	Prefs.listen('urlbar_autohide', urlbarTogglePP);
+	Prefs.listen('urlbar_autohide', urlbarAutoHide);
+	Prefs.listen('urlbar_whenfocused', urlbarTogglePP);
+	Prefs.listen('urlbar_whenfocused', urlbarAutoHide);
+	Prefs.listen('urlbar_whenfocused', urlbarWhenFocused);
+	Prefs.listen('urlbar_keycode', setUrlbarKey);
+	Prefs.listen('urlbar_accel', setUrlbarKey);
+	Prefs.listen('urlbar_shift', setUrlbarKey);
+	Prefs.listen('urlbar_alt', setUrlbarKey);
 	
 	setUrlbarKey();
 	
@@ -149,31 +149,31 @@ moduleAid.LOADMODULE = function() {
 		setAttribute(searchContainer, 'width', searchWidth);
 	}
 	
-	overlayAid.overlayWindow(window, 'urlbar', null, urlbarOnLoad, urlbarOnUnload);
+	Overlays.overlayWindow(window, 'urlbar', null, urlbarOnLoad, urlbarOnUnload);
 };
 
-moduleAid.UNLOADMODULE = function() {
-	overlayAid.removeOverlayWindow(window, 'urlbar');
-	styleAid.unload('urlbarMove_'+_UUID);
+Modules.UNLOADMODULE = function() {
+	Overlays.removeOverlayWindow(window, 'urlbar');
+	Styles.unload('urlbarMove_'+_UUID);
 	
-	prefAid.unlisten('urlbar_pp', urlbarTogglePP);
-	prefAid.unlisten('urlbar_pp', urlbarAutoHide);
-	prefAid.unlisten('urlbar_autohide', urlbarTogglePP);
-	prefAid.unlisten('urlbar_autohide', urlbarAutoHide);
-	prefAid.unlisten('urlbar_whenfocused', urlbarTogglePP);
-	prefAid.unlisten('urlbar_whenfocused', urlbarAutoHide);
-	prefAid.unlisten('urlbar_whenfocused', urlbarWhenFocused);
-	prefAid.unlisten('urlbar_keycode', setUrlbarKey);
-	prefAid.unlisten('urlbar_accel', setUrlbarKey);
-	prefAid.unlisten('urlbar_shift', setUrlbarKey);
-	prefAid.unlisten('urlbar_alt', setUrlbarKey);
+	Prefs.unlisten('urlbar_pp', urlbarTogglePP);
+	Prefs.unlisten('urlbar_pp', urlbarAutoHide);
+	Prefs.unlisten('urlbar_autohide', urlbarTogglePP);
+	Prefs.unlisten('urlbar_autohide', urlbarAutoHide);
+	Prefs.unlisten('urlbar_whenfocused', urlbarTogglePP);
+	Prefs.unlisten('urlbar_whenfocused', urlbarAutoHide);
+	Prefs.unlisten('urlbar_whenfocused', urlbarWhenFocused);
+	Prefs.unlisten('urlbar_keycode', setUrlbarKey);
+	Prefs.unlisten('urlbar_accel', setUrlbarKey);
+	Prefs.unlisten('urlbar_shift', setUrlbarKey);
+	Prefs.unlisten('urlbar_alt', setUrlbarKey);
 	
 	if(flexContainers) {
 		removeAttribute(locationContainer, 'width');
 		removeAttribute(searchContainer, 'width');
 	}
 	
-	if(UNLOADED || !prefAid.urlbar_bar) {
-		keysetAid.unregister(urlbarKey);
+	if(UNLOADED || !Prefs.urlbar_bar) {
+		Keysets.unregister(urlbarKey);
 	}
 };

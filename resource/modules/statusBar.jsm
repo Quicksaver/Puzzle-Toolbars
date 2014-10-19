@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.1.5';
+Modules.VERSION = '1.1.6';
 
 // move the status bar onto our container
 this.prepareStatusBar = function(aWindow) {
@@ -41,7 +41,7 @@ this.moveStatusBar = function(aWindow) {
 	if(CustomizableUI.getWidget('status-bar').areaType) {
 		// in case we haven't yet enabled the add-on in other windows, we have to keep a reference to the status bar node,
 		// otherwise we'll lose it when we continue. This will be deleted once the add-on is enabled there.
-		windowMediator.callOnAll(function(bWindow) {
+		Windows.callOnAll(function(bWindow) {
 			if(!bWindow[objName]) {
 				bWindow[objName+'__statusBar'] = bWindow.document.getElementById('status-bar');
 			}
@@ -50,7 +50,7 @@ this.moveStatusBar = function(aWindow) {
 		CustomizableUI.removeWidgetFromArea('status-bar');
 		
 		// because when we do the above command, the node is physically removed from all windows, we have to put it back
-		windowMediator.callOnAll(function(cWindow) {
+		Windows.callOnAll(function(cWindow) {
 			if(!cWindow[objName]) { return; }
 			moveStatusBarNode(cWindow);
 		}, 'navigator:browser');
@@ -61,7 +61,7 @@ this.moveStatusBar = function(aWindow) {
 };
 
 this.moveAllStatusBars = function() {
-	windowMediator.callOnAll(function(cWindow) {
+	Windows.callOnAll(function(cWindow) {
 		if(!cWindow[objName]) { return; }
 		moveStatusBar(cWindow);
 	}, 'navigator:browser');
@@ -90,7 +90,7 @@ this.moveStatusBarBack = function(aWindow) {
 
 // see https://bugzilla.mozilla.org/show_bug.cgi?id=989338
 this.preventLosingCustomizeData = function() {
-	windowMediator.callOnAll(function(aWindow) {
+	Windows.callOnAll(function(aWindow) {
 		moveStatusBarBack(aWindow);
 	}, 'navigator:browser');
 	try { CustomizableUI.addWidgetToArea('status-bar', 'addon-bar'); } catch(ex) {}
@@ -133,12 +133,12 @@ this.trackStatusBar = {
 	}
 };
 
-moduleAid.LOADMODULE = function() {
+Modules.LOADMODULE = function() {
 	alwaysRunOnShutdown.push(preventLosingCustomizeData);
 	
 	CustomizableUI.addListener(trackStatusBar);
 	
-	overlayAid.overlayURI('chrome://browser/content/browser.xul', 'statusBar', null,
+	Overlays.overlayURI('chrome://browser/content/browser.xul', 'statusBar', null,
 		function(aWindow) {
 			prepareObject(aWindow);
 			prepareStatusBar(aWindow);
@@ -149,19 +149,19 @@ moduleAid.LOADMODULE = function() {
 		}
 	);
 	
-	overlayAid.overlayURI('chrome://'+objPathString+'/content/statusBar.xul', objName, null,
+	Overlays.overlayURI('chrome://'+objPathString+'/content/statusBar.xul', objName, null,
 		function(aWindow) {
-			aWindow[objName].moduleAid.load(objName, true);
+			aWindow[objName].Modules.load(objName, true);
 		},
 		function(aWindow) {
-			aWindow[objName].moduleAid.unload(objName);
+			aWindow[objName].Modules.unload(objName);
 		}
 	);
 };
 
-moduleAid.UNLOADMODULE = function() {
-	overlayAid.removeOverlayURI('chrome://'+objPathString+'/content/statusBar.xul', objName);
-	overlayAid.removeOverlayURI('chrome://browser/content/browser.xul', 'statusBar');
+Modules.UNLOADMODULE = function() {
+	Overlays.removeOverlayURI('chrome://'+objPathString+'/content/statusBar.xul', objName);
+	Overlays.removeOverlayURI('chrome://browser/content/browser.xul', 'statusBar');
 	
 	CustomizableUI.removeListener(trackStatusBar);
 	

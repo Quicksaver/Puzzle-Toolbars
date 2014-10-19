@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.1.4';
+Modules.VERSION = '1.1.5';
 
 this.keys = [
 	{
@@ -50,7 +50,7 @@ this.keys = [
 
 this.fillKeycodes = function() {
 	for(var key of keys) {
-		var available = keysetAid.getAvailable(key, keys);
+		var available = Keysets.getAvailable(key, keys);
 		if(!isStillAvailable(key, available)) {
 			key.keycode = 'none';
 		}
@@ -90,7 +90,7 @@ this.isStillAvailable = function(key, list) {
 };
 
 this.urlbarCheckboxes = function() {
-	timerAid.init('urlbarCheckboxes', function() {
+	Timers.init('urlbarCheckboxes', function() {
 		var pp = $(objName+'-urlbar-ppCheckbox');
 		var autohide = $(objName+'-urlbar-autohideCheckbox');
 		var whenfocused = $(objName+'-urlbar-whenfocusedCheckbox');
@@ -116,21 +116,21 @@ this.openReleaseNotes = function(e) {
 	if(window.opener && window.opener instanceof window.opener.ChromeWindow) {
 		openReleaseNotesTab(window.opener);
 	} else {
-		windowMediator.callOnMostRecent(openReleaseNotesTab, 'navigator:browser');
+		Windows.callOnMostRecent(openReleaseNotesTab, 'navigator:browser');
 	}
 	
 	e.preventDefault();
 	e.stopPropagation();
 };
 	
-moduleAid.LOADMODULE = function() {
+Modules.LOADMODULE = function() {
 	if(DARWIN) {
-		overlayAid.overlayWindow(window, 'optionsMac');
+		Overlays.overlayWindow(window, 'optionsMac');
 	}
 	
 	fillKeycodes();
 	fillVersion($('addonVersion'));
 	
-	listenerAid.add($('releaseNotesLink'), 'keypress', openReleaseNotes, true);
-	listenerAid.add($('releaseNotesLink'), 'click', openReleaseNotes, true);
+	Listeners.add($('releaseNotesLink'), 'keypress', openReleaseNotes, true);
+	Listeners.add($('releaseNotesLink'), 'click', openReleaseNotes, true);
 };

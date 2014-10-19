@@ -1,9 +1,9 @@
-moduleAid.VERSION = '1.4.0';
+Modules.VERSION = '1.4.1';
 
-moduleAid.LOADMODULE = function() {
-	styleAid.load('ctr', 'ctr');
+Modules.LOADMODULE = function() {
+	Styles.load('ctr', 'ctr');
 };
 
-moduleAid.UNLOADMODULE = function() {
-	styleAid.unload('ctr');
+Modules.UNLOADMODULE = function() {
+	Styles.unload('ctr');
 };

@@ -1,18 +1,18 @@
-moduleAid.VERSION = '1.0.1';
+Modules.VERSION = '1.0.2';
 
 // this is just to migrate all the items and preferences from thePuzzlePiece-addon-bar to this new version of the add-on,
 // it can probably be removed in the future when most users have updated
 
-moduleAid.LOADMODULE = function() {
-	if(!prefAid.migratedLegacy) {
-		prefAid.migratedLegacy = true;
+Modules.LOADMODULE = function() {
+	if(!Prefs.migratedLegacy) {
+		Prefs.migratedLegacy = true;
 		
 		if(!CUIBackstage.gPlacements.has('thePuzzlePiece-addon-bar')
 		&& (!CUIBackstage.gSavedState || !CUIBackstage.gSavedState.placements || !CUIBackstage.gSavedState.placements['thePuzzlePiece-addon-bar'])) {
 			return;
 		}
 		
-		prefAid.setDefaults({
+		Prefs.setDefaults({
 			movetoRight: true,
 			autoHide: false,
 			autoHideWhenFocused: false,
@@ -24,38 +24,38 @@ moduleAid.LOADMODULE = function() {
 			addonBarAlt: false
 		}, 'thepuzzlepiece');
 		
-		switch(prefAid.placement) {
+		switch(Prefs.placement) {
 			case 'bottom':
-				prefAid.bottom_placement = (prefAid.movetoRight) ? 'right' : 'left';
-				prefAid.bottom_pp = prefAid.showPPs;
-				prefAid.bottom_keycode = prefAid.addonBarKeycode;
-				prefAid.bottom_accel = prefAid.addonBarAccel;
-				prefAid.bottom_shift = prefAid.addonBarShift;
-				prefAid.bottom_alt = prefAid.addonBarAlt;
+				Prefs.bottom_placement = (Prefs.movetoRight) ? 'right' : 'left';
+				Prefs.bottom_pp = Prefs.showPPs;
+				Prefs.bottom_keycode = Prefs.addonBarKeycode;
+				Prefs.bottom_accel = Prefs.addonBarAccel;
+				Prefs.bottom_shift = Prefs.addonBarShift;
+				Prefs.bottom_alt = Prefs.addonBarAlt;
 				break;
 			case 'corner':
-				prefAid.corner_bar = true;
-				prefAid.corner_placement = (prefAid.movetoRight) ? 'right' : 'left';
-				prefAid.corner_pp = prefAid.showPPs;
-				prefAid.corner_autohide = prefAid.autoHide;
-				prefAid.corner_keycode = prefAid.addonBarKeycode;
-				prefAid.corner_accel = prefAid.addonBarAccel;
-				prefAid.corner_shift = prefAid.addonBarShift;
-				prefAid.corner_alt = prefAid.addonBarAlt;
+				Prefs.corner_bar = true;
+				Prefs.corner_placement = (Prefs.movetoRight) ? 'right' : 'left';
+				Prefs.corner_pp = Prefs.showPPs;
+				Prefs.corner_autohide = Prefs.autoHide;
+				Prefs.corner_keycode = Prefs.addonBarKeycode;
+				Prefs.corner_accel = Prefs.addonBarAccel;
+				Prefs.corner_shift = Prefs.addonBarShift;
+				Prefs.corner_alt = Prefs.addonBarAlt;
 				break;
 			case 'urlbar':
-				prefAid.urlbar_bar = true;
-				prefAid.urlbar_pp = prefAid.showPPs;
-				prefAid.urlbar_autohide = prefAid.autoHide;
-				prefAid.urlbar_whenfocused = prefAid.autoHideWhenFocused;
-				prefAid.urlbar_keycode = prefAid.addonBarKeycode;
-				prefAid.urlbar_accel = prefAid.addonBarAccel;
-				prefAid.urlbar_shift = prefAid.addonBarShift;
-				prefAid.urlbar_alt = prefAid.addonBarAlt;
+				Prefs.urlbar_bar = true;
+				Prefs.urlbar_pp = Prefs.showPPs;
+				Prefs.urlbar_autohide = Prefs.autoHide;
+				Prefs.urlbar_whenfocused = Prefs.autoHideWhenFocused;
+				Prefs.urlbar_keycode = Prefs.addonBarKeycode;
+				Prefs.urlbar_accel = Prefs.addonBarAccel;
+				Prefs.urlbar_shift = Prefs.addonBarShift;
+				Prefs.urlbar_alt = Prefs.addonBarAlt;
 				break;
 			default:
 				// this should never happen, but...
-				prefAid.placement = 'bottom';
+				Prefs.placement = 'bottom';
 				break;
 		}
 		
@@ -77,26 +77,26 @@ moduleAid.LOADMODULE = function() {
 			}
 			if(CUIBackstage.gSavedState && CUIBackstage.gSavedState.placements) {
 				delete CUIBackstage.gSavedState.placements['thePuzzlePiece-addon-bar'];
-				CUIBackstage.gSavedState.placements[objName+'-'+prefAid.placement+'-bar'] = newPlacements;
+				CUIBackstage.gSavedState.placements[objName+'-'+Prefs.placement+'-bar'] = newPlacements;
 			}
-			if(CUIBackstage.gFuturePlacements.has(objName+'-'+prefAid.placement+'-bar')) {
-				CUIBackstage.gFuturePlacements.delete(objName+'-'+prefAid.placement+'-bar');
+			if(CUIBackstage.gFuturePlacements.has(objName+'-'+Prefs.placement+'-bar')) {
+				CUIBackstage.gFuturePlacements.delete(objName+'-'+Prefs.placement+'-bar');
 			}
-			CUIBackstage.gFuturePlacements.set(objName+'-'+prefAid.placement+'-bar', newPlacementsSet);
+			CUIBackstage.gFuturePlacements.set(objName+'-'+Prefs.placement+'-bar', newPlacementsSet);
 			
 			CUIBackstage.gDirty = true;
 			CUIBackstage.CustomizableUIInternal.saveState();
 		}
 		catch(ex) { /* don't bother */ }
 		
-		prefAid.reset('movetoRight');
-		prefAid.reset('autoHide');
-		prefAid.reset('autoHideWhenFocused');
-		prefAid.reset('placement');
-		prefAid.reset('showPPs');
-		prefAid.reset('addonBarKeycode');
-		prefAid.reset('addonBarAccel');
-		prefAid.reset('addonBarShift');
-		prefAid.reset('addonBarAlt');
+		Prefs.reset('movetoRight');
+		Prefs.reset('autoHide');
+		Prefs.reset('autoHideWhenFocused');
+		Prefs.reset('placement');
+		Prefs.reset('showPPs');
+		Prefs.reset('addonBarKeycode');
+		Prefs.reset('addonBarAccel');
+		Prefs.reset('addonBarShift');
+		Prefs.reset('addonBarAlt');
 	}
 };

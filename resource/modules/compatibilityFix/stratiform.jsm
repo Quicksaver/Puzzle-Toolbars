@@ -1,32 +1,32 @@
-moduleAid.VERSION = '1.0.1';
+Modules.VERSION = '1.0.2';
 
 this.changeStratiformColor = function() {
-	styleAid.unload('stratiformFix');
+	Styles.unload('stratiformFix');
 	
-	if(prefAid['selectedtab-bg']) {
-		var color = JSON.parse(prefAid['selectedtab-bg']);
+	if(Prefs['selectedtab-bg']) {
+		var color = JSON.parse(Prefs['selectedtab-bg']);
 		
 		var sscode = '/*The Puzzle Piece CSS declarations of variable values*/\n';
 		sscode += '@namespace url(http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul);\n';
 		sscode += '#'+objName+'-corner-container { background-color: hsla('+color.H+', '+color.S+'%, '+color.L+'%, 1) !important; }';
 		
-		styleAid.load('stratiformFix', sscode, true);
+		Styles.load('stratiformFix', sscode, true);
 	}
 };
 
-moduleAid.LOADMODULE = function() {
+Modules.LOADMODULE = function() {
 	// it has a '-' character...
 	var stratiformPrefs = {};
 	stratiformPrefs['selectedtab-bg'] = '';
-	prefAid.setDefaults(stratiformPrefs, 'stratiform');
+	Prefs.setDefaults(stratiformPrefs, 'stratiform');
 	
-	prefAid.listen('selectedtab-bg', changeStratiformColor);
+	Prefs.listen('selectedtab-bg', changeStratiformColor);
 	
 	changeStratiformColor();
 };
 
-moduleAid.UNLOADMODULE = function() {
-	prefAid.unlisten('selectedtab-bg', changeStratiformColor);
+Modules.UNLOADMODULE = function() {
+	Prefs.unlisten('selectedtab-bg', changeStratiformColor);
 	
-	styleAid.unload('stratiformFix');
+	Styles.unload('stratiformFix');
 };

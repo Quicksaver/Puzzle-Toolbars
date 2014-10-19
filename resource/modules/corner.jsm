@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.1.2';
+Modules.VERSION = '1.1.3';
 
 this.PP_OFFSET_CORNER = 0;
 
@@ -11,20 +11,20 @@ this.__defineGetter__('cornerPP', function() { return $(objName+'-corner-PP'); }
 this.cornerKey = {
 	id: objName+'-corner-key',
 	command: objName+':ToggleCornerBar',
-	get keycode () { return prefAid.corner_keycode; },
-	get accel () { return prefAid.corner_accel; },
-	get shift () { return prefAid.corner_shift; },
-	get alt () { return prefAid.corner_alt; }
+	get keycode () { return Prefs.corner_keycode; },
+	get accel () { return Prefs.corner_accel; },
+	get shift () { return Prefs.corner_shift; },
+	get alt () { return Prefs.corner_alt; }
 };
 
 this.setCornerKey = function() {
-	if(cornerKey.keycode != 'none') { keysetAid.register(cornerKey); }
-	else { keysetAid.unregister(cornerKey); }
+	if(cornerKey.keycode != 'none') { Keysets.register(cornerKey); }
+	else { Keysets.unregister(cornerKey); }
 };
 
 this.cornerStyle = {};
 this.cornerMove = function() {
-	timerAid.cancel('delayCornerMove');
+	Timers.cancel('delayCornerMove');
 	
 	var appContentPos = $('content').getBoundingClientRect();
 	cornerStyle.maxWidth = -(scrollBarWidth *2) +appContentPos.width -PP_OFFSET_CORNER /* account for the puzzle piece */;
@@ -72,7 +72,7 @@ this.cornerMove = function() {
 	cornerStyle.right += PP_OFFSET_CORNER;
 	
 	var clipOffHeight = cornerContainer.clientHeight +cornerContainer.clientTop;
-	var barOffset = clipOffHeight -prefAid.corner_hotspotHeight;
+	var barOffset = clipOffHeight -Prefs.corner_hotspotHeight;
 	if(cornerStyle.bottom > 1) { clipOffHeight += cornerBarBorderBottom; }
 	
 	var OSoffset = (WINNT) ? -2 : 0;
@@ -86,9 +86,9 @@ this.cornerMove = function() {
 		shrunkOffsetHover -= Math.min(Math.floor((PPsize -ppOffset -cornerContainer.clientHeight) /2), 0);
 	}
 	
-	var ppActiveHiddenOffset = -27 +prefAid.corner_hotspotHeight;
+	var ppActiveHiddenOffset = -27 +Prefs.corner_hotspotHeight;
 	var ppHiddenOffset = -21;
-	var ppActiveHiddenClip = -6 +prefAid.corner_hotspotHeight;
+	var ppActiveHiddenClip = -6 +Prefs.corner_hotspotHeight;
 	
 	toggleAttribute(cornerPP, 'clipped', cornerStyle.bottom == 1);
 	
@@ -111,7 +111,7 @@ this.cornerMove = function() {
 	sscode += '	window['+objName+'_UUID="'+_UUID+'"]:not([customizing="true"]) #'+objName+'-corner-container[collapsed="true"],\n';
 	sscode += '	window['+objName+'_UUID="'+_UUID+'"]:not([customizing="true"]) #'+objName+'-corner-container[autohide]:not([hover]):not(:hover) {\n';
 	sscode += '		bottom: '+(cornerStyle.bottom -barOffset)+'px;\n';
-	sscode += '		clip: rect(0px, '+4000+'px, '+prefAid.corner_hotspotHeight+'px, 0px);\n';
+	sscode += '		clip: rect(0px, '+4000+'px, '+Prefs.corner_hotspotHeight+'px, 0px);\n';
 	sscode += '	}\n';
 	
 	sscode += '	window['+objName+'_UUID="'+_UUID+'"] #'+objName+'-corner-PP:not([movetoright]) { left: '+(cornerStyle.left -PP_OFFSET_CORNER)+'px; }\n';
@@ -144,11 +144,11 @@ this.cornerMove = function() {
 	
 	sscode += '}';
 	
-	styleAid.load('cornerMove_'+_UUID, sscode, true);
+	Styles.load('cornerMove_'+_UUID, sscode, true);
 };
 
 this.delayCornerMove = function() {
-	timerAid.init('delayCornerMove', cornerMove, 250);
+	Timers.init('delayCornerMove', cornerMove, 250);
 };
 
 this.tabSelectCornerBar = function() {
@@ -186,10 +186,10 @@ this.styleCornerPersona = function() {
 	}
 	
 	// Unload current stylesheet if it's been loaded, just in case we're changing personas
-	styleAid.unload('cornerPersona_'+_UUID);
+	Styles.unload('cornerPersona_'+_UUID);
 	
 	if(lwtheme.bgImage != '') {
-		if(prefAid.corner_placement == 'left') {
+		if(Prefs.corner_placement == 'left') {
 			var offsetPersonaX = -cornerStyle.left -cornerContainer.clientLeft +parseInt(boxStyle.getPropertyValue('border-left-width'));
 		} else {
 			var offsetPersonaX =
@@ -225,7 +225,7 @@ this.styleCornerPersona = function() {
 		sscode += '	}\n';
 		sscode += '}';
 		
-		styleAid.load('cornerPersona_'+_UUID, sscode, true);
+		Styles.load('cornerPersona_'+_UUID, sscode, true);
 	}
 };
 
@@ -234,19 +234,19 @@ this.cornerBrightText = function() {
 };
 
 this.cornerTogglePP = function() {
-	cornerPP.hidden = !prefAid.corner_pp;
-	toggleAttribute(cornerBar, 'hidePP', !prefAid.corner_pp);
+	cornerPP.hidden = !Prefs.corner_pp;
+	toggleAttribute(cornerBar, 'hidePP', !Prefs.corner_pp);
 	
 	// this is done here because if the PP is hidden, its clientHeight is 0, so it needs to update its position when it's shown
 	cornerMove();
 };
 
 this.cornerPlacement = function() {
-	toggleAttribute(cornerBar, 'movetoright', prefAid.corner_placement == 'right');
+	toggleAttribute(cornerBar, 'movetoright', Prefs.corner_placement == 'right');
 };
 
 this.cornerAutoHide = function() {
-	if(prefAid.corner_autohide || (!DARWIN && inFullScreen && prefAid['fullscreen.autohide'])) {
+	if(Prefs.corner_autohide || (!DARWIN && inFullScreen && Prefs['fullscreen.autohide'])) {
 		initAutoHide(cornerBar, [cornerContainer, cornerPP], cornerContainer, 'opacity');
 	} else {
 		deinitAutoHide(cornerBar);
@@ -254,17 +254,17 @@ this.cornerAutoHide = function() {
 };
 
 this.cornerExtend = function() {
-	toggleAttribute(cornerContainer, 'extend', prefAid.corner_extend);
+	toggleAttribute(cornerContainer, 'extend', Prefs.corner_extend);
 };
 
 this.cornerOnLoad = function() {
 	// bugfix: on startup the toolbar and puzzle piece would slide down across the whole window
 	setAttribute(document.documentElement, objName+'-noAnimation', 'true');
 	
-	listenerAid.add(window, 'PuzzleBarsMoved', cornerMove);
-	listenerAid.add(gBrowser.tabContainer, 'TabSelect', tabSelectCornerBar);
-	observerAid.add(personaChanged, "lightweight-theme-styling-update");
-	objectWatcher.addAttributeWatcher(gNavBar, 'brighttext', cornerBrightText);
+	Listeners.add(window, 'PuzzleBarsMoved', cornerMove);
+	Listeners.add(gBrowser.tabContainer, 'TabSelect', tabSelectCornerBar);
+	Observers.add(personaChanged, "lightweight-theme-styling-update");
+	Watchers.addAttributeWatcher(gNavBar, 'brighttext', cornerBrightText);
 	
 	cornerTogglePP(); // implies cornerMove()
 	cornerPlacement();
@@ -274,8 +274,8 @@ this.cornerOnLoad = function() {
 	
 	initBar(cornerBar, cornerPP);
 	
-	listenerAid.add(window, 'beforecustomization', cornerCustomize);
-	listenerAid.add(window, 'aftercustomization', cornerCustomize);
+	Listeners.add(window, 'beforecustomization', cornerCustomize);
+	Listeners.add(window, 'aftercustomization', cornerCustomize);
 	cornerCustomize(customizing);
 	
 	aSync(function() {
@@ -284,65 +284,65 @@ this.cornerOnLoad = function() {
 };
 
 this.cornerOnUnload = function() {
-	listenerAid.remove(window, 'beforecustomization', cornerCustomize);
-	listenerAid.remove(window, 'aftercustomization', cornerCustomize);
-	overlayAid.removeOverlayWindow(window, 'cornerCustomize');
+	Listeners.remove(window, 'beforecustomization', cornerCustomize);
+	Listeners.remove(window, 'aftercustomization', cornerCustomize);
+	Overlays.removeOverlayWindow(window, 'cornerCustomize');
 	
 	deinitAutoHide(cornerBar);
 	deinitBar(cornerBar, cornerPP);
 	
-	objectWatcher.removeAttributeWatcher(gNavBar, 'brighttext', cornerBrightText);
-	listenerAid.remove(window, 'PuzzleBarsMoved', cornerMove);
-	listenerAid.remove(gBrowser.tabContainer, 'TabSelect', tabSelectCornerBar);
-	observerAid.remove(personaChanged, "lightweight-theme-styling-update");
+	Watchers.removeAttributeWatcher(gNavBar, 'brighttext', cornerBrightText);
+	Listeners.remove(window, 'PuzzleBarsMoved', cornerMove);
+	Listeners.remove(gBrowser.tabContainer, 'TabSelect', tabSelectCornerBar);
+	Observers.remove(personaChanged, "lightweight-theme-styling-update");
 	
 	removeAttribute(document.documentElement, objName+'-noAnimation');
 };
 
 this.cornerCustomize = function(e, force) {
 	if(e === true || e.type == 'beforecustomization') {
-		overlayAid.overlayWindow(window, 'cornerCustomize');
+		Overlays.overlayWindow(window, 'cornerCustomize');
 	} else {
-		overlayAid.removeOverlayWindow(window, 'cornerCustomize');
+		Overlays.removeOverlayWindow(window, 'cornerCustomize');
 	}
 };
 
-moduleAid.LOADMODULE = function() {
-	prefAid.listen('corner_pp', cornerTogglePP);
-	prefAid.listen('corner_placement', cornerPlacement);
-	prefAid.listen('corner_autohide', cornerAutoHide);
-	prefAid.listen('corner_hotspotHeight', delayCornerMove);
-	prefAid.listen('corner_extend', cornerExtend);
-	prefAid.listen('corner_keycode', setCornerKey);
-	prefAid.listen('corner_accel', setCornerKey);
-	prefAid.listen('corner_shift', setCornerKey);
-	prefAid.listen('corner_alt', setCornerKey);
-	prefAid.listen('fullscreen.autohide', cornerAutoHide);
+Modules.LOADMODULE = function() {
+	Prefs.listen('corner_pp', cornerTogglePP);
+	Prefs.listen('corner_placement', cornerPlacement);
+	Prefs.listen('corner_autohide', cornerAutoHide);
+	Prefs.listen('corner_hotspotHeight', delayCornerMove);
+	Prefs.listen('corner_extend', cornerExtend);
+	Prefs.listen('corner_keycode', setCornerKey);
+	Prefs.listen('corner_accel', setCornerKey);
+	Prefs.listen('corner_shift', setCornerKey);
+	Prefs.listen('corner_alt', setCornerKey);
+	Prefs.listen('fullscreen.autohide', cornerAutoHide);
 	onFullScreen.add(cornerAutoHide);
 	
 	setCornerKey();
 	
-	overlayAid.overlayWindow(window, 'corner', null, cornerOnLoad, cornerOnUnload);
+	Overlays.overlayWindow(window, 'corner', null, cornerOnLoad, cornerOnUnload);
 };
 
-moduleAid.UNLOADMODULE = function() {
-	overlayAid.removeOverlayWindow(window, 'corner');
-	styleAid.unload('cornerMove_'+_UUID);
-	styleAid.unload('cornerPersona_'+_UUID);
+Modules.UNLOADMODULE = function() {
+	Overlays.removeOverlayWindow(window, 'corner');
+	Styles.unload('cornerMove_'+_UUID);
+	Styles.unload('cornerPersona_'+_UUID);
 	
 	onFullScreen.remove(cornerAutoHide);
-	prefAid.unlisten('fullscreen.autohide', cornerAutoHide);
-	prefAid.unlisten('corner_pp', cornerTogglePP);
-	prefAid.unlisten('corner_placement', cornerPlacement);
-	prefAid.unlisten('corner_autohide', cornerAutoHide);
-	prefAid.unlisten('corner_hotspotHeight', delayCornerMove);
-	prefAid.unlisten('corner_extend', cornerExtend);
-	prefAid.unlisten('corner_keycode', setCornerKey);
-	prefAid.unlisten('corner_accel', setCornerKey);
-	prefAid.unlisten('corner_shift', setCornerKey);
-	prefAid.unlisten('corner_alt', setCornerKey);
+	Prefs.unlisten('fullscreen.autohide', cornerAutoHide);
+	Prefs.unlisten('corner_pp', cornerTogglePP);
+	Prefs.unlisten('corner_placement', cornerPlacement);
+	Prefs.unlisten('corner_autohide', cornerAutoHide);
+	Prefs.unlisten('corner_hotspotHeight', delayCornerMove);
+	Prefs.unlisten('corner_extend', cornerExtend);
+	Prefs.unlisten('corner_keycode', setCornerKey);
+	Prefs.unlisten('corner_accel', setCornerKey);
+	Prefs.unlisten('corner_shift', setCornerKey);
+	Prefs.unlisten('corner_alt', setCornerKey);
 	
-	if(UNLOADED || !prefAid.corner_bar) {
-		keysetAid.unregister(cornerKey);
+	if(UNLOADED || !Prefs.corner_bar) {
+		Keysets.unregister(cornerKey);
 	}
 };

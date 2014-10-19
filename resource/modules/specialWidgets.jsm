@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.0.6';
+Modules.VERSION = '1.0.7';
 
 // Special widgets aren't allowed in the menu panel by default, so we need to override this behavior (and hope we don't clash with other add-ons doing the same).
 // I hope I can remove this soon. See:
@@ -135,10 +135,10 @@ this.trackSpecialWidgets = {
 	}
 };
 
-moduleAid.LOADMODULE = function() {
-	piggyback.add('specialWidgets', CUIBackstage.CustomizableUIInternal, 'addWidgetToArea', addWidgetToArea);
-	piggyback.add('specialWidgets', CUIBackstage.CustomizableUIInternal, 'canWidgetMoveToArea', canWidgetMoveToArea);
-	piggyback.add('specialWidgets', CUIBackstage.CustomizableUIInternal, 'buildArea', buildArea);
+Modules.LOADMODULE = function() {
+	Piggyback.add('specialWidgets', CUIBackstage.CustomizableUIInternal, 'addWidgetToArea', addWidgetToArea);
+	Piggyback.add('specialWidgets', CUIBackstage.CustomizableUIInternal, 'canWidgetMoveToArea', canWidgetMoveToArea);
+	Piggyback.add('specialWidgets', CUIBackstage.CustomizableUIInternal, 'buildArea', buildArea);
 	
 	var panelIds = CustomizableUI.getWidgetIdsInArea(CustomizableUI.AREA_PANEL);
 	for(var wId of panelIds) {
@@ -153,11 +153,11 @@ moduleAid.LOADMODULE = function() {
 		CustomizableUI.removeWidgetFromArea(objName+'-placeholder-'+i);
 	}
 	
-	overlayAid.overlayURI('chrome://browser/content/browser.xul', 'specialWidgets');
+	Overlays.overlayURI('chrome://browser/content/browser.xul', 'specialWidgets');
 };
 
-moduleAid.UNLOADMODULE = function() {
-	overlayAid.removeOverlayURI('chrome://browser/content/browser.xul', 'specialWidgets');
+Modules.UNLOADMODULE = function() {
+	Overlays.removeOverlayURI('chrome://browser/content/browser.xul', 'specialWidgets');
 	
 	CustomizableUI.removeListener(trackSpecialWidgets);
 	
@@ -165,7 +165,7 @@ moduleAid.UNLOADMODULE = function() {
 		CustomizableUI.destroyWidget(wId);
 	}
 	
-	piggyback.remove('specialWidgets', CUIBackstage.CustomizableUIInternal, 'addWidgetToArea');
-	piggyback.remove('specialWidgets', CUIBackstage.CustomizableUIInternal, 'canWidgetMoveToArea');
-	piggyback.remove('specialWidgets', CUIBackstage.CustomizableUIInternal, 'buildArea');
+	Piggyback.remove('specialWidgets', CUIBackstage.CustomizableUIInternal, 'addWidgetToArea');
+	Piggyback.remove('specialWidgets', CUIBackstage.CustomizableUIInternal, 'canWidgetMoveToArea');
+	Piggyback.remove('specialWidgets', CUIBackstage.CustomizableUIInternal, 'buildArea');
 };

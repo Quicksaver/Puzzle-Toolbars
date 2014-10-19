@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.1.0';
+Modules.VERSION = '1.1.1';
 
 /* I'm actually not sure if any of this is working, UIEnhancer seems to be having some problems in Nightly... */
 
@@ -6,28 +6,28 @@ this.__defineGetter__('UIEnhancer', function() { return $('UIEnhancer_URLBar'); 
 
 this.UIEnhancerFixer = function(aEnabled) {
 	if(aEnabled) {
-		listenerAid.add(urlbarBar, 'HoverAddonBar', fixUIEnhancerWidth);
-		listenerAid.add(urlbarBar, 'ToggledAddonBar', fixUIEnhancerWidth);
-		listenerAid.add(UIEnhancer, 'transitionend', UIEnhancerTransitionEnd);
+		Listeners.add(urlbarBar, 'HoverAddonBar', fixUIEnhancerWidth);
+		Listeners.add(urlbarBar, 'ToggledAddonBar', fixUIEnhancerWidth);
+		Listeners.add(UIEnhancer, 'transitionend', UIEnhancerTransitionEnd);
 		setAttribute($('urlbar'), objName+'-UIEnhancer', 'true');
 		fixUIEnhancerWidth();
 	} else {
-		listenerAid.remove(urlbarBar, 'HoverAddonBar', fixUIEnhancerWidth);
-		listenerAid.remove(urlbarBar, 'ToggledAddonBar', fixUIEnhancerWidth);
-		listenerAid.remove(UIEnhancer, 'transitionend', UIEnhancerTransitionEnd);
+		Listeners.remove(urlbarBar, 'HoverAddonBar', fixUIEnhancerWidth);
+		Listeners.remove(urlbarBar, 'ToggledAddonBar', fixUIEnhancerWidth);
+		Listeners.remove(UIEnhancer, 'transitionend', UIEnhancerTransitionEnd);
 		removeAttribute($('urlbar'), objName+'-UIEnhancer');
-		styleAid.unload('UIEnhancer_'+_UUID);
+		Styles.unload('UIEnhancer_'+_UUID);
 		removeAttribute(UIEnhancer, 'hover');
 		removeAttribute(UIEnhancer, 'noAnimation');
 	}
 };
 
 this.fixUIEnhancerWidth = function() {
-	var hover = !urlbarBar.collapsed && (!prefAid.urlbar_autohide || trueAttribute(urlbarBar, 'hover'));
+	var hover = !urlbarBar.collapsed && (!Prefs.urlbar_autohide || trueAttribute(urlbarBar, 'hover'));
 	if(hover == trueAttribute(UIEnhancer, 'hover')) { return; }
 	
 	removeAttribute(UIEnhancer, 'noAnimation');
-	styleAid.unload('UIEnhancer_'+_UUID);
+	Styles.unload('UIEnhancer_'+_UUID);
 	toggleAttribute(UIEnhancer, 'hover', hover);
 	
 	// if the size of the add-on bar is above the available space to it, resize the UIEnhancer box
@@ -42,7 +42,7 @@ this.fixUIEnhancerWidth = function() {
 		sscode += '	}\n';
 		sscode += '}';
 		
-		styleAid.load('UIEnhancer_'+_UUID, sscode, true);
+		Styles.load('UIEnhancer_'+_UUID, sscode, true);
 	}
 };
 
@@ -74,20 +74,20 @@ this.toggleUIEnhancerListener = function(e) {
 	}
 };
 
-moduleAid.LOADMODULE = function() {
-	listenerAid.add(window, 'LoadedPuzzleBar', toggleUIEnhancerListener);
-	listenerAid.add(window, 'UnloadedPuzzleBar', toggleUIEnhancerListener);
+Modules.LOADMODULE = function() {
+	Listeners.add(window, 'LoadedPuzzleBar', toggleUIEnhancerListener);
+	Listeners.add(window, 'UnloadedPuzzleBar', toggleUIEnhancerListener);
 	
-	if(prefAid.urlbar_bar && typeof(urlbarBar) != 'undefined' && urlbarBar) {
+	if(Prefs.urlbar_bar && typeof(urlbarBar) != 'undefined' && urlbarBar) {
 		toggleUIEnhancerListener({ target: urlbarBar });
 	}
 };
 
-moduleAid.UNLOADMODULE = function() {
-	if(prefAid.urlbar_bar && typeof(urlbarBar) != 'undefined' && urlbarBar) {
+Modules.UNLOADMODULE = function() {
+	if(Prefs.urlbar_bar && typeof(urlbarBar) != 'undefined' && urlbarBar) {
 		toggleUIEnhancerListener();
 	}
 	
-	listenerAid.remove(window, 'LoadedPuzzleBar', toggleUIEnhancerListener);
-	listenerAid.remove(window, 'UnloadedPuzzleBar', toggleUIEnhancerListener);
+	Listeners.remove(window, 'LoadedPuzzleBar', toggleUIEnhancerListener);
+	Listeners.remove(window, 'UnloadedPuzzleBar', toggleUIEnhancerListener);
 };

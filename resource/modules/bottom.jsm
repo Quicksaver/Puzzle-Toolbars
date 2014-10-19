@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.0.6';
+Modules.VERSION = '1.0.7';
 
 this.__defineGetter__('bottomBox', function() { return $('browser-bottombox'); });
 this.__defineGetter__('bottomBar', function() { return $(objName+'-bottom-bar'); });
@@ -7,27 +7,27 @@ this.__defineGetter__('bottomPP', function() { return $(objName+'-bottom-PP'); }
 this.bottomKey = {
 	id: objName+'-bottom-key',
 	command: objName+':ToggleBottomBar',
-	get keycode () { return prefAid.bottom_keycode; },
-	get accel () { return prefAid.bottom_accel; },
-	get shift () { return prefAid.bottom_shift; },
-	get alt () { return prefAid.bottom_alt; }
+	get keycode () { return Prefs.bottom_keycode; },
+	get accel () { return Prefs.bottom_accel; },
+	get shift () { return Prefs.bottom_shift; },
+	get alt () { return Prefs.bottom_alt; }
 };
 
 this.setBottomKey = function() {
-	if(bottomKey.keycode != 'none') { keysetAid.register(bottomKey); }
-	else { keysetAid.unregister(bottomKey); }
+	if(bottomKey.keycode != 'none') { Keysets.register(bottomKey); }
+	else { Keysets.unregister(bottomKey); }
 };
 
 this.bottomTogglePP = function() {
-	bottomPP.hidden = !prefAid.bottom_pp;
-	toggleAttribute(bottomBar, 'hidePP', !prefAid.bottom_pp);
+	bottomPP.hidden = !Prefs.bottom_pp;
+	toggleAttribute(bottomBar, 'hidePP', !Prefs.bottom_pp);
 	
 	// this is done here because if the PP is hidden, its clientHeight is 0, so it needs to update its position when it's shown
 	bottomMove();
 };
 
 this.bottomPlacement = function() {
-	toggleAttribute(bottomBar, 'movetoright', prefAid.bottom_placement == 'right');
+	toggleAttribute(bottomBar, 'movetoright', Prefs.bottom_placement == 'right');
 };
 
 this.bottomMove = function() {
@@ -80,7 +80,7 @@ this.bottomMove = function() {
 	sscode += '	}\n';
 	sscode += '}';
 	
-	styleAid.load('bottomMove_'+_UUID, sscode, true);
+	Styles.load('bottomMove_'+_UUID, sscode, true);
 };
 
 this.bottomBrightText = function() {
@@ -88,7 +88,7 @@ this.bottomBrightText = function() {
 };
 
 this.bottomAutoHide = function() {
-	if(!DARWIN && inFullScreen && prefAid['fullscreen.autohide']) {
+	if(!DARWIN && inFullScreen && Prefs['fullscreen.autohide']) {
 		initAutoHide(bottomBar, [bottomBar, bottomPP], bottomBar, 'margin');
 		
 		// this would cause the bottom toolbar to appear invisible
@@ -100,8 +100,8 @@ this.bottomAutoHide = function() {
 };
 
 this.bottomOnLoad = function() {
-	listenerAid.add(window, 'PuzzleBarsMoved', bottomMove);
-	objectWatcher.addAttributeWatcher(gNavBar, 'brighttext', bottomBrightText);
+	Listeners.add(window, 'PuzzleBarsMoved', bottomMove);
+	Watchers.addAttributeWatcher(gNavBar, 'brighttext', bottomBrightText);
 	
 	bottomTogglePP(); // implies bottomMove()
 	bottomPlacement();
@@ -117,39 +117,39 @@ this.bottomOnUnload = function() {
 	deinitAutoHide(bottomBar);
 	deinitBar(bottomBar, bottomPP);
 	
-	objectWatcher.removeAttributeWatcher(gNavBar, 'brighttext', bottomBrightText);
-	listenerAid.remove(window, 'PuzzleBarsMoved', bottomMove);
+	Watchers.removeAttributeWatcher(gNavBar, 'brighttext', bottomBrightText);
+	Listeners.remove(window, 'PuzzleBarsMoved', bottomMove);
 };
 
-moduleAid.LOADMODULE = function() {
-	prefAid.listen('bottom_pp', bottomTogglePP);
-	prefAid.listen('bottom_placement', bottomPlacement);
-	prefAid.listen('bottom_keycode', setBottomKey);
-	prefAid.listen('bottom_accel', setBottomKey);
-	prefAid.listen('bottom_shift', setBottomKey);
-	prefAid.listen('bottom_alt', setBottomKey);
-	prefAid.listen('fullscreen.autohide', bottomAutoHide);
+Modules.LOADMODULE = function() {
+	Prefs.listen('bottom_pp', bottomTogglePP);
+	Prefs.listen('bottom_placement', bottomPlacement);
+	Prefs.listen('bottom_keycode', setBottomKey);
+	Prefs.listen('bottom_accel', setBottomKey);
+	Prefs.listen('bottom_shift', setBottomKey);
+	Prefs.listen('bottom_alt', setBottomKey);
+	Prefs.listen('fullscreen.autohide', bottomAutoHide);
 	onFullScreen.add(bottomAutoHide);
 	
 	setBottomKey();
 	
-	overlayAid.overlayWindow(window, 'bottom', null, bottomOnLoad, bottomOnUnload);
+	Overlays.overlayWindow(window, 'bottom', null, bottomOnLoad, bottomOnUnload);
 };
 
-moduleAid.UNLOADMODULE = function() {
-	overlayAid.removeOverlayWindow(window, 'bottom');
-	styleAid.unload('bottomMove_'+_UUID);
+Modules.UNLOADMODULE = function() {
+	Overlays.removeOverlayWindow(window, 'bottom');
+	Styles.unload('bottomMove_'+_UUID);
 	
 	onFullScreen.remove(bottomAutoHide);
-	prefAid.unlisten('fullscreen.autohide', bottomAutoHide);
-	prefAid.unlisten('bottom_pp', bottomTogglePP);
-	prefAid.unlisten('bottom_placement', bottomPlacement);
-	prefAid.unlisten('bottom_keycode', setBottomKey);
-	prefAid.unlisten('bottom_accel', setBottomKey);
-	prefAid.unlisten('bottom_shift', setBottomKey);
-	prefAid.unlisten('bottom_alt', setBottomKey);
+	Prefs.unlisten('fullscreen.autohide', bottomAutoHide);
+	Prefs.unlisten('bottom_pp', bottomTogglePP);
+	Prefs.unlisten('bottom_placement', bottomPlacement);
+	Prefs.unlisten('bottom_keycode', setBottomKey);
+	Prefs.unlisten('bottom_accel', setBottomKey);
+	Prefs.unlisten('bottom_shift', setBottomKey);
+	Prefs.unlisten('bottom_alt', setBottomKey);
 	
-	if(UNLOADED || !prefAid.bottom_bar) {
-		keysetAid.unregister(bottomKey);
+	if(UNLOADED || !Prefs.bottom_bar) {
+		Keysets.unregister(bottomKey);
 	}
 };

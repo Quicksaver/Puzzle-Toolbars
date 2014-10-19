@@ -1,21 +1,21 @@
-moduleAid.VERSION = '1.1.0';
+Modules.VERSION = '1.1.1';
 
 this.TMPtoggledBottom = function() {
-	if(prefAid.tabBarPosition == 1) {
-		overlayAid.overlayURI('chrome://'+objPathString+'/content/bottom.xul', 'bottomTMP');
+	if(Prefs.tabBarPosition == 1) {
+		Overlays.overlayURI('chrome://'+objPathString+'/content/bottom.xul', 'bottomTMP');
 	} else {
-		overlayAid.removeOverlayURI('chrome://'+objPathString+'/content/bottom.xul', 'bottomTMP');
+		Overlays.removeOverlayURI('chrome://'+objPathString+'/content/bottom.xul', 'bottomTMP');
 	}
 };
 
-moduleAid.LOADMODULE = function() {
-	prefAid.setDefaults({ tabBarPosition: 0 }, 'tabmix');
-	prefAid.listen('tabBarPosition', TMPtoggledBottom);
+Modules.LOADMODULE = function() {
+	Prefs.setDefaults({ tabBarPosition: 0 }, 'tabmix');
+	Prefs.listen('tabBarPosition', TMPtoggledBottom);
 	
 	TMPtoggledBottom();
 };
 
-moduleAid.UNLOADMODULE = function() {
-	prefAid.unlisten('tabBarPosition', TMPtoggledBottom);
-	overlayAid.removeOverlayURI('chrome://'+objPathString+'/content/bottom.xul', 'bottomTMP');
+Modules.UNLOADMODULE = function() {
+	Prefs.unlisten('tabBarPosition', TMPtoggledBottom);
+	Overlays.removeOverlayURI('chrome://'+objPathString+'/content/bottom.xul', 'bottomTMP');
 };

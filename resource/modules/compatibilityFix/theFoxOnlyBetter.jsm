@@ -1,16 +1,16 @@
-moduleAid.VERSION = '1.0.1';
+Modules.VERSION = '1.0.2';
 
 this.__defineGetter__('theFoxOnlyBetter', function() { return window.theFoxOnlyBetter; });
 this.__defineGetter__('gNavToolbox', function() { return window.gNavToolbox; });
 
 this.slimChromeFixer = function(aEnabled) {
 	// for our preferences dialog
-	prefAid.tFOB = aEnabled;
+	Prefs.tFOB = aEnabled;
 	
-	if(prefAid.tFOB && theFoxOnlyBetter) {
+	if(Prefs.tFOB && theFoxOnlyBetter) {
 		// for Slim Chrome to not move our toolbar if it shouldn't right from the start
 		if(theFoxOnlyBetter.slimChromeExceptions) {
-			if(!UNLOADED && !prefAid.top_slimChrome) {
+			if(!UNLOADED && !Prefs.top_slimChrome) {
 				if(theFoxOnlyBetter.slimChromeExceptions.indexOf(objName+'-top-bar') == -1) {
 					theFoxOnlyBetter.slimChromeExceptions.push(objName+'-top-bar');
 				}
@@ -23,8 +23,8 @@ this.slimChromeFixer = function(aEnabled) {
 		}
 		
 		// so our UI is shown as it should depending on where the toolbar is
-		if(prefAid.top_bar && typeof(topBar) != 'undefined' && topBar) {
-			var toggle = !UNLOADED && prefAid.top_slimChrome && isAncestor(topBar, theFoxOnlyBetter.slimChromeContainer);
+		if(Prefs.top_bar && typeof(topBar) != 'undefined' && topBar) {
+			var toggle = !UNLOADED && Prefs.top_slimChrome && isAncestor(topBar, theFoxOnlyBetter.slimChromeContainer);
 			toggleAttribute(topBar, 'slimChrome', toggle);
 			toggleAttribute(theFoxOnlyBetter.slimChromeContainer, 'topPuzzleBar', !toggle && !topBar.collapsed);
 		} else {
@@ -37,13 +37,13 @@ this.slimChromeFixer = function(aEnabled) {
 };
 
 this.slimChromePuzzleBarListener = function(e) {
-	if(!prefAid.tFOB || typeof(topBar) == 'undefined' || (e.target && e.target != topBar)) { return; }
+	if(!Prefs.tFOB || typeof(topBar) == 'undefined' || (e.target && e.target != topBar)) { return; }
 	
 	slimChromeFixer(true);
 	
 	// in this case we need to move the toolbars ourselves if we need to, as we can't force Slim Chrome to move again
 	if(topBar && theFoxOnlyBetter && theFoxOnlyBetter.slimChromeContainer) {
-		if(prefAid.top_slimChrome && !isAncestor(topBar, theFoxOnlyBetter.slimChromeContainer)) {
+		if(Prefs.top_slimChrome && !isAncestor(topBar, theFoxOnlyBetter.slimChromeContainer)) {
 			theFoxOnlyBetter.slimChromeToolbars.appendChild(topBar);
 			if(gNavToolbox.externalToolbars.indexOf(topBar) == -1) {
 				gNavToolbox.externalToolbars.push(topBar);
@@ -52,7 +52,7 @@ this.slimChromePuzzleBarListener = function(e) {
 			setAttribute(topBar, 'slimChrome', 'true');
 			removeAttribute(theFoxOnlyBetter.slimChromeContainer, 'topPuzzleBar');
 		}
-		else if(!prefAid.top_slimChrome && isAncestor(topBar, theFoxOnlyBetter.slimChromeContainer)) {
+		else if(!Prefs.top_slimChrome && isAncestor(topBar, theFoxOnlyBetter.slimChromeContainer)) {
 			var i = gNavToolbox.externalToolbars.indexOf(topBar);
 			if(i != -1) {
 				gNavToolbox.externalToolbars.splice(i, 1);
@@ -61,7 +61,7 @@ this.slimChromePuzzleBarListener = function(e) {
 			theFoxOnlyBetter.slimChromeDeinitOverflowable(topBar);
 			
 			if(window.closed || window.willClose) {
-				overlayAid.safeMoveToolbar(topBar, gNavToolbox);
+				Overlays.safeMoveToolbar(topBar, gNavToolbox);
 			} else {
 				gNavToolbox.appendChild(topBar);
 			}
@@ -72,9 +72,9 @@ this.slimChromePuzzleBarListener = function(e) {
 };
 
 this.slimChromePuzzleBarToggled = function(e) {
-	if(!prefAid.tFOB || !prefAid.top_bar || typeof(topBar) == 'undefined' || e.target != topBar) { return; }
+	if(!Prefs.tFOB || !Prefs.top_bar || typeof(topBar) == 'undefined' || e.target != topBar) { return; }
 	
-	toggleAttribute(theFoxOnlyBetter.slimChromeContainer, 'topPuzzleBar', !prefAid.top_slimChrome && !topBar.collapsed);
+	toggleAttribute(theFoxOnlyBetter.slimChromeContainer, 'topPuzzleBar', !Prefs.top_slimChrome && !topBar.collapsed);
 };
 
 this.slimChromeShowListener = function(e) {
@@ -99,17 +99,17 @@ this.theFoxOnlyBetterListener = {
 	}
 };
 
-moduleAid.LOADMODULE = function() {
+Modules.LOADMODULE = function() {
 	// trigger a default state if tFOB is already loaded
 	slimChromeFixer(false);
 	
-	listenerAid.add(window, 'LoadedSlimChrome', slimChromeListener);
-	listenerAid.add(window, 'UnloadedSlimChrome', slimChromeListener);
-	listenerAid.add(window, 'LoadedPuzzleBar', slimChromePuzzleBarListener);
-	listenerAid.add(window, 'WillShowSlimChrome', slimChromeShowListener);
-	listenerAid.add(window, 'ToggledPuzzleBar', slimChromePuzzleBarToggled);
-	prefAid.listen('top_bar', slimChromePuzzleBarListener);
-	prefAid.listen('top_slimChrome', slimChromePuzzleBarListener);
+	Listeners.add(window, 'LoadedSlimChrome', slimChromeListener);
+	Listeners.add(window, 'UnloadedSlimChrome', slimChromeListener);
+	Listeners.add(window, 'LoadedPuzzleBar', slimChromePuzzleBarListener);
+	Listeners.add(window, 'WillShowSlimChrome', slimChromeShowListener);
+	Listeners.add(window, 'ToggledPuzzleBar', slimChromePuzzleBarToggled);
+	Prefs.listen('top_bar', slimChromePuzzleBarListener);
+	Prefs.listen('top_slimChrome', slimChromePuzzleBarListener);
 	
 	AddonManager.addAddonListener(theFoxOnlyBetterListener);
 	AddonManager.getAddonByID('thefoxonlybetter@quicksaver', function(addon) {
@@ -117,14 +117,14 @@ moduleAid.LOADMODULE = function() {
 	});
 };
 
-moduleAid.UNLOADMODULE = function() {
-	listenerAid.remove(window, 'LoadedSlimChrome', slimChromeListener);
-	listenerAid.remove(window, 'UnloadedSlimChrome', slimChromeListener);
-	listenerAid.remove(window, 'LoadedPuzzleBar', slimChromePuzzleBarListener);
-	listenerAid.remove(window, 'WillShowSlimChrome', slimChromeShowListener);
-	listenerAid.remove(window, 'ToggledPuzzleBar', slimChromePuzzleBarToggled);
-	prefAid.unlisten('top_bar', slimChromePuzzleBarListener);
-	prefAid.unlisten('top_slimChrome', slimChromePuzzleBarListener);
+Modules.UNLOADMODULE = function() {
+	Listeners.remove(window, 'LoadedSlimChrome', slimChromeListener);
+	Listeners.remove(window, 'UnloadedSlimChrome', slimChromeListener);
+	Listeners.remove(window, 'LoadedPuzzleBar', slimChromePuzzleBarListener);
+	Listeners.remove(window, 'WillShowSlimChrome', slimChromeShowListener);
+	Listeners.remove(window, 'ToggledPuzzleBar', slimChromePuzzleBarToggled);
+	Prefs.unlisten('top_bar', slimChromePuzzleBarListener);
+	Prefs.unlisten('top_slimChrome', slimChromePuzzleBarListener);
 	AddonManager.removeAddonListener(theFoxOnlyBetterListener);
 	
 	slimChromeFixer(false);

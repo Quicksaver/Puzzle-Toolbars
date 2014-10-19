@@ -1,4 +1,4 @@
-moduleAid.VERSION = '2.1.0';
+Modules.VERSION = '2.1.1';
 
 this.__defineGetter__('PrintPreviewListener', function() { return window.PrintPreviewListener; });
 this.__defineGetter__('browserPanel', function() { return $('browser-panel'); });
@@ -100,7 +100,7 @@ this.setMenuEntries = function(menu) {
 };
 
 this.delayMoveBars = function() {
-	timerAid.init('delayMoveAddonBar', moveBars, 0);
+	Timers.init('delayMoveAddonBar', moveBars, 0);
 };
 
 this.moveBars = function() {
@@ -123,7 +123,7 @@ this.reMoveBar = function(bar) {
 		height: bar.clientHeight +(bar.clientTop *2),
 		width: bar.clientWidth +(bar.clientLeft *2)
 	};
-	timerAid.init('reMoveBar-'+bar.id, function() {
+	Timers.init('reMoveBar-'+bar.id, function() {
 		if(typeof(moveBars) != 'undefined' && !UNLOADED) {
 			var nowSize = {
 				height: bar.clientHeight +(bar.clientTop *2),
@@ -145,9 +145,9 @@ this.initBar = function(bar, pp) {
 		bar._overflowTarget = $(bar.getAttribute('overflowtarget'));
 	}
 	
-	listenerAid.add(bar, 'resize', delayMoveBars);
-	listenerAid.add(bar, 'drop', delayMoveBars);
-	listenerAid.add(bar, 'load', delayMoveBars);
+	Listeners.add(bar, 'resize', delayMoveBars);
+	Listeners.add(bar, 'drop', delayMoveBars);
+	Listeners.add(bar, 'load', delayMoveBars);
 	
 	// moveBars won't fire when setting hidden/collapsed in the buttons, unless we make it follow these changes
 	bar._moveOnHidingAttr = new window.MutationObserver(function(mutations) {
@@ -179,9 +179,9 @@ this.deinitBar = function(bar, pp) {
 	
 	bar._moveOnHidingAttr.disconnect();
 	
-	listenerAid.remove(bar, 'resize', delayMoveBars);
-	listenerAid.remove(bar, 'drop', delayMoveBars);
-	listenerAid.remove(bar, 'load', delayMoveBars);
+	Listeners.remove(bar, 'resize', delayMoveBars);
+	Listeners.remove(bar, 'drop', delayMoveBars);
+	Listeners.remove(bar, 'load', delayMoveBars);
 	
 	delete bar._overflowTarget;
 	delete pp._bar;
@@ -190,48 +190,48 @@ this.deinitBar = function(bar, pp) {
 	delete bars[bars.id];
 };
 
-moduleAid.LOADMODULE = function() {
+Modules.LOADMODULE = function() {
 	// The add-on bar needs to be hidden when entering print preview mode
-	piggyback.add('initAddonbar', PrintPreviewListener, '_hideChrome', function() {
+	Piggyback.add('initAddonbar', PrintPreviewListener, '_hideChrome', function() {
 		setAttribute(document.documentElement, 'PrintPreview', 'true');
 		return true;
-	}, piggyback.MODE_BEFORE);
-	piggyback.add('initAddonbar', PrintPreviewListener, '_showChrome', function() {
+	}, Piggyback.MODE_BEFORE);
+	Piggyback.add('initAddonbar', PrintPreviewListener, '_showChrome', function() {
 		removeAttribute(document.documentElement, 'PrintPreview');
 		return true;
-	}, piggyback.MODE_BEFORE);
+	}, Piggyback.MODE_BEFORE);
 	
 	CustomizableUI.addListener(barCustomized);
 	
-	listenerAid.add(contextMenu, 'popupshowing', setContextMenu);
-	listenerAid.add(viewMenu, 'popupshown', setViewMenu);
-	listenerAid.add(customizeMenu, 'popupshown', setCustomizeMenu);
-	listenerAid.add(browserPanel, 'resize', delayMoveBars);
-	listenerAid.add(window, 'aftercustomization', delayMoveBars);
-	listenerAid.add(window, 'ToggledPuzzleBar', moveBars);
-	listenerAid.add(window, 'PuzzleBarCustomized', moveBars);
-	listenerAid.add(window, 'fullscreen', onFullScreen.listener);
+	Listeners.add(contextMenu, 'popupshowing', setContextMenu);
+	Listeners.add(viewMenu, 'popupshown', setViewMenu);
+	Listeners.add(customizeMenu, 'popupshown', setCustomizeMenu);
+	Listeners.add(browserPanel, 'resize', delayMoveBars);
+	Listeners.add(window, 'aftercustomization', delayMoveBars);
+	Listeners.add(window, 'ToggledPuzzleBar', moveBars);
+	Listeners.add(window, 'PuzzleBarCustomized', moveBars);
+	Listeners.add(window, 'fullscreen', onFullScreen.listener);
 	
 	// Half fix for when the status-bar is changed
-	listenerAid.add(statusBar, 'load', delayMoveBars, true);
+	Listeners.add(statusBar, 'load', delayMoveBars, true);
 	
 	moveBars();
 };
 
-moduleAid.UNLOADMODULE = function() {
-	listenerAid.remove(contextMenu, 'popupshowing', setContextMenu);
-	listenerAid.remove(viewMenu, 'popupshown', setViewMenu);
-	listenerAid.remove(customizeMenu, 'popupshown', setCustomizeMenu);
-	listenerAid.remove(browserPanel, 'resize', delayMoveBars);
-	listenerAid.remove(window, 'aftercustomization', delayMoveBars);
-	listenerAid.remove(window, 'ToggledPuzzleBar', moveBars);
-	listenerAid.remove(window, 'PuzzleBarCustomized', moveBars);
-	listenerAid.remove(window, 'fullscreen', onFullScreen.listener);
-	listenerAid.remove(statusBar, 'load', delayMoveBars, true);
+Modules.UNLOADMODULE = function() {
+	Listeners.remove(contextMenu, 'popupshowing', setContextMenu);
+	Listeners.remove(viewMenu, 'popupshown', setViewMenu);
+	Listeners.remove(customizeMenu, 'popupshown', setCustomizeMenu);
+	Listeners.remove(browserPanel, 'resize', delayMoveBars);
+	Listeners.remove(window, 'aftercustomization', delayMoveBars);
+	Listeners.remove(window, 'ToggledPuzzleBar', moveBars);
+	Listeners.remove(window, 'PuzzleBarCustomized', moveBars);
+	Listeners.remove(window, 'fullscreen', onFullScreen.listener);
+	Listeners.remove(statusBar, 'load', delayMoveBars, true);
 	
 	CustomizableUI.removeListener(barCustomized);
 	
-	piggyback.revert('initAddonbar', PrintPreviewListener, '_hideChrome');
-	piggyback.revert('initAddonbar', PrintPreviewListener, '_showChrome');
+	Piggyback.revert('initAddonbar', PrintPreviewListener, '_hideChrome');
+	Piggyback.revert('initAddonbar', PrintPreviewListener, '_showChrome');
 	removeAttribute(document.documentElement, 'PrintPreview');
 };

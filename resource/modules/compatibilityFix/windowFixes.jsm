@@ -1,34 +1,34 @@
-moduleAid.VERSION = '1.0.13';
+Modules.VERSION = '1.0.14';
 
-moduleAid.LOADMODULE = function() {
+Modules.LOADMODULE = function() {
 	AddonManager.getAddonByID("s3download@statusbar", function(addon) {
-		moduleAid.loadIf('compatibilityFix/S3', (addon && addon.isActive));
+		Modules.loadIf('compatibilityFix/S3', (addon && addon.isActive));
 	});
 	
 	AddonManager.getAddonByID("tiletabs@DW-dev", function(addon) {
-		moduleAid.loadIf('compatibilityFix/TileTabs', (addon && addon.isActive));
+		Modules.loadIf('compatibilityFix/TileTabs', (addon && addon.isActive));
 	});
 	
 	AddonManager.getAddonByID('treestyletab@piro.sakura.ne.jp', function(addon) {
-		moduleAid.loadIf('compatibilityFix/TreeStyleTab', (addon && addon.isActive));
+		Modules.loadIf('compatibilityFix/TreeStyleTab', (addon && addon.isActive));
 	});
 	
-	moduleAid.load('compatibilityFix/downloadsIndicator');
-	moduleAid.load('compatibilityFix/bookmarkedItem');
-	moduleAid.load('compatibilityFix/UIEnhancer');
-	moduleAid.load('compatibilityFix/theFoxOnlyBetter');
+	Modules.load('compatibilityFix/downloadsIndicator');
+	Modules.load('compatibilityFix/bookmarkedItem');
+	Modules.load('compatibilityFix/UIEnhancer');
+	Modules.load('compatibilityFix/theFoxOnlyBetter');
 	
 	toggleAttribute(document.documentElement, objName+'-FF34', Services.vc.compare(Services.appinfo.version, "34.0a1") >= 0);
 };
 
-moduleAid.UNLOADMODULE = function() {
+Modules.UNLOADMODULE = function() {
 	removeAttribute(document.documentElement, objName+'-FF34');
 	
-	moduleAid.unload('compatibilityFix/S3');
-	moduleAid.unload('compatibilityFix/TileTabs');
-	moduleAid.unload('compatibilityFix/TreeStyleTab');
-	moduleAid.unload('compatibilityFix/downloadsIndicator');
-	moduleAid.unload('compatibilityFix/bookmarkedItem');
-	moduleAid.unload('compatibilityFix/UIEnhancer');
-	moduleAid.unload('compatibilityFix/theFoxOnlyBetter');
+	Modules.unload('compatibilityFix/S3');
+	Modules.unload('compatibilityFix/TileTabs');
+	Modules.unload('compatibilityFix/TreeStyleTab');
+	Modules.unload('compatibilityFix/downloadsIndicator');
+	Modules.unload('compatibilityFix/bookmarkedItem');
+	Modules.unload('compatibilityFix/UIEnhancer');
+	Modules.unload('compatibilityFix/theFoxOnlyBetter');
 };
