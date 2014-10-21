@@ -23,7 +23,7 @@
 	
 	/* Inner buttons and other elements display */
 	
-	/* These are for the mouse over effects, !important tags are necessary especially for when inURLBar is true */
+	/* These are for the mouse over effects */
 	#puzzleBars-top-bar toolbarbutton:not([disabled]):hover,
 	#puzzleBars-top-bar toolbarbutton[open],
 	#puzzleBars-top-bar toolbarbutton > .toolbarbutton-menubutton-button:not([disabled]):hover {
