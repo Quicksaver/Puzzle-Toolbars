@@ -1,4 +1,4 @@
-Modules.VERSION = '1.0.2';
+Modules.VERSION = '1.0.3';
 
 // this is just to migrate all the items and preferences from thePuzzlePiece-addon-bar to this new version of the add-on,
 // it can probably be removed in the future when most users have updated
@@ -34,7 +34,6 @@ Modules.LOADMODULE = function() {
 				Prefs.bottom_alt = Prefs.addonBarAlt;
 				break;
 			case 'corner':
-				Prefs.corner_bar = true;
 				Prefs.corner_placement = (Prefs.movetoRight) ? 'right' : 'left';
 				Prefs.corner_pp = Prefs.showPPs;
 				Prefs.corner_autohide = Prefs.autoHide;
@@ -44,7 +43,6 @@ Modules.LOADMODULE = function() {
 				Prefs.corner_alt = Prefs.addonBarAlt;
 				break;
 			case 'urlbar':
-				Prefs.urlbar_bar = true;
 				Prefs.urlbar_pp = Prefs.showPPs;
 				Prefs.urlbar_autohide = Prefs.autoHide;
 				Prefs.urlbar_whenfocused = Prefs.autoHideWhenFocused;
