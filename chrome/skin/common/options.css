@@ -36,12 +36,21 @@ prefpane > .content-box {
 	list-style-image: url("chrome://puzzlebars/skin/panes.png");
 	padding: 5px 3px 1px;
 }
-.paneSelector radio[pane="generalPane"] {
+.paneSelector radio[pane="bottomPane"] {
 	-moz-image-region: rect(0px 32px 32px 0px);
 }
-.paneSelector radio[pane="aboutPane"] {
+.paneSelector radio[pane="cornerPane"] {
 	-moz-image-region: rect(0px 64px 32px 32px);
 }
-
-
-.paneSelector radio .paneButtonIcon { display: none; }
+.paneSelector radio[pane="lateralPane"] {
+	-moz-image-region: rect(0px 92px 32px 64px);
+}
+.paneSelector radio[pane="topPane"] {
+	-moz-image-region: rect(0px 128px 32px 96px);
+}
+.paneSelector radio[pane="urlbarPane"] {
+	-moz-image-region: rect(0px 160px 32px 128px);
+}
+.paneSelector radio[pane="aboutPane"] {
+	-moz-image-region: rect(0px 192px 32px 160px);
+}
