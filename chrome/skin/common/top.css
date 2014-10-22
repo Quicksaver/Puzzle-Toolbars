@@ -11,11 +11,6 @@
 		-moz-box-ordinal-group: 10001;
 	}
 	
-	/* for fullscreen */
-	#puzzleBars-top-bar[moz-collapsed="true"]:not([collapsed="true"]) {
-		visibility: visible !important;
-	}
-	
 	/* little tweaks to make the search bar fit better */
 	#puzzleBars-top-bar #search-container {
 		margin: -1px 0 -2px;

@@ -11,13 +11,15 @@
 	<!-- Bugfix: there's a weird bug where the puzzle piece will be rendered behind the add-on bar (in the corner)
 	if the bar is not right after developer-toolbar (Status-4-ever add-on triggers this for example, and CTR as well sometimes -->
 	<vbox id="browser-bottombox">
-		<box id="objName-corner-container" insertbefore="ctraddon_addon-bar,ctraddon_toolbar_dummy" insertafter="developer-toolbar">
+		<box id="objName-corner-container"
+			class="puzzleBars-fullscreenCollapse"
+			insertbefore="ctraddon_addon-bar,ctraddon_toolbar_dummy"
+			insertafter="developer-toolbar">
 			<observes element="objName-corner-bar" attribute="collapsed" />
 			<observes element="objName-corner-bar" attribute="movetoright" />
 			<observes element="objName-corner-bar" attribute="autohide" />
 			<observes element="objName-corner-bar" attribute="hover" />
 			<observes element="objName-corner-bar" attribute="statusHide" />
-			<observes element="objName-corner-bar" attribute="moz-collapsed" />
 			
 			<toolbar id="puzzleBars-corner-bar"
 				toolbarname="&corner.name;"

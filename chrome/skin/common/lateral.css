@@ -155,12 +155,6 @@
 		opacity: 0;
 	}
 	
-	/* for fullscreen */
-	#puzzleBars-lateral-container[moz-collapsed="true"],
-	#puzzleBars-lateral-bar[moz-collapsed="true"] {
-		visibility: visible !important;
-	}
-	
 	/* animation */
 	
 	window:not([puzzleBars-noAnimation]) #puzzleBars-lateral-container:hover,

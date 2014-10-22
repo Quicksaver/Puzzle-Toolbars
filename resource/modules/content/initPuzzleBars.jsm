@@ -1,7 +1,7 @@
-Modules.VERSION = '1.0.2';
+Modules.VERSION = '1.0.0';
 
 this.handleFullScreen = function() {
-	message('inFullScreen', !!document.mozFullScreenElement);
+	message('DOMFullScreen', !!document.mozFullScreenElement);
 };
 
 Modules.LOADMODULE = function() {

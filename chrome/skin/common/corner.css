@@ -32,12 +32,6 @@
 		position: fixed;
 	}
 	
-	/* for fullscreen */
-	#puzzleBars-corner-container[moz-collapsed="true"],
-	#puzzleBars-corner-bar[moz-collapsed="true"] {
-		visibility: visible !important;
-	}
-	
 	/* Inner buttons and other elements display */
 	
 	#puzzleBars-corner-bar #status-bar {

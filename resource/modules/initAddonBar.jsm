@@ -1,4 +1,4 @@
-Modules.VERSION = '2.1.2';
+Modules.VERSION = '2.1.3';
 
 this.__defineGetter__('PrintPreviewListener', function() { return window.PrintPreviewListener; });
 this.__defineGetter__('browserPanel', function() { return $('browser-panel'); });
@@ -27,9 +27,14 @@ this.__defineGetter__('scrollBarWidth', function() {
 });
 
 // some bars need to properly force autohide on when in full screen, this is just a helper to ease this process
-this.inFullScreen = window.fullScreen;
 this.onFullScreen = {
 	handlers: [],
+	
+	get useLion () { return window.FullScreen.useLionFullScreen; },
+	get autohide () { return Prefs['fullscreen.autohide']; },
+	
+	// we don't care when entering DOM fullscreen, everything is hidden there, so no use in de/initializing anything
+	entered: window.fullScreen && !document.mozFullScreen,
 	
 	add: function(h) {
 		if(this.handlers.indexOf(h) == -1) {
@@ -43,11 +48,29 @@ this.onFullScreen = {
 		}
 	},
 	
-	listener: function() {
-		inFullScreen = !window.fullScreen;
+	listener: function(e) {
+		var inFullScreen = window.fullScreen;
+		// we get the event before the change is made
+		if(e && e.type == 'fullscreen') {
+			inFullScreen = !inFullScreen;
+		}
+		inFullScreen = inFullScreen && !document.mozFullScreen;
+		
+		// only call the handlers if there was a change
+		if(inFullScreen == onFullScreen.entered) { return; }
+		onFullScreen.entered = inFullScreen;
+		
 		for(var h of onFullScreen.handlers) {
 			h();
 		}
+	},
+	
+	listenDOM: function(m) {
+		setAttribute(document.documentElement, objName+'-noAnimation', 'true');
+		toggleAttribute(document.documentElement, objName+'-fullscreen', m.data);
+		aSync(function() {
+			removeAttribute(document.documentElement, objName+'-noAnimation');
+		});
 	}
 };
 
@@ -201,6 +224,13 @@ Modules.LOADMODULE = function() {
 	
 	CustomizableUI.addListener(barCustomized);
 	
+	var fullscreenDefaults = {};
+	fullscreenDefaults['fullscreen.autohide'] = true;
+	Prefs.setDefaults(fullscreenDefaults, 'browser', '');
+	
+	Messenger.loadInWindow(window, 'initPuzzleBars');
+	Messenger.listenWindow(window, 'DOMFullScreen', onFullScreen.listenDOM);
+	
 	Listeners.add(contextMenu, 'popupshowing', setContextMenu);
 	Listeners.add(viewMenu, 'popupshown', setViewMenu);
 	Listeners.add(customizeMenu, 'popupshown', setCustomizeMenu);
@@ -226,6 +256,11 @@ Modules.UNLOADMODULE = function() {
 	Listeners.remove(window, 'PuzzleBarCustomized', moveBars);
 	Listeners.remove(window, 'fullscreen', onFullScreen.listener);
 	Listeners.remove(statusBar, 'load', delayMoveBars, true);
+	
+	Messenger.unlistenWindow(window, 'DOMFullScreen', onFullScreen.listenDOM);
+	Messenger.unloadFromWindow(window, 'initPuzzleBars');
+	removeAttribute(document.documentElement, objName+'-fullscreen');
+	removeAttribute(document.documentElement, objName+'-noAnimation');
 	
 	CustomizableUI.removeListener(barCustomized);
 	

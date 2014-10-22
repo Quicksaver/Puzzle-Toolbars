@@ -25,7 +25,7 @@
 	</popupset>
 	
 	<hbox id="browser">
-		<vbox id="objName-lateral-container" insertafter="browser-border-start">
+		<vbox id="objName-lateral-container" class="puzzleBars-fullscreenCollapse" insertafter="browser-border-start">
 			<observes element="objName-lateral-bar" attribute="autohide" />
 			<observes element="objName-lateral-bar" attribute="hover" />
 			<observes element="objName-lateral-bar" attribute="collapsed" />

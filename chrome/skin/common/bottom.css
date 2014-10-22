@@ -4,11 +4,6 @@
 	/* Bugfix: we need our add-on bar always as the last visible element, even if it physically isn't */
 	#puzzleBars-bottom-bar { -moz-box-ordinal-group: 10000; }
 	
-	/* for fullscreen */
-	#puzzleBars-bottom-bar[moz-collapsed="true"]:not([collapsed="true"]) {
-		visibility: visible !important;
-	}
-	
 	/* little tweaks to make the search bar fit better */
 	#puzzleBars-bottom-bar #search-container {
 		margin: -1px 0 -2px;

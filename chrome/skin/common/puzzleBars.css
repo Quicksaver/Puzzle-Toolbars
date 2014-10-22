@@ -1,16 +1,25 @@
 @namespace url(http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul);
 @-moz-document url("chrome://browser/content/browser.xul") {
-
-	.puzzleBars-bar *:not(#zoom-reset-button) > .toolbarbutton-text,
-	window:-moz-any([PrintPreview="true"],[puzzleBars-fullscreen]) .puzzleBars-bar,
-	window:-moz-any([PrintPreview="true"],[puzzleBars-fullscreen]) .PuzzlePiece {
+	
+	/* for fullscreen stuff mostly */
+	
+	window:-moz-any([PrintPreview="true"],[puzzleBars-fullscreen]) :-moz-any(.puzzleBars-bar,.PuzzlePiece,.puzzleBars-fullscreenCollapse) {
 		visibility: collapse;
+	}
+	
+	window:not([puzzleBars-fullscreen]) .puzzleBars-bar[moz-collapsed="true"]:not([collapsed="true"]) {
+		visibility: visible !important;
 	}
 	
 	/* Bugfix: https://github.com/Quicksaver/The-Puzzle-Piece/issues/10 */
 	#urlbar-icons #star-button { visibility: collapse !important; }
 	
 	/* Inner buttons and other elements display */
+	
+	/* don't show buttons labels in any of our toolbars */
+	.puzzleBars-bar *:not(#zoom-reset-button) > .toolbarbutton-text {
+		visibility: collapse;
+	}
 	
 	/* !important tags are necessary, especially for inURLBar */
 	.puzzleBars-bar .toolbarbutton-icon:not(:hover) {

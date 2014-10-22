@@ -9,7 +9,7 @@
 	</commandset>
 	
 	<hbox id="urlbar-icons">
-		<box id="objName-urlbar-container" position="1">
+		<box id="objName-urlbar-container" class="puzzleBars-fullscreenCollapse" position="1">
 			<observes element="objName-urlbar-bar" attribute="autohide" />
 			<observes element="objName-urlbar-bar" attribute="hover" />
 			

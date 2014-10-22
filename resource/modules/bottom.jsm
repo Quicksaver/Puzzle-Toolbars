@@ -1,4 +1,4 @@
-Modules.VERSION = '1.0.7';
+Modules.VERSION = '1.0.8';
 
 this.__defineGetter__('bottomBox', function() { return $('browser-bottombox'); });
 this.__defineGetter__('bottomBar', function() { return $(objName+'-bottom-bar'); });
@@ -88,7 +88,7 @@ this.bottomBrightText = function() {
 };
 
 this.bottomAutoHide = function() {
-	if(!DARWIN && inFullScreen && Prefs['fullscreen.autohide']) {
+	if(!onFullScreen.useLion && onFullScreen.entered && onFullScreen.autohide) {
 		initAutoHide(bottomBar, [bottomBar, bottomPP], bottomBar, 'margin');
 		
 		// this would cause the bottom toolbar to appear invisible

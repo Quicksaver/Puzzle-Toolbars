@@ -1,10 +1,6 @@
 @namespace url(http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul);
 @-moz-document url("chrome://browser/content/browser.xul") {
 
-	window[puzzleBars-fullscreen] #puzzleBars-urlbar-container {
-		display: none;
-	}
-	
 	#puzzleBars-urlbar-container {
 		overflow: hidden;
 	}
@@ -25,11 +21,6 @@
 		visibility: visible !important;
 		pointer-events: none;
 		opacity: 0;
-	}
-	
-	/* for fullscreen */
-	#puzzleBars-urlbar-bar[moz-collapsed="true"] {
-		visibility: visible !important;
 	}
 	
 	/* Inner buttons and other elements display */

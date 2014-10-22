@@ -1,4 +1,4 @@
-Modules.VERSION = '1.0.5';
+Modules.VERSION = '1.0.6';
 
 // ammount of pixels to clip the bar to when it is closed or hidden
 this.CLIPBAR_LATERAL = 4;
@@ -451,7 +451,7 @@ this.lateralToggleBottom = function() {
 };
 
 this.lateralAutoHide = function() {
-	if(!customizing && (Prefs.lateral_autohide || (!DARWIN && inFullScreen && Prefs['fullscreen.autohide']))) {
+	if(!customizing && (Prefs.lateral_autohide || (!onFullScreen.useLion && onFullScreen.entered && onFullScreen.autohide))) {
 		initAutoHide(lateralBar, [lateralContainer, lateralPP], lateralContainer, 'opacity');
 	} else {
 		deinitAutoHide(lateralBar);

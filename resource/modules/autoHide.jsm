@@ -1,4 +1,4 @@
-Modules.VERSION = '2.1.2';
+Modules.VERSION = '2.1.3';
 
 this.onDragExitAll = function() {
 	Listeners.remove(gBrowser, "dragenter", onDragExitAll, false);
@@ -320,10 +320,6 @@ this.deinitAutoHide = function(bar) {
 };
 
 Modules.LOADMODULE = function() {
-	var fullscreenDefaults = {};
-	fullscreenDefaults['fullscreen.autohide'] = true;
-	Prefs.setDefaults(fullscreenDefaults, 'browser', '');
-	
 	Listeners.add(window, 'popupshown', holdPopupMenu);
 };
 
