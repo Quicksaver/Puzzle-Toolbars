@@ -1,4 +1,4 @@
-Modules.VERSION = '1.0.7';
+Modules.VERSION = '1.0.8';
 
 // Special widgets aren't allowed in the menu panel by default, so we need to override this behavior (and hope we don't clash with other add-ons doing the same).
 // I hope I can remove this soon. See:
@@ -165,7 +165,7 @@ Modules.UNLOADMODULE = function() {
 		CustomizableUI.destroyWidget(wId);
 	}
 	
-	Piggyback.remove('specialWidgets', CUIBackstage.CustomizableUIInternal, 'addWidgetToArea');
-	Piggyback.remove('specialWidgets', CUIBackstage.CustomizableUIInternal, 'canWidgetMoveToArea');
-	Piggyback.remove('specialWidgets', CUIBackstage.CustomizableUIInternal, 'buildArea');
+	Piggyback.revert('specialWidgets', CUIBackstage.CustomizableUIInternal, 'addWidgetToArea');
+	Piggyback.revert('specialWidgets', CUIBackstage.CustomizableUIInternal, 'canWidgetMoveToArea');
+	Piggyback.revert('specialWidgets', CUIBackstage.CustomizableUIInternal, 'buildArea');
 };
