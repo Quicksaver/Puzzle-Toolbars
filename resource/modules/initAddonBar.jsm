@@ -1,4 +1,4 @@
-Modules.VERSION = '2.1.3';
+Modules.VERSION = '2.1.4';
 
 this.__defineGetter__('PrintPreviewListener', function() { return window.PrintPreviewListener; });
 this.__defineGetter__('browserPanel', function() { return $('browser-panel'); });
@@ -35,6 +35,7 @@ this.onFullScreen = {
 	
 	// we don't care when entering DOM fullscreen, everything is hidden there, so no use in de/initializing anything
 	entered: window.fullScreen && !document.mozFullScreen,
+	DOMEntered: false,
 	
 	add: function(h) {
 		if(this.handlers.indexOf(h) == -1) {
@@ -66,11 +67,16 @@ this.onFullScreen = {
 	},
 	
 	listenDOM: function(m) {
-		setAttribute(document.documentElement, objName+'-noAnimation', 'true');
-		toggleAttribute(document.documentElement, objName+'-fullscreen', m.data);
-		aSync(function() {
-			removeAttribute(document.documentElement, objName+'-noAnimation');
-		});
+		// only do this if it's changed
+		if(m.data != onFullScreen.DOMEntered) {
+			onFullScreen.DOMEntered = m.data;
+			
+			setAttribute(document.documentElement, objName+'-noAnimation', 'true');
+			toggleAttribute(document.documentElement, objName+'-fullscreen', m.data);
+			aSync(function() {
+				removeAttribute(document.documentElement, objName+'-noAnimation');
+			});
+		}
 	}
 };
 

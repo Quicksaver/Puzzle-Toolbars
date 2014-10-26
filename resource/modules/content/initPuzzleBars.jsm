@@ -1,4 +1,4 @@
-Modules.VERSION = '1.0.0';
+Modules.VERSION = '1.0.1';
 
 this.handleFullScreen = function() {
 	message('DOMFullScreen', !!document.mozFullScreenElement);
@@ -6,6 +6,7 @@ this.handleFullScreen = function() {
 
 Modules.LOADMODULE = function() {
 	Listeners.add(Scope, 'mozfullscreenchange', handleFullScreen);
+	handleFullScreen();
 };
 
 Modules.UNLOADMODULE = function() {
