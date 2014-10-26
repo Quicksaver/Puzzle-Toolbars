@@ -1,4 +1,4 @@
-Modules.VERSION = '1.1.4';
+Modules.VERSION = '1.1.5';
 
 this.PP_OFFSET_CORNER = 0;
 
@@ -145,6 +145,8 @@ this.cornerMove = function() {
 	sscode += '}';
 	
 	Styles.load('cornerMove_'+_UUID, sscode, true);
+	
+	personaChanged();
 };
 
 this.delayCornerMove = function() {
@@ -186,47 +188,48 @@ this.styleCornerPersona = function() {
 	}
 	
 	// Unload current stylesheet if it's been loaded, just in case we're changing personas
-	Styles.unload('cornerPersona_'+_UUID);
-	
-	if(lwtheme.bgImage != '') {
-		if(Prefs.corner_placement == 'left') {
-			var offsetPersonaX = -cornerStyle.left -cornerContainer.clientLeft +parseInt(boxStyle.getPropertyValue('border-left-width'));
-		} else {
-			var offsetPersonaX =
-				-bottomBox.clientWidth
-				+cornerStyle.right
-				+cornerContainer.clientWidth
-				+cornerContainer.clientLeft
-				-parseInt(boxStyle.getPropertyValue('border-left-width'));
-		}
-		
-		var offsetPersonaY =
-			+cornerContainer.clientHeight
-			+cornerStyle.bottom
-			+cornerContainer.clientTop
-			-parseInt(boxStyle.getPropertyValue('border-bottom-width'));
-		if(cornerStyle.bottom > 1) { offsetPersonaY--; }
-		
-		var offsetPadding = boxStyle.getPropertyValue('background-position');
-		if(offsetPadding.indexOf(' ') > -1 && offsetPadding.indexOf('px', offsetPadding.indexOf(' ') +1) > -1) {
-			offsetPersonaY += parseInt(offsetPadding.substr(offsetPadding.indexOf(' ') +1, offsetPadding.indexOf('px', offsetPadding.indexOf(' ') +1)));
-		}
-		
-		var sscode = '/*The Puzzle Piece CSS declarations of variable values*/\n';
-		sscode += '@namespace url(http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul);\n';
-		sscode += '@-moz-document url("'+document.baseURI+'") {\n';
-		sscode += '	window['+objName+'_UUID="'+_UUID+'"]:not([customizing="true"]) #'+objName+'-corner-container {\n';
-		sscode += '	  background-image: ' + lwtheme.bgImage + ' !important;\n';
-		sscode += '	  background-color: ' + lwtheme.bgColor + ' !important;\n';
-		sscode += '	  color: ' + lwtheme.color + ' !important;\n';
-		sscode += '	  background-position: ' + offsetPersonaX + 'px ' +offsetPersonaY+ 'px !important;\n';
-		sscode += '	  background-repeat: repeat !important;\n';
-		sscode += '	  background-size: auto auto !important;\n';
-		sscode += '	}\n';
-		sscode += '}';
-		
-		Styles.load('cornerPersona_'+_UUID, sscode, true);
+	if(!lwtheme.bgImage) {
+		Styles.unload('cornerPersona_'+_UUID);
+		return;
 	}
+	
+	if(Prefs.corner_placement == 'left') {
+		var offsetPersonaX = -cornerStyle.left -cornerContainer.clientLeft +parseInt(boxStyle.getPropertyValue('border-left-width'));
+	} else {
+		var offsetPersonaX =
+			-bottomBox.clientWidth
+			+cornerStyle.right
+			+cornerContainer.clientWidth
+			+cornerContainer.clientLeft
+			-parseInt(boxStyle.getPropertyValue('border-left-width'));
+	}
+	
+	var offsetPersonaY =
+		+cornerContainer.clientHeight
+		+cornerStyle.bottom
+		+cornerContainer.clientTop
+		-parseInt(boxStyle.getPropertyValue('border-bottom-width'));
+	if(cornerStyle.bottom > 1) { offsetPersonaY--; }
+	
+	var offsetPadding = boxStyle.getPropertyValue('background-position');
+	if(offsetPadding.indexOf(' ') > -1 && offsetPadding.indexOf('px', offsetPadding.indexOf(' ') +1) > -1) {
+		offsetPersonaY += parseInt(offsetPadding.substr(offsetPadding.indexOf(' ') +1, offsetPadding.indexOf('px', offsetPadding.indexOf(' ') +1)));
+	}
+	
+	var sscode = '/*The Puzzle Piece CSS declarations of variable values*/\n';
+	sscode += '@namespace url(http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul);\n';
+	sscode += '@-moz-document url("'+document.baseURI+'") {\n';
+	sscode += '	window['+objName+'_UUID="'+_UUID+'"]:not([customizing="true"]) #'+objName+'-corner-container {\n';
+	sscode += '	  background-image: ' + lwtheme.bgImage + ' !important;\n';
+	sscode += '	  background-color: ' + lwtheme.bgColor + ' !important;\n';
+	sscode += '	  color: ' + lwtheme.color + ' !important;\n';
+	sscode += '	  background-position: ' + offsetPersonaX + 'px ' +offsetPersonaY+ 'px !important;\n';
+	sscode += '	  background-repeat: repeat !important;\n';
+	sscode += '	  background-size: auto auto !important;\n';
+	sscode += '	}\n';
+	sscode += '}';
+	
+	Styles.load('cornerPersona_'+_UUID, sscode, true);
 };
 
 this.cornerBrightText = function() {
@@ -253,8 +256,12 @@ this.cornerAutoHide = function() {
 	}
 };
 
-this.cornerExtend = function() {
+this.cornerExtend = function(persona) {
 	toggleAttribute(cornerContainer, 'extend', Prefs.corner_extend);
+	
+	if(persona) {
+		personaChanged();
+	}
 };
 
 this.cornerOnLoad = function() {
