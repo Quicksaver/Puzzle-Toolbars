@@ -1,10 +1,31 @@
-<!ENTITY OptionsMenu.label "Options de The Puzzle Piece">
-<!ENTITY addonBar.name "Add-on Bar">
-<!ENTITY addonBar.accesskey "A">
-<!ENTITY addonBar.menuAdd "Ajouter à la barre des modules">
-<!ENTITY addonBar.menuMove "Déplacer vers la barre des modules">
-<!ENTITY addonBar.menuRemove "Retirer de la barre des modules">
-<!ENTITY addonBar.menuMain "Déplacer vers la barre d'outils">
+<!ENTITY OptionsMenu.label "Options de Puzzle Toolbars">
+<!ENTITY bottom.name "Barre Puzzle du bas">
+<!ENTITY bottom.accesskey "b">
+<!ENTITY bottom.menuAdd "Ajouter à la barre Puzzle du bas">
+<!ENTITY bottom.menuMove "Déplacer vers la barre Puzzle du bas">
+<!ENTITY bottom.menuRemove "Retirer de la barre Puzzle du bas">
+<!ENTITY corner.name "Barre Puzzle en coin">
+<!ENTITY corner.accesskey "c">
+<!ENTITY corner.menuAdd "Ajouter à la barre Puzzle en coin">
+<!ENTITY corner.menuMove "Déplacer vers la barre Puzzle en coin">
+<!ENTITY corner.menuRemove "Retirer de la barre Puzzle en coin">
+<!ENTITY urlbar.name "Barre Puzzle de la barre d'adresse">
+<!ENTITY urlbar.accesskey "a">
+<!ENTITY urlbar.menuAdd "Ajouter à la barre Puzzle de la barre d'adresse">
+<!ENTITY urlbar.menuMove "Déplacer vers la barre Puzzle de la barre d'adresse">
+<!ENTITY urlbar.menuRemove "Retirer de la barre Puzzle de la barre d'adresse">
+<!ENTITY lateral.name "Barre Puzzle latérale">
+<!ENTITY lateral.accesskey "l">
+<!ENTITY lateral.menuAdd "Ajouter à la barre Puzzle latérale">
+<!ENTITY lateral.menuMove "Déplacer vers la barre Puzzle latérale">
+<!ENTITY lateral.menuRemove "Retirer de la barre Puzzle latérale">
+<!ENTITY top.name "Barre Puzzle haute">
+<!ENTITY top.accesskey "h">
+<!ENTITY top.menuAdd "Ajouter à la barre Puzzle du haut">
+<!ENTITY top.menuMove "Déplacer vers la barre Puzzle du haut">
+<!ENTITY top.menuRemove "Retirer de la barre Puzzle du haut">
+<!ENTITY allbars.menuMain "Déplacer vers la barre d'outils">
+<!ENTITY allbars.overflow "Afficher davantage…">
 <!ENTITY statusBar.label "Barre d'état">
 <!ENTITY specialWidget.separator "Séparateur">
 <!ENTITY specialWidget.spring "Espace flexible">

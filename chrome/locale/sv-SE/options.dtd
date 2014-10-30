@@ -1,17 +1,43 @@
-<!ENTITY Optwindow.style "width: 31em;">
-<!ENTITY Options.title "The Puzzle Piece">
-<!ENTITY Optgeneral.label "Tilläggsfältet">
-<!ENTITY Optabout.label "Om">
+<!ENTITY Optwindow.style "width: 36.5em;">
+<!ENTITY Options.title "Inställningar för Puzzle Toolbars">
+<!ENTITY bottom.title "Nedre fält">
+<!ENTITY corner.title "Hörnfält">
+<!ENTITY urlbar.title "Integrerat fält">
+<!ENTITY lateral.title "Sidofält">
+<!ENTITY top.title "Övre fält">
+<!ENTITY about.title "Om">
 <!ENTITY GroupPosition.label "Position">
 <!ENTITY GroupBehavior.label "Beteende">
-<!ENTITY OptPlacement.bottomLabel "Placera nederst i webbläsarfönstret">
-<!ENTITY OptPlacement.cornerLabel "Komprimera till ett hörn, nederst på webbläsarsidan">
-<!ENTITY OptPlacement.urlbarLabel "Placera inuti adressfältet">
-<!ENTITY OptmoveToRight.label "Placera till höger om webbläsarfönstret">
-<!ENTITY OptshowPPs.label "Visa växlingsknappen för Puzzle Piece i tilläggsfältet">
-<!ENTITY OptautoHide.label "Dölj tilläggsfältet automatiskt">
-<!ENTITY OptstatusBar.label "Återställ statusfältet">
-<!ENTITY OptKeyboardShortcut.caption "Kortkommando">
+<!ENTITY OptBottom.label "Aktivera det nedre pusselfältet">
+<!ENTITY OptBottom.tooltip "Lägger till ett verktygsfält nederst i webbläsarfönstret, ungefär som det gamla tilläggsfältet.">
+<!ENTITY OptCorner.label "Aktivera hörnpusselfältet">
+<!ENTITY OptCorner.tooltip "Lägger till ett smalt verktygsfält i endera nedre hörnet av webbläsarfönstret. Sparar på skärmutrymmet.">
+<!ENTITY OptUrlbar.label "Aktivera det integrerade pusselfältet">
+<!ENTITY OptUrlbar.tooltip "Lägger till ett litet och städat verktygsfält i adressfältet. Bra om du har gott om plats där och vill utnyttja det.">
+<!ENTITY OptLateral.label "Aktivera sidopusselfältet">
+<!ENTITY OptLateral.tooltip "Lägger till ett lodrätt verktygsfält på endera sidan av webbläsarfönstret. Bra för dig som ofta använder sidopanelen.">
+<!ENTITY OptTop.label "Aktivera det övre pusselfältet">
+<!ENTITY OptTop.tooltip "Lägger till ett verktygsfält överst i webbläsarfönstret, nedanför navigeringsfältet.">
+<!ENTITY OptTopSlimChrome.label "Inkludera i de verktygsfält som döljs i Slim Chrome-läget">
+<!ENTITY OptTopSlimChrome.tooltip "Rekommenderas. Verktygsfältet döljs tillsammans med de övriga övre verktygsfälten när Slim Chrome är aktiverat. Observera att pusselbitknappen inte kan användas i detta läge. Kräver tillägget The Fox, Only Better.">
+<!ENTITY OptShowPiece.label "Visa pusselbit">
+<!ENTITY OptShowPiece.tooltip "Pusselbiten är en knapp som öppnar och stänger verktygsfältet den hör till.">
+<!ENTITY OptPlacement.left "Placera till vänster">
+<!ENTITY OptPlacement.right "Placera till höger">
+<!ENTITY OptPlacement.tooltip "Växla på vilken sida av webbläsarfönstret den skall visas.">
+<!ENTITY OptAutoHide.label "Dölj automatiskt">
+<!ENTITY OptAutoHide.tooltip "Dölj verktygsfältet automatiskt.">
+<!ENTITY OptHotspot.label "Aktivt område för muspekare">
+<!ENTITY OptHotspot.tooltip "Anger hur stort området som reagerar på muspekaren skall vara, för visning av verktygsfältet.">
+<!ENTITY OptHotspot.low "Mindre">
+<!ENTITY OptHotspot.high "Större">
+<!ENTITY OptWhenFocused.label "Dölj endast när adressfältet är fokuserat">
+<!ENTITY OptWhenFocused.tooltip "Verktygsfältet kommer endast att döljas när textmarkören är i adressfältet.">
+<!ENTITY OptExtend.label "Utvidga över hela det tillgängliga utrymmet">
+<!ENTITY OptExtend.tooltip "Visar verktygsfältet över hela det tillgängliga utrymmet i webbläsarfönstret, även om det inte har tillräckligt många objekt eller gränssnittskomponenter i sig. Bra om du vill använda flexibla mellanrum.">
+<!ENTITY OptMoveBottom.label "Placera nederst">
+<!ENTITY OptMoveBottom.tooltip "Visa pusselbiten nederst i verktygsfältet istället för överst.">
+<!ENTITY OptKeyboardShortcut.captionA "Kortkommando för aktivering eller inaktivering">
 <!ENTITY OptKeyboardShortcut.control "Ctrl">
 <!ENTITY OptKeyboardShortcut.shift "Skift">
 <!ENTITY OptKeyboardShortcut.alt "Alt">
@@ -27,8 +53,9 @@
 <!ENTITY OptKeyboardShortcut.up "Uppåtpil">
 <!ENTITY OptKeyboardShortcut.right "Högerpil">
 <!ENTITY OptKeyboardShortcut.down "Nedåtpil">
-<!ENTITY thepuzzlepieceabout.name "The Puzzle Piece - Pusselbiten">
-<!ENTITY thepuzzlepieceabout.by "av Quicksaver">
-<!ENTITY thepuzzlepieceabout.desc "All information om The Puzzle Piece och dess utvecklare återfinns på dess tilläggssida hos Mozilla. Om du tycker om tillägget, skriv då gärna en informativ recension eller donera en slant för att stödja dess fortsatta utveckling. Buggrapporter och förslag kan skickas in på tilläggets sida för teknisk support.">
-<!ENTITY thepuzzlepieceabout.home "Tilläggets webbplats">
-<!ENTITY thepuzzlepieceabout.tech "Teknisk support">
+<!ENTITY puzzlebarsabout.name "Puzzle Toolbars">
+<!ENTITY puzzlebarsabout.by "av Quicksaver">
+<!ENTITY puzzlebarsabout.desc "All information om The Puzzle Piece och dess utvecklare återfinns på dess tilläggssida hos Mozilla. Om du tycker om tillägget, skriv då gärna en informativ recension eller donera en slant för att stödja dess fortsatta utveckling. Buggrapporter och förslag kan skickas in på tilläggets sida för teknisk support.">
+<!ENTITY puzzlebarsabout.home "Tilläggets webbplats">
+<!ENTITY puzzlebarsabout.tech "Teknisk support">
+<!ENTITY puzzlebarsabout.notes "Utgivningsanteckningar">

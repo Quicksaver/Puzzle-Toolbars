@@ -1,10 +1,31 @@
-<!ENTITY OptionsMenu.label "Opções da Peça do Puzzle">
-<!ENTITY addonBar.name "Barra de Extras">
-<!ENTITY addonBar.accesskey "E">
-<!ENTITY addonBar.menuAdd "Adicionar à Barra de Extras">
-<!ENTITY addonBar.menuMove "Mover para a Barra de Extras">
-<!ENTITY addonBar.menuRemove "Remover da Barra de Extras">
-<!ENTITY addonBar.menuMain "Mover para a Barra de Ferramentas">
+<!ENTITY OptionsMenu.label "Opções das Barras Puzzle">
+<!ENTITY bottom.name "Barra Puzzle do Fundo">
+<!ENTITY bottom.accesskey "z">
+<!ENTITY bottom.menuAdd "Adicionar à Barra Puzzle do Fundo">
+<!ENTITY bottom.menuMove "Mover para a Barra Puzzle do Fundo">
+<!ENTITY bottom.menuRemove "Remover da Barra Puzzle do Fundo">
+<!ENTITY corner.name "Barra Puzzle do Canto">
+<!ENTITY corner.accesskey "t">
+<!ENTITY corner.menuAdd "Adicionar à Barra Puzzle do Canto">
+<!ENTITY corner.menuMove "Mover para a Barra Puzzle do Canto">
+<!ENTITY corner.menuRemove "Remover da Barra Puzzle do Canto">
+<!ENTITY urlbar.name "Barra Puzzle da Barra de Endereço">
+<!ENTITY urlbar.accesskey "e">
+<!ENTITY urlbar.menuAdd "Adicionar à Barra Puzzle da Barra de Endereço">
+<!ENTITY urlbar.menuMove "Mover para a Barra Puzzle da Barra de Endereço">
+<!ENTITY urlbar.menuRemove "Remover da Barra Puzzle da Barra de Endereço">
+<!ENTITY lateral.name "Barra Puzzle Lateral">
+<!ENTITY lateral.accesskey "L">
+<!ENTITY lateral.menuAdd "Adicionar à Barra Puzzle Lateral">
+<!ENTITY lateral.menuMove "Mover para a Barra Puzzle Lateral">
+<!ENTITY lateral.menuRemove "Remover da Barra Puzzle Lateral">
+<!ENTITY top.name "Barra Puzzle do Topo">
+<!ENTITY top.accesskey "p">
+<!ENTITY top.menuAdd "Adicionar à Barra Puzzle do Topo">
+<!ENTITY top.menuMove "Mover para a Barra Puzzle do Topo">
+<!ENTITY top.menuRemove "Remover da Barra Puzzle do Topo">
+<!ENTITY allbars.menuMain "Mover para a Barra de Ferramentas">
+<!ENTITY allbars.overflow "Mostrar mais...">
 <!ENTITY statusBar.label "Barra de Estado">
 <!ENTITY specialWidget.separator "Separador">
 <!ENTITY specialWidget.spring "Espaço Flexível">

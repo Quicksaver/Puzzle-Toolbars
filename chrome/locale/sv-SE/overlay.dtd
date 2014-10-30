@@ -1,10 +1,31 @@
-<!ENTITY OptionsMenu.label "Inställningar för The Puzzle Piece">
-<!ENTITY addonBar.name "Tilläggsfältet">
-<!ENTITY addonBar.accesskey "T">
-<!ENTITY addonBar.menuAdd "Lägg till i tilläggsfältet">
-<!ENTITY addonBar.menuMove "Flytta till tilläggsfältet">
-<!ENTITY addonBar.menuRemove "Ta bort från tilläggsfältet">
-<!ENTITY addonBar.menuMain "Flytta till verktygsfältet">
+<!ENTITY OptionsMenu.label "Inställningar för Puzzle Toolbars">
+<!ENTITY bottom.name "Nedre pusselfält">
+<!ENTITY bottom.accesskey "N">
+<!ENTITY bottom.menuAdd "Lägg till i det nedre pusselfältet">
+<!ENTITY bottom.menuMove "Flytta till det nedre pusselfältet">
+<!ENTITY bottom.menuRemove "Ta bort från det nedre pusselfältet">
+<!ENTITY corner.name "Hörnpusselfält">
+<!ENTITY corner.accesskey "H">
+<!ENTITY corner.menuAdd "Lägg till i hörnpusselfältet">
+<!ENTITY corner.menuMove "Flytta till hörnpusselfältet">
+<!ENTITY corner.menuRemove "Ta bort från hörnpusselfältet">
+<!ENTITY urlbar.name "Integrerat pusselfält">
+<!ENTITY urlbar.accesskey "I">
+<!ENTITY urlbar.menuAdd "Lägg till i det integrerade pusselfältet">
+<!ENTITY urlbar.menuMove "Flytta till det integrerade pusselfältet">
+<!ENTITY urlbar.menuRemove "Ta bort från det integrerade pusselfältet">
+<!ENTITY lateral.name "Sidopusselfält">
+<!ENTITY lateral.accesskey "S">
+<!ENTITY lateral.menuAdd "Lägg till i sidopusselfältet">
+<!ENTITY lateral.menuMove "Flytta till sidopusselfältet">
+<!ENTITY lateral.menuRemove "Ta bort från sidopusselfältet">
+<!ENTITY top.name "Övre pusselfält">
+<!ENTITY top.accesskey "v">
+<!ENTITY top.menuAdd "Lägg till i det övre pusselfältet">
+<!ENTITY top.menuMove "Flytta till det övre pusselfältet">
+<!ENTITY top.menuRemove "Ta bort från det övre pusselfältet">
+<!ENTITY allbars.menuMain "Flyta till verktygsfält">
+<!ENTITY allbars.overflow "Visa mer …">
 <!ENTITY statusBar.label "Statusfältet">
 <!ENTITY specialWidget.separator "Avskiljare">
 <!ENTITY specialWidget.spring "Flexibelt mellanrum">

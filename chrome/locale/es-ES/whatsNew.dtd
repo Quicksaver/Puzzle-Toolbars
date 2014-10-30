@@ -1,0 +1,24 @@
+<!ENTITY whatsNew.title "Puzzle Toolbars - Notas de versión">
+<!ENTITY whatsNew.name "Puzzle Toolbars">
+<!ENTITY whatsNew.version "Versión {v}">
+<!ENTITY whatsNew.versionDivider " - ">
+<!ENTITY whatsNew.uptodate "actualizado, ¡felicidades!">
+<!ENTITY whatsNew.needsupdate "¡actualización disponible!">
+<!ENTITY whatsNew.description "Revise las &quot;Notas de versión&quot; y los &quot;Problemas conocidos&quot; para esta versión de debajo. Hágame saber cualquier problema que encuentre, o si tiene alguna sugerencia para futuras versiones.">
+<!ENTITY whatsNew.message "Puede encontrar más información sobre el complemento en su página del sitio de complementos (add-ons) de Mozilla. Si disfruta del complemento, considere dejar allí una revisión amable, o hacer una pequeña contribución para ayudar a sostener su desarrollo continuado. ¡Cada pequeña aportación es muy apreciada!">
+<!ENTITY whatsNew.allVersions "Mostrar notas de todas las versiones previas">
+<!ENTITY whatsNew.options "Opciones del complemento">
+<!ENTITY whatsNew.notifyOnUpdates "Mostrarme esta pestaña en la siguiente actualización">
+<!ENTITY whatsNew.information "Más información">
+<!ENTITY whatsNew.home "Página principal del complemento">
+<!ENTITY whatsNew.fullchangelog "Registro de cambios completo">
+<!ENTITY whatsNew.problems "¿Tiene problemas?">
+<!ENTITY whatsNew.tech "Abra un asunto (issue) en la página de soporte describiendo su problema">
+<!ENTITY whatsNew.email "O envíeme un correo electrónico acerca de ello">
+<!ENTITY whatsNew.author "Más sobre el autor">
+<!ENTITY whatsNew.trymore "¡Pruebe alguno de mis otros complementos para una experiencia con Firefox aún mejor!">
+<!ENTITY whatsNew.profile "Búsquelos en mi perfil">
+<!ENTITY whatsNew.share "¡Compartir!">
+<!ENTITY whatsNew.friends "No sea el único con un gran navegador. ¡Haga partícipes a sus amigos de algo estupendo!">
+<!ENTITY whatsNew.moreshare "Otros servicios...">
+<!ENTITY whatsNew.tryit "Pruebe este complemento que le permite colocar las piezas de todas sus características de Firefox de la precisa forma en que las quiere - ¡Puzzle Toolbars!">

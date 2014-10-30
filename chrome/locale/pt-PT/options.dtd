@@ -1,17 +1,43 @@
-<!ENTITY Optwindow.style "width: 31em;">
-<!ENTITY Options.title "A Peça do Puzzle">
-<!ENTITY Optgeneral.label "Barra de Extras">
-<!ENTITY Optabout.label "Sobre">
+<!ENTITY Optwindow.style "width: 34.5em;">
+<!ENTITY Options.title "Barras de Ferramentas Puzzle">
+<!ENTITY bottom.title "Fundo">
+<!ENTITY corner.title "Canto">
+<!ENTITY urlbar.title "Barra de Endereço">
+<!ENTITY lateral.title "Lateral">
+<!ENTITY top.title "Topo">
+<!ENTITY about.title "Sobre">
 <!ENTITY GroupPosition.label "Posição">
 <!ENTITY GroupBehavior.label "Comportamento">
-<!ENTITY OptPlacement.bottomLabel "Colocar ao fundo do navegador">
-<!ENTITY OptPlacement.cornerLabel "Encolher num canto ao fundo da página">
-<!ENTITY OptPlacement.urlbarLabel "Mover para a barra de endereço">
-<!ENTITY OptmoveToRight.label "Colocar à direita da janela do navegador">
-<!ENTITY OptshowPPs.label "Mostrar o botão da Peça do Puzzle na barra de extras">
-<!ENTITY OptautoHide.label "Esconder a barra de extras automaticamente">
-<!ENTITY OptstatusBar.label "Restaurar a barra de estado">
-<!ENTITY OptKeyboardShortcut.caption "Atalho de Teclado">
+<!ENTITY OptBottom.label "Activar a Barra Puzzle do Fundo">
+<!ENTITY OptBottom.tooltip "Activa uma barra de ferramentas customizável ao fundo da janela do navegador, muito parecida com a antiga barra de extras.">
+<!ENTITY OptCorner.label "Activar a Barra Puzzle do Canto">
+<!ENTITY OptCorner.tooltip "Activa uma pequena barra de ferramentas no canto da janela, útil para maximizar o espaço de visualização do ecrã.">
+<!ENTITY OptUrlbar.label "Activar a Barra Puzzle da Barra de Endereço">
+<!ENTITY OptUrlbar.tooltip "Activa uma pequena e compacta barra de ferramentas dentro da barra de enderço, óptima para tirar partido do espaço livre lá disponível se normalmente tiver muito.">
+<!ENTITY OptLateral.label "Activar Barra Puzzle Lateral">
+<!ENTITY OptLateral.tooltip "Activa uma barra de ferramentas vertical na margem do navegador, uma companheira perfeita para quem utiliza regularmente o painel lateral.">
+<!ENTITY OptTop.label "Activa a Barra Puzzle do Topo">
+<!ENTITY OptTop.tooltip "Activa uma barra de ferramentas customizável no topo da janela, logo a seguir à barra de navegação.">
+<!ENTITY OptTopSlimChrome.label "Incluir nas barras da Interface Reduzida">
+<!ENTITY OptTopSlimChrome.tooltip "Recomendado! Para uso com o meu outro extra O Fox, Só Que Melhor; a barra de ferramentas será escondida com as restantes barras do topo da janela quando a Interface Reduzida está activa. Contudo, neste caso a peça do puzzle não pode ser utilizada.">
+<!ENTITY OptShowPiece.label "Mostra Peça do Puzzle">
+<!ENTITY OptShowPiece.tooltip "A peça do puzzle é um botão que pode premir para abrir ou fechar rapidamente a barra de ferramentas.">
+<!ENTITY OptPlacement.left "Colocar à esquerda">
+<!ENTITY OptPlacement.right "Colocar à direita">
+<!ENTITY OptPlacement.tooltip "Escolhe o lado da janela onde a colocar.">
+<!ENTITY OptAutoHide.label "Esconder Automaticamente">
+<!ENTITY OptAutoHide.tooltip "Esconde a barra de ferramentas automaticamente quando não é necessária.">
+<!ENTITY OptHotspot.label "Zona reactiva ao ponteiro">
+<!ENTITY OptHotspot.tooltip "Define o tamanho da zona que reage ao movimento do ponteiro para mostrar a barra de ferramentas.">
+<!ENTITY OptHotspot.low "Menor">
+<!ENTITY OptHotspot.high "Maior">
+<!ENTITY OptWhenFocused.label "Esconder apenas quando a barra de endereço está activa">
+<!ENTITY OptWhenFocused.tooltip "Com esta opção, a barra puzzle só se esconde automaticamente quando o cursor estiver na barra de endereço.">
+<!ENTITY OptExtend.label "Estender por todo o espaço disponível">
+<!ENTITY OptExtend.tooltip "Esta opção mostra a barra de ferramentas ao longo de toda a largura disponível na janela, mesmo que não tenha items suficientes para a encher; especialmente útil se quiser utilizar espaços flexíveis.">
+<!ENTITY OptMoveBottom.label "Colocar ao fundo">
+<!ENTITY OptMoveBottom.tooltip "Mostra a peça do puzzle ao fundo da barra de ferramentas em vez de ao topo.">
+<!ENTITY OptKeyboardShortcut.captionA "Atalho de teclado para activar ou desactivar">
 <!ENTITY OptKeyboardShortcut.control "Control">
 <!ENTITY OptKeyboardShortcut.shift "Shift">
 <!ENTITY OptKeyboardShortcut.alt "Alt">
@@ -27,8 +53,9 @@
 <!ENTITY OptKeyboardShortcut.up "Seta cima">
 <!ENTITY OptKeyboardShortcut.right "Seta direira">
 <!ENTITY OptKeyboardShortcut.down "Seta baixo">
-<!ENTITY thepuzzlepieceabout.name "A Peça do Puzzle">
-<!ENTITY thepuzzlepieceabout.by "por Quicksaver">
-<!ENTITY thepuzzlepieceabout.desc "Toda a informação relativa a este extra e ao seu autor pode ser encontrada na página dos Extras do Mozilla. Se gostou da extensão, pode mostrar o seu agrado ao lá deixar um comentário ou pode também fazer uma pequena contribuição para manter o seu desenvolvimento. Sugestões e problemas podem ser comunicados na página de suporte técnico.">
-<!ENTITY thepuzzlepieceabout.home "Página do Extra do Mozilla">
-<!ENTITY thepuzzlepieceabout.tech "Suporte Técnico">
+<!ENTITY puzzlebarsabout.name "Barras de Ferramentas Puzzle">
+<!ENTITY puzzlebarsabout.by "por Quicksaver">
+<!ENTITY puzzlebarsabout.desc "Toda a informação relativa a este extra e ao seu autor pode ser encontrada na página dos Extras do Mozilla. Se gostou da extensão, pode mostrar o seu agrado ao lá deixar um comentário ou pode também fazer uma pequena contribuição para manter o seu desenvolvimento. Sugestões e problemas podem ser comunicados na página de suporte técnico.">
+<!ENTITY puzzlebarsabout.home "Página do Extra do Mozilla">
+<!ENTITY puzzlebarsabout.tech "Suporte Técnico">
+<!ENTITY puzzlebarsabout.notes "Notas de Lançamento">

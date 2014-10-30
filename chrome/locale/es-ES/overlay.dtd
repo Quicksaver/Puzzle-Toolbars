@@ -1,10 +1,31 @@
-<!ENTITY OptionsMenu.label "Opciones de The Puzzle Piece">
-<!ENTITY addonBar.name "Barra de complementos">
-<!ENTITY addonBar.accesskey "A">
-<!ENTITY addonBar.menuAdd "Añadir a la barra de complementos">
-<!ENTITY addonBar.menuMove "Mover a la barra de complementos">
-<!ENTITY addonBar.menuRemove "Eliminar de la barra de complementos">
-<!ENTITY addonBar.menuMain "Mover a la barra de herramientas">
+<!ENTITY OptionsMenu.label "Opciones de Puzzle Toolbars">
+<!ENTITY bottom.name "Barra de puzzle inferior">
+<!ENTITY bottom.accesskey "z">
+<!ENTITY bottom.menuAdd "Añadir a la barra de puzzle inferior">
+<!ENTITY bottom.menuMove "Mover a la barra de puzzle inferior">
+<!ENTITY bottom.menuRemove "Eliminar de la barra de puzzle inferior">
+<!ENTITY corner.name "Barra de puzzle en esquina">
+<!ENTITY corner.accesskey "q">
+<!ENTITY corner.menuAdd "Añadir a la barra de puzzle en esquina">
+<!ENTITY corner.menuMove "Mover a la barra de puzzle en esquina">
+<!ENTITY corner.menuRemove "Eliminar de la barra de puzzle en esquina">
+<!ENTITY urlbar.name "Barra de puzzle en la barra de direcciones">
+<!ENTITY urlbar.accesskey "c">
+<!ENTITY urlbar.menuAdd "Añadir a la barra de puzzle en la barra de direcciones">
+<!ENTITY urlbar.menuMove "Mover a la barra de puzzle en la barra de direcciones">
+<!ENTITY urlbar.menuRemove "Eliminar de la barra de puzzle en la barra de direcciones">
+<!ENTITY lateral.name "Barra de puzzle lateral">
+<!ENTITY lateral.accesskey "t">
+<!ENTITY lateral.menuAdd "Añadir a la barra de puzzle lateral">
+<!ENTITY lateral.menuMove "Mover a la barra de puzzle lateral">
+<!ENTITY lateral.menuRemove "Eliminar de la barra de puzzle lateral">
+<!ENTITY top.name "Barra de puzzle superior">
+<!ENTITY top.accesskey "o">
+<!ENTITY top.menuAdd "Añadir a la barra de puzzle superior">
+<!ENTITY top.menuMove "Mover a la barra de puzzle superior">
+<!ENTITY top.menuRemove "Eliminar de la barra de puzzle superior">
+<!ENTITY allbars.menuMain "Mover a la barra de herramientas">
+<!ENTITY allbars.overflow "Ver más...">
 <!ENTITY statusBar.label "Barra de estado">
 <!ENTITY specialWidget.separator "Separador">
 <!ENTITY specialWidget.spring "Espacio flexible">

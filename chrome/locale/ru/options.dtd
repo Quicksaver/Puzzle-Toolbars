@@ -1,17 +1,43 @@
-<!ENTITY Optwindow.style "width: 32.5em;">
-<!ENTITY Options.title "The Puzzle Piece">
-<!ENTITY Optgeneral.label "Панель дополнений">
-<!ENTITY Optabout.label "О дополнении...">
+<!ENTITY Optwindow.style "width: 40.1em;">
+<!ENTITY Options.title "Puzzle Панели">
+<!ENTITY bottom.title "Нижняя">
+<!ENTITY corner.title "Угловая">
+<!ENTITY urlbar.title "В адресной строке">
+<!ENTITY lateral.title "Боковая">
+<!ENTITY top.title "Верняя">
+<!ENTITY about.title "О дополнении...">
 <!ENTITY GroupPosition.label "Расположение">
 <!ENTITY GroupBehavior.label "Поведение">
-<!ENTITY OptPlacement.bottomLabel "Поместить внизу окна браузера">
-<!ENTITY OptPlacement.cornerLabel "Сжать в нижний угол окна браузера">
-<!ENTITY OptPlacement.urlbarLabel "Поместить в строку адреса">
-<!ENTITY OptmoveToRight.label "Поместить с правой стороны окна браузера">
-<!ENTITY OptshowPPs.label "Показывать кнопку-переключатель в Панеле дополнений">
-<!ENTITY OptautoHide.label "Автоматически скрывать Панель дополнений">
-<!ENTITY OptstatusBar.label "Восстановить Панель статуса">
-<!ENTITY OptKeyboardShortcut.caption "Горячая клавиша">
+<!ENTITY OptBottom.label "Включить Нижнюю панель">
+<!ENTITY OptBottom.tooltip "Добавляет настраиваемую панель в нижней части окна браузера, практически как старая панель дополнений.">
+<!ENTITY OptCorner.label "Включить Угловую панель">
+<!ENTITY OptCorner.tooltip "Добавляет узкую настраиваемую панель в нижний угол окна браузера, удобно для максимизации рабочего пространства браузера.">
+<!ENTITY OptUrlbar.label "Включить Панель в адресной строке">
+<!ENTITY OptUrlbar.tooltip "Добавляет маленькую панель внутрь адресной строки.">
+<!ENTITY OptLateral.label "Включить Боковую панель">
+<!ENTITY OptLateral.tooltip "Добавляет вертикальную панель с левой или правой стороны окна браузера, очень удобно для кнопок открытия боковых панелей.">
+<!ENTITY OptTop.label "Включить Верхнюю панель">
+<!ENTITY OptTop.tooltip "Добавляет настраиваемую панель в верхней части окна браузера, под панелью навигации.">
+<!ENTITY OptTopSlimChrome.label "Включить в состав панелей Slim Chrome">
+<!ENTITY OptTopSlimChrome.tooltip "Рекомендуется для пользователей другого моего дополнения Slim Chrome, панель будет скрываться вместе с остальными панелями.">
+<!ENTITY OptShowPiece.label "Показывать паззл-кнопку">
+<!ENTITY OptShowPiece.tooltip "С помощью данной кнопки вы можете легко открыть или закрыть панель.">
+<!ENTITY OptPlacement.left "Поместить слева">
+<!ENTITY OptPlacement.right "Поместить справа">
+<!ENTITY OptPlacement.tooltip "Выберите с какой стороны показывать паззл-кнопку.">
+<!ENTITY OptAutoHide.label "Автоматически скрывать">
+<!ENTITY OptAutoHide.tooltip "Скрывать панель автоматически, когда она не используется.">
+<!ENTITY OptHotspot.label "Зона активации">
+<!ENTITY OptHotspot.tooltip "Определяет размер зоны реакции на указатель мыши для активации панели.">
+<!ENTITY OptHotspot.low "Меньше">
+<!ENTITY OptHotspot.high "Больше">
+<!ENTITY OptWhenFocused.label "Скрывать только когда фокус в адресной строке">
+<!ENTITY OptWhenFocused.tooltip "Панель будет автоматически скрываться только когда курсор в адресной строке.">
+<!ENTITY OptExtend.label "Растянуть на всю доступную ширину">
+<!ENTITY OptExtend.tooltip "Позволяет занять панели максимально возможную площадь, не зависимо от ее содержимого.">
+<!ENTITY OptMoveBottom.label "Поместить вниз">
+<!ENTITY OptMoveBottom.tooltip "Показывать паззл-кнопку внизу панели.">
+<!ENTITY OptKeyboardShortcut.captionA "Горячие клавиши">
 <!ENTITY OptKeyboardShortcut.control "Ctrl">
 <!ENTITY OptKeyboardShortcut.shift "Shift">
 <!ENTITY OptKeyboardShortcut.alt "Alt">
@@ -27,8 +53,9 @@
 <!ENTITY OptKeyboardShortcut.up "Up">
 <!ENTITY OptKeyboardShortcut.right "Right">
 <!ENTITY OptKeyboardShortcut.down "Down">
-<!ENTITY thepuzzlepieceabout.name "The Puzzle Piece">
-<!ENTITY thepuzzlepieceabout.by "by Quicksaver">
-<!ENTITY thepuzzlepieceabout.desc "Всю информацию о дополнении и его авторе можно найти на офицальной странице дополнения. Если Вам понравилось дополнение, оставьте, пожалуйста, хороший отзыв о нем или сделайте скромное пожертвование для поддержки дальнейшей разработки.  Отчеты об ошибках можно оставлять на странице технической поддержки.">
-<!ENTITY thepuzzlepieceabout.home "Страница дополнения">
-<!ENTITY thepuzzlepieceabout.tech "Техническая поддержка">
+<!ENTITY puzzlebarsabout.name "Puzzle Панели">
+<!ENTITY puzzlebarsabout.by "by Quicksaver">
+<!ENTITY puzzlebarsabout.desc "Всю информацию о дополнении и его авторе можно найти на офицальной странице дополнения. Если Вам понравилось дополнение, оставьте, пожалуйста, хороший отзыв о нем или сделайте скромное пожертвование для поддержки дальнейшей разработки.  Отчеты об ошибках можно оставлять на странице технической поддержки.">
+<!ENTITY puzzlebarsabout.home "Страница дополнения">
+<!ENTITY puzzlebarsabout.tech "Техническая поддержка">
+<!ENTITY puzzlebarsabout.notes "Примечания к выпуску">

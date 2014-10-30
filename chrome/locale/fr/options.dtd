@@ -1,17 +1,43 @@
-<!ENTITY Optwindow.style "width: 31em;">
-<!ENTITY Options.title "The Puzzle Piece">
-<!ENTITY Optgeneral.label "Barre des modules">
-<!ENTITY Optabout.label "À propos">
+<!ENTITY Optwindow.style "width: 38em;">
+<!ENTITY Options.title "Puzze Toolbars">
+<!ENTITY bottom.title "Bas">
+<!ENTITY corner.title "Coin">
+<!ENTITY urlbar.title "Barre d'adresse">
+<!ENTITY lateral.title "latérale">
+<!ENTITY top.title "Haut">
+<!ENTITY about.title "À propos">
 <!ENTITY GroupPosition.label "Position">
 <!ENTITY GroupBehavior.label "Comportement">
-<!ENTITY OptPlacement.bottomLabel "Placer en bas du navigateur">
-<!ENTITY OptPlacement.cornerLabel "Réduire dans un coin inférieur de la page Web">
-<!ENTITY OptPlacement.urlbarLabel "Déplacer vers la barre d'adresses">
-<!ENTITY OptmoveToRight.label "Placer à droite de la fenêtre du navigateur">
-<!ENTITY OptshowPPs.label "Afficher le bouton d'activation/désactivation Puzzle Piece dans la barre des modules">
-<!ENTITY OptautoHide.label "Masquer automatiquement la barre des modules">
-<!ENTITY OptstatusBar.label "Rétablir la barre d'état">
-<!ENTITY OptKeyboardShortcut.caption "Raccourci clavier">
+<!ENTITY OptBottom.label "Activer la barre d'outils du bas">
+<!ENTITY OptBottom.tooltip "Ajoute une barre d'outils personnalisable en haut de la fenêtre du navigateur, comme l'ancienne extension.">
+<!ENTITY OptCorner.label "Activer la barre d'outils en coin">
+<!ENTITY OptCorner.tooltip "Ajoute une petite barre d'outils dans le coin inférieur du navigateur, utile pour agrandir votre espace de navigation.">
+<!ENTITY OptUrlbar.label "Activer la barre d'outils de la barre d'adresse">
+<!ENTITY OptUrlbar.tooltip "Ajoute une petite barre d'outils dans la barre d'adresse, vraiment intéressante si vous y avez habituellement de l'espace libre que vous souhaitez utiliser.">
+<!ENTITY OptLateral.label "Activer la barre d'outils latérale">
+<!ENTITY OptLateral.tooltip "Ajoute une barre d'outils verticale au bord du navigateur, un compagnon parfait pour les gros utilisateurs du panneau latéral.">
+<!ENTITY OptTop.label "Activer la barre d'outils du haut">
+<!ENTITY OptTop.tooltip "Ajoute une barre d'outils personnalisable en haut du navigateur sous la barre d'adresse.">
+<!ENTITY OptTopSlimChrome.label "Inclure dans les barres d'outils cachées de Chrome Slim">
+<!ENTITY OptTopSlimChrome.tooltip "Recommandé ! Pour mieux utiliser mon autre extension The Fox, Only Better ; la barre d'outils sera masquée avec les autres barres d'outils du haut lorsque Chrome Slim est activé. Veuillez prendre note que dans ce cas, le bouton Puzzle Piece ne pourra être utilisé.">
+<!ENTITY OptShowPiece.label "Afficher la pièce de puzzle">
+<!ENTITY OptShowPiece.tooltip "La pièce de puzzle est un bouton avec lequel vous pouvez ouvrir ou fermer rapidement sa barre d'outils.">
+<!ENTITY OptPlacement.left "Placer à gauche">
+<!ENTITY OptPlacement.right "Placer à droite">
+<!ENTITY OptPlacement.tooltip "Basculer d'un emplacement à un autre.">
+<!ENTITY OptAutoHide.label "Masquer automatiquement">
+<!ENTITY OptAutoHide.tooltip "Masque automatiquement la barre d'outils lorsqu'elle n'est pas utilisée.">
+<!ENTITY OptHotspot.label "Zone active pour souris">
+<!ENTITY OptHotspot.tooltip "Définit la taille de la zone réactive au mouvement de souris pour afficher la barre d'outils.">
+<!ENTITY OptHotspot.low "Plus petite">
+<!ENTITY OptHotspot.high "Plus grande">
+<!ENTITY OptWhenFocused.label "Masquer uniquement lorsque la barre d'adresse est active">
+<!ENTITY OptWhenFocused.tooltip "La barre d'outils ne se masquera automatiquement que lorsque le curseur se trouve dans la barre d'adresse.">
+<!ENTITY OptExtend.label "Étendre à tout l'espace disponible">
+<!ENTITY OptExtend.tooltip "Affiche la barre d'outils dans tout l'espace disponible du navigateur, même si elle ne contient pas suffisamment d'éléments pour la remplir ; très pratique si vous souhaitez utiliser des espaces flexibles.">
+<!ENTITY OptMoveBottom.label "Placer en bas">
+<!ENTITY OptMoveBottom.tooltip "Affiche la pièce de puzzle en bas de la barre d'outils au lieu d'en-haut.">
+<!ENTITY OptKeyboardShortcut.captionA "Raccourci clavier pour activation ou désactivation">
 <!ENTITY OptKeyboardShortcut.control "Ctrl">
 <!ENTITY OptKeyboardShortcut.shift "Maj">
 <!ENTITY OptKeyboardShortcut.alt "Alt">
@@ -27,8 +53,9 @@
 <!ENTITY OptKeyboardShortcut.up "Haut">
 <!ENTITY OptKeyboardShortcut.right "Droite">
 <!ENTITY OptKeyboardShortcut.down "Bas">
-<!ENTITY thepuzzlepieceabout.name "The Puzzle Piece">
-<!ENTITY thepuzzlepieceabout.by "par Quicksaver">
-<!ENTITY thepuzzlepieceabout.desc "Toutes les informations à propos de cette extension et de son développeur peuvent être trouvées sur la page Mozilla Add-ons. Si vous avez aimé l'extension, veuillez y laisser un commentaire sympathique ou une petite contribution pour soutenir son développement. Les signalements de bogues et les suggestions peuvent être faits sur la page d'aide technique.">
-<!ENTITY thepuzzlepieceabout.home "Page web de l'extension">
-<!ENTITY thepuzzlepieceabout.tech "Aide technique">
+<!ENTITY puzzlebarsabout.name "Puzzle Toolbars">
+<!ENTITY puzzlebarsabout.by "par Quicksaver">
+<!ENTITY puzzlebarsabout.desc "Toutes les informations à propos de cette extension et de son développeur peuvent être trouvées sur la page Mozilla Add-ons. Si vous avez aimé l'extension, veuillez y laisser un commentaire sympathique ou une petite contribution pour soutenir son développement. Les signalements de bogues et les suggestions peuvent être faits sur la page d'aide technique.">
+<!ENTITY puzzlebarsabout.home "Page Web de l'extension">
+<!ENTITY puzzlebarsabout.tech "Aide technique">
+<!ENTITY puzzlebarsabout.notes "Notes de version">

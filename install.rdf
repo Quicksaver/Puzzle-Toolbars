@@ -7,6 +7,7 @@
 		<em:creator>Quicksaver</em:creator>
 		<em:iconURL>chrome://puzzlebars/skin/icon.png</em:iconURL>
 		<em:optionsURL>chrome://puzzlebars/content/options.xul</em:optionsURL>
+		<em:homepageURL>https://addons.mozilla.org/firefox/addon/the-puzzle-piece/</em:homepageURL>
 		<em:name>Puzzle Toolbars</em:name>
 		<em:bootstrap>true</em:bootstrap>
 		<em:multiprocessCompatible>true</em:multiprocessCompatible>
@@ -23,62 +24,47 @@
 			<Description>
 				<em:locale>en-US</em:locale>
 				<em:name>Puzzle Toolbars</em:name>
-				<em:description>Piece all of your add-on buttons and extras into the browser window in exactly the way you like it!</em:description>
-				<em:homepageURL>https://addons.mozilla.org/en-US/firefox/addon/the-puzzle-piece/</em:homepageURL>
+				<em:description>Piece together all of your add-on buttons and extras into your browser window in exactly the way you want them!</em:description>
 			</Description>
 		</em:localized>
 		<em:localized>
 			<Description>
 				<em:locale>es-ES</em:locale>
-				<em:name>The Puzzle Piece</em:name>
-				<em:description>¡Trae de vuelta la barra de complementos con toda su fuerza! ¿Dónde la quiere? ¿Qué es lo que quiere que haga? ¡Usted decide!</em:description>
-				<em:homepageURL>https://addons.mozilla.org/es-ES/firefox/addon/the-puzzle-piece/</em:homepageURL>
+				<em:name>Puzzle Toolbars</em:name>
+				<em:description>¡Reune las 'piezas' de todos sus botones de complementos y extras en su ventana de navegador de la forma exacta que usted los quiere!</em:description>
 				<em:translator>strel</em:translator>
 			</Description>
 		</em:localized>
 		<em:localized>
 			<Description>
 				<em:locale>fr</em:locale>
-				<em:name>The Puzzle Piece</em:name>
-				<em:description>Autorisez le retour en force de votre barre de modules ! Où la voulez-vous ? Que souhaitez-vous qu'elle fasse ? C'est vous qui décidez !</em:description>
-				<em:homepageURL>https://addons.mozilla.org/fr/firefox/addon/the-puzzle-piece/</em:homepageURL>
+				<em:name>Puzzle Toolbars</em:name>
+				<em:description>Rassemblez tous vos boutons et fonctionnalités d'extensions dans votre navigateur exactement comme vous le souhaitez !</em:description>
 				<em:translator>Jojaba - BabelZilla</em:translator>
 			</Description>
 		</em:localized>
 		<em:localized>
 			<Description>
 				<em:locale>pt-PT</em:locale>
-				<em:name>A Peça do Puzzle</em:name>
-				<em:description>Traz de volta a sua barra de extras, ainda melhorada! Como lhe quer aceder? Você decide!</em:description>
-				<em:homepageURL>https://addons.mozilla.org/pt-PT/firefox/addon/the-puzzle-piece/</em:homepageURL>
+				<em:name>Barras de Ferramentas Puzzle</em:name>
+				<em:description>Monta todos os teus ícones e extras na tua janela do navegador exactamente da maneira que as queres!</em:description>
 				<em:translator>Quicksaver</em:translator>
 			</Description>
 		</em:localized>
 		<em:localized>
 			<Description>
 				<em:locale>ru</em:locale>
-				<em:name>The Puzzle Piece</em:name>
-				<em:description>Возвращает полную мощь Панели дополнений! Где Вы ее хотите разместить? Что Вы хотите чтобы она выполняла? Вам решать!</em:description>
-				<em:homepageURL>https://addons.mozilla.org/ru/firefox/addon/the-puzzle-piece/</em:homepageURL>
+				<em:name>Puzzle Панель</em:name>
+				<em:description>Объедините все кнопки ваших дополнений в окне вашего браузера в удобном для вас месте и виде!</em:description>
 				<em:translator>Alexander Gvaramiya</em:translator>
 			</Description>
 		</em:localized>
 		<em:localized>
 			<Description>
 				<em:locale>sv-SE</em:locale>
-				<em:name>The Puzzle Piece – Pusselbiten</em:name>
-				<em:description>Ta tillbaka ditt tilläggsfält – på ditt sätt! Var vill du ha det? Vad skall det göra? Du bestämmer!</em:description>
-				<em:homepageURL>https://addons.mozilla.org/sv-SE/firefox/addon/the-puzzle-piece/</em:homepageURL>
+				<em:name>Puzzle Toolbars</em:name>
+				<em:description>Samla ihop alla dina tilläggsknappar och andra objekt och placera dem i webbläsarfönstret precis där du vill ha dem!</em:description>
 				<em:translator>Mikael Hiort af Ornäs</em:translator>
-			</Description>
-		</em:localized>
-		<em:localized>
-			<Description>
-				<em:locale>zh-CN</em:locale>
-				<em:name>The Puzzle Piece</em:name>
-				<em:description>此扩展恢复附加组件栏的全部功能。它要出现在哪里？它要做什么？全由你决定！</em:description>
-				<em:homepageURL>https://addons.mozilla.org/zh-CN/firefox/addon/the-puzzle-piece/</em:homepageURL>
-				<em:translator>Wang.H.K</em:translator>
 			</Description>
 		</em:localized>
 	</Description>
