@@ -3,7 +3,7 @@
 <overlay id="urlbarCustomize-overlay" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul" >
 	
 	<vbox id="customization-palette-container">
-		<hbox id="objName-urlbar-customize-wrapper" insertbefore="customization-header">
+		<hbox id="objName-urlbar-customize-wrapper" insertbefore="omnisidebar-toolbarCustomizeWrapper,customization-header">
 			<observes element="objName-urlbar-bar" attribute="collapsed" />
 			
 			<stack id="objName-urlbar-customize-stack">
