@@ -1,4 +1,4 @@
-var defaultsVersion = '1.5.11';
+var defaultsVersion = '1.5.12';
 var objName = 'puzzleBars';
 var objPathString = 'puzzlebars';
 var prefList = {
@@ -40,7 +40,7 @@ var prefList = {
 	lateral_shift: false,
 	lateral_alt: false,
 	
-	top_bar: true,
+	top_bar: false,
 	top_pp: true,
 	top_placement: 'right',
 	top_slimChrome: true,
