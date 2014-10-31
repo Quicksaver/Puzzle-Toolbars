@@ -11,7 +11,7 @@
 		visibility: visible !important;
 	}
 	
-	/* Bugfix: https://github.com/Quicksaver/The-Puzzle-Piece/issues/10 */
+	/* Bugfix: https://github.com/Quicksaver/Puzzle-Toolbars/issues/10 */
 	#urlbar-icons #star-button { visibility: collapse !important; }
 	
 	/* Inner buttons and other elements display */

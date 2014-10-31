@@ -7,7 +7,7 @@
 		<em:creator>Quicksaver</em:creator>
 		<em:iconURL>chrome://puzzlebars/skin/icon.png</em:iconURL>
 		<em:optionsURL>chrome://puzzlebars/content/options.xul</em:optionsURL>
-		<em:homepageURL>https://addons.mozilla.org/firefox/addon/the-puzzle-piece/</em:homepageURL>
+		<em:homepageURL>https://addons.mozilla.org/firefox/addon/puzzle-toolbars/</em:homepageURL>
 		<em:name>Puzzle Toolbars</em:name>
 		<em:bootstrap>true</em:bootstrap>
 		<em:multiprocessCompatible>true</em:multiprocessCompatible>
