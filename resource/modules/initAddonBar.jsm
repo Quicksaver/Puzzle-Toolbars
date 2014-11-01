@@ -72,6 +72,8 @@ this.onFullScreen = {
 			onFullScreen.DOMEntered = m.data;
 			
 			setAttribute(document.documentElement, objName+'-noAnimation', 'true');
+			// In Firefox 36, remove the following line and follow inDOMFullscreen attribute in the stylesheets instead
+			// https://bugzilla.mozilla.org/show_bug.cgi?id=714675
 			toggleAttribute(document.documentElement, objName+'-fullscreen', m.data);
 			aSync(function() {
 				removeAttribute(document.documentElement, objName+'-noAnimation');
