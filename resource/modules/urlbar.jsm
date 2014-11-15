@@ -1,4 +1,4 @@
-Modules.VERSION = '1.0.3';
+Modules.VERSION = '1.0.4';
 
 this.__defineGetter__('gURLBar', function() { return window.gURLBar; });
 this.__defineGetter__('locationContainer', function() { return $('urlbar-container'); });
@@ -113,7 +113,7 @@ this.urlbarOnUnload = function() {
 	Listeners.remove(window, 'PuzzleBarsMoved', urlbarMove);
 };
 
-this.urlbarCustomize = function(e, force) {
+this.urlbarCustomize = function(e) {
 	if(e === true || e.type == 'beforecustomization') {
 		Overlays.overlayWindow(window, 'urlbarCustomize');
 	} else {

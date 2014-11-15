@@ -1,4 +1,4 @@
-Modules.VERSION = '1.1.5';
+Modules.VERSION = '1.1.6';
 
 this.PP_OFFSET_CORNER = 0;
 
@@ -306,7 +306,7 @@ this.cornerOnUnload = function() {
 	removeAttribute(document.documentElement, objName+'-noAnimation');
 };
 
-this.cornerCustomize = function(e, force) {
+this.cornerCustomize = function(e) {
 	if(e === true || e.type == 'beforecustomization') {
 		Overlays.overlayWindow(window, 'cornerCustomize');
 	} else {

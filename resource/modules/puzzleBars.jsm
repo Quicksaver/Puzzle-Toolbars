@@ -1,19 +1,6 @@
-Modules.VERSION = '1.0.6';
+Modules.VERSION = '1.0.7';
 
 this.__defineGetter__('gBrowser', function() { return window.gBrowser; });
-
-this.__defineGetter__('customizing', function() {
-	if(trueAttribute(document.documentElement, 'customizing')) { return true; }
-	
-	// this means that the window is still opening and the first tab will open customize mode
-	if(gBrowser.mCurrentBrowser
-	&& gBrowser.mCurrentBrowser.__SS_restore_data
-	&& gBrowser.mCurrentBrowser.__SS_restore_data.url == 'about:customizing') {
-		return true;
-	}
-	
-	return false;
-});
 
 this.possibleBars = [
 	objName+'-bottom-bar',
