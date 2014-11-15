@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?xml-stylesheet href="chrome://puzzlebars/skin/urlbar.css" type="text/css"?>
-<?xml-stylesheet href="chrome://puzzlebars-os/skin/urlbar.css" type="text/css"?>
+<?xml-stylesheet href="chrome://objPathString/skin/urlbar.css" type="text/css"?>
+<?xml-stylesheet href="chrome://objPathString-os/skin/urlbar.css" type="text/css"?>
 <!DOCTYPE overlay SYSTEM "chrome://puzzlebars/locale/overlay.dtd">
 <overlay id="urlbar-overlay" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul" >
 	
@@ -9,7 +9,11 @@
 	</commandset>
 	
 	<hbox id="urlbar-icons">
-		<box id="objName-urlbar-container" class="puzzleBars-fullscreenCollapse" position="1">
+		<box id="objName-urlbar-container"
+			class="puzzleBars-fullscreenCollapse"
+			waitForSS="chrome://objPathString/skin/puzzleBars.css chrome://objPathString-os/skin/puzzleBars.css chrome://objPathString/skin/urlbar.css chrome://objPathString-os/skin/urlbar.css"
+			position="1">
+			
 			<observes element="objName-urlbar-bar" attribute="autohide" />
 			<observes element="objName-urlbar-bar" attribute="hover" />
 			
@@ -36,6 +40,7 @@
 		
 		<box id="objName-urlbar-PP"
 			class="PuzzlePiece"
+			waitForSS="chrome://objPathString/skin/puzzleBars.css chrome://objPathString-os/skin/puzzleBars.css chrome://objPathString/skin/urlbar.css chrome://objPathString-os/skin/urlbar.css"
 			context="toolbar-context-menu"
 			position="2">
 			<image onclick="objName.commandPP(event, this.parentNode);" />

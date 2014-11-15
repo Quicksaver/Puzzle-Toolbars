@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?xml-stylesheet href="chrome://puzzlebars/skin/top.css" type="text/css"?>
-<?xml-stylesheet href="chrome://puzzlebars-os/skin/top.css" type="text/css"?>
+<?xml-stylesheet href="chrome://objPathString/skin/top.css" type="text/css"?>
+<?xml-stylesheet href="chrome://objPathString-os/skin/top.css" type="text/css"?>
 <!DOCTYPE overlay SYSTEM "chrome://puzzlebars/locale/overlay.dtd">
 <overlay id="top-overlay" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul" >
 
@@ -33,6 +33,7 @@
 			collapsed="false"
 			persist="collapsed"
 			class="toolbar-primary chromeclass-toolbar puzzleBars-bar"
+			waitForSS="chrome://objPathString/skin/puzzleBars.css chrome://objPathString-os/skin/puzzleBars.css chrome://objPathString/skin/top.css chrome://objPathString-os/skin/top.css"
 			iconsize="small"
 			context="toolbar-context-menu"
 			menucommand="objName:ToggleTopBar"
@@ -58,6 +59,7 @@
 		
 		<box id="objName-top-PP"
 			class="PuzzlePiece"
+			waitForSS="chrome://objPathString/skin/puzzleBars.css chrome://objPathString-os/skin/puzzleBars.css chrome://objPathString/skin/top.css chrome://objPathString-os/skin/top.css"
 			context="toolbar-context-menu"
 			insertafter="objName-top-bar"
 			hidden="true">

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?xml-stylesheet href="chrome://puzzlebars/skin/puzzleBars.css" type="text/css"?>
-<?xml-stylesheet href="chrome://puzzlebars-os/skin/puzzleBars.css" type="text/css"?>
+<?xml-stylesheet href="chrome://objPathString/skin/puzzleBars.css" type="text/css"?>
+<?xml-stylesheet href="chrome://objPathString-os/skin/puzzleBars.css" type="text/css"?>
 <!DOCTYPE overlay SYSTEM "chrome://puzzlebars/locale/overlay.dtd">
 <overlay id="puzzleBars-overlay" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul" >
 	

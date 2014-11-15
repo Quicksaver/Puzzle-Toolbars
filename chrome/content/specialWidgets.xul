@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?xml-stylesheet href="chrome://puzzlebars/skin/specialWidgets.css" type="text/css"?>
-<?xml-stylesheet href="chrome://puzzlebars-os/skin/specialWidgets.css" type="text/css"?>
+<?xml-stylesheet href="chrome://objPathString/skin/specialWidgets.css" type="text/css"?>
+<?xml-stylesheet href="chrome://objPathString-os/skin/specialWidgets.css" type="text/css"?>
 <!DOCTYPE overlay SYSTEM "chrome://puzzlebars/locale/overlay.dtd">
 <overlay id="specialWidgets-overlay" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul" >
 	<!-- so we have separators, springs and spacers to add to the add-on bar -->

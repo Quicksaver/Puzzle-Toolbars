@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?xml-stylesheet href="chrome://puzzlebars/skin/corner.css" type="text/css"?>
-<?xml-stylesheet href="chrome://puzzlebars-os/skin/corner.css" type="text/css"?>
+<?xml-stylesheet href="chrome://objPathString/skin/corner.css" type="text/css"?>
+<?xml-stylesheet href="chrome://objPathString-os/skin/corner.css" type="text/css"?>
 <!DOCTYPE overlay SYSTEM "chrome://puzzlebars/locale/overlay.dtd">
 <overlay id="corner-overlay" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul" >
 	
@@ -13,6 +13,7 @@
 	<vbox id="browser-bottombox">
 		<box id="objName-corner-container"
 			class="puzzleBars-fullscreenCollapse"
+			waitForSS="chrome://objPathString/skin/puzzleBars.css chrome://objPathString-os/skin/puzzleBars.css chrome://objPathString/skin/corner.css chrome://objPathString-os/skin/corner.css"
 			insertbefore="ctraddon_addon-bar,ctraddon_toolbar_dummy"
 			insertafter="developer-toolbar">
 			<observes element="objName-corner-bar" attribute="collapsed" />
@@ -44,6 +45,7 @@
 		
 		<box id="objName-corner-PP"
 			class="PuzzlePiece"
+			waitForSS="chrome://objPathString/skin/puzzleBars.css chrome://objPathString-os/skin/puzzleBars.css chrome://objPathString/skin/corner.css chrome://objPathString-os/skin/corner.css"
 			context="toolbar-context-menu"
 			insertafter="objName-corner-container"
 			hidden="true">

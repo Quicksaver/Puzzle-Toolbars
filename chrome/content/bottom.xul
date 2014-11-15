@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?xml-stylesheet href="chrome://puzzlebars/skin/bottom.css" type="text/css"?>
-<?xml-stylesheet href="chrome://puzzlebars-os/skin/bottom.css" type="text/css"?>
+<?xml-stylesheet href="chrome://objPathString/skin/bottom.css" type="text/css"?>
+<?xml-stylesheet href="chrome://objPathString-os/skin/bottom.css" type="text/css"?>
 <!DOCTYPE overlay SYSTEM "chrome://puzzlebars/locale/overlay.dtd">
 <overlay id="bottom-overlay" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul" >
 
@@ -33,6 +33,7 @@
 			collapsed="false"
 			persist="collapsed"
 			class="toolbar-primary chromeclass-toolbar puzzleBars-bar"
+			waitForSS="chrome://objPathString/skin/puzzleBars.css chrome://objPathString-os/skin/puzzleBars.css chrome://objPathString/skin/bottom.css chrome://objPathString-os/skin/bottom.css"
 			iconsize="small"
 			context="toolbar-context-menu"
 			menucommand="objName:ToggleBottomBar"
@@ -60,6 +61,7 @@
 		
 		<box id="objName-bottom-PP"
 			class="PuzzlePiece"
+			waitForSS="chrome://objPathString/skin/puzzleBars.css chrome://objPathString-os/skin/puzzleBars.css chrome://objPathString/skin/bottom.css chrome://objPathString-os/skin/bottom.css"
 			context="toolbar-context-menu"
 			insertafter="objName-bottom-bar"
 			hidden="true">

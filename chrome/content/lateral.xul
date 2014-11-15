@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?xml-stylesheet href="chrome://puzzlebars/skin/lateral.css" type="text/css"?>
-<?xml-stylesheet href="chrome://puzzlebars-os/skin/lateral.css" type="text/css"?>
+<?xml-stylesheet href="chrome://objPathString/skin/lateral.css" type="text/css"?>
+<?xml-stylesheet href="chrome://objPathString-os/skin/lateral.css" type="text/css"?>
 <!DOCTYPE overlay SYSTEM "chrome://puzzlebars/locale/overlay.dtd">
 <overlay id="lateral-overlay" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul" >
 	
@@ -25,7 +25,11 @@
 	</popupset>
 	
 	<hbox id="browser">
-		<vbox id="objName-lateral-container" class="puzzleBars-fullscreenCollapse" insertafter="browser-border-start">
+		<vbox id="objName-lateral-container"
+			class="puzzleBars-fullscreenCollapse"
+			waitForSS="chrome://objPathString/skin/puzzleBars.css chrome://objPathString-os/skin/puzzleBars.css chrome://objPathString/skin/lateral.css chrome://objPathString-os/skin/lateral.css"
+			insertafter="browser-border-start">
+			
 			<observes element="objName-lateral-bar" attribute="autohide" />
 			<observes element="objName-lateral-bar" attribute="hover" />
 			<observes element="objName-lateral-bar" attribute="collapsed" />
@@ -68,6 +72,7 @@
 	
 		<box id="objName-lateral-PP"
 			class="PuzzlePiece"
+			waitForSS="chrome://objPathString/skin/puzzleBars.css chrome://objPathString-os/skin/puzzleBars.css chrome://objPathString/skin/lateral.css chrome://objPathString-os/skin/lateral.css"
 			context="toolbar-context-menu"
 			hidden="true">
 			
