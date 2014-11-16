@@ -1,7 +1,21 @@
-Modules.VERSION = '1.0.1';
+Modules.VERSION = '1.0.2';
 
 // list of buttons that will be forced to have the toolbarbutton-1 class when in our toolbars
-this.buttonsClassForce = ['cookiesafe-button'];
+this.buttonsClassForce = [
+	// https://addons.mozilla.org/firefox/addon/cookiesafe-ff-4-compatible/
+	'cookiesafe-button',
+	
+	// https://addons.mozilla.org/firefox/addon/quickjava/
+	"QuickJava_ToolbarIcon_Container_JavaScript",
+	"QuickJava_ToolbarIcon_Container_Java",
+	"QuickJava_ToolbarIcon_Container_Flash",
+	"QuickJava_ToolbarIcon_Container_Silverlight",
+	"QuickJava_ToolbarIcon_Container_AnimatedImage",
+	"QuickJava_ToolbarIcon_Container_Cookies",
+	"QuickJava_ToolbarIcon_Container_Images",
+	"QuickJava_ToolbarIcon_Container_CSS",
+	"QuickJava_ToolbarIcon_Container_Proxy"
+];
 
 this.buttonsListener = {
 	// always remove the class when doing this, so we're sure we only force the class in our toolbars
