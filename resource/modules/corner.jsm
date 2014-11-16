@@ -1,4 +1,4 @@
-Modules.VERSION = '1.1.6';
+Modules.VERSION = '1.1.7';
 
 this.PP_OFFSET_CORNER = 0;
 
@@ -169,7 +169,7 @@ this.lwtheme = {
 };
 
 this.personaChanged = function() {
-	aSync(styleCornerPersona);
+	if(!UNLOADED) { aSync(styleCornerPersona); }
 };
 
 this.styleCornerPersona = function() {

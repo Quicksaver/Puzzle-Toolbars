@@ -1,4 +1,4 @@
-Modules.VERSION = '2.1.3';
+Modules.VERSION = '2.1.4';
 
 this.onDragExitAll = function() {
 	Listeners.remove(gBrowser, "dragenter", onDragExitAll, false);
@@ -324,5 +324,8 @@ Modules.LOADMODULE = function() {
 };
 
 Modules.UNLOADMODULE = function() {
+	for(var b in bars) {
+		Timers.cancel('setHover_'+b);
+	}
 	Listeners.remove(window, 'popupshown', holdPopupMenu);
 };
