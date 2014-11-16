@@ -1,0 +1,61 @@
+<!ENTITY Optwindow.style "width: 29em;">
+<!ENTITY Options.title "Puzzle Toolbars">
+<!ENTITY bottom.title "底部">
+<!ENTITY corner.title "角落">
+<!ENTITY urlbar.title "地址栏">
+<!ENTITY lateral.title "侧边">
+<!ENTITY top.title "顶部">
+<!ENTITY about.title "关于">
+<!ENTITY GroupPosition.label "位置">
+<!ENTITY GroupBehavior.label "行为">
+<!ENTITY OptBottom.label "启用底部工具栏">
+<!ENTITY OptBottom.tooltip "添加一个可定制的工具栏到浏览器窗口的底部，就像是曾经的附加组件栏。">
+<!ENTITY OptCorner.label "启用角落工具栏">
+<!ENTITY OptCorner.tooltip "添加一个角落工具栏到浏览器窗口的右下角，这有助于最大限度的提高您的屏幕浏览空间。">
+<!ENTITY OptUrlbar.label "启用地址工具栏">
+<!ENTITY OptUrlbar.tooltip "添加一个小而整洁的工具栏在地址栏里面，如果你有较大的可用空间并且你平时会经常用到它们的话，这很棒。">
+<!ENTITY OptLateral.label "启用侧边工具栏">
+<!ENTITY OptLateral.tooltip "添加一个侧边工具栏在浏览器窗口的侧边，侧栏使用者的一个完美伴侣。">
+<!ENTITY OptTop.label "启用顶部工具栏">
+<!ENTITY OptTop.tooltip "添加一个可定制的工具栏到浏览器窗口的顶部区域，在导航工具栏的下方。">
+<!ENTITY OptTopSlimChrome.label "包含在 Slim Chrome 的隐藏工具栏中">
+<!ENTITY OptTopSlimChrome.tooltip "推荐！对于使用我的另一个附加组件 The Fox, Only Better 的用户，这个工具栏会在 Slim Chrome 启用时被隐藏在顶部工具栏的其余部分。请注意，在这种情况下，不能使用“一块拼图”按钮。">
+<!ENTITY OptShowPiece.label "显示“一块拼图”">
+<!ENTITY OptShowPiece.tooltip "利用“一块拼图”按钮，您可以快速地打开或关闭工具栏。">
+<!ENTITY OptPlacement.left "放置在左侧">
+<!ENTITY OptPlacement.right "放置在右侧">
+<!ENTITY OptPlacement.tooltip "切换您想放置在浏览器窗口的哪一侧。">
+<!ENTITY OptAutoHide.label "自动隐藏">
+<!ENTITY OptAutoHide.tooltip "在您不需要的时候自动隐藏工具栏">
+<!ENTITY OptHotspot.label "鼠标激活区域">
+<!ENTITY OptHotspot.tooltip "定义有鼠标移动到多大的区域范围内会激活工具栏。">
+<!ENTITY OptHotspot.low "较小">
+<!ENTITY OptHotspot.high "较大">
+<!ENTITY OptWhenFocused.label "仅当地址栏有焦点时隐藏">
+<!ENTITY OptWhenFocused.tooltip "启用此项后，该工具栏将只会在光标在地址栏中时自动隐藏。">
+<!ENTITY OptExtend.label "延伸到所有可用的空间">
+<!ENTITY OptExtend.tooltip "此选项会在浏览器窗口中用最多的可用空间显示工具栏，即使它没有足够多的项目或覆盖它的窗口小部件；如果您想要一块固定的空间，这会非常有用。">
+<!ENTITY OptMoveBottom.label "放置在底部">
+<!ENTITY OptMoveBottom.tooltip "在工具栏的底部而不是顶部显示“一块拼图”。">
+<!ENTITY OptKeyboardShortcut.captionA "键盘快捷键设置">
+<!ENTITY OptKeyboardShortcut.control "Control">
+<!ENTITY OptKeyboardShortcut.shift "Shift">
+<!ENTITY OptKeyboardShortcut.alt "Alt">
+<!ENTITY OptKeyboardShortcut.command "Command">
+<!ENTITY OptKeyboardShortcut.option "Option">
+<!ENTITY OptKeyboardShortcut.none "无">
+<!ENTITY OptKeyboardShortcut.spacebar "空格键">
+<!ENTITY OptKeyboardShortcut.pageup "Page Up">
+<!ENTITY OptKeyboardShortcut.pagedown "Page Down">
+<!ENTITY OptKeyboardShortcut.end "End">
+<!ENTITY OptKeyboardShortcut.home "Home">
+<!ENTITY OptKeyboardShortcut.left "左">
+<!ENTITY OptKeyboardShortcut.up "上">
+<!ENTITY OptKeyboardShortcut.right "右">
+<!ENTITY OptKeyboardShortcut.down "下">
+<!ENTITY puzzlebarsabout.name "Puzzle Toolbars">
+<!ENTITY puzzlebarsabout.by "作者 Quicksaver">
+<!ENTITY puzzlebarsabout.desc "关于此附加组件的所有信息可以在 Mozilla 附加组件主页上查看。如果你喜欢这个附加组件，请考虑在附加组件主页上留下好评或者做出一点捐助来支持它的继续开发。问题报告和建议请发送到技术支持页面。">
+<!ENTITY puzzlebarsabout.home "附加组件主页">
+<!ENTITY puzzlebarsabout.tech "技术支持">
+<!ENTITY puzzlebarsabout.notes "发行说明">

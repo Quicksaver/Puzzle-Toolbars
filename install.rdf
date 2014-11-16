@@ -67,5 +67,13 @@
 				<em:translator>Mikael Hiort af Ornäs</em:translator>
 			</Description>
 		</em:localized>
+		<em:localized>
+			<Description>
+				<em:locale>zh-CN</em:locale>
+				<em:name>Puzzle Toolbars</em:name>
+				<em:description>把您的附加组件按钮和其他的东西拼凑在一起，放在你想放在的地方！</em:description>
+				<em:translator>Wang.H.K, YFdyh000</em:translator>
+			</Description>
+		</em:localized>
 	</Description>
 </RDF>
