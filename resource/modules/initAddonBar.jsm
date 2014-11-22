@@ -1,4 +1,4 @@
-Modules.VERSION = '2.1.4';
+Modules.VERSION = '2.1.5';
 
 this.__defineGetter__('PrintPreviewListener', function() { return window.PrintPreviewListener; });
 this.__defineGetter__('browserPanel', function() { return $('browser-panel'); });
@@ -95,8 +95,12 @@ this.barCustomized = {
 this.toggleBar = function(id) {
 	if(bars[id]) {
 		CustomizableUI.setToolbarVisibility(id, bars[id].collapsed);
-		dispatch(bars[id], { type: 'ToggledPuzzleBar', cancelable: false });
-		return;
+	}
+};
+
+this.toolbarVisibilityChanged = function(e) {
+	if(bars[e.target.id]) {
+		aSync(function() { dispatch(bars[e.target.id], { type: 'ToggledPuzzleBar', cancelable: false }); });
 	}
 };
 
@@ -244,6 +248,7 @@ Modules.LOADMODULE = function() {
 	Listeners.add(customizeMenu, 'popupshown', setCustomizeMenu);
 	Listeners.add(browserPanel, 'resize', delayMoveBars);
 	Listeners.add(window, 'aftercustomization', delayMoveBars);
+	Listeners.add(window, 'toolbarvisibilitychange', toolbarVisibilityChanged);
 	Listeners.add(window, 'ToggledPuzzleBar', moveBars);
 	Listeners.add(window, 'PuzzleBarCustomized', moveBars);
 	Listeners.add(window, 'fullscreen', onFullScreen.listener);
@@ -260,6 +265,7 @@ Modules.UNLOADMODULE = function() {
 	Listeners.remove(customizeMenu, 'popupshown', setCustomizeMenu);
 	Listeners.remove(browserPanel, 'resize', delayMoveBars);
 	Listeners.remove(window, 'aftercustomization', delayMoveBars);
+	Listeners.remove(window, 'toolbarvisibilitychange', toolbarVisibilityChanged);
 	Listeners.remove(window, 'ToggledPuzzleBar', moveBars);
 	Listeners.remove(window, 'PuzzleBarCustomized', moveBars);
 	Listeners.remove(window, 'fullscreen', onFullScreen.listener);
