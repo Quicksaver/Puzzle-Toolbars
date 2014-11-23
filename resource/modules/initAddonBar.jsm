@@ -1,7 +1,6 @@
-Modules.VERSION = '2.1.5';
+Modules.VERSION = '2.1.6';
 
 this.__defineGetter__('PrintPreviewListener', function() { return window.PrintPreviewListener; });
-this.__defineGetter__('browserPanel', function() { return $('browser-panel'); });
 this.__defineGetter__('gNavBar', function() { return $('nav-bar'); });
 this.__defineGetter__('statusBar', function() { return _statusBar.node || $('status-bar'); });
 this.__defineGetter__('customizeMenu', function() { return $('customization-toolbar-menu'); });
@@ -19,7 +18,7 @@ this.__defineGetter__('scrollBarWidth', function() {
 	if(_scrollBarWidth === null) {
 		var scrollDiv = document.createElement("div");
 		scrollDiv.setAttribute('style', 'width: 100px; height: 100px; overflow: scroll; position: fixed; top: -9999px;');
-		scrollDiv = browserPanel.appendChild(scrollDiv);
+		scrollDiv = $('browser-panel').appendChild(scrollDiv);
 		_scrollBarWidth = 100 -scrollDiv.clientWidth;
 		scrollDiv.remove();
 	}
@@ -246,7 +245,7 @@ Modules.LOADMODULE = function() {
 	Listeners.add(contextMenu, 'popupshowing', setContextMenu);
 	Listeners.add(viewMenu, 'popupshown', setViewMenu);
 	Listeners.add(customizeMenu, 'popupshown', setCustomizeMenu);
-	Listeners.add(browserPanel, 'resize', delayMoveBars);
+	Listeners.add(window, 'resize', delayMoveBars);
 	Listeners.add(window, 'aftercustomization', delayMoveBars);
 	Listeners.add(window, 'toolbarvisibilitychange', toolbarVisibilityChanged);
 	Listeners.add(window, 'ToggledPuzzleBar', moveBars);
@@ -263,7 +262,7 @@ Modules.UNLOADMODULE = function() {
 	Listeners.remove(contextMenu, 'popupshowing', setContextMenu);
 	Listeners.remove(viewMenu, 'popupshown', setViewMenu);
 	Listeners.remove(customizeMenu, 'popupshown', setCustomizeMenu);
-	Listeners.remove(browserPanel, 'resize', delayMoveBars);
+	Listeners.remove(window, 'resize', delayMoveBars);
 	Listeners.remove(window, 'aftercustomization', delayMoveBars);
 	Listeners.remove(window, 'toolbarvisibilitychange', toolbarVisibilityChanged);
 	Listeners.remove(window, 'ToggledPuzzleBar', moveBars);
