@@ -1,4 +1,4 @@
-Modules.VERSION = '2.1.4';
+Modules.VERSION = '2.1.5';
 
 this.onDragExitAll = function() {
 	Listeners.remove(gBrowser, "dragenter", onDragExitAll, false);
@@ -104,9 +104,9 @@ this.holdPopupMenu = function(e) {
 			for(var b in bars) {
 				if(!bars[b]._autohide) { continue; }
 				
-				var widgets = CustomizableUI.getWidgetsInArea(b.id);
+				var widgets = CustomizableUI.getWidgetsInArea(b);
 				for(var w=0; w<widgets.length; w++) {
-					var widget = widgets[w].forWindow(window);
+					var widget = widgets[w] && widgets[w].forWindow(window);
 					if(!widget || !widget.node || !widget.node.open) { continue; }
 					
 					hold = bars[b];
@@ -137,7 +137,7 @@ this.holdPopupMenu = function(e) {
 	
 	// nothing "native" is opening this popup, so let's see if someone claims it
 	if(!hold) {
-		trigger = askForOwner(target);
+		trigger = dispatch(target, { type: 'AskingForNodeOwner', asking: true });
 		if(trigger && typeof(trigger) == 'string') {
 			trigger = $(trigger);
 			
