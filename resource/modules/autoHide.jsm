@@ -1,4 +1,4 @@
-Modules.VERSION = '2.1.5';
+Modules.VERSION = '2.1.6';
 
 this.onDragExitAll = function() {
 	Listeners.remove(gBrowser, "dragenter", onDragExitAll, false);
@@ -225,6 +225,18 @@ this.popupsFinishedVisible = function() {
 	}
 };
 
+this.autoHideNodeListeners = function(bar, node, setup) {
+	if(setup) {
+		Listeners.add(node, 'dragenter', bar._onDragEnter);
+		Listeners.add(node, 'mouseover', bar._onMouseOver);
+		Listeners.add(node, 'mouseout', bar._onMouseOut);
+	} else {
+		Listeners.remove(node, 'dragenter', bar._onDragEnter);
+		Listeners.remove(node, 'mouseover', bar._onMouseOver);
+		Listeners.remove(node, 'mouseout', bar._onMouseOut);
+	}
+};
+
 this.initAutoHide = function(bar, nodes, transitionNode, transitionProperty) {
 	if(bar._autohide) { return; }
 	
@@ -252,9 +264,7 @@ this.initAutoHide = function(bar, nodes, transitionNode, transitionProperty) {
 	};
 	
 	for(var node of nodes) {
-		Listeners.add(node, 'dragenter', bar._onDragEnter);
-		Listeners.add(node, 'mouseover', bar._onMouseOver);
-		Listeners.add(node, 'mouseout', bar._onMouseOut);
+		autoHideNodeListeners(bar, node, true);
 		bar._autohide.push(node);
 	}
 	
@@ -285,6 +295,7 @@ this.initAutoHide = function(bar, nodes, transitionNode, transitionProperty) {
 	Listeners.add(bar._transition.node, 'transitionend', bar._transition.onEnd);
 	
 	setAttribute(bar, 'autohide', 'true');
+	dispatch(bar, { type: "LoadedAutoHidePuzzleBar", cancelable: false });
 	
 	if(!Prefs.noInitialShow) {
 		initialShowBar({ target: bar });
@@ -296,11 +307,10 @@ this.deinitAutoHide = function(bar) {
 	
 	removeAttribute(bar, 'autohide');
 	removeAttribute(bar, 'hover');
+	dispatch(bar, { type: "UnloadedAutoHidePuzzleBar", cancelable: false });
 	
 	for(var node of bar._autohide) {
-		Listeners.remove(node, 'dragenter', bar._onDragEnter);
-		Listeners.remove(node, 'mouseover', bar._onMouseOver);
-		Listeners.remove(node, 'mouseout', bar._onMouseOut);
+		autoHideNodeListeners(bar, node, false);
 	}
 	
 	delete bar._onMouseOver;

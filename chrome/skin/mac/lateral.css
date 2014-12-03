@@ -48,12 +48,12 @@
 		background-color: #e8e8e8;
 	}
 	
-	#puzzleBars-lateral-bar:not([movetoright]):-moz-any(:not([sidebarOpen]),[autohide]),
+	#puzzleBars-lateral-bar:not([movetoright]):not([inSidebar]):-moz-any(:not([sidebarOpen]),[autohide]),
 	window[customizing="true"] #puzzleBars-lateral-bar:not([movetoright]) {
 		box-shadow: inset -1px 0 0 #ababab;
 	}
 	
-	#puzzleBars-lateral-bar[movetoright]:-moz-any(:not([sidebarOpen]),[autohide]),
+	#puzzleBars-lateral-bar[movetoright]:not([inSidebar]):-moz-any(:not([sidebarOpen]),[autohide]),
 	window[customizing="true"] #puzzleBars-lateral-bar[movetoright] {
 		box-shadow: inset 1px 0 0 #ababab;
 	}
@@ -61,12 +61,12 @@
 	/* Puzzle Pieces */
 	
 	#puzzleBars-lateral-PP:not([movetoright]):not([active]):not(:hover):not([hover]),
-	#puzzleBars-lateral-PP:not([movetoright])[autohide]:not(:hover):not([hover]) {
+	#puzzleBars-lateral-PP:not([movetoright])[autohide]:not([inSidebar]):not(:hover):not([hover]) {
 		clip: rect(0px, 32px, 32px, 18px);
 	}
 	
 	#puzzleBars-lateral-PP[movetoright]:not([active]):not(:hover):not([hover]),
-	#puzzleBars-lateral-PP[movetoright][autohide]:not(:hover):not([hover]) {
+	#puzzleBars-lateral-PP[movetoright][autohide]:not([inSidebar]):not(:hover):not([hover]) {
 		clip: rect(0px, 14px, 32px, 0px);
 	}
 	

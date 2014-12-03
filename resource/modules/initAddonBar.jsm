@@ -1,4 +1,4 @@
-Modules.VERSION = '2.1.6';
+Modules.VERSION = '2.1.7';
 
 this.__defineGetter__('PrintPreviewListener', function() { return window.PrintPreviewListener; });
 this.__defineGetter__('gNavBar', function() { return $('nav-bar'); });
@@ -28,6 +28,9 @@ this.__defineGetter__('scrollBarWidth', function() {
 // some bars need to properly force autohide on when in full screen, this is just a helper to ease this process
 this.onFullScreen = {
 	handlers: [],
+	
+	// just a shortcut for the properties below to facilitate everywhere else
+	get hideBars () { return !this.useLion && this.entered && this.autohide; },
 	
 	get useLion () { return window.FullScreen.useLionFullScreen; },
 	get autohide () { return Prefs['fullscreen.autohide']; },
@@ -200,6 +203,7 @@ this.initBar = function(bar, pp) {
 		attributeOldValue: true
 	});
 	
+	bar._loaded = true;
 	aSync(function() { bar.hidden = false; }); // aSync works best
 	dispatch(bar, { type: "LoadedPuzzleBar", cancelable: false });
 };
@@ -207,6 +211,7 @@ this.initBar = function(bar, pp) {
 this.deinitBar = function(bar, pp) {
 	// Prevent things from jumping around on startup
 	bar.hidden = true;
+	delete bar._loaded;
 	dispatch(bar, { type: "UnloadedPuzzleBar", cancelable: false });
 	
 	bar._moveOnHidingAttr.disconnect();

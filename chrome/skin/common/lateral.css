@@ -31,18 +31,18 @@
 	}
 	
 	/* These are for the mouse over effects */
-	#puzzleBars-lateral-bar:not([movetoright]):-moz-any(:not([sidebarOpen]),[autohide]) toolbarbutton:not([disabled]):hover,
-	#puzzleBars-lateral-bar:not([movetoright]):-moz-any(:not([sidebarOpen]),[autohide]) toolbarbutton[open],
-	#puzzleBars-lateral-bar:not([movetoright]):-moz-any(:not([sidebarOpen]),[autohide]) toolbarbutton > .toolbarbutton-menubutton-button:not([disabled]):hover {
+	#puzzleBars-lateral-bar:not([movetoright]):not([inSidebar]):-moz-any(:not([sidebarOpen]),[autohide]) toolbarbutton:not([disabled]):hover,
+	#puzzleBars-lateral-bar:not([movetoright]):not([inSidebar]):-moz-any(:not([sidebarOpen]),[autohide]) toolbarbutton[open],
+	#puzzleBars-lateral-bar:not([movetoright]):not([inSidebar]):-moz-any(:not([sidebarOpen]),[autohide]) toolbarbutton > .toolbarbutton-menubutton-button:not([disabled]):hover {
 		background-position: top, top, bottom !important;
 		background-size: auto, 100% 1px, 100% 1px !important;
 		background-image:	linear-gradient(to right, transparent, rgba(0,0,0,.15)),
 					linear-gradient(to right, transparent, rgba(0,0,0,.15) 30%),
 		        		linear-gradient(to right, transparent, rgba(0,0,0,.15) 30%) !important;
 	}
-	#puzzleBars-lateral-bar:not([movetoright])[sidebarOpen]:not([autohide]) toolbarbutton:not([disabled]):hover,
-	#puzzleBars-lateral-bar:not([movetoright])[sidebarOpen]:not([autohide]) toolbarbutton[open],
-	#puzzleBars-lateral-bar:not([movetoright])[sidebarOpen]:not([autohide]) toolbarbutton > .toolbarbutton-menubutton-button:not([disabled]):hover {
+	#puzzleBars-lateral-bar:not([movetoright]):-moz-any([sidebarOpen]:not([autohide]),[inSidebar]) toolbarbutton:not([disabled]):hover,
+	#puzzleBars-lateral-bar:not([movetoright]):-moz-any([sidebarOpen]:not([autohide]),[inSidebar]) toolbarbutton[open],
+	#puzzleBars-lateral-bar:not([movetoright]):-moz-any([sidebarOpen]:not([autohide]),[inSidebar]) toolbarbutton > .toolbarbutton-menubutton-button:not([disabled]):hover {
 		background-position: top, top, bottom, right !important;
 		background-size: auto, 100% 1px, 100% 1px, 1px 100% !important;
 		background-image:	linear-gradient(to right, transparent, rgba(0,0,0,.15)),
@@ -50,18 +50,18 @@
 		        		linear-gradient(to right, transparent, rgba(0,0,0,.15) 30%),
 		        		linear-gradient(to left, rgba(0,0,0,.15) 1px, transparent) !important;
 	}
-	#puzzleBars-lateral-bar[movetoright]:-moz-any(:not([sidebarOpen]),[autohide]) toolbarbutton:not([disabled]):hover,
-	#puzzleBars-lateral-bar[movetoright]:-moz-any(:not([sidebarOpen]),[autohide]) toolbarbutton[open],
-	#puzzleBars-lateral-bar[movetoright]:-moz-any(:not([sidebarOpen]),[autohide]) toolbarbutton > .toolbarbutton-menubutton-button:not([disabled]):hover {
+	#puzzleBars-lateral-bar[movetoright]:not([inSidebar]):-moz-any(:not([sidebarOpen]),[autohide]) toolbarbutton:not([disabled]):hover,
+	#puzzleBars-lateral-bar[movetoright]:not([inSidebar]):-moz-any(:not([sidebarOpen]),[autohide]) toolbarbutton[open],
+	#puzzleBars-lateral-bar[movetoright]:not([inSidebar]):-moz-any(:not([sidebarOpen]),[autohide]) toolbarbutton > .toolbarbutton-menubutton-button:not([disabled]):hover {
 		background-position: top, top, bottom !important;
 		background-size: auto, 100% 1px, 100% 1px !important;
 		background-image:	linear-gradient(to left, transparent, rgba(0,0,0,.15)),
 					linear-gradient(to left, transparent, rgba(0,0,0,.15) 30%),
 		        		linear-gradient(to left, transparent, rgba(0,0,0,.15) 30%) !important;
 	}
-	#puzzleBars-lateral-bar[movetoright][sidebarOpen]:not([autohide]) toolbarbutton:not([disabled]):hover,
-	#puzzleBars-lateral-bar[movetoright][sidebarOpen]:not([autohide]) toolbarbutton[open],
-	#puzzleBars-lateral-bar[movetoright][sidebarOpen]:not([autohide]) toolbarbutton > .toolbarbutton-menubutton-button:not([disabled]):hover {
+	#puzzleBars-lateral-bar[movetoright]:-moz-any([sidebarOpen]:not([autohide]),[inSidebar]) toolbarbutton:not([disabled]):hover,
+	#puzzleBars-lateral-bar[movetoright]:-moz-any([sidebarOpen]:not([autohide]),[inSidebar]) toolbarbutton[open],
+	#puzzleBars-lateral-bar[movetoright]:-moz-any([sidebarOpen]:not([autohide]),[inSidebar]) toolbarbutton > .toolbarbutton-menubutton-button:not([disabled]):hover {
 		background-position: top, top, bottom, left !important;
 		background-size: auto, 100% 1px, 100% 1px, 1px 100% !important;
 		background-image:	linear-gradient(to left, transparent, rgba(0,0,0,.15)),
@@ -103,7 +103,7 @@
 	#puzzleBars-lateral-PP[movetoright]:not([active]):not(:hover) image { transform: rotate(40deg); }
 	
 	#puzzleBars-lateral-PP:not([active]):not(:hover):not([hover]),
-	#puzzleBars-lateral-PP[autohide]:not(:hover):not([hover]) {
+	#puzzleBars-lateral-PP[autohide]:not([inSidebar]):not(:hover):not([hover]) {
 		opacity: 0;
 	}
 	
@@ -144,8 +144,8 @@
 		height: 100%;
 	}
 	
-	window:not([customizing="true"]) #puzzleBars-lateral-container[autohide][collapsed="true"],
-	window:not([customizing="true"]) #puzzleBars-lateral-bar[autohide][collapsed="true"] {
+	window:not([customizing="true"]) #puzzleBars-lateral-container[autohide][collapsed="true"]:not([inSidebar]),
+	window:not([customizing="true"]) #puzzleBars-lateral-bar[autohide][collapsed="true"]:not([inSidebar]) {
 		display: -moz-box !important;
 		visibility: visible !important;
 		pointer-events: none;
@@ -202,6 +202,35 @@
 	
 	#main-window[customizing] #puzzleBars-lateral-PP {
 		display: none;
+	}
+	
+	/* compatibility with OmniSidebar */
+	
+	#puzzleBars-lateral-PP[inSidebar] {
+		position: absolute;
+	}
+	#puzzleBars-lateral-PP[inSidebar]:not([movetobottom]) {
+		top: 0;
+	}
+	#puzzleBars-lateral-PP[inSidebar][movetobottom] {
+		bottom: 0;
+	}
+	
+	#puzzleBars-lateral-PP {
+		z-index: 30; /* OSB's side switcher is 20 */
+	}
+	
+	#puzzleBars-lateral-container[autohide] {
+		z-index: 15; /* OSB's side switcher is 20 */
+	}
+	
+	#puzzleBars-lateral-container[inSidebar] {
+		visibility: collapse;
+	}
+	
+	.sidebar-box[glassStyle="true"] #puzzleBars-lateral-bar {
+		background: none !important;
+		box-shadow: none !important;
 	}
 	
 }

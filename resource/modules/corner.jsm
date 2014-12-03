@@ -1,4 +1,4 @@
-Modules.VERSION = '1.1.7';
+Modules.VERSION = '1.1.8';
 
 this.PP_OFFSET_CORNER = 0;
 
@@ -249,7 +249,7 @@ this.cornerPlacement = function() {
 };
 
 this.cornerAutoHide = function() {
-	if(Prefs.corner_autohide || (!onFullScreen.useLion && onFullScreen.entered && onFullScreen.autohide)) {
+	if(Prefs.corner_autohide || onFullScreen.hideBars) {
 		initAutoHide(cornerBar, [cornerContainer, cornerPP], cornerContainer, 'opacity');
 	} else {
 		deinitAutoHide(cornerBar);

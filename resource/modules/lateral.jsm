@@ -1,4 +1,4 @@
-Modules.VERSION = '1.0.6';
+Modules.VERSION = '1.1.0';
 
 // ammount of pixels to clip the bar to when it is closed or hidden
 this.CLIPBAR_LATERAL = 4;
@@ -7,7 +7,14 @@ this.__defineGetter__('gCustomizeMode', function() { return window.gCustomizeMod
 this.__defineGetter__('lateralContainer', function() { return $(objName+'-lateral-container'); });
 this.__defineGetter__('lateralBar', function() { return $(objName+'-lateral-bar'); });
 this.__defineGetter__('lateralPP', function() { return $(objName+'-lateral-PP'); });
-this.__defineGetter__('sidebarOpen', function() { return $('sidebar-box') ? !$('sidebar-box').hidden : false; });
+this.__defineGetter__('sidebarOpen', function() {
+	var open = dispatch(window, { type: 'IsSidebarOpen', asking: true });
+	if(open !== undefined) {
+		return open;
+	}
+	
+	return $('sidebar-box') ? !$('sidebar-box').hidden && LTR == (Prefs.lateral_placement == 'left') : false;
+});
 
 this.lateralKey = {
 	id: objName+'-lateral-key',
@@ -24,7 +31,7 @@ this.setLateralKey = function() {
 };
 
 this.lateralSidebarOpen = function() {
-	toggleAttribute(lateralBar, 'sidebarOpen', sidebarOpen && LTR == (Prefs.lateral_placement == 'left'));
+	toggleAttribute(lateralBar, 'sidebarOpen', sidebarOpen);
 };
 
 this.lateralStyle = {};
@@ -95,48 +102,48 @@ this.lateralMove = function() {
 	sscode += '		clip: rect(0px, '+CLIPBAR_LATERAL+'px, '+lateralStyle.height+'px, 0px);\n';
 	sscode += '	}\n';
 	
-	sscode += '	window['+objName+'_UUID="'+_UUID+'"] #'+objName+'-lateral-PP:not([movetobottom]) { top: '+lateralStyle.top+'px; }\n';
-	sscode += '	window['+objName+'_UUID="'+_UUID+'"] #'+objName+'-lateral-PP[movetobottom] { bottom: '+lateralStyle.bottom+'px; }\n';
+	sscode += '	window['+objName+'_UUID="'+_UUID+'"] #'+objName+'-lateral-PP:not([movetobottom]):-moz-any(:not([active]),:not([inSidebar])) { top: '+lateralStyle.top+'px; }\n';
+	sscode += '	window['+objName+'_UUID="'+_UUID+'"] #'+objName+'-lateral-PP[movetobottom]:-moz-any(:not([active]),:not([inSidebar])) { bottom: '+lateralStyle.bottom+'px; }\n';
 	
 	sscode += '	window['+objName+'_UUID="'+_UUID+'"] #'+objName+'-lateral-PP:not([movetoright]):not([active]) {\n';
 	sscode += '		left: '+(lateralStyle.left +ppOffsetX +OSoffset)+'px;\n';
 	sscode += '	}\n';
-	sscode += '	window['+objName+'_UUID="'+_UUID+'"] #'+objName+'-lateral-PP:not([movetoright])[active] {\n';
+	sscode += '	window['+objName+'_UUID="'+_UUID+'"] #'+objName+'-lateral-PP:not([movetoright])[active]:not([inSidebar]) {\n';
 	sscode += '		left: '+(lateralStyle.left +ppOffsetX +OSoffset +shrunkOffsetHover)+'px;\n';
 	sscode += '	}\n';
-	sscode += '	window['+objName+'_UUID="'+_UUID+'"] #'+objName+'-lateral-PP:not([movetoright])[active]:not(:hover) {\n';
+	sscode += '	window['+objName+'_UUID="'+_UUID+'"] #'+objName+'-lateral-PP:not([movetoright])[active]:not([inSidebar]):not(:hover) {\n';
 	sscode += '		left: '+(lateralStyle.left +ppOffsetX +OSoffset +shrunkOffset)+'px;\n';
 	sscode += '	}\n';
 	sscode += '	@media not all and (-moz-windows-classic) {\n';
 	sscode += '		@media (-moz-windows-default-theme) {\n';
-	sscode += '			window['+objName+'_UUID="'+_UUID+'"][sizemode="normal"] #'+objName+'-lateral-PP:not([movetoright])[active]:not(:hover) {\n';
+	sscode += '			window['+objName+'_UUID="'+_UUID+'"][sizemode="normal"] #'+objName+'-lateral-PP:not([movetoright])[active]:not([inSidebar]):not(:hover) {\n';
 	sscode += '				left: '+(lateralStyle.left +ppOffsetX +OSoffset +shrunkOffset +1)+'px;\n';
 	sscode += '			}\n';
 	sscode += '		}\n';
 	sscode += '	}\n';
 	sscode += '	window['+objName+'_UUID="'+_UUID+'"] #'+objName+'-lateral-PP:not([movetoright]):not([active]):not(:hover):not([hover]),\n';
-	sscode += '	window['+objName+'_UUID="'+_UUID+'"] #'+objName+'-lateral-PP:not([movetoright])[autohide][active]:not(:hover):not([hover]) {\n';
+	sscode += '	window['+objName+'_UUID="'+_UUID+'"] #'+objName+'-lateral-PP:not([movetoright])[autohide][active]:not([inSidebar]):not(:hover):not([hover]) {\n';
 	sscode += '		left: '+(lateralStyle.left +ppOffsetX +OSoffset -21)+'px;\n';
 	sscode += '	}\n';
 	
 	sscode += '	window['+objName+'_UUID="'+_UUID+'"] #'+objName+'-lateral-PP[movetoright]:not([active]) {\n';
 	sscode += '		right: '+(lateralStyle.right +ppOffsetX +OSoffset)+'px;\n';
 	sscode += '	}\n';
-	sscode += '	window['+objName+'_UUID="'+_UUID+'"] #'+objName+'-lateral-PP[movetoright][active] {\n';
+	sscode += '	window['+objName+'_UUID="'+_UUID+'"] #'+objName+'-lateral-PP[movetoright][active]:not([inSidebar]) {\n';
 	sscode += '		right: '+(lateralStyle.right +ppOffsetX +OSoffset +shrunkOffsetHover)+'px;\n';
 	sscode += '	}\n';
-	sscode += '	window['+objName+'_UUID="'+_UUID+'"] #'+objName+'-lateral-PP[movetoright][active]:not(:hover) {\n';
+	sscode += '	window['+objName+'_UUID="'+_UUID+'"] #'+objName+'-lateral-PP[movetoright][active]:not([inSidebar]):not(:hover) {\n';
 	sscode += '		right: '+(lateralStyle.right +ppOffsetX +OSoffset +shrunkOffset)+'px;\n';
 	sscode += '	}\n';
 	sscode += '	@media not all and (-moz-windows-classic) {\n';
 	sscode += '		@media (-moz-windows-default-theme) {\n';
-	sscode += '			window['+objName+'_UUID="'+_UUID+'"][sizemode="normal"] #'+objName+'-lateral-PP[movetoright][active]:not(:hover) {\n';
+	sscode += '			window['+objName+'_UUID="'+_UUID+'"][sizemode="normal"] #'+objName+'-lateral-PP[movetoright][active]:not([inSidebar]):not(:hover) {\n';
 	sscode += '				right: '+(lateralStyle.right +ppOffsetX +OSoffset +shrunkOffset +1)+'px;\n';
 	sscode += '			}\n';
 	sscode += '		}\n';
 	sscode += '	}\n';
 	sscode += '	window['+objName+'_UUID="'+_UUID+'"] #'+objName+'-lateral-PP[movetoright]:not([active]):not(:hover):not([hover]),\n';
-	sscode += '	window['+objName+'_UUID="'+_UUID+'"] #'+objName+'-lateral-PP[movetoright][autohide][active]:not(:hover):not([hover]) {\n';
+	sscode += '	window['+objName+'_UUID="'+_UUID+'"] #'+objName+'-lateral-PP[movetoright][autohide][active]:not([inSidebar]):not(:hover):not([hover]) {\n';
 	sscode += '		right: '+(lateralStyle.right +ppOffsetX +OSoffset -21)+'px;\n';
 	sscode += '	}\n';
 	
@@ -451,7 +458,7 @@ this.lateralToggleBottom = function() {
 };
 
 this.lateralAutoHide = function() {
-	if(!customizing && (Prefs.lateral_autohide || (!onFullScreen.useLion && onFullScreen.entered && onFullScreen.autohide))) {
+	if(!customizing && (Prefs.lateral_autohide || onFullScreen.hideBars)) {
 		initAutoHide(lateralBar, [lateralContainer, lateralPP], lateralContainer, 'opacity');
 	} else {
 		deinitAutoHide(lateralBar);
@@ -489,7 +496,7 @@ this.lateralOnUnload = function() {
 	Watchers.removeAttributeWatcher($('sidebar-box'), 'hidden', lateralSidebarOpen);
 };
 
-this.lateralCustomize = function(e, force) {
+this.lateralCustomize = function(e) {
 	if(e === true || e.type == 'beforecustomization') {
 		// I have to disable autohide, or it screws up the layout when leaving customize mode, no idea why though...
 		deinitAutoHide(lateralBar);

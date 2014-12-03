@@ -34,6 +34,7 @@
 			<observes element="objName-lateral-bar" attribute="hover" />
 			<observes element="objName-lateral-bar" attribute="collapsed" />
 			<observes element="objName-lateral-bar" attribute="movetoright" />
+			<observes element="objName-lateral-bar" attribute="inSidebar" />
 			
 			<toolbar id="puzzleBars-lateral-bar"
 				toolbarname="&lateral.name;"
@@ -80,6 +81,7 @@
 			<observes element="objName-lateral-bar" attribute="hover" />
 			<observes element="objName-lateral-bar" attribute="movetobottom" />
 			<observes element="objName-lateral-bar" attribute="movetoright" />
+			<observes element="objName-lateral-bar" attribute="inSidebar" />
 			
 			<image onclick="objName.commandPP(event, this.parentNode);" />
 		</box>
