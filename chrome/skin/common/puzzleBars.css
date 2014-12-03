@@ -129,7 +129,7 @@
 	}
 	
 	/* try to keep the hovered puzzle piece on top of the others */
-	window[puzzleBars-FF34] .PuzzlePiece:not([position]):hover { -moz-box-ordinal-group: 10; }
+	.PuzzlePiece:not([position]):hover { -moz-box-ordinal-group: 10; }
 	
 	/* overflow panels */
 	

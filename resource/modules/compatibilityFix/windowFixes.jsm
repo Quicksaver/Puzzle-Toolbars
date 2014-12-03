@@ -1,4 +1,4 @@
-Modules.VERSION = '1.0.15';
+Modules.VERSION = '1.0.16';
 
 Modules.LOADMODULE = function() {
 	AddonManager.getAddonByID("s3download@statusbar", function(addon) {
@@ -18,13 +18,9 @@ Modules.LOADMODULE = function() {
 	Modules.load('compatibilityFix/UIEnhancer');
 	Modules.load('compatibilityFix/theFoxOnlyBetter');
 	Modules.load('compatibilityFix/OmniSidebar');
-	
-	toggleAttribute(document.documentElement, objName+'-FF34', Services.vc.compare(Services.appinfo.version, "34.0a1") >= 0);
 };
 
 Modules.UNLOADMODULE = function() {
-	removeAttribute(document.documentElement, objName+'-FF34');
-	
 	Modules.unload('compatibilityFix/S3');
 	Modules.unload('compatibilityFix/TileTabs');
 	Modules.unload('compatibilityFix/TreeStyleTab');
