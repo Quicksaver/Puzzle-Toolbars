@@ -1,4 +1,4 @@
-Modules.VERSION = '1.0.0';
+Modules.VERSION = '1.0.1';
 
 this.__defineGetter__('omnisidebar', function() { return window.omnisidebar; });
 this.__defineGetter__('leftSidebar', function() { return omnisidebar.leftSidebar; });
@@ -84,6 +84,7 @@ this.osbMoveLateral = function(e) {
 	
 	if(!customizing
 	&&	(!e
+		|| (e.type == 'ToggledPuzzleBar' && e.target == lateralBar && !lateralBar.collapsed)
 		|| (e.type == 'LoadedAutoHidePuzzleBar' && e.target == lateralBar)
 		|| (e.type == 'UnloadedAutoHidePuzzleBar' && e.target != lateralBar)
 		|| (e.type != 'UnloadedAutoHidePuzzleBar' && e.type != 'beforecustomization' && e.type != 'sidebarDocked'))
@@ -93,7 +94,12 @@ this.osbMoveLateral = function(e) {
 			sidebar.resizeBox.insertBefore(lateralBar, sidebar.resizeBox.firstChild);
 			sidebar.resizeBox.insertBefore(lateralPP, sidebar.resizeBox.firstChild);
 			removeAttribute(lateralBar, 'flex');
-			setAttribute(lateralBar, 'inSidebar');
+			setAttribute(lateralBar, 'inSidebar', 'true');
+			
+			// if we're toggling the toolbar, we better show the sidebar
+			if(e && e.type == 'ToggledPuzzleBar') {
+				omnisidebar.initialShowBar(sidebar, 1500);
+			}
 		}
 	}
 	else if(!isAncestor(lateralBar, lateralContainer)) {
@@ -142,6 +148,7 @@ this.osbFixer = function(loaded) {
 		Listeners.add(window, 'endToggleSidebar', osbMoveLateral);
 		Listeners.add(window, 'sidebarAbove', osbMoveLateral);
 		Listeners.add(window, 'sidebarDocked', osbMoveLateral);
+		Listeners.add(window, 'ToggledPuzzleBar', osbMoveLateral);
 	} else {
 		Prefs.unlisten('moveSidebars', osbLateralSidebarOpenListener);
 		Prefs.unlisten('twinSidebar', osbLateralSidebarOpenListener);
@@ -166,6 +173,7 @@ this.osbFixer = function(loaded) {
 		Listeners.remove(window, 'endToggleSidebar', osbMoveLateral);
 		Listeners.remove(window, 'sidebarAbove', osbMoveLateral);
 		Listeners.remove(window, 'sidebarDocked', osbMoveLateral);
+		Listeners.remove(window, 'ToggledPuzzleBar', osbMoveLateral);
 	}
 };
 
