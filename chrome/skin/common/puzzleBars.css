@@ -28,13 +28,13 @@
 	}
 	
 	/* !important tags are necessary, especially for inURLBar */
-	.puzzleBars-bar .toolbarbutton-icon:not(:hover) {
+	.puzzleBars-bar :-moz-any(.toolbarbutton-badge-container,.toolbarbutton-icon):not(:hover) {
 		background: none !important;
 		border: none !important;
 		box-shadow: none !important;
 	}
 	
-	.puzzleBars-bar .toolbarbutton-icon {
+	.puzzleBars-bar :-moz-any(.toolbarbutton-badge-container,.toolbarbutton-icon) {
 		max-height: 18px;
 	}
 	

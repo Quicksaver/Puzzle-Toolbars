@@ -25,7 +25,7 @@
 	
 	/* Inner buttons and other elements display */
 	/* !important tags are necessary, especially for urlbarBar, as are extra selectors */
-	#puzzleBars-urlbar-bar .toolbarbutton-icon {
+	#puzzleBars-urlbar-bar :-moz-any(.toolbarbutton-badge-container,.toolbarbutton-icon) {
 		padding: 0 !important;
 	}
 	#nav-bar #puzzleBars-urlbar-bar *:not(.toolbarbutton-menubutton-button):not(.toolbarbutton-combined) > .toolbarbutton-icon {
