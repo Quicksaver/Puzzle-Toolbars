@@ -17,8 +17,14 @@
 	/* Inner buttons and other elements display */
 	
 	/* don't show buttons labels in any of our toolbars */
-	.puzzleBars-bar *:not(#zoom-reset-button) > .toolbarbutton-text {
+	.puzzleBars-bar *:not(#zoom-reset-button):not(.bookmark-item):not(#bookmarks-toolbar-placeholder) > .toolbarbutton-text {
 		visibility: collapse;
+	}
+	
+	/* the bookmarks items need this to mimick the same behavior as when placed in the nav-bar;
+	http://mxr.mozilla.org/mozilla-central/source/browser/base/content/browser.css#307 */
+	.puzzleBars-bar[overflowable="true"] .customization-target #personal-bookmarks {
+		-moz-box-flex: 1;
 	}
 	
 	/* !important tags are necessary, especially for inURLBar */
