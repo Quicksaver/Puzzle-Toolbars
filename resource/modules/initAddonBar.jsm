@@ -1,4 +1,4 @@
-Modules.VERSION = '2.1.7';
+Modules.VERSION = '2.1.8';
 
 this.__defineGetter__('PrintPreviewListener', function() { return window.PrintPreviewListener; });
 this.__defineGetter__('gNavBar', function() { return $('nav-bar'); });
@@ -8,7 +8,6 @@ this.__defineGetter__('viewMenu', function() { return $('viewToolbarsMenu').firs
 this.__defineGetter__('contextMenu', function() { return $('toolbar-context-menu'); });
 this.__defineGetter__('contextOptions', function() { return $(objName+'-contextOptions'); });
 this.__defineGetter__('contextSeparator', function() { return $(objName+'-contextSeparator'); });
-this.getComputedStyle = function(el) { return window.getComputedStyle(el); };
 
 this.bars = {};
 

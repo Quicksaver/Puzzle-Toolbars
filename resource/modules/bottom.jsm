@@ -1,4 +1,4 @@
-Modules.VERSION = '1.0.9';
+Modules.VERSION = '1.0.10';
 
 this.__defineGetter__('bottomBox', function() { return $('browser-bottombox'); });
 this.__defineGetter__('bottomBar', function() { return $(objName+'-bottom-bar'); });
@@ -33,7 +33,7 @@ this.bottomPlacement = function() {
 this.bottomMove = function() {
 	// Let's account for the transparent bottom border as well if it exists
 	var bottomBarStyle = getComputedStyle(bottomBar);
-	var bottom = -parseInt(bottomBarStyle.getPropertyValue('border-bottom-width'));
+	var bottom = -parseInt(bottomBarStyle.borderBottomWidth);
 	
 	var left = 2;
 	var right = 2;

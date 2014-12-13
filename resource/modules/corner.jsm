@@ -1,4 +1,4 @@
-Modules.VERSION = '1.1.8';
+Modules.VERSION = '1.1.9';
 
 this.PP_OFFSET_CORNER = 0;
 
@@ -61,7 +61,7 @@ this.cornerMove = function() {
 	
 	// Let's account for the transparent bottom border as well if it exists
 	var cornerBarStyle = getComputedStyle(cornerBar);
-	var cornerBarBorderBottom = parseInt(cornerBarStyle.getPropertyValue('border-bottom-width'));
+	var cornerBarBorderBottom = parseInt(cornerBarStyle.borderBottomWidth);
 	cornerStyle.bottom -= cornerBarBorderBottom;
 	
 	// Let's try to show it like it's poping up from somewhere when there's something below it
@@ -180,10 +180,10 @@ this.styleCornerPersona = function() {
 	}
 	else {
 		var boxStyle = getComputedStyle(bottomBox);
-		if(lwtheme.bgImage != boxStyle.getPropertyValue('background-image') && boxStyle.getPropertyValue('background-image') != 'none') {
-			lwtheme.bgImage = boxStyle.getPropertyValue('background-image');
-			lwtheme.color = boxStyle.getPropertyValue('color');
-			lwtheme.bgColor = boxStyle.getPropertyValue('background-color');
+		if(lwtheme.bgImage != boxStyle.backgroundImage && boxStyle.backgroundImage != 'none') {
+			lwtheme.bgImage = boxStyle.backgroundImage;
+			lwtheme.color = boxStyle.color;
+			lwtheme.bgColor = boxStyle.backgroundColor;
 		}
 	}
 	

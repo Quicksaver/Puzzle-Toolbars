@@ -1,4 +1,4 @@
-Modules.VERSION = '1.0.3';
+Modules.VERSION = '1.0.4';
 
 this.__defineGetter__('topBar', function() { return $(objName+'-top-bar'); });
 this.__defineGetter__('topPP', function() { return $(objName+'-top-PP'); });
@@ -38,7 +38,7 @@ this.topMove = function() {
 	var topBarRect = topBar.getBoundingClientRect();
 	topStyle = {
 		// Let's account for the transparent top border as well if it exists
-		top: topBarRect.top -parseInt(topBarStyle.getPropertyValue('border-top-width')),
+		top: topBarRect.top -parseInt(topBarStyle.borderTopWidth),
 		left: topBarRect.left +2,
 		right: document.documentElement.clientWidth -topBarRect.right +2
 	};

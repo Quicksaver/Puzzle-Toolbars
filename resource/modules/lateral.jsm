@@ -1,4 +1,4 @@
-Modules.VERSION = '1.1.0';
+Modules.VERSION = '1.1.1';
 
 // ammount of pixels to clip the bar to when it is closed or hidden
 this.CLIPBAR_LATERAL = 4;
@@ -278,7 +278,7 @@ this.CModeSetDragActive = function(aItem, aValue, aDraggedItemId, aInToolbar) {
 		
 		// Calculate width of the item when it'd be dropped in this position
 		let height = this._getDragItemSize(aItem, draggedItem).height;
-		let direction = window.getComputedStyle(aItem).direction;
+		let direction = getComputedStyle(aItem).direction;
 		let prop, otherProp;
 		
 		// If we're inserting before:
