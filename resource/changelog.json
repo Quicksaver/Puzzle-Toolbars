@@ -1,6 +1,12 @@
 {
-	"current":"2.0.1",
+	"current":"2.0.2",
 	"releases": {
+		"2.0.2":{
+			"date":"December 14, 2014",
+			"notes":[
+				["bugfix","typo in fr locale"]
+			]
+		},
 		"2.0.1":{
 			"date":"December 13, 2014",
 			"notes":[
@@ -9,7 +15,7 @@
 				["bugfix","Prevent some visual glitches during startup"],
 				["bugfix","Location bar puzzle bar wouldn't appear in Customize Mode sometimes"],
 				["bugfix","Improved compatibility with my other add-ons, if you use any of them make sure they are also updated and restart your browser afterwards"],
-				["bugfix","Compatiblity with <a target=\"blank\" href=\"https://addons.mozilla.org/firefox/addon/quickjava/\">Quick Java</a>, it's icons would be misproportioned when placed in any puzzle toolbar"],
+				["bugfix","Compatibility with <a target=\"blank\" href=\"https://addons.mozilla.org/firefox/addon/quickjava/\">Quick Java</a>, it's icons would be misproportioned when placed in any puzzle toolbar"],
 				["bugfix","If more than one window is open, toggling a toolbar in one window wouldn't correctly update its puzzle piece in other windows (<a target=\"blank\" href=\"https://github.com/Quicksaver/Puzzle-Toolbars/issues/62\">issue #62</a>)"],
 				["bugfix","Toolbars wouldn't be properly sized/positioned when resizing the window in e10s"],
 				["bugfix","Compatibility with <a target=\"blank\" href=\"https://addons.mozilla.org/firefox/addon/omnisidebar/\">OmniSidebar</a>, the lateral puzzle bar should work in perfect harmony with the sidebar in all modes"],
