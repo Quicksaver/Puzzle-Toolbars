@@ -1,4 +1,4 @@
-Modules.VERSION = '1.1.1';
+Modules.VERSION = '1.1.2';
 
 /* I'm actually not sure if any of this is working, UIEnhancer seems to be having some problems in Nightly... */
 
@@ -8,12 +8,14 @@ this.UIEnhancerFixer = function(aEnabled) {
 	if(aEnabled) {
 		Listeners.add(urlbarBar, 'HoverAddonBar', fixUIEnhancerWidth);
 		Listeners.add(urlbarBar, 'ToggledAddonBar', fixUIEnhancerWidth);
+		Listeners.add(window, 'resize', fixUIEnhancerWidth);
 		Listeners.add(UIEnhancer, 'transitionend', UIEnhancerTransitionEnd);
 		setAttribute($('urlbar'), objName+'-UIEnhancer', 'true');
 		fixUIEnhancerWidth();
 	} else {
 		Listeners.remove(urlbarBar, 'HoverAddonBar', fixUIEnhancerWidth);
 		Listeners.remove(urlbarBar, 'ToggledAddonBar', fixUIEnhancerWidth);
+		Listeners.remove(window, 'resize', fixUIEnhancerWidth);
 		Listeners.remove(UIEnhancer, 'transitionend', UIEnhancerTransitionEnd);
 		removeAttribute($('urlbar'), objName+'-UIEnhancer');
 		Styles.unload('UIEnhancer_'+_UUID);
@@ -24,10 +26,12 @@ this.UIEnhancerFixer = function(aEnabled) {
 
 this.fixUIEnhancerWidth = function() {
 	var hover = !urlbarBar.collapsed && (!Prefs.urlbar_autohide || trueAttribute(urlbarBar, 'hover'));
-	if(hover == trueAttribute(UIEnhancer, 'hover')) { return; }
 	
-	removeAttribute(UIEnhancer, 'noAnimation');
-	Styles.unload('UIEnhancer_'+_UUID);
+	if(hover != trueAttribute(UIEnhancer, 'hover')) {
+		removeAttribute(UIEnhancer, 'noAnimation');
+		Styles.unload('UIEnhancer_'+_UUID);
+	}
+	
 	toggleAttribute(UIEnhancer, 'hover', hover);
 	
 	// if the size of the add-on bar is above the available space to it, resize the UIEnhancer box

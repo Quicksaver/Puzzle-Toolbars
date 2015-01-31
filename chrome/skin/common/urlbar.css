@@ -152,10 +152,10 @@
 	}
 	
 	/* fix for UIEnhancer, putting it here because it's easier than finding the right conditions to (un)load a separate style in this case */
-	#urlbar[puzzleBars-UIEnhancer] #UIEnhancer_URLBar:not([puzzleBars-noAnimation])[hover] {
+	#urlbar[puzzleBars-UIEnhancer] #UIEnhancer_URLBar:not([noAnimation])[hover] {
 		transition: width .25s linear 0s;
 	}
-	#urlbar[puzzleBars-UIEnhancer] #UIEnhancer_URLBar:not([puzzleBars-noAnimation]):not([hover]) {
+	#urlbar[puzzleBars-UIEnhancer] #UIEnhancer_URLBar:not([noAnimation]):not([hover]) {
 		transition: width .5s linear .2s;
 	}
 	
