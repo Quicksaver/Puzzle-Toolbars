@@ -1,4 +1,4 @@
-Modules.VERSION = '1.0.18';
+Modules.VERSION = '1.0.17';
 
 Modules.LOADMODULE = function() {
 	AddonManager.getAddonByID("s3download@statusbar", function(addon) {
@@ -13,14 +13,6 @@ Modules.LOADMODULE = function() {
 		Modules.loadIf('compatibilityFix/TreeStyleTab', (addon && addon.isActive));
 	});
 	
-	AddonManager.getAddonByID('foxyproxy@eric.h.jung', function(addon) {
-		Modules.loadIf('compatibilityFix/foxyProxy', (addon && addon.isActive));
-	});
-	
-	AddonManager.getAddonByID('foxyproxy-basic@eric.h.jung', function(addon) {
-		Modules.loadIf('compatibilityFix/foxyProxy', (addon && addon.isActive));
-	});
-	
 	Modules.load('compatibilityFix/downloadsIndicator');
 	Modules.load('compatibilityFix/bookmarkedItem');
 	Modules.load('compatibilityFix/bookmarksToolbar');
@@ -33,7 +25,6 @@ Modules.UNLOADMODULE = function() {
 	Modules.unload('compatibilityFix/S3');
 	Modules.unload('compatibilityFix/TileTabs');
 	Modules.unload('compatibilityFix/TreeStyleTab');
-	Modules.unload('compatibilityFix/foxyProxy');
 	Modules.unload('compatibilityFix/downloadsIndicator');
 	Modules.unload('compatibilityFix/bookmarkedItem');
 	Modules.unload('compatibilityFix/bookmarksToolbar');
