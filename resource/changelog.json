@@ -1,6 +1,17 @@
 {
-	"current":"2.0.2",
+	"current":"2.0.3",
+	"knownissues":[
+		["There are some minor (aesthetic) <a target=\"blank\" href=\"https://github.com/Quicksaver/Puzzle-Toolbars/issues/24\">issues</a> when the Location Bar Puzzle Bar is used together with <a target=\"blank\" href=\"https://addons.mozilla.org/firefox/addon/ui-enhancer/\">Location Bar Enhancer</a>."]
+	],
 	"releases": {
+		"2.0.3":{
+			"date":"December 14, 2014",
+			"notes":[
+				["updated","ru locale"],
+				["removed","Compatibility fixes for FoxyProxy Standard and FoxyProxy Basic add-ons introduced in the last update, they're no longed needed since their latest versions are already fully compatible"],
+				["bugfix","Compatibility with Tree Style Tab add-on, toggling the lateral bar would leave the vertical tabs wrongly positioned"]
+			]
+		},
 		"2.0.2":{
 			"date":"December 14, 2014",
 			"notes":[
