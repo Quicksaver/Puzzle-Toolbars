@@ -1,4 +1,4 @@
-Modules.VERSION = '1.1.9';
+Modules.VERSION = '1.1.10';
 
 this.PP_OFFSET_CORNER = 0;
 
@@ -86,7 +86,7 @@ this.cornerMove = function() {
 		shrunkOffsetHover -= Math.min(Math.floor((PPsize -ppOffset -cornerContainer.clientHeight) /2), 0);
 	}
 	
-	var ppActiveHiddenOffset = -27 +Prefs.corner_hotspotHeight;
+	var ppActiveHiddenOffset = -17 +Prefs.corner_hotspotHeight;
 	var ppHiddenOffset = -21;
 	var ppActiveHiddenClip = -6 +Prefs.corner_hotspotHeight;
 	
