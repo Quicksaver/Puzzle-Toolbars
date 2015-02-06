@@ -31,10 +31,10 @@
 	#nav-bar #puzzleBars-urlbar-bar *:not(.toolbarbutton-menubutton-button):not(.toolbarbutton-combined) > .toolbarbutton-icon {
 		margin: 0 2px;
 	}
-	#nav-bar #puzzleBars-urlbar-bar .toolbarbutton-1[type="menu"] .toolbarbutton-menu-dropmarker {
+	#nav-bar #puzzleBars-urlbar-bar :-moz-any(.toolbarbutton-1,.chromeclass-toolbar-additional)[type="menu"] .toolbarbutton-menu-dropmarker {
 		-moz-margin-start: 0;
 	}
-	#nav-bar #puzzleBars-urlbar-bar .toolbarbutton-1[type="menu-button"] dropmarker image {
+	#nav-bar #puzzleBars-urlbar-bar :-moz-any(.toolbarbutton-1,.chromeclass-toolbar-additional)[type="menu-button"] dropmarker image {
 		border: none;
 	}
 	

@@ -1,4 +1,4 @@
-Modules.VERSION = '1.0.2';
+Modules.VERSION = '1.0.3';
 
 // list of buttons that will be forced to have the toolbarbutton-1 class when in our toolbars
 this.buttonsClassForce = [
@@ -32,9 +32,11 @@ this.buttonsListener = {
 };
 
 Modules.LOADMODULE = function() {
+	Styles.load('buttons', 'buttons');
 	CustomizableUI.addListener(buttonsListener);
 };
 
 Modules.UNLOADMODULE = function() {
 	CustomizableUI.removeListener(buttonsListener);
+	Styles.unload('buttons');
 };

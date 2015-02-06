@@ -3,9 +3,9 @@
 
 	/* special style for buttons in the add-on bar */
 	
-	.puzzleBars-bar .toolbarbutton-1,
-	.puzzleBars-bar .toolbarbutton-1 > .toolbarbutton-menubutton-button,
-	.puzzleBars-bar .toolbarbutton-1 > .toolbarbutton-menubutton-dropmarker {
+	.puzzleBars-bar :-moz-any(.toolbarbutton-1,.chromeclass-toolbar-additional),
+	.puzzleBars-bar :-moz-any(.toolbarbutton-1,.chromeclass-toolbar-additional) > .toolbarbutton-menubutton-button,
+	.puzzleBars-bar :-moz-any(.toolbarbutton-1,.chromeclass-toolbar-additional) > .toolbarbutton-menubutton-dropmarker {
 		-moz-appearance: none;
 		/* !important flags needed because of bug 561154: */
 		margin: 0 !important;
@@ -16,40 +16,40 @@
 		box-shadow: none !important;
 	}
 	
-	.puzzleBars-bar .toolbarbutton-1:not([type="menu-button"]),
-	.puzzleBars-bar .toolbarbutton-1 > .toolbarbutton-menubutton-button {
+	.puzzleBars-bar :-moz-any(.toolbarbutton-1,.chromeclass-toolbar-additional):not([type="menu-button"]),
+	.puzzleBars-bar :-moz-any(.toolbarbutton-1,.chromeclass-toolbar-additional) > .toolbarbutton-menubutton-button {
 		margin: 0;
 		padding: 0 1px;
 	}
 	
-	.puzzleBars-bar .toolbarbutton-1 > .toolbarbutton-menubutton-dropmarker {
+	.puzzleBars-bar :-moz-any(.toolbarbutton-1,.chromeclass-toolbar-additional) > .toolbarbutton-menubutton-dropmarker {
 		padding-left: 4px;
 		padding-right: 4px;
 	}
 	
-	.puzzleBars-bar .toolbarbutton-1:not([type="menu-button"]):not([disabled]):not([open]):hover,
-	.puzzleBars-bar .toolbarbutton-1 > .toolbarbutton-menubutton-button:not([disabled]):hover,
-	.puzzleBars-bar .toolbarbutton-1:not([disabled]):not([buttonover]):hover > .toolbarbutton-menubutton-dropmarker {
+	.puzzleBars-bar :-moz-any(.toolbarbutton-1,.chromeclass-toolbar-additional):not([type="menu-button"]):not([disabled]):not([open]):hover,
+	.puzzleBars-bar :-moz-any(.toolbarbutton-1,.chromeclass-toolbar-additional) > .toolbarbutton-menubutton-button:not([disabled]):hover,
+	.puzzleBars-bar :-moz-any(.toolbarbutton-1,.chromeclass-toolbar-additional):not([disabled]):not([buttonover]):hover > .toolbarbutton-menubutton-dropmarker {
 		background-image: linear-gradient(transparent, rgba(0,0,0,.15)) !important;
 	}
 	
-	.puzzleBars-bar .toolbarbutton-1:not([type="menu-button"]):not([disabled]):hover:active,
-	.puzzleBars-bar .toolbarbutton-1[type="menu"][open],
-	.puzzleBars-bar .toolbarbutton-1 > .toolbarbutton-menubutton-button:not([disabled]):hover:active,
-	.puzzleBars-bar .toolbarbutton-1[open]:not([disabled]):hover > .toolbarbutton-menubutton-dropmarker {
+	.puzzleBars-bar :-moz-any(.toolbarbutton-1,.chromeclass-toolbar-additional):not([type="menu-button"]):not([disabled]):hover:active,
+	.puzzleBars-bar :-moz-any(.toolbarbutton-1,.chromeclass-toolbar-additional)[type="menu"][open],
+	.puzzleBars-bar :-moz-any(.toolbarbutton-1,.chromeclass-toolbar-additional) > .toolbarbutton-menubutton-button:not([disabled]):hover:active,
+	.puzzleBars-bar :-moz-any(.toolbarbutton-1,.chromeclass-toolbar-additional)[open]:not([disabled]):hover > .toolbarbutton-menubutton-dropmarker {
 		background-image: linear-gradient(transparent, rgba(0,0,0,.3)) !important;
 	}
 	
-	.puzzleBars-bar[brighttext="true"] .toolbarbutton-1:not([type="menu-button"]):not([disabled]):not([open]):hover,
-	.puzzleBars-bar[brighttext="true"] .toolbarbutton-1 > .toolbarbutton-menubutton-button:not([disabled]):hover,
-	.puzzleBars-bar[brighttext="true"] .toolbarbutton-1:not([disabled]):not([buttonover]):hover > .toolbarbutton-menubutton-dropmarker {
+	.puzzleBars-bar[brighttext="true"] :-moz-any(.toolbarbutton-1,.chromeclass-toolbar-additional):not([type="menu-button"]):not([disabled]):not([open]):hover,
+	.puzzleBars-bar[brighttext="true"] :-moz-any(.toolbarbutton-1,.chromeclass-toolbar-additional) > .toolbarbutton-menubutton-button:not([disabled]):hover,
+	.puzzleBars-bar[brighttext="true"] :-moz-any(.toolbarbutton-1,.chromeclass-toolbar-additional):not([disabled]):not([buttonover]):hover > .toolbarbutton-menubutton-dropmarker {
 		background-image: linear-gradient(transparent, rgba(255,255,255,.6)) !important;
 	}
 	
-	.puzzleBars-bar[brighttext="true"] .toolbarbutton-1:not([type="menu-button"]):not([disabled]):hover:active,
-	.puzzleBars-bar[brighttext="true"] .toolbarbutton-1[type="menu"][open],
-	.puzzleBars-bar[brighttext="true"] .toolbarbutton-1 > .toolbarbutton-menubutton-button:not([disabled]):hover:active,
-	.puzzleBars-bar[brighttext="true"] .toolbarbutton-1[open]:not([disabled]):hover > .toolbarbutton-menubutton-dropmarker {
+	.puzzleBars-bar[brighttext="true"] :-moz-any(.toolbarbutton-1,.chromeclass-toolbar-additional):not([type="menu-button"]):not([disabled]):hover:active,
+	.puzzleBars-bar[brighttext="true"] :-moz-any(.toolbarbutton-1,.chromeclass-toolbar-additional)[type="menu"][open],
+	.puzzleBars-bar[brighttext="true"] :-moz-any(.toolbarbutton-1,.chromeclass-toolbar-additional) > .toolbarbutton-menubutton-button:not([disabled]):hover:active,
+	.puzzleBars-bar[brighttext="true"] :-moz-any(.toolbarbutton-1,.chromeclass-toolbar-additional)[open]:not([disabled]):hover > .toolbarbutton-menubutton-dropmarker {
 		background-image: linear-gradient(transparent, rgba(255,255,255,.6)) !important;
 	}
 	

@@ -1,0 +1,7 @@
+@namespace url(http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul);
+@-moz-document url("chrome://browser/content/browser.xul") {
+
+	/* the LastPass toolbar button has an extra unnecessary margin (its dropmarker is always hidden), that just pushes the toolbars further out than needed */
+	.puzzleBars-bar:not(#puzzleBars-urlbar-bar) #lpt_lastpass-compact-btn > .toolbarbutton-icon { -moz-margin-end: 0 !important; }
+	
+}

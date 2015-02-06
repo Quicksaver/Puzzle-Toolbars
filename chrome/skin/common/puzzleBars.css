@@ -73,7 +73,7 @@
 	}
 	
 	/* don't show the little separator, as it'll be out of place in the add-on bar */
-	.puzzleBars-bar .toolbarbutton-1 > .toolbarbutton-menubutton-dropmarker:before {
+	.puzzleBars-bar :-moz-any(.toolbarbutton-1,.chromeclass-toolbar-additional) > .toolbarbutton-menubutton-dropmarker:before {
 		display: none !important;
 	}
 	

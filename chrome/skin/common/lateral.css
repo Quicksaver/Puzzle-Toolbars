@@ -70,8 +70,8 @@
 		        		linear-gradient(to right, rgba(0,0,0,.15) 1px, transparent) !important;
 	}
 	
-	#puzzleBars-lateral-bar .toolbarbutton-1,
-	#puzzleBars-lateral-bar .toolbarbutton-1 > .toolbarbutton-menubutton-button {
+	#puzzleBars-lateral-bar :-moz-any(.toolbarbutton-1,.chromeclass-toolbar-additional),
+	#puzzleBars-lateral-bar :-moz-any(.toolbarbutton-1,.chromeclass-toolbar-additional) > .toolbarbutton-menubutton-button {
 		padding-top: 2px;
 		padding-bottom: 2px;
 	}
