@@ -1,11 +1,18 @@
 {
-	"current":"2.0.3",
+	"current":"2.0.4",
 	"knownissues":[
 		["There are some minor (aesthetic) <a target=\"blank\" href=\"https://github.com/Quicksaver/Puzzle-Toolbars/issues/24\">issues</a> when the Location Bar Puzzle Bar is used together with <a target=\"blank\" href=\"https://addons.mozilla.org/firefox/addon/ui-enhancer/\">Location Bar Enhancer</a>."]
 	],
 	"releases": {
+		"2.0.4":{
+			"date":"February 6, 2015",
+			"notes":[
+				["bugfix","Appearance fixes for <a target=\"blank\" href=\"https://lastpass.com/\">LastPass</a>'s toolbar button (<a target=\"blank\" href=\"https://github.com/Quicksaver/Puzzle-Toolbars/issues/70\">issue #70</a>)"],
+				["bugfix","The corner bar's puzzle piece would occlude the bottom toolbar when set to autohide"]
+			]
+		},
 		"2.0.3":{
-			"date":"December 14, 2014",
+			"date":"February 1, 2015",
 			"notes":[
 				["updated","ru locale"],
 				["removed","Compatibility fixes for FoxyProxy Standard and FoxyProxy Basic add-ons introduced in the last update, they're no longed needed since their latest versions are already fully compatible"],
