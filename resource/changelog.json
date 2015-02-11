@@ -1,9 +1,16 @@
 {
-	"current":"2.0.4",
+	"current":"2.0.5",
 	"knownissues":[
 		["There are some minor (aesthetic) <a target=\"blank\" href=\"https://github.com/Quicksaver/Puzzle-Toolbars/issues/24\">issues</a> when the Location Bar Puzzle Bar is used together with <a target=\"blank\" href=\"https://addons.mozilla.org/firefox/addon/ui-enhancer/\">Location Bar Enhancer</a>."]
 	],
 	"releases": {
+		"2.0.5":{
+			"date":"February 11, 2015",
+			"notes":[
+				["bugfix","<a target=\"blank\" href=\"https://addons.mozilla.org/firefox/addon/stylish/\">Stylish</a> button would be a few pixels too wide for its icon when placed in the Location Bar Puzzle Bar"],
+				["bugfix","<a target=\"blank\" href=\"https://addons.mozilla.org/firefox/addon/show-anchors-2/\">Show Anchors 2</a> button (and possibly others) could not have the hover style applied when hovered"]
+			]
+		},
 		"2.0.4":{
 			"date":"February 6, 2015",
 			"notes":[
