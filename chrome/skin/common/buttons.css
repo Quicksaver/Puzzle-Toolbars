@@ -4,4 +4,9 @@
 	/* the LastPass toolbar button has an extra unnecessary margin (its dropmarker is always hidden), that just pushes the toolbars further out than needed */
 	.puzzleBars-bar:not(#puzzleBars-urlbar-bar) #lpt_lastpass-compact-btn > .toolbarbutton-icon { -moz-margin-end: 0 !important; }
 	
+	/* the Stylish button has an extra rule that always sets this padding when in the nav-bar */
+	#nav-bar #puzzleBars-urlbar-bar #stylish-toolbar-button > .toolbarbutton-icon {
+		-moz-padding-end: 0 !important;
+	}
+	
 }

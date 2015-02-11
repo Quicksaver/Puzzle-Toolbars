@@ -78,9 +78,9 @@
 	}
 	
 	/* These are for the mouse over effects, !important tags are necessary especially for when inURLBar is true */
-	.puzzleBars-bar toolbarbutton:not([disabled]):hover,
+	.puzzleBars-bar toolbarbutton:not([disabled="true"]):hover,
 	.puzzleBars-bar toolbarbutton[open],
-	.puzzleBars-bar toolbarbutton > .toolbarbutton-menubutton-button:not([disabled]):hover {
+	.puzzleBars-bar toolbarbutton > .toolbarbutton-menubutton-button:not([disabled="true"]):hover {
 		background-position: left, left, right !important;
 		background-size: auto, 1px 100%, 1px 100% !important;
 		background-repeat: no-repeat !important;
@@ -88,16 +88,16 @@
 					linear-gradient(to top, transparent, rgba(0,0,0,.15) 30%),
 		        		linear-gradient(to top, transparent, rgba(0,0,0,.15) 30%) !important;
 	}
-	.puzzleBars-bar toolbarbutton:not([disabled]):hover image,
+	.puzzleBars-bar toolbarbutton:not([disabled="true"]):hover image,
 	.puzzleBars-bar toolbarbutton[open] image,
-	.puzzleBars-bar toolbarbutton > .toolbarbutton-menubutton-button:not([disabled]):hover image {
+	.puzzleBars-bar toolbarbutton > .toolbarbutton-menubutton-button:not([disabled="true"]):hover image {
 		border-color: transparent !important;
 		box-shadow: none !important;
 		background: none !important;
 	}
-	.puzzleBars-bar[brighttext="true"] toolbarbutton:not([disabled]):hover,
+	.puzzleBars-bar[brighttext="true"] toolbarbutton:not([disabled="true"]):hover,
 	.puzzleBars-bar[brighttext="true"] toolbarbutton[open],
-	.puzzleBars-bar[brighttext="true"] toolbarbutton > .toolbarbutton-menubutton-button:not([disabled]):hover {
+	.puzzleBars-bar[brighttext="true"] toolbarbutton > .toolbarbutton-menubutton-button:not([disabled="true"]):hover {
 		background-image:	linear-gradient(to top, transparent, rgba(255,255,255,.45)),
 					linear-gradient(to top, transparent, rgba(255,255,255,.45) 30%),
 		        		linear-gradient(to top, transparent, rgba(255,255,255,.45) 30%) !important;

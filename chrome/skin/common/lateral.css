@@ -31,18 +31,18 @@
 	}
 	
 	/* These are for the mouse over effects */
-	#puzzleBars-lateral-bar:not([movetoright]):not([inSidebar]):-moz-any(:not([sidebarOpen]),[autohide]) toolbarbutton:not([disabled]):hover,
+	#puzzleBars-lateral-bar:not([movetoright]):not([inSidebar]):-moz-any(:not([sidebarOpen]),[autohide]) toolbarbutton:not([disabled="true"]):hover,
 	#puzzleBars-lateral-bar:not([movetoright]):not([inSidebar]):-moz-any(:not([sidebarOpen]),[autohide]) toolbarbutton[open],
-	#puzzleBars-lateral-bar:not([movetoright]):not([inSidebar]):-moz-any(:not([sidebarOpen]),[autohide]) toolbarbutton > .toolbarbutton-menubutton-button:not([disabled]):hover {
+	#puzzleBars-lateral-bar:not([movetoright]):not([inSidebar]):-moz-any(:not([sidebarOpen]),[autohide]) toolbarbutton > .toolbarbutton-menubutton-button:not([disabled="true"]):hover {
 		background-position: top, top, bottom !important;
 		background-size: auto, 100% 1px, 100% 1px !important;
 		background-image:	linear-gradient(to right, transparent, rgba(0,0,0,.15)),
 					linear-gradient(to right, transparent, rgba(0,0,0,.15) 30%),
 		        		linear-gradient(to right, transparent, rgba(0,0,0,.15) 30%) !important;
 	}
-	#puzzleBars-lateral-bar:not([movetoright]):-moz-any([sidebarOpen]:not([autohide]),[inSidebar]) toolbarbutton:not([disabled]):hover,
+	#puzzleBars-lateral-bar:not([movetoright]):-moz-any([sidebarOpen]:not([autohide]),[inSidebar]) toolbarbutton:not([disabled="true"]):hover,
 	#puzzleBars-lateral-bar:not([movetoright]):-moz-any([sidebarOpen]:not([autohide]),[inSidebar]) toolbarbutton[open],
-	#puzzleBars-lateral-bar:not([movetoright]):-moz-any([sidebarOpen]:not([autohide]),[inSidebar]) toolbarbutton > .toolbarbutton-menubutton-button:not([disabled]):hover {
+	#puzzleBars-lateral-bar:not([movetoright]):-moz-any([sidebarOpen]:not([autohide]),[inSidebar]) toolbarbutton > .toolbarbutton-menubutton-button:not([disabled="true"]):hover {
 		background-position: top, top, bottom, right !important;
 		background-size: auto, 100% 1px, 100% 1px, 1px 100% !important;
 		background-image:	linear-gradient(to right, transparent, rgba(0,0,0,.15)),
@@ -50,18 +50,18 @@
 		        		linear-gradient(to right, transparent, rgba(0,0,0,.15) 30%),
 		        		linear-gradient(to left, rgba(0,0,0,.15) 1px, transparent) !important;
 	}
-	#puzzleBars-lateral-bar[movetoright]:not([inSidebar]):-moz-any(:not([sidebarOpen]),[autohide]) toolbarbutton:not([disabled]):hover,
+	#puzzleBars-lateral-bar[movetoright]:not([inSidebar]):-moz-any(:not([sidebarOpen]),[autohide]) toolbarbutton:not([disabled="true"]):hover,
 	#puzzleBars-lateral-bar[movetoright]:not([inSidebar]):-moz-any(:not([sidebarOpen]),[autohide]) toolbarbutton[open],
-	#puzzleBars-lateral-bar[movetoright]:not([inSidebar]):-moz-any(:not([sidebarOpen]),[autohide]) toolbarbutton > .toolbarbutton-menubutton-button:not([disabled]):hover {
+	#puzzleBars-lateral-bar[movetoright]:not([inSidebar]):-moz-any(:not([sidebarOpen]),[autohide]) toolbarbutton > .toolbarbutton-menubutton-button:not([disabled="true"]):hover {
 		background-position: top, top, bottom !important;
 		background-size: auto, 100% 1px, 100% 1px !important;
 		background-image:	linear-gradient(to left, transparent, rgba(0,0,0,.15)),
 					linear-gradient(to left, transparent, rgba(0,0,0,.15) 30%),
 		        		linear-gradient(to left, transparent, rgba(0,0,0,.15) 30%) !important;
 	}
-	#puzzleBars-lateral-bar[movetoright]:-moz-any([sidebarOpen]:not([autohide]),[inSidebar]) toolbarbutton:not([disabled]):hover,
+	#puzzleBars-lateral-bar[movetoright]:-moz-any([sidebarOpen]:not([autohide]),[inSidebar]) toolbarbutton:not([disabled="true"]):hover,
 	#puzzleBars-lateral-bar[movetoright]:-moz-any([sidebarOpen]:not([autohide]),[inSidebar]) toolbarbutton[open],
-	#puzzleBars-lateral-bar[movetoright]:-moz-any([sidebarOpen]:not([autohide]),[inSidebar]) toolbarbutton > .toolbarbutton-menubutton-button:not([disabled]):hover {
+	#puzzleBars-lateral-bar[movetoright]:-moz-any([sidebarOpen]:not([autohide]),[inSidebar]) toolbarbutton > .toolbarbutton-menubutton-button:not([disabled="true"]):hover {
 		background-position: top, top, bottom, left !important;
 		background-size: auto, 100% 1px, 100% 1px, 1px 100% !important;
 		background-image:	linear-gradient(to left, transparent, rgba(0,0,0,.15)),
