@@ -1,4 +1,4 @@
-Modules.VERSION = '1.1.10';
+Modules.VERSION = '1.1.11';
 
 this.PP_OFFSET_CORNER = 0;
 
@@ -35,7 +35,7 @@ this.cornerMove = function() {
 	
 	// Compatibility with TreeStyleTab
 	var TabsToolbar = $('TabsToolbar');
-	if(TabsToolbar && !TabsToolbar.collapsed
+	if(TabsToolbar && !TabsToolbar.collapsed && TabsToolbar.getAttribute('treestyletab-tabbar-autohide-state') != 'hidden'
 	&& (TabsToolbar.getAttribute('treestyletab-tabbar-position') == 'left' || TabsToolbar.getAttribute('treestyletab-tabbar-position') == 'right')) {
 		var TabsSplitter = document.getAnonymousElementByAttribute($('content'), 'class', 'treestyletab-splitter');
 		cornerStyle.maxWidth -= TabsToolbar.clientWidth;
