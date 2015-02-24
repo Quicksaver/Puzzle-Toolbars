@@ -1,9 +1,17 @@
 {
-	"current":"2.0.5",
+	"current":"2.0.6",
 	"knownissues":[
 		["There are some minor (aesthetic) <a target=\"blank\" href=\"https://github.com/Quicksaver/Puzzle-Toolbars/issues/24\">issues</a> when the Location Bar Puzzle Bar is used together with <a target=\"blank\" href=\"https://addons.mozilla.org/firefox/addon/ui-enhancer/\">Location Bar Enhancer</a>."]
 	],
 	"releases": {
+		"2.0.6":{
+			"date":"February 24, 2015",
+			"notes":[
+				["changed","Release Notes tab URI defaults to about:puzzlebars instead of chrome://..., which is now fully functional in multiprocess firefox (e10s)"],
+				["bugfix","The Release Notes link in the preferences dialog would sometimes fail to work"],
+				["bugfix","Compatibility with <a target=\"blank\" href=\"https://addons.mozilla.org/firefox/addon/tree-style-tab/\">Tree Style Tab</a>'s autohide tabs toolbar feature, corner puzzle toolbar would not be properly positioned"]
+			]
+		},
 		"2.0.5":{
 			"date":"February 11, 2015",
 			"notes":[
