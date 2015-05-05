@@ -5,7 +5,7 @@
 <overlay id="urlbar-overlay" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul" >
 	
 	<commandset id="mainCommandSet">
-		<command id="objName:ToggleURLBarBar" oncommand="objName.toggleBar('objName-urlbar-bar');"/>
+		<command id="objName:ToggleURLBarBar" oncommand="objName.bars.toggle('objName-urlbar-bar');"/>
 	</commandset>
 	
 	<hbox id="urlbar-icons">
@@ -43,7 +43,7 @@
 			waitForSS="chrome://objPathString/skin/puzzleBars.css chrome://objPathString-os/skin/puzzleBars.css chrome://objPathString/skin/urlbar.css chrome://objPathString-os/skin/urlbar.css"
 			context="toolbar-context-menu"
 			position="2">
-			<image onclick="objName.commandPP(event, this.parentNode);" />
+			<image onclick="objName.PPs.command(event, this.parentNode);" />
 		</box>
 	</hbox>
 	

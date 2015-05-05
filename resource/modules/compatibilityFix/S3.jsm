@@ -1,8 +1,8 @@
-Modules.VERSION = '1.0.2';
+Modules.VERSION = '1.0.3';
 
 this.watchS3Bar = function() {
-	if(Prefs.corner_bar && typeof(cornerBar) != 'undefined' && cornerBar && !cornerBar.collapsed && !customizing) {
-		cornerMove();
+	if(Prefs.corner_bar && typeof(corner) != 'undefined' && corner.bar && !corner.bar.collapsed && !customizing) {
+		corner.move();
 	}
 };
 

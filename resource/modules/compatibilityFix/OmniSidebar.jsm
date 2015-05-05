@@ -1,118 +1,111 @@
-Modules.VERSION = '1.0.1';
+Modules.VERSION = '2.0.0';
 
 this.__defineGetter__('omnisidebar', function() { return window.omnisidebar; });
 this.__defineGetter__('leftSidebar', function() { return omnisidebar.leftSidebar; });
 this.__defineGetter__('rightSidebar', function() { return omnisidebar.rightSidebar; });
 
-this.osbLateralSidebarOpenListener = function() {
-	if(typeof(lateralSidebarOpen) != 'undefined') {
-		lateralSidebarOpen();
-	}
-};
-
-this.osbIsSidebarOpen = function(e) {
-	e.stopPropagation();
+this.osb = {
+	id: 'osb@quicksaver',
 	
-	var sidebar = (Prefs.lateral_placement == 'left') ? leftSidebar : rightSidebar;
-	e.detail = !sidebar.closed && !sidebar.above;
-};
-
-// make sure OSB's side switcher triggers the lateral bar
-this.osbSetSwitcher = function(sidebar, other, setup) {
-	if(typeof(lateralBar) == 'undefined' || !lateralBar || !lateralBar._autohide) { return; }
-	
-	// the other (opposite) sidebar should never trigger the lateral bar to show
-	if(other.switcher && lateralBar._autohide.indexOf(other.switcher) > -1) {
-		autoHideNodeListeners(lateralBar, other.switcher, false);
-		lateralBar._autohide.splice(lateralBar._autohide.indexOf(other.switcher), 1);
-	}
-	
-	if(setup && Prefs.lateral_bar && Prefs.lateral_autohide) {
-		if(sidebar.switcher && lateralBar._autohide.indexOf(sidebar.switcher) == -1) {
-			autoHideNodeListeners(lateralBar, sidebar.switcher, true);
-			lateralBar._autohide.push(sidebar.switcher);
-		}
-	}
-	else {
-		if(sidebar.switcher && lateralBar._autohide.indexOf(sidebar.switcher) > -1) {
-			autoHideNodeListeners(lateralBar, sidebar.switcher, false);
-			lateralBar._autohide.splice(lateralBar._autohide.indexOf(sidebar.switcher), 1);
-		}
-	}
-};
-
-this.osbLoadListener = function(e) {
-	if(leftSidebar && leftSidebar.box == e.target) {
-		var sidebar = leftSidebar;
-		var other = rightSidebar;
-		var check = 'left';
-	} else {
-		var sidebar = rightSidebar;
-		var other = leftSidebar;
-		var check = 'right';
-	}
-	
-	if(Prefs.lateral_placement == check) {
-		osbSetSwitcher(sidebar, other, e.detail);
-	}
-};
-
-this.osbLateralAutoHideListener = function(e) {
-	if(typeof(lateralBar) != 'undefined' && e.target == lateralBar) {
-		if(Prefs.lateral_placement == 'left') {
-			var sidebar = leftSidebar;
-			var other = rightSidebar;
-		} else {
-			var sidebar = rightSidebar;
-			var other = leftSidebar;
-		}
-		osbSetSwitcher(sidebar, other, true);
-	}
-};
-
-this.osbLateralPlacementListener = function() {
-	if(typeof(lateralBar) != 'undefined' && lateralBar) {
-		osbLateralAutoHideListener({ target: lateralBar });
-	}
-};
-
-// if both the sidebar and the lateral bar are set to autohide, we physically move the lateral bar inside the sidebar, so they behave as if they're the "same" interactive element
-this.osbMoveLateral = function(e) {
-	if(typeof(lateralBar) == 'undefined' || !lateralBar) { return; }
-	
-	var sidebar = (Prefs.lateral_placement == 'left') ? leftSidebar : rightSidebar;
-	
-	if(!customizing
-	&&	(!e
-		|| (e.type == 'ToggledPuzzleBar' && e.target == lateralBar && !lateralBar.collapsed)
-		|| (e.type == 'LoadedAutoHidePuzzleBar' && e.target == lateralBar)
-		|| (e.type == 'UnloadedAutoHidePuzzleBar' && e.target != lateralBar)
-		|| (e.type != 'UnloadedAutoHidePuzzleBar' && e.type != 'beforecustomization' && e.type != 'sidebarDocked'))
-	&& Prefs.lateral_bar && (Prefs.lateral_autohide || onFullScreen.hideBars) && !lateralBar.collapsed
-	&& sidebar.resizeBox && !sidebar.closed && sidebar.above && sidebar.autoHide) {
-		if(!isAncestor(lateralBar, sidebar.resizeBox)) {
-			sidebar.resizeBox.insertBefore(lateralBar, sidebar.resizeBox.firstChild);
-			sidebar.resizeBox.insertBefore(lateralPP, sidebar.resizeBox.firstChild);
-			removeAttribute(lateralBar, 'flex');
-			setAttribute(lateralBar, 'inSidebar', 'true');
+	handleEvent: function(e) {
+		switch(e.type) {
+			case 'IsSidebarOpen':
+				e.stopPropagation();
+				
+				var sidebar = (Prefs.lateral_placement == 'left') ? leftSidebar : rightSidebar;
+				e.detail = !sidebar.closed && !sidebar.above;
+				break;
 			
-			// if we're toggling the toolbar, we better show the sidebar
-			if(e && e.type == 'ToggledPuzzleBar') {
-				omnisidebar.initialShowBar(sidebar, 1500);
-			}
+			case 'LoadedSidebar':
+				if(leftSidebar && leftSidebar.box == e.target) {
+					this.shouldFix(leftSidebar, rightSidebar, e.detail, 'left');
+				} else {
+					this.shouldFix(rightSidebar, leftSidebar, e.detail, 'right');
+				}
+				break;
+			
+			case 'LoadedAutoHidePuzzleBar':
+				if(typeof(lateral) != 'undefined' && e.target == lateral.bar) {
+					this.shouldFix(leftSidebar, rightSidebar, true, 'left');
+					this.shouldFix(rightSidebar, leftSidebar, true, 'right');
+				}
+				break;
+			
+			case 'endToggleSidebar':
+				if(typeof(lateral) != 'undefined') {
+					lateral.sidebarOpen();
+				}
+				// no break;
+			
+			case 'beforecustomization':
+			case 'aftercustomization':
+			case 'LoadedAutoHidePuzzleBar':
+			case 'UnloadedAutoHidePuzzleBar':
+			case 'sidebarAbove':
+			case 'sidebarDocked':
+			case 'ToggledPuzzleBar':
+				if(typeof(lateral) != 'undefined') {
+					this.move(e);
+				}
+				break;
 		}
-	}
-	else if(!isAncestor(lateralBar, lateralContainer)) {
-		lateralContainer.appendChild(lateralBar);
-		$('browser').appendChild(lateralPP);
-		setAttribute(lateralBar, 'flex', '1');
-		removeAttribute(lateralBar, 'inSidebar');
-		lateralMove();
-	}
-};
-
-this.osbFixer = function(loaded) {
-	if(loaded) {
+	},
+	
+	observe: function(aSubject, aTopic, aData) {
+		if(typeof(lateral) == 'undefined') { return; }
+		
+		switch(aSubject) {
+			case 'twinSidebar':
+			case 'renderabove':
+			case 'renderaboveTwin':
+				lateral.sidebarOpen();
+				break;
+			
+			case 'moveSidebars':
+				lateral.sidebarOpen();
+				if(lateral.bar) {
+					this.shouldFix(leftSidebar, rightSidebar, true, 'left');
+					this.shouldFix(rightSidebar, leftSidebar, true, 'right');
+				}
+				break;
+				
+			case 'lateral_placement':
+				if(lateral.bar) {
+					this.shouldFix(leftSidebar, rightSidebar, true, 'left');
+					this.shouldFix(rightSidebar, leftSidebar, true, 'right');
+				}
+				// no break;
+			
+			case 'lateral_bar':
+			case 'lateral_autohide':
+			case 'autoHide':
+			case 'autoHideTwin':
+				this.move();
+				break;
+		}
+	},
+	
+	onEnabled: function(addon) {
+		if(addon.id == this.id) { this.enable(); }
+	},
+	
+	onDisabled: function(addon) {
+		if(addon.id == this.id) { this.disable(); }
+	},
+	
+	listen: function() {
+		AddonManager.addAddonListener(this);
+		AddonManager.getAddonByID(this.id, (addon) => {
+			if(addon && addon.isActive) { this.enable(); }
+		});
+	},
+	
+	unlisten: function() {
+		AddonManager.removeAddonListener(this);
+		this.disable();
+	},
+	
+	enable: function() {
 		// we need to access and follow some of OSB's preferences
 		Prefs.setDefaults({
 			moveSidebars: false,
@@ -124,76 +117,127 @@ this.osbFixer = function(loaded) {
 		}, 'omnisidebar');
 		
 		// stuff for the appearance fixes
-		Prefs.listen('moveSidebars', osbLateralSidebarOpenListener);
-		Prefs.listen('twinSidebar', osbLateralSidebarOpenListener);
-		Prefs.listen('renderabove', osbLateralSidebarOpenListener);
-		Prefs.listen('renderaboveTwin', osbLateralSidebarOpenListener);
-		Prefs.listen('lateral_placement', osbLateralPlacementListener);
-		Prefs.listen('moveSidebars', osbLateralPlacementListener);
-		Listeners.add(window, 'endToggleSidebar', osbLateralSidebarOpenListener);
-		Listeners.add(window, 'IsSidebarOpen', osbIsSidebarOpen);
-		Listeners.add(window, 'LoadedSidebar', osbLoadListener);
-		Listeners.add(window, 'LoadedAutoHidePuzzleBar', osbLateralAutoHideListener);
+		Prefs.listen('moveSidebars', this);
+		Prefs.listen('twinSidebar', this);
+		Prefs.listen('renderabove', this);
+		Prefs.listen('renderaboveTwin', this);
+		Prefs.listen('lateral_placement', this);
+		Listeners.add(window, 'endToggleSidebar', this);
+		Listeners.add(window, 'IsSidebarOpen', this);
+		Listeners.add(window, 'LoadedSidebar', this);
+		Listeners.add(window, 'LoadedAutoHidePuzzleBar', this);
 		
 		// stuff for moving the lateralBar into the sidebar
-		Prefs.listen('lateral_bar', osbMoveLateral);
-		Prefs.listen('lateral_autohide', osbMoveLateral);
-		Prefs.listen('lateral_placement', osbMoveLateral);
-		Prefs.listen('autoHide', osbMoveLateral);
-		Prefs.listen('autoHideTwin', osbMoveLateral);
-		Listeners.add(window, 'beforecustomization', osbMoveLateral);
-		Listeners.add(window, 'aftercustomization', osbMoveLateral);
-		Listeners.add(window, 'LoadedAutoHidePuzzleBar', osbMoveLateral);
-		Listeners.add(window, 'UnloadedAutoHidePuzzleBar', osbMoveLateral);
-		Listeners.add(window, 'endToggleSidebar', osbMoveLateral);
-		Listeners.add(window, 'sidebarAbove', osbMoveLateral);
-		Listeners.add(window, 'sidebarDocked', osbMoveLateral);
-		Listeners.add(window, 'ToggledPuzzleBar', osbMoveLateral);
-	} else {
-		Prefs.unlisten('moveSidebars', osbLateralSidebarOpenListener);
-		Prefs.unlisten('twinSidebar', osbLateralSidebarOpenListener);
-		Prefs.unlisten('renderabove', osbLateralSidebarOpenListener);
-		Prefs.unlisten('renderaboveTwin', osbLateralSidebarOpenListener);
-		Prefs.unlisten('lateral_placement', osbLateralPlacementListener);
-		Prefs.unlisten('moveSidebars', osbLateralPlacementListener);
-		Listeners.remove(window, 'endToggleSidebar', osbLateralSidebarOpenListener);
-		Listeners.remove(window, 'IsSidebarOpen', osbIsSidebarOpen);
-		Listeners.remove(window, 'LoadedSidebar', osbLoadListener);
-		Listeners.remove(window, 'LoadedAutoHidePuzzleBar', osbLateralAutoHideListener);
-		
-		Prefs.unlisten('lateral_bar', osbMoveLateral);
-		Prefs.unlisten('lateral_autohide', osbMoveLateral);
-		Prefs.unlisten('lateral_placement', osbMoveLateral);
-		Prefs.unlisten('autoHide', osbMoveLateral);
-		Prefs.unlisten('autoHideTwin', osbMoveLateral);
-		Listeners.remove(window, 'beforecustomization', osbMoveLateral);
-		Listeners.remove(window, 'aftercustomization', osbMoveLateral);
-		Listeners.remove(window, 'LoadedAutoHidePuzzleBar', osbMoveLateral);
-		Listeners.remove(window, 'UnloadedAutoHidePuzzleBar', osbMoveLateral);
-		Listeners.remove(window, 'endToggleSidebar', osbMoveLateral);
-		Listeners.remove(window, 'sidebarAbove', osbMoveLateral);
-		Listeners.remove(window, 'sidebarDocked', osbMoveLateral);
-		Listeners.remove(window, 'ToggledPuzzleBar', osbMoveLateral);
-	}
-};
-
-this.osbListener = {
-	onEnabled: function(addon) {
-		if(addon.id == 'osb@quicksaver') { osbFixer(true); }
+		Prefs.listen('lateral_bar', this);
+		Prefs.listen('lateral_autohide', this);
+		Prefs.listen('autoHide', this);
+		Prefs.listen('autoHideTwin', this);
+		Listeners.add(window, 'beforecustomization', this);
+		Listeners.add(window, 'aftercustomization', this);
+		Listeners.add(window, 'LoadedAutoHidePuzzleBar', this);
+		Listeners.add(window, 'UnloadedAutoHidePuzzleBar', this);
+		Listeners.add(window, 'endToggleSidebar', this);
+		Listeners.add(window, 'sidebarAbove', this);
+		Listeners.add(window, 'sidebarDocked', this);
+		Listeners.add(window, 'ToggledPuzzleBar', this);
 	},
-	onDisabled: function(addon) {
-		if(addon.id == 'osb@quicksaver') { osbFixer(false); }
+	
+	disable: function() {
+		Prefs.unlisten('moveSidebars', this);
+		Prefs.unlisten('twinSidebar', this);
+		Prefs.unlisten('renderabove', this);
+		Prefs.unlisten('renderaboveTwin', this);
+		Prefs.unlisten('lateral_placement', this);
+		Listeners.remove(window, 'endToggleSidebar', this);
+		Listeners.remove(window, 'IsSidebarOpen', this);
+		Listeners.remove(window, 'LoadedSidebar', this);
+		Listeners.remove(window, 'LoadedAutoHidePuzzleBar', this);
+		
+		Prefs.unlisten('lateral_bar', this);
+		Prefs.unlisten('lateral_autohide', this);
+		Prefs.unlisten('autoHide', this);
+		Prefs.unlisten('autoHideTwin', this);
+		Listeners.remove(window, 'beforecustomization', this);
+		Listeners.remove(window, 'aftercustomization', this);
+		Listeners.remove(window, 'LoadedAutoHidePuzzleBar', this);
+		Listeners.remove(window, 'UnloadedAutoHidePuzzleBar', this);
+		Listeners.remove(window, 'endToggleSidebar', this);
+		Listeners.remove(window, 'sidebarAbove', this);
+		Listeners.remove(window, 'sidebarDocked', this);
+		Listeners.remove(window, 'ToggledPuzzleBar', this);
+	},
+	
+	shouldFix: function(sidebar, other, setup, check) {
+		if(Prefs.lateral_placement == check) {
+			this.fix(sidebar, other, setup);
+		}
+	},
+	
+	// make sure OSB's side switcher triggers the lateral bar
+	fix: function(sidebar, other, setup) {
+		if(typeof(lateral) == 'undefined' || !lateral.bar || !lateral.bar._autohide) { return; }
+		
+		// the other (opposite) sidebar should never trigger the lateral bar to show
+		if(other.switcher && lateral.bar._autohide.has(other.switcher)) {
+			autoHide.setBarListeners(lateral.bar, other.switcher, false);
+			lateral.bar._autohide.delete(other.switcher);
+		}
+		
+		if(setup && Prefs.lateral_bar && Prefs.lateral_autohide) {
+			if(sidebar.switcher && !lateral.bar._autohide.has(sidebar.switcher)) {
+				autoHide.setBarListeners(lateral.bar, sidebar.switcher, true);
+				lateral.bar._autohide.add(sidebar.switcher);
+			}
+		}
+		else {
+			if(sidebar.switcher && lateral.bar._autohide.has(sidebar.switcher)) {
+				autoHide.setBarListeners(lateral.bar, sidebar.switcher, false);
+				lateral.bar._autohide.delete(sidebar.switcher);
+			}
+		}
+	},
+	
+	// if both the sidebar and the lateral bar are set to autohide, we physically move the lateral bar inside the sidebar,
+	// so they behave as if they're the "same" interactive element
+	move: function(e) {
+		if(!lateral.bar) { return; }
+		
+		var sidebar = (Prefs.lateral_placement == 'left') ? leftSidebar : rightSidebar;
+		
+		if(!customizing
+		&&	(!e
+			|| (e.type == 'ToggledPuzzleBar' && e.target == lateral.bar && !lateral.bar.collapsed)
+			|| (e.type == 'LoadedAutoHidePuzzleBar' && e.target == lateral.bar)
+			|| (e.type == 'UnloadedAutoHidePuzzleBar' && e.target != lateral.bar)
+			|| (e.type != 'UnloadedAutoHidePuzzleBar' && e.type != 'beforecustomization' && e.type != 'sidebarDocked'))
+		&& Prefs.lateral_bar && (Prefs.lateral_autohide || onFullScreen.hideBars) && !lateral.bar.collapsed
+		&& sidebar.resizeBox && !sidebar.closed && sidebar.above && sidebar.autoHide) {
+			if(!isAncestor(lateral.bar, sidebar.resizeBox)) {
+				sidebar.resizeBox.insertBefore(lateral.bar, sidebar.resizeBox.firstChild);
+				sidebar.resizeBox.insertBefore(lateral.PP, sidebar.resizeBox.firstChild);
+				removeAttribute(lateral.bar, 'flex');
+				setAttribute(lateral.bar, 'inSidebar', 'true');
+				
+				// if we're toggling the toolbar, we better show the sidebar
+				if(e.type && e.type == 'ToggledPuzzleBar') {
+					omnisidebar.initialShowBar(sidebar, 1500);
+				}
+			}
+		}
+		else if(!isAncestor(lateral.bar, lateral.container)) {
+			lateral.container.appendChild(lateral.bar);
+			$('browser').appendChild(lateral.PP);
+			setAttribute(lateral.bar, 'flex', '1');
+			removeAttribute(lateral.bar, 'inSidebar');
+			lateral.move();
+		}
 	}
 };
 
 Modules.LOADMODULE = function() {
-	AddonManager.addAddonListener(osbListener);
-	AddonManager.getAddonByID('osb@quicksaver', function(addon) {
-		if(addon && addon.isActive) { osbFixer(true); }
-	});
+	osb.listen();
 };
 
 Modules.UNLOADMODULE = function() {
-	AddonManager.removeAddonListener(osbListener);
-	osbFixer(false);
+	osb.unlisten();
 };

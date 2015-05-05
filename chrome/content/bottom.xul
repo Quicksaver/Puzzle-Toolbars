@@ -5,7 +5,7 @@
 <overlay id="bottom-overlay" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul" >
 
 	<commandset id="mainCommandSet">
-		<command id="objName:ToggleBottomBar" oncommand="objName.toggleBar('objName-bottom-bar');"/>
+		<command id="objName:ToggleBottomBar" oncommand="objName.bars.toggle('objName-bottom-bar');"/>
 	</commandset>
 	
 	<popupset id="mainPopupSet">
@@ -70,7 +70,7 @@
 			<observes element="objName-bottom-bar" attribute="hover" />
 			<observes element="objName-bottom-bar" attribute="movetoright" />
 			
-			<image onclick="objName.commandPP(event, this.parentNode);" />
+			<image onclick="objName.PPs.command(event, this.parentNode);" />
 		</box>
 	</vbox>
 	

@@ -5,7 +5,7 @@
 <overlay id="top-overlay" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul" >
 
 	<commandset id="mainCommandSet">
-		<command id="objName:ToggleTopBar" oncommand="objName.toggleBar('objName-top-bar');"/>
+		<command id="objName:ToggleTopBar" oncommand="objName.bars.toggle('objName-top-bar');"/>
 	</commandset>
 	
 	<popupset id="mainPopupSet">
@@ -67,7 +67,7 @@
 			<observes element="objName-top-bar" attribute="movetoright" />
 			<observes element="objName-top-bar" attribute="slimChrome" />
 			
-			<image onclick="objName.commandPP(event, this.parentNode);" />
+			<image onclick="objName.PPs.command(event, this.parentNode);" />
 		</box>
 	</toolbox>
 	

@@ -697,7 +697,7 @@
 					value="&puzzlebarsabout.tech;"/>
 			<label	id="releaseNotesLink"
 					class="text-link closer"
-					tooltiptext="chrome://objPathString/content/whatsnew.xhtml"
+					tooltiptext="about:objPathString"
 					value="&puzzlebarsabout.notes;"/>
 		</vbox>
 	</prefpane>

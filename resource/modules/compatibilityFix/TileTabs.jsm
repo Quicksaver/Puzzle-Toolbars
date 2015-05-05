@@ -1,10 +1,10 @@
-Modules.VERSION = '1.0.2';
+Modules.VERSION = '1.0.3';
 
 this.TileTabsStatusText = function() {
-	if(!Prefs.corner_bar || typeof(cornerBar) == 'undefined') { return; }
+	if(!Prefs.corner_bar || typeof(corner) == 'undefined') { return; }
 	
 	var field = gBrowser.getStatusPanel();
-	toggleAttribute(cornerBar, 'statusHide', field.label);
+	toggleAttribute(corner.bar, 'statusHide', field.label);
 };
 
 Modules.LOADMODULE = function() {

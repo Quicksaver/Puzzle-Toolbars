@@ -3,11 +3,11 @@
 	
 	/* for fullscreen stuff mostly */
 	
-	window:-moz-any([PrintPreview="true"],[puzzleBars-fullscreen]) :-moz-any(.puzzleBars-bar,.PuzzlePiece,.puzzleBars-fullscreenCollapse) {
+	window:-moz-any([PrintPreview="true"],[inDOMFullscreen]) :-moz-any(.puzzleBars-bar,.PuzzlePiece,.puzzleBars-fullscreenCollapse) {
 		visibility: collapse;
 	}
 	
-	window:not([puzzleBars-fullscreen]) .puzzleBars-bar[moz-collapsed="true"]:not([collapsed="true"]) {
+	window:not([inDOMFullscreen]) .puzzleBars-bar[moz-collapsed="true"]:not([collapsed="true"]) {
 		visibility: visible !important;
 	}
 	
