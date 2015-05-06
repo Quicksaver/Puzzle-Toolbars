@@ -1,4 +1,4 @@
-Modules.VERSION = '3.0.0';
+Modules.VERSION = '3.0.1';
 
 this.__defineGetter__('PrintPreviewListener', function() { return window.PrintPreviewListener; });
 this.__defineGetter__('gNavBar', function() { return $('nav-bar'); });
@@ -77,7 +77,7 @@ this.onFullScreen = {
 this.bars = {
 	_bars: new Map(),
 	[Symbol.iterator]: function* () {
-		for(let bar of this._bars) {
+		for(let bar of this._bars.values()) {
 			yield bar;
 		}
 	},
@@ -115,6 +115,8 @@ this.bars = {
 	},
 	
 	init: function(bar, pp) {
+		if(this._bars.has(bar.id)) { return; }
+		
 		this._bars.set(bar.id, bar);
 		bar._pp = pp;
 		pp._bar = bar;
@@ -152,6 +154,8 @@ this.bars = {
 	},
 	
 	deinit: function(bar, pp) {
+		if(!this._bars.has(bar.id)) { return; }
+		
 		// Prevent things from jumping around on startup
 		bar.hidden = true;
 		delete bar._loaded;
