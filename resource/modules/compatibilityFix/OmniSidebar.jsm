@@ -1,4 +1,4 @@
-Modules.VERSION = '2.0.0';
+Modules.VERSION = '2.0.1';
 
 this.__defineGetter__('omnisidebar', function() { return window.omnisidebar; });
 this.__defineGetter__('leftSidebar', function() { return omnisidebar.leftSidebar; });
@@ -183,7 +183,7 @@ this.osb = {
 			lateral.bar._autohide.delete(other.switcher);
 		}
 		
-		if(setup && Prefs.lateral_bar && Prefs.lateral_autohide) {
+		if(setup && Prefs.lateral_bar && (Prefs.lateral_autohide || onFullScreen.hideBars)) {
 			if(sidebar.switcher && !lateral.bar._autohide.has(sidebar.switcher)) {
 				autoHide.setBarListeners(lateral.bar, sidebar.switcher, true);
 				lateral.bar._autohide.add(sidebar.switcher);
