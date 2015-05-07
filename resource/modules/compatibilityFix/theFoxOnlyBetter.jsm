@@ -1,4 +1,4 @@
-Modules.VERSION = '2.0.0';
+Modules.VERSION = '2.0.1';
 
 this.__defineGetter__('theFoxOnlyBetter', function() { return window.theFoxOnlyBetter; });
 this.__defineGetter__('gNavToolbox', function() { return window.gNavToolbox; });
@@ -14,7 +14,7 @@ this.tFOB = {
 				break;
 			
 			case 'LoadedPuzzleBar':
-				this.moveBar();
+				this.moveBar(e);
 				break;
 			
 			case 'ToggledPuzzleBar':
@@ -99,7 +99,7 @@ this.tFOB = {
 	},
 	
 	moveBar: function(e) {
-		if(!Prefs.tFOB || typeof(top) == 'undefined' || (e.target && e.target != top.bar)) { return; }
+		if(!Prefs.tFOB || typeof(top) == 'undefined' || (e && e.target && e.target != top.bar)) { return; }
 		
 		this.enable();
 		

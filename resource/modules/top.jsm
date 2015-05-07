@@ -1,4 +1,4 @@
-Modules.VERSION = '2.0.0';
+Modules.VERSION = '2.0.1';
 
 this.top = {
 	get bar () { return $(objName+'-top-bar'); },
@@ -63,7 +63,7 @@ this.top = {
 		if(!this.bar) { return; }
 		
 		var computed = getComputedStyle(this.bar);
-		var rect = topBar.getBoundingClientRect();
+		var rect = top.bar.getBoundingClientRect();
 		this.style = {
 			// Let's account for the transparent top border as well if it exists
 			top: rect.top -parseInt(computed.borderTopWidth),
