@@ -1,9 +1,18 @@
 {
-	"current":"2.0.6",
+	"current":"2.0.7",
 	"knownissues":[
 		["There are some minor (aesthetic) <a target=\"blank\" href=\"https://github.com/Quicksaver/Puzzle-Toolbars/issues/24\">issues</a> when the Location Bar Puzzle Bar is used together with <a target=\"blank\" href=\"https://addons.mozilla.org/firefox/addon/ui-enhancer/\">Location Bar Enhancer</a>."]
 	],
 	"releases": {
+		"2.0.7":{
+			"date":"May 7, 2015",
+			"notes":[
+				["removed","Compatibility with Firefox 35 and below"],
+				["bugfix","Autohiding the lateral puzzle bar in fullscreen could not work with OmniSidebar installed"],
+				["bugfix","Some toolbar icons were distorted in the location bar puzzle bar in the latest Nightly (Firefox 40)"],
+				["updated","Reorganized code and did some cleanup"]
+			]
+		},
 		"2.0.6":{
 			"date":"February 24, 2015",
 			"notes":[
