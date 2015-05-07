@@ -1,4 +1,4 @@
-Modules.VERSION = '2.0.0';
+Modules.VERSION = '2.0.1';
 
 this.StatusBar = {
 	// don't forget that add-ons that use the status-bar seem to assume it is always in the DOM tree!
@@ -136,6 +136,16 @@ this.StatusBar = {
 		
 		try { CustomizableUI.addWidgetToArea('status-bar', 'addon-bar'); }
 		catch(ex) {}
+	},
+	
+	onLoad: function(aWindow) {
+		prepareObject(aWindow);
+		this.prepare(aWindow);
+	},
+	
+	onUnload: function(aWindow) {
+		this.restore(aWindow);
+		removeObject(aWindow);
 	}
 };
 
@@ -144,16 +154,7 @@ Modules.LOADMODULE = function() {
 	
 	CustomizableUI.addListener(StatusBar);
 	
-	Overlays.overlayURI('chrome://browser/content/browser.xul', 'statusBar', {
-		onLoad: function(aWindow) {
-			prepareObject(aWindow);
-			StatusBar.prepare(aWindow);
-		},
-		onUnload: function(aWindow) {
-			StatusBar.restore(aWindow);
-			removeObject(aWindow);
-		}
-	});
+	Overlays.overlayURI('chrome://browser/content/browser.xul', 'statusBar', StatusBar);
 	
 	Overlays.overlayURI('chrome://'+objPathString+'/content/statusBar.xul', objName, {
 		onLoad: function(aWindow) {
