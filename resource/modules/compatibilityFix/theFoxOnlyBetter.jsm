@@ -1,4 +1,4 @@
-Modules.VERSION = '2.0.1';
+Modules.VERSION = '2.0.2';
 
 this.__defineGetter__('theFoxOnlyBetter', function() { return window.theFoxOnlyBetter; });
 this.__defineGetter__('gNavToolbox', function() { return window.gNavToolbox; });
@@ -19,7 +19,7 @@ this.tFOB = {
 			
 			case 'ToggledPuzzleBar':
 				if(Prefs.tFOB && Prefs.top_bar && typeof(top) != 'undefined' && e.target == top.bar) {
-					toggleAttribute(theFoxOnlyBetter.slimChromeContainer, 'topPuzzleBar', !Prefs.top_slimChrome && !top.bar.collapsed);
+					toggleAttribute(theFoxOnlyBetter.slimChrome.container, 'topPuzzleBar', !Prefs.top_slimChrome && !top.bar.collapsed);
 				}
 				break;
 			
@@ -73,24 +73,25 @@ this.tFOB = {
 			// for Slim Chrome to not move our toolbar if it shouldn't right from the start
 			if(theFoxOnlyBetter.slimChromeExceptions) {
 				if(!UNLOADED && !Prefs.top_slimChrome) {
-					if(theFoxOnlyBetter.slimChromeExceptions.indexOf(objName+'-top-bar') == -1) {
-						theFoxOnlyBetter.slimChromeExceptions.push(objName+'-top-bar');
+					if(!theFoxOnlyBetter.slimChromeExceptions.has(objName+'-top-bar')) {
+						theFoxOnlyBetter.slimChromeExceptions.add(objName+'-top-bar');
 					}
 				} else {
-					var i = theFoxOnlyBetter.slimChromeExceptions.indexOf(objName+'-top-bar');
-					if(i > -1) {
-						theFoxOnlyBetter.slimChromeExceptions.splice(i, 1);
+					if(theFoxOnlyBetter.slimChromeExceptions.has(objName+'-top-bar')) {
+						theFoxOnlyBetter.slimChromeExceptions.delete(objName+'-top-bar');
 					}
 				}
 			}
 			
-			// so our UI is shown as it should depending on where the toolbar is
-			if(Prefs.top_bar && typeof(top) != 'undefined' && top.bar) {
-				var toggle = !UNLOADED && Prefs.top_slimChrome && isAncestor(top.bar, theFoxOnlyBetter.slimChromeContainer);
-				toggleAttribute(top.bar, 'slimChrome', toggle);
-				toggleAttribute(theFoxOnlyBetter.slimChromeContainer, 'topPuzzleBar', !toggle && !top.bar.collapsed);
-			} else {
-				removeAttribute(theFoxOnlyBetter.slimChromeContainer, 'topPuzzleBar');
+			if(theFoxOnlyBetter.slimChrome) {
+				// so our UI is shown as it should depending on where the toolbar is
+				if(Prefs.top_bar && typeof(top) != 'undefined' && top.bar) {
+					var toggle = !UNLOADED && Prefs.top_slimChrome && isAncestor(top.bar, theFoxOnlyBetter.slimChrome.container);
+					toggleAttribute(top.bar, 'slimChrome', toggle);
+					toggleAttribute(theFoxOnlyBetter.slimChrome.container, 'topPuzzleBar', !toggle && !top.bar.collapsed);
+				} else {
+					removeAttribute(theFoxOnlyBetter.slimChrome.container, 'topPuzzleBar');
+				}
 			}
 		}
 		else if(typeof(top) != 'undefined') {
@@ -104,23 +105,23 @@ this.tFOB = {
 		this.enable();
 		
 		// in this case we need to move the toolbars ourselves if we need to, as we can't force Slim Chrome to move again
-		if(top.bar && theFoxOnlyBetter && theFoxOnlyBetter.slimChromeContainer) {
-			if(Prefs.top_slimChrome && !isAncestor(top.bar, theFoxOnlyBetter.slimChromeContainer)) {
-				theFoxOnlyBetter.slimChromeToolbars.appendChild(top.bar);
+		if(top.bar && theFoxOnlyBetter && theFoxOnlyBetter.slimChrome) {
+			if(Prefs.top_slimChrome && !isAncestor(top.bar, theFoxOnlyBetter.slimChrome.container)) {
+				theFoxOnlyBetter.slimChrome.toolbars.appendChild(top.bar);
 				if(gNavToolbox.externalToolbars.indexOf(top.bar) == -1) {
 					gNavToolbox.externalToolbars.push(top.bar);
 				}
-				theFoxOnlyBetter.slimChromeInitOverflowable(top.bar);
+				theFoxOnlyBetter.slimChrome.initOverflowable(top.bar);
 				setAttribute(top.bar, 'slimChrome', 'true');
-				removeAttribute(theFoxOnlyBetter.slimChromeContainer, 'topPuzzleBar');
+				removeAttribute(theFoxOnlyBetter.slimChrome.container, 'topPuzzleBar');
 			}
-			else if(!Prefs.top_slimChrome && isAncestor(top.bar, theFoxOnlyBetter.slimChromeContainer)) {
+			else if(!Prefs.top_slimChrome && isAncestor(top.bar, theFoxOnlyBetter.slimChrome.container)) {
 				var i = gNavToolbox.externalToolbars.indexOf(top.bar);
 				if(i != -1) {
 					gNavToolbox.externalToolbars.splice(i, 1);
 				}
 				
-				theFoxOnlyBetter.slimChromeDeinitOverflowable(top.bar);
+				theFoxOnlyBetter.slimChrome.deinitOverflowable(top.bar);
 				
 				if(window.closed || window.willClose) {
 					Overlays.safeMoveToolbar(top.bar, gNavToolbox);
@@ -128,7 +129,7 @@ this.tFOB = {
 					gNavToolbox.appendChild(top.bar);
 				}
 				removeAttribute(top.bar, 'slimChrome');
-				toggleAttribute(theFoxOnlyBetter.slimChromeContainer, 'topPuzzleBar', !top.bar.collapsed);
+				toggleAttribute(theFoxOnlyBetter.slimChrome.container, 'topPuzzleBar', !top.bar.collapsed);
 			}
 		}
 	}
