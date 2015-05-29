@@ -1,0 +1,67 @@
+<!ENTITY Optwindow.style "width: 32em;">
+
+<!ENTITY Options.title "Puzzle Toolbars">
+<!ENTITY bottom.title "Bottom">
+<!ENTITY corner.title "Corner">
+<!ENTITY urlbar.title "Location Bar">
+<!ENTITY lateral.title "Lateral">
+<!ENTITY top.title "Top">
+<!ENTITY about.title "About">
+
+<!ENTITY GroupPosition.label "Position">
+<!ENTITY GroupBehavior.label "Behavior">
+
+<!ENTITY OptBottom.label "Enable Bottom Toolbar">
+<!ENTITY OptBottom.tooltip "Adds a customizable toolbar to the bottom of the browser window, much like the old add-on bar.">
+<!ENTITY OptCorner.label "Enable Corner Toolbar">
+<!ENTITY OptCorner.tooltip "Adds a narrow toolbar to the bottom corner of the browser window, useful to maximize your browsing screen space.">
+<!ENTITY OptUrlbar.label "Enable Location Bar Toolbar">
+<!ENTITY OptUrlbar.tooltip "Adds a small and tidy toolbar inside the location bar, great if you usually have a lot of free space there and want to take advantage of it.">
+<!ENTITY OptLateral.label "Enable Lateral Toolbar">
+<!ENTITY OptLateral.tooltip "Adds a vertical toolbar at the margin of the browser window, a perfect companion for the heavy user of the sidebar.">
+<!ENTITY OptTop.label "Enable Top Toolbar">
+<!ENTITY OptTop.tooltip "Adds a customizable toolbar to the top area of the browser window, below the navigation bar.">
+<!ENTITY OptTopSlimChrome.label "Include in Slim Chrome's hidden toolbars">
+<!ENTITY OptTopSlimChrome.tooltip "Recommended! For use my other add-on The Fox, Only Better; the toolbar will be hidden with the rest of the top toolbars when Slim Chrome is enabled. Please note that in this case the puzzle piece button cannot be used.">
+
+<!ENTITY OptShowPiece.label "Show Puzzle Piece">
+<!ENTITY OptShowPiece.tooltip "The puzzle piece is a button which you can use to quickly open or close its toolbar.">
+<!ENTITY OptPlacement.left "Place on the left">
+<!ENTITY OptPlacement.right "Place on the right">
+<!ENTITY OptPlacement.tooltip "Toggle in which side of your browser window to place it.">
+<!ENTITY OptAutoHide.label "Auto-Hide">
+<!ENTITY OptAutoHide.tooltip "Hide the toolbar automatically when it's not needed.">
+<!ENTITY OptHotspot.label "Active mouse area">
+<!ENTITY OptHotspot.tooltip "Defines how big will be the area reactive to mouse movement to show the toolbar.">
+<!ENTITY OptHotspot.low "Smaller">
+<!ENTITY OptHotspot.high "Bigger">
+<!ENTITY OptWhenFocused.label "Hide only when the location bar has focus">
+<!ENTITY OptWhenFocused.tooltip "With this enabled, the toolbar will only hide automatically when the cursor is in the location bar.">
+<!ENTITY OptExtend.label "Extend over all the available space">
+<!ENTITY OptExtend.tooltip "This option shows the toolbar over the maximum available space in the browser window, even if it doesn't have enough items or widgets to cover it; especially useful if you want to use flexible spaces in it.">
+<!ENTITY OptMoveBottom.label "Place at the bottom">
+<!ENTITY OptMoveBottom.tooltip "Show the puzzle piece at the bottom of the toolbar rather than at the top.">
+
+<!ENTITY OptKeyboardShortcut.captionA "Keyboard shortcut for enabling or disabling">
+<!ENTITY OptKeyboardShortcut.control "Control">
+<!ENTITY OptKeyboardShortcut.shift "Shift">
+<!ENTITY OptKeyboardShortcut.alt "Alt">
+<!ENTITY OptKeyboardShortcut.command "Command">
+<!ENTITY OptKeyboardShortcut.option "Option">
+<!ENTITY OptKeyboardShortcut.none "None">
+<!ENTITY OptKeyboardShortcut.spacebar "Spacebar">
+<!ENTITY OptKeyboardShortcut.pageup "Page Up">
+<!ENTITY OptKeyboardShortcut.pagedown "Page Down">
+<!ENTITY OptKeyboardShortcut.end "End">
+<!ENTITY OptKeyboardShortcut.home "Home">
+<!ENTITY OptKeyboardShortcut.left "Left">
+<!ENTITY OptKeyboardShortcut.up "Up">
+<!ENTITY OptKeyboardShortcut.right "Right">
+<!ENTITY OptKeyboardShortcut.down "Down">
+
+<!ENTITY puzzlebarsabout.name "Puzzle Toolbars">
+<!ENTITY puzzlebarsabout.by "by Quicksaver">
+<!ENTITY puzzlebarsabout.desc "All information about the add-on and its developer can be found in its Mozilla Add-ons Homepage. If you liked the add-on, please consider leaving there a nice review or a small contribution to help support its continued development. Bug reports and suggestions can be made in the technical support webpage.">
+<!ENTITY puzzlebarsabout.home "Add-on Homepage">
+<!ENTITY puzzlebarsabout.tech "Technical Support">
+<!ENTITY puzzlebarsabout.notes "Release Notes">

@@ -1,0 +1,32 @@
+<!ENTITY whatsNew.title "Puzzle Toolbars - 發行註記">
+<!ENTITY whatsNew.name "Puzzle Toolbars">
+
+<!ENTITY whatsNew.version "版本 {v}">
+<!ENTITY whatsNew.versionDivider " - ">
+<!ENTITY whatsNew.uptodate "已為最新，恭喜您！">
+<!ENTITY whatsNew.needsupdate "有可用的更新！">
+
+<!ENTITY whatsNew.description "在下面檢視這個版本的 &quot;發行註記&quot; 及 &quot;已知問題&quot; 。如果您發現任何問題，或是您對未來的版本有任何建議，請告訴我。">
+<!ENTITY whatsNew.message "更多關於本附加元件的資訊可在它的 Mozilla 附加元件首頁找到。如果您對此附加元件很滿意，請考慮在那裡留下一份不錯的評論，或是作出一點小小的貢獻以協助它的永續發展。每一點小小的鼓勵都是很激勵人心的！">
+
+<!ENTITY whatsNew.allVersions "顯示先前所有版本的發行註記">
+
+<!ENTITY whatsNew.options "附加元件選項">
+<!ENTITY whatsNew.notifyOnUpdates "在下次更新時顯示此分頁">
+
+<!ENTITY whatsNew.information "更多資訊">
+<!ENTITY whatsNew.home "附加元件首頁">
+<!ENTITY whatsNew.fullchangelog "完整變更記錄">
+
+<!ENTITY whatsNew.problems "遇到問題了？">
+<!ENTITY whatsNew.tech "在支援頁面中打開一個 issue，並描述您的問題">
+<!ENTITY whatsNew.email "或是寄給我一封關於該問題的電子郵件">
+
+<!ENTITY whatsNew.author "作者的一點話">
+<!ENTITY whatsNew.trymore "試試看我的其他附加元件以取得更好的 Firefox 體驗！">
+<!ENTITY whatsNew.profile "在我的個人檔案中找到它們">
+
+<!ENTITY whatsNew.share "分享">
+<!ENTITY whatsNew.friends "不要獨享一個絕佳的瀏覽器。與您的朋友分享它們！">
+<!ENTITY whatsNew.moreshare "其他服務...">
+<!ENTITY whatsNew.tryit "快來試試這個附加元件，讓您隨心所欲的擺放各項 Firefox 的功能 - Puzzle Toolbars！">
