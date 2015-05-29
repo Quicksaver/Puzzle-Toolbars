@@ -1,39 +1,39 @@
-<!ENTITY OptionsMenu.label "Puzzle Toolbars Options">
+<!ENTITY OptionsMenu.label "Puzzle Toolbars 選項">
 
-<!ENTITY bottom.name "Bottom Puzzle Bar">
+<!ENTITY bottom.name "底部 Puzzle Bar">
 <!ENTITY bottom.accesskey "z">
-<!ENTITY bottom.menuAdd "Add to Bottom Puzzle Bar">
-<!ENTITY bottom.menuMove "Move to Bottom Puzzle Bar">
-<!ENTITY bottom.menuRemove "Remove from Bottom Puzzle Bar">
+<!ENTITY bottom.menuAdd "加入到底部 Puzzle Bar">
+<!ENTITY bottom.menuMove "移動到底部 Puzzle Bar">
+<!ENTITY bottom.menuRemove "從底部的 Puzzle Bar 移除">
 
-<!ENTITY corner.name "Corner Puzzle Bar">
+<!ENTITY corner.name "角落 Puzzle Bar">
 <!ENTITY corner.accesskey "r">
-<!ENTITY corner.menuAdd "Add to Corner Puzzle Bar">
-<!ENTITY corner.menuMove "Move to Corner Puzzle Bar">
-<!ENTITY corner.menuRemove "Remove from Corner Puzzle Bar">
+<!ENTITY corner.menuAdd "加入到角落 Puzzle Bar">
+<!ENTITY corner.menuMove "移動到角落 Puzzle Bar">
+<!ENTITY corner.menuRemove "從角落的 Puzzle Bar 移除">
 
-<!ENTITY urlbar.name "Location Bar Puzzle Bar">
+<!ENTITY urlbar.name "網址列 Puzzle Bar">
 <!ENTITY urlbar.accesskey "i">
-<!ENTITY urlbar.menuAdd "Add to Location Bar Puzzle Bar">
-<!ENTITY urlbar.menuMove "Move to Location Bar Puzzle Bar">
-<!ENTITY urlbar.menuRemove "Remove from Location Bar Puzzle Bar">
+<!ENTITY urlbar.menuAdd "加入到 網址列 Puzzle Bar">
+<!ENTITY urlbar.menuMove "移動到 網址列 Puzzle Bar">
+<!ENTITY urlbar.menuRemove "從網址列的 Puzzle Bar 移除">
 
-<!ENTITY lateral.name "Lateral Puzzle Bar">
+<!ENTITY lateral.name "橫向 Puzzle Bar">
 <!ENTITY lateral.accesskey "L">
-<!ENTITY lateral.menuAdd "Add to Lateral Puzzle Bar">
-<!ENTITY lateral.menuMove "Move to Lateral Puzzle Bar">
-<!ENTITY lateral.menuRemove "Remove from Lateral Puzzle Bar">
+<!ENTITY lateral.menuAdd "加入到橫向 Puzzle Bar">
+<!ENTITY lateral.menuMove "移動到橫向 Puzzle Bar">
+<!ENTITY lateral.menuRemove "從橫向的 Puzzle Bar 移除">
 
-<!ENTITY top.name "Top Puzzle Bar">
+<!ENTITY top.name "頂部 Puzzle Bar">
 <!ENTITY top.accesskey "p">
-<!ENTITY top.menuAdd "Add to Top Puzzle Bar">
-<!ENTITY top.menuMove "Move to Top Puzzle Bar">
-<!ENTITY top.menuRemove "Remove from Top Puzzle Bar">
+<!ENTITY top.menuAdd "加入到頂部 Puzzle Bar">
+<!ENTITY top.menuMove "移動到頂部 Puzzle Bar">
+<!ENTITY top.menuRemove "從頂部的 Puzzle Bar 移除">
 
-<!ENTITY allbars.menuMain "Move to Toolbar">
-<!ENTITY allbars.overflow "Show more...">
-<!ENTITY statusBar.label "Status Bar">
+<!ENTITY allbars.menuMain "移動到工具列">
+<!ENTITY allbars.overflow "顯示更多...">
+<!ENTITY statusBar.label "狀態列">
 
-<!ENTITY specialWidget.separator "Separator">
-<!ENTITY specialWidget.spring "Flexible Space">
-<!ENTITY specialWidget.spacer "Space">
+<!ENTITY specialWidget.separator "分隔線">
+<!ENTITY specialWidget.spring "彈性空間">
+<!ENTITY specialWidget.spacer "空白">
