@@ -1,0 +1,67 @@
+<!ENTITY Optwindow.style "width: 32em;">
+
+<!ENTITY Options.title "Puzzle Toolbars">
+<!ENTITY bottom.title "底部">
+<!ENTITY corner.title "角落">
+<!ENTITY urlbar.title "網址列">
+<!ENTITY lateral.title "橫向">
+<!ENTITY top.title "頂部">
+<!ENTITY about.title "關於">
+
+<!ENTITY GroupPosition.label "位置">
+<!ENTITY GroupBehavior.label "行為">
+
+<!ENTITY OptBottom.label "啟用底部工具列">
+<!ENTITY OptBottom.tooltip "加入一個可自訂的工具列到瀏覽器視窗的底部，較像是舊的附加元件列。">
+<!ENTITY OptCorner.label "啟用角落工具列">
+<!ENTITY OptCorner.tooltip "加入一個窄的工具列到瀏覽器視窗底部的角落，有助於最大化您的瀏覽空間。">
+<!ENTITY OptUrlbar.label "啟用網址列工具列">
+<!ENTITY OptUrlbar.tooltip "加入一個小而整潔的工具列到網址列中，如果您有較大的可用空間，且經常用到它的話會很棒。">
+<!ENTITY OptLateral.label "啟用橫向工具列">
+<!ENTITY OptLateral.tooltip "加入一個縱向的工具列到您瀏覽器視窗的側邊，側邊欄重度使用者的好選擇。">
+<!ENTITY OptTop.label "啟用頂部工具列">
+<!ENTITY OptTop.tooltip "加入一個可自訂的工具列到瀏覽器視窗的頂部，在導覽工具列之下。">
+<!ENTITY OptTopSlimChrome.label "包含在 Slim Chrome 的隱藏工具列之中">
+<!ENTITY OptTopSlimChrome.tooltip "推薦！對於使用我另一個附加元件，The Fox, Only Better，的使用者，這個工具列會在 Slim Chrome 被啟用時隱藏在頂部工具列的剩餘部份。請注意在這種情況下無法使用 puzzle piece 按鈕。">
+
+<!ENTITY OptShowPiece.label "顯示 Puzzle Piece">
+<!ENTITY OptShowPiece.tooltip "Puzzle piece 是一個讓您可以用來快速開啟或關閉其工具列的按鈕。">
+<!ENTITY OptPlacement.left "置於左邊">
+<!ENTITY OptPlacement.right "置於右邊">
+<!ENTITY OptPlacement.tooltip "切換您想將其置於您瀏覽器視窗的哪一側。">
+<!ENTITY OptAutoHide.label "自動隱藏">
+<!ENTITY OptAutoHide.tooltip "當您不需要時自動隱藏工具列。">
+<!ENTITY OptHotspot.label "滑鼠啟動區域">
+<!ENTITY OptHotspot.tooltip "定義對滑鼠有反應的區域，在此範圍內會啟動工具列。">
+<!ENTITY OptHotspot.low "較小">
+<!ENTITY OptHotspot.high "較大">
+<!ENTITY OptWhenFocused.label "只在網址列取得焦點時隱藏">
+<!ENTITY OptWhenFocused.tooltip "若啟用此選項，工具列將只會在游標在網址列內時自動隱藏。">
+<!ENTITY OptExtend.label "延伸到所有可用的空間">
+<!ENTITY OptExtend.tooltip "這個選項會將工具列顯示到瀏覽器視窗中最大的可用空間，即便它沒有足夠的項目或小工具在其中，若您在其中使用彈性空間時很有用。">
+<!ENTITY OptMoveBottom.label "置於底部">
+<!ENTITY OptMoveBottom.tooltip "在工具列底部而非頂部顯示 Puzzle piece。">
+
+<!ENTITY OptKeyboardShortcut.captionA "啟用或停用鍵盤快捷鍵設定">
+<!ENTITY OptKeyboardShortcut.control "Control">
+<!ENTITY OptKeyboardShortcut.shift "Shift">
+<!ENTITY OptKeyboardShortcut.alt "Alt">
+<!ENTITY OptKeyboardShortcut.command "指令">
+<!ENTITY OptKeyboardShortcut.option "選項">
+<!ENTITY OptKeyboardShortcut.none "無">
+<!ENTITY OptKeyboardShortcut.spacebar "空白鍵">
+<!ENTITY OptKeyboardShortcut.pageup "Page Up">
+<!ENTITY OptKeyboardShortcut.pagedown "Page Down">
+<!ENTITY OptKeyboardShortcut.end "End">
+<!ENTITY OptKeyboardShortcut.home "Home">
+<!ENTITY OptKeyboardShortcut.left "左">
+<!ENTITY OptKeyboardShortcut.up "上">
+<!ENTITY OptKeyboardShortcut.right "右">
+<!ENTITY OptKeyboardShortcut.down "下">
+
+<!ENTITY puzzlebarsabout.name "Puzzle Toolbars">
+<!ENTITY puzzlebarsabout.by "作者 Quicksaver">
+<!ENTITY puzzlebarsabout.desc "更多關於本附加元件的資訊可在它的 Mozilla 附加元件首頁找到。如果您對此附加元件很滿意，請考慮在那裡留下一份不錯的評論，或是作出一點小小的貢獻以協助它的永續發展。臭蟲回報與建議請到其技術支援網頁中提出。">
+<!ENTITY puzzlebarsabout.home "附加元件首頁">
+<!ENTITY puzzlebarsabout.tech "技術支援">
+<!ENTITY puzzlebarsabout.notes "發行註記">
