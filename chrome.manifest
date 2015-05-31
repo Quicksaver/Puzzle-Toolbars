@@ -1,5 +1,5 @@
 content   puzzlebars                    chrome/content/
-resource  puzzlebars                    chrome/content/
+resource  puzzlebars                    resource/
 
 locale    puzzlebars-en   en-US         chrome/locale/en-US/
 locale    puzzlebars      en-US         chrome/locale/en-US/
