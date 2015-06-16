@@ -1,7 +1,20 @@
-var defaultsVersion = '1.5.12';
-var objName = 'puzzleBars';
-var objPathString = 'puzzlebars';
-var prefList = {
+// VERSION = '1.3';
+
+objName = 'puzzleBars';
+objPathString = 'puzzlebars';
+addonUUID = '9c522ae0-5241-11e4-916c-0800200c9a66';
+
+addonUris = {
+	homepage: 'https://addons.mozilla.org/firefox/addon/puzzle-toolbars/',
+	support: 'https://github.com/Quicksaver/Puzzle-Toolbars/issues',
+	fullchangelog: 'https://github.com/Quicksaver/Puzzle-Toolbars/commits/master',
+	email: 'mailto:quicksaver@gmail.com',
+	profile: 'https://addons.mozilla.org/firefox/user/quicksaver/',
+	api: 'http://fasezero.com/addons/api/puzzlebars',
+	development: 'http://fasezero.com/addons/'
+};
+
+prefList = {
 	bottom_bar: true,
 	bottom_pp: true,
 	bottom_placement: 'left',
@@ -55,23 +68,17 @@ var prefList = {
 	// for migrateLegacy, probably safe to remove in the future, see note in that module
 	migratedLegacy: false,
 	
-	// for the what's new tab, it's better they're here so they're automatically carried over to content
-	lastVersionNotify: '0',
-	notifyOnUpdates: true,
-	
 	// hidden preference to not show the addon bar autohiding on startup
 	noInitialShow: false
 };
 
-function stopAddon(window) {
-	removeObject(window);
-}
-
-function startPreferences(window) {
-	replaceObjStrings(window.document);
-	preparePreferences(window);
-	window[objName].Modules.load('options');
-}
+paneList = [
+	[ 'paneBottom' ],
+	[ 'paneCorner' ],
+	[ 'paneLateral' ],
+	[ 'paneTop' ],
+	[ 'paneURLBar', true ],
+];
 
 function onStartup() {
 	Modules.load('compatibilityFix/sandboxFixes');
@@ -80,12 +87,6 @@ function onStartup() {
 	Modules.load('statusBar');
 	
 	// the add-on initialization is done inside the statusBar module so it can correctly handle the status-bar in all windows
-	
-	// Apply the add-on to every preferences window opened and to be opened
-	Windows.callOnAll(startPreferences, null, "chrome://"+objPathString+"/content/options.xul");
-	Windows.register(startPreferences, 'domwindowopened', null, "chrome://"+objPathString+"/content/options.xul");
-	Browsers.callOnAll(startPreferences, "chrome://"+objPathString+"/content/options.xul");
-	Browsers.register(startPreferences, 'pageshow', "chrome://"+objPathString+"/content/options.xul");
 }
 
 function onShutdown() {

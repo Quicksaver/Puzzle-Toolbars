@@ -1,12 +1,8 @@
-<!ENTITY Optwindow.style "width: 32em;">
-
-<!ENTITY Options.title "Puzzle Toolbars">
 <!ENTITY bottom.title "Bottom">
 <!ENTITY corner.title "Corner">
 <!ENTITY urlbar.title "Location Bar">
 <!ENTITY lateral.title "Lateral">
 <!ENTITY top.title "Top">
-<!ENTITY about.title "About">
 
 <!ENTITY GroupPosition.label "Position">
 <!ENTITY GroupBehavior.label "Behavior">
@@ -43,25 +39,3 @@
 <!ENTITY OptMoveBottom.tooltip "Show the puzzle piece at the bottom of the toolbar rather than at the top.">
 
 <!ENTITY OptKeyboardShortcut.captionA "Keyboard shortcut for enabling or disabling">
-<!ENTITY OptKeyboardShortcut.control "Control">
-<!ENTITY OptKeyboardShortcut.shift "Shift">
-<!ENTITY OptKeyboardShortcut.alt "Alt">
-<!ENTITY OptKeyboardShortcut.command "Command">
-<!ENTITY OptKeyboardShortcut.option "Option">
-<!ENTITY OptKeyboardShortcut.none "None">
-<!ENTITY OptKeyboardShortcut.spacebar "Spacebar">
-<!ENTITY OptKeyboardShortcut.pageup "Page Up">
-<!ENTITY OptKeyboardShortcut.pagedown "Page Down">
-<!ENTITY OptKeyboardShortcut.end "End">
-<!ENTITY OptKeyboardShortcut.home "Home">
-<!ENTITY OptKeyboardShortcut.left "Left">
-<!ENTITY OptKeyboardShortcut.up "Up">
-<!ENTITY OptKeyboardShortcut.right "Right">
-<!ENTITY OptKeyboardShortcut.down "Down">
-
-<!ENTITY puzzlebarsabout.name "Puzzle Toolbars">
-<!ENTITY puzzlebarsabout.by "by Quicksaver">
-<!ENTITY puzzlebarsabout.desc "All information about the add-on and its developer can be found in its Mozilla Add-ons Homepage. If you liked the add-on, please consider leaving there a nice review or a small contribution to help support its continued development. Bug reports and suggestions can be made in the technical support webpage.">
-<!ENTITY puzzlebarsabout.home "Add-on Homepage">
-<!ENTITY puzzlebarsabout.tech "Technical Support">
-<!ENTITY puzzlebarsabout.notes "Release Notes">

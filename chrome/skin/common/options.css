@@ -1,56 +1,15 @@
-textbox[type="number"] input {
-	text-align: center;
-}
-
-.closer {
-	margin-bottom: 0;
-}
-
-#logo {
-	list-style-image: url("chrome://puzzlebars/skin/icon.png");
-	margin-top: 20px;
-	margin-bottom: 20px;
-}
-
-.justify {
-	text-align: justify;
-}
+#categories .category image { list-style-image: url("chrome://puzzlebars/skin/panes.png"); }
+#categories .category[value="paneBottom"] image { -moz-image-region: rect(0px 24px 24px 0px); }
+#categories .category[value="paneCorner"] image { -moz-image-region: rect(0px 48px 24px 24px); }
+#categories .category[value="paneLateral"] image { -moz-image-region: rect(0px 72px 24px 48px); }
+#categories .category[value="paneTop"] image { -moz-image-region: rect(0px 96px 24px 72px); }
+#categories .category[value="paneURLBar"] image { -moz-image-region: rect(0px 120px 24px 96px); }
+#categories .category[value="paneAbout"] image { -moz-image-region: rect(0px 144px 24px 120px); }
 
 /* keep left and right radio boxes on the actual left and right */
 .ltr:-moz-locale-dir(rtl) { direction: ltr; }
 .ltr > *:-moz-locale-dir(rtl) { direction: rtl; }
 
-#addonVersion {
-	-moz-margin-start: 3px;
-}
-
-/* Bugfix: cropped prefpanes with animateFadeIn, found at https://bugzilla.mozilla.org/show_bug.cgi?id=394793 comment #1 */
-prefpane > .content-box {
-	overflow: -moz-hidden-unscrollable;
-}
-
-.paneSelector radio[pane] label {
-	margin: 1px 5px 2px 5px;
-}
-.paneSelector radio[pane] {
-	list-style-image: url("chrome://puzzlebars/skin/panes.png");
-	padding: 5px 3px 1px;
-}
-.paneSelector radio[pane="bottomPane"] {
-	-moz-image-region: rect(0px 32px 32px 0px);
-}
-.paneSelector radio[pane="cornerPane"] {
-	-moz-image-region: rect(0px 64px 32px 32px);
-}
-.paneSelector radio[pane="lateralPane"] {
-	-moz-image-region: rect(0px 92px 32px 64px);
-}
-.paneSelector radio[pane="topPane"] {
-	-moz-image-region: rect(0px 128px 32px 96px);
-}
-.paneSelector radio[pane="urlbarPane"] {
-	-moz-image-region: rect(0px 160px 32px 128px);
-}
-.paneSelector radio[pane="aboutPane"] {
-	-moz-image-region: rect(0px 192px 32px 160px);
+#paneCorner-behavior hbox[flex="1"] {
+	min-width: 3em;
 }

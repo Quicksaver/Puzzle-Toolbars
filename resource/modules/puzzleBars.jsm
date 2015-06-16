@@ -1,4 +1,4 @@
-Modules.VERSION = '1.0.7';
+Modules.VERSION = '1.0.8';
 
 this.__defineGetter__('gBrowser', function() { return window.gBrowser; });
 
@@ -10,8 +10,8 @@ this.possibleBars = [
 	objName+'-urlbar-bar'
 ];
 
-this.doOpenOptions = function() {
-	openOptions();
+this.openOptions = function() {
+	PrefPanes.open(window);
 };
 
 this.toggleBottom = function() {
@@ -35,7 +35,6 @@ this.toggleTop = function() {
 };
 
 Modules.LOADMODULE = function() {
-	Modules.load('whatsNew');
 	Modules.load('compatibilityFix/windowFixes');
 	Modules.load('initAddonBar');
 	Modules.load('placePP');
@@ -70,5 +69,4 @@ Modules.UNLOADMODULE = function() {
 	Modules.unload('placePP');
 	Modules.unload('initAddonBar');
 	Modules.unload('compatibilityFix/windowFixes');
-	Modules.unload('whatsNew');
 };

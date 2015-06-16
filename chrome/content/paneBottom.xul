@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<?xml-stylesheet href="chrome://puzzlebars/skin/options.css" type="text/css"?>
+<!DOCTYPE options SYSTEM "chrome://puzzlebars/locale/options.dtd">
+<overlay xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+
+	<richlistbox id="categories">
+		<richlistitem id="category-bottom"
+			class="category"
+			value="paneBottom"
+			tooltiptext="&bottom.title;"
+			position="1"
+			align="center">
+			
+			<image class="category-icon"/>
+			<label class="category-name" flex="1" value="&bottom.title;"/>
+		</richlistitem>
+	</richlistbox>
+	
+	<prefpane id="mainPrefPane">
+		<preferences>
+			<preference id="pref-bottom_bar" name="extensions.puzzlebars.bottom_bar" type="bool" />
+			<preference id="pref-bottom_pp" name="extensions.puzzlebars.bottom_pp" type="bool" />
+			<preference id="pref-bottom_placement" name="extensions.puzzlebars.bottom_placement" type="string" />
+			<preference id="pref-bottom_keycode" name="extensions.puzzlebars.bottom_keycode" type="string"/>
+			<preference id="pref-bottom_accel" name="extensions.puzzlebars.bottom_accel" type="bool"/>
+			<preference id="pref-bottom_shift" name="extensions.puzzlebars.bottom_shift" type="bool"/>
+			<preference id="pref-bottom_alt" name="extensions.puzzlebars.bottom_alt" type="bool"/>
+		</preferences>
+		
+		<hbox id="header-bottom" class="header" collapsed="true" data-category="paneBottom">
+			<label class="header-name">&bottom.title;</label>
+		</hbox>
+		
+		<hbox align="start" id="paneBottom-toggler" collapsed="true" data-category="paneBottom">
+			<checkbox label="&OptBottom.label;" tooltiptext="&OptBottom.tooltip;" preference="pref-bottom_bar"/>
+		</hbox>
+		
+		<groupbox align="start" id="paneBottom-pp" collapsed="true" data-category="paneBottom">
+			<caption><checkbox label="&OptShowPiece.label;" tooltiptext="&OptShowPiece.tooltip;" dependson="pref-bottom_bar" preference="pref-bottom_pp"/></caption>
+			<radiogroup preference="pref-bottom_placement"><hbox class="ltr indent">
+				<radio label="&OptPlacement.left;" tooltiptext="&OptPlacement.tooltip;" dependson="pref-bottom_bar,pref-bottom_pp" value="left"/>
+				<radio label="&OptPlacement.right;" tooltiptext="&OptPlacement.tooltip;" dependson="pref-bottom_bar,pref-bottom_pp" value="right"/>
+			</hbox></radiogroup>
+		</groupbox>
+		
+		<groupbox align="start" id="paneBottom-shortcut" collapsed="true" data-category="paneBottom">
+			<caption label="&OptKeyboardShortcut.captionA;"/>
+			<hbox>
+				<checkbox class="smallindent" keysetAccel="bottom" preference="pref-bottom_accel" dependson="pref-bottom_bar"/>
+				<checkbox class="smallindent" keysetAlt="bottom" preference="pref-bottom_alt" dependson="pref-bottom_bar"/>
+				<checkbox class="smallindent" keysetShift="bottom" preference="pref-bottom_shift" dependson="pref-bottom_bar"/>
+				<menulist class="smallindent" keyset="bottom" preference="pref-bottom_keycode" dependson="pref-bottom_bar"/>
+			</hbox>
+		</groupbox>
+	</prefpane>
+	
+</overlay>

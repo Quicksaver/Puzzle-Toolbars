@@ -9,7 +9,7 @@
 			
 		<menuitem id="objName-contextOptions"
 			label="&OptionsMenu.label;"
-			oncommand="objName.doOpenOptions();"
+			oncommand="objName.openOptions();"
 			hidden="true"/>
 	</menupopup>
 		

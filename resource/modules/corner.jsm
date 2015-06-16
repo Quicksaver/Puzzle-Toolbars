@@ -1,4 +1,4 @@
-Modules.VERSION = '2.0.0';
+Modules.VERSION = '2.0.1';
 
 this.__defineGetter__('gFindBar', function() { return window.gFindBar; });
 this.__defineGetter__('bottomBox', function() { return $('browser-bottombox'); });
@@ -107,7 +107,7 @@ this.corner = {
 		var TabsToolbar = $('TabsToolbar');
 		if(TabsToolbar && !TabsToolbar.collapsed && TabsToolbar.getAttribute('treestyletab-tabbar-autohide-state') != 'hidden'
 		&& (TabsToolbar.getAttribute('treestyletab-tabbar-position') == 'left' || TabsToolbar.getAttribute('treestyletab-tabbar-position') == 'right')) {
-			var TabsSplitter = document.getAnonymousElementByAttribute($('content'), 'class', 'treestyletab-splitter');
+			var TabsSplitter = $ª($('content'), 'treestyletab-splitter', 'class');
 			this.style.maxWidth -= TabsToolbar.clientWidth;
 			this.style.maxWidth -= TabsSplitter.clientWidth +(TabsSplitter.clientLeft *2);
 			if(TabsToolbar.getAttribute('treestyletab-tabbar-position') == 'left') {

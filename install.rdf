@@ -1,12 +1,13 @@
-<?xml version="1.0"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <RDF xmlns="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:em="http://www.mozilla.org/2004/em-rdf#">
 	<Description about="urn:mozilla:install-manifest">
 		<em:id>thePuzzlePiece@quicksaver</em:id>
-		<em:version>2.0.8</em:version>
 		<em:type>2</em:type>
+		<em:version>2.0.8</em:version>
 		<em:creator>Quicksaver</em:creator>
+		<em:optionsURL>about:puzzlebars</em:optionsURL>
+		<em:optionsType>3</em:optionsType>
 		<em:iconURL>chrome://puzzlebars/skin/icon.png</em:iconURL>
-		<em:optionsURL>chrome://puzzlebars/content/options.xul</em:optionsURL>
 		<em:homepageURL>https://addons.mozilla.org/firefox/addon/puzzle-toolbars/</em:homepageURL>
 		<em:name>Puzzle Toolbars</em:name>
 		<em:bootstrap>true</em:bootstrap>
