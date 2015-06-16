@@ -1,8 +1,8 @@
-Modules.VERSION = '2.0.2';
+Modules.VERSION = '2.0.3';
 
 this.__defineGetter__('omnisidebar', function() { return window.omnisidebar; });
-this.__defineGetter__('leftSidebar', function() { return omnisidebar.leftSidebar; });
-this.__defineGetter__('rightSidebar', function() { return omnisidebar.rightSidebar; });
+this.__defineGetter__('leftSidebar', function() { return omnisidebar && omnisidebar.leftSidebar; });
+this.__defineGetter__('rightSidebar', function() { return omnisidebar && omnisidebar.rightSidebar; });
 
 this.osb = {
 	id: 'osb@quicksaver',
@@ -13,6 +13,7 @@ this.osb = {
 				e.stopPropagation();
 				
 				var sidebar = (Prefs.lateral_placement == 'left') ? leftSidebar : rightSidebar;
+				if(!sidebar) { return; }
 				e.detail = !sidebar.closed && !sidebar.above;
 				break;
 			
@@ -178,10 +179,12 @@ this.osb = {
 		if(typeof(lateral) == 'undefined' || !lateral.bar || !lateral.bar._autohide) { return; }
 		
 		// the other (opposite) sidebar should never trigger the lateral bar to show
-		if(other.switcher && lateral.bar._autohide.has(other.switcher)) {
+		if(other && other.switcher && lateral.bar._autohide.has(other.switcher)) {
 			autoHide.setBarListeners(lateral.bar, other.switcher, false);
 			lateral.bar._autohide.delete(other.switcher);
 		}
+		
+		if(!sidebar) { return; }
 		
 		if(setup && Prefs.lateral_bar && (Prefs.lateral_autohide || onFullScreen.hideBars)) {
 			if(sidebar.switcher && !lateral.bar._autohide.has(sidebar.switcher)) {
@@ -204,7 +207,7 @@ this.osb = {
 		
 		var sidebar = (Prefs.lateral_placement == 'left') ? leftSidebar : rightSidebar;
 		
-		if(!customizing
+		if(sidebar && !customizing
 		&&	(!e
 			|| (e.type == 'ToggledPuzzleBar' && e.target == lateral.bar && !lateral.bar.collapsed)
 			|| (e.type == 'LoadedAutoHidePuzzleBar' && e.target == lateral.bar)
