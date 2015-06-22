@@ -1,4 +1,4 @@
-Modules.VERSION = '2.0.1';
+Modules.VERSION = '2.0.2';
 
 this.StatusBar = {
 	// don't forget that add-ons that use the status-bar seem to assume it is always in the DOM tree!
@@ -139,8 +139,10 @@ this.StatusBar = {
 	},
 	
 	onLoad: function(aWindow) {
-		prepareObject(aWindow);
-		this.prepare(aWindow);
+		if(!aWindow.document.documentElement.getAttribute('chromehidden').contains('toolbar')) {
+			prepareObject(aWindow);
+			this.prepare(aWindow);
+		}
 	},
 	
 	onUnload: function(aWindow) {
@@ -158,10 +160,14 @@ Modules.LOADMODULE = function() {
 	
 	Overlays.overlayURI('chrome://'+objPathString+'/content/statusBar.xul', objName, {
 		onLoad: function(aWindow) {
-			aWindow[objName].Modules.load(objName, true);
+			if(aWindow[objName]) {
+				aWindow[objName].Modules.load(objName, true);
+			}
 		},
 		onUnload: function(aWindow) {
-			aWindow[objName].Modules.unload(objName);
+			if(aWindow[objName]) {
+				aWindow[objName].Modules.unload(objName);
+			}
 		}
 	});
 };

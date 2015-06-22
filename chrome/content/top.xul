@@ -32,7 +32,7 @@
 			hidden="true"
 			collapsed="false"
 			persist="collapsed"
-			class="toolbar-primary chromeclass-toolbar puzzleBars-bar"
+			class="puzzleBars-bar chromeclass-toolbar-additional"
 			waitForSS="chrome://objPathString/skin/puzzleBars.css chrome://objPathString-os/skin/puzzleBars.css chrome://objPathString/skin/top.css chrome://objPathString-os/skin/top.css"
 			iconsize="small"
 			context="toolbar-context-menu"
@@ -58,7 +58,7 @@
 		</toolbar>
 		
 		<box id="objName-top-PP"
-			class="PuzzlePiece"
+			class="PuzzlePiece chromeclass-toolbar-additional"
 			waitForSS="chrome://objPathString/skin/puzzleBars.css chrome://objPathString-os/skin/puzzleBars.css chrome://objPathString/skin/top.css chrome://objPathString-os/skin/top.css"
 			context="toolbar-context-menu"
 			insertafter="objName-top-bar"

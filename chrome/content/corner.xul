@@ -29,7 +29,7 @@
 				hidden="true"
 				collapsed="false"
 				persist="collapsed"
-				class="toolbar-primary chromeclass-toolbar puzzleBars-bar"
+				class="puzzleBars-bar chromeclass-toolbar-additional"
 				iconsize="small"
 				context="toolbar-context-menu"
 				menucommand="objName:ToggleCornerBar"
@@ -44,7 +44,7 @@
 		</box>
 		
 		<box id="objName-corner-PP"
-			class="PuzzlePiece"
+			class="PuzzlePiece chromeclass-toolbar-additional"
 			waitForSS="chrome://objPathString/skin/puzzleBars.css chrome://objPathString-os/skin/puzzleBars.css chrome://objPathString/skin/corner.css chrome://objPathString-os/skin/corner.css"
 			context="toolbar-context-menu"
 			insertafter="objName-corner-container"

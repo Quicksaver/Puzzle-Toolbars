@@ -44,7 +44,7 @@
 				hidden="true"
 				collapsed="false"
 				persist="collapsed"
-				class="toolbar-primary chromeclass-toolbar puzzleBars-bar"
+				class="puzzleBars-bar chromeclass-toolbar-additional"
 				verticalToolbar="true"
 				iconsize="small"
 				context="toolbar-context-menu"
@@ -72,7 +72,7 @@
 		</vbox>
 	
 		<box id="objName-lateral-PP"
-			class="PuzzlePiece"
+			class="PuzzlePiece chromeclass-toolbar-additional"
 			waitForSS="chrome://objPathString/skin/puzzleBars.css chrome://objPathString-os/skin/puzzleBars.css chrome://objPathString/skin/lateral.css chrome://objPathString-os/skin/lateral.css"
 			context="toolbar-context-menu"
 			hidden="true">

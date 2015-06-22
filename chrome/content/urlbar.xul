@@ -24,7 +24,7 @@
 				hidden="true"
 				collapsed="false"
 				persist="collapsed"
-				class="toolbar-primary chromeclass-toolbar puzzleBars-bar"
+				class="puzzleBars-bar chromeclass-toolbar-additional"
 				iconsize="small"
 				context="toolbar-context-menu"
 				menucommand="objName:ToggleURLBarBar"
@@ -39,7 +39,7 @@
 		</box>
 		
 		<box id="objName-urlbar-PP"
-			class="PuzzlePiece"
+			class="PuzzlePiece chromeclass-toolbar-additional"
 			waitForSS="chrome://objPathString/skin/puzzleBars.css chrome://objPathString-os/skin/puzzleBars.css chrome://objPathString/skin/urlbar.css chrome://objPathString-os/skin/urlbar.css"
 			context="toolbar-context-menu"
 			position="2">
