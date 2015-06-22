@@ -63,6 +63,12 @@
 		padding: 0 !important;
 	}
 	
+	/* try to get the places toolbar to fit in as well */
+	.puzzleBars-bar #PlacesToolbar toolbarbutton {
+		-moz-appearance: none;
+		border: none;
+	}
+	
 	/* the bookmarks button is a special case because of its dropmarker */
 	.puzzleBars-bar #bookmarks-menu-button dropmarker {
 		padding: 0 3px !important;

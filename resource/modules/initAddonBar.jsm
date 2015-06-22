@@ -1,4 +1,4 @@
-Modules.VERSION = '3.0.1';
+Modules.VERSION = '3.0.2';
 
 this.__defineGetter__('PrintPreviewListener', function() { return window.PrintPreviewListener; });
 this.__defineGetter__('gNavBar', function() { return $('nav-bar'); });
@@ -8,6 +8,7 @@ this.__defineGetter__('viewMenu', function() { return $('viewToolbarsMenu').firs
 this.__defineGetter__('contextMenu', function() { return $('toolbar-context-menu'); });
 this.__defineGetter__('contextOptions', function() { return $(objName+'-contextOptions'); });
 this.__defineGetter__('contextSeparator', function() { return $(objName+'-contextSeparator'); });
+this.__defineGetter__('PlacesToolbarHelper', function() { return window.PlacesToolbarHelper; });
 
 // trick to find out the acurate width of the vertical scrollbar
 this._scrollBarWidth = null;
@@ -149,7 +150,17 @@ this.bars = {
 		});
 		
 		bar._loaded = true;
-		aSync(function() { bar.hidden = false; }); // aSync works best
+		
+		// aSync works best
+		aSync(function() {
+			bar.hidden = false;
+			
+			// up until now the bar was hidden, the places toolbar interprets this as "don't initialize"
+			if(isAncestor(PlacesToolbarHelper._viewElt, bar)) {
+				PlacesToolbarHelper.init();
+			}
+		});
+		
 		dispatch(bar, { type: "LoadedPuzzleBar", cancelable: false });
 	},
 	
