@@ -1,9 +1,22 @@
 {
-	"current":"2.0.8",
+	"current":"2.1",
 	"knownissues":[
 		["There are some minor (aesthetic) <a target=\"blank\" href=\"https://github.com/Quicksaver/Puzzle-Toolbars/issues/24\">issues</a> when the Location Bar Puzzle Bar is used together with <a target=\"blank\" href=\"https://addons.mozilla.org/firefox/addon/ui-enhancer/\">Location Bar Enhancer</a>."]
 	],
 	"releases": {
+		"2.1":{
+			"date":"June 24, 2015",
+			"notes":[
+				["new","Brand new preferences tab with a new \"About\" pane (previously the \"Release Notes\" tab)"],
+				["new","zh-TW locale"],
+				["changed","The active development process for the add-on is undergoing a few changes, check out the information and links at the top of this pane for more details"],
+				["removed","Compatibility with Firefox 37 and below"],
+				["bugfix","Downloads indicator could not reflect the actual status of current downloads"],
+				["bugfix","Compatibility with latest version of <a target=\"blank\" href=\"https://addons.mozilla.org/firefox/addon/omnisidebar/\">OmniSidebar</a>"],
+				["bugfix","Don't load the puzzle toolbars in popup windows where they're not supposed to exist"],
+				["bugfix","When placing the bookmarks toolbar in any of the puzzle toolbars, it could fail to initialize properly when starting up the browser (<a target=\"blank\" href=\"https://github.com/Quicksaver/Puzzle-Toolbars/issues/80\">issue #80</a>)"]
+			]
+		},
 		"2.0.8":{
 			"date":"May 9, 2015",
 			"notes":[
