@@ -1,11 +1,8 @@
-<!ENTITY Optwindow.style "width: 34.5em;">
-<!ENTITY Options.title "Barras de Ferramentas Puzzle">
 <!ENTITY bottom.title "Fundo">
 <!ENTITY corner.title "Canto">
 <!ENTITY urlbar.title "Barra de Endereço">
 <!ENTITY lateral.title "Lateral">
 <!ENTITY top.title "Topo">
-<!ENTITY about.title "Sobre">
 <!ENTITY GroupPosition.label "Posição">
 <!ENTITY GroupBehavior.label "Comportamento">
 <!ENTITY OptBottom.label "Activar a Barra Puzzle do Fundo">
@@ -38,24 +35,3 @@
 <!ENTITY OptMoveBottom.label "Colocar ao fundo">
 <!ENTITY OptMoveBottom.tooltip "Mostra a peça do puzzle ao fundo da barra de ferramentas em vez de ao topo.">
 <!ENTITY OptKeyboardShortcut.captionA "Atalho de teclado para activar ou desactivar">
-<!ENTITY OptKeyboardShortcut.control "Control">
-<!ENTITY OptKeyboardShortcut.shift "Shift">
-<!ENTITY OptKeyboardShortcut.alt "Alt">
-<!ENTITY OptKeyboardShortcut.command "Comando">
-<!ENTITY OptKeyboardShortcut.option "Opção">
-<!ENTITY OptKeyboardShortcut.none "Nenhum">
-<!ENTITY OptKeyboardShortcut.spacebar "Barra de espaço">
-<!ENTITY OptKeyboardShortcut.pageup "Página para cima">
-<!ENTITY OptKeyboardShortcut.pagedown "Página para baixo">
-<!ENTITY OptKeyboardShortcut.end "Fim">
-<!ENTITY OptKeyboardShortcut.home "Início">
-<!ENTITY OptKeyboardShortcut.left "Seta esquerda">
-<!ENTITY OptKeyboardShortcut.up "Seta cima">
-<!ENTITY OptKeyboardShortcut.right "Seta direira">
-<!ENTITY OptKeyboardShortcut.down "Seta baixo">
-<!ENTITY puzzlebarsabout.name "Barras de Ferramentas Puzzle">
-<!ENTITY puzzlebarsabout.by "por Quicksaver">
-<!ENTITY puzzlebarsabout.desc "Toda a informação relativa a este extra e ao seu autor pode ser encontrada na página dos Extras do Mozilla. Se gostou da extensão, pode mostrar o seu agrado ao lá deixar um comentário ou pode também fazer uma pequena contribuição para manter o seu desenvolvimento. Sugestões e problemas podem ser comunicados na página de suporte técnico.">
-<!ENTITY puzzlebarsabout.home "Página do Extra do Mozilla">
-<!ENTITY puzzlebarsabout.tech "Suporte Técnico">
-<!ENTITY puzzlebarsabout.notes "Notas de Lançamento">

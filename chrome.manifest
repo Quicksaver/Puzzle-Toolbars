@@ -9,6 +9,7 @@ locale    puzzlebars      pt-PT         chrome/locale/pt-PT/
 locale    puzzlebars      ru            chrome/locale/ru/
 locale    puzzlebars      sv-SE         chrome/locale/sv-SE/
 locale    puzzlebars      zh-CN         chrome/locale/zh-CN/
+locale    puzzlebars      zh-TW         chrome/locale/zh-TW/
 
 skin      puzzlebars      classic/1.0   chrome/skin/common/
 skin      puzzlebars-os   classic/1.0   chrome/skin/linux/

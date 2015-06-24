@@ -1,11 +1,8 @@
-<!ENTITY Optwindow.style "width: 36.5em;">
-<!ENTITY Options.title "Inställningar för Puzzle Toolbars">
 <!ENTITY bottom.title "Nedre fält">
 <!ENTITY corner.title "Hörnfält">
 <!ENTITY urlbar.title "Integrerat fält">
 <!ENTITY lateral.title "Sidofält">
 <!ENTITY top.title "Övre fält">
-<!ENTITY about.title "Om">
 <!ENTITY GroupPosition.label "Position">
 <!ENTITY GroupBehavior.label "Beteende">
 <!ENTITY OptBottom.label "Aktivera det nedre pusselfältet">
@@ -38,24 +35,3 @@
 <!ENTITY OptMoveBottom.label "Placera nederst">
 <!ENTITY OptMoveBottom.tooltip "Visa pusselbiten nederst i verktygsfältet istället för överst.">
 <!ENTITY OptKeyboardShortcut.captionA "Kortkommando för aktivering eller inaktivering">
-<!ENTITY OptKeyboardShortcut.control "Ctrl">
-<!ENTITY OptKeyboardShortcut.shift "Skift">
-<!ENTITY OptKeyboardShortcut.alt "Alt">
-<!ENTITY OptKeyboardShortcut.command "Cmd">
-<!ENTITY OptKeyboardShortcut.option "Option">
-<!ENTITY OptKeyboardShortcut.none "Ingen">
-<!ENTITY OptKeyboardShortcut.spacebar "Blanksteg">
-<!ENTITY OptKeyboardShortcut.pageup "Page Up">
-<!ENTITY OptKeyboardShortcut.pagedown "Page Down">
-<!ENTITY OptKeyboardShortcut.end "End">
-<!ENTITY OptKeyboardShortcut.home "Home">
-<!ENTITY OptKeyboardShortcut.left "Vänsterpil">
-<!ENTITY OptKeyboardShortcut.up "Uppåtpil">
-<!ENTITY OptKeyboardShortcut.right "Högerpil">
-<!ENTITY OptKeyboardShortcut.down "Nedåtpil">
-<!ENTITY puzzlebarsabout.name "Puzzle Toolbars">
-<!ENTITY puzzlebarsabout.by "av Quicksaver">
-<!ENTITY puzzlebarsabout.desc "All information om The Puzzle Piece och dess utvecklare återfinns på dess tilläggssida hos Mozilla. Om du tycker om tillägget, skriv då gärna en informativ recension eller donera en slant för att stödja dess fortsatta utveckling. Buggrapporter och förslag kan skickas in på tilläggets sida för teknisk support.">
-<!ENTITY puzzlebarsabout.home "Tilläggets webbplats">
-<!ENTITY puzzlebarsabout.tech "Teknisk support">
-<!ENTITY puzzlebarsabout.notes "Utgivningsanteckningar">

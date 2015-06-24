@@ -1,0 +1,24 @@
+<!ENTITY about.paneTitle "關於">
+<!ENTITY about.version "版本 {v}">
+<!ENTITY about.versionDivider " - ">
+<!ENTITY about.uptodate "已為最新，恭喜您！">
+<!ENTITY about.needsupdate "有可用的更新！">
+<!ENTITY about.description "在下面檢視這個版本的 &quot;發行註記&quot; 及 &quot;已知問題&quot; 。如果您發現任何問題，或是您對未來的版本有任何建議，請告訴我。">
+<!ENTITY about.descriptionB "這個附加元件是免費的，但是加入新功能與並確保每件事都能在每一個新的 Firefox 版本上都能正確執行是相當費工的。如果您覺得這個附加元件很好用，請支持它的永續開發。就像連結所說的，&quot;您可以幫忙&quot;！">
+<!ENTITY about.allVersions "顯示先前所有版本的發行註記">
+<!ENTITY about.notifyOnUpdates "在下次更新時顯示此分頁">
+<!ENTITY about.development "開發狀態">
+<!ENTITY about.helpdevelopment "您可以幫忙">
+<!ENTITY about.information "更多資訊">
+<!ENTITY about.home "附加元件首頁">
+<!ENTITY about.fullchangelog "完整變更記錄">
+<!ENTITY about.problems "遇到問題了？">
+<!ENTITY about.tech "在支援頁面中打開一個 issue，並描述您的問題">
+<!ENTITY about.email "或是寄給我一封關於該問題的電子郵件">
+<!ENTITY about.author "作者的一點話">
+<!ENTITY about.trymore "試試看我的其他附加元件以取得更好的 Firefox 體驗！">
+<!ENTITY about.profile "在我的個人檔案中找到它們">
+<!ENTITY about.share "分享">
+<!ENTITY about.friends "不要獨享一個絕佳的瀏覽器。與您的朋友分享它們！">
+<!ENTITY about.moreshare "其他服務...">
+<!ENTITY about.tryit "快來試試這個附加元件，讓您隨心所欲的擺放各項 Firefox 的功能 - Puzzle Toolbars！">

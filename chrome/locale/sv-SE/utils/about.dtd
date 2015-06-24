@@ -1,0 +1,24 @@
+<!ENTITY about.paneTitle "Om">
+<!ENTITY about.version "Version {v}">
+<!ENTITY about.versionDivider " – ">
+<!ENTITY about.uptodate "aktuell, gratulerar!">
+<!ENTITY about.needsupdate "uppdatering tillgänglig!">
+<!ENTITY about.description "Läs &quot;utgivningsanteckningar&quot; och  &quot;kända problem&quot; för den här versionen nedan. Meddela mig om du stöter på buggar eller om du har förslag på funktioner.">
+<!ENTITY about.descriptionB "The add-on is free, but fixing problems, adding new features and ensuring everything works with each new Firefox release is laborious and can be difficult at times. If you enjoy the add-on, please support its continued development. As the link says, &quot;You Can Help&quot;!">
+<!ENTITY about.allVersions "Visa anteckningar för alla föregående versioner">
+<!ENTITY about.notifyOnUpdates "Visa mig den här fliken vid nästa uppdatering">
+<!ENTITY about.development "Development Status">
+<!ENTITY about.helpdevelopment "YOU CAN HELP">
+<!ENTITY about.information "Mer information">
+<!ENTITY about.home "Tilläggets hemsida">
+<!ENTITY about.fullchangelog "Fullständig ändringslogg">
+<!ENTITY about.problems "Har du stött på problem?">
+<!ENTITY about.tech "Registrera ett ärende på hjälpsidan, där du beskriver problemet.">
+<!ENTITY about.email "Eller skicka mig ett e-brev om det">
+<!ENTITY about.author "Mer från samma utvecklare">
+<!ENTITY about.trymore "Testa ett av mina andra tillägg för en ännu bättre firefoxupplevelse!">
+<!ENTITY about.profile "Hitta dem på min profilsida">
+<!ENTITY about.share "Dela!">
+<!ENTITY about.friends "Var inte ensam om att ha en fantastisk webbläsare. Berätta för dina vänner!">
+<!ENTITY about.moreshare "Andra tjänster …">
+<!ENTITY about.tryit "Puzzle Toolbars – tillägget som låter dig pussla ihop alla dina firefoxfunktioner precis på det sätt som du vill ha det.">

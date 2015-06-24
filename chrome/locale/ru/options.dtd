@@ -1,11 +1,8 @@
-<!ENTITY Optwindow.style "width: 40.1em;">
-<!ENTITY Options.title "Puzzle Панели">
 <!ENTITY bottom.title "Нижняя">
 <!ENTITY corner.title "Угловая">
 <!ENTITY urlbar.title "В адресной строке">
 <!ENTITY lateral.title "Боковая">
 <!ENTITY top.title "Верняя">
-<!ENTITY about.title "О дополнении...">
 <!ENTITY GroupPosition.label "Расположение">
 <!ENTITY GroupBehavior.label "Поведение">
 <!ENTITY OptBottom.label "Включить Нижнюю панель">
@@ -38,24 +35,3 @@
 <!ENTITY OptMoveBottom.label "Поместить вниз">
 <!ENTITY OptMoveBottom.tooltip "Показывать паззл-кнопку внизу панели.">
 <!ENTITY OptKeyboardShortcut.captionA "Горячие клавиши">
-<!ENTITY OptKeyboardShortcut.control "Ctrl">
-<!ENTITY OptKeyboardShortcut.shift "Shift">
-<!ENTITY OptKeyboardShortcut.alt "Alt">
-<!ENTITY OptKeyboardShortcut.command "Command">
-<!ENTITY OptKeyboardShortcut.option "Option">
-<!ENTITY OptKeyboardShortcut.none "None">
-<!ENTITY OptKeyboardShortcut.spacebar "Spacebar">
-<!ENTITY OptKeyboardShortcut.pageup "Page Up">
-<!ENTITY OptKeyboardShortcut.pagedown "Page Down">
-<!ENTITY OptKeyboardShortcut.end "End">
-<!ENTITY OptKeyboardShortcut.home "Home">
-<!ENTITY OptKeyboardShortcut.left "Left">
-<!ENTITY OptKeyboardShortcut.up "Up">
-<!ENTITY OptKeyboardShortcut.right "Right">
-<!ENTITY OptKeyboardShortcut.down "Down">
-<!ENTITY puzzlebarsabout.name "Puzzle Панели">
-<!ENTITY puzzlebarsabout.by "by Quicksaver">
-<!ENTITY puzzlebarsabout.desc "Всю информацию о дополнении и его авторе можно найти на офицальной странице дополнения. Если Вам понравилось дополнение, оставьте, пожалуйста, хороший отзыв о нем или сделайте скромное пожертвование для поддержки дальнейшей разработки.  Отчеты об ошибках можно оставлять на странице технической поддержки.">
-<!ENTITY puzzlebarsabout.home "Страница дополнения">
-<!ENTITY puzzlebarsabout.tech "Техническая поддержка">
-<!ENTITY puzzlebarsabout.notes "Примечания к выпуску">

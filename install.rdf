@@ -35,7 +35,7 @@
 			<Description>
 				<em:locale>es-ES</em:locale>
 				<em:name>Puzzle Toolbars</em:name>
-				<em:description>¡Reune las 'piezas' de todos sus botones de complementos y extras en su ventana de navegador de la forma exacta que usted los quiere!</em:description>
+				<em:description>¡Reúne las 'piezas' de todos sus botones de complementos y extras en su ventana de navegador de la forma exacta que usted los quiere!</em:description>
 				<em:translator>strel</em:translator>
 			</Description>
 		</em:localized>
@@ -77,6 +77,14 @@
 				<em:name>Puzzle Toolbars</em:name>
 				<em:description>把您的附加组件按钮和其他的东西拼凑在一起，放在你想放在的地方！</em:description>
 				<em:translator>Wang.H.K, YFdyh000</em:translator>
+			</Description>
+		</em:localized>
+		<em:localized>
+			<Description>
+				<em:locale>zh-TW</em:locale>
+				<em:name>Puzzle Toolbars</em:name>
+				<em:description>把您的附加元件按鈕與其他東西拼湊在一起，隨心所欲的放到您的瀏覽器視窗中！</em:description>
+				<em:translator>s8321414 - Babelzilla</em:translator>
 			</Description>
 		</em:localized>
 	</Description>

@@ -1,0 +1,24 @@
+<!ENTITY about.paneTitle "Acerca de">
+<!ENTITY about.version "Versión {v}">
+<!ENTITY about.versionDivider "-">
+<!ENTITY about.uptodate "actualizado, ¡felicidades!">
+<!ENTITY about.needsupdate "¡actualización disponible!">
+<!ENTITY about.description "Revise debajo las &quot;Notas de la versión&quot; y los &quot;Problemas conocidos&quot; para esta versión. Hágame saber cualquier problema que encuentre, o si tiene alguna sugerencia para futuras versiones.">
+<!ENTITY about.descriptionB "El complemento es gratuito, pero reparar problemas, añadir nuevas características y asegurarse de que todo funciona con cada nueva versión de Firefox es laborioso y puede ser difícil en algunos momentos. Si disfruta de este complemento, por favor, apoye su desarrollo continuado. Tal como el enlace dice ¡&quot;usted puede ayudar&quot;!">
+<!ENTITY about.allVersions "Mostrar notas de todas las versiones previas">
+<!ENTITY about.notifyOnUpdates "Mostrarme esta pestaña en la siguiente actualización">
+<!ENTITY about.development "Estado del desarrollo">
+<!ENTITY about.helpdevelopment "USTED PUEDE AYUDAR">
+<!ENTITY about.information "Más información">
+<!ENTITY about.home "Página principal del complemento">
+<!ENTITY about.fullchangelog "Registro de cambios completo">
+<!ENTITY about.problems "¿Tiene problemas?">
+<!ENTITY about.tech "Abra un asunto (issue) en la página de soporte describiendo su problema">
+<!ENTITY about.email "O envíeme un correo electrónico acerca de ello">
+<!ENTITY about.author "Más sobre el autor">
+<!ENTITY about.trymore "¡Pruebe alguno de mis otros complementos para una experiencia con Firefox aún mejor!">
+<!ENTITY about.profile "Búsquelos en mi perfil">
+<!ENTITY about.share "¡Compartir!">
+<!ENTITY about.friends "No sea el único con un gran navegador. ¡Haga partícipes a sus amigos de algo estupendo!">
+<!ENTITY about.moreshare "Otros servicios...">
+<!ENTITY about.tryit "Pruebe este complemento que le permite reunir las piezas de todas sus características de Firefox de la precisa forma en que las quiere - ¡Puzzle Toolbars!">

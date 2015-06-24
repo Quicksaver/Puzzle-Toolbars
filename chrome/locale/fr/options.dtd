@@ -1,11 +1,8 @@
-<!ENTITY Optwindow.style "width: 38em;">
-<!ENTITY Options.title "Puzzle Toolbars">
 <!ENTITY bottom.title "Bas">
 <!ENTITY corner.title "Coin">
 <!ENTITY urlbar.title "Barre d'adresse">
 <!ENTITY lateral.title "latérale">
 <!ENTITY top.title "Haut">
-<!ENTITY about.title "À propos">
 <!ENTITY GroupPosition.label "Position">
 <!ENTITY GroupBehavior.label "Comportement">
 <!ENTITY OptBottom.label "Activer la barre d'outils du bas">
@@ -38,24 +35,3 @@
 <!ENTITY OptMoveBottom.label "Placer en bas">
 <!ENTITY OptMoveBottom.tooltip "Affiche la pièce de puzzle en bas de la barre d'outils au lieu d'en-haut.">
 <!ENTITY OptKeyboardShortcut.captionA "Raccourci clavier pour activation ou désactivation">
-<!ENTITY OptKeyboardShortcut.control "Ctrl">
-<!ENTITY OptKeyboardShortcut.shift "Maj">
-<!ENTITY OptKeyboardShortcut.alt "Alt">
-<!ENTITY OptKeyboardShortcut.command "Command">
-<!ENTITY OptKeyboardShortcut.option "Option">
-<!ENTITY OptKeyboardShortcut.none "Aucun">
-<!ENTITY OptKeyboardShortcut.spacebar "Barre d'espace">
-<!ENTITY OptKeyboardShortcut.pageup "Page précédente">
-<!ENTITY OptKeyboardShortcut.pagedown "Page suivante">
-<!ENTITY OptKeyboardShortcut.end "Fin">
-<!ENTITY OptKeyboardShortcut.home "Début">
-<!ENTITY OptKeyboardShortcut.left "Gauche">
-<!ENTITY OptKeyboardShortcut.up "Haut">
-<!ENTITY OptKeyboardShortcut.right "Droite">
-<!ENTITY OptKeyboardShortcut.down "Bas">
-<!ENTITY puzzlebarsabout.name "Puzzle Toolbars">
-<!ENTITY puzzlebarsabout.by "par Quicksaver">
-<!ENTITY puzzlebarsabout.desc "Toutes les informations à propos de cette extension et de son développeur peuvent être trouvées sur la page Mozilla Add-ons. Si vous avez aimé l'extension, veuillez y laisser un commentaire sympathique ou une petite contribution pour soutenir son développement. Les signalements de bogues et les suggestions peuvent être faits sur la page d'aide technique.">
-<!ENTITY puzzlebarsabout.home "Page Web de l'extension">
-<!ENTITY puzzlebarsabout.tech "Aide technique">
-<!ENTITY puzzlebarsabout.notes "Notes de version">

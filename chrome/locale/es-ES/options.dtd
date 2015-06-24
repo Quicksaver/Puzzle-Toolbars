@@ -1,29 +1,26 @@
-<!ENTITY Optwindow.style "width: 38em;">
-<!ENTITY Options.title "Puzzle Toolbars">
 <!ENTITY bottom.title "Inferior">
 <!ENTITY corner.title "Esquina">
 <!ENTITY urlbar.title "Barra de direcciones">
 <!ENTITY lateral.title "Lateral">
 <!ENTITY top.title "Superior">
-<!ENTITY about.title "Acerca de">
 <!ENTITY GroupPosition.label "Posición">
 <!ENTITY GroupBehavior.label "Comportamiento">
 <!ENTITY OptBottom.label "Habilitar barra de herramientas inferior">
-<!ENTITY OptBottom.tooltip "Añade una barra de herramientas personalizable en la parte inferior de ventana del navegador, muy parecida a la antigua barra de complementos.">
+<!ENTITY OptBottom.tooltip "Añade una barra de herramientas personalizable en la parte inferior de la ventana del navegador, muy parecida a la antigua barra de complementos.">
 <!ENTITY OptCorner.label "Habilitar barra de herramientas en esquina">
-<!ENTITY OptCorner.tooltip "Añade una barra de herramientas estrecha en una esquina inferior de la ventana del navegador, útil para maximizar su espacio de pantalla para navegación.">
+<!ENTITY OptCorner.tooltip "Añade una barra de herramientas corta en una esquina inferior de la ventana del navegador, útil para maximizar su espacio en pantalla para navegación.">
 <!ENTITY OptUrlbar.label "Habilitar barra de herramientas en la barra de direcciones">
-<!ENTITY OptUrlbar.tooltip "Añade una barra de herramientas pequeña y ordenada dentro de la barra de direcciones, estupenda si generalmente tiene mucho espacio libre allí y quiere aprovecharlo.">
+<!ENTITY OptUrlbar.tooltip "Añade una pequeña y pulcra barra de herramientas dentro de la barra de direcciones, estupenda si generalmente tiene mucho espacio libre allí y quiere aprovecharlo.">
 <!ENTITY OptLateral.label "Habilitar barra de herramientas lateral">
 <!ENTITY OptLateral.tooltip "Añade una barra de herramientas vertical en el margen de la ventana del navegador, un acompañamiento perfecto para el usuario intensivo de la barra lateral.">
 <!ENTITY OptTop.label "Habilitar barra de herramientas superior">
 <!ENTITY OptTop.tooltip "Añade una barra de herramientas personalizable en el área superior de la ventana del navegador, debajo de la barra de navegación.">
-<!ENTITY OptTopSlimChrome.label "Incluir en las barras de herramientas ocultas de Slim Chrome">
-<!ENTITY OptTopSlimChrome.tooltip "¡Recomendado! para usar acompañando a mi otro complemento The Fox, Only Better; la barra de herramientas se ocultará junto con el resto de las barras de herramientas en la parte superior cuando Slim Chrome esté habilitado. Observe que en este caso el botón de la pieza de puzzle no se puede usar.">
+<!ENTITY OptTopSlimChrome.label "Incluir con las barras de herramientas ocultas de Chrome Esbelto">
+<!ENTITY OptTopSlimChrome.tooltip "¡Recomendado! para su uso acompañando a mi otro complemento The Fox, Only Better; la barra de herramientas se ocultará junto con el resto de las barras de herramientas de la parte superior, cuando Chrome Esbelto (TFOB) esté habilitado. Observe que en este caso el botón de la pieza de puzzle no se puede usar.">
 <!ENTITY OptShowPiece.label "Mostrar pieza de puzzle">
 <!ENTITY OptShowPiece.tooltip "La pieza de puzzle es un botón que puede usar para abrir o cerrar rápidamente la barra de herramientas correspondiente.">
-<!ENTITY OptPlacement.left "Colocar a la izquierda">
-<!ENTITY OptPlacement.right "Colocar a la derecha">
+<!ENTITY OptPlacement.left "Situar a la izquierda">
+<!ENTITY OptPlacement.right "Situar a la derecha">
 <!ENTITY OptPlacement.tooltip "Cambia el lado de la ventana del navegador en el que colocarla.">
 <!ENTITY OptAutoHide.label "Auto-ocultar">
 <!ENTITY OptAutoHide.tooltip "Oculta automáticamente la barra de herramientas cuando no se necesita.">
@@ -32,30 +29,9 @@
 <!ENTITY OptHotspot.low "Más pequeña">
 <!ENTITY OptHotspot.high "Más grande">
 <!ENTITY OptWhenFocused.label "Ocultar sólo cuando la barra de direcciones tenga el foco">
-<!ENTITY OptWhenFocused.tooltip "Con esto habilitado, la barra de herramientas sólo se ocultará automáticamente cuando el cursor esté en la barra de direcciones.">
+<!ENTITY OptWhenFocused.tooltip "Con esto habilitado, la barra de herramientas sólo se ocultará automáticamente cuando el cursor esté sobre la barra de direcciones.">
 <!ENTITY OptExtend.label "Extender por todo el espacio disponible">
-<!ENTITY OptExtend.tooltip "Esta opción muestra la barra de herramientas sobre el máximo espacio disponible en la ventana del navegador, incluso si no tiene suficientes elementos o widgets para cubrirlo; es especialmente práctico si quiere utilizar espacios flexibles en él.">
-<!ENTITY OptMoveBottom.label "Colocar en el inferior">
+<!ENTITY OptExtend.tooltip "Esta opción muestra la barra de herramientas sobre el máximo de espacio disponible en la ventana del navegador, incluso si no tiene suficientes elementos o funciones para cubrirlo; es especialmente práctico si quiere utilizar espacios flexibles en ella.">
+<!ENTITY OptMoveBottom.label "Situar en la parte inferior">
 <!ENTITY OptMoveBottom.tooltip "Muestra la pieza de puzzle en la parte inferior de la barra de herramientas en lugar de en la parte superior.">
 <!ENTITY OptKeyboardShortcut.captionA "Atajo de teclado para habilitar o deshabilitar">
-<!ENTITY OptKeyboardShortcut.control "Control">
-<!ENTITY OptKeyboardShortcut.shift "Mayúsculas">
-<!ENTITY OptKeyboardShortcut.alt "Alt">
-<!ENTITY OptKeyboardShortcut.command "Command / cmd (o Windows)">
-<!ENTITY OptKeyboardShortcut.option "Option (o Alt)">
-<!ENTITY OptKeyboardShortcut.none "Ninguno">
-<!ENTITY OptKeyboardShortcut.spacebar "Barra espaciadora">
-<!ENTITY OptKeyboardShortcut.pageup "Re pag">
-<!ENTITY OptKeyboardShortcut.pagedown "Av Pag">
-<!ENTITY OptKeyboardShortcut.end "Fin">
-<!ENTITY OptKeyboardShortcut.home "Inicio">
-<!ENTITY OptKeyboardShortcut.left "Izquierda">
-<!ENTITY OptKeyboardShortcut.up "Arriba">
-<!ENTITY OptKeyboardShortcut.right "Derecha">
-<!ENTITY OptKeyboardShortcut.down "Abajo">
-<!ENTITY puzzlebarsabout.name "Puzzle Toolbars">
-<!ENTITY puzzlebarsabout.by "por Quicksaver">
-<!ENTITY puzzlebarsabout.desc "Toda la información acerca del complemento y su desarrollador puede encontrarse en su página principal de complementos (add-ons) de Mozilla. Si le gustó el complemento, por favor considere dejar allí una revisión amable o una pequeña contribución para ayudar a sostener su desarrollo continuado. Los informes de errores y las sugerencias pueden hacerse en la página web de soporte técnico.">
-<!ENTITY puzzlebarsabout.home "Página principal del complemento">
-<!ENTITY puzzlebarsabout.tech "Soporte técnico">
-<!ENTITY puzzlebarsabout.notes "Notas de versión">

@@ -1,11 +1,8 @@
-<!ENTITY Optwindow.style "width: 29em;">
-<!ENTITY Options.title "Puzzle Toolbars">
 <!ENTITY bottom.title "底部">
 <!ENTITY corner.title "角落">
 <!ENTITY urlbar.title "地址栏">
 <!ENTITY lateral.title "侧边">
 <!ENTITY top.title "顶部">
-<!ENTITY about.title "关于">
 <!ENTITY GroupPosition.label "位置">
 <!ENTITY GroupBehavior.label "行为">
 <!ENTITY OptBottom.label "启用底部工具栏">
@@ -38,24 +35,3 @@
 <!ENTITY OptMoveBottom.label "放置在底部">
 <!ENTITY OptMoveBottom.tooltip "在工具栏的底部而不是顶部显示“一块拼图”。">
 <!ENTITY OptKeyboardShortcut.captionA "键盘快捷键设置">
-<!ENTITY OptKeyboardShortcut.control "Control">
-<!ENTITY OptKeyboardShortcut.shift "Shift">
-<!ENTITY OptKeyboardShortcut.alt "Alt">
-<!ENTITY OptKeyboardShortcut.command "Command">
-<!ENTITY OptKeyboardShortcut.option "Option">
-<!ENTITY OptKeyboardShortcut.none "无">
-<!ENTITY OptKeyboardShortcut.spacebar "空格键">
-<!ENTITY OptKeyboardShortcut.pageup "Page Up">
-<!ENTITY OptKeyboardShortcut.pagedown "Page Down">
-<!ENTITY OptKeyboardShortcut.end "End">
-<!ENTITY OptKeyboardShortcut.home "Home">
-<!ENTITY OptKeyboardShortcut.left "左">
-<!ENTITY OptKeyboardShortcut.up "上">
-<!ENTITY OptKeyboardShortcut.right "右">
-<!ENTITY OptKeyboardShortcut.down "下">
-<!ENTITY puzzlebarsabout.name "Puzzle Toolbars">
-<!ENTITY puzzlebarsabout.by "作者 Quicksaver">
-<!ENTITY puzzlebarsabout.desc "关于此附加组件的所有信息可以在 Mozilla 附加组件主页上查看。如果你喜欢这个附加组件，请考虑在附加组件主页上留下好评或者做出一点捐助来支持它的继续开发。问题报告和建议请发送到技术支持页面。">
-<!ENTITY puzzlebarsabout.home "附加组件主页">
-<!ENTITY puzzlebarsabout.tech "技术支持">
-<!ENTITY puzzlebarsabout.notes "发行说明">
