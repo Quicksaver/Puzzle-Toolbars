@@ -4,11 +4,11 @@
 <!ENTITY about.uptodate "поздравляю, у вас свежая версия!">
 <!ENTITY about.needsupdate "доступно обновление!">
 <!ENTITY about.description "Прочтите &quot;Примечания к выпуску&quot; и &quot;Известные проблемы&quot; для этой версии. Дайте мне знать если у вас имеются какие либо проблемы или предложения.">
-<!ENTITY about.descriptionB "The add-on is free, but fixing problems, adding new features and ensuring everything works with each new Firefox release is laborious and can be difficult at times. If you enjoy the add-on, please support its continued development. As the link says, &quot;You Can Help&quot;!">
+<!ENTITY about.descriptionB "Это дополнение бесплатно, но исправление ошибок, добавление новых функций и обеспечение совместимости с новыми версиями Firefox довольно трудоемкий процесс. Если Вам нравится это дополнение, вы можете помочь его дальнейшему развитию. Как говорится, &quot;Вы можете помочь&quot;!">
 <!ENTITY about.allVersions "Показать заметки о всех предыдущих версиях">
 <!ENTITY about.notifyOnUpdates "Показать эту вкладку при следующем обновлении">
-<!ENTITY about.development "Development Status">
-<!ENTITY about.helpdevelopment "YOU CAN HELP">
+<!ENTITY about.development "Статус разработки">
+<!ENTITY about.helpdevelopment "ВЫ МОЖЕТЕ ПОМОЧЬ">
 <!ENTITY about.information "Больше информации">
 <!ENTITY about.home "Домашняя страница дополнения">
 <!ENTITY about.fullchangelog "Полная история изменений">
