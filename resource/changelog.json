@@ -5,7 +5,7 @@
 	],
 	"releases": {
 		"2.1":{
-			"date":"June 24, 2015",
+			"date":"June 25, 2015",
 			"notes":[
 				["new","Brand new preferences tab with a new \"About\" pane (previously the \"Release Notes\" tab)"],
 				["new","zh-TW locale"],
