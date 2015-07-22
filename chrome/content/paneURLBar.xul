@@ -32,37 +32,51 @@
 		</hbox>
 		
 		<hbox align="start" id="paneURLBar-toggler" collapsed="true" data-category="paneURLBar">
-			<checkbox label="&OptUrlbar.label;" tooltiptext="&OptUrlbar.tooltip;" preference="pref-urlbar_bar"/>
+			<checkbox label="&OptUrlbar.label;"
+				jump="urlbar_bar"
+				helptext="&OptUrlbar.tooltip;"
+				delayPreference="pref-urlbar_bar"/>
 		</hbox>
 		
 		<groupbox align="start" id="paneURLBar-behavior" collapsed="true" data-category="paneURLBar">
 			<caption label="&GroupBehavior.label;"/>
 			<checkbox id="objName-urlbar-ppCheckbox"
 				label="&OptShowPiece.label;"
-				tooltiptext="&OptShowPiece.tooltip;"
+				jump="urlbar_pp"
+				helpbox="paneURLBar-behavior-helptext"
 				dependson="pref-urlbar_bar,!pref-urlbar_autohide;pref-urlbar_whenfocused"
-				preference="pref-urlbar_pp"/>
+				delayPreference="pref-urlbar_pp"/>
 			<checkbox id="objName-urlbar-autohideCheckbox"
 				label="&OptAutoHide.label;"
-				tooltiptext="&OptAutoHide.tooltip;"
+				jump="urlbar_autohide"
+				helpbox="paneURLBar-behavior-helptext"
 				dependson="pref-urlbar_bar,pref-urlbar_pp"
-				preference="pref-urlbar_autohide"
+				delayPreference="pref-urlbar_autohide"
 				oncommand="objName.urlbarCheckboxes(); return true;"/>
 			<checkbox id="objName-urlbar-whenfocusedCheckbox"
 				label="&OptWhenFocused.label;"
-				tooltiptext="&OptWhenFocused.tooltip;"
+				jump="urlbar_whenfocused"
+				helpbox="paneURLBar-behavior-helptext"
 				dependson="pref-urlbar_bar,pref-urlbar_autohide"
-				preference="pref-urlbar_whenfocused"
+				delayPreference="pref-urlbar_whenfocused"
 				oncommand="objName.urlbarCheckboxes(); return true;"/>
+			<vbox id="paneURLBar-behavior-helptext" collapsed="true">
+				<description style="font-weight:bold;">&OptShowPiece.label;</description>
+				<description>&OptShowPiece.tooltip;</description>
+				<description style="font-weight:bold; margin-top:1em;">&OptAutoHide.label;</description>
+				<description>&OptAutoHide.tooltip;</description>
+				<description style="font-weight:bold; margin-top:1em;">&OptWhenFocused.label;</description>
+				<description>&OptWhenFocused.tooltip;</description>
+			</vbox>
 		</groupbox>
 		
 		<groupbox align="start" id="paneURLBar-shortcut" collapsed="true" data-category="paneURLBar">
 			<caption label="&OptKeyboardShortcut.captionA;"/>
-			<hbox>
-				<checkbox class="smallindent" keysetAccel="urlbar" preference="pref-urlbar_accel" dependson="pref-urlbar_bar"/>
-				<checkbox class="smallindent" keysetAlt="urlbar" preference="pref-urlbar_alt" dependson="pref-urlbar_bar"/>
-				<checkbox class="smallindent" keysetShift="urlbar" preference="pref-urlbar_shift" dependson="pref-urlbar_bar"/>
-				<menulist class="smallindent" keyset="urlbar" preference="pref-urlbar_keycode" dependson="pref-urlbar_bar"/>
+			<hbox jump="urlbar &OptKeyboardShortcut.captionA;">
+				<checkbox class="smallindent" keysetAccel="urlbar" delayPreference="pref-urlbar_accel" dependson="pref-urlbar_bar"/>
+				<checkbox class="smallindent" keysetAlt="urlbar" delayPreference="pref-urlbar_alt" dependson="pref-urlbar_bar"/>
+				<checkbox class="smallindent" keysetShift="urlbar" delayPreference="pref-urlbar_shift" dependson="pref-urlbar_bar"/>
+				<menulist class="smallindent" keyset="urlbar" delayPreference="pref-urlbar_keycode" dependson="pref-urlbar_bar"/>
 			</hbox>
 		</groupbox>
 	</prefpane>

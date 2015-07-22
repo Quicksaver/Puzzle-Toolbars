@@ -33,31 +33,63 @@
 		</hbox>
 		
 		<hbox align="start" id="paneLateral-toggler" collapsed="true" data-category="paneLateral">
-			<checkbox label="&OptLateral.label;" tooltiptext="&OptLateral.tooltip;" preference="pref-lateral_bar"/>
+			<checkbox label="&OptLateral.label;"
+				jump="lateral_bar"
+				helptext="&OptLateral.tooltip;"
+				delayPreference="pref-lateral_bar"/>
 		</hbox>
 		
 		<groupbox align="start" id="paneLateral-position" collapsed="true" data-category="paneLateral">
 			<caption label="&GroupPosition.label;"/>
-			<radiogroup preference="pref-lateral_placement"><hbox class="ltr">
-				<radio label="&OptPlacement.left;" tooltiptext="&OptPlacement.tooltip;" dependson="pref-lateral_bar" value="left"/>
-				<radio label="&OptPlacement.right;" tooltiptext="&OptPlacement.tooltip;" dependson="pref-lateral_bar" value="right"/>
-			</hbox></radiogroup>
+			<radiogroup delayPreference="pref-lateral_placement"
+				dependson="pref-lateral_bar"
+				jump="lateral_placement"
+				helptext="&OptPlacement.tooltip;">
+				<hbox class="ltr">
+					<radio label="&OptPlacement.left;"
+						class="smallindent"
+						dependson="pref-lateral_bar"
+						value="left"/>
+					<radio label="&OptPlacement.right;"
+						class="smallindent"
+						dependson="pref-lateral_bar"
+						value="right"/>
+				</hbox>
+			</radiogroup>
 		</groupbox>
 		
 		<groupbox align="start" id="paneLateral-behavior" collapsed="true" data-category="paneLateral">
 			<caption label="&GroupBehavior.label;"/>
-			<checkbox label="&OptAutoHide.label;" tooltiptext="&OptAutoHide.tooltip;" dependson="pref-lateral_bar" preference="pref-lateral_autohide"/>
-			<checkbox label="&OptShowPiece.label;" tooltiptext="&OptShowPiece.tooltip;" dependson="pref-lateral_bar" preference="pref-lateral_pp"/>
-			<checkbox class="indent" label="&OptMoveBottom.label;" tooltiptext="&OptMoveBottom.tooltip;" dependson="pref-lateral_bar,pref-lateral_pp" preference="pref-lateral_bottom"/>
+			<checkbox label="&OptAutoHide.label;"
+				jump="lateral_autohide"
+				helptext="&OptAutoHide.tooltip;"
+				dependson="pref-lateral_bar"
+				delayPreference="pref-lateral_autohide"/>
+			<checkbox label="&OptShowPiece.label;"
+				jump="lateral_pp"
+				helpbox="paneLateral-pp-helptext"
+				dependson="pref-lateral_bar"
+				delayPreference="pref-lateral_pp"/>
+			<checkbox class="indent"
+				label="&OptMoveBottom.label;"
+				jump="lateral_bottom"
+				helpbox="paneLateral-pp-helptext"
+				dependson="pref-lateral_bar,pref-lateral_pp"
+				delayPreference="pref-lateral_bottom"/>
+			<vbox id="paneLateral-pp-helptext" collapsed="true">
+				<description>&OptShowPiece.tooltip;</description>
+				<description style="font-weight:bold; margin-top:1em;">&OptMoveBottom.label;</description>
+				<description>&OptMoveBottom.tooltip;</description>
+			</vbox>
 		</groupbox>
 		
 		<groupbox align="start" id="paneLateral-shortcut" collapsed="true" data-category="paneLateral">
 			<caption label="&OptKeyboardShortcut.captionA;"/>
-			<hbox>
-				<checkbox class="smallindent" keysetAccel="lateral" preference="pref-lateral_accel" dependson="pref-lateral_bar"/>
-				<checkbox class="smallindent" keysetAlt="lateral" preference="pref-lateral_alt" dependson="pref-lateral_bar"/>
-				<checkbox class="smallindent" keysetShift="lateral" preference="pref-lateral_shift" dependson="pref-lateral_bar"/>
-				<menulist class="smallindent" keyset="lateral" preference="pref-lateral_keycode" dependson="pref-lateral_bar"/>
+			<hbox jump="lateral &OptKeyboardShortcut.captionA;">
+				<checkbox class="smallindent" keysetAccel="lateral" delayPreference="pref-lateral_accel" dependson="pref-lateral_bar"/>
+				<checkbox class="smallindent" keysetAlt="lateral" delayPreference="pref-lateral_alt" dependson="pref-lateral_bar"/>
+				<checkbox class="smallindent" keysetShift="lateral" delayPreference="pref-lateral_shift" dependson="pref-lateral_bar"/>
+				<menulist class="smallindent" keyset="lateral" delayPreference="pref-lateral_keycode" dependson="pref-lateral_bar"/>
 			</hbox>
 		</groupbox>
 	</prefpane>

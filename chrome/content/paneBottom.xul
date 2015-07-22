@@ -32,24 +32,44 @@
 		</hbox>
 		
 		<hbox align="start" id="paneBottom-toggler" collapsed="true" data-category="paneBottom">
-			<checkbox label="&OptBottom.label;" tooltiptext="&OptBottom.tooltip;" preference="pref-bottom_bar"/>
+			<checkbox label="&OptBottom.label;"
+				jump="bottom_bar"
+				helptext="&OptBottom.tooltip;"
+				delayPreference="pref-bottom_bar"/>
 		</hbox>
 		
 		<groupbox align="start" id="paneBottom-pp" collapsed="true" data-category="paneBottom">
-			<caption><checkbox label="&OptShowPiece.label;" tooltiptext="&OptShowPiece.tooltip;" dependson="pref-bottom_bar" preference="pref-bottom_pp"/></caption>
-			<radiogroup preference="pref-bottom_placement"><hbox class="ltr indent">
-				<radio label="&OptPlacement.left;" tooltiptext="&OptPlacement.tooltip;" dependson="pref-bottom_bar,pref-bottom_pp" value="left"/>
-				<radio label="&OptPlacement.right;" tooltiptext="&OptPlacement.tooltip;" dependson="pref-bottom_bar,pref-bottom_pp" value="right"/>
-			</hbox></radiogroup>
+			<caption>
+				<checkbox label="&OptShowPiece.label;"
+					jump="bottom_pp"
+					helptext="&OptShowPiece.tooltip;"
+					dependson="pref-bottom_bar"
+					delayPreference="pref-bottom_pp"/>
+			</caption>
+			<radiogroup delayPreference="pref-bottom_placement"
+				dependson="pref-bottom_bar,pref-bottom_pp"
+				jump="bottom_placement"
+				helptext="&OptPlacement.tooltip;">
+				<hbox class="ltr indent">
+					<radio label="&OptPlacement.left;"
+						class="smallindent"
+						dependson="pref-bottom_bar,pref-bottom_pp"
+						value="left"/>
+					<radio label="&OptPlacement.right;"
+						class="smallindent"
+						dependson="pref-bottom_bar,pref-bottom_pp"
+						value="right"/>
+				</hbox>
+			</radiogroup>
 		</groupbox>
 		
 		<groupbox align="start" id="paneBottom-shortcut" collapsed="true" data-category="paneBottom">
 			<caption label="&OptKeyboardShortcut.captionA;"/>
-			<hbox>
-				<checkbox class="smallindent" keysetAccel="bottom" preference="pref-bottom_accel" dependson="pref-bottom_bar"/>
-				<checkbox class="smallindent" keysetAlt="bottom" preference="pref-bottom_alt" dependson="pref-bottom_bar"/>
-				<checkbox class="smallindent" keysetShift="bottom" preference="pref-bottom_shift" dependson="pref-bottom_bar"/>
-				<menulist class="smallindent" keyset="bottom" preference="pref-bottom_keycode" dependson="pref-bottom_bar"/>
+			<hbox jump="bottom &OptKeyboardShortcut.captionA;">
+				<checkbox class="smallindent" keysetAccel="bottom" delayPreference="pref-bottom_accel" dependson="pref-bottom_bar"/>
+				<checkbox class="smallindent" keysetAlt="bottom" delayPreference="pref-bottom_alt" dependson="pref-bottom_bar"/>
+				<checkbox class="smallindent" keysetShift="bottom" delayPreference="pref-bottom_shift" dependson="pref-bottom_bar"/>
+				<menulist class="smallindent" keyset="bottom" delayPreference="pref-bottom_keycode" dependson="pref-bottom_bar"/>
 			</hbox>
 		</groupbox>
 	</prefpane>

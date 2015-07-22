@@ -34,25 +34,60 @@
 		</hbox>
 		
 		<hbox align="start" id="paneCorner-toggler" collapsed="true" data-category="paneCorner">
-			<checkbox label="&OptCorner.label;" tooltiptext="&OptCorner.tooltip;" preference="pref-corner_bar"/>
+			<checkbox label="&OptCorner.label;"
+				jump="corner_bar"
+				helptext="&OptCorner.tooltip;"
+				delayPreference="pref-corner_bar"/>
 		</hbox>
 		
 		<groupbox align="start" id="paneCorner-position" collapsed="true" data-category="paneCorner">
 			<caption label="&GroupPosition.label;"/>
 			<vbox align="start">
-				<radiogroup preference="pref-corner_placement"><hbox class="ltr">
-					<radio label="&OptPlacement.left;" tooltiptext="&OptPlacement.tooltip;" dependson="pref-corner_bar" value="left"/>
-					<radio label="&OptPlacement.right;" tooltiptext="&OptPlacement.tooltip;" dependson="pref-corner_bar" value="right"/>
-				</hbox></radiogroup>
-				<checkbox label="&OptExtend.label;" tooltiptext="&OptExtend.tooltip;" dependson="pref-corner_bar" preference="pref-corner_extend"/>
+				<radiogroup delayPreference="pref-corner_placement"
+					dependson="pref-corner_bar"
+					jump="corner_placement"
+					helpbox="paneCorner-position-helptext">
+					<hbox class="ltr">
+						<radio label="&OptPlacement.left;"
+							class="smallindent"
+							dependson="pref-corner_bar"
+							value="left"/>
+						<radio label="&OptPlacement.right;"
+							class="smallindent"
+							dependson="pref-corner_bar"
+							value="right"/>
+					</hbox>
+				</radiogroup>
+				<checkbox label="&OptExtend.label;"
+					jump="corner_extend"
+					helpbox="paneCorner-position-helptext"
+					dependson="pref-corner_bar"
+					delayPreference="pref-corner_extend"/>
+			</vbox>
+			<vbox id="paneCorner-position-helptext" collapsed="true">
+				<description>&OptPlacement.tooltip;</description>
+				<description style="font-weight:bold; margin-top:1em;">&OptExtend.label;</description>
+				<description>&OptExtend.tooltip;</description>
 			</vbox>
 		</groupbox>
 		
 		<groupbox align="start" id="paneCorner-behavior" collapsed="true" data-category="paneCorner">
 			<caption label="&GroupBehavior.label;"/>
-			<checkbox label="&OptShowPiece.label;" tooltiptext="&OptShowPiece.tooltip;" dependson="pref-corner_bar" preference="pref-corner_pp"/>
-			<checkbox label="&OptAutoHide.label;" tooltiptext="&OptAutoHide.tooltip;" dependson="pref-corner_bar" preference="pref-corner_autohide"/>
-			<hbox tooltiptext="&OptHotspot.tooltip;" align="center" class="indent">
+			<checkbox label="&OptShowPiece.label;"
+				jump="corner_pp"
+				helptext="&OptShowPiece.tooltip;"
+				dependson="pref-corner_bar"
+				delayPreference="pref-corner_pp"/>
+			<checkbox label="&OptAutoHide.label;"
+				jump="corner_autohide"
+				helpbox="paneCorner-autohide-helptext"
+				dependson="pref-corner_bar"
+				delayPreference="pref-corner_autohide"/>
+			<hbox align="center"
+				class="indent"
+				jump="corner_hotspotHeight"
+				dependson="pref-corner_bar,pref-corner_autohide"
+				helpbox="paneCorner-autohide-helptext">
 				<label value="&OptHotspot.label;" dependson="pref-corner_bar,pref-corner_autohide"/>
 				<hbox flex="1"/>
 				<label value="&OptHotspot.low;" dependson="pref-corner_bar,pref-corner_autohide"/>
@@ -64,18 +99,23 @@
 					value="6"
 					increment="1"
 					pageincrement="4"
-					preference="pref-corner_hotspotHeight"/>
+					delayPreference="pref-corner_hotspotHeight"/>
 				<label value="&OptHotspot.high;" dependson="pref-corner_bar,pref-corner_autohide"/>
 			</hbox>
+			<vbox id="paneCorner-autohide-helptext" collapsed="true">
+				<description>&OptAutoHide.tooltip;</description>
+				<description style="font-weight:bold; margin-top:1em;">&OptHotspot.label;</description>
+				<description>&OptHotspot.tooltip;</description>
+			</vbox>
 		</groupbox>
 		
 		<groupbox align="start" id="paneCorner-shortcut" collapsed="true" data-category="paneCorner">
 			<caption label="&OptKeyboardShortcut.captionA;"/>
-			<hbox>
-				<checkbox class="smallindent" keysetAccel="corner" preference="pref-corner_accel" dependson="pref-corner_bar"/>
-				<checkbox class="smallindent" keysetAlt="corner" preference="pref-corner_alt" dependson="pref-corner_bar"/>
-				<checkbox class="smallindent" keysetShift="corner" preference="pref-corner_shift" dependson="pref-corner_bar"/>
-				<menulist class="smallindent" keyset="corner" preference="pref-corner_keycode" dependson="pref-corner_bar"/>
+			<hbox jump="corner &OptKeyboardShortcut.captionA;">
+				<checkbox class="smallindent" keysetAccel="corner" delayPreference="pref-corner_accel" dependson="pref-corner_bar"/>
+				<checkbox class="smallindent" keysetAlt="corner" delayPreference="pref-corner_alt" dependson="pref-corner_bar"/>
+				<checkbox class="smallindent" keysetShift="corner" delayPreference="pref-corner_shift" dependson="pref-corner_bar"/>
+				<menulist class="smallindent" keyset="corner" delayPreference="pref-corner_keycode" dependson="pref-corner_bar"/>
 			</hbox>
 		</groupbox>
 	</prefpane>

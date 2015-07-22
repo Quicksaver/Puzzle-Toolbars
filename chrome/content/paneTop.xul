@@ -33,29 +33,53 @@
 		</hbox>
 		
 		<hbox align="start" id="paneTop-toggler" collapsed="true" data-category="paneTop">
-			<checkbox label="&OptTop.label;" tooltiptext="&OptTop.tooltip;" preference="pref-top_bar"/>
+			<checkbox label="&OptTop.label;"
+				jump="top_bar"
+				helptext="&OptTop.tooltip;"
+				delayPreference="pref-top_bar"/>
 		</hbox>
 		
 		<groupbox align="start" id="paneTop-pp" collapsed="true" data-category="paneTop">
-			<caption><checkbox label="&OptShowPiece.label;" tooltiptext="&OptShowPiece.tooltip;" dependson="pref-top_bar" preference="pref-top_pp"/></caption>
-			<radiogroup preference="pref-top_placement"><hbox class="ltr indent">
-				<radio label="&OptPlacement.left;" tooltiptext="&OptPlacement.tooltip;" dependson="pref-top_bar,pref-top_pp" value="left"/>
-				<radio label="&OptPlacement.right;" tooltiptext="&OptPlacement.tooltip;" dependson="pref-top_bar,pref-top_pp" value="right"/>
-			</hbox></radiogroup>
+			<caption>
+				<checkbox label="&OptShowPiece.label;"
+					jump="top_pp"
+					helptext="&OptShowPiece.tooltip;"
+					dependson="pref-top_bar"
+					delayPreference="pref-top_pp"/>
+			</caption>
+			<radiogroup delayPreference="pref-top_placement"
+				jump="top_placement"
+				helptext="&OptPlacement.tooltip;"
+				dependson="pref-top_bar,pref-top_pp">
+				<hbox class="ltr indent">
+					<radio label="&OptPlacement.left;"
+						class="smallindent"
+						dependson="pref-top_bar,pref-top_pp"
+						value="left"/>
+					<radio label="&OptPlacement.right;"
+						class="smallindent"
+						dependson="pref-top_bar,pref-top_pp"
+						value="right"/>
+				</hbox>
+			</radiogroup>
 		</groupbox>
 		
 		<groupbox align="start" id="paneTop-behavior" collapsed="true" data-category="paneTop">
 			<caption label="&GroupBehavior.label;"/>
-			<checkbox label="&OptTopSlimChrome.label;" tooltiptext="&OptTopSlimChrome.tooltip;" dependson="pref-top_bar,pref-tFOB" preference="pref-top_slimChrome"/>
+			<checkbox label="&OptTopSlimChrome.label;"
+				jump="top_slimChrome"
+				helptext="&OptTopSlimChrome.tooltip;"
+				dependson="pref-top_bar,pref-tFOB"
+				delayPreference="pref-top_slimChrome"/>
 		</groupbox>
 		
 		<groupbox align="start" id="paneTop-shortcut" collapsed="true" data-category="paneTop">
 			<caption label="&OptKeyboardShortcut.captionA;"/>
-			<hbox>
-				<checkbox class="smallindent" keysetAccel="top" preference="pref-top_accel" dependson="pref-top_bar"/>
-				<checkbox class="smallindent" keysetAlt="top" preference="pref-top_alt" dependson="pref-top_bar"/>
-				<checkbox class="smallindent" keysetShift="top" preference="pref-top_shift" dependson="pref-top_bar"/>
-				<menulist class="smallindent" keyset="top" preference="pref-top_keycode" dependson="pref-top_bar"/>
+			<hbox jump="top &OptKeyboardShortcut.captionA;">
+				<checkbox class="smallindent" keysetAccel="top" delayPreference="pref-top_accel" dependson="pref-top_bar"/>
+				<checkbox class="smallindent" keysetAlt="top" delayPreference="pref-top_alt" dependson="pref-top_bar"/>
+				<checkbox class="smallindent" keysetShift="top" delayPreference="pref-top_shift" dependson="pref-top_bar"/>
+				<menulist class="smallindent" keyset="top" delayPreference="pref-top_keycode" dependson="pref-top_bar"/>
 			</hbox>
 		</groupbox>
 	</prefpane>
