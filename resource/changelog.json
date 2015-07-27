@@ -1,9 +1,21 @@
 {
-	"current":"2.1",
+	"current":"2.1.1",
 	"knownissues":[
 		["There are some minor (aesthetic) <a target=\"blank\" href=\"https://github.com/Quicksaver/Puzzle-Toolbars/issues/24\">issues</a> when the Location Bar Puzzle Bar is used together with <a target=\"blank\" href=\"https://addons.mozilla.org/firefox/addon/ui-enhancer/\">Location Bar Enhancer</a>."]
 	],
 	"releases": {
+		"2.1.1":{
+			"date":"July 27, 2015",
+			"notes":[
+				["new","Undo/Redo/Import/Export/Restore-defaults/Jump-to functions in the preferences"],
+				["changed","Re-styled and optimized the help tooltips in the preferences"],
+				["changed","Only request the Development Status information when the About pane in the preferences is accessed"],
+				["bugfix","Force LTR layout for the preferences tab options, at least until any RTL locales are included"],
+				["bugfix","Minor startup improvements"],
+				["bugfix","The preferences, especially the corner active mouse area slider, were very sluggish to change, all should be much smoother now"],
+				["bugfix","Lightweight themes (personas) were not being applied to the corner puzzle toolbar (<a target=\"blank\" href=\"https://github.com/Quicksaver/Puzzle-Toolbars/issues/81\">issue #81</a>)"]
+			]
+		},
 		"2.1":{
 			"date":"June 25, 2015",
 			"notes":[
