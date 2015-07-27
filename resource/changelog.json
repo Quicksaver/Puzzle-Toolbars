@@ -5,7 +5,7 @@
 	],
 	"releases": {
 		"2.1.1":{
-			"date":"July 27, 2015",
+			"date":"July 28, 2015",
 			"notes":[
 				["new","Undo/Redo/Import/Export/Restore-defaults/Jump-to functions in the preferences"],
 				["changed","Re-styled and optimized the help tooltips in the preferences"],
