@@ -1,4 +1,4 @@
-Modules.VERSION = '2.0.1';
+Modules.VERSION = '2.0.2';
 
 this.__defineGetter__('gFindBar', function() { return window.gFindBar; });
 this.__defineGetter__('bottomBox', function() { return $('browser-bottombox'); });
@@ -232,17 +232,17 @@ this.corner = {
 	},
 	
 	stylePersona: function() {
-		if(!trueAttribute(this.box, 'lwthemefooter')) {
+		if(!trueAttribute(bottomBox, 'lwthemefooter')) {
 			this.lwtheme.bgImage = '';
 			this.lwtheme.color = '';
 			this.lwtheme.bgColor = '';
 		}
 		else {
-			var computed = getComputedStyle(this.box);
-			if(this.lwtheme.bgImage != computed.backgroundImage && computed.backgroundImage != 'none') {
-				this.lwtheme.bgImage = computed.backgroundImage;
-				this.lwtheme.color = computed.color;
-				this.lwtheme.bgColor = computed.backgroundColor;
+			var boxStyle = getComputedStyle(bottomBox);
+			if(this.lwtheme.bgImage != boxStyle.backgroundImage && boxStyle.backgroundImage != 'none') {
+				this.lwtheme.bgImage = boxStyle.backgroundImage;
+				this.lwtheme.color = boxStyle.color;
+				this.lwtheme.bgColor = boxStyle.backgroundColor;
 			}
 		}
 		
@@ -256,24 +256,20 @@ this.corner = {
 			var offsetPersonaX =
 				-this.style.left
 				-this.container.clientLeft
-				+parseInt(computed.getPropertyValue('border-left-width'));
+				+parseInt(boxStyle.getPropertyValue('border-left-width'));
 		} else {
 			var offsetPersonaX =
-				-this.box.clientWidth
+				-bottomBox.clientWidth
 				+this.style.right
 				+this.container.clientWidth
 				+this.container.clientLeft
-				-parseInt(computed.getPropertyValue('border-left-width'));
+				-parseInt(boxStyle.getPropertyValue('border-left-width'));
 		}
 		
-		var offsetPersonaY =
-			+this.container.clientHeight
-			+this.style.bottom
-			+this.container.clientTop
-			-parseInt(computed.getPropertyValue('border-bottom-width'));
+		var offsetPersonaY = this.style.bottom;
 		if(this.style.bottom > 1) { offsetPersonaY--; }
 		
-		var offsetPadding = computed.getPropertyValue('background-position');
+		var offsetPadding = boxStyle.getPropertyValue('background-position');
 		if(offsetPadding.indexOf(' ') > -1 && offsetPadding.indexOf('px', offsetPadding.indexOf(' ') +1) > -1) {
 			offsetPersonaY += parseInt(offsetPadding.substr(offsetPadding.indexOf(' ') +1, offsetPadding.indexOf('px', offsetPadding.indexOf(' ') +1)));
 		}
@@ -285,7 +281,7 @@ this.corner = {
 		sscode += '	  background-image: ' + this.lwtheme.bgImage + ' !important;\n';
 		sscode += '	  background-color: ' + this.lwtheme.bgColor + ' !important;\n';
 		sscode += '	  color: ' + this.lwtheme.color + ' !important;\n';
-		sscode += '	  background-position: ' + offsetPersonaX + 'px ' +offsetPersonaY+ 'px !important;\n';
+		sscode += '	  background-position: ' + offsetPersonaX + 'px calc(100% + ' +offsetPersonaY+ 'px) !important;\n';
 		sscode += '	  background-repeat: repeat !important;\n';
 		sscode += '	  background-size: auto auto !important;\n';
 		sscode += '	}\n';
@@ -308,6 +304,7 @@ this.corner = {
 	
 	placement: function() {
 		toggleAttribute(this.bar, 'movetoright', Prefs.corner_placement == 'right');
+		this.personaChanged();
 	},
 	
 	autoHide: function() {
