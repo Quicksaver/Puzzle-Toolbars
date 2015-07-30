@@ -1,13 +1,13 @@
-<!ENTITY preferences.button "Preferences">
-<!ENTITY preferences.undo.label "Undo">
-<!ENTITY preferences.redo.label "Redo">
-<!ENTITY preferences.undoredo.tooltip "Quickly revert any change made to the add-on's preferences, including importing from a file and restoring defaults.">
-<!ENTITY preferences.import.label "Import from file...">
-<!ENTITY preferences.import.tooltip "Load add-on preferences from a previously exported file on your computer.">
-<!ENTITY preferences.export.label "Export to file...">
-<!ENTITY preferences.export.tooltip "Save your add-on preferences into an external file for safekeeping.">
-<!ENTITY preferences.reset.label "Restore defaults">
-<!ENTITY preferences.reset.tooltip.a "All preferences are rolled back to their default values, as if the add-on was fresh installed.">
-<!ENTITY preferences.reset.tooltip.b "Button placements in toolbars are unaffected, to revert those use the Restore Defaults button in Customize view instead.">
-<!ENTITY preferences.jumpto.label "Jump to preference...">
-<!ENTITY preferences.jumpto.tooltip "Type in a word and you'll be taken to the first preference that contains it.">
+<!ENTITY preferences.button "Préférences">
+<!ENTITY preferences.undo.label "Annuler">
+<!ENTITY preferences.redo.label "Rétablir">
+<!ENTITY preferences.undoredo.tooltip "Rétablir rapidement toute modification des préférences, y compris l'importation à partir d'un fichier et le rétablissement des paramètres par défaut.">
+<!ENTITY preferences.import.label "Importer à partir d'un fichier…">
+<!ENTITY preferences.import.tooltip "Charger les préférences à partir d'un fichier exporté précédemment sur votre ordinateur.">
+<!ENTITY preferences.export.label "Exporter vers un fichier…">
+<!ENTITY preferences.export.tooltip "Enregistrez vos préférences dans un fichier externe comme sauvegarde.">
+<!ENTITY preferences.reset.label "Rétablir les paramètres par défaut">
+<!ENTITY preferences.reset.tooltip.a "Toutes les valeurs des préférences sont établies aux valeurs par défaut, comme si l'extension avait été fraîchement installée.">
+<!ENTITY preferences.reset.tooltip.b "Le placement des boutons dans la barre d'outils n'est pas affecté, pour rétablir cela, utilisez le bouton de rétablissement des positions dans la boîte de dialogue de personnalisation.">
+<!ENTITY preferences.jumpto.label "Aller aux préférences…">
+<!ENTITY preferences.jumpto.tooltip "Saisissez un mot et vous serez dirigé vers la première préférence le contenant.">
