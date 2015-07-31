@@ -1,4 +1,4 @@
-Modules.VERSION = '3.0.2';
+Modules.VERSION = '3.0.3';
 
 this.__defineGetter__('PrintPreviewListener', function() { return window.PrintPreviewListener; });
 this.__defineGetter__('gNavBar', function() { return $('nav-bar'); });
@@ -46,19 +46,35 @@ this.onFullScreen = {
 	},
 	
 	handleEvent: function(e) {
-		// we get the event before the change is made
-		var inFullScreen = !window.fullScreen && !document.mozFullScreen;
-		
-		// only call the handlers if there was a change
-		if(inFullScreen == this.entered) { return; }
-		this.entered = inFullScreen;
-		
-		for(let h of this.handlers) {
-			if(h.handleEvent) {
-				h.handleEvent(e);
-			} else {
-				h(e);
-			}
+		switch(e.type) {
+			case 'fullscreen':
+				// Before FF41, we get the fullscreen event _before_ the window transitions into or out of FS mode.
+				if(Services.vc.compare(Services.appinfo.version, "41.0a1") < 0) {
+					var inFullScreen = !window.fullScreen && !document.mozFullScreen;
+				} else {
+					var inFullScreen = window.fullScreen && !document.mozFullScreen;
+				}
+				
+				// only call the handlers if there was a change
+				if(inFullScreen == this.entered) { return; }
+				this.entered = inFullScreen;
+				
+				for(let h of this.handlers) {
+					if(h.handleEvent) {
+						h.handleEvent(e);
+					} else {
+						h(e);
+					}
+				}
+				break;
+			
+			case 'MozDOMFullscreen:Entered':
+				this.receiveMessage({ data: true });
+				break;
+			
+			case 'MozDOMFullscreen:Exited':
+				this.receiveMessage({ data: false });
+				break;
 		}
 	},
 	
@@ -264,8 +280,13 @@ Modules.LOADMODULE = function() {
 	fullscreenDefaults['fullscreen.autohide'] = true;
 	Prefs.setDefaults(fullscreenDefaults, 'browser', '');
 	
-	Messenger.loadInWindow(window, 'initPuzzleBars');
-	Messenger.listenWindow(window, 'DOMFullScreen', onFullScreen);
+	if(Services.vc.compare(Services.appinfo.version, "41.0a1") < 0) {
+		Messenger.loadInWindow(window, 'initPuzzleBars');
+		Messenger.listenWindow(window, 'DOMFullScreen', onFullScreen);
+	} else {
+		Listeners.add(window, 'MozDOMFullscreen:Entered', onFullScreen);
+		Listeners.add(window, 'MozDOMFullscreen:Exited', onFullScreen);
+	}
 	
 	Listeners.add(contextMenu, 'popupshowing', bars);
 	Listeners.add(viewMenu, 'popupshown', bars);
@@ -295,8 +316,13 @@ Modules.UNLOADMODULE = function() {
 	Listeners.remove(window, 'fullscreen', onFullScreen);
 	Listeners.remove(statusBar, 'load', bars, true);
 	
-	Messenger.unlistenWindow(window, 'DOMFullScreen', onFullScreen);
-	Messenger.unloadFromWindow(window, 'initPuzzleBars');
+	if(Services.vc.compare(Services.appinfo.version, "41.0a1") < 0) {
+		Messenger.unlistenWindow(window, 'DOMFullScreen', onFullScreen);
+		Messenger.unloadFromWindow(window, 'initPuzzleBars');
+	} else {
+		Listeners.remove(window, 'MozDOMFullscreen:Entered', onFullScreen);
+		Listeners.remove(window, 'MozDOMFullscreen:Exited', onFullScreen);
+	}
 	removeAttribute(document.documentElement, objName+'-noAnimation');
 	
 	CustomizableUI.removeListener(bars);
