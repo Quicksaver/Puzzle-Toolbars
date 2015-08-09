@@ -1,9 +1,17 @@
 {
-	"current":"2.1.1",
+	"current":"2.1.2",
 	"knownissues":[
 		["There are some minor (aesthetic) <a target=\"blank\" href=\"https://github.com/Quicksaver/Puzzle-Toolbars/issues/24\">issues</a> when the Location Bar Puzzle Bar is used together with <a target=\"blank\" href=\"https://addons.mozilla.org/firefox/addon/ui-enhancer/\">Location Bar Enhancer</a>."]
 	],
 	"releases": {
+		"2.1.2":{
+			"date":"August 9, 2015",
+			"notes":[
+				["updated","fr locale"],
+				["bugfix","Compatibility with <a target=\"blank\" href=\"https://addons.mozilla.org/firefox/addon/omnisidebar/\">OmniSidebar</a> and <a target=\"blank\" href=\"https://addons.mozilla.org/firefox/addon/the-fox-only-better/\">The Fox, Only Better</a>: the Bookmark This Page button would stop working if one of the add-ons was disabled/updated; this fix requires a browser restart"],
+				["bugfix","(Firefox 41+) toolbars would not react correctly when entering or exiting fullscreen"]
+			]
+		},
 		"2.1.1":{
 			"date":"July 28, 2015",
 			"notes":[
