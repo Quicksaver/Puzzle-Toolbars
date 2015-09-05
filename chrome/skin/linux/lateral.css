@@ -1,56 +1,53 @@
 @namespace url(http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul);
-@-moz-document url("chrome://browser/content/browser.xul") {
-	
-	/* special widgets */
 
-	#puzzleBars-lateral-bar separator,
-	#puzzleBars-lateral-bar toolbarseparator {
-		border: none;
-		height: 2px;
-		background-color: transparent;
-		background-image:	linear-gradient(to right, hsla(210,54%,20%,0), hsla(210,54%,20%,.3) 30%, hsla(210,54%,20%,.3) 70%, hsla(210,54%,20%,0)),
-					linear-gradient(to right, hsla(0,0%,100%,0), hsla(0,0%,100%,.3) 30%, hsla(0,0%,100%,.3) 70%, hsla(0,0%,100%,0)),
-					linear-gradient(to right, hsla(210,54%,20%,0), hsla(210,54%,20%,.3) 30%, hsla(210,54%,20%,.3) 70%, hsla(210,54%,20%,0));
-		background-size: calc(100% - 1px) 1px, calc(100% - 1px) 1px, calc(100% - 1px) 1px;
-		background-position: 0px 0px, 0px 1px, 0px 2px;
-		background-repeat: no-repeat;
-		background-origin: content-box;
-	}
-	
-	/* style the toolbar */
-	
-	#puzzleBars-lateral-bar {
-		min-width: 26px;
-		background-color: -moz-dialog;
-	}
-	
-	#puzzleBars-lateral-bar:not([movetoright]):not([inSidebar]):-moz-any(:not([sidebarOpen]),[autohide]),
-	window[customizing="true"] #puzzleBars-lateral-bar:not([movetoright]) {
-		box-shadow: inset -1px 0 0 ThreeDShadow;
-	}
-	
-	#puzzleBars-lateral-bar[movetoright]:not([inSidebar]):-moz-any(:not([sidebarOpen]),[autohide]),
-	window[customizing="true"] #puzzleBars-lateral-bar[movetoright] {
-		box-shadow: inset 1px 0 0 ThreeDShadow;
-	}
-	
-	/* Puzzle Pieces */
-	
-	#puzzleBars-lateral-PP:not([movetoright]):not([active]):not(:hover):not([hover]),
-	#puzzleBars-lateral-PP:not([movetoright])[autohide]:not([inSidebar]):not(:hover):not([hover]) {
-		clip: rect(0px, 32px, 32px, 18px);
-	}
-	
-	#puzzleBars-lateral-PP[movetoright]:not([active]):not(:hover):not([hover]),
-	#puzzleBars-lateral-PP[movetoright][autohide]:not([inSidebar]):not(:hover):not([hover]) {
-		clip: rect(0px, 14px, 32px, 0px);
-	}
-	
-	#puzzleBars-lateral-PP[active]:not(:hover) image {
-		width: 22px;
-	}
-	
-	#puzzleBars-lateral-PP:not([movetobottom])[active]:not(:hover) image { margin-top: 5px; }
-	#puzzleBars-lateral-PP[movetobottom][active]:not(:hover) image { margin-bottom: 5px; }
-	
+/* special widgets */
+
+#puzzleBars-lateral-bar separator,
+#puzzleBars-lateral-bar toolbarseparator {
+	border: none;
+	height: 2px;
+	background-color: transparent;
+	background-image:	linear-gradient(to right, hsla(210,54%,20%,0), hsla(210,54%,20%,.3) 30%, hsla(210,54%,20%,.3) 70%, hsla(210,54%,20%,0)),
+				linear-gradient(to right, hsla(0,0%,100%,0), hsla(0,0%,100%,.3) 30%, hsla(0,0%,100%,.3) 70%, hsla(0,0%,100%,0)),
+				linear-gradient(to right, hsla(210,54%,20%,0), hsla(210,54%,20%,.3) 30%, hsla(210,54%,20%,.3) 70%, hsla(210,54%,20%,0));
+	background-size: calc(100% - 1px) 1px, calc(100% - 1px) 1px, calc(100% - 1px) 1px;
+	background-position: 0px 0px, 0px 1px, 0px 2px;
+	background-repeat: no-repeat;
+	background-origin: content-box;
 }
+
+/* style the toolbar */
+
+#puzzleBars-lateral-bar {
+	min-width: 26px;
+	background-color: -moz-dialog;
+}
+
+#puzzleBars-lateral-bar:not([movetoright]):not([inSidebar]):-moz-any(:not([sidebarOpen]),[autohide]),
+window[customizing="true"] #puzzleBars-lateral-bar:not([movetoright]) {
+	box-shadow: inset -1px 0 0 ThreeDShadow;
+}
+
+#puzzleBars-lateral-bar[movetoright]:not([inSidebar]):-moz-any(:not([sidebarOpen]),[autohide]),
+window[customizing="true"] #puzzleBars-lateral-bar[movetoright] {
+	box-shadow: inset 1px 0 0 ThreeDShadow;
+}
+
+/* Puzzle Pieces */
+
+#puzzleBars-lateral-PP:not([movetoright]):not([active]):not(:hover):not([hover]),
+#puzzleBars-lateral-PP:not([movetoright])[autohide]:not([inSidebar]):not(:hover):not([hover]) {
+	clip: rect(0px, 32px, 32px, 18px);
+}
+
+#puzzleBars-lateral-PP[movetoright]:not([active]):not(:hover):not([hover]),
+#puzzleBars-lateral-PP[movetoright][autohide]:not([inSidebar]):not(:hover):not([hover]) {
+	clip: rect(0px, 14px, 32px, 0px);
+}
+
+#puzzleBars-lateral-PP[active]:not(:hover) image {
+	width: 22px;
+}
+
+#puzzleBars-lateral-PP:not([movetobottom])[active]:not(:hover) image { margin-top: 5px; }
+#puzzleBars-lateral-PP[movetobottom][active]:not(:hover) image { margin-bottom: 5px; }

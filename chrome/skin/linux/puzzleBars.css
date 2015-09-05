@@ -1,18 +1,15 @@
 @namespace url(http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul);
-@-moz-document url("chrome://browser/content/browser.xul") {
 
-	/* style the add-on bar */
-	
-	.puzzleBars-bar {
-		min-height: 20px;
-	}
-	
-	/* Inner buttons and other elements display */
-	
-	/* #fixer-status-bar selector is from UI Fixer add-on "make status bar movable" feature */
-	.puzzleBars-bar > toolbaritem:not(#fixer-status-bar):not(#puzzleBars-status-bar-container):not(#search-container),
-	.puzzleBars-bar > .customization-target > toolbaritem:not(#fixer-status-bar):not(#puzzleBars-status-bar-container):not(#search-container) {
-		height: 24px;
-	}
+/* style the add-on bar */
 
+.puzzleBars-bar {
+	min-height: 20px;
+}
+
+/* Inner buttons and other elements display */
+
+/* #fixer-status-bar selector is from UI Fixer add-on "make status bar movable" feature */
+.puzzleBars-bar > toolbaritem:not(#fixer-status-bar):not(#puzzleBars-status-bar-container):not(#search-container),
+.puzzleBars-bar > .customization-target > toolbaritem:not(#fixer-status-bar):not(#puzzleBars-status-bar-container):not(#search-container) {
+	height: 24px;
 }

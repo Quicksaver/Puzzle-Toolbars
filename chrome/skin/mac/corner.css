@@ -1,37 +1,34 @@
 @namespace url(http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul);
-@-moz-document url("chrome://browser/content/browser.xul") {
-	
-	#puzzleBars-corner-bar {
-		box-shadow: none;
-	}
-	
-	window:not([customizing="true"]) #puzzleBars-corner-container {
-		border-radius: 8px 8px 0 0;
-		border-top: 1px solid #888;
-		border-right: 1px solid #888;
-		border-left: 1px solid #888;
-		-moz-border-top-colors: #888;
-		-moz-border-right-colors: #888;
-		-moz-border-left-colors: #888;
-		padding-top: 1px;
-	}
-	
-	window:not([customizing="true"]) #puzzleBars-corner-container:not(:-moz-lwtheme) {
-		background: url(chrome://browser/skin/Toolbar-background-noise.png) hsl(0,0%,83%);
-	}
-	
-	/* Puzzle Pieces */
-	
-	#puzzleBars-corner-PP:not([active]):not(:hover),
-	#puzzleBars-corner-PP[autohide]:not(:hover):not([hover]) {
-		clip: rect(0px, 32px, 14px, 0px);
-	}
-	
-	#puzzleBars-corner-PP[active]:not(:hover) image {
-		height: 24px;
-	}
-	
-	#puzzleBars-corner-PP:not([movetoright])[active]:not(:hover) image { margin-left: 4px; }
-	#puzzleBars-corner-PP[movetoright][active]:not(:hover) image { margin-right: 4px; }
-	
+
+#puzzleBars-corner-bar {
+	box-shadow: none;
 }
+
+window:not([customizing="true"]) #puzzleBars-corner-container {
+	border-radius: 8px 8px 0 0;
+	border-top: 1px solid #888;
+	border-right: 1px solid #888;
+	border-left: 1px solid #888;
+	-moz-border-top-colors: #888;
+	-moz-border-right-colors: #888;
+	-moz-border-left-colors: #888;
+	padding-top: 1px;
+}
+
+window:not([customizing="true"]) #puzzleBars-corner-container:not(:-moz-lwtheme) {
+	background: url(chrome://browser/skin/Toolbar-background-noise.png) hsl(0,0%,83%);
+}
+
+/* Puzzle Pieces */
+
+#puzzleBars-corner-PP:not([active]):not(:hover),
+#puzzleBars-corner-PP[autohide]:not(:hover):not([hover]) {
+	clip: rect(0px, 32px, 14px, 0px);
+}
+
+#puzzleBars-corner-PP[active]:not(:hover) image {
+	height: 24px;
+}
+
+#puzzleBars-corner-PP:not([movetoright])[active]:not(:hover) image { margin-left: 4px; }
+#puzzleBars-corner-PP[movetoright][active]:not(:hover) image { margin-right: 4px; }

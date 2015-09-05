@@ -1,182 +1,179 @@
 @namespace url(http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul);
-@-moz-document url("chrome://browser/content/browser.xul") {
 
-	#puzzleBars-urlbar-container {
-		overflow: hidden;
-	}
-
-	#puzzleBars-urlbar-bar {
-		-moz-appearance: none !important;
-		background: none !important;
-		border: none;
-		box-shadow: none;
-		overflow: hidden;
-		opacity: 1;
-		padding: 1px 3px 0px 3px;
-		max-height: 20px; /* I swear this one makes me mad trying to figure out why it increases the height of the location bar only sometimes */
-	}
-	
-	#puzzleBars-urlbar-bar[collapsed="true"] {
-		display: -moz-box !important;
-		visibility: visible !important;
-		pointer-events: none;
-		opacity: 0;
-	}
-	
-	/* Inner buttons and other elements display */
-	/* !important tags are necessary, especially for urlbarBar, as are extra selectors */
-	#puzzleBars-urlbar-bar :-moz-any(.toolbarbutton-badge-container,.toolbarbutton-icon) {
-		padding: 0 !important;
-	}
-	#nav-bar #puzzleBars-urlbar-bar *:not(.toolbarbutton-menubutton-button):not(.toolbarbutton-combined) > .toolbarbutton-icon {
-		margin: 0 2px;
-	}
-	#nav-bar #puzzleBars-urlbar-bar :-moz-any(.toolbarbutton-1,.chromeclass-toolbar-additional)[type="menu"] .toolbarbutton-menu-dropmarker {
-		-moz-margin-start: 0;
-	}
-	#nav-bar #puzzleBars-urlbar-bar :-moz-any(.toolbarbutton-1,.chromeclass-toolbar-additional)[type="menu-button"] dropmarker image {
-		border: none;
-	}
-	
-	/* little tweaks to make the search bar fit better */
-	/* it is just so weird to look at though */
-	#puzzleBars-urlbar-bar #search-container {
-		min-width: calc(54px + 22ch);
-	}
-	#puzzleBars-urlbar-bar #searchbar {
-		margin: -1px 0 -2px;
-	}
-	
-	/* SDK icons need a little helping fitting in the location bar */
-	#nav-bar #puzzleBars-urlbar-bar > toolbarbutton[sdk-button="true"][cui-areatype="toolbar"] > .toolbarbutton-icon {
-		width: auto;
-	}
-	/* so do Tab Utilities icons */
-	#nav-bar #puzzleBars-urlbar-bar > #button_tuOptions .toolbarbutton-icon,
-	#nav-bar #puzzleBars-urlbar-bar > #closetab-button .toolbarbutton-icon {
-		height: 16px !important;
-		width: 16px !important;
-	}
-	/* and Quick Locale Switcher *sniff*... */
-	#nav-bar #puzzleBars-urlbar-bar > #tbtnCavemanQLS .toolbarbutton-icon {
-		padding-top: 4px !important;
-		padding-bottom: 3px !important;
-	}
-	/* and the zoom control reset button */
-	#nav-bar #puzzleBars-urlbar-bar #zoom-reset-button .toolbarbutton-text {
-		padding: 1px 0 0 0;
-		border: none;
-		background: none;
-		box-shadow: none;
-	}
-	/* all combined buttons have a margin in the nav-bar */
-	#nav-bar #puzzleBars-urlbar-bar .toolbaritem-combined-buttons {
-		margin: 0;
-	}
-	/* greasemonkey shows a little background in the dropmarker when the button is disabled (no idea where it comes from though */
-	#nav-bar #puzzleBars-urlbar-bar #greasemonkey-tbb[disabled="yes"] > .toolbarbutton-menubutton-dropmarker > .dropmarker-icon {
-		background: none;
-	}
-	
-	/* special widgets in urlbarBar */
-	
-	#puzzleBars-urlbar-bar > toolbarspring {
-		visibility: collapse !important;
-	}
-	
-	#puzzleBars-urlbar-bar > *:not(:-moz-any(toolbarseparator, [type="separator"], toolbarspring, [type="spring"])) {
-		max-height: 18px;
-	}
-	#puzzleBars-urlbar-bar > *:not(:-moz-any(toolbarseparator, [type="separator"], toolbarspring, [type="spring"], [type="menu-button"], .toolbaritem-combined-buttons)) {
-		padding: 0px 1px !important;
-	}
-	#puzzleBars-urlbar-bar > toolbarseparator,
-	#puzzleBars-urlbar-bar > toolbarpaletteitem[type="separator"],
-	#puzzleBars-urlbar-bar > toolbarspring,
-	#puzzleBars-urlbar-bar > toolbarpaletteitem[type="spring"] {
-		max-height: 18px;
-	}
-	
-	/* Puzzle Pieces */
-	
-	#puzzleBars-urlbar-PP {
-		-moz-margin-end: 3px;
-	}
-	
-	#puzzleBars-urlbar-PP image {
-		-moz-image-region: rect(0px, 96px, 32px, 64px);
-		height: 18px;
-		width: 18px;
-	}
-	
-	#puzzleBars-urlbar-PP:hover image {
-		-moz-image-region: rect(32px, 96px, 64px, 64px);
-	}
-	
-	/* Animation */
-	
-	window:not([puzzleBars-noAnimation]) #puzzleBars-urlbar-bar:hover,
-	window:not([puzzleBars-noAnimation]) #puzzleBars-urlbar-bar[hover],
-	window:not([puzzleBars-noAnimation]) #puzzleBars-urlbar-bar:not([collapsed="true"]) {
-		transition: opacity .25s linear 0s;
-	}
-	window:not([puzzleBars-noAnimation]) #urlbar:-moz-any(:not([puzzleBars-WhenFocused]),[focused]) #puzzleBars-urlbar-bar:not([collapsed="true"])[autohide]:not(:hover):not([hover]) {
-		transition: opacity .5s linear .2s;
-	}
-	window:not([puzzleBars-noAnimation]) #puzzleBars-urlbar-bar[collapsed="true"] {
-		transition: opacity .5s linear 0s;
-	}
-	
-	#puzzleBars-urlbar-bar:not([collapsed="true"]):hover,
-	#puzzleBars-urlbar-bar:not([collapsed="true"])[hover] {
-		opacity: 1;
-	}
-	
-	window:not([customizing="true"]) #urlbar:-moz-any(:not([puzzleBars-WhenFocused]),[focused]) #puzzleBars-urlbar-bar[autohide]:not(:hover):not([hover]) {
-		opacity: 0;
-	}
-	
-	window:not([customizing="true"]) #puzzleBars-urlbar-container:not([active]),
-	window:not([customizing="true"]) #urlbar:-moz-any(:not([puzzleBars-WhenFocused]),[focused]) #puzzleBars-urlbar-container[autohide]:not(:hover):not([hover]) {
-		width: 0px;
-	}
-	
-	window:not([puzzleBars-noAnimation]) #puzzleBars-urlbar-container[active] {
-		transition: width .25s linear 0s;
-	}
-	window:not([puzzleBars-noAnimation]) #puzzleBars-urlbar-container:not([active]) {
-		transition: width .5s linear 0s;
-	}
-	window:not([puzzleBars-noAnimation]) #urlbar:-moz-any(:not([puzzleBars-WhenFocused]),[focused]) #puzzleBars-urlbar-container[autohide]:not(:hover):not([hover]) {
-		transition: width .5s linear .2s;
-	}
-	
-	/* fix for UIEnhancer, putting it here because it's easier than finding the right conditions to (un)load a separate style in this case */
-	#urlbar[puzzleBars-UIEnhancer] #UIEnhancer_URLBar:not([noAnimation])[hover] {
-		transition: width .25s linear 0s;
-	}
-	#urlbar[puzzleBars-UIEnhancer] #UIEnhancer_URLBar:not([noAnimation]):not([hover]) {
-		transition: width .5s linear .2s;
-	}
-	
-	/* customize dialog */
-	
-	#puzzleBars-urlbar-customize-wrapper {
-		margin: 15px;
-	}
-	
-	#puzzleBars-urlbar-customize-stack {
-		border: 1px solid rgba(0,0,0,.3);
-		box-shadow: 0 0 4px rgba(0,0,0,.3);
-		background: rgba(250, 250, 250, 0.8);
-		width: 100%;
-	}
-	
-	#puzzleBars-urlbar-customize-stack > label {
-		margin: 2px 15px;
-		color: #777;
-	}
-	#puzzleBars-urlbar-customize-stack:-moz-locale-dir(ltr) > label { text-align: right; }
-	#puzzleBars-urlbar-customize-stack:-moz-locale-dir(rtl) > label { text-align: left; }
-	
+#puzzleBars-urlbar-container {
+	overflow: hidden;
 }
+
+#puzzleBars-urlbar-bar {
+	-moz-appearance: none !important;
+	background: none !important;
+	border: none;
+	box-shadow: none;
+	overflow: hidden;
+	opacity: 1;
+	padding: 1px 3px 0px 3px;
+	max-height: 20px; /* I swear this one makes me mad trying to figure out why it increases the height of the location bar only sometimes */
+}
+
+#puzzleBars-urlbar-bar[collapsed="true"] {
+	display: -moz-box !important;
+	visibility: visible !important;
+	pointer-events: none;
+	opacity: 0;
+}
+
+/* Inner buttons and other elements display */
+/* !important tags are necessary, especially for urlbarBar, as are extra selectors */
+#puzzleBars-urlbar-bar :-moz-any(.toolbarbutton-badge-container,.toolbarbutton-icon) {
+	padding: 0 !important;
+}
+#nav-bar #puzzleBars-urlbar-bar *:not(.toolbarbutton-menubutton-button):not(.toolbarbutton-combined) > .toolbarbutton-icon {
+	margin: 0 2px;
+}
+#nav-bar #puzzleBars-urlbar-bar :-moz-any(.toolbarbutton-1,.chromeclass-toolbar-additional)[type="menu"] .toolbarbutton-menu-dropmarker {
+	-moz-margin-start: 0;
+}
+#nav-bar #puzzleBars-urlbar-bar :-moz-any(.toolbarbutton-1,.chromeclass-toolbar-additional)[type="menu-button"] dropmarker image {
+	border: none;
+}
+
+/* little tweaks to make the search bar fit better */
+/* it is just so weird to look at though */
+#puzzleBars-urlbar-bar #search-container {
+	min-width: calc(54px + 22ch);
+}
+#puzzleBars-urlbar-bar #searchbar {
+	margin: -1px 0 -2px;
+}
+
+/* SDK icons need a little helping fitting in the location bar */
+#nav-bar #puzzleBars-urlbar-bar > toolbarbutton[sdk-button="true"][cui-areatype="toolbar"] > .toolbarbutton-icon {
+	width: auto;
+}
+/* so do Tab Utilities icons */
+#nav-bar #puzzleBars-urlbar-bar > #button_tuOptions .toolbarbutton-icon,
+#nav-bar #puzzleBars-urlbar-bar > #closetab-button .toolbarbutton-icon {
+	height: 16px !important;
+	width: 16px !important;
+}
+/* and Quick Locale Switcher *sniff*... */
+#nav-bar #puzzleBars-urlbar-bar > #tbtnCavemanQLS .toolbarbutton-icon {
+	padding-top: 4px !important;
+	padding-bottom: 3px !important;
+}
+/* and the zoom control reset button */
+#nav-bar #puzzleBars-urlbar-bar #zoom-reset-button .toolbarbutton-text {
+	padding: 1px 0 0 0;
+	border: none;
+	background: none;
+	box-shadow: none;
+}
+/* all combined buttons have a margin in the nav-bar */
+#nav-bar #puzzleBars-urlbar-bar .toolbaritem-combined-buttons {
+	margin: 0;
+}
+/* greasemonkey shows a little background in the dropmarker when the button is disabled (no idea where it comes from though */
+#nav-bar #puzzleBars-urlbar-bar #greasemonkey-tbb[disabled="yes"] > .toolbarbutton-menubutton-dropmarker > .dropmarker-icon {
+	background: none;
+}
+
+/* special widgets in urlbarBar */
+
+#puzzleBars-urlbar-bar > toolbarspring {
+	visibility: collapse !important;
+}
+
+#puzzleBars-urlbar-bar > *:not(:-moz-any(toolbarseparator, [type="separator"], toolbarspring, [type="spring"])) {
+	max-height: 18px;
+}
+#puzzleBars-urlbar-bar > *:not(:-moz-any(toolbarseparator, [type="separator"], toolbarspring, [type="spring"], [type="menu-button"], .toolbaritem-combined-buttons)) {
+	padding: 0px 1px !important;
+}
+#puzzleBars-urlbar-bar > toolbarseparator,
+#puzzleBars-urlbar-bar > toolbarpaletteitem[type="separator"],
+#puzzleBars-urlbar-bar > toolbarspring,
+#puzzleBars-urlbar-bar > toolbarpaletteitem[type="spring"] {
+	max-height: 18px;
+}
+
+/* Puzzle Pieces */
+
+#puzzleBars-urlbar-PP {
+	-moz-margin-end: 3px;
+}
+
+#puzzleBars-urlbar-PP image {
+	-moz-image-region: rect(0px, 96px, 32px, 64px);
+	height: 18px;
+	width: 18px;
+}
+
+#puzzleBars-urlbar-PP:hover image {
+	-moz-image-region: rect(32px, 96px, 64px, 64px);
+}
+
+/* Animation */
+
+window:not([puzzleBars-noAnimation]) #puzzleBars-urlbar-bar:hover,
+window:not([puzzleBars-noAnimation]) #puzzleBars-urlbar-bar[hover],
+window:not([puzzleBars-noAnimation]) #puzzleBars-urlbar-bar:not([collapsed="true"]) {
+	transition: opacity .25s linear 0s;
+}
+window:not([puzzleBars-noAnimation]) #urlbar:-moz-any(:not([puzzleBars-WhenFocused]),[focused]) #puzzleBars-urlbar-bar:not([collapsed="true"])[autohide]:not(:hover):not([hover]) {
+	transition: opacity .5s linear .2s;
+}
+window:not([puzzleBars-noAnimation]) #puzzleBars-urlbar-bar[collapsed="true"] {
+	transition: opacity .5s linear 0s;
+}
+
+#puzzleBars-urlbar-bar:not([collapsed="true"]):hover,
+#puzzleBars-urlbar-bar:not([collapsed="true"])[hover] {
+	opacity: 1;
+}
+
+window:not([customizing="true"]) #urlbar:-moz-any(:not([puzzleBars-WhenFocused]),[focused]) #puzzleBars-urlbar-bar[autohide]:not(:hover):not([hover]) {
+	opacity: 0;
+}
+
+window:not([customizing="true"]) #puzzleBars-urlbar-container:not([active]),
+window:not([customizing="true"]) #urlbar:-moz-any(:not([puzzleBars-WhenFocused]),[focused]) #puzzleBars-urlbar-container[autohide]:not(:hover):not([hover]) {
+	width: 0px;
+}
+
+window:not([puzzleBars-noAnimation]) #puzzleBars-urlbar-container[active] {
+	transition: width .25s linear 0s;
+}
+window:not([puzzleBars-noAnimation]) #puzzleBars-urlbar-container:not([active]) {
+	transition: width .5s linear 0s;
+}
+window:not([puzzleBars-noAnimation]) #urlbar:-moz-any(:not([puzzleBars-WhenFocused]),[focused]) #puzzleBars-urlbar-container[autohide]:not(:hover):not([hover]) {
+	transition: width .5s linear .2s;
+}
+
+/* fix for UIEnhancer, putting it here because it's easier than finding the right conditions to (un)load a separate style in this case */
+#urlbar[puzzleBars-UIEnhancer] #UIEnhancer_URLBar:not([noAnimation])[hover] {
+	transition: width .25s linear 0s;
+}
+#urlbar[puzzleBars-UIEnhancer] #UIEnhancer_URLBar:not([noAnimation]):not([hover]) {
+	transition: width .5s linear .2s;
+}
+
+/* customize dialog */
+
+#puzzleBars-urlbar-customize-wrapper {
+	margin: 15px;
+}
+
+#puzzleBars-urlbar-customize-stack {
+	border: 1px solid rgba(0,0,0,.3);
+	box-shadow: 0 0 4px rgba(0,0,0,.3);
+	background: rgba(250, 250, 250, 0.8);
+	width: 100%;
+}
+
+#puzzleBars-urlbar-customize-stack > label {
+	margin: 2px 15px;
+	color: #777;
+}
+#puzzleBars-urlbar-customize-stack:-moz-locale-dir(ltr) > label { text-align: right; }
+#puzzleBars-urlbar-customize-stack:-moz-locale-dir(rtl) > label { text-align: left; }

@@ -1,14 +1,11 @@
 @namespace url(http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul);
-@-moz-document url("chrome://browser/content/browser.xul") {
 
-	#status-bar {
-		min-height: 0;
-		background-color: transparent;
-		border: none;
-	}
-	
-	#puzzleBars-status-bar-placeholder {
-		box-shadow: inset 0 0 1px 1px #808080;
-	}
-	
+#status-bar {
+	min-height: 0;
+	background-color: transparent;
+	border: none;
+}
+
+#puzzleBars-status-bar-placeholder {
+	box-shadow: inset 0 0 1px 1px #808080;
 }

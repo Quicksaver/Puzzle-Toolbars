@@ -1,71 +1,68 @@
 @namespace url(http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul);
-@-moz-document url("chrome://browser/content/browser.xul") {
 
-	/* Bugfix: we need our add-on bar always as the last visible element, even if it physically isn't */
-	#puzzleBars-bottom-bar { -moz-box-ordinal-group: 10000; }
-	
-	/* little tweaks to make the search bar fit better */
-	#puzzleBars-bottom-bar #search-container {
-		margin: -1px 0 -2px;
-	}
-	
-	/* style the toolbar */
-	
-	window:not([customizing="true"]) #puzzleBars-bottom-bar:not([hidePP]):not([movetoright]) {
-		padding-left: 34px;
-	}
-	
-	window:not([customizing="true"]) #puzzleBars-bottom-bar:not([hidePP])[movetoright] {
-		padding-right: 34px;
-	}
-	
-	/* Puzzle Pieces */
-	
-	#puzzleBars-bottom-PP {
-		position: fixed;
-	}
-	
-	#puzzleBars-bottom-PP:not([movetoright]) image { -moz-image-region: rect(0px, 32px, 32px, 0px); }
-	#puzzleBars-bottom-PP:not([movetoright]):hover image { -moz-image-region: rect(32px, 32px, 64px, 0px); }
-	#puzzleBars-bottom-PP[movetoright] image { -moz-image-region: rect(0px, 64px, 32px, 32px); }
-	#puzzleBars-bottom-PP[movetoright]:hover image { -moz-image-region: rect(32px, 64px, 64px, 32px); }
-	
-	#puzzleBars-bottom-PP { clip: rect(0px, 32px, 32px, 0px); }
-	#puzzleBars-bottom-PP image { transform: rotate(0deg); }
-	#puzzleBars-bottom-PP:not([movetoright]):not([active]):not(:hover) image { transform: rotate(-40deg); }
-	#puzzleBars-bottom-PP[movetoright]:not([active]):not(:hover) image { transform: rotate(40deg); }
-	
-	#puzzleBars-bottom-PP:not([active]):not(:hover) {
-		opacity: 0;
-	}
-	
-	#puzzleBars-bottom-PP:not([movetoright])[active]:not(:hover) image { transform: rotate(-60deg); }
-	#puzzleBars-bottom-PP[movetoright][active]:not(:hover) image { transform: rotate(60deg); }
-	
-	#puzzleBars-bottom-PP:hover image,
-	#puzzleBars-bottom-PP:not([active]) image {
-		height: 32px;
-	}
-	
-	window:not([puzzleBars-noAnimation]) #puzzleBars-bottom-PP:not([active]):not(:hover) {
-		transition: bottom .5s linear .2s, opacity .5s linear .2s, clip .5s linear .2s;
-	}
-	window:not([puzzleBars-noAnimation]) #puzzleBars-bottom-PP:hover,
-	window:not([puzzleBars-noAnimation]) #puzzleBars-bottom-PP[active] {
-		transition: bottom .25s linear 0s, opacity .25s linear 0s, clip .25s linear 0s;
-	}
-	window:not([puzzleBars-noAnimation]) #puzzleBars-bottom-PP:not([active]):not(:hover) image {
-		transition: transform .5s linear .2s, margin .5s linear .2s, height .5s linear .2s;
-	}
-	window:not([puzzleBars-noAnimation]) #puzzleBars-bottom-PP:hover image,
-	window:not([puzzleBars-noAnimation]) #puzzleBars-bottom-PP[active] image {
-		transition: transform .25s linear 0s, margin .25s linear 0s, height .25s linear 0s;
-	}
-	
-	/* overflow panel */
-	
-	#puzzleBars-bottom-overflow-button:-moz-locale-dir(rtl) > .toolbarbutton-icon {
-		transform: scaleX(-1);
-	}
-	
+/* Bugfix: we need our add-on bar always as the last visible element, even if it physically isn't */
+#puzzleBars-bottom-bar { -moz-box-ordinal-group: 10000; }
+
+/* little tweaks to make the search bar fit better */
+#puzzleBars-bottom-bar #search-container {
+	margin: -1px 0 -2px;
+}
+
+/* style the toolbar */
+
+window:not([customizing="true"]) #puzzleBars-bottom-bar:not([hidePP]):not([movetoright]) {
+	padding-left: 34px;
+}
+
+window:not([customizing="true"]) #puzzleBars-bottom-bar:not([hidePP])[movetoright] {
+	padding-right: 34px;
+}
+
+/* Puzzle Pieces */
+
+#puzzleBars-bottom-PP {
+	position: fixed;
+}
+
+#puzzleBars-bottom-PP:not([movetoright]) image { -moz-image-region: rect(0px, 32px, 32px, 0px); }
+#puzzleBars-bottom-PP:not([movetoright]):hover image { -moz-image-region: rect(32px, 32px, 64px, 0px); }
+#puzzleBars-bottom-PP[movetoright] image { -moz-image-region: rect(0px, 64px, 32px, 32px); }
+#puzzleBars-bottom-PP[movetoright]:hover image { -moz-image-region: rect(32px, 64px, 64px, 32px); }
+
+#puzzleBars-bottom-PP { clip: rect(0px, 32px, 32px, 0px); }
+#puzzleBars-bottom-PP image { transform: rotate(0deg); }
+#puzzleBars-bottom-PP:not([movetoright]):not([active]):not(:hover) image { transform: rotate(-40deg); }
+#puzzleBars-bottom-PP[movetoright]:not([active]):not(:hover) image { transform: rotate(40deg); }
+
+#puzzleBars-bottom-PP:not([active]):not(:hover) {
+	opacity: 0;
+}
+
+#puzzleBars-bottom-PP:not([movetoright])[active]:not(:hover) image { transform: rotate(-60deg); }
+#puzzleBars-bottom-PP[movetoright][active]:not(:hover) image { transform: rotate(60deg); }
+
+#puzzleBars-bottom-PP:hover image,
+#puzzleBars-bottom-PP:not([active]) image {
+	height: 32px;
+}
+
+window:not([puzzleBars-noAnimation]) #puzzleBars-bottom-PP:not([active]):not(:hover) {
+	transition: bottom .5s linear .2s, opacity .5s linear .2s, clip .5s linear .2s;
+}
+window:not([puzzleBars-noAnimation]) #puzzleBars-bottom-PP:hover,
+window:not([puzzleBars-noAnimation]) #puzzleBars-bottom-PP[active] {
+	transition: bottom .25s linear 0s, opacity .25s linear 0s, clip .25s linear 0s;
+}
+window:not([puzzleBars-noAnimation]) #puzzleBars-bottom-PP:not([active]):not(:hover) image {
+	transition: transform .5s linear .2s, margin .5s linear .2s, height .5s linear .2s;
+}
+window:not([puzzleBars-noAnimation]) #puzzleBars-bottom-PP:hover image,
+window:not([puzzleBars-noAnimation]) #puzzleBars-bottom-PP[active] image {
+	transition: transform .25s linear 0s, margin .25s linear 0s, height .25s linear 0s;
+}
+
+/* overflow panel */
+
+#puzzleBars-bottom-overflow-button:-moz-locale-dir(rtl) > .toolbarbutton-icon {
+	transform: scaleX(-1);
 }

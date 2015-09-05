@@ -1,179 +1,176 @@
 @namespace url(http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul);
-@-moz-document url("chrome://browser/content/browser.xul") {
-	
-	/* for fullscreen stuff mostly */
-	
-	window:-moz-any([PrintPreview="true"],[inDOMFullscreen]) :-moz-any(.puzzleBars-bar,.PuzzlePiece,.puzzleBars-fullscreenCollapse) {
-		visibility: collapse;
-	}
-	
-	window:not([inDOMFullscreen]) .puzzleBars-bar[moz-collapsed="true"]:not([collapsed="true"]) {
-		visibility: visible !important;
-	}
-	
-	/* Bugfix: https://github.com/Quicksaver/Puzzle-Toolbars/issues/10 */
-	#urlbar-icons #star-button { visibility: collapse !important; }
-	
-	/* Inner buttons and other elements display */
-	
-	/* don't show buttons labels in any of our toolbars */
-	.puzzleBars-bar *:not(#zoom-reset-button):not(.bookmark-item):not(#bookmarks-toolbar-placeholder) > .toolbarbutton-text {
-		visibility: collapse;
-	}
-	
-	/* the bookmarks items need this to mimick the same behavior as when placed in the nav-bar;
-	http://mxr.mozilla.org/mozilla-central/source/browser/base/content/browser.css#307 */
-	.puzzleBars-bar[overflowable="true"] .customization-target #personal-bookmarks {
-		-moz-box-flex: 1;
-	}
-	
-	/* !important tags are necessary, especially for inURLBar */
-	.puzzleBars-bar :-moz-any(.toolbarbutton-badge-container,.toolbarbutton-icon):not(:hover) {
-		background: none !important;
-		border: none !important;
-		box-shadow: none !important;
-	}
-	
-	.puzzleBars-bar :-moz-any(.toolbarbutton-badge-container,.toolbarbutton-icon) {
-		max-height: 18px;
-	}
-	
-	.puzzleBars-bar > toolbarbutton,
-	.puzzleBars-bar > .customization-target > toolbarbutton {
-		-moz-appearance: none;
-	}
-	
-	.puzzleBars-bar #status-bar label {
-		margin-top: 0px;
-		margin-bottom: 0px;
-	}
-	
-	.puzzleBars-bar > *:not(.customization-target) > toolbarbutton,
-	.puzzleBars-bar > .customization-target > * > toolbarbutton {
-		-moz-appearance: none;
-		border: none;
-	}
-	
-	.puzzleBars-bar *:not(#bookmarks-menu-button) > dropmarker {
-		padding: 0 2px !important;
-		border: none;
-	}
-	
-	.puzzleBars-bar *:not(#bookmarks-menu-button) > dropmarker image {
-		padding: 0 !important;
-	}
-	
-	/* try to get the places toolbar to fit in as well */
-	.puzzleBars-bar #PlacesToolbar toolbarbutton {
-		-moz-appearance: none;
-		border: none;
-	}
-	
-	/* the bookmarks button is a special case because of its dropmarker */
-	.puzzleBars-bar #bookmarks-menu-button dropmarker {
-		padding: 0 3px !important;
-		border: none;
-	}
-	.puzzleBars-bar #bookmarks-menu-button dropmarker image {
-		padding: 0 !important;
-	}
-	
-	/* don't show the little separator, as it'll be out of place in the add-on bar */
-	.puzzleBars-bar :-moz-any(.toolbarbutton-1,.chromeclass-toolbar-additional) > .toolbarbutton-menubutton-dropmarker:before {
-		display: none !important;
-	}
-	
-	/* These are for the mouse over effects, !important tags are necessary especially for when inURLBar is true */
-	.puzzleBars-bar toolbarbutton:not([disabled="true"]):hover,
-	.puzzleBars-bar toolbarbutton[open],
-	.puzzleBars-bar toolbarbutton > .toolbarbutton-menubutton-button:not([disabled="true"]):hover {
-		background-position: left, left, right !important;
-		background-size: auto, 1px 100%, 1px 100% !important;
-		background-repeat: no-repeat !important;
-		background-image:	linear-gradient(to top, transparent, rgba(0,0,0,.15)),
-					linear-gradient(to top, transparent, rgba(0,0,0,.15) 30%),
-		        		linear-gradient(to top, transparent, rgba(0,0,0,.15) 30%) !important;
-	}
-	.puzzleBars-bar toolbarbutton:not([disabled="true"]):hover image,
-	.puzzleBars-bar toolbarbutton[open] image,
-	.puzzleBars-bar toolbarbutton > .toolbarbutton-menubutton-button:not([disabled="true"]):hover image {
-		border-color: transparent !important;
-		box-shadow: none !important;
-		background: none !important;
-	}
-	.puzzleBars-bar[brighttext="true"] toolbarbutton:not([disabled="true"]):hover,
-	.puzzleBars-bar[brighttext="true"] toolbarbutton[open],
-	.puzzleBars-bar[brighttext="true"] toolbarbutton > .toolbarbutton-menubutton-button:not([disabled="true"]):hover {
-		background-image:	linear-gradient(to top, transparent, rgba(255,255,255,.45)),
-					linear-gradient(to top, transparent, rgba(255,255,255,.45) 30%),
-		        		linear-gradient(to top, transparent, rgba(255,255,255,.45) 30%) !important;
-	}
 
-	/* ghostery's button is actually a stack, and the label above it does carry our hover effects, so we just disable mouse events on it,
-	this doesn't take away functionality as the button behind it is still clickable and performs the same action as when clicking the label.
-	No point in creating a whole routine to check if this needs to load (Ghostery is restartless), putting this here is just easier and simpler. */
-	.puzzleBars-bar #ghostery-button-badge {
-		pointer-events: none;
-	}
-	
-	/* for Hide Caption Titlebar Plus, its elements have the windowdragbox binding, which keeps them from capturing mouse events (thus showing autohiding toolbars) */
-	.puzzleBars-bar .hcp-dragbox-binding {
-		-moz-binding: none !important;
-	}
-	
-	/* Tab Counter's element has a hardcoded padding that causes it to increase the height of our toolbars */
-	.puzzleBars-bar #tabcounter-toolbar-item {
-		padding: 0 3px !important;
-	}
-	.puzzleBars-bar toolbarpaletteitem #tabcounter-toolbar-item label {
-		margin: 0 5px 0 6px !important;
-	}
-	
-	/* Puzzle Pieces */
-	
-	window[customizing="true"] .PuzzlePiece {
-		display: none;
-	}
-	
-	.PuzzlePiece image {
-		list-style-image: url("chrome://puzzlebars/skin/pp.png");
-		cursor: pointer;
-	}
-	
-	/* try to keep the hovered puzzle piece on top of the others */
-	.PuzzlePiece:not([position]):hover { -moz-box-ordinal-group: 10; }
-	
-	/* overflow panels */
-	
-	.puzzleBars-overflow > .panel-arrowcontainer > .panel-arrowcontent {
-		padding: 0;
-	}
-	
-	.puzzleBars-overflow-scroller {
-		overflow-y: auto;
-		overflow-x: hidden;
-		max-height: 30em;
-		margin-top: 10px;
-		margin-bottom: 10px;
-	}
-	
-	.puzzleBars-overflow-list {
-		width: 22.35em;
-		padding-left: 10px;
-		padding-right: 10px;
-	}
-	
-	.puzzleBars-overflow-list > .toolbaritem-combined-buttons {
-		min-height: 28px;
-	}
-	
-	.puzzleBars-overflow-button {
-		list-style-image: url("chrome://browser/skin/Toolbar.png");
-		-moz-image-region: rect(0, 612px, 18px, 594px);
-	}
-	
-	toolbar[brighttext] .puzzleBars-overflow-button {
-		list-style-image: url(chrome://browser/skin/Toolbar-inverted.png);
-	}
-	
+/* for fullscreen stuff mostly */
+
+window:-moz-any([PrintPreview="true"],[inDOMFullscreen]) :-moz-any(.puzzleBars-bar,.PuzzlePiece,.puzzleBars-fullscreenCollapse) {
+	visibility: collapse;
+}
+
+window:not([inDOMFullscreen]) .puzzleBars-bar[moz-collapsed="true"]:not([collapsed="true"]) {
+	visibility: visible !important;
+}
+
+/* Bugfix: https://github.com/Quicksaver/Puzzle-Toolbars/issues/10 */
+#urlbar-icons #star-button { visibility: collapse !important; }
+
+/* Inner buttons and other elements display */
+
+/* don't show buttons labels in any of our toolbars */
+.puzzleBars-bar *:not(#zoom-reset-button):not(.bookmark-item):not(#bookmarks-toolbar-placeholder) > .toolbarbutton-text {
+	visibility: collapse;
+}
+
+/* the bookmarks items need this to mimick the same behavior as when placed in the nav-bar;
+http://mxr.mozilla.org/mozilla-central/source/browser/base/content/browser.css#307 */
+.puzzleBars-bar[overflowable="true"] .customization-target #personal-bookmarks {
+	-moz-box-flex: 1;
+}
+
+/* !important tags are necessary, especially for inURLBar */
+.puzzleBars-bar :-moz-any(.toolbarbutton-badge-container,.toolbarbutton-icon):not(:hover) {
+	background: none !important;
+	border: none !important;
+	box-shadow: none !important;
+}
+
+.puzzleBars-bar :-moz-any(.toolbarbutton-badge-container,.toolbarbutton-icon) {
+	max-height: 18px;
+}
+
+.puzzleBars-bar > toolbarbutton,
+.puzzleBars-bar > .customization-target > toolbarbutton {
+	-moz-appearance: none;
+}
+
+.puzzleBars-bar #status-bar label {
+	margin-top: 0px;
+	margin-bottom: 0px;
+}
+
+.puzzleBars-bar > *:not(.customization-target) > toolbarbutton,
+.puzzleBars-bar > .customization-target > * > toolbarbutton {
+	-moz-appearance: none;
+	border: none;
+}
+
+.puzzleBars-bar *:not(#bookmarks-menu-button) > dropmarker {
+	padding: 0 2px !important;
+	border: none;
+}
+
+.puzzleBars-bar *:not(#bookmarks-menu-button) > dropmarker image {
+	padding: 0 !important;
+}
+
+/* try to get the places toolbar to fit in as well */
+.puzzleBars-bar #PlacesToolbar toolbarbutton {
+	-moz-appearance: none;
+	border: none;
+}
+
+/* the bookmarks button is a special case because of its dropmarker */
+.puzzleBars-bar #bookmarks-menu-button dropmarker {
+	padding: 0 3px !important;
+	border: none;
+}
+.puzzleBars-bar #bookmarks-menu-button dropmarker image {
+	padding: 0 !important;
+}
+
+/* don't show the little separator, as it'll be out of place in the add-on bar */
+.puzzleBars-bar :-moz-any(.toolbarbutton-1,.chromeclass-toolbar-additional) > .toolbarbutton-menubutton-dropmarker:before {
+	display: none !important;
+}
+
+/* These are for the mouse over effects, !important tags are necessary especially for when inURLBar is true */
+.puzzleBars-bar toolbarbutton:not([disabled="true"]):hover,
+.puzzleBars-bar toolbarbutton[open],
+.puzzleBars-bar toolbarbutton > .toolbarbutton-menubutton-button:not([disabled="true"]):hover {
+	background-position: left, left, right !important;
+	background-size: auto, 1px 100%, 1px 100% !important;
+	background-repeat: no-repeat !important;
+	background-image:	linear-gradient(to top, transparent, rgba(0,0,0,.15)),
+				linear-gradient(to top, transparent, rgba(0,0,0,.15) 30%),
+	        		linear-gradient(to top, transparent, rgba(0,0,0,.15) 30%) !important;
+}
+.puzzleBars-bar toolbarbutton:not([disabled="true"]):hover image,
+.puzzleBars-bar toolbarbutton[open] image,
+.puzzleBars-bar toolbarbutton > .toolbarbutton-menubutton-button:not([disabled="true"]):hover image {
+	border-color: transparent !important;
+	box-shadow: none !important;
+	background: none !important;
+}
+.puzzleBars-bar[brighttext="true"] toolbarbutton:not([disabled="true"]):hover,
+.puzzleBars-bar[brighttext="true"] toolbarbutton[open],
+.puzzleBars-bar[brighttext="true"] toolbarbutton > .toolbarbutton-menubutton-button:not([disabled="true"]):hover {
+	background-image:	linear-gradient(to top, transparent, rgba(255,255,255,.45)),
+				linear-gradient(to top, transparent, rgba(255,255,255,.45) 30%),
+	        		linear-gradient(to top, transparent, rgba(255,255,255,.45) 30%) !important;
+}
+
+/* ghostery's button is actually a stack, and the label above it does carry our hover effects, so we just disable mouse events on it,
+this doesn't take away functionality as the button behind it is still clickable and performs the same action as when clicking the label.
+No point in creating a whole routine to check if this needs to load (Ghostery is restartless), putting this here is just easier and simpler. */
+.puzzleBars-bar #ghostery-button-badge {
+	pointer-events: none;
+}
+
+/* for Hide Caption Titlebar Plus, its elements have the windowdragbox binding, which keeps them from capturing mouse events (thus showing autohiding toolbars) */
+.puzzleBars-bar .hcp-dragbox-binding {
+	-moz-binding: none !important;
+}
+
+/* Tab Counter's element has a hardcoded padding that causes it to increase the height of our toolbars */
+.puzzleBars-bar #tabcounter-toolbar-item {
+	padding: 0 3px !important;
+}
+.puzzleBars-bar toolbarpaletteitem #tabcounter-toolbar-item label {
+	margin: 0 5px 0 6px !important;
+}
+
+/* Puzzle Pieces */
+
+window[customizing="true"] .PuzzlePiece {
+	display: none;
+}
+
+.PuzzlePiece image {
+	list-style-image: url("chrome://puzzlebars/skin/pp.png");
+	cursor: pointer;
+}
+
+/* try to keep the hovered puzzle piece on top of the others */
+.PuzzlePiece:not([position]):hover { -moz-box-ordinal-group: 10; }
+
+/* overflow panels */
+
+.puzzleBars-overflow > .panel-arrowcontainer > .panel-arrowcontent {
+	padding: 0;
+}
+
+.puzzleBars-overflow-scroller {
+	overflow-y: auto;
+	overflow-x: hidden;
+	max-height: 30em;
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+.puzzleBars-overflow-list {
+	width: 22.35em;
+	padding-left: 10px;
+	padding-right: 10px;
+}
+
+.puzzleBars-overflow-list > .toolbaritem-combined-buttons {
+	min-height: 28px;
+}
+
+.puzzleBars-overflow-button {
+	list-style-image: url("chrome://browser/skin/Toolbar.png");
+	-moz-image-region: rect(0, 612px, 18px, 594px);
+}
+
+toolbar[brighttext] .puzzleBars-overflow-button {
+	list-style-image: url(chrome://browser/skin/Toolbar-inverted.png);
 }

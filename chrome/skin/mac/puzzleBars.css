@@ -1,103 +1,100 @@
 @namespace url(http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul);
-@-moz-document url("chrome://browser/content/browser.xul") {
 
-	/* special style for buttons in the add-on bar */
-	
-	.puzzleBars-bar :-moz-any(.toolbarbutton-1,.chromeclass-toolbar-additional),
-	.puzzleBars-bar :-moz-any(.toolbarbutton-1,.chromeclass-toolbar-additional) > .toolbarbutton-menubutton-button,
-	.puzzleBars-bar :-moz-any(.toolbarbutton-1,.chromeclass-toolbar-additional) > .toolbarbutton-menubutton-dropmarker {
-		-moz-appearance: none;
-		/* !important flags needed because of bug 561154: */
-		margin: 0 !important;
-		padding: 0 !important;
-		border: none !important;
-		border-radius: 0 !important;
-		background: none !important;
-		box-shadow: none !important;
-	}
-	
-	.puzzleBars-bar :-moz-any(.toolbarbutton-1,.chromeclass-toolbar-additional):not([type="menu-button"]),
-	.puzzleBars-bar :-moz-any(.toolbarbutton-1,.chromeclass-toolbar-additional) > .toolbarbutton-menubutton-button {
-		margin: 0;
-		padding: 0 1px;
-	}
-	
-	.puzzleBars-bar :-moz-any(.toolbarbutton-1,.chromeclass-toolbar-additional) > .toolbarbutton-menubutton-dropmarker {
-		padding-left: 4px;
-		padding-right: 4px;
-	}
-	
-	.puzzleBars-bar :-moz-any(.toolbarbutton-1,.chromeclass-toolbar-additional):not([type="menu-button"]):not([disabled="true"]):not([open]):hover,
-	.puzzleBars-bar :-moz-any(.toolbarbutton-1,.chromeclass-toolbar-additional) > .toolbarbutton-menubutton-button:not([disabled="true"]):hover,
-	.puzzleBars-bar :-moz-any(.toolbarbutton-1,.chromeclass-toolbar-additional):not([disabled="true"]):not([buttonover]):hover > .toolbarbutton-menubutton-dropmarker {
-		background-image: linear-gradient(transparent, rgba(0,0,0,.15)) !important;
-	}
-	
-	.puzzleBars-bar :-moz-any(.toolbarbutton-1,.chromeclass-toolbar-additional):not([type="menu-button"]):not([disabled="true"]):hover:active,
-	.puzzleBars-bar :-moz-any(.toolbarbutton-1,.chromeclass-toolbar-additional)[type="menu"][open],
-	.puzzleBars-bar :-moz-any(.toolbarbutton-1,.chromeclass-toolbar-additional) > .toolbarbutton-menubutton-button:not([disabled="true"]):hover:active,
-	.puzzleBars-bar :-moz-any(.toolbarbutton-1,.chromeclass-toolbar-additional)[open]:not([disabled="true"]):hover > .toolbarbutton-menubutton-dropmarker {
-		background-image: linear-gradient(transparent, rgba(0,0,0,.3)) !important;
-	}
-	
-	.puzzleBars-bar[brighttext="true"] :-moz-any(.toolbarbutton-1,.chromeclass-toolbar-additional):not([type="menu-button"]):not([disabled="true"]):not([open]):hover,
-	.puzzleBars-bar[brighttext="true"] :-moz-any(.toolbarbutton-1,.chromeclass-toolbar-additional) > .toolbarbutton-menubutton-button:not([disabled="true"]):hover,
-	.puzzleBars-bar[brighttext="true"] :-moz-any(.toolbarbutton-1,.chromeclass-toolbar-additional):not([disabled="true"]):not([buttonover]):hover > .toolbarbutton-menubutton-dropmarker {
-		background-image: linear-gradient(transparent, rgba(255,255,255,.6)) !important;
-	}
-	
-	.puzzleBars-bar[brighttext="true"] :-moz-any(.toolbarbutton-1,.chromeclass-toolbar-additional):not([type="menu-button"]):not([disabled="true"]):hover:active,
-	.puzzleBars-bar[brighttext="true"] :-moz-any(.toolbarbutton-1,.chromeclass-toolbar-additional)[type="menu"][open],
-	.puzzleBars-bar[brighttext="true"] :-moz-any(.toolbarbutton-1,.chromeclass-toolbar-additional) > .toolbarbutton-menubutton-button:not([disabled="true"]):hover:active,
-	.puzzleBars-bar[brighttext="true"] :-moz-any(.toolbarbutton-1,.chromeclass-toolbar-additional)[open]:not([disabled="true"]):hover > .toolbarbutton-menubutton-dropmarker {
-		background-image: linear-gradient(transparent, rgba(255,255,255,.6)) !important;
-	}
-	
-	/* Inner buttons and other elements display */
-	
-	/* #fixer-status-bar selector is from UI Fixer add-on "make status bar movable" feature */
-	.puzzleBars-bar > toolbaritem:not(#fixer-status-bar):not(#puzzleBars-status-bar-container):not(#search-container),
-	.puzzleBars-bar > .customization-target > toolbaritem:not(#fixer-status-bar):not(#puzzleBars-status-bar-container):not(#search-container) {
-		height: 18px;
-	}
-	
-	.puzzleBars-bar > *:not(.customization-target):not(toolbarpaletteitem) toolbarbutton,
-	.puzzleBars-bar > .customization-target > *:not(toolbarpaletteitem) toolbarbutton {
-		padding: 0px 3px !important;
-	}
+/* special style for buttons in the add-on bar */
 
-	/* style the add-on bar */
-	
-	.puzzleBars-bar {
-		min-height: 18px;
+.puzzleBars-bar :-moz-any(.toolbarbutton-1,.chromeclass-toolbar-additional),
+.puzzleBars-bar :-moz-any(.toolbarbutton-1,.chromeclass-toolbar-additional) > .toolbarbutton-menubutton-button,
+.puzzleBars-bar :-moz-any(.toolbarbutton-1,.chromeclass-toolbar-additional) > .toolbarbutton-menubutton-dropmarker {
+	-moz-appearance: none;
+	/* !important flags needed because of bug 561154: */
+	margin: 0 !important;
+	padding: 0 !important;
+	border: none !important;
+	border-radius: 0 !important;
+	background: none !important;
+	box-shadow: none !important;
+}
+
+.puzzleBars-bar :-moz-any(.toolbarbutton-1,.chromeclass-toolbar-additional):not([type="menu-button"]),
+.puzzleBars-bar :-moz-any(.toolbarbutton-1,.chromeclass-toolbar-additional) > .toolbarbutton-menubutton-button {
+	margin: 0;
+	padding: 0 1px;
+}
+
+.puzzleBars-bar :-moz-any(.toolbarbutton-1,.chromeclass-toolbar-additional) > .toolbarbutton-menubutton-dropmarker {
+	padding-left: 4px;
+	padding-right: 4px;
+}
+
+.puzzleBars-bar :-moz-any(.toolbarbutton-1,.chromeclass-toolbar-additional):not([type="menu-button"]):not([disabled="true"]):not([open]):hover,
+.puzzleBars-bar :-moz-any(.toolbarbutton-1,.chromeclass-toolbar-additional) > .toolbarbutton-menubutton-button:not([disabled="true"]):hover,
+.puzzleBars-bar :-moz-any(.toolbarbutton-1,.chromeclass-toolbar-additional):not([disabled="true"]):not([buttonover]):hover > .toolbarbutton-menubutton-dropmarker {
+	background-image: linear-gradient(transparent, rgba(0,0,0,.15)) !important;
+}
+
+.puzzleBars-bar :-moz-any(.toolbarbutton-1,.chromeclass-toolbar-additional):not([type="menu-button"]):not([disabled="true"]):hover:active,
+.puzzleBars-bar :-moz-any(.toolbarbutton-1,.chromeclass-toolbar-additional)[type="menu"][open],
+.puzzleBars-bar :-moz-any(.toolbarbutton-1,.chromeclass-toolbar-additional) > .toolbarbutton-menubutton-button:not([disabled="true"]):hover:active,
+.puzzleBars-bar :-moz-any(.toolbarbutton-1,.chromeclass-toolbar-additional)[open]:not([disabled="true"]):hover > .toolbarbutton-menubutton-dropmarker {
+	background-image: linear-gradient(transparent, rgba(0,0,0,.3)) !important;
+}
+
+.puzzleBars-bar[brighttext="true"] :-moz-any(.toolbarbutton-1,.chromeclass-toolbar-additional):not([type="menu-button"]):not([disabled="true"]):not([open]):hover,
+.puzzleBars-bar[brighttext="true"] :-moz-any(.toolbarbutton-1,.chromeclass-toolbar-additional) > .toolbarbutton-menubutton-button:not([disabled="true"]):hover,
+.puzzleBars-bar[brighttext="true"] :-moz-any(.toolbarbutton-1,.chromeclass-toolbar-additional):not([disabled="true"]):not([buttonover]):hover > .toolbarbutton-menubutton-dropmarker {
+	background-image: linear-gradient(transparent, rgba(255,255,255,.6)) !important;
+}
+
+.puzzleBars-bar[brighttext="true"] :-moz-any(.toolbarbutton-1,.chromeclass-toolbar-additional):not([type="menu-button"]):not([disabled="true"]):hover:active,
+.puzzleBars-bar[brighttext="true"] :-moz-any(.toolbarbutton-1,.chromeclass-toolbar-additional)[type="menu"][open],
+.puzzleBars-bar[brighttext="true"] :-moz-any(.toolbarbutton-1,.chromeclass-toolbar-additional) > .toolbarbutton-menubutton-button:not([disabled="true"]):hover:active,
+.puzzleBars-bar[brighttext="true"] :-moz-any(.toolbarbutton-1,.chromeclass-toolbar-additional)[open]:not([disabled="true"]):hover > .toolbarbutton-menubutton-dropmarker {
+	background-image: linear-gradient(transparent, rgba(255,255,255,.6)) !important;
+}
+
+/* Inner buttons and other elements display */
+
+/* #fixer-status-bar selector is from UI Fixer add-on "make status bar movable" feature */
+.puzzleBars-bar > toolbaritem:not(#fixer-status-bar):not(#puzzleBars-status-bar-container):not(#search-container),
+.puzzleBars-bar > .customization-target > toolbaritem:not(#fixer-status-bar):not(#puzzleBars-status-bar-container):not(#search-container) {
+	height: 18px;
+}
+
+.puzzleBars-bar > *:not(.customization-target):not(toolbarpaletteitem) toolbarbutton,
+.puzzleBars-bar > .customization-target > *:not(toolbarpaletteitem) toolbarbutton {
+	padding: 0px 3px !important;
+}
+
+/* style the add-on bar */
+
+.puzzleBars-bar {
+	min-height: 18px;
+}
+
+/* overflow panels */
+
+.puzzleBars-overflow-button:hover:active:not([disabled="true"]) {
+	-moz-image-region: rect(18px, 612px, 36px, 594px);
+}
+
+@media (min-resolution: 2dppx) {
+	.puzzleBars-overflow-button {
+		list-style-image: url("chrome://browser/skin/Toolbar@2x.png");
 	}
 	
-	/* overflow panels */
+	toolbar[brighttext] .puzzleBars-overflow-button {
+		list-style-image: url("chrome://browser/skin/Toolbar-inverted@2x.png");
+	}
+	
+	.puzzleBars-overflow-button {
+		-moz-image-region: rect(0, 1224px, 36px, 1188px);
+	}
 	
 	.puzzleBars-overflow-button:hover:active:not([disabled="true"]) {
-		-moz-image-region: rect(18px, 612px, 36px, 594px);
+		-moz-image-region: rect(36px, 1224px, 72px, 1188px);
 	}
 	
-	@media (min-resolution: 2dppx) {
-		.puzzleBars-overflow-button {
-			list-style-image: url("chrome://browser/skin/Toolbar@2x.png");
-		}
-		
-		toolbar[brighttext] .puzzleBars-overflow-button {
-			list-style-image: url("chrome://browser/skin/Toolbar-inverted@2x.png");
-		}
-		
-		.puzzleBars-overflow-button {
-			-moz-image-region: rect(0, 1224px, 36px, 1188px);
-		}
-		
-		.puzzleBars-overflow-button:hover:active:not([disabled="true"]) {
-			-moz-image-region: rect(36px, 1224px, 72px, 1188px);
-		}
-		
-		.puzzleBars-overflow-button > .toolbarbutton-icon {
-			width: 18px;
-		}
+	.puzzleBars-overflow-button > .toolbarbutton-icon {
+		width: 18px;
 	}
-
 }

@@ -1,9 +1,6 @@
 @namespace url(http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul);
-@-moz-document url("chrome://browser/content/browser.xul") {
 
-	/* make sure the PP is above the tabs toolbar, necessary without aero at least */
-	#puzzleBars-bottom-PP {
-		z-index: 5;
-	}
-	
+/* make sure the PP is above the tabs toolbar, necessary without aero at least */
+#puzzleBars-bottom-PP {
+	z-index: 5;
 }

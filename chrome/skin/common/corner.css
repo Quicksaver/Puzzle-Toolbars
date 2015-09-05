@@ -1,159 +1,156 @@
 @namespace url(http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul);
-@-moz-document url("chrome://browser/content/browser.xul") {
 
-	#puzzleBars-corner-bar {
-		-moz-appearance: none !important;
-		background: none !important;
-		border: none !important;
-		overflow: hidden;
-		opacity: 1;
-		padding: 2px 0;
-		margin: 0 5px;
-	}
-	
-	#puzzleBars-corner-container:not(:-moz-lwtheme),
-	#puzzleBars-corner-bar:not(:-moz-lwtheme) {
-		background-image: none;
-	}
-	
-	window:not([customizing="true"]) #puzzleBars-corner-container[collapsed="true"],
-	window:not([customizing="true"]) #puzzleBars-corner-bar[collapsed="true"] {
-		display: -moz-box !important;
-		visibility: visible !important;
-		pointer-events: none;
-	}
-	
-	#puzzleBars-corner-container[collapsed="true"] {
-		opacity: 0;
-	}
-	
-	window:not([customizing="true"]) #puzzleBars-corner-container {
-		background-color: inherit;
-		position: fixed;
-	}
-	
-	/* Inner buttons and other elements display */
-	
-	#puzzleBars-corner-bar #status-bar {
-		max-height: 18px;
-	}
-	
-	/* little tweaks to make the search bar fit better */
-	#puzzleBars-corner-bar #search-container {
-		min-width: calc(54px + 22ch);
-		margin: -2px 0;
-	}
-	
-	/* style the toolbar */
-	
-	window:not([customizing="true"]) #puzzleBars-corner-bar:not([hidePP]):not([movetoright]) {
-		margin-left: 27px;
-	}
-	window:not([customizing="true"]) #puzzleBars-corner-bar:not([hidePP])[movetoright] {
-		margin-right: 27px;
-	}
-	
-	window:not([customizing="true"]) #puzzleBars-corner-container[extend] #puzzleBars-corner-bar:not([hidePP]) {
-		width: calc(100% - 32px);
-	}
-	window:not([customizing="true"]) #puzzleBars-corner-container[extend] #puzzleBars-corner-bar {
-		width: calc(100% - 10px);
-	}
-	
-	/* Puzzle Pieces */
-	
-	#puzzleBars-corner-PP {
-		position: fixed;
-	}
-	
-	#puzzleBars-corner-PP:not([movetoright]) image { -moz-image-region: rect(0px, 32px, 32px, 0px); }
-	#puzzleBars-corner-PP:not([movetoright]):hover image { -moz-image-region: rect(32px, 32px, 64px, 0px); }
-	#puzzleBars-corner-PP[movetoright] image { -moz-image-region: rect(0px, 64px, 32px, 32px); }
-	#puzzleBars-corner-PP[movetoright]:hover image { -moz-image-region: rect(32px, 64px, 64px, 32px); }
-	
-	#puzzleBars-corner-PP:not([active]):not(:hover):not([hover]),
-	#puzzleBars-corner-PP:not([autohide])[statusHide]:not(:hover):not([hover]),
-	#puzzleBars-corner-PP[autohide]:not(:hover):not([hover]) {
-		opacity: 0;
-	}
-	
-	#puzzleBars-corner-PP:not([movetoright])[active]:not(:hover) image { transform: rotate(-60deg); }
-	#puzzleBars-corner-PP[movetoright][active]:not(:hover) image { transform: rotate(60deg); }
-	
-	#puzzleBars-corner-PP:hover image,
-	#puzzleBars-corner-PP:not([active]) image {
-		height: 32px;
-	}
-	
-	/* Animation */
-	
-	window:not([puzzleBars-noAnimation]) #puzzleBars-corner-PP:not([active]):not(:hover),
-	window:not([puzzleBars-noAnimation]) #puzzleBars-corner-PP[autohide]:not(:hover):not([hover]) {
-		transition: bottom .5s linear .2s, opacity .5s linear .2s, clip .5s linear .2s;
-	}
-	window:not([puzzleBars-noAnimation]) #puzzleBars-corner-PP:hover,
-	window:not([puzzleBars-noAnimation]) #puzzleBars-corner-PP[hover],
-	window:not([puzzleBars-noAnimation]) #puzzleBars-corner-PP[active] {
-		transition: bottom .25s linear 0s, opacity .25s linear 0s, clip .25s linear 0s;
-	}
-	window:not([puzzleBars-noAnimation]) #puzzleBars-corner-PP:not([active]):not(:hover):not([hover]) image {
-		transition: transform .5s linear .2s, margin .5s linear .2s, height .5s linear .2s;
-	}
-	window:not([puzzleBars-noAnimation]) #puzzleBars-corner-PP:hover image,
-	window:not([puzzleBars-noAnimation]) #puzzleBars-corner-PP[hover] image,
-	window:not([puzzleBars-noAnimation]) #puzzleBars-corner-PP[active] image {
-		transition: transform .25s linear 0s, margin .25s linear 0s, height .25s linear 0s;
-	}
-	
-	#puzzleBars-corner-PP { clip: rect(0px, 32px, 32px, 0px); }
-	#puzzleBars-corner-PP image { transform: rotate(0deg); }
-	#puzzleBars-corner-PP:not([movetoright]):not([active]):not(:hover) image { transform: rotate(-40deg); }
-	#puzzleBars-corner-PP[movetoright]:not([active]):not(:hover) image { transform: rotate(40deg); }
-	
-	window:not([puzzleBars-noAnimation]) #puzzleBars-corner-container:hover,
-	window:not([puzzleBars-noAnimation]) #puzzleBars-corner-container[hover],
-	window:not([puzzleBars-noAnimation]) #puzzleBars-corner-container:not([collapsed="true"]) {
-		transition: bottom .25s linear 0s, opacity .25s linear 0s, clip .25s linear 0s;
-	}
-	window:not([puzzleBars-noAnimation]) #puzzleBars-corner-container:not([collapsed="true"])[autohide]:not(:hover):not([hover]) {
-		transition: bottom .5s linear .2s, opacity .5s linear .2s, clip .5s linear .2s;
-	}
-	window:not([puzzleBars-noAnimation]) #puzzleBars-corner-container[collapsed="true"] {
-		transition: bottom .5s linear 0s, opacity .5s linear 0s, clip .5s linear 0s;
-	}
-	
-	#puzzleBars-corner-container:not([collapsed="true"]):hover,
-	#puzzleBars-corner-container:not([collapsed="true"])[hover] {
-		opacity: 1;
-	}
-	
-	window:not([customizing="true"]) #puzzleBars-corner-container:not([autohide])[statusHide]:not(:hover):not([hover]),
-	window:not([customizing="true"]) #puzzleBars-corner-container[autohide]:not(:hover):not([hover]) {
-		opacity: 0;
-	}
-	
-	/* customize dialog */
-	
-	#puzzleBars-corner-customize-wrapper {
-		margin: 15px;
-	}
-	
-	#puzzleBars-corner-customize-stack {
-		border: 1px solid rgba(0,0,0,.3);
-		box-shadow: 0 0 4px rgba(0,0,0,.3);
-		background: rgba(250, 250, 250, 0.8);
-		width: 100%;
-	}
-	
-	#puzzleBars-corner-customize-stack > label {
-		margin: 2px 15px;
-		color: #777;
-	}
-	#puzzleBars-corner-customize-stack:-moz-locale-dir(ltr) > label { text-align: right; }
-	#puzzleBars-corner-customize-stack:-moz-locale-dir(rtl) > label { text-align: left; }
-	
-	#puzzleBars-corner-customize-stack #puzzleBars-corner-bar {
-		margin: 0;
-	}
-	
+#puzzleBars-corner-bar {
+	-moz-appearance: none !important;
+	background: none !important;
+	border: none !important;
+	overflow: hidden;
+	opacity: 1;
+	padding: 2px 0;
+	margin: 0 5px;
+}
+
+#puzzleBars-corner-container:not(:-moz-lwtheme),
+#puzzleBars-corner-bar:not(:-moz-lwtheme) {
+	background-image: none;
+}
+
+window:not([customizing="true"]) #puzzleBars-corner-container[collapsed="true"],
+window:not([customizing="true"]) #puzzleBars-corner-bar[collapsed="true"] {
+	display: -moz-box !important;
+	visibility: visible !important;
+	pointer-events: none;
+}
+
+#puzzleBars-corner-container[collapsed="true"] {
+	opacity: 0;
+}
+
+window:not([customizing="true"]) #puzzleBars-corner-container {
+	background-color: inherit;
+	position: fixed;
+}
+
+/* Inner buttons and other elements display */
+
+#puzzleBars-corner-bar #status-bar {
+	max-height: 18px;
+}
+
+/* little tweaks to make the search bar fit better */
+#puzzleBars-corner-bar #search-container {
+	min-width: calc(54px + 22ch);
+	margin: -2px 0;
+}
+
+/* style the toolbar */
+
+window:not([customizing="true"]) #puzzleBars-corner-bar:not([hidePP]):not([movetoright]) {
+	margin-left: 27px;
+}
+window:not([customizing="true"]) #puzzleBars-corner-bar:not([hidePP])[movetoright] {
+	margin-right: 27px;
+}
+
+window:not([customizing="true"]) #puzzleBars-corner-container[extend] #puzzleBars-corner-bar:not([hidePP]) {
+	width: calc(100% - 32px);
+}
+window:not([customizing="true"]) #puzzleBars-corner-container[extend] #puzzleBars-corner-bar {
+	width: calc(100% - 10px);
+}
+
+/* Puzzle Pieces */
+
+#puzzleBars-corner-PP {
+	position: fixed;
+}
+
+#puzzleBars-corner-PP:not([movetoright]) image { -moz-image-region: rect(0px, 32px, 32px, 0px); }
+#puzzleBars-corner-PP:not([movetoright]):hover image { -moz-image-region: rect(32px, 32px, 64px, 0px); }
+#puzzleBars-corner-PP[movetoright] image { -moz-image-region: rect(0px, 64px, 32px, 32px); }
+#puzzleBars-corner-PP[movetoright]:hover image { -moz-image-region: rect(32px, 64px, 64px, 32px); }
+
+#puzzleBars-corner-PP:not([active]):not(:hover):not([hover]),
+#puzzleBars-corner-PP:not([autohide])[statusHide]:not(:hover):not([hover]),
+#puzzleBars-corner-PP[autohide]:not(:hover):not([hover]) {
+	opacity: 0;
+}
+
+#puzzleBars-corner-PP:not([movetoright])[active]:not(:hover) image { transform: rotate(-60deg); }
+#puzzleBars-corner-PP[movetoright][active]:not(:hover) image { transform: rotate(60deg); }
+
+#puzzleBars-corner-PP:hover image,
+#puzzleBars-corner-PP:not([active]) image {
+	height: 32px;
+}
+
+/* Animation */
+
+window:not([puzzleBars-noAnimation]) #puzzleBars-corner-PP:not([active]):not(:hover),
+window:not([puzzleBars-noAnimation]) #puzzleBars-corner-PP[autohide]:not(:hover):not([hover]) {
+	transition: bottom .5s linear .2s, opacity .5s linear .2s, clip .5s linear .2s;
+}
+window:not([puzzleBars-noAnimation]) #puzzleBars-corner-PP:hover,
+window:not([puzzleBars-noAnimation]) #puzzleBars-corner-PP[hover],
+window:not([puzzleBars-noAnimation]) #puzzleBars-corner-PP[active] {
+	transition: bottom .25s linear 0s, opacity .25s linear 0s, clip .25s linear 0s;
+}
+window:not([puzzleBars-noAnimation]) #puzzleBars-corner-PP:not([active]):not(:hover):not([hover]) image {
+	transition: transform .5s linear .2s, margin .5s linear .2s, height .5s linear .2s;
+}
+window:not([puzzleBars-noAnimation]) #puzzleBars-corner-PP:hover image,
+window:not([puzzleBars-noAnimation]) #puzzleBars-corner-PP[hover] image,
+window:not([puzzleBars-noAnimation]) #puzzleBars-corner-PP[active] image {
+	transition: transform .25s linear 0s, margin .25s linear 0s, height .25s linear 0s;
+}
+
+#puzzleBars-corner-PP { clip: rect(0px, 32px, 32px, 0px); }
+#puzzleBars-corner-PP image { transform: rotate(0deg); }
+#puzzleBars-corner-PP:not([movetoright]):not([active]):not(:hover) image { transform: rotate(-40deg); }
+#puzzleBars-corner-PP[movetoright]:not([active]):not(:hover) image { transform: rotate(40deg); }
+
+window:not([puzzleBars-noAnimation]) #puzzleBars-corner-container:hover,
+window:not([puzzleBars-noAnimation]) #puzzleBars-corner-container[hover],
+window:not([puzzleBars-noAnimation]) #puzzleBars-corner-container:not([collapsed="true"]) {
+	transition: bottom .25s linear 0s, opacity .25s linear 0s, clip .25s linear 0s;
+}
+window:not([puzzleBars-noAnimation]) #puzzleBars-corner-container:not([collapsed="true"])[autohide]:not(:hover):not([hover]) {
+	transition: bottom .5s linear .2s, opacity .5s linear .2s, clip .5s linear .2s;
+}
+window:not([puzzleBars-noAnimation]) #puzzleBars-corner-container[collapsed="true"] {
+	transition: bottom .5s linear 0s, opacity .5s linear 0s, clip .5s linear 0s;
+}
+
+#puzzleBars-corner-container:not([collapsed="true"]):hover,
+#puzzleBars-corner-container:not([collapsed="true"])[hover] {
+	opacity: 1;
+}
+
+window:not([customizing="true"]) #puzzleBars-corner-container:not([autohide])[statusHide]:not(:hover):not([hover]),
+window:not([customizing="true"]) #puzzleBars-corner-container[autohide]:not(:hover):not([hover]) {
+	opacity: 0;
+}
+
+/* customize dialog */
+
+#puzzleBars-corner-customize-wrapper {
+	margin: 15px;
+}
+
+#puzzleBars-corner-customize-stack {
+	border: 1px solid rgba(0,0,0,.3);
+	box-shadow: 0 0 4px rgba(0,0,0,.3);
+	background: rgba(250, 250, 250, 0.8);
+	width: 100%;
+}
+
+#puzzleBars-corner-customize-stack > label {
+	margin: 2px 15px;
+	color: #777;
+}
+#puzzleBars-corner-customize-stack:-moz-locale-dir(ltr) > label { text-align: right; }
+#puzzleBars-corner-customize-stack:-moz-locale-dir(rtl) > label { text-align: left; }
+
+#puzzleBars-corner-customize-stack #puzzleBars-corner-bar {
+	margin: 0;
 }

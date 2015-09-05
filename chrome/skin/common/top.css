@@ -1,105 +1,102 @@
 @namespace url(http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul);
-@-moz-document url("chrome://browser/content/browser.xul") {
 
-	/* Bugfix: we need our add-on bar always as the last visible element, even if it physically isn't */
-	#puzzleBars-top-bar {
-		position: relative;
-		-moz-box-ordinal-group: 10000;
-	}
-	#navigator-toolbox:after,
-	#theFoxOnlyBetter-slimChrome-container {
-		-moz-box-ordinal-group: 10001;
-	}
-	
-	/* little tweaks to make the search bar fit better */
-	#puzzleBars-top-bar #search-container {
-		margin: -1px 0 -2px;
-	}
-	
-	/* Inner buttons and other elements display */
-	
-	/* These are for the mouse over effects */
-	#puzzleBars-top-bar toolbarbutton:not([disabled="true"]):hover,
-	#puzzleBars-top-bar toolbarbutton[open],
-	#puzzleBars-top-bar toolbarbutton > .toolbarbutton-menubutton-button:not([disabled="true"]):hover {
-		background-position: left, left, right, top !important;
-		background-size: auto, 1px 100%, 1px 100%, 100% 1px !important;
-		background-repeat: no-repeat !important;
-		background-image:	linear-gradient(to top, transparent, rgba(0,0,0,.15)),
-					linear-gradient(to top, transparent, rgba(0,0,0,.15) 30%),
-		        		linear-gradient(to top, transparent, rgba(0,0,0,.15) 30%),
-		        		linear-gradient(to bottom, rgba(0,0,0,.15) 1px, transparent) !important;
-	}
-	#puzzleBars-top-bar[brighttext="true"] toolbarbutton:not([disabled="true"]):hover,
-	#puzzleBars-top-bar[brighttext="true"] toolbarbutton[open],
-	#puzzleBars-top-bar[brighttext="true"] toolbarbutton > .toolbarbutton-menubutton-button:not([disabled="true"]):hover {
-		background-image:	linear-gradient(to top, transparent, rgba(255,255,255,.45)),
-					linear-gradient(to top, transparent, rgba(255,255,255,.45) 30%),
-		        		linear-gradient(to top, transparent, rgba(255,255,255,.45) 30%),
-		        		linear-gradient(to bottom, rgba(255,255,255,.45) 1px, transparent) !important;
-	}
-	
-	/* style the toolbar */
-	
-	window:not([customizing="true"]) #puzzleBars-top-bar:not([slimChrome]):not([hidePP]):not([movetoright]) {
-		padding-left: 34px;
-	}
-	
-	window:not([customizing="true"]) #puzzleBars-top-bar:not([slimChrome]):not([hidePP])[movetoright] {
-		padding-right: 34px;
-	}
-	
-	/* Puzzle Pieces */
-	
-	#puzzleBars-top-PP {
-		position: fixed;
-		z-index: 2; /* nav-bar has z-index:1 */
-	}
-	
-	#puzzleBars-top-PP:not([movetoright]) image { -moz-image-region: rect(0px, 32px, 32px, 0px); }
-	#puzzleBars-top-PP:not([movetoright]):hover image { -moz-image-region: rect(32px, 32px, 64px, 0px); }
-	#puzzleBars-top-PP[movetoright] image { -moz-image-region: rect(0px, 64px, 32px, 32px); }
-	#puzzleBars-top-PP[movetoright]:hover image { -moz-image-region: rect(32px, 64px, 64px, 32px); }
-	
-	#puzzleBars-top-PP { clip: rect(0px, 32px, 32px, 0px); }
-	#puzzleBars-top-PP image { transform: rotate(0deg); }
-	#puzzleBars-top-PP:not([movetoright]):not([active]):not(:hover) image { transform: rotate(-40deg); }
-	#puzzleBars-top-PP[movetoright]:not([active]):not(:hover) image { transform: rotate(40deg); }
-	
-	#puzzleBars-top-PP:not([active]):not(:hover) {
-		opacity: 0;
-	}
-	
-	#puzzleBars-top-PP:not([movetoright])[active]:not(:hover) image { transform: rotate(-60deg); }
-	#puzzleBars-top-PP[movetoright][active]:not(:hover) image { transform: rotate(60deg); }
-	
-	#puzzleBars-top-PP:hover image,
-	#puzzleBars-top-PP:not([active]) image {
-		height: 32px;
-	}
-	
-	window:not([puzzleBars-noAnimation]) #puzzleBars-top-PP:not([active]):not(:hover) {
-		transition: top .5s linear .2s, opacity .5s linear .2s, clip .5s linear .2s;
-	}
-	window:not([puzzleBars-noAnimation]) #puzzleBars-top-PP:hover,
-	window:not([puzzleBars-noAnimation]) #puzzleBars-top-PP[active] {
-		transition: top .25s linear 0s, opacity .25s linear 0s, clip .25s linear 0s;
-	}
-	window:not([puzzleBars-noAnimation]) #puzzleBars-top-PP:not([active]):not(:hover) image {
-		transition: transform .5s linear .2s, margin .5s linear .2s, height .5s linear .2s;
-	}
-	window:not([puzzleBars-noAnimation]) #puzzleBars-top-PP:hover image,
-	window:not([puzzleBars-noAnimation]) #puzzleBars-top-PP[active] image {
-		transition: transform .25s linear 0s, margin .25s linear 0s, height .25s linear 0s;
-	}
-	
-	/* don't show the puzzle piece if the toolbar is being hidden by Slim Chrome */
-	#puzzleBars-top-PP[slimChrome] { display: none; }
-	
-	/* overflow panel */
-	
-	#puzzleBars-top-overflow-button:-moz-locale-dir(rtl) > .toolbarbutton-icon {
-		transform: scaleX(-1);
-	}
-	
+/* Bugfix: we need our add-on bar always as the last visible element, even if it physically isn't */
+#puzzleBars-top-bar {
+	position: relative;
+	-moz-box-ordinal-group: 10000;
+}
+#navigator-toolbox:after,
+#theFoxOnlyBetter-slimChrome-container {
+	-moz-box-ordinal-group: 10001;
+}
+
+/* little tweaks to make the search bar fit better */
+#puzzleBars-top-bar #search-container {
+	margin: -1px 0 -2px;
+}
+
+/* Inner buttons and other elements display */
+
+/* These are for the mouse over effects */
+#puzzleBars-top-bar toolbarbutton:not([disabled="true"]):hover,
+#puzzleBars-top-bar toolbarbutton[open],
+#puzzleBars-top-bar toolbarbutton > .toolbarbutton-menubutton-button:not([disabled="true"]):hover {
+	background-position: left, left, right, top !important;
+	background-size: auto, 1px 100%, 1px 100%, 100% 1px !important;
+	background-repeat: no-repeat !important;
+	background-image:	linear-gradient(to top, transparent, rgba(0,0,0,.15)),
+				linear-gradient(to top, transparent, rgba(0,0,0,.15) 30%),
+	        		linear-gradient(to top, transparent, rgba(0,0,0,.15) 30%),
+	        		linear-gradient(to bottom, rgba(0,0,0,.15) 1px, transparent) !important;
+}
+#puzzleBars-top-bar[brighttext="true"] toolbarbutton:not([disabled="true"]):hover,
+#puzzleBars-top-bar[brighttext="true"] toolbarbutton[open],
+#puzzleBars-top-bar[brighttext="true"] toolbarbutton > .toolbarbutton-menubutton-button:not([disabled="true"]):hover {
+	background-image:	linear-gradient(to top, transparent, rgba(255,255,255,.45)),
+				linear-gradient(to top, transparent, rgba(255,255,255,.45) 30%),
+	        		linear-gradient(to top, transparent, rgba(255,255,255,.45) 30%),
+	        		linear-gradient(to bottom, rgba(255,255,255,.45) 1px, transparent) !important;
+}
+
+/* style the toolbar */
+
+window:not([customizing="true"]) #puzzleBars-top-bar:not([slimChrome]):not([hidePP]):not([movetoright]) {
+	padding-left: 34px;
+}
+
+window:not([customizing="true"]) #puzzleBars-top-bar:not([slimChrome]):not([hidePP])[movetoright] {
+	padding-right: 34px;
+}
+
+/* Puzzle Pieces */
+
+#puzzleBars-top-PP {
+	position: fixed;
+	z-index: 2; /* nav-bar has z-index:1 */
+}
+
+#puzzleBars-top-PP:not([movetoright]) image { -moz-image-region: rect(0px, 32px, 32px, 0px); }
+#puzzleBars-top-PP:not([movetoright]):hover image { -moz-image-region: rect(32px, 32px, 64px, 0px); }
+#puzzleBars-top-PP[movetoright] image { -moz-image-region: rect(0px, 64px, 32px, 32px); }
+#puzzleBars-top-PP[movetoright]:hover image { -moz-image-region: rect(32px, 64px, 64px, 32px); }
+
+#puzzleBars-top-PP { clip: rect(0px, 32px, 32px, 0px); }
+#puzzleBars-top-PP image { transform: rotate(0deg); }
+#puzzleBars-top-PP:not([movetoright]):not([active]):not(:hover) image { transform: rotate(-40deg); }
+#puzzleBars-top-PP[movetoright]:not([active]):not(:hover) image { transform: rotate(40deg); }
+
+#puzzleBars-top-PP:not([active]):not(:hover) {
+	opacity: 0;
+}
+
+#puzzleBars-top-PP:not([movetoright])[active]:not(:hover) image { transform: rotate(-60deg); }
+#puzzleBars-top-PP[movetoright][active]:not(:hover) image { transform: rotate(60deg); }
+
+#puzzleBars-top-PP:hover image,
+#puzzleBars-top-PP:not([active]) image {
+	height: 32px;
+}
+
+window:not([puzzleBars-noAnimation]) #puzzleBars-top-PP:not([active]):not(:hover) {
+	transition: top .5s linear .2s, opacity .5s linear .2s, clip .5s linear .2s;
+}
+window:not([puzzleBars-noAnimation]) #puzzleBars-top-PP:hover,
+window:not([puzzleBars-noAnimation]) #puzzleBars-top-PP[active] {
+	transition: top .25s linear 0s, opacity .25s linear 0s, clip .25s linear 0s;
+}
+window:not([puzzleBars-noAnimation]) #puzzleBars-top-PP:not([active]):not(:hover) image {
+	transition: transform .5s linear .2s, margin .5s linear .2s, height .5s linear .2s;
+}
+window:not([puzzleBars-noAnimation]) #puzzleBars-top-PP:hover image,
+window:not([puzzleBars-noAnimation]) #puzzleBars-top-PP[active] image {
+	transition: transform .25s linear 0s, margin .25s linear 0s, height .25s linear 0s;
+}
+
+/* don't show the puzzle piece if the toolbar is being hidden by Slim Chrome */
+#puzzleBars-top-PP[slimChrome] { display: none; }
+
+/* overflow panel */
+
+#puzzleBars-top-overflow-button:-moz-locale-dir(rtl) > .toolbarbutton-icon {
+	transform: scaleX(-1);
 }
