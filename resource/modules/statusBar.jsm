@@ -1,4 +1,4 @@
-Modules.VERSION = '2.0.2';
+Modules.VERSION = '2.0.3';
 
 this.StatusBar = {
 	// don't forget that add-ons that use the status-bar seem to assume it is always in the DOM tree!
@@ -129,17 +129,19 @@ this.StatusBar = {
 	},
 	
 	// see https://bugzilla.mozilla.org/show_bug.cgi?id=989338
-	preventLosingCustomizeData: function() {
+	// that bug has been fixed for a while, I don't think this is needed anymore,
+	// I'll give it a test-removal, will actually remove by FF43 if I get no complaints
+	/*preventLosingCustomizeData: function() {
 		Windows.callOnAll((aWindow) => {
 			this.restore(aWindow);
 		}, 'navigator:browser');
 		
 		try { CustomizableUI.addWidgetToArea('status-bar', 'addon-bar'); }
 		catch(ex) {}
-	},
+	},*/
 	
 	onLoad: function(aWindow) {
-		if(!aWindow.document.documentElement.getAttribute('chromehidden').contains('toolbar')) {
+		if(!aWindow.document.documentElement.getAttribute('chromehidden').includes('toolbar')) {
 			prepareObject(aWindow);
 			this.prepare(aWindow);
 		}
@@ -152,7 +154,7 @@ this.StatusBar = {
 };
 
 Modules.LOADMODULE = function() {
-	alwaysRunOnShutdown.push(StatusBar.preventLosingCustomizeData);
+	//alwaysRunOnShutdown.push(StatusBar.preventLosingCustomizeData);
 	
 	CustomizableUI.addListener(StatusBar);
 	
@@ -178,5 +180,5 @@ Modules.UNLOADMODULE = function() {
 	
 	CustomizableUI.removeListener(StatusBar);
 	
-	StatusBar.preventLosingCustomizeData();
+	//StatusBar.preventLosingCustomizeData();
 };

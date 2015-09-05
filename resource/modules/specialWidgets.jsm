@@ -1,4 +1,4 @@
-Modules.VERSION = '1.0.8';
+Modules.VERSION = '1.0.9';
 
 // Special widgets aren't allowed in the menu panel by default, so we need to override this behavior (and hope we don't clash with other add-ons doing the same).
 // I hope I can remove this soon. See:
@@ -6,14 +6,14 @@ Modules.VERSION = '1.0.8';
 // https://bugzilla.mozilla.org/show_bug.cgi?id=1003588
 
 this.specialWidgets = ['separator', 'spring', 'spacer'];
-this.forbiddenSprings = ['nav-bar', 'PanelUI-contents', objName+'-urlbar-bar'];
+this.forbiddenSprings = new Set([ 'nav-bar', 'PanelUI-contents', objName+'-urlbar-bar' ]);
 this.ourSpecialWidgets = [];
 
 this.addWidgetToArea = function(aWidgetId, aArea, aPosition, aInitialAdd) {
 	if(aWidgetId.startsWith(objName+'-placeholder-')) {
 		aWidgetId = aWidgetId.match(/spring|spacer|separator/)[0];
 		
-		if(aWidgetId == 'spring' && forbiddenSprings.indexOf(aArea) > -1) {
+		if(aWidgetId == 'spring' && forbiddenSprings.has(aArea)) {
 			return;
 		}
 	}
@@ -30,7 +30,7 @@ this.addWidgetToArea = function(aWidgetId, aArea, aPosition, aInitialAdd) {
 	}
 	
 	if(this.isSpecialWidget(aWidgetId)) {
-		if(aWidgetId.contains('spring') && forbiddenSprings.indexOf(aArea) > -1) {
+		if(aWidgetId.includes('spring') && forbiddenSprings.has(aArea)) {
 			this.removeWidgetFromArea(aWidgetId);
 			return;
 		}
@@ -57,7 +57,7 @@ this.canWidgetMoveToArea = function(aWidgetId, aArea) {
 			return true;
 		}
 		
-		if(aWidgetId.contains('spring') && forbiddenSprings.indexOf(aArea) > -1) {
+		if(aWidgetId.includes('spring') && forbiddenSprings.has(aArea)) {
 			return false;
 		}
 	}
@@ -113,7 +113,7 @@ this.trackSpecialWidgets = {
 	onWidgetAfterDOMChange: function(aNode, aNextNode, aContainer, aIsRemoval) {
 		if(!aIsRemoval && aNode && aNode.id
 		&& (CustomizableUI.isSpecialWidget(aNode.id) || aNode.id.startsWith(objName+'-special-'))
-		&& aNode.id.contains('separator')) {
+		&& aNode.id.includes('separator')) {
 			aNode.classList.add(CustomizableUI.WIDE_PANEL_CLASS);
 		}
 	},
@@ -149,7 +149,7 @@ Modules.LOADMODULE = function() {
 	
 	CustomizableUI.addListener(trackSpecialWidgets);
 	
-	for(var i of specialWidgets) {
+	for(let i of specialWidgets) {
 		CustomizableUI.removeWidgetFromArea(objName+'-placeholder-'+i);
 	}
 	
