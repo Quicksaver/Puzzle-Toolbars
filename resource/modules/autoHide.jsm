@@ -1,4 +1,4 @@
-Modules.VERSION = '3.0.1';
+Modules.VERSION = '3.0.2';
 
 this.autoHide = {
 	handleEvent: function(e) {
@@ -178,7 +178,7 @@ this.autoHide = {
 			this.holdPopupNodes.add(target);
 			
 			if(!trueAttribute(hold, 'hover')) {
-				hideIt(target);
+				target.collapsed = true;
 				hold._transition.add(this);
 				Timers.init('ensureHoldPopupShows', () => { this.popupsFinishedVisible(); }, 400);
 			}
@@ -191,7 +191,7 @@ this.autoHide = {
 				this.popupsRemoveListeners();
 				
 				// making sure we don't collapse it permanently
-				hideIt(target, true);
+				target.collapsed = false;
 				
 				this.setHover(hold, false);
 				
@@ -224,7 +224,7 @@ this.autoHide = {
 				// obviously we won't need to move it if it isn't open
 				if(popup.open || popup.state == 'open') {
 					popup.moveTo(-1,-1);
-					hideIt(popup, true);
+					popup.collapsed = false;
 				}
 			}
 			
