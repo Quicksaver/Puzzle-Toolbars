@@ -1,4 +1,4 @@
-Modules.VERSION = '2.0.3';
+Modules.VERSION = '2.0.4';
 
 this.__defineGetter__('omnisidebar', function() { return window.omnisidebar; });
 this.__defineGetter__('leftSidebar', function() { return omnisidebar && omnisidebar.leftSidebar; });
@@ -6,6 +6,8 @@ this.__defineGetter__('rightSidebar', function() { return omnisidebar && omnisid
 
 this.osb = {
 	id: 'osb@quicksaver',
+	
+	initialized: false,
 	
 	handleEvent: function(e) {
 		switch(e.type) {
@@ -107,6 +109,9 @@ this.osb = {
 	},
 	
 	enable: function() {
+		if(this.initialized) { return; }
+		this.initialized = true;
+		
 		// we need to access and follow some of OSB's preferences
 		Prefs.setDefaults({
 			moveSidebars: false,
@@ -144,6 +149,9 @@ this.osb = {
 	},
 	
 	disable: function() {
+		if(!this.initialized) { return; }
+		this.initialized = false;
+		
 		Prefs.unlisten('moveSidebars', this);
 		Prefs.unlisten('twinSidebar', this);
 		Prefs.unlisten('renderabove', this);
