@@ -1,4 +1,4 @@
-Modules.VERSION = '2.0.1';
+Modules.VERSION = '2.0.2';
 
 this.top = {
 	get bar () { return $(objName+'-top-bar'); },
@@ -82,31 +82,31 @@ this.top = {
 			shrunkOffsetHover -= Math.min(Math.floor((PPsize -ppOffset -this.bar.clientHeight) /2), 0);
 		}
 		
-		var sscode = '/*The Puzzle Piece CSS declarations of variable values*/\n';
-		sscode += '@namespace url(http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul);\n';
-		sscode += '@-moz-document url("'+document.baseURI+'") {\n';
-		sscode += '	window['+objName+'_UUID="'+_UUID+'"] #'+objName+'-top-PP:not([movetoright]) { left: '+(this.style.left)+'px; }\n';
-		sscode += '	window['+objName+'_UUID="'+_UUID+'"] #'+objName+'-top-PP[movetoright] { right: '+(this.style.right)+'px; }\n';
-		sscode += '	window['+objName+'_UUID="'+_UUID+'"] #'+objName+'-top-PP:not([active]) {\n';
-		sscode += '		top: '+(this.style.top +OSoffset)+'px;\n';
-		sscode += '	}\n';
-		sscode += '	window['+objName+'_UUID="'+_UUID+'"] #'+objName+'-top-PP[active] {\n';
-		sscode += '		top: '+(this.style.top +OSoffset +shrunkOffsetHover)+'px;\n';
-		sscode += '	}\n';
-		sscode += '	window['+objName+'_UUID="'+_UUID+'"] #'+objName+'-top-PP[active]:not(:hover) {\n';
-		sscode += '		top: '+(this.style.top +OSoffset +shrunkOffset)+'px;\n';
-		sscode += '	}\n';
-		sscode += '	@media not all and (-moz-windows-classic) {\n';
-		sscode += '		@media (-moz-windows-default-theme) {\n';
-		sscode += '			window['+objName+'_UUID="'+_UUID+'"][sizemode="normal"] #'+objName+'-top-PP[active]:not(:hover) {\n';
-		sscode += '				top: '+(this.style.top +OSoffset +shrunkOffset +1)+'px;\n';
-		sscode += '			}\n';
-		sscode += '		}\n';
-		sscode += '	}\n';
-		sscode += '	window['+objName+'_UUID="'+_UUID+'"] #'+objName+'-top-PP:not([active]):not(:hover) {\n';
-		sscode += '		top: '+(this.style.top +OSoffset -21)+'px;\n';
-		sscode += '	}\n';
-		sscode += '}';
+		let sscode = 
+			'@namespace url(http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul);\n' +
+			'@-moz-document url("'+document.baseURI+'") {\n' +
+			'	window['+objName+'_UUID="'+_UUID+'"] #'+objName+'-top-PP:not([movetoright]) { left: '+(this.style.left)+'px; }\n' +
+			'	window['+objName+'_UUID="'+_UUID+'"] #'+objName+'-top-PP[movetoright] { right: '+(this.style.right)+'px; }\n' +
+			'	window['+objName+'_UUID="'+_UUID+'"] #'+objName+'-top-PP:not([active]) {\n' +
+			'		top: '+(this.style.top +OSoffset)+'px;\n' +
+			'	}\n' +
+			'	window['+objName+'_UUID="'+_UUID+'"] #'+objName+'-top-PP[active] {\n' +
+			'		top: '+(this.style.top +OSoffset +shrunkOffsetHover)+'px;\n' +
+			'	}\n' +
+			'	window['+objName+'_UUID="'+_UUID+'"] #'+objName+'-top-PP[active]:not(:hover) {\n' +
+			'		top: '+(this.style.top +OSoffset +shrunkOffset)+'px;\n' +
+			'	}\n' +
+			'	@media not all and (-moz-windows-classic) {\n' +
+			'		@media (-moz-windows-default-theme) {\n' +
+			'			window['+objName+'_UUID="'+_UUID+'"][sizemode="normal"] #'+objName+'-top-PP[active]:not(:hover) {\n' +
+			'				top: '+(this.style.top +OSoffset +shrunkOffset +1)+'px;\n' +
+			'			}\n' +
+			'		}\n' +
+			'	}\n' +
+			'	window['+objName+'_UUID="'+_UUID+'"] #'+objName+'-top-PP:not([active]):not(:hover) {\n' +
+			'		top: '+(this.style.top +OSoffset -21)+'px;\n' +
+			'	}\n' +
+			'}';
 		
 		Styles.load('topMove_'+_UUID, sscode, true);
 	},

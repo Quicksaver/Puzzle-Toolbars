@@ -1,4 +1,4 @@
-Modules.VERSION = '1.0.2';
+Modules.VERSION = '1.0.3';
 
 this.changeStratiformColor = function() {
 	Styles.unload('stratiformFix');
@@ -6,9 +6,9 @@ this.changeStratiformColor = function() {
 	if(Prefs['selectedtab-bg']) {
 		var color = JSON.parse(Prefs['selectedtab-bg']);
 		
-		var sscode = '/*The Puzzle Piece CSS declarations of variable values*/\n';
-		sscode += '@namespace url(http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul);\n';
-		sscode += '#'+objName+'-corner-container { background-color: hsla('+color.H+', '+color.S+'%, '+color.L+'%, 1) !important; }';
+		let sscode = 
+			'@namespace url(http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul);\n' +
+			'#'+objName+'-corner-container { background-color: hsla('+color.H+', '+color.S+'%, '+color.L+'%, 1) !important; }';
 		
 		Styles.load('stratiformFix', sscode, true);
 	}

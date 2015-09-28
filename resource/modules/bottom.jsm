@@ -1,4 +1,4 @@
-Modules.VERSION = '2.0.0';
+Modules.VERSION = '2.0.1';
 
 this.bottom = {
 	get box () { return $('browser-bottombox'); },
@@ -89,36 +89,36 @@ this.bottom = {
 			shrunkOffsetHover -= Math.min(Math.floor((PPsize -ppOffset -this.bar.clientHeight) /2), 0);
 		}
 		
-		var sscode = '/*The Puzzle Piece CSS declarations of variable values*/\n';
-		sscode += '@namespace url(http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul);\n';
-		sscode += '@-moz-document url("'+document.baseURI+'") {\n';
-		sscode += '	window['+objName+'_UUID="'+_UUID+'"] #'+objName+'-bottom-PP:not([movetoright]) { left: '+(left)+'px; }\n';
-		sscode += '	window['+objName+'_UUID="'+_UUID+'"] #'+objName+'-bottom-PP[movetoright] { right: '+(right)+'px; }\n';
-		sscode += '	window['+objName+'_UUID="'+_UUID+'"] #'+objName+'-bottom-PP:not([active]) {\n';
-		sscode += '		bottom: '+(bottomY +ppOffset +OSoffset)+'px;\n';
-		sscode += '	}\n';
-		sscode += '	window['+objName+'_UUID="'+_UUID+'"] #'+objName+'-bottom-PP[active] {\n';
-		sscode += '		bottom: '+(bottomY +ppOffset +OSoffset +shrunkOffsetHover)+'px;\n';
-		sscode += '	}\n';
-		sscode += '	window['+objName+'_UUID="'+_UUID+'"] #'+objName+'-bottom-PP[active]:not(:hover) {\n';
-		sscode += '		bottom: '+(bottomY +ppOffset +OSoffset +shrunkOffset)+'px;\n';
-		sscode += '	}\n';
-		sscode += '	@media not all and (-moz-windows-classic) {\n';
-		sscode += '		@media (-moz-windows-default-theme) {\n';
-		sscode += '			window['+objName+'_UUID="'+_UUID+'"][sizemode="normal"] #'+objName+'-bottom-PP[active]:not(:hover) {\n';
-		sscode += '				bottom: '+(bottomY +ppOffset +OSoffset +shrunkOffset +1)+'px;\n';
-		sscode += '			}\n';
-		sscode += '		}\n';
-		sscode += '	}\n';
-		sscode += '	window['+objName+'_UUID="'+_UUID+'"] #'+objName+'-bottom-PP:not([active]):not(:hover) {\n';
-		sscode += '		bottom: '+(bottomY +ppOffset +OSoffset -21)+'px;\n';
-		sscode += '	}\n';
+		let sscode = 
+			'@namespace url(http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul);\n' +
+			'@-moz-document url("'+document.baseURI+'") {\n' +
+			'	window['+objName+'_UUID="'+_UUID+'"] #'+objName+'-bottom-PP:not([movetoright]) { left: '+(left)+'px; }\n' +
+			'	window['+objName+'_UUID="'+_UUID+'"] #'+objName+'-bottom-PP[movetoright] { right: '+(right)+'px; }\n' +
+			'	window['+objName+'_UUID="'+_UUID+'"] #'+objName+'-bottom-PP:not([active]) {\n' +
+			'		bottom: '+(bottomY +ppOffset +OSoffset)+'px;\n' +
+			'	}\n' +
+			'	window['+objName+'_UUID="'+_UUID+'"] #'+objName+'-bottom-PP[active] {\n' +
+			'		bottom: '+(bottomY +ppOffset +OSoffset +shrunkOffsetHover)+'px;\n' +
+			'	}\n' +
+			'	window['+objName+'_UUID="'+_UUID+'"] #'+objName+'-bottom-PP[active]:not(:hover) {\n' +
+			'		bottom: '+(bottomY +ppOffset +OSoffset +shrunkOffset)+'px;\n' +
+			'	}\n' +
+			'	@media not all and (-moz-windows-classic) {\n' +
+			'		@media (-moz-windows-default-theme) {\n' +
+			'			window['+objName+'_UUID="'+_UUID+'"][sizemode="normal"] #'+objName+'-bottom-PP[active]:not(:hover) {\n' +
+			'				bottom: '+(bottomY +ppOffset +OSoffset +shrunkOffset +1)+'px;\n' +
+			'			}\n' +
+			'		}\n' +
+			'	}\n' +
+			'	window['+objName+'_UUID="'+_UUID+'"] #'+objName+'-bottom-PP:not([active]):not(:hover) {\n' +
+			'		bottom: '+(bottomY +ppOffset +OSoffset -21)+'px;\n' +
+			'	}\n' +
 		
-		sscode += '	window['+objName+'_UUID="'+_UUID+'"] #'+objName+'-bottom-PP[autohide][active]:not(:hover):not([hover]),\n';
-		sscode += '	window['+objName+'_UUID="'+_UUID+'"] #'+objName+'-bottom-bar[autohide]:not(:hover):not([hover]) {\n';
-		sscode += '		margin-bottom: '+(1 -this.bar.clientHeight)+'px;\n';
-		sscode += '	}\n';
-		sscode += '}';
+			'	window['+objName+'_UUID="'+_UUID+'"] #'+objName+'-bottom-PP[autohide][active]:not(:hover):not([hover]),\n' +
+			'	window['+objName+'_UUID="'+_UUID+'"] #'+objName+'-bottom-bar[autohide]:not(:hover):not([hover]) {\n' +
+			'		margin-bottom: '+(1 -this.bar.clientHeight)+'px;\n' +
+			'	}\n' +
+			'}';
 		
 		Styles.load('bottomMove_'+_UUID, sscode, true);
 	},

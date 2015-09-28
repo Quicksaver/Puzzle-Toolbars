@@ -1,4 +1,4 @@
-Modules.VERSION = '2.0.1';
+Modules.VERSION = '2.0.2';
 
 /* I'm actually not sure if any of this is working, UIEnhancer seems to be having some problems in Nightly... */
 
@@ -97,13 +97,13 @@ this.UIEnhancer = {
 		if(hover && urlbar.bar.clientWidth > $('urlbar').inputField.clientWidth) {
 			var newWidth = parseInt(this.urlbarEnhancer.style.width) -urlbar.bar.clientWidth +$('urlbar').inputField.clientWidth;
 			
-			var sscode = '/*The Puzzle Piece CSS declarations of variable values*/\n';
-			sscode += '@namespace url(http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul);\n';
-			sscode += '@-moz-document url("'+document.baseURI+'") {\n';
-			sscode += '	window['+objName+'_UUID="'+_UUID+'"] #UIEnhancer_URLBar {\n';
-			sscode += '		width: '+newWidth+'px !important;\n';
-			sscode += '	}\n';
-			sscode += '}';
+			let sscode = 
+				'@namespace url(http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul);\n' +
+				'@-moz-document url("'+document.baseURI+'") {\n' +
+				'	window['+objName+'_UUID="'+_UUID+'"] #UIEnhancer_URLBar {\n' +
+				'		width: '+newWidth+'px !important;\n' +
+				'	}\n' +
+				'}';
 			
 			Styles.load('UIEnhancer_'+_UUID, sscode, true);
 		}

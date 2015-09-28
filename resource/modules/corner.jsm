@@ -1,4 +1,4 @@
-Modules.VERSION = '2.0.2';
+Modules.VERSION = '2.0.3';
 
 this.__defineGetter__('gFindBar', function() { return window.gFindBar; });
 this.__defineGetter__('bottomBox', function() { return $('browser-bottombox'); });
@@ -162,57 +162,57 @@ this.corner = {
 		
 		toggleAttribute(corner.PP, 'clipped', this.style.bottom == 1);
 		
-		var sscode = '/*The Puzzle Piece CSS declarations of variable values*/\n';
-		sscode += '@namespace url(http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul);\n';
-		sscode += '@-moz-document url("'+document.baseURI+'") {\n';
-		sscode += '	window['+objName+'_UUID="'+_UUID+'"]:not([customizing="true"]) #'+objName+'-corner-container:not([movetoright]) { left: '+this.style.left+'px; }\n';
-		sscode += '	window['+objName+'_UUID="'+_UUID+'"]:not([customizing="true"]) #'+objName+'-corner-container[movetoright] { right: '+this.style.right+'px; }\n';
-		sscode += '	window['+objName+'_UUID="'+_UUID+'"]:not([customizing="true"]) #'+objName+'-corner-container {\n';
-		sscode += '		bottom: '+this.style.bottom+'px;\n';
-		sscode += '		max-width: '+Math.max(this.style.maxWidth, 5)+'px;\n';
-		sscode += '	}\n';
-		sscode += '	window['+objName+'_UUID="'+_UUID+'"]:not([customizing="true"]) #'+objName+'-corner-container[extend] {\n';
-		sscode += '		min-width: '+Math.max(this.style.maxWidth, 5)+'px;\n';
-		sscode += '	}\n';
-		sscode += '	window['+objName+'_UUID="'+_UUID+'"]:not([customizing="true"]) #'+objName+'-corner-container:not([autohide]),\n';
-		sscode += '	window['+objName+'_UUID="'+_UUID+'"]:not([customizing="true"]) #'+objName+'-corner-container[autohide]:-moz-any([hover],:hover) {\n';
-		sscode += '		clip: rect(0px, '+4000+'px, '+clipOffHeight+'px, 0px);\n';
-		sscode += '	}\n';
-		sscode += '	window['+objName+'_UUID="'+_UUID+'"]:not([customizing="true"]) #'+objName+'-corner-container[collapsed="true"],\n';
-		sscode += '	window['+objName+'_UUID="'+_UUID+'"]:not([customizing="true"]) #'+objName+'-corner-container[autohide]:not([hover]):not(:hover) {\n';
-		sscode += '		bottom: '+(this.style.bottom -barOffset)+'px;\n';
-		sscode += '		clip: rect(0px, '+4000+'px, '+Prefs.corner_hotspotHeight+'px, 0px);\n';
-		sscode += '	}\n';
-		
-		sscode += '	window['+objName+'_UUID="'+_UUID+'"] #'+objName+'-corner-PP:not([movetoright]) { left: '+(this.style.left -this.PP_OFFSET)+'px; }\n';
-		sscode += '	window['+objName+'_UUID="'+_UUID+'"] #'+objName+'-corner-PP[movetoright] { right: '+(this.style.right -this.PP_OFFSET)+'px; }\n';
-		sscode += '	window['+objName+'_UUID="'+_UUID+'"] #'+objName+'-corner-PP {\n';
-		sscode += '		bottom: '+(this.style.bottom +ppOffset +OSoffset)+'px;\n';
-		sscode += '	}\n';
-		sscode += '	window['+objName+'_UUID="'+_UUID+'"] #'+objName+'-corner-PP[active] {\n';
-		sscode += '		bottom: '+(this.style.bottom +ppOffset +OSoffset +shrunkOffsetHover)+'px;\n';
-		sscode += '	}\n';
-		sscode += '	window['+objName+'_UUID="'+_UUID+'"] #'+objName+'-corner-PP[active]:not(:hover) {\n';
-		sscode += '		bottom: '+(this.style.bottom +ppOffset +OSoffset +shrunkOffset)+'px;\n';
-		sscode += '	}\n';
-		sscode += '	@media not all and (-moz-windows-classic) {\n';
-		sscode += '		@media (-moz-windows-default-theme) {\n';
-		sscode += '			window['+objName+'_UUID="'+_UUID+'"][sizemode="normal"] #'+objName+'-corner-PP[active]:not(:hover) {\n';
-		sscode += '				bottom: '+(this.style.bottom +ppOffset +OSoffset +shrunkOffset +1)+'px;\n';
-		sscode += '			}\n';
-		sscode += '		}\n';
-		sscode += '	}\n';
-		sscode += '	window['+objName+'_UUID="'+_UUID+'"] #'+objName+'-corner-PP:not([active]):not(:hover) {\n';
-		sscode += '		bottom: '+(this.style.bottom +ppOffset +OSoffset +ppHiddenOffset)+'px;\n';
-		sscode += '	}\n';
-		sscode += '	window['+objName+'_UUID="'+_UUID+'"] #'+objName+'-corner-PP[autohide][active]:not(:hover):not([hover]) {\n';
-		sscode += '		bottom: '+(this.style.bottom +ppOffset +OSoffset +ppActiveHiddenOffset)+'px;\n';
-		sscode += '	}\n';
-		sscode += '	window['+objName+'_UUID="'+_UUID+'"] #'+objName+'-corner-PP[autohide][active]:not(:hover):not([hover]) {\n';
-		sscode += '		clip: rect(0px, 32px, '+ppActiveHiddenClip+'px, 0px);\n';
-		sscode += '	}\n';
-		
-		sscode += '}';
+		let sscode = 
+			'@namespace url(http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul);\n' +
+			'@-moz-document url("'+document.baseURI+'") {\n' +
+			'	window['+objName+'_UUID="'+_UUID+'"]:not([customizing="true"]) #'+objName+'-corner-container:not([movetoright]) { left: '+this.style.left+'px; }\n' +
+			'	window['+objName+'_UUID="'+_UUID+'"]:not([customizing="true"]) #'+objName+'-corner-container[movetoright] { right: '+this.style.right+'px; }\n' +
+			'	window['+objName+'_UUID="'+_UUID+'"]:not([customizing="true"]) #'+objName+'-corner-container {\n' +
+			'		bottom: '+this.style.bottom+'px;\n' +
+			'		max-width: '+Math.max(this.style.maxWidth, 5)+'px;\n' +
+			'	}\n' +
+			'	window['+objName+'_UUID="'+_UUID+'"]:not([customizing="true"]) #'+objName+'-corner-container[extend] {\n' +
+			'		min-width: '+Math.max(this.style.maxWidth, 5)+'px;\n' +
+			'	}\n' +
+			'	window['+objName+'_UUID="'+_UUID+'"]:not([customizing="true"]) #'+objName+'-corner-container:not([autohide]),\n' +
+			'	window['+objName+'_UUID="'+_UUID+'"]:not([customizing="true"]) #'+objName+'-corner-container[autohide]:-moz-any([hover],:hover) {\n' +
+			'		clip: rect(0px, '+4000+'px, '+clipOffHeight+'px, 0px);\n' +
+			'	}\n' +
+			'	window['+objName+'_UUID="'+_UUID+'"]:not([customizing="true"]) #'+objName+'-corner-container[collapsed="true"],\n' +
+			'	window['+objName+'_UUID="'+_UUID+'"]:not([customizing="true"]) #'+objName+'-corner-container[autohide]:not([hover]):not(:hover) {\n' +
+			'		bottom: '+(this.style.bottom -barOffset)+'px;\n' +
+			'		clip: rect(0px, '+4000+'px, '+Prefs.corner_hotspotHeight+'px, 0px);\n' +
+			'	}\n' +
+			
+			'	window['+objName+'_UUID="'+_UUID+'"] #'+objName+'-corner-PP:not([movetoright]) { left: '+(this.style.left -this.PP_OFFSET)+'px; }\n' +
+			'	window['+objName+'_UUID="'+_UUID+'"] #'+objName+'-corner-PP[movetoright] { right: '+(this.style.right -this.PP_OFFSET)+'px; }\n' +
+			'	window['+objName+'_UUID="'+_UUID+'"] #'+objName+'-corner-PP {\n' +
+			'		bottom: '+(this.style.bottom +ppOffset +OSoffset)+'px;\n' +
+			'	}\n' +
+			'	window['+objName+'_UUID="'+_UUID+'"] #'+objName+'-corner-PP[active] {\n' +
+			'		bottom: '+(this.style.bottom +ppOffset +OSoffset +shrunkOffsetHover)+'px;\n' +
+			'	}\n' +
+			'	window['+objName+'_UUID="'+_UUID+'"] #'+objName+'-corner-PP[active]:not(:hover) {\n' +
+			'		bottom: '+(this.style.bottom +ppOffset +OSoffset +shrunkOffset)+'px;\n' +
+			'	}\n' +
+			'	@media not all and (-moz-windows-classic) {\n' +
+			'		@media (-moz-windows-default-theme) {\n' +
+			'			window['+objName+'_UUID="'+_UUID+'"][sizemode="normal"] #'+objName+'-corner-PP[active]:not(:hover) {\n' +
+			'				bottom: '+(this.style.bottom +ppOffset +OSoffset +shrunkOffset +1)+'px;\n' +
+			'			}\n' +
+			'		}\n' +
+			'	}\n' +
+			'	window['+objName+'_UUID="'+_UUID+'"] #'+objName+'-corner-PP:not([active]):not(:hover) {\n' +
+			'		bottom: '+(this.style.bottom +ppOffset +OSoffset +ppHiddenOffset)+'px;\n' +
+			'	}\n' +
+			'	window['+objName+'_UUID="'+_UUID+'"] #'+objName+'-corner-PP[autohide][active]:not(:hover):not([hover]) {\n' +
+			'		bottom: '+(this.style.bottom +ppOffset +OSoffset +ppActiveHiddenOffset)+'px;\n' +
+			'	}\n' +
+			'	window['+objName+'_UUID="'+_UUID+'"] #'+objName+'-corner-PP[autohide][active]:not(:hover):not([hover]) {\n' +
+			'		clip: rect(0px, 32px, '+ppActiveHiddenClip+'px, 0px);\n' +
+			'	}\n' +
+			
+			'}';
 		
 		Styles.load('cornerMove_'+_UUID, sscode, true);
 		
@@ -274,18 +274,18 @@ this.corner = {
 			offsetPersonaY += parseInt(offsetPadding.substr(offsetPadding.indexOf(' ') +1, offsetPadding.indexOf('px', offsetPadding.indexOf(' ') +1)));
 		}
 		
-		var sscode = '/*The Puzzle Piece CSS declarations of variable values*/\n';
-		sscode += '@namespace url(http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul);\n';
-		sscode += '@-moz-document url("'+document.baseURI+'") {\n';
-		sscode += '	window['+objName+'_UUID="'+_UUID+'"]:not([customizing="true"]) #'+objName+'-corner-container {\n';
-		sscode += '	  background-image: ' + this.lwtheme.bgImage + ' !important;\n';
-		sscode += '	  background-color: ' + this.lwtheme.bgColor + ' !important;\n';
-		sscode += '	  color: ' + this.lwtheme.color + ' !important;\n';
-		sscode += '	  background-position: ' + offsetPersonaX + 'px calc(100% + ' +offsetPersonaY+ 'px) !important;\n';
-		sscode += '	  background-repeat: repeat !important;\n';
-		sscode += '	  background-size: auto auto !important;\n';
-		sscode += '	}\n';
-		sscode += '}';
+		let sscode = 
+			'@namespace url(http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul);\n' +
+			'@-moz-document url("'+document.baseURI+'") {\n' +
+			'	window['+objName+'_UUID="'+_UUID+'"]:not([customizing="true"]) #'+objName+'-corner-container {\n' +
+			'	  background-image: ' + this.lwtheme.bgImage + ' !important;\n' +
+			'	  background-color: ' + this.lwtheme.bgColor + ' !important;\n' +
+			'	  color: ' + this.lwtheme.color + ' !important;\n' +
+			'	  background-position: ' + offsetPersonaX + 'px calc(100% + ' +offsetPersonaY+ 'px) !important;\n' +
+			'	  background-repeat: repeat !important;\n' +
+			'	  background-size: auto auto !important;\n' +
+			'	}\n' +
+			'}';
 		
 		Styles.load('cornerPersona_'+_UUID, sscode, true);
 	},
