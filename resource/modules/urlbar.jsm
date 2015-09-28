@@ -1,4 +1,4 @@
-Modules.VERSION = '2.0.1';
+Modules.VERSION = '2.0.2';
 
 this.__defineGetter__('gURLBar', function() { return window.gURLBar; });
 this.__defineGetter__('locationContainer', function() { return $('urlbar-container'); });
@@ -85,13 +85,13 @@ this.urlbar = {
 		if(this.lastWidth != this.bar.clientWidth) {
 			this.lastWidth = this.bar.clientWidth;
 			
-			let sscode = 
-				'@namespace url(http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul);\n' +
-				'@-moz-document url("'+document.baseURI+'") {\n' +
-				'	window['+objName+'_UUID="'+_UUID+'"] #'+objName+'-urlbar-container[active] {\n' +
-				'		width: '+this.bar.clientWidth+'px;\n' +
-				'	}\n' +
-				'}';
+			let sscode = '\
+				@namespace url(http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul);\n\
+				@-moz-document url("'+document.baseURI+'") {\n\
+					window['+objName+'_UUID="'+_UUID+'"] #'+objName+'-urlbar-container[active] {\n\
+						width: '+this.bar.clientWidth+'px;\n\
+					}\n\
+				}';
 			
 			Styles.load('urlbarMove_'+_UUID, sscode, true);
 		}
