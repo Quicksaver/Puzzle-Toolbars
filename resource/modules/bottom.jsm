@@ -1,4 +1,4 @@
-Modules.VERSION = '2.0.2';
+Modules.VERSION = '2.0.3';
 
 this.bottom = {
 	get box () { return $('browser-bottombox'); },
@@ -154,11 +154,12 @@ this.bottom = {
 	onUnload: function() {
 		setAttribute(this.box, 'layer', 'true');
 		
-		autoHide.deinit(this.bar);
-		bars.deinit(this.bar, this.PP);
-		
 		Watchers.removeAttributeWatcher(gNavBar, 'brighttext', this);
 		Listeners.remove(window, 'PuzzleBarsMoved', this);
+		
+		// deinitialize bar after we've removed all listeners and handlers, so they don't react to this uselessly
+		autoHide.deinit(this.bar);
+		bars.deinit(this.bar, this.PP);
 	}
 };
 

@@ -1,4 +1,4 @@
-Modules.VERSION = '2.0.2';
+Modules.VERSION = '2.0.3';
 
 this.__defineGetter__('gURLBar', function() { return window.gURLBar; });
 this.__defineGetter__('locationContainer', function() { return $('urlbar-container'); });
@@ -155,12 +155,13 @@ this.urlbar = {
 		Listeners.remove(window, 'aftercustomization', this);
 		Overlays.removeOverlayWindow(window, 'urlbarCustomize');
 		
+		Listeners.remove(this.bar, 'ToggledPuzzleBar', this);
+		Listeners.remove(window, 'PuzzleBarsMoved', this);
+		
+		// deinitialize bar after we've removed all listeners and handlers, so they don't react to this uselessly
 		autoHide.deinit(this.bar);
 		bars.deinit(this.bar, this.PP);
 		removeAttribute(gURLBar, objName+'-WhenFocused');
-		
-		Listeners.remove(this.bar, 'ToggledPuzzleBar', this);
-		Listeners.remove(window, 'PuzzleBarsMoved', this);
 	}
 };
 

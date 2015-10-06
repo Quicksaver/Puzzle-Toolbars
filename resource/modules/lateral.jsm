@@ -1,4 +1,4 @@
-Modules.VERSION = '2.0.2';
+Modules.VERSION = '2.0.3';
 
 this.__defineGetter__('gCustomizeMode', function() { return window.gCustomizeMode; });
 
@@ -393,12 +393,13 @@ this.lateral = {
 		Listeners.remove(window, 'aftercustomization', this);
 		Overlays.removeOverlayWindow(window, 'lateralCustomize');
 		
+		Listeners.remove(window, 'PuzzleBarsMoved', this);
+		Watchers.removeAttributeWatcher($('sidebar-box'), 'hidden', this);
+		
+		// deinitialize bar after we've removed all listeners and handlers, so they don't react to this uselessly
 		autoHide.deinit(this.bar);
 		this.deinitOverflow(this.bar);
 		bars.deinit(this.bar, this.PP);
-		
-		Listeners.remove(window, 'PuzzleBarsMoved', this);
-		Watchers.removeAttributeWatcher($('sidebar-box'), 'hidden', this);
 	}
 };
 

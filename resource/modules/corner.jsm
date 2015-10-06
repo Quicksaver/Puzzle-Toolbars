@@ -1,4 +1,4 @@
-Modules.VERSION = '2.0.4';
+Modules.VERSION = '2.0.5';
 
 this.__defineGetter__('gFindBar', function() { return window.gFindBar; });
 this.__defineGetter__('bottomBox', function() { return $('browser-bottombox'); });
@@ -358,13 +358,14 @@ this.corner = {
 		Listeners.remove(window, 'aftercustomization', this);
 		Overlays.removeOverlayWindow(window, 'cornerCustomize');
 		
-		autoHide.deinit(this.bar);
-		bars.deinit(this.bar, this.PP);
-		
 		Watchers.removeAttributeWatcher(gNavBar, 'brighttext', this);
 		Listeners.remove(window, 'PuzzleBarsMoved', this);
 		Listeners.remove(gBrowser.tabContainer, 'TabSelect', this);
 		Observers.remove(this, "lightweight-theme-styling-update");
+		
+		// deinitialize bar after we've removed all listeners and handlers, so they don't react to this uselessly
+		autoHide.deinit(this.bar);
+		bars.deinit(this.bar, this.PP);
 		
 		removeAttribute(document.documentElement, objName+'-noAnimation');
 	}

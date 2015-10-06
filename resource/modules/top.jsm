@@ -1,4 +1,4 @@
-Modules.VERSION = '2.0.3';
+Modules.VERSION = '2.0.4';
 
 this.top = {
 	get bar () { return $(objName+'-top-bar'); },
@@ -124,9 +124,10 @@ this.top = {
 	},
 	
 	onUnload: function() {
-		bars.deinit(this.bar, this.PP);
-		
 		Listeners.remove(window, 'PuzzleBarsMoved', this);
+		
+		// deinitialize bar after we've removed all listeners and handlers, so they don't react to this uselessly
+		bars.deinit(this.bar, this.PP);
 	}
 };
 
