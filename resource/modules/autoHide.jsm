@@ -1,4 +1,4 @@
-Modules.VERSION = '3.0.2';
+Modules.VERSION = '3.0.3';
 
 this.autoHide = {
 	handleEvent: function(e) {
@@ -78,6 +78,7 @@ this.autoHide = {
 	},
 	
 	// Keep toolbar visible when opening menus within it
+	hoveredPopup: null,
 	holdPopupNodes: new Set(),
 	holdPopupMenu: function(e) {
 		// don't do anything on tooltips! the UI might collapse altogether
@@ -185,10 +186,14 @@ this.autoHide = {
 			
 			this.setHover(hold, true);
 			
-			var selfRemover = (ee) => {
+			let selfRemover = (ee) => {
 				if(ee.originalTarget != e.originalTarget) { return; } //submenus
 				Listeners.remove(target, 'popuphidden', selfRemover);
+				
 				this.popupsRemoveListeners();
+				if(this.hoveredPopup == target) {
+					this.hoveredPopup = null;
+				}
 				
 				// making sure we don't collapse it permanently
 				target.collapsed = false;
@@ -266,17 +271,33 @@ this.autoHide = {
 		bar.handleEvent = function(e) {
 			switch(e.type) {
 				case 'dragenter':
-					setHover(this, true, 1);
+					autoHide.setHover(this, true, 1);
 					Listeners.add(gBrowser, "dragenter", autoHide, false);
 					Listeners.add(window, "drop", autoHide, false);
 					Listeners.add(window, "dragend", autoHide, false);
 					break;
 				
 				case 'mouseover':
+					// Try not to double-mouseover items in child popups, otherwise it could lead to the toolbar getting stuck open.
+					// For instance, NoScript's "dis/allow scripts on this page" changes the DOM of the popup, where hovered items could
+					// be removed without triggering a mouseout event, leading to a subsequent mouseover on new/moved items.
+					if(isAncestor(e.target, autoHide.hoveredPopup)) { break; }
+					for(let popup of autoHide.holdPopupNodes) {
+						if(isAncestor(e.target, popup)) {
+							autoHide.hoveredPopup = popup;
+							break;
+						}
+					}
+					
 					autoHide.setHover(this, true);
 					break;
 				
 				case 'mouseout':
+					// see note above about preventing double-mouseovers
+					if(isAncestor(e.target, autoHide.hoveredPopup)) {
+						autoHide.hoveredPopup = null;
+					}
+					
 					autoHide.setHover(this, false);
 					break;
 				
