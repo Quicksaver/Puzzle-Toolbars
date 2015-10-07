@@ -1,4 +1,4 @@
-Modules.VERSION = '3.0.3';
+Modules.VERSION = '3.0.4';
 
 this.autoHide = {
 	handleEvent: function(e) {
@@ -80,6 +80,7 @@ this.autoHide = {
 	// Keep toolbar visible when opening menus within it
 	hoveredPopup: null,
 	holdPopupNodes: new Set(),
+	releasePopups: new Map(),
 	holdPopupMenu: function(e) {
 		// don't do anything on tooltips! the UI might collapse altogether
 		if(!e.target || e.target.nodeName == 'window' || e.target.nodeName == 'tooltip') { return; }
@@ -178,6 +179,13 @@ this.autoHide = {
 			// if we're opening the toolbar now, the anchor may move, so we need to reposition the popup when it does
 			this.holdPopupNodes.add(target);
 			
+			// make sure the popup stays in the set, so that ones that open and close quickly
+			// (i.e. multiple dis/allow actions in NoScript's popup) aren't removed while they're still open
+			if(this.releasePopups.has(target)) {
+				this.releasePopups.get(target).cancel();
+				this.releasePopups.delete(target);
+			}
+			
 			if(!trueAttribute(hold, 'hover')) {
 				target.collapsed = true;
 				hold._transition.add(this);
@@ -192,6 +200,10 @@ this.autoHide = {
 				
 				this.popupsRemoveListeners();
 				if(this.hoveredPopup == target) {
+					// it's unlikely that a mouseout will occur once the popup is hidden,
+					// so make sure to undo whatever mouseover event hovered the popup
+					this.setHover(hold, false);
+					
 					this.hoveredPopup = null;
 				}
 				
@@ -200,9 +212,9 @@ this.autoHide = {
 				
 				this.setHover(hold, false);
 				
-				aSync(() => {
+				this.releasePopups.set(target, aSync(() => {
 					this.holdPopupNodes.delete(target);
-				}, 150);
+				}, 150));
 			}
 			Listeners.add(target, 'popuphidden', selfRemover);
 		}
