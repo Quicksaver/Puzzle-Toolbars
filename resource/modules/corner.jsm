@@ -1,4 +1,4 @@
-Modules.VERSION = '2.0.5';
+// VERSION 2.0.5
 
 this.__defineGetter__('gFindBar', function() { return window.gFindBar; });
 this.__defineGetter__('bottomBox', function() { return $('browser-bottombox'); });

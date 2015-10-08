@@ -1,4 +1,4 @@
-Modules.VERSION = '2.0.4';
+// VERSION 2.0.4
 
 this.__defineGetter__('omnisidebar', function() { return window.omnisidebar; });
 this.__defineGetter__('leftSidebar', function() { return omnisidebar && omnisidebar.leftSidebar; });

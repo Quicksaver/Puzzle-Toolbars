@@ -1,4 +1,4 @@
-Modules.VERSION = '1.0.3';
+// VERSION 1.0.3
 
 // this is just to migrate all the items and preferences from thePuzzlePiece-addon-bar to this new version of the add-on,
 // it can probably be removed in the future when most users have updated

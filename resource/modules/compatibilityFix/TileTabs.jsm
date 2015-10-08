@@ -1,4 +1,4 @@
-Modules.VERSION = '1.0.3';
+// VERSION 1.0.3
 
 this.TileTabsStatusText = function() {
 	if(!Prefs.corner_bar || typeof(corner) == 'undefined') { return; }

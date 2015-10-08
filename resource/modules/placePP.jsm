@@ -1,4 +1,4 @@
-Modules.VERSION = '3.0.0';
+// VERSION 3.0.0
 
 this.PPs = {
 	command: function(e, button) {

@@ -1,4 +1,4 @@
-Modules.VERSION = '1.0.4';
+// VERSION 1.0.4
 
 this.changeStratiformColor = function() {
 	Styles.unload('stratiformFix');

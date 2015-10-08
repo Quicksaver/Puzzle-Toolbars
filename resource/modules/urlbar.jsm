@@ -1,4 +1,4 @@
-Modules.VERSION = '2.0.3';
+// VERSION 2.0.3
 
 this.__defineGetter__('gURLBar', function() { return window.gURLBar; });
 this.__defineGetter__('locationContainer', function() { return $('urlbar-container'); });

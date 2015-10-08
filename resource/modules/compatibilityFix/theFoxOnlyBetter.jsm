@@ -1,4 +1,4 @@
-Modules.VERSION = '2.0.2';
+// VERSION 2.0.2
 
 this.__defineGetter__('theFoxOnlyBetter', function() { return window.theFoxOnlyBetter; });
 this.__defineGetter__('gNavToolbox', function() { return window.gNavToolbox; });

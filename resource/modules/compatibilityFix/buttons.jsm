@@ -1,4 +1,4 @@
-Modules.VERSION = '1.1.0';
+// VERSION 1.1.0
 
 this.buttons = {
 	// list of buttons that will be forced to have the toolbarbutton-1 class when in our toolbars

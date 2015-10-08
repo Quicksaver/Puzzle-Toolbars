@@ -1,4 +1,4 @@
-Modules.VERSION = '1.0.8';
+// VERSION 1.0.8
 
 this.__defineGetter__('gBrowser', function() { return window.gBrowser; });
 

@@ -1,4 +1,4 @@
-Modules.VERSION = '1.0.9';
+// VERSION 1.0.9
 
 // Special widgets aren't allowed in the menu panel by default, so we need to override this behavior (and hope we don't clash with other add-ons doing the same).
 // I hope I can remove this soon. See:

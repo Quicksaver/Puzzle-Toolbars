@@ -1,4 +1,4 @@
-Modules.VERSION = '2.0.4';
+// VERSION 2.0.4
 
 this.top = {
 	get bar () { return $(objName+'-top-bar'); },

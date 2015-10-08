@@ -1,4 +1,4 @@
-Modules.VERSION = '1.0.17';
+// VERSION 1.0.17
 
 Modules.LOADMODULE = function() {
 	AddonManager.getAddonByID("s3download@statusbar", function(addon) {

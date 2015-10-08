@@ -1,4 +1,4 @@
-Modules.VERSION = '1.1.1';
+// VERSION 1.1.1
 
 this.TMPtoggledBottom = function() {
 	if(Prefs.tabBarPosition == 1) {

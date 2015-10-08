@@ -1,4 +1,4 @@
-Modules.VERSION = '3.0.4';
+// VERSION 3.0.4
 
 this.__defineGetter__('PrintPreviewListener', function() { return window.PrintPreviewListener; });
 this.__defineGetter__('gNavBar', function() { return $('nav-bar'); });

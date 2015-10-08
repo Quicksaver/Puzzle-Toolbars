@@ -1,4 +1,4 @@
-Modules.VERSION = '2.0.3';
+// VERSION 2.0.3
 
 this.__defineGetter__('gCustomizeMode', function() { return window.gCustomizeMode; });
 

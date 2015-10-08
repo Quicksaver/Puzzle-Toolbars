@@ -1,4 +1,4 @@
-Modules.VERSION = '2.0.3';
+// VERSION 2.0.3
 
 this.StatusBar = {
 	// don't forget that add-ons that use the status-bar seem to assume it is always in the DOM tree!

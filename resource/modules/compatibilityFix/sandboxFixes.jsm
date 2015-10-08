@@ -1,4 +1,4 @@
-Modules.VERSION = '1.0.5';
+// VERSION 1.0.5
 
 Modules.LOADMODULE = function() {
 	AddonManager.getAddonByID("ClassicThemeRestorer@ArisT2Noia4dev", function(addon) {
