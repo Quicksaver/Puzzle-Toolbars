@@ -25,6 +25,7 @@
 				collapsed="false"
 				persist="collapsed"
 				class="puzzleBars-bar chromeclass-toolbar-additional"
+				fullscreentoolbar="true"
 				iconsize="small"
 				context="toolbar-context-menu"
 				menucommand="objName:ToggleURLBarBar"

@@ -1,4 +1,4 @@
-// VERSION 3.0.4
+// VERSION 3.0.5
 
 this.__defineGetter__('PrintPreviewListener', function() { return window.PrintPreviewListener; });
 this.__defineGetter__('gNavBar', function() { return $('nav-bar'); });
@@ -35,7 +35,6 @@ this.onFullScreen = {
 	
 	// we don't care when entering DOM fullscreen, everything is hidden there, so no use in de/initializing anything
 	entered: window.fullScreen && !document.mozFullScreen,
-	DOMEntered: false,
 	
 	add: function(h) {
 		this.handlers.add(h);
@@ -48,11 +47,23 @@ this.onFullScreen = {
 	handleEvent: function(e) {
 		switch(e.type) {
 			case 'fullscreen':
+				// prevent the toolbars from moving around when entering or leaving fullscreen mode
+				this.noAnimation();
+				
 				let inFullScreen = window.fullScreen && !document.mozFullScreen;
 				
 				// only call the handlers if there was a change
 				if(inFullScreen == this.entered) { return; }
 				this.entered = inFullScreen;
+				
+				// Firefox's fullscreen handler removes the context menu from these toolbars, for old reasons (bug 1213598)
+				if(this.entered) {
+					for(let bar of bars) {
+						if(!bar.hasAttribute('context') && bar.hasAttribute('saved-context')) {
+							bar.setAttribute('context', bar.getAttribute('saved-context'));
+						}
+					}
+				}
 				
 				for(let h of this.handlers) {
 					if(h.handleEvent) {
@@ -62,15 +73,14 @@ this.onFullScreen = {
 					}
 				}
 				break;
-			
-			case 'MozDOMFullscreen:Entered':
-				this.receiveMessage({ data: true });
-				break;
-			
-			case 'MozDOMFullscreen:Exited':
-				this.receiveMessage({ data: false });
-				break;
 		}
+	},
+	
+	noAnimation: function() {
+		setAttribute(document.documentElement, objName+'-noAnimation', 'true');
+		Timers.init('noAnimation', function() {
+			removeAttribute(document.documentElement, objName+'-noAnimation');
+		}, 0);
 	}
 };
 
@@ -263,8 +273,6 @@ Modules.LOADMODULE = function() {
 	fullscreenDefaults['fullscreen.autohide'] = true;
 	Prefs.setDefaults(fullscreenDefaults, 'browser', '');
 	
-	Listeners.add(window, 'MozDOMFullscreen:Entered', onFullScreen);
-	Listeners.add(window, 'MozDOMFullscreen:Exited', onFullScreen);
 	Listeners.add(contextMenu, 'popupshowing', bars);
 	Listeners.add(viewMenu, 'popupshown', bars);
 	Listeners.add(customizeMenu, 'popupshown', bars);
@@ -282,6 +290,8 @@ Modules.LOADMODULE = function() {
 };
 
 Modules.UNLOADMODULE = function() {
+	Timers.cancel('noAnimation');
+	
 	Listeners.remove(contextMenu, 'popupshowing', bars);
 	Listeners.remove(viewMenu, 'popupshown', bars);
 	Listeners.remove(customizeMenu, 'popupshown', bars);
@@ -292,8 +302,6 @@ Modules.UNLOADMODULE = function() {
 	Listeners.remove(window, 'PuzzleBarCustomized', bars);
 	Listeners.remove(window, 'fullscreen', onFullScreen);
 	Listeners.remove(statusBar, 'load', bars, true);
-	Listeners.remove(window, 'MozDOMFullscreen:Entered', onFullScreen);
-	Listeners.remove(window, 'MozDOMFullscreen:Exited', onFullScreen);
 	
 	removeAttribute(document.documentElement, objName+'-noAnimation');
 	

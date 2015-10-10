@@ -33,6 +33,7 @@
 			collapsed="false"
 			persist="collapsed"
 			class="puzzleBars-bar chromeclass-toolbar-additional"
+			fullscreentoolbar="true"
 			waitForSS="chrome://objPathString/skin/puzzleBars.css chrome://objPathString-os/skin/puzzleBars.css chrome://objPathString/skin/bottom.css chrome://objPathString-os/skin/bottom.css"
 			iconsize="small"
 			context="toolbar-context-menu"
