@@ -1,4 +1,4 @@
-// VERSION 1.3
+// VERSION 1.3.1
 
 objName = 'puzzleBars';
 objPathString = 'puzzlebars';
@@ -62,11 +62,8 @@ prefList = {
 	top_shift: false,
 	top_alt: false,
 	
-	// for compatibility with The Fox, Only Better add-on
+	// for compatibility with Beyond Australis add-on
 	tFOB: false,
-	
-	// for migrateLegacy, probably safe to remove in the future, see note in that module
-	migratedLegacy: false,
 	
 	// hidden preference to not show the addon bar autohiding on startup
 	noInitialShow: false
@@ -83,7 +80,6 @@ paneList = [
 function onStartup() {
 	Modules.load('compatibilityFix/sandboxFixes');
 	Modules.load('specialWidgets');
-	Modules.load('migrateLegacy');
 	Modules.load('statusBar');
 	
 	// the add-on initialization is done inside the statusBar module so it can correctly handle the status-bar in all windows
@@ -93,7 +89,6 @@ function onShutdown() {
 	// deinitialization is also done inside statusBar, just like above
 	
 	Modules.unload('statusBar');
-	Modules.unload('migrateLegacy');
 	Modules.unload('specialWidgets');
 	Modules.unload('compatibilityFix/sandboxFixes');
 }
