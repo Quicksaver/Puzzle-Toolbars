@@ -1,9 +1,23 @@
 {
-	"current":"2.1.4",
+	"current":"2.1.5",
 	"knownissues":[
 		["There are some <a=https://github.com/Quicksaver/Puzzle-Toolbars/issues/24>minor (aesthetic) issues</a> when the Location Bar Puzzle Bar is used together with <a=https://addons.mozilla.org/firefox/addon/ui-enhancer/>Location Bar Enhancer</a>."]
 	],
 	"releases": {
+		"2.1.5":{
+			"date":"October 12, 2015",
+			"notes":[
+				["changed","Tweaked the name ever so slightly to Puzzle Bars (was Puzzle Toolbars)"],
+				["removed","Code for migrating settings from old versions of the add-on (The Puzzle Piece 1.*)"],
+				["updated","Minor improvements to multiline string concatenation code, as suggested by AMO reviewer"],
+				["updated","Share icons in the add-on's About pane"],
+				["updated","Minor improvements to global add-on and individual toolbar deinitialization speed"],
+				["bugfix","Some dynamic menupopups, such as the one opened by <a=https://addons.mozilla.org/firefox/addon/noscript/>NoScript</a>'s button, could cause the toolbars to get stuck open when set to autohide"],
+				["bugfix","(Firefox 44) the add-on would fail to start in the latest Nightly builds"],
+				["bugfix","Toolbars wouldn't work properly in fullscreen mode"],
+				["","Other minor fixes and improvements"]
+			]
+		},
 		"2.1.4":{
 			"date":"September 28, 2015",
 			"notes":[
