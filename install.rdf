@@ -3,7 +3,7 @@
 	<Description about="urn:mozilla:install-manifest">
 		<em:id>thePuzzlePiece@quicksaver</em:id>
 		
-		<em:name>Puzzle Toolbars</em:name>
+		<em:name>Puzzle Bars</em:name>
 		<em:version>2.1.4</em:version>
 		
 		<em:creator>Quicksaver</em:creator>
@@ -27,14 +27,14 @@
 		<em:localized>
 			<Description>
 				<em:locale>en-US</em:locale>
-				<em:name>Puzzle Toolbars</em:name>
+				<em:name>Puzzle Bars</em:name>
 				<em:description>Piece together all of your add-on buttons and extras into your browser window in exactly the way you want them!</em:description>
 			</Description>
 		</em:localized>
 		<em:localized>
 			<Description>
 				<em:locale>es-ES</em:locale>
-				<em:name>Puzzle Toolbars</em:name>
+				<em:name>Puzzle Bars</em:name>
 				<em:description>¡Reúne las 'piezas' de todos sus botones de complementos y extras en su ventana de navegador de la forma exacta que usted los quiere!</em:description>
 				<em:translator>strel</em:translator>
 			</Description>
@@ -42,7 +42,7 @@
 		<em:localized>
 			<Description>
 				<em:locale>fr</em:locale>
-				<em:name>Puzzle Toolbars</em:name>
+				<em:name>Puzzle Bars</em:name>
 				<em:description>Rassemblez tous vos boutons et fonctionnalités d'extensions dans votre navigateur exactement comme vous le souhaitez !</em:description>
 				<em:translator>Jojaba - BabelZilla</em:translator>
 			</Description>
@@ -58,7 +58,7 @@
 		<em:localized>
 			<Description>
 				<em:locale>ru</em:locale>
-				<em:name>Puzzle Панель</em:name>
+				<em:name>Puzzle Bars</em:name>
 				<em:description>Объедините все кнопки ваших дополнений в удобном для вас месте и виде!</em:description>
 				<em:translator>Alexander Gvaramiya</em:translator>
 			</Description>
@@ -66,7 +66,7 @@
 		<em:localized>
 			<Description>
 				<em:locale>sv-SE</em:locale>
-				<em:name>Puzzle Toolbars</em:name>
+				<em:name>Puzzle Bars</em:name>
 				<em:description>Samla ihop alla dina tilläggsknappar och andra objekt och placera dem i webbläsarfönstret precis där du vill ha dem!</em:description>
 				<em:translator>Mikael Hiort af Ornäs</em:translator>
 			</Description>
@@ -74,7 +74,7 @@
 		<em:localized>
 			<Description>
 				<em:locale>zh-CN</em:locale>
-				<em:name>Puzzle Toolbars</em:name>
+				<em:name>Puzzle Bars</em:name>
 				<em:description>把您的附加组件按钮和其他的东西拼凑在一起，放在你想放在的地方！</em:description>
 				<em:translator>Wang.H.K, YFdyh000</em:translator>
 			</Description>
@@ -82,7 +82,7 @@
 		<em:localized>
 			<Description>
 				<em:locale>zh-TW</em:locale>
-				<em:name>Puzzle Toolbars</em:name>
+				<em:name>Puzzle Bars</em:name>
 				<em:description>把您的附加元件按鈕與其他東西拼湊在一起，隨心所欲的放到您的瀏覽器視窗中！</em:description>
 				<em:translator>s8321414 - Babelzilla</em:translator>
 			</Description>
