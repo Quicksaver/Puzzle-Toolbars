@@ -1,19 +1,24 @@
-// VERSION 1.0.3
+// VERSION 1.1.0
 
-this.TileTabsStatusText = function() {
-	if(!Prefs.corner_bar || typeof(corner) == 'undefined') { return; }
-	
-	var field = gBrowser.getStatusPanel();
-	toggleAttribute(corner.bar, 'statusHide', field.label);
-};
+this.__defineGetter__('XULBrowserWindow', function() { return window.XULBrowserWindow; });
 
 Modules.LOADMODULE = function() {
-	toCode.modify(window.XULBrowserWindow, 'window.XULBrowserWindow.updateStatusField', [
-		// to ensure TileTabsStatusText() is run everytime the status text is set, to show/hide the corner toolbar appropriately so it doesn't hide the status text
-		['field.label = text;', 'field.label = text; TileTabsStatusText();']
-	]);
+	// to ensure TileTabsStatusText() is run everytime the status text is set, show/hide the corner toolbar so it doesn't cover the status text
+	XULBrowserWindow._statusText = XULBrowserWindow.statusText;
+	delete XULBrowserWindow.statusText;
+	XULBrowserWindow.__defineGetter__('statusText', function() { return this._statusText; });
+	XULBrowserWindow.__defineSetter__('statusText', function(v) {
+		this._statusText = v;
+		
+		if(Prefs.corner_bar && self.corner) {
+			toggleAttribute(corner.bar, 'statusHide', v);
+			toggleAttribute(corner.PP, 'statusHide', v);
+		}
+	});
 };
 
 Modules.UNLOADMODULE = function() {
-	toCode.revert(window.XULBrowserWindow, 'window.XULBrowserWindow.updateStatusField');
+	delete XULBrowserWindow.statusText;
+	XULBrowserWindow.statusText = XULBrowserWindow._statusText;
+	delete XULBrowserWindow._statusText;
 };
