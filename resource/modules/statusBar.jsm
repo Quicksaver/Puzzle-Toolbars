@@ -128,18 +128,6 @@ this.StatusBar = {
 		this.move(aWindow);
 	},
 	
-	// see https://bugzilla.mozilla.org/show_bug.cgi?id=989338
-	// that bug has been fixed for a while, I don't think this is needed anymore,
-	// I'll give it a test-removal, will actually remove by FF43 if I get no complaints
-	/*preventLosingCustomizeData: function() {
-		Windows.callOnAll((aWindow) => {
-			this.restore(aWindow);
-		}, 'navigator:browser');
-		
-		try { CustomizableUI.addWidgetToArea('status-bar', 'addon-bar'); }
-		catch(ex) {}
-	},*/
-	
 	onLoad: function(aWindow) {
 		if(!aWindow.document.documentElement.getAttribute('chromehidden').includes('toolbar')) {
 			prepareObject(aWindow);
@@ -154,8 +142,6 @@ this.StatusBar = {
 };
 
 Modules.LOADMODULE = function() {
-	//alwaysRunOnShutdown.push(StatusBar.preventLosingCustomizeData);
-	
 	CustomizableUI.addListener(StatusBar);
 	
 	Overlays.overlayURI('chrome://browser/content/browser.xul', 'statusBar', StatusBar);
@@ -179,6 +165,4 @@ Modules.UNLOADMODULE = function() {
 	Overlays.removeOverlayURI('chrome://browser/content/browser.xul', 'statusBar');
 	
 	CustomizableUI.removeListener(StatusBar);
-	
-	//StatusBar.preventLosingCustomizeData();
 };
