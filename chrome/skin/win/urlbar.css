@@ -20,6 +20,6 @@
 	padding: 0;
 }
 
-#nav-bar #puzzleBars-urlbar-bar .toolbarbutton-1:-moz-any([type="panel"],[type="menu"] > .toolbarbutton-badge-stack {
+#nav-bar #puzzleBars-urlbar-bar .toolbarbutton-1:-moz-any([type="panel"],[type="menu"]) > .toolbarbutton-badge-stack {
 	-moz-padding-end: 17px;
 }
