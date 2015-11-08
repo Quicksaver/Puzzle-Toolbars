@@ -1,9 +1,18 @@
 {
-	"current":"2.1.5",
+	"current":"2.1.6",
 	"knownissues":[
 		["There are some <a=https://github.com/Quicksaver/Puzzle-Toolbars/issues/24>minor (aesthetic) issues</a> when the Location Bar Puzzle Bar is used together with <a=https://addons.mozilla.org/firefox/addon/ui-enhancer/>Location Bar Enhancer</a>."]
 	],
 	"releases": {
+		"2.1.6":{
+			"date":"November 8, 2015",
+			"notes":[
+				["updated","Don't use eval in any part of the code; should bring a slight performance enhancement when used together with <a=https://addons.mozilla.org/firefox/addon/tile-tabs/>Tile Tabs</a>"],
+				["updated","Minor code cleanup"],
+				["bugfix","The keyboard shortcut dropdown selectors weren't properly populated only with the available keys"],
+				["bugfix","Possible fix for slight appearance issue with badge icons"]
+			]
+		},
 		"2.1.5":{
 			"date":"October 12, 2015",
 			"notes":[
