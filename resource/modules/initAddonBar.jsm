@@ -1,4 +1,4 @@
-// VERSION 3.0.5
+// VERSION 3.0.6
 
 this.__defineGetter__('PrintPreviewListener', function() { return window.PrintPreviewListener; });
 this.__defineGetter__('gNavBar', function() { return $('nav-bar'); });
@@ -237,13 +237,13 @@ this.bars = {
 		
 		// if the bars change sizes (from customization for instance, or as a consequence of themselves being moved), make sure we keep their placement accurate
 		for(let bar of this) {
-			var lastSize = {
+			let lastSize = {
 				height: bar.clientHeight +(bar.clientTop *2),
 				width: bar.clientWidth +(bar.clientLeft *2)
 			};
 			Timers.init('reMoveBar-'+bar.id, () => {
 				if(!UNLOADED) {
-					var nowSize = {
+					let nowSize = {
 						height: bar.clientHeight +(bar.clientTop *2),
 						width: bar.clientWidth +(bar.clientLeft *2)
 					};
