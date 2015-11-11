@@ -1,4 +1,4 @@
-// VERSION 2.0.3
+// VERSION 2.0.4
 
 this.__defineGetter__('gURLBar', function() { return window.gURLBar; });
 this.__defineGetter__('locationContainer', function() { return $('urlbar-container'); });
@@ -33,7 +33,7 @@ this.urlbar = {
 				this.setKey();
 				break;
 			
-			case 'corner_autohide':
+			case 'urlbar_autohide':
 				this.autoHide();
 				break;
 			
