@@ -1,4 +1,4 @@
-// VERSION 3.0.4
+// VERSION 3.0.5
 
 this.autoHide = {
 	handleEvent: function(e) {
@@ -17,8 +17,12 @@ this.autoHide = {
 				}
 				break;
 			
-			case 'ToggledPuzzleBar':
 			case 'PuzzleBarCustomized':
+				// On startup some icons may be added to the toolbar after its been initialized with autoHide; e.g. LastPass's button (v3.2.42, restartless).
+				// If the user flipped the noInitialShow pref, we shouldn't show the toolbars during those buttons initialization at startup.
+				if(Timers.noInitialShowOnStartup) { break; }
+				
+			case 'ToggledPuzzleBar':
 				this.initialShow(e.target);
 				break;
 			
@@ -383,9 +387,15 @@ this.autoHide = {
 
 Modules.LOADMODULE = function() {
 	Listeners.add(window, 'popupshown', autoHide);
+	
+	if(Prefs.noInitialShow) {
+		Timers.init("noInitialShowOnStartup", function() {}, 4000);
+	}
 };
 
 Modules.UNLOADMODULE = function() {
+	Timers.cancel("noInitialShowOnStartup");
+	
 	for(let bar of bars) {
 		Timers.cancel('setHover_'+bar.id);
 	}
