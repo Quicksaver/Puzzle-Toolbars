@@ -179,6 +179,7 @@ this.autoHide = {
 		}
 		
 		// some menus, like NoScript's button menu, like to open multiple times (I think), or at least they don't actually open the first time... or something...
+		// The bar can be hidden here in case we click, for instance, its puzzle piece, in which case we can't very well show it (nor would we need to).
 		if(hold && !hold.collapsed && target.state == 'open') {
 			// if we're opening the toolbar now, the anchor may move, so we need to reposition the popup when it does
 			this.holdPopupNodes.add(target);
