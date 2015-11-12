@@ -1,4 +1,4 @@
-// VERSION 3.0.6
+// VERSION 3.0.7
 
 this.autoHide = {
 	handleEvent: function(e) {
@@ -179,7 +179,7 @@ this.autoHide = {
 		}
 		
 		// some menus, like NoScript's button menu, like to open multiple times (I think), or at least they don't actually open the first time... or something...
-		if(hold && target.state == 'open') {
+		if(hold && !hold.collapsed && target.state == 'open') {
 			// if we're opening the toolbar now, the anchor may move, so we need to reposition the popup when it does
 			this.holdPopupNodes.add(target);
 			
