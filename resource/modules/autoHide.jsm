@@ -1,4 +1,4 @@
-// VERSION 3.0.5
+// VERSION 3.0.6
 
 this.autoHide = {
 	handleEvent: function(e) {
@@ -63,7 +63,7 @@ this.autoHide = {
 		});
 	},
 	
-	initialShow: function(bar) {
+	initialShow: function(bar, duration = 1500) {
 		if(bar.collapsed) {
 			this.setHover(bar, false, 0);
 		} else {
@@ -71,12 +71,12 @@ this.autoHide = {
 			
 			// don't use Timers, because if we use multiple initialShow()'s it would get stuck open
 			// we keep a reference to the timer, because otherwise sometimes it would not trigger (go figure...), hopefully this helps with that
-			var thisShowing = aSync(() => {
+			let thisShowing = aSync(() => {
 				if(bar._initialShowings) {
 					this.setHover(bar, false);
 					bar._initialShowings.delete(thisShowing);
 				}
-			}, 1500);
+			}, duration);
 			bar._initialShowings.add(thisShowing);
 		}
 	},
@@ -266,10 +266,12 @@ this.autoHide = {
 			Listeners.add(node, 'dragenter', bar);
 			Listeners.add(node, 'mouseover', bar);
 			Listeners.add(node, 'mouseout', bar);
+			Listeners.add(node, 'click', bar);
 		} else {
 			Listeners.remove(node, 'dragenter', bar);
 			Listeners.remove(node, 'mouseover', bar);
 			Listeners.remove(node, 'mouseout', bar);
+			Listeners.remove(node, 'click', bar);
 		}
 	},
 	
@@ -330,6 +332,14 @@ this.autoHide = {
 						}
 						catch(ex) { Cu.reportError(ex); }
 					}
+					break;
+				
+				case 'click':
+					// When pressing a button in the toolbar while keeping the mouse moving, it's possible the mouse would leave the toolbar
+					// before a popup is opened. So the toolbar would temporarily start to hide because it is only stuck open *after*
+					// the popup is finished opening. This would cause some visual glitches in the popups, like them flashing, showing only the borders,
+					// or jumping to the top-left edge of the window.
+					autoHide.initialShow(this, 500);
 					break;
 			}
 		};

@@ -1,4 +1,4 @@
-// VERSION 2.0.4
+// VERSION 2.0.5
 
 this.__defineGetter__('omnisidebar', function() { return window.omnisidebar; });
 this.__defineGetter__('leftSidebar', function() { return omnisidebar && omnisidebar.leftSidebar; });
@@ -231,7 +231,7 @@ this.osb = {
 				
 				// if we're toggling the toolbar, we better show the sidebar
 				if(e.type && e.type == 'ToggledPuzzleBar') {
-					omnisidebar.autoHide.initialShow(sidebar, 1500);
+					omnisidebar.autoHide.initialShow(sidebar);
 				}
 			}
 		}
