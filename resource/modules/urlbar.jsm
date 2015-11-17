@@ -1,4 +1,4 @@
-// VERSION 2.0.4
+// VERSION 2.0.5
 
 this.__defineGetter__('gURLBar', function() { return window.gURLBar; });
 this.__defineGetter__('locationContainer', function() { return $('urlbar-container'); });
@@ -8,6 +8,7 @@ this.urlbar = {
 	get container () { return $(objName+'-urlbar-container'); },
 	get bar () { return $(objName+'-urlbar-bar'); },
 	get PP () { return $(objName+'-urlbar-PP'); },
+	get historydropmarker () { return $ª($('urlbar'), 'historydropmarker'); },
 	
 	flexContainers: false,
 	
@@ -56,6 +57,19 @@ this.urlbar = {
 			case 'beforecustomization':
 			case 'aftercustomization':
 				this.customize(e);
+				break;
+			
+			case 'HoverPuzzleBar':
+				if(!this.bar._autohide) { break; }
+				
+				let dropmarker = this.historydropmarker;
+				if(this.bar.hovers) {
+					autoHide.setBarListeners(this.bar, dropmarker, true);
+					this.bar._autohide.add(dropmarker);
+				} else {
+					autoHide.setBarListeners(this.bar, dropmarker, false);
+					this.bar._autohide.delete(dropmarker);
+				}
 				break;
 		}
 	},
@@ -115,8 +129,16 @@ this.urlbar = {
 	autoHide: function() {
 		if(Prefs.urlbar_autohide) {
 			autoHide.init(this.bar, [this.container, this.PP], this.bar, 'opacity');
+			
+			// hovering the urlbar dropmarker should keep the toolbar shown, but only if it was shown already
+			if(Services.vc.compare(Services.appinfo.version, "42.0a1") >= 0) {
+				Listeners.add(this.bar, 'HoverPuzzleBar', this);
+			}
 		} else {
 			autoHide.deinit(this.bar);
+			if(Services.vc.compare(Services.appinfo.version, "42.0a1") >= 0) {
+				Listeners.remove(this.bar, 'HoverPuzzleBar', this);
+			}
 		}
 	},
 	
@@ -160,6 +182,9 @@ this.urlbar = {
 		
 		// deinitialize bar after we've removed all listeners and handlers, so they don't react to this uselessly
 		autoHide.deinit(this.bar);
+		if(Services.vc.compare(Services.appinfo.version, "42.0a1") >= 0) {
+			Listeners.remove(this.bar, 'HoverPuzzleBar', this);
+		}
 		bars.deinit(this.bar, this.PP);
 		removeAttribute(gURLBar, objName+'-WhenFocused');
 	}
