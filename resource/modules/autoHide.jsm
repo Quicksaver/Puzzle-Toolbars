@@ -1,4 +1,4 @@
-// VERSION 3.0.7
+// VERSION 3.0.8
 
 this.autoHide = {
 	handleEvent: function(e) {
@@ -32,6 +32,7 @@ this.autoHide = {
 				}
 				break;
 			
+			case 'popupshowing':
 			case 'popupshown':
 				this.holdPopupMenu(e);
 				break;
@@ -88,6 +89,16 @@ this.autoHide = {
 	holdPopupMenu: function(e) {
 		// don't do anything on tooltips! the UI might collapse altogether
 		if(!e.target || e.target.nodeName == 'window' || e.target.nodeName == 'tooltip') { return; }
+		
+		// no need to do any of this if none of the toolbars are autohiding (or are closed)
+		let proceed = false;
+		for(let bar of bars) {
+			if(bar._autohide && !bar.collapsed) {
+				proceed = true;
+				break;
+			}
+		}
+		if(!proceed) { return; }
 		
 		var trigger = e.originalTarget.triggerNode;
 		var target = e.target;
@@ -176,6 +187,15 @@ this.autoHide = {
 					}
 				}
 			}
+		}
+		
+		// Similarly to the 'click' handler below,
+		// popups shouldn't flash or jump around because the toolbars are temporarily hidden before the popup is fully shown.
+		if(e.type == 'popupshowing') {
+			if(trueAttribute(hold, 'hover')) {
+				this.initialShow(hold, 500);
+			}
+			return;
 		}
 		
 		// some menus, like NoScript's button menu, like to open multiple times (I think), or at least they don't actually open the first time... or something...
@@ -397,6 +417,7 @@ this.autoHide = {
 };
 
 Modules.LOADMODULE = function() {
+	Listeners.add(window, 'popupshowing', autoHide);
 	Listeners.add(window, 'popupshown', autoHide);
 	
 	if(Prefs.noInitialShow) {
@@ -410,5 +431,6 @@ Modules.UNLOADMODULE = function() {
 	for(let bar of bars) {
 		Timers.cancel('setHover_'+bar.id);
 	}
+	Listeners.remove(window, 'popupshowing', autoHide);
 	Listeners.remove(window, 'popupshown', autoHide);
 };
