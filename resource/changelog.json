@@ -1,9 +1,19 @@
 {
-	"current":"2.1.6",
+	"current":"2.1.7",
 	"knownissues":[
 		["There are some <a=https://github.com/Quicksaver/Puzzle-Toolbars/issues/24>minor (aesthetic) issues</a> when the Location Bar Puzzle Bar is used together with <a=https://addons.mozilla.org/firefox/addon/ui-enhancer/>Location Bar Enhancer</a>."]
 	],
 	"releases": {
+		"2.1.7":{
+			"date":"November 18, 2015",
+			"notes":[
+				["updated","es-ES and ru locales"],
+				["bugfix","Toggling Location Bar's Puzzle Bar auto-hide would require a browser restart to take effect"],
+				["bugfix","Panels or popups opened from icons in a puzzle bar set to autohide could show some weirdness, like showing only the borders, flashing on screen or even jumping to the top-left edge of the window"],
+				["bugfix","Slight performance drop caused by an error in the code"],
+				["bugfix","(Firefox 43) Location Bar's Puzzle Bar auto-hide behavior tweaked to accomodate for the new position of the urlbar's dropmarker; mousing over it will keep the icons shown if they were shown already, so that it doesn't move away with the rest of the icons when you want to click it"]
+			]
+		},
 		"2.1.6":{
 			"date":"November 8, 2015",
 			"notes":[
