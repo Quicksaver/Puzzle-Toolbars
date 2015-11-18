@@ -1,10 +1,10 @@
 {
-	"current":"2.1.7",
+	"current":"2.1.7.1",
 	"knownissues":[
 		["There are some <a=https://github.com/Quicksaver/Puzzle-Toolbars/issues/24>minor (aesthetic) issues</a> when the Location Bar Puzzle Bar is used together with <a=https://addons.mozilla.org/firefox/addon/ui-enhancer/>Location Bar Enhancer</a>."]
 	],
 	"releases": {
-		"2.1.7":{
+		"2.1.7.1":{
 			"date":"November 18, 2015",
 			"notes":[
 				["updated","es-ES and ru locales"],
