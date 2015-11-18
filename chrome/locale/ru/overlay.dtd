@@ -1,30 +1,30 @@
-<!ENTITY OptionsMenu.label "Puzzle Bars Options">
-<!ENTITY bottom.name "Нижняя панель">
+<!ENTITY OptionsMenu.label "Настройки Puzzle панелей">
+<!ENTITY bottom.name "Нижняя Puzzle панель">
 <!ENTITY bottom.accesskey "z">
-<!ENTITY bottom.menuAdd "Добавить на Нижнюю Puzzle Панель">
-<!ENTITY bottom.menuMove "Переместить на Нижнюю Puzzle Панель">
-<!ENTITY bottom.menuRemove "Удалить с Нижней Puzzle Панели">
-<!ENTITY corner.name "Угловая Puzzle Панель">
+<!ENTITY bottom.menuAdd "Добавить на нижнюю Puzzle панель">
+<!ENTITY bottom.menuMove "Переместить на нижнюю Puzzle панель">
+<!ENTITY bottom.menuRemove "Удалить с нижней Puzzle панели">
+<!ENTITY corner.name "Угловая Puzzle панель">
 <!ENTITY corner.accesskey "r">
-<!ENTITY corner.menuAdd "Добавить на Угловую Puzzle Панель">
-<!ENTITY corner.menuMove "Переместить на Угловую Puzzle Панель">
-<!ENTITY corner.menuRemove "Удалить с Угловой Puzzle Панели">
+<!ENTITY corner.menuAdd "Добавить на угловую Puzzle панель">
+<!ENTITY corner.menuMove "Переместить на угловую Puzzle панель">
+<!ENTITY corner.menuRemove "Удалить с угловой Puzzle панели">
 <!ENTITY urlbar.name "Панель в строке адреса">
 <!ENTITY urlbar.accesskey "i">
-<!ENTITY urlbar.menuAdd "Добавить на Панель в строке адреса">
-<!ENTITY urlbar.menuMove "Переместить на Панель в строке адреса">
-<!ENTITY urlbar.menuRemove "Удалить с Панели в строке адреса">
-<!ENTITY lateral.name "Боковая Puzzle Панель">
+<!ENTITY urlbar.menuAdd "Добавить на панель в строке адреса">
+<!ENTITY urlbar.menuMove "Переместить на панель в строке адреса">
+<!ENTITY urlbar.menuRemove "Удалить с панели в строке адреса">
+<!ENTITY lateral.name "Боковая Puzzle панель">
 <!ENTITY lateral.accesskey "L">
-<!ENTITY lateral.menuAdd "Добавить на Боковую Puzzle Панель">
-<!ENTITY lateral.menuMove "Переместить на Боковую Puzzle Панель">
-<!ENTITY lateral.menuRemove "Удалить с Боковой Puzzle Панели">
-<!ENTITY top.name "Верхняя Puzzle Панель">
+<!ENTITY lateral.menuAdd "Добавить на боковую Puzzle панель">
+<!ENTITY lateral.menuMove "Переместить на боковую Puzzle панель">
+<!ENTITY lateral.menuRemove "Удалить с боковой Puzzle панели">
+<!ENTITY top.name "Верхняя Puzzle панель">
 <!ENTITY top.accesskey "p">
-<!ENTITY top.menuAdd "Добавить на Верхнюю Puzzle Панель">
-<!ENTITY top.menuMove "Переместить на Верхнюю Puzzle Панель">
-<!ENTITY top.menuRemove "Удалить с Верхней Puzzle Панели">
-<!ENTITY allbars.menuMain "Переместить на Панель">
+<!ENTITY top.menuAdd "Добавить на верхнюю Puzzle панель">
+<!ENTITY top.menuMove "Переместить на верхнюю Puzzle панель">
+<!ENTITY top.menuRemove "Удалить с верхней Puzzle панели">
+<!ENTITY allbars.menuMain "Переместить на панель">
 <!ENTITY allbars.overflow "Показать еще...">
 <!ENTITY statusBar.label "Панель статуса">
 <!ENTITY specialWidget.separator "Разделитель">
