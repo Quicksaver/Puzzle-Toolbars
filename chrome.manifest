@@ -1,4 +1,4 @@
-content   puzzlebars                    chrome/content/
+content   puzzlebars                    chrome/content/   contentaccessible=yes
 resource  puzzlebars                    resource/
 
 locale    puzzlebars-en   en-US         chrome/locale/en-US/
