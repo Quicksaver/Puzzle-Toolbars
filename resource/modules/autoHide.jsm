@@ -1,4 +1,4 @@
-// VERSION 3.0.8
+// VERSION 3.0.9
 
 this.autoHide = {
 	handleEvent: function(e) {
@@ -160,7 +160,7 @@ this.autoHide = {
 						// the search engine selection menu is an anonymous child of the searchbar: e.target == $('searchbar'),
 						// so we need to explicitely get the actual menu to use
 						if(target.id == 'searchbar') {
-							target = $ª(target, 'searchbar-popup');
+							target = $Âª(target, 'searchbar-popup');
 						}
 						
 						break;

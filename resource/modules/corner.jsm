@@ -1,4 +1,4 @@
-// VERSION 2.0.5
+// VERSION 2.0.6
 
 this.__defineGetter__('gFindBar', function() { return window.gFindBar; });
 this.__defineGetter__('bottomBox', function() { return $('browser-bottombox'); });
@@ -107,7 +107,7 @@ this.corner = {
 		var TabsToolbar = $('TabsToolbar');
 		if(TabsToolbar && !TabsToolbar.collapsed && TabsToolbar.getAttribute('treestyletab-tabbar-autohide-state') != 'hidden'
 		&& (TabsToolbar.getAttribute('treestyletab-tabbar-position') == 'left' || TabsToolbar.getAttribute('treestyletab-tabbar-position') == 'right')) {
-			var TabsSplitter = $ª($('content'), 'treestyletab-splitter', 'class');
+			var TabsSplitter = $Âª($('content'), 'treestyletab-splitter', 'class');
 			this.style.maxWidth -= TabsToolbar.clientWidth;
 			this.style.maxWidth -= TabsSplitter.clientWidth +(TabsSplitter.clientLeft *2);
 			if(TabsToolbar.getAttribute('treestyletab-tabbar-position') == 'left') {

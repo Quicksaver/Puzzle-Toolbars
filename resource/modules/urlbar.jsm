@@ -1,4 +1,4 @@
-// VERSION 2.0.5
+// VERSION 2.0.6
 
 this.__defineGetter__('gURLBar', function() { return window.gURLBar; });
 this.__defineGetter__('locationContainer', function() { return $('urlbar-container'); });
@@ -8,7 +8,7 @@ this.urlbar = {
 	get container () { return $(objName+'-urlbar-container'); },
 	get bar () { return $(objName+'-urlbar-bar'); },
 	get PP () { return $(objName+'-urlbar-PP'); },
-	get historydropmarker () { return $ª($('urlbar'), 'historydropmarker'); },
+	get historydropmarker () { return $Âª($('urlbar'), 'historydropmarker'); },
 	
 	flexContainers: false,
 	
