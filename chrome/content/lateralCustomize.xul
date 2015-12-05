@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE overlay SYSTEM "chrome://puzzlebars/locale/overlay.dtd">
 <overlay id="lateralCustomize-overlay" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul" >
-	
+
 	<hbox id="customization-container">
 		<vbox id="objName-lateral-customize-wrapper" insertbefore="customization-palette-container">
 			<observes element="objName-lateral-bar" attribute="collapsed" />
 		</vbox>
 	</hbox>
-	
+
 	<vbox id="objName-lateral-container" newparent="objName-lateral-customize-wrapper" flex="1" />
-	
+
 </overlay>

@@ -4,15 +4,15 @@ Modules.LOADMODULE = function() {
 	AddonManager.getAddonByID("s3download@statusbar", function(addon) {
 		Modules.loadIf('compatibilityFix/S3', (addon && addon.isActive));
 	});
-	
+
 	AddonManager.getAddonByID("tiletabs@DW-dev", function(addon) {
 		Modules.loadIf('compatibilityFix/TileTabs', (addon && addon.isActive));
 	});
-	
+
 	AddonManager.getAddonByID('treestyletab@piro.sakura.ne.jp', function(addon) {
 		Modules.loadIf('compatibilityFix/TreeStyleTab', (addon && addon.isActive));
 	});
-	
+
 	Modules.load('compatibilityFix/downloadsIndicator');
 	Modules.load('compatibilityFix/bookmarkedItem');
 	Modules.load('compatibilityFix/bookmarksToolbar');

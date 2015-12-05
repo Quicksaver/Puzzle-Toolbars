@@ -39,13 +39,13 @@ Modules.LOADMODULE = function() {
 	Modules.load('initAddonBar');
 	Modules.load('placePP');
 	Modules.load('autoHide');
-	
+
 	Prefs.listen('bottom_bar', toggleBottom);
 	Prefs.listen('corner_bar', toggleCorner);
 	Prefs.listen('urlbar_bar', toggleUrlbar);
 	Prefs.listen('lateral_bar', toggleLateral);
 	Prefs.listen('top_bar', toggleTop);
-	
+
 	toggleBottom();
 	toggleCorner();
 	toggleLateral();
@@ -59,7 +59,7 @@ Modules.UNLOADMODULE = function() {
 	Prefs.unlisten('urlbar_bar', toggleUrlbar);
 	Prefs.unlisten('lateral_bar', toggleLateral);
 	Prefs.unlisten('top_bar', toggleTop);
-	
+
 	Modules.unload('urlbar');
 	Modules.unload('top');
 	Modules.unload('lateral');

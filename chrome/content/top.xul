@@ -7,7 +7,7 @@
 	<commandset id="mainCommandSet">
 		<command id="objName:ToggleTopBar" oncommand="objName.bars.toggle('objName-top-bar');"/>
 	</commandset>
-	
+
 	<popupset id="mainPopupSet">
 		<panel id="objName-top-overflow"
 			class="objName-overflow"
@@ -17,13 +17,13 @@
 			context="toolbar-context-menu"
 			position="bottomcenter topright"
 			hidden="true">
-			
+
 			<vbox id="objName-top-overflow-scroller" class="objName-overflow-scroller">
 			<vbox id="objName-top-overflow-list" class="widget-overflow-list objName-overflow-list" overflowfortoolbar="objName-top-bar"/>
 			</vbox>
 		</panel>
 	</popupset>
-	
+
 	<toolbox id="navigator-toolbox">
 		<toolbar id="puzzleBars-top-bar"
 			toolbarname="&top.name;"
@@ -47,29 +47,29 @@
 			menuMove="&top.menuMove;"
 			menuRemove="&top.menuRemove;"
 			menuMain="&allbars.menuMain;">
-			
+
 			<observes element="main-window" attribute="customizing" />
-			
+
 			<hbox id="objName-top-customization-target" flex="1"/>
-			
+
 			<toolbarbutton id="objName-top-overflow-button"
 				class="toolbarbutton-1 chromeclass-toolbar-additional overflow-button puzzleBars-overflow-button"
 				skipintoolbarset="true"
 				tooltiptext="&allbars.overflow;"/>
 		</toolbar>
-		
+
 		<box id="objName-top-PP"
 			class="PuzzlePiece chromeclass-toolbar-additional"
 			waitForSS="chrome://objPathString/skin/puzzleBars.css chrome://objPathString-os/skin/puzzleBars.css chrome://objPathString/skin/top.css chrome://objPathString-os/skin/top.css"
 			context="toolbar-context-menu"
 			insertafter="objName-top-bar"
 			hidden="true">
-			
+
 			<observes element="objName-top-bar" attribute="movetoright" />
 			<observes element="objName-top-bar" attribute="slimChrome" />
-			
+
 			<image onclick="objName.PPs.command(event, this.parentNode);" />
 		</box>
 	</toolbox>
-	
+
 </overlay>

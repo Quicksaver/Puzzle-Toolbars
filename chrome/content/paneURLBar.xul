@@ -9,12 +9,12 @@
 			tooltiptext="&urlbar.title;"
 			position="5"
 			align="center">
-			
+
 			<image class="category-icon"/>
 			<label class="category-name" flex="1" value="&urlbar.title;"/>
 		</richlistitem>
 	</richlistbox>
-	
+
 	<prefpane id="mainPrefPane">
 		<preferences>
 			<preference id="pref-urlbar_bar" name="extensions.puzzlebars.urlbar_bar" type="bool" />
@@ -26,18 +26,18 @@
 			<preference id="pref-urlbar_shift" name="extensions.puzzlebars.urlbar_shift" type="bool"/>
 			<preference id="pref-urlbar_alt" name="extensions.puzzlebars.urlbar_alt" type="bool"/>
 		</preferences>
-		
+
 		<hbox id="header-urlbar" class="header" collapsed="true" data-category="paneURLBar">
 			<label class="header-name">&urlbar.title;</label>
 		</hbox>
-		
+
 		<hbox align="start" id="paneURLBar-toggler" collapsed="true" data-category="paneURLBar">
 			<checkbox label="&OptUrlbar.label;"
 				jump="urlbar_bar"
 				helptext="&OptUrlbar.tooltip;"
 				delayPreference="pref-urlbar_bar"/>
 		</hbox>
-		
+
 		<groupbox align="start" id="paneURLBar-behavior" collapsed="true" data-category="paneURLBar">
 			<caption label="&GroupBehavior.label;"/>
 			<checkbox id="objName-urlbar-ppCheckbox"
@@ -69,7 +69,7 @@
 				<description>&OptWhenFocused.tooltip;</description>
 			</vbox>
 		</groupbox>
-		
+
 		<groupbox align="start" id="paneURLBar-shortcut" collapsed="true" data-category="paneURLBar">
 			<caption label="&OptKeyboardShortcut.captionA;"/>
 			<hbox jump="urlbar &OptKeyboardShortcut.captionA;">
@@ -80,5 +80,5 @@
 			</hbox>
 		</groupbox>
 	</prefpane>
-	
+
 </overlay>

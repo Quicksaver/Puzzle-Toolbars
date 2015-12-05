@@ -3,11 +3,11 @@
 <?xml-stylesheet href="chrome://objPathString-os/skin/corner.css" type="text/css"?>
 <!DOCTYPE overlay SYSTEM "chrome://puzzlebars/locale/overlay.dtd">
 <overlay id="corner-overlay" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul" >
-	
+
 	<commandset id="mainCommandSet">
 		<command id="objName:ToggleCornerBar" oncommand="objName.bars.toggle('objName-corner-bar');"/>
 	</commandset>
-	
+
 	<!-- Bugfix: there's a weird bug where the puzzle piece will be rendered behind the add-on bar (in the corner)
 	if the bar is not right after developer-toolbar (Status-4-ever add-on triggers this for example, and CTR as well sometimes -->
 	<vbox id="browser-bottombox">
@@ -21,7 +21,7 @@
 			<observes element="objName-corner-bar" attribute="autohide" />
 			<observes element="objName-corner-bar" attribute="hover" />
 			<observes element="objName-corner-bar" attribute="statusHide" />
-			
+
 			<toolbar id="puzzleBars-corner-bar"
 				toolbarname="&corner.name;"
 				accesskey="&corner.accesskey;"
@@ -39,24 +39,24 @@
 				menuMove="&corner.menuMove;"
 				menuRemove="&corner.menuRemove;"
 				menuMain="&allbars.menuMain;">
-				
+
 				<observes element="main-window" attribute="customizing" />
 			</toolbar>
 		</box>
-		
+
 		<box id="objName-corner-PP"
 			class="PuzzlePiece chromeclass-toolbar-additional"
 			waitForSS="chrome://objPathString/skin/puzzleBars.css chrome://objPathString-os/skin/puzzleBars.css chrome://objPathString/skin/corner.css chrome://objPathString-os/skin/corner.css"
 			context="toolbar-context-menu"
 			insertafter="objName-corner-container"
 			hidden="true">
-			
+
 			<observes element="objName-corner-bar" attribute="autohide" />
 			<observes element="objName-corner-bar" attribute="hover" />
 			<observes element="objName-corner-bar" attribute="movetoright" />
-			
+
 			<image onclick="objName.PPs.command(event, this.parentNode);" />
 		</box>
 	</vbox>
-	
+
 </overlay>

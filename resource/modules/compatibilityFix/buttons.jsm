@@ -5,7 +5,7 @@ this.buttons = {
 	classes: [
 		// https://addons.mozilla.org/firefox/addon/cookiesafe-ff-4-compatible/
 		'cookiesafe-button',
-		
+
 		// https://addons.mozilla.org/firefox/addon/quickjava/
 		"QuickJava_ToolbarIcon_Container_JavaScript",
 		"QuickJava_ToolbarIcon_Container_Java",
@@ -17,7 +17,7 @@ this.buttons = {
 		"QuickJava_ToolbarIcon_Container_CSS",
 		"QuickJava_ToolbarIcon_Container_Proxy"
 	],
-	
+
 	// always remove the class when doing this, so we're sure we only force the class in our toolbars
 	onWidgetBeforeDOMChange: function(aNode) {
 		if(this.classes.indexOf(aNode.id) > -1) {

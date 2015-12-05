@@ -26,36 +26,36 @@ this.__defineGetter__('scrollBarWidth', function() {
 // some bars need to properly force autohide on when in full screen, this is just a helper to ease this process
 this.onFullScreen = {
 	handlers: new Set(),
-	
+
 	// just a shortcut for the properties below to facilitate everywhere else
 	get hideBars () { return !this.useLion && this.entered && this.autohide; },
-	
+
 	get useLion () { return window.FullScreen.useLionFullScreen; },
 	get autohide () { return Prefs['fullscreen.autohide']; },
-	
+
 	// we don't care when entering DOM fullscreen, everything is hidden there, so no use in de/initializing anything
 	entered: window.fullScreen && !document.mozFullScreen,
-	
+
 	add: function(h) {
 		this.handlers.add(h);
 	},
-	
+
 	remove: function(h) {
 		this.handlers.delete(h);
 	},
-	
+
 	handleEvent: function(e) {
 		switch(e.type) {
 			case 'fullscreen':
 				// prevent the toolbars from moving around when entering or leaving fullscreen mode
 				this.noAnimation();
-				
+
 				let inFullScreen = window.fullScreen && !document.mozFullScreen;
-				
+
 				// only call the handlers if there was a change
 				if(inFullScreen == this.entered) { return; }
 				this.entered = inFullScreen;
-				
+
 				// Firefox's fullscreen handler removes the context menu from these toolbars, for old reasons (bug 1213598)
 				if(this.entered) {
 					for(let bar of bars) {
@@ -64,7 +64,7 @@ this.onFullScreen = {
 						}
 					}
 				}
-				
+
 				for(let h of this.handlers) {
 					if(h.handleEvent) {
 						h.handleEvent(e);
@@ -75,7 +75,7 @@ this.onFullScreen = {
 				break;
 		}
 	},
-	
+
 	noAnimation: function() {
 		setAttribute(document.documentElement, objName+'-noAnimation', 'true');
 		Timers.init('noAnimation', function() {
@@ -91,10 +91,10 @@ this.bars = {
 			yield bar;
 		}
 	},
-	
+
 	onWidgetAdded: function(aWidget, aArea) { this.widgetCustomized(aWidget, aArea); },
 	onWidgetRemoved: function(aWidget, aArea) { this.widgetCustomized(aWidget, aArea); },
-	
+
 	handleEvent: function(e) {
 		switch(e.type) {
 			case 'toolbarvisibilitychange':
@@ -102,43 +102,43 @@ this.bars = {
 					aSync(() => { dispatch(this._bars.get(e.target.id), { type: 'ToggledPuzzleBar', cancelable: false }); });
 				}
 				break;
-			
+
 			// Menus are dynamic, I need to make sure the entries do what they're supposed to if they're changed
 			case 'popupshowing':
 				this.setContextMenu(e);
 			case 'popupshown':
 				this.setMenuEntries(e.target);
 				break;
-			
+
 			case 'resize':
 			case 'drop':
 			case 'load':
 			case 'aftercustomization':
 				this.delayMove();
 				break;
-			
+
 			case 'ToggledPuzzleBar':
 			case 'PuzzleBarCustomized':
 				this.move();
 				break;
 		}
 	},
-	
+
 	init: function(bar, pp) {
 		if(this._bars.has(bar.id)) { return; }
-		
+
 		this._bars.set(bar.id, bar);
 		bar._pp = pp;
 		pp._bar = bar;
-		
+
 		if(trueAttribute(bar, 'overflowable') && bar.getAttribute('overflowtarget')) {
 			bar._overflowTarget = $(bar.getAttribute('overflowtarget'));
 		}
-		
+
 		Listeners.add(bar, 'resize', this);
 		Listeners.add(bar, 'drop', this);
 		Listeners.add(bar, 'load', this);
-		
+
 		// bars.move won't fire when setting hidden/collapsed in the buttons, unless we make it follow these changes
 		bar._moveOnHidingAttr = new window.MutationObserver((mutations) => {
 			// we don't need to schedule for every difference, we only need to schedule if there is any
@@ -157,55 +157,55 @@ this.bars = {
 			attributeFilter: ['hidden', 'collapsed'],
 			attributeOldValue: true
 		});
-		
+
 		bar._loaded = true;
-		
+
 		// aSync works best
 		aSync(function() {
 			bar.hidden = false;
-			
+
 			// up until now the bar was hidden, the places toolbar interprets this as "don't initialize"
 			if(isAncestor(PlacesToolbarHelper._viewElt, bar)) {
 				PlacesToolbarHelper.init();
 			}
 		});
-		
+
 		dispatch(bar, { type: "LoadedPuzzleBar", cancelable: false });
 	},
-	
+
 	deinit: function(bar, pp) {
 		if(!this._bars.has(bar.id)) { return; }
-		
+
 		// Prevent things from jumping around on startup
 		bar.hidden = true;
 		delete bar._loaded;
 		dispatch(bar, { type: "UnloadedPuzzleBar", cancelable: false });
-		
+
 		bar._moveOnHidingAttr.disconnect();
-		
+
 		Listeners.remove(bar, 'resize', this);
 		Listeners.remove(bar, 'drop', this);
 		Listeners.remove(bar, 'load', this);
-		
+
 		delete bar._overflowTarget;
 		delete pp._bar;
 		delete bar._moveOnHidingAttr;
 		delete bar._pp;
 		this._bars.delete(bar.id);
 	},
-	
+
 	toggle: function(aId) {
 		if(this._bars.has(aId)) {
 			CustomizableUI.setToolbarVisibility(aId, this._bars.get(aId).collapsed);
 		}
 	},
-	
+
 	widgetCustomized: function(aWidget, aArea) {
 		if(this._bars.has(aArea) && !trueAttribute(this._bars.get(aArea), 'customizing')) {
 			dispatch(this._bars.get(aArea), { type: 'PuzzleBarCustomized', cancelable: false });
 		}
 	},
-	
+
 	// Menus are dynamic, I need to make sure the entries do what they're supposed to if they're changed
 	setContextMenu: function(e) {
 		var notHidden = false;
@@ -218,23 +218,23 @@ this.bars = {
 		toggleAttribute(contextOptions, 'hidden', !notHidden);
 		toggleAttribute(contextSeparator, 'hidden', !notHidden);
 	},
-	
+
 	setMenuEntries:function(menu) {
 		for(let bar of this) {
 			setAttribute(menu.getElementsByAttribute('toolbarId', bar.id)[0], 'command', bar.getAttribute('menucommand'));
 		}
 	},
-	
+
 	delayMove: function() {
 		Timers.init('delayMoveAddonBar', () => { this.move(); }, 0);
 	},
-	
+
 	move: function() {
 		// there's no point in doing all this in customize mode
 		if(customizing) { return; }
-		
+
 		dispatch(window, { type: "PuzzleBarsMoved", cancelable: false });
-		
+
 		// if the bars change sizes (from customization for instance, or as a consequence of themselves being moved), make sure we keep their placement accurate
 		for(let bar of this) {
 			let lastSize = {
@@ -268,13 +268,13 @@ Modules.LOADMODULE = function() {
 		removeAttribute(document.documentElement, 'PrintPreview');
 		return true;
 	}, Piggyback.MODE_BEFORE);
-	
+
 	CustomizableUI.addListener(bars);
-	
+
 	var fullscreenDefaults = {};
 	fullscreenDefaults['fullscreen.autohide'] = true;
 	Prefs.setDefaults(fullscreenDefaults, 'browser', '');
-	
+
 	Listeners.add(contextMenu, 'popupshowing', bars);
 	Listeners.add(viewMenu, 'popupshown', bars);
 	Listeners.add(customizeMenu, 'popupshown', bars);
@@ -284,16 +284,16 @@ Modules.LOADMODULE = function() {
 	Listeners.add(window, 'ToggledPuzzleBar', bars);
 	Listeners.add(window, 'PuzzleBarCustomized', bars);
 	Listeners.add(window, 'fullscreen', onFullScreen);
-	
+
 	// Half fix for when the status-bar is changed
 	Listeners.add(statusBar, 'load', bars, true);
-	
+
 	bars.move();
 };
 
 Modules.UNLOADMODULE = function() {
 	Timers.cancel('noAnimation');
-	
+
 	Listeners.remove(contextMenu, 'popupshowing', bars);
 	Listeners.remove(viewMenu, 'popupshown', bars);
 	Listeners.remove(customizeMenu, 'popupshown', bars);
@@ -304,11 +304,11 @@ Modules.UNLOADMODULE = function() {
 	Listeners.remove(window, 'PuzzleBarCustomized', bars);
 	Listeners.remove(window, 'fullscreen', onFullScreen);
 	Listeners.remove(statusBar, 'load', bars, true);
-	
+
 	removeAttribute(document.documentElement, objName+'-noAnimation');
-	
+
 	CustomizableUI.removeListener(bars);
-	
+
 	Piggyback.revert('initAddonbar', PrintPreviewListener, '_hideChrome');
 	Piggyback.revert('initAddonbar', PrintPreviewListener, '_showChrome');
 	removeAttribute(document.documentElement, 'PrintPreview');

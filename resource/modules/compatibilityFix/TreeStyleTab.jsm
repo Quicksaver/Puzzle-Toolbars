@@ -9,7 +9,7 @@ this.TreeStyleTab = {
 					corner.move();
 				}
 				break;
-			
+
 			case 'ToggledPuzzleBar':
 			case 'LoadedAutoHidePuzzleBar':
 			case 'UnloadedAutoHidePuzzleBar':
@@ -25,7 +25,7 @@ this.TreeStyleTab = {
 				break;
 		}
 	},
-	
+
 	resize: function() {
 		gBrowser.treeStyleTab.onResize({ originalTarget: window });
 	}

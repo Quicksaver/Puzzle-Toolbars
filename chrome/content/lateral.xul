@@ -3,11 +3,11 @@
 <?xml-stylesheet href="chrome://objPathString-os/skin/lateral.css" type="text/css"?>
 <!DOCTYPE overlay SYSTEM "chrome://puzzlebars/locale/overlay.dtd">
 <overlay id="lateral-overlay" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul" >
-	
+
 	<commandset id="mainCommandSet">
 		<command id="objName:ToggleLateralBar" oncommand="objName.bars.toggle('objName-lateral-bar');"/>
 	</commandset>
-	
+
 	<popupset id="mainPopupSet">
 		<panel id="objName-lateral-overflow"
 			class="objName-overflow"
@@ -17,25 +17,25 @@
 			context="toolbar-context-menu"
 			position="topcenter bottomright"
 			hidden="true">
-			
+
 			<vbox id="objName-lateral-overflow-scroller" class="objName-overflow-scroller">
 			<vbox id="objName-lateral-overflow-list" class="widget-overflow-list objName-overflow-list" overflowfortoolbar="objName-lateral-bar"/>
 			</vbox>
 		</panel>
 	</popupset>
-	
+
 	<hbox id="browser">
 		<vbox id="objName-lateral-container"
 			class="puzzleBars-fullscreenCollapse"
 			waitForSS="chrome://objPathString/skin/puzzleBars.css chrome://objPathString-os/skin/puzzleBars.css chrome://objPathString/skin/lateral.css chrome://objPathString-os/skin/lateral.css"
 			insertafter="browser-border-start">
-			
+
 			<observes element="objName-lateral-bar" attribute="autohide" />
 			<observes element="objName-lateral-bar" attribute="hover" />
 			<observes element="objName-lateral-bar" attribute="collapsed" />
 			<observes element="objName-lateral-bar" attribute="movetoright" />
 			<observes element="objName-lateral-bar" attribute="inSidebar" />
-			
+
 			<toolbar id="puzzleBars-lateral-bar"
 				toolbarname="&lateral.name;"
 				accesskey="&lateral.accesskey;"
@@ -60,32 +60,32 @@
 				menuMove="&lateral.menuMove;"
 				menuRemove="&lateral.menuRemove;"
 				menuMain="&allbars.menuMain;">
-				
+
 				<observes element="main-window" attribute="customizing" />
-				
+
 				<hbox id="objName-lateral-customization-target" flex="1"/>
-				
+
 				<toolbarbutton id="objName-lateral-overflow-button"
 					class="toolbarbutton-1 chromeclass-toolbar-additional overflow-button puzzleBars-overflow-button"
 					skipintoolbarset="true"
 					tooltiptext="&allbars.overflow;"/>
 			</toolbar>
 		</vbox>
-	
+
 		<box id="objName-lateral-PP"
 			class="PuzzlePiece chromeclass-toolbar-additional"
 			waitForSS="chrome://objPathString/skin/puzzleBars.css chrome://objPathString-os/skin/puzzleBars.css chrome://objPathString/skin/lateral.css chrome://objPathString-os/skin/lateral.css"
 			context="toolbar-context-menu"
 			hidden="true">
-			
+
 			<observes element="objName-lateral-bar" attribute="autohide" />
 			<observes element="objName-lateral-bar" attribute="hover" />
 			<observes element="objName-lateral-bar" attribute="movetobottom" />
 			<observes element="objName-lateral-bar" attribute="movetoright" />
 			<observes element="objName-lateral-bar" attribute="inSidebar" />
-			
+
 			<image onclick="objName.PPs.command(event, this.parentNode);" />
 		</box>
 	</hbox>
-	
+
 </overlay>

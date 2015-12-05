@@ -11,7 +11,7 @@ this.TMPtoggledBottom = function() {
 Modules.LOADMODULE = function() {
 	Prefs.setDefaults({ tabBarPosition: 0 }, 'tabmix');
 	Prefs.listen('tabBarPosition', TMPtoggledBottom);
-	
+
 	TMPtoggledBottom();
 };
 

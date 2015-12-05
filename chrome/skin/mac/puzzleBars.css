@@ -81,19 +81,19 @@
 	.puzzleBars-overflow-button {
 		list-style-image: url("chrome://browser/skin/Toolbar@2x.png");
 	}
-	
+
 	toolbar[brighttext] .puzzleBars-overflow-button {
 		list-style-image: url("chrome://browser/skin/Toolbar-inverted@2x.png");
 	}
-	
+
 	.puzzleBars-overflow-button {
 		-moz-image-region: rect(0, 1224px, 36px, 1188px);
 	}
-	
+
 	.puzzleBars-overflow-button:hover:active:not([disabled="true"]) {
 		-moz-image-region: rect(36px, 1224px, 72px, 1188px);
 	}
-	
+
 	.puzzleBars-overflow-button > .toolbarbutton-icon {
 		width: 18px;
 	}

@@ -9,12 +9,12 @@
 			tooltiptext="&corner.title;"
 			position="2"
 			align="center">
-			
+
 			<image class="category-icon"/>
 			<label class="category-name" flex="1" value="&corner.title;"/>
 		</richlistitem>
 	</richlistbox>
-	
+
 	<prefpane id="mainPrefPane">
 		<preferences>
 			<preference id="pref-corner_bar" name="extensions.puzzlebars.corner_bar" type="bool" />
@@ -28,18 +28,18 @@
 			<preference id="pref-corner_shift" name="extensions.puzzlebars.corner_shift" type="bool"/>
 			<preference id="pref-corner_alt" name="extensions.puzzlebars.corner_alt" type="bool"/>
 		</preferences>
-		
+
 		<hbox id="header-corner" class="header" collapsed="true" data-category="paneCorner">
 			<label class="header-name">&corner.title;</label>
 		</hbox>
-		
+
 		<hbox align="start" id="paneCorner-toggler" collapsed="true" data-category="paneCorner">
 			<checkbox label="&OptCorner.label;"
 				jump="corner_bar"
 				helptext="&OptCorner.tooltip;"
 				delayPreference="pref-corner_bar"/>
 		</hbox>
-		
+
 		<groupbox align="start" id="paneCorner-position" collapsed="true" data-category="paneCorner">
 			<caption label="&GroupPosition.label;"/>
 			<vbox align="start">
@@ -70,7 +70,7 @@
 				<description>&OptExtend.tooltip;</description>
 			</vbox>
 		</groupbox>
-		
+
 		<groupbox align="start" id="paneCorner-behavior" collapsed="true" data-category="paneCorner">
 			<caption label="&GroupBehavior.label;"/>
 			<checkbox label="&OptShowPiece.label;"
@@ -108,7 +108,7 @@
 				<description>&OptHotspot.tooltip;</description>
 			</vbox>
 		</groupbox>
-		
+
 		<groupbox align="start" id="paneCorner-shortcut" collapsed="true" data-category="paneCorner">
 			<caption label="&OptKeyboardShortcut.captionA;"/>
 			<hbox jump="corner &OptKeyboardShortcut.captionA;">
@@ -119,5 +119,5 @@
 			</hbox>
 		</groupbox>
 	</prefpane>
-	
+
 </overlay>

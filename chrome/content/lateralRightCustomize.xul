@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE overlay SYSTEM "chrome://puzzlebars/locale/overlay.dtd">
 <overlay id="lateralRightCustomize-overlay" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul" >
-	
+
 	<vbox id="objName-lateral-customize-wrapper" insertafter="customization-palette-container" />
-	
+
 </overlay>

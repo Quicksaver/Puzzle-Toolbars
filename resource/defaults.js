@@ -22,7 +22,7 @@ prefList = {
 	bottom_accel: true,
 	bottom_shift: false,
 	bottom_alt: false,
-	
+
 	corner_bar: true,
 	corner_pp: true,
 	corner_placement: 'right',
@@ -33,7 +33,7 @@ prefList = {
 	corner_accel: false,
 	corner_shift: false,
 	corner_alt: false,
-	
+
 	urlbar_bar: true,
 	urlbar_pp: true,
 	urlbar_autohide: true,
@@ -42,7 +42,7 @@ prefList = {
 	urlbar_accel: false,
 	urlbar_shift: false,
 	urlbar_alt: false,
-	
+
 	lateral_bar: true,
 	lateral_pp: true,
 	lateral_bottom: false,
@@ -52,7 +52,7 @@ prefList = {
 	lateral_accel: false,
 	lateral_shift: false,
 	lateral_alt: false,
-	
+
 	top_bar: false,
 	top_pp: true,
 	top_placement: 'right',
@@ -61,10 +61,10 @@ prefList = {
 	top_accel: false,
 	top_shift: false,
 	top_alt: false,
-	
+
 	// for compatibility with Beyond Australis add-on
 	tFOB: false,
-	
+
 	// hidden preference to not show the addon bar autohiding on startup
 	noInitialShow: false
 };
@@ -81,13 +81,13 @@ function onStartup() {
 	Modules.load('compatibilityFix/sandboxFixes');
 	Modules.load('specialWidgets');
 	Modules.load('statusBar');
-	
+
 	// the add-on initialization is done inside the statusBar module so it can correctly handle the status-bar in all windows
 }
 
 function onShutdown() {
 	// deinitialization is also done inside statusBar, just like above
-	
+
 	Modules.unload('statusBar');
 	Modules.unload('specialWidgets');
 	Modules.unload('compatibilityFix/sandboxFixes');

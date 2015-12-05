@@ -6,7 +6,7 @@ this.PPs = {
 		bars.toggle(button._bar.id);
 		dispatch(button, { type: 'ToggledPuzzleBarThroughButton', cancelable: false });
 	},
-	
+
 	handleEvent: function(e) {
 		toggleAttribute(e.target._pp, 'active', !e.target.collapsed);
 	}

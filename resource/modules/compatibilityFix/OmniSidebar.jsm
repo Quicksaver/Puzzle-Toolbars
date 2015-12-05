@@ -6,19 +6,19 @@ this.__defineGetter__('rightSidebar', function() { return omnisidebar && omnisid
 
 this.osb = {
 	id: 'osb@quicksaver',
-	
+
 	initialized: false,
-	
+
 	handleEvent: function(e) {
 		switch(e.type) {
 			case 'IsSidebarOpen':
 				e.stopPropagation();
-				
+
 				var sidebar = (Prefs.lateral_placement == 'left') ? leftSidebar : rightSidebar;
 				if(!sidebar) { return; }
 				e.detail = !sidebar.closed && !sidebar.above;
 				break;
-			
+
 			case 'LoadedSidebar':
 				if(leftSidebar && leftSidebar.box == e.target) {
 					this.shouldFix(leftSidebar, rightSidebar, e.detail, 'left');
@@ -26,20 +26,20 @@ this.osb = {
 					this.shouldFix(rightSidebar, leftSidebar, e.detail, 'right');
 				}
 				break;
-			
+
 			case 'LoadedAutoHidePuzzleBar':
 				if(typeof(lateral) != 'undefined' && e.target == lateral.bar) {
 					this.shouldFix(leftSidebar, rightSidebar, true, 'left');
 					this.shouldFix(rightSidebar, leftSidebar, true, 'right');
 				}
 				break;
-			
+
 			case 'endToggleSidebar':
 				if(typeof(lateral) != 'undefined') {
 					lateral.sidebarOpen();
 				}
 				// no break;
-			
+
 			case 'beforecustomization':
 			case 'aftercustomization':
 			case 'LoadedAutoHidePuzzleBar':
@@ -53,17 +53,17 @@ this.osb = {
 				break;
 		}
 	},
-	
+
 	observe: function(aSubject, aTopic, aData) {
 		if(typeof(lateral) == 'undefined') { return; }
-		
+
 		switch(aSubject) {
 			case 'twinSidebar':
 			case 'renderabove':
 			case 'renderaboveTwin':
 				lateral.sidebarOpen();
 				break;
-			
+
 			case 'moveSidebars':
 				lateral.sidebarOpen();
 				if(lateral.bar) {
@@ -71,14 +71,14 @@ this.osb = {
 					this.shouldFix(rightSidebar, leftSidebar, true, 'right');
 				}
 				break;
-				
+
 			case 'lateral_placement':
 				if(lateral.bar) {
 					this.shouldFix(leftSidebar, rightSidebar, true, 'left');
 					this.shouldFix(rightSidebar, leftSidebar, true, 'right');
 				}
 				// no break;
-			
+
 			case 'lateral_bar':
 			case 'lateral_autohide':
 			case 'autoHide':
@@ -87,31 +87,31 @@ this.osb = {
 				break;
 		}
 	},
-	
+
 	onEnabled: function(addon) {
 		if(addon.id == this.id) { this.enable(); }
 	},
-	
+
 	onDisabled: function(addon) {
 		if(addon.id == this.id) { this.disable(); }
 	},
-	
+
 	listen: function() {
 		AddonManager.addAddonListener(this);
 		AddonManager.getAddonByID(this.id, (addon) => {
 			if(addon && addon.isActive) { this.enable(); }
 		});
 	},
-	
+
 	unlisten: function() {
 		AddonManager.removeAddonListener(this);
 		this.disable();
 	},
-	
+
 	enable: function() {
 		if(this.initialized) { return; }
 		this.initialized = true;
-		
+
 		// we need to access and follow some of OSB's preferences
 		Prefs.setDefaults({
 			moveSidebars: false,
@@ -121,7 +121,7 @@ this.osb = {
 			autoHide: true,
 			autoHideTwin: true
 		}, 'omnisidebar');
-		
+
 		// stuff for the appearance fixes
 		Prefs.listen('moveSidebars', this);
 		Prefs.listen('twinSidebar', this);
@@ -132,7 +132,7 @@ this.osb = {
 		Listeners.add(window, 'IsSidebarOpen', this);
 		Listeners.add(window, 'LoadedSidebar', this);
 		Listeners.add(window, 'LoadedAutoHidePuzzleBar', this);
-		
+
 		// stuff for moving the lateralBar into the sidebar
 		Prefs.listen('lateral_bar', this);
 		Prefs.listen('lateral_autohide', this);
@@ -147,11 +147,11 @@ this.osb = {
 		Listeners.add(window, 'sidebarDocked', this);
 		Listeners.add(window, 'ToggledPuzzleBar', this);
 	},
-	
+
 	disable: function() {
 		if(!this.initialized) { return; }
 		this.initialized = false;
-		
+
 		Prefs.unlisten('moveSidebars', this);
 		Prefs.unlisten('twinSidebar', this);
 		Prefs.unlisten('renderabove', this);
@@ -161,7 +161,7 @@ this.osb = {
 		Listeners.remove(window, 'IsSidebarOpen', this);
 		Listeners.remove(window, 'LoadedSidebar', this);
 		Listeners.remove(window, 'LoadedAutoHidePuzzleBar', this);
-		
+
 		Prefs.unlisten('lateral_bar', this);
 		Prefs.unlisten('lateral_autohide', this);
 		Prefs.unlisten('autoHide', this);
@@ -175,25 +175,25 @@ this.osb = {
 		Listeners.remove(window, 'sidebarDocked', this);
 		Listeners.remove(window, 'ToggledPuzzleBar', this);
 	},
-	
+
 	shouldFix: function(sidebar, other, setup, check) {
 		if(Prefs.lateral_placement == check) {
 			this.fix(sidebar, other, setup);
 		}
 	},
-	
+
 	// make sure OSB's side switcher triggers the lateral bar
 	fix: function(sidebar, other, setup) {
 		if(typeof(lateral) == 'undefined' || !lateral.bar || !lateral.bar._autohide) { return; }
-		
+
 		// the other (opposite) sidebar should never trigger the lateral bar to show
 		if(other && other.switcher && lateral.bar._autohide.has(other.switcher)) {
 			autoHide.setBarListeners(lateral.bar, other.switcher, false);
 			lateral.bar._autohide.delete(other.switcher);
 		}
-		
+
 		if(!sidebar) { return; }
-		
+
 		if(setup && Prefs.lateral_bar && (Prefs.lateral_autohide || onFullScreen.hideBars)) {
 			if(sidebar.switcher && !lateral.bar._autohide.has(sidebar.switcher)) {
 				autoHide.setBarListeners(lateral.bar, sidebar.switcher, true);
@@ -207,14 +207,14 @@ this.osb = {
 			}
 		}
 	},
-	
+
 	// if both the sidebar and the lateral bar are set to autohide, we physically move the lateral bar inside the sidebar,
 	// so they behave as if they're the "same" interactive element
 	move: function(e) {
 		if(!lateral.bar) { return; }
-		
+
 		var sidebar = (Prefs.lateral_placement == 'left') ? leftSidebar : rightSidebar;
-		
+
 		if(sidebar && !customizing
 		&&	(!e
 			|| (e.type == 'ToggledPuzzleBar' && e.target == lateral.bar && !lateral.bar.collapsed)
@@ -228,7 +228,7 @@ this.osb = {
 				sidebar.resizeBox.insertBefore(lateral.PP, sidebar.resizeBox.firstChild);
 				removeAttribute(lateral.bar, 'flex');
 				setAttribute(lateral.bar, 'inSidebar', 'true');
-				
+
 				// if we're toggling the toolbar, we better show the sidebar
 				if(e.type && e.type == 'ToggledPuzzleBar') {
 					omnisidebar.autoHide.initialShow(sidebar);

@@ -12,10 +12,10 @@
 	.ctr_separators {
 		display: none !important;
 	}
-	
+
 	/* Keep our add-on bar below CTR's customizations */
 	#browser-bottombox .puzzleBars-bar {
 		-moz-box-ordinal-group: 1000000 !important;
 	}
-	
+
 }

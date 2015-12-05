@@ -58,10 +58,10 @@
 @media	(-moz-os-version: windows-vista),
 	(-moz-os-version: windows-win7),
 	(-moz-os-version: windows-win8) {
-		
+
 	@media (-moz-windows-default-theme) {
 		#puzzleBars-lateral-bar { background-color: #EEF3FA; }
-		
+
 		#puzzleBars-lateral-bar:not([movetoright]):not([inSidebar]):-moz-any(:not([sidebarOpen]),[autohide]),
 		window[customizing="true"] #puzzleBars-lateral-bar:not([movetoright]) {
 			box-shadow: inset -1px 0 0 #aabccf, inset 0 1px 0 ThreeDHighlight;

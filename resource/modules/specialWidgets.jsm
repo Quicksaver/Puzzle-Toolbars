@@ -12,12 +12,12 @@ this.ourSpecialWidgets = [];
 this.addWidgetToArea = function(aWidgetId, aArea, aPosition, aInitialAdd) {
 	if(aWidgetId.startsWith(objName+'-placeholder-')) {
 		aWidgetId = aWidgetId.match(/spring|spacer|separator/)[0];
-		
+
 		if(aWidgetId == 'spring' && forbiddenSprings.has(aArea)) {
 			return;
 		}
 	}
-	
+
 	if(aWidgetId.startsWith(objName+'-special-')) {
 		if(aArea != CustomizableUI.AREA_PANEL) {
 			this.removeWidgetFromArea(aWidgetId);
@@ -28,24 +28,24 @@ this.addWidgetToArea = function(aWidgetId, aArea, aPosition, aInitialAdd) {
 			aWidgetId = createOurSpecialWidget(aWidgetId);
 		}
 	}
-	
+
 	if(this.isSpecialWidget(aWidgetId)) {
 		if(aWidgetId.includes('spring') && forbiddenSprings.has(aArea)) {
 			this.removeWidgetFromArea(aWidgetId);
 			return;
 		}
-		
+
 		if(aArea == CustomizableUI.AREA_PANEL) {
 			var placement = this.getPlacementOfWidget(aWidgetId, true);
 			if(placement && placement.area != aArea) {
 				this.removeWidgetFromArea(aWidgetId);
 			}
-			
+
 			var wId = createOurSpecialWidget(aWidgetId);
 			return this._addWidgetToArea(wId, aArea, aPosition, aInitialAdd);
 		}
 	}
-	
+
 	return this._addWidgetToArea(aWidgetId, aArea, aPosition, aInitialAdd);
 };
 
@@ -56,12 +56,12 @@ this.canWidgetMoveToArea = function(aWidgetId, aArea) {
 		&& CUIBackstage.gAreas.has(aArea) && CUIBackstage.gAreas.get(aArea).get("type") == CustomizableUI.TYPE_MENU_PANEL) {
 			return true;
 		}
-		
+
 		if(aWidgetId.includes('spring') && forbiddenSprings.has(aArea)) {
 			return false;
 		}
 	}
-	
+
 	return this._canWidgetMoveToArea(aWidgetId, aArea);
 };
 
@@ -73,7 +73,7 @@ this.buildArea = function(aArea, aPlacements, aAreaNode) {
 			}
 		}
 	}
-	
+
 	this._buildArea(aArea, aPlacements, aAreaNode);
 };
 
@@ -83,7 +83,7 @@ this.createOurSpecialWidget = function(aId) {
 	if(!wId.startsWith(objName+'-special-')) {
 		wId = objName+'-special-'+nodeType+(++CUIBackstage.gNewElementCount);
 	}
-	
+
 	CustomizableUI.createWidget({
 		id: wId,
 		type: 'custom',
@@ -93,7 +93,7 @@ this.createOurSpecialWidget = function(aId) {
 			return widget;
 		}
 	});
-	
+
 	ourSpecialWidgets.push(wId);
 	return wId;
 };
@@ -117,7 +117,7 @@ this.trackSpecialWidgets = {
 			aNode.classList.add(CustomizableUI.WIDE_PANEL_CLASS);
 		}
 	},
-	
+
 	onWidgetRemoved: function(aId) {
 		// aSync so this happens only after it's dragged (if sync, dragging to palette would still keep the node even though it's been destroyed)
 		// see https://bugzilla.mozilla.org/show_bug.cgi?id=1062014
@@ -125,7 +125,7 @@ this.trackSpecialWidgets = {
 			aSync(function() { destroyOurSpecialWidget(aId); });
 		}
 	},
-	
+
 	onAreaReset: function(aArea) {
 		if(aArea == CustomizableUI.AREA_PANEL) {
 			while(ourSpecialWidgets.length > 0) {
@@ -139,32 +139,32 @@ Modules.LOADMODULE = function() {
 	Piggyback.add('specialWidgets', CUIBackstage.CustomizableUIInternal, 'addWidgetToArea', addWidgetToArea);
 	Piggyback.add('specialWidgets', CUIBackstage.CustomizableUIInternal, 'canWidgetMoveToArea', canWidgetMoveToArea);
 	Piggyback.add('specialWidgets', CUIBackstage.CustomizableUIInternal, 'buildArea', buildArea);
-	
+
 	var panelIds = CustomizableUI.getWidgetIdsInArea(CustomizableUI.AREA_PANEL);
 	for(var wId of panelIds) {
 		if(wId.startsWith(objName+'-special-')) {
 			createOurSpecialWidget(wId);
 		}
 	}
-	
+
 	CustomizableUI.addListener(trackSpecialWidgets);
-	
+
 	for(let i of specialWidgets) {
 		CustomizableUI.removeWidgetFromArea(objName+'-placeholder-'+i);
 	}
-	
+
 	Overlays.overlayURI('chrome://browser/content/browser.xul', 'specialWidgets');
 };
 
 Modules.UNLOADMODULE = function() {
 	Overlays.removeOverlayURI('chrome://browser/content/browser.xul', 'specialWidgets');
-	
+
 	CustomizableUI.removeListener(trackSpecialWidgets);
-	
+
 	for(var wId of ourSpecialWidgets) {
 		CustomizableUI.destroyWidget(wId);
 	}
-	
+
 	Piggyback.revert('specialWidgets', CUIBackstage.CustomizableUIInternal, 'addWidgetToArea');
 	Piggyback.revert('specialWidgets', CUIBackstage.CustomizableUIInternal, 'canWidgetMoveToArea');
 	Piggyback.revert('specialWidgets', CUIBackstage.CustomizableUIInternal, 'buildArea');

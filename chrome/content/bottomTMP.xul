@@ -3,5 +3,5 @@
 <overlay id="bottomTMP-overlay" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul" >
 
 	<box id="objName-bottom-PP" newparent="browser-panel" insertbefore="browser-bottombox"/>
-	
+
 </overlay>

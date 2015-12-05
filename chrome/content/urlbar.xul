@@ -3,20 +3,20 @@
 <?xml-stylesheet href="chrome://objPathString-os/skin/urlbar.css" type="text/css"?>
 <!DOCTYPE overlay SYSTEM "chrome://puzzlebars/locale/overlay.dtd">
 <overlay id="urlbar-overlay" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul" >
-	
+
 	<commandset id="mainCommandSet">
 		<command id="objName:ToggleURLBarBar" oncommand="objName.bars.toggle('objName-urlbar-bar');"/>
 	</commandset>
-	
+
 	<hbox id="urlbar-icons">
 		<box id="objName-urlbar-container"
 			class="puzzleBars-fullscreenCollapse"
 			waitForSS="chrome://objPathString/skin/puzzleBars.css chrome://objPathString-os/skin/puzzleBars.css chrome://objPathString/skin/urlbar.css chrome://objPathString-os/skin/urlbar.css"
 			position="1">
-			
+
 			<observes element="objName-urlbar-bar" attribute="autohide" />
 			<observes element="objName-urlbar-bar" attribute="hover" />
-			
+
 			<toolbar id="puzzleBars-urlbar-bar"
 				toolbarname="&urlbar.name;"
 				accesskey="&urlbar.accesskey;"
@@ -34,11 +34,11 @@
 				menuMove="&urlbar.menuMove;"
 				menuRemove="&urlbar.menuRemove;"
 				menuMain="&allbars.menuMain;">
-				
+
 				<observes element="main-window" attribute="customizing" />
 			</toolbar>
 		</box>
-		
+
 		<box id="objName-urlbar-PP"
 			class="PuzzlePiece chromeclass-toolbar-additional"
 			waitForSS="chrome://objPathString/skin/puzzleBars.css chrome://objPathString-os/skin/puzzleBars.css chrome://objPathString/skin/urlbar.css chrome://objPathString-os/skin/urlbar.css"
@@ -47,5 +47,5 @@
 			<image onclick="objName.PPs.command(event, this.parentNode);" />
 		</box>
 	</hbox>
-	
+
 </overlay>

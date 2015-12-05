@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE overlay SYSTEM "chrome://puzzlebars/locale/overlay.dtd">
 <overlay id="cornerCustomize-overlay" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul" >
-	
+
 	<vbox id="customization-palette-container">
 		<hbox id="objName-corner-customize-wrapper" insertbefore="customization-footer">
 			<observes element="objName-corner-bar" attribute="collapsed" />
-			
+
 			<stack id="objName-corner-customize-stack">
 				<label value="&corner.name;" />
 			</stack>
 		</hbox>
 	</vbox>
-	
+
 	<box id="objName-corner-container" newparent="objName-corner-customize-stack" />
 	<toolbar id="objName-corner-bar" flex="1" />
-	
+
 </overlay>

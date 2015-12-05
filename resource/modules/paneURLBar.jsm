@@ -5,7 +5,7 @@ this.urlbarCheckboxes = function() {
 		var pp = $(objName+'-urlbar-ppCheckbox');
 		var autohide = $(objName+'-urlbar-autohideCheckbox');
 		var whenfocused = $(objName+'-urlbar-whenfocusedCheckbox');
-		
+
 		if(autohide.checked && !pp.checked && !whenfocused.checked) {
 			autohide.checked = false;
 			autohide.doCommand(); // trigger dependencies

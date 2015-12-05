@@ -9,7 +9,7 @@ Modules.LOADMODULE = function() {
 	XULBrowserWindow.__defineGetter__('statusText', function() { return this._statusText; });
 	XULBrowserWindow.__defineSetter__('statusText', function(v) {
 		this._statusText = v;
-		
+
 		if(Prefs.corner_bar && self.corner) {
 			toggleAttribute(corner.bar, 'statusHide', v);
 			toggleAttribute(corner.PP, 'statusHide', v);

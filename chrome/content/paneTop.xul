@@ -9,12 +9,12 @@
 			tooltiptext="&top.title;"
 			position="4"
 			align="center">
-			
+
 			<image class="category-icon"/>
 			<label class="category-name" flex="1" value="&top.title;"/>
 		</richlistitem>
 	</richlistbox>
-	
+
 	<prefpane id="mainPrefPane">
 		<preferences>
 			<preference id="pref-top_bar" name="extensions.puzzlebars.top_bar" type="bool" />
@@ -27,18 +27,18 @@
 			<preference id="pref-top_shift" name="extensions.puzzlebars.top_shift" type="bool"/>
 			<preference id="pref-top_alt" name="extensions.puzzlebars.top_alt" type="bool"/>
 		</preferences>
-		
+
 		<hbox id="header-top" class="header" collapsed="true" data-category="paneTop">
 			<label class="header-name">&top.title;</label>
 		</hbox>
-		
+
 		<hbox align="start" id="paneTop-toggler" collapsed="true" data-category="paneTop">
 			<checkbox label="&OptTop.label;"
 				jump="top_bar"
 				helptext="&OptTop.tooltip;"
 				delayPreference="pref-top_bar"/>
 		</hbox>
-		
+
 		<groupbox align="start" id="paneTop-pp" collapsed="true" data-category="paneTop">
 			<caption>
 				<checkbox label="&OptShowPiece.label;"
@@ -63,7 +63,7 @@
 				</hbox>
 			</radiogroup>
 		</groupbox>
-		
+
 		<groupbox align="start" id="paneTop-behavior" collapsed="true" data-category="paneTop">
 			<caption label="&GroupBehavior.label;"/>
 			<checkbox label="&OptTopSlimChrome.label;"
@@ -72,7 +72,7 @@
 				dependson="pref-top_bar,pref-tFOB"
 				delayPreference="pref-top_slimChrome"/>
 		</groupbox>
-		
+
 		<groupbox align="start" id="paneTop-shortcut" collapsed="true" data-category="paneTop">
 			<caption label="&OptKeyboardShortcut.captionA;"/>
 			<hbox jump="top &OptKeyboardShortcut.captionA;">
@@ -83,5 +83,5 @@
 			</hbox>
 		</groupbox>
 	</prefpane>
-	
+
 </overlay>
