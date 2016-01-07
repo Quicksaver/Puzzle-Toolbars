@@ -1,4 +1,4 @@
-// VERSION 1.0.8
+// VERSION 1.0.9
 
 this.__defineGetter__('gBrowser', function() { return window.gBrowser; });
 
@@ -35,6 +35,16 @@ this.toggleTop = function() {
 };
 
 Modules.LOADMODULE = function() {
+	// this is to migrate to the new Keysets object, it can probably be removed once most users have updated to the latest version
+	if(!Prefs.migratedKeysets) {
+		Prefs.migratedKeysets = true;
+		Prefs.bottom_keycode = Keysets.translateFromConstantCode(Prefs.bottom_keycode);
+		Prefs.corner_keycode = Keysets.translateFromConstantCode(Prefs.corner_keycode);
+		Prefs.urlbar_keycode = Keysets.translateFromConstantCode(Prefs.urlbar_keycode);
+		Prefs.lateral_keycode = Keysets.translateFromConstantCode(Prefs.lateral_keycode);
+		Prefs.top_keycode = Keysets.translateFromConstantCode(Prefs.top_keycode);
+	}
+
 	Modules.load('compatibilityFix/windowFixes');
 	Modules.load('initAddonBar');
 	Modules.load('placePP');

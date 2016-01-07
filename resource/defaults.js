@@ -1,4 +1,4 @@
-// VERSION 1.3.1
+// VERSION 1.3.2
 
 objName = 'puzzleBars';
 objPathString = 'puzzlebars';
@@ -22,6 +22,7 @@ prefList = {
 	bottom_accel: true,
 	bottom_shift: false,
 	bottom_alt: false,
+	bottom_ctrl: false,
 
 	corner_bar: true,
 	corner_pp: true,
@@ -33,6 +34,7 @@ prefList = {
 	corner_accel: false,
 	corner_shift: false,
 	corner_alt: false,
+	corner_ctrl: false,
 
 	urlbar_bar: true,
 	urlbar_pp: true,
@@ -42,6 +44,7 @@ prefList = {
 	urlbar_accel: false,
 	urlbar_shift: false,
 	urlbar_alt: false,
+	urlbar_ctrl: false,
 
 	lateral_bar: true,
 	lateral_pp: true,
@@ -52,6 +55,7 @@ prefList = {
 	lateral_accel: false,
 	lateral_shift: false,
 	lateral_alt: false,
+	lateral_ctrl: false,
 
 	top_bar: false,
 	top_pp: true,
@@ -61,6 +65,10 @@ prefList = {
 	top_accel: false,
 	top_shift: false,
 	top_alt: false,
+	top_ctrl: false,
+
+	// for internal use
+	migratedKeysets: false,
 
 	// for compatibility with Beyond Australis add-on
 	tFOB: false,

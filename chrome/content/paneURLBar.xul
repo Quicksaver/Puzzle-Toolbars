@@ -25,6 +25,7 @@
 			<preference id="pref-urlbar_accel" name="extensions.puzzlebars.urlbar_accel" type="bool"/>
 			<preference id="pref-urlbar_shift" name="extensions.puzzlebars.urlbar_shift" type="bool"/>
 			<preference id="pref-urlbar_alt" name="extensions.puzzlebars.urlbar_alt" type="bool"/>
+			<preference id="pref-urlbar_ctrl" name="extensions.puzzlebars.urlbar_ctrl" type="bool"/>
 		</preferences>
 
 		<hbox id="header-urlbar" class="header" collapsed="true" data-category="paneURLBar">
@@ -76,6 +77,7 @@
 				<checkbox class="smallindent" keysetAccel="urlbar" delayPreference="pref-urlbar_accel" dependson="pref-urlbar_bar"/>
 				<checkbox class="smallindent" keysetAlt="urlbar" delayPreference="pref-urlbar_alt" dependson="pref-urlbar_bar"/>
 				<checkbox class="smallindent" keysetShift="urlbar" delayPreference="pref-urlbar_shift" dependson="pref-urlbar_bar"/>
+				<checkbox class="smallindent" keysetCtrl="urlbar" delayPreference="pref-urlbar_ctrl" dependson="pref-urlbar_bar"/>
 				<menulist class="smallindent" keyset="urlbar" delayPreference="pref-urlbar_keycode" dependson="pref-urlbar_bar"/>
 			</hbox>
 		</groupbox>

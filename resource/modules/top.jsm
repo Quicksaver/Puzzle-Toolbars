@@ -1,4 +1,4 @@
-// VERSION 2.0.4
+// VERSION 2.0.5
 
 this.top = {
 	get bar () { return $(objName+'-top-bar'); },
@@ -10,7 +10,8 @@ this.top = {
 		get keycode () { return Prefs.top_keycode; },
 		get accel () { return Prefs.top_accel; },
 		get shift () { return Prefs.top_shift; },
-		get alt () { return Prefs.top_alt; }
+		get alt () { return Prefs.top_alt; },
+		get ctrl () { return Prefs.top_ctrl; }
 	},
 
 	observe: function(aSubject, aTopic, aData) {
@@ -27,6 +28,7 @@ this.top = {
 			case 'top_accel':
 			case 'top_shift':
 			case 'top_alt':
+			case 'top_ctrl':
 				this.setKey();
 				break;
 		}
@@ -138,6 +140,7 @@ Modules.LOADMODULE = function() {
 	Prefs.listen('top_accel', top);
 	Prefs.listen('top_shift', top);
 	Prefs.listen('top_alt', top);
+	Prefs.listen('top_ctrl', top);
 
 	top.setKey();
 
@@ -154,6 +157,7 @@ Modules.UNLOADMODULE = function() {
 	Prefs.unlisten('top_accel', top);
 	Prefs.unlisten('top_shift', top);
 	Prefs.unlisten('top_alt', top);
+	Prefs.unlisten('top_ctrl', top);
 
 	if(UNLOADED || !Prefs.top_bar) {
 		Keysets.unregister(top.key);

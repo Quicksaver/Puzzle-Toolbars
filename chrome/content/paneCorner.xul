@@ -27,6 +27,7 @@
 			<preference id="pref-corner_accel" name="extensions.puzzlebars.corner_accel" type="bool"/>
 			<preference id="pref-corner_shift" name="extensions.puzzlebars.corner_shift" type="bool"/>
 			<preference id="pref-corner_alt" name="extensions.puzzlebars.corner_alt" type="bool"/>
+			<preference id="pref-corner_ctrl" name="extensions.puzzlebars.corner_ctrl" type="bool"/>
 		</preferences>
 
 		<hbox id="header-corner" class="header" collapsed="true" data-category="paneCorner">
@@ -115,6 +116,7 @@
 				<checkbox class="smallindent" keysetAccel="corner" delayPreference="pref-corner_accel" dependson="pref-corner_bar"/>
 				<checkbox class="smallindent" keysetAlt="corner" delayPreference="pref-corner_alt" dependson="pref-corner_bar"/>
 				<checkbox class="smallindent" keysetShift="corner" delayPreference="pref-corner_shift" dependson="pref-corner_bar"/>
+				<checkbox class="smallindent" keysetCtrl="corner" delayPreference="pref-corner_ctrl" dependson="pref-corner_bar"/>
 				<menulist class="smallindent" keyset="corner" delayPreference="pref-corner_keycode" dependson="pref-corner_bar"/>
 			</hbox>
 		</groupbox>

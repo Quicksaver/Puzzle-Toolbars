@@ -1,4 +1,4 @@
-// VERSION 2.0.6
+// VERSION 2.0.7
 
 this.__defineGetter__('gURLBar', function() { return window.gURLBar; });
 this.__defineGetter__('locationContainer', function() { return $('urlbar-container'); });
@@ -18,7 +18,8 @@ this.urlbar = {
 		get keycode () { return Prefs.urlbar_keycode; },
 		get accel () { return Prefs.urlbar_accel; },
 		get shift () { return Prefs.urlbar_shift; },
-		get alt () { return Prefs.urlbar_alt; }
+		get alt () { return Prefs.urlbar_alt; },
+		get ctrl () { return Prefs.urlbar_ctrl; }
 	},
 
 	observe: function(aSubject, aTopic, aData) {
@@ -31,6 +32,7 @@ this.urlbar = {
 			case 'urlbar_accel':
 			case 'urlbar_shift':
 			case 'urlbar_alt':
+			case 'urlbar_ctrl':
 				this.setKey();
 				break;
 
@@ -198,6 +200,7 @@ Modules.LOADMODULE = function() {
 	Prefs.listen('urlbar_accel', urlbar);
 	Prefs.listen('urlbar_shift', urlbar);
 	Prefs.listen('urlbar_alt', urlbar);
+	Prefs.listen('urlbar_ctrl', urlbar);
 
 	urlbar.setKey();
 
@@ -226,6 +229,7 @@ Modules.UNLOADMODULE = function() {
 	Prefs.unlisten('urlbar_accel', urlbar);
 	Prefs.unlisten('urlbar_shift', urlbar);
 	Prefs.unlisten('urlbar_alt', urlbar);
+	Prefs.unlisten('urlbar_ctrl', urlbar);
 
 	if(urlbar.flexContainers) {
 		removeAttribute(locationContainer, 'width');

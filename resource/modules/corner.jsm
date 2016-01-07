@@ -1,4 +1,4 @@
-// VERSION 2.0.6
+// VERSION 2.0.7
 
 this.__defineGetter__('gFindBar', function() { return window.gFindBar; });
 this.__defineGetter__('bottomBox', function() { return $('browser-bottombox'); });
@@ -16,7 +16,8 @@ this.corner = {
 		get keycode () { return Prefs.corner_keycode; },
 		get accel () { return Prefs.corner_accel; },
 		get shift () { return Prefs.corner_shift; },
-		get alt () { return Prefs.corner_alt; }
+		get alt () { return Prefs.corner_alt; },
+		get ctrl () { return Prefs.corner_ctrl; }
 	},
 
 	observe: function(aSubject, aTopic, aData) {
@@ -35,6 +36,7 @@ this.corner = {
 					case 'corner_accel':
 					case 'corner_shift':
 					case 'corner_alt':
+					case 'corner_ctrl':
 						this.setKey();
 						break;
 
@@ -381,6 +383,7 @@ Modules.LOADMODULE = function() {
 	Prefs.listen('corner_accel', corner);
 	Prefs.listen('corner_shift', corner);
 	Prefs.listen('corner_alt', corner);
+	Prefs.listen('corner_ctrl', corner);
 	Prefs.listen('fullscreen.autohide', corner);
 	onFullScreen.add(corner);
 
@@ -405,6 +408,7 @@ Modules.UNLOADMODULE = function() {
 	Prefs.unlisten('corner_accel', corner);
 	Prefs.unlisten('corner_shift', corner);
 	Prefs.unlisten('corner_alt', corner);
+	Prefs.unlisten('corner_ctrl', corner);
 
 	if(UNLOADED || !Prefs.corner_bar) {
 		Keysets.unregister(corner.key);

@@ -26,6 +26,7 @@
 			<preference id="pref-top_accel" name="extensions.puzzlebars.top_accel" type="bool"/>
 			<preference id="pref-top_shift" name="extensions.puzzlebars.top_shift" type="bool"/>
 			<preference id="pref-top_alt" name="extensions.puzzlebars.top_alt" type="bool"/>
+			<preference id="pref-top_ctrl" name="extensions.puzzlebars.top_ctrl" type="bool"/>
 		</preferences>
 
 		<hbox id="header-top" class="header" collapsed="true" data-category="paneTop">
@@ -79,6 +80,7 @@
 				<checkbox class="smallindent" keysetAccel="top" delayPreference="pref-top_accel" dependson="pref-top_bar"/>
 				<checkbox class="smallindent" keysetAlt="top" delayPreference="pref-top_alt" dependson="pref-top_bar"/>
 				<checkbox class="smallindent" keysetShift="top" delayPreference="pref-top_shift" dependson="pref-top_bar"/>
+				<checkbox class="smallindent" keysetCtrl="top" delayPreference="pref-top_ctrl" dependson="pref-top_bar"/>
 				<menulist class="smallindent" keyset="top" delayPreference="pref-top_keycode" dependson="pref-top_bar"/>
 			</hbox>
 		</groupbox>

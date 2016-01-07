@@ -1,4 +1,4 @@
-// VERSION 2.0.3
+// VERSION 2.0.4
 
 this.__defineGetter__('gCustomizeMode', function() { return window.gCustomizeMode; });
 
@@ -36,7 +36,8 @@ this.lateral = {
 		get keycode () { return Prefs.lateral_keycode; },
 		get accel () { return Prefs.lateral_accel; },
 		get shift () { return Prefs.lateral_shift; },
-		get alt () { return Prefs.lateral_alt; }
+		get alt () { return Prefs.lateral_alt; },
+		get ctrl () { return Prefs.lateral_ctrl; }
 	},
 
 	observe: function(aSubject, aTopic, aData) {
@@ -58,6 +59,7 @@ this.lateral = {
 			case 'lateral_accel':
 			case 'lateral_shift':
 			case 'lateral_alt':
+			case 'lateral_ctrl':
 				this.setKey();
 				break;
 
@@ -412,6 +414,7 @@ Modules.LOADMODULE = function() {
 	Prefs.listen('lateral_accel', lateral);
 	Prefs.listen('lateral_shift', lateral);
 	Prefs.listen('lateral_alt', lateral);
+	Prefs.listen('lateral_ctrl', lateral);
 	Prefs.listen('fullscreen.autohide', lateral);
 	onFullScreen.add(lateral);
 
@@ -608,6 +611,7 @@ Modules.UNLOADMODULE = function() {
 	Prefs.unlisten('lateral_accel', lateral);
 	Prefs.unlisten('lateral_shift', lateral);
 	Prefs.unlisten('lateral_alt', lateral);
+	Prefs.unlisten('lateral_ctrl', lateral);
 
 	if(UNLOADED || !Prefs.lateral_bar) {
 		Overlays.removeOverlayURI('chrome://'+objPathString+'/content/lateral.xul', 'lateralRight');

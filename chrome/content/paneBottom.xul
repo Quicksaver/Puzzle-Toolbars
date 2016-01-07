@@ -25,6 +25,7 @@
 			<preference id="pref-bottom_accel" name="extensions.puzzlebars.bottom_accel" type="bool"/>
 			<preference id="pref-bottom_shift" name="extensions.puzzlebars.bottom_shift" type="bool"/>
 			<preference id="pref-bottom_alt" name="extensions.puzzlebars.bottom_alt" type="bool"/>
+			<preference id="pref-bottom_ctrl" name="extensions.puzzlebars.bottom_ctrl" type="bool"/>
 		</preferences>
 
 		<hbox id="header-bottom" class="header" collapsed="true" data-category="paneBottom">
@@ -69,6 +70,7 @@
 				<checkbox class="smallindent" keysetAccel="bottom" delayPreference="pref-bottom_accel" dependson="pref-bottom_bar"/>
 				<checkbox class="smallindent" keysetAlt="bottom" delayPreference="pref-bottom_alt" dependson="pref-bottom_bar"/>
 				<checkbox class="smallindent" keysetShift="bottom" delayPreference="pref-bottom_shift" dependson="pref-bottom_bar"/>
+				<checkbox class="smallindent" keysetCtrl="bottom" delayPreference="pref-bottom_ctrl" dependson="pref-bottom_bar"/>
 				<menulist class="smallindent" keyset="bottom" delayPreference="pref-bottom_keycode" dependson="pref-bottom_bar"/>
 			</hbox>
 		</groupbox>

@@ -26,6 +26,7 @@
 			<preference id="pref-lateral_accel" name="extensions.puzzlebars.lateral_accel" type="bool"/>
 			<preference id="pref-lateral_shift" name="extensions.puzzlebars.lateral_shift" type="bool"/>
 			<preference id="pref-lateral_alt" name="extensions.puzzlebars.lateral_alt" type="bool"/>
+			<preference id="pref-lateral_ctrl" name="extensions.puzzlebars.lateral_ctrl" type="bool"/>
 		</preferences>
 
 		<hbox id="header-lateral" class="header" collapsed="true" data-category="paneLateral">
@@ -89,6 +90,7 @@
 				<checkbox class="smallindent" keysetAccel="lateral" delayPreference="pref-lateral_accel" dependson="pref-lateral_bar"/>
 				<checkbox class="smallindent" keysetAlt="lateral" delayPreference="pref-lateral_alt" dependson="pref-lateral_bar"/>
 				<checkbox class="smallindent" keysetShift="lateral" delayPreference="pref-lateral_shift" dependson="pref-lateral_bar"/>
+				<checkbox class="smallindent" keysetCtrl="lateral" delayPreference="pref-lateral_ctrl" dependson="pref-lateral_bar"/>
 				<menulist class="smallindent" keyset="lateral" delayPreference="pref-lateral_keycode" dependson="pref-lateral_bar"/>
 			</hbox>
 		</groupbox>

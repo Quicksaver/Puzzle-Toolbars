@@ -1,4 +1,4 @@
-// VERSION 2.0.3
+// VERSION 2.0.4
 
 this.bottom = {
 	get box () { return $('browser-bottombox'); },
@@ -11,7 +11,8 @@ this.bottom = {
 		get keycode () { return Prefs.bottom_keycode; },
 		get accel () { return Prefs.bottom_accel; },
 		get shift () { return Prefs.bottom_shift; },
-		get alt () { return Prefs.bottom_alt; }
+		get alt () { return Prefs.bottom_alt; },
+		get ctrl () { return Prefs.bottom_ctrl; }
 	},
 
 	observe: function(aSubject, aTopic, aData) {
@@ -28,6 +29,7 @@ this.bottom = {
 			case 'bottom_accel':
 			case 'bottom_shift':
 			case 'bottom_alt':
+			case 'bottom_ctrl':
 				this.setKey();
 				break;
 
@@ -170,6 +172,7 @@ Modules.LOADMODULE = function() {
 	Prefs.listen('bottom_accel', bottom);
 	Prefs.listen('bottom_shift', bottom);
 	Prefs.listen('bottom_alt', bottom);
+	Prefs.listen('bottom_ctrl', bottom);
 	Prefs.listen('fullscreen.autohide', bottom);
 	onFullScreen.add(bottom);
 
@@ -190,6 +193,7 @@ Modules.UNLOADMODULE = function() {
 	Prefs.unlisten('bottom_accel', bottom);
 	Prefs.unlisten('bottom_shift', bottom);
 	Prefs.unlisten('bottom_alt', bottom);
+	Prefs.unlisten('bottom_ctrl', bottom);
 
 	if(UNLOADED || !Prefs.bottom_bar) {
 		Keysets.unregister(bottom.key);
