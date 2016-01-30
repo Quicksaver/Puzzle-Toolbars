@@ -1,4 +1,4 @@
-// VERSION 1.3.2
+// VERSION 1.4.0
 
 objName = 'puzzleBars';
 objPathString = 'puzzlebars';
@@ -76,6 +76,9 @@ prefList = {
 	// hidden preference to not show the addon bar autohiding on startup
 	noInitialShow: false
 };
+
+// If we're initializing in a content process, we don't care about the rest
+if(isContent) { throw 'isContent'; }
 
 paneList = [
 	[ 'paneBottom' ],

@@ -1,6 +1,6 @@
 <!ENTITY about.paneTitle "關於">
 <!ENTITY about.version "版本 {v}">
-<!ENTITY about.versionDivider " - ">
+<!ENTITY about.versionDivider "-">
 <!ENTITY about.uptodate "已為最新，恭喜您！">
 <!ENTITY about.needsupdate "有可用的更新！">
 <!ENTITY about.description "在下面檢視這個版本的 &quot;發行註記&quot; 及 &quot;已知問題&quot; 。如果您發現任何問題，或是您對未來的版本有任何建議，請告訴我。">

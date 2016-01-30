@@ -1,4 +1,4 @@
-// VERSION 2.0.7
+// VERSION 2.0.8
 
 this.__defineGetter__('gURLBar', function() { return window.gURLBar; });
 this.__defineGetter__('locationContainer', function() { return $('urlbar-container'); });
@@ -133,14 +133,10 @@ this.urlbar = {
 			autoHide.init(this.bar, [this.container, this.PP], this.bar, 'opacity');
 
 			// hovering the urlbar dropmarker should keep the toolbar shown, but only if it was shown already
-			if(Services.vc.compare(Services.appinfo.version, "42.0a1") >= 0) {
-				Listeners.add(this.bar, 'HoverPuzzleBar', this);
-			}
+			Listeners.add(this.bar, 'HoverPuzzleBar', this);
 		} else {
 			autoHide.deinit(this.bar);
-			if(Services.vc.compare(Services.appinfo.version, "42.0a1") >= 0) {
-				Listeners.remove(this.bar, 'HoverPuzzleBar', this);
-			}
+			Listeners.remove(this.bar, 'HoverPuzzleBar', this);
 		}
 	},
 
@@ -184,9 +180,7 @@ this.urlbar = {
 
 		// deinitialize bar after we've removed all listeners and handlers, so they don't react to this uselessly
 		autoHide.deinit(this.bar);
-		if(Services.vc.compare(Services.appinfo.version, "42.0a1") >= 0) {
-			Listeners.remove(this.bar, 'HoverPuzzleBar', this);
-		}
+		Listeners.remove(this.bar, 'HoverPuzzleBar', this);
 		bars.deinit(this.bar, this.PP);
 		removeAttribute(gURLBar, objName+'-WhenFocused');
 	}

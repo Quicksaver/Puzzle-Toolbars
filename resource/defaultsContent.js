@@ -1,10 +1,7 @@
-// VERSION 1.0.0
+// VERSION 2.0.0
 
-Services.scriptloader.loadSubScript("resource://puzzlebars/modules/utils/content.js", this);
-
-this.puzzleBars = this.__contentEnvironment;
-delete this.__contentEnvironment;
-
-this.puzzleBars.objName = 'puzzleBars';
-this.puzzleBars.objPathString = 'puzzlebars';
-this.puzzleBars.init();
+// By using a JSM, we can initialize each individual tab (frame) with our scripts without having to instanciate the same objects with each one.
+(function(frame) {
+	Components.utils.import("resource://puzzlebars/modules/content/utils/ModuleInSandbox.jsm");
+	ModuleInSandbox.init('puzzlebars', frame);
+})(this);
