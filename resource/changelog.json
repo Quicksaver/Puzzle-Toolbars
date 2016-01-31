@@ -1,9 +1,17 @@
 {
-	"current":"2.1.8",
+	"current":"2.1.9",
 	"knownissues":[
 		["There are some <a=https://github.com/Quicksaver/Puzzle-Toolbars/issues/24>minor (aesthetic) issues</a> when the Location Bar Puzzle Bar is used together with <a=https://addons.mozilla.org/firefox/addon/ui-enhancer/>Location Bar Enhancer</a>."]
 	],
 	"releases": {
+		"2.1.9":{
+			"date":"January 31, 2016",
+			"notes":[
+				["updated","Significant improvement to memory usage, as well as to browser startup time and when opening new tabs"],
+				["removed","Compatibility with Firefox 43 and below"],
+				["bugfix","Default file name when exporting preferences would have the wrong month"]
+			]
+		},
 		"2.1.8":{
 			"date":"January 7, 2016",
 			"notes":[
