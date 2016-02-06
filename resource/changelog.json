@@ -1,9 +1,15 @@
 {
-	"current":"2.1.9",
+	"current":"2.1.10",
 	"knownissues":[
 		["There are some <a=https://github.com/Quicksaver/Puzzle-Toolbars/issues/24>minor (aesthetic) issues</a> when the Location Bar Puzzle Bar is used together with <a=https://addons.mozilla.org/firefox/addon/ui-enhancer/>Location Bar Enhancer</a>."]
 	],
 	"releases": {
+		"2.1.10":{
+			"date":"February 6, 2016",
+			"notes":[
+				["bugfix","The corner bar's active area slider would reset to the maximum sensitivity when re-opening the preferences tab"]
+			]
+		},
 		"2.1.9":{
 			"date":"January 31, 2016",
 			"notes":[
