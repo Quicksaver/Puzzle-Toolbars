@@ -1,9 +1,15 @@
 {
-	"current":"2.1.10",
+	"current":"2.1.11",
 	"knownissues":[
 		["There are some <a=https://github.com/Quicksaver/Puzzle-Toolbars/issues/24>minor (aesthetic) issues</a> when the Location Bar Puzzle Bar is used together with <a=https://addons.mozilla.org/firefox/addon/ui-enhancer/>Location Bar Enhancer</a>."]
 	],
 	"releases": {
+		"2.1.11":{
+			"date":"February 7, 2016",
+			"notes":[
+				["bugfix","Buttons in the lateral toolbar would not span across the whole toolbar width, often being cropped out of the toolbar"]
+			]
+		},
 		"2.1.10":{
 			"date":"February 6, 2016",
 			"notes":[
