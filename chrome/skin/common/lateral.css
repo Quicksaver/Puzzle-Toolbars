@@ -29,6 +29,13 @@
 	-moz-box-orient: vertical;
 }
 
+/* Bug 1208715 sets max-widths on the icons, which completely nulls a box's align=stretch attr,
+   this means the buttons wouldn't span across the whole lateral toolbar, they would pack to the start margin. */
+#puzzleBars-lateral-bar .toolbarbutton-1 > .toolbarbutton-icon,
+#puzzleBars-lateral-bar .toolbarbutton-1 > :-moz-any(.toolbarbutton-menubutton-button, .toolbarbutton-badge-stack) > .toolbarbutton-icon {
+	max-width: unset !important;
+}
+
 /* These are for the mouse over effects */
 #puzzleBars-lateral-bar:not([movetoright]):not([inSidebar]):-moz-any(:not([sidebarOpen]),[autohide]) toolbarbutton:not([disabled="true"]):hover,
 #puzzleBars-lateral-bar:not([movetoright]):not([inSidebar]):-moz-any(:not([sidebarOpen]),[autohide]) toolbarbutton[open],
