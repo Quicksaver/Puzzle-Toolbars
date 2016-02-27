@@ -1,9 +1,17 @@
 {
-	"current":"2.1.11",
+	"current":"2.1.12",
 	"knownissues":[
 		["There are some <a=https://github.com/Quicksaver/Puzzle-Toolbars/issues/24>minor (aesthetic) issues</a> when the Location Bar Puzzle Bar is used together with <a=https://addons.mozilla.org/firefox/addon/ui-enhancer/>Location Bar Enhancer</a>."]
 	],
 	"releases": {
+		"2.1.12":{
+			"date":"February 7, 2016",
+			"notes":[
+				["updated","fr locale"],
+				["bugfix","(OSX and Linux) the add-on's preferences would be exported into a file without the \".json\" extension that the add-on couldn't immediately recognize afterwards"],
+				["general","Added a small section to this page to promote my new web series \"A dude and his Firefox\"; it will be completely out of your way unless you point at the icon at the bottom corner, and you can dismiss it completely by clicking its close button."]
+			]
+		},
 		"2.1.11":{
 			"date":"February 7, 2016",
 			"notes":[
