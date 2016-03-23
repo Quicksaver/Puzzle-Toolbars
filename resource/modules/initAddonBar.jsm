@@ -1,4 +1,4 @@
-// VERSION 3.0.7
+// VERSION 3.0.8
 
 this.__defineGetter__('PrintPreviewListener', function() { return window.PrintPreviewListener; });
 this.__defineGetter__('gNavBar', function() { return $('nav-bar'); });
@@ -30,11 +30,17 @@ this.onFullScreen = {
 	// just a shortcut for the properties below to facilitate everywhere else
 	get hideBars () { return !this.useLion && this.entered && this.autohide; },
 
+	get fullscreenElement() {
+		if(Services.vc.compare(Services.appinfo.version, "47.0a1") < 0) {
+			return document.mozFullScreen;
+		}
+		return document.fullscreenElement;
+	},
 	get useLion () { return window.FullScreen.useLionFullScreen; },
 	get autohide () { return Prefs['fullscreen.autohide']; },
 
 	// we don't care when entering DOM fullscreen, everything is hidden there, so no use in de/initializing anything
-	entered: window.fullScreen && !document.mozFullScreen,
+	entered: window.fullScreen && !this.fullscreenElement,
 
 	add: function(h) {
 		this.handlers.add(h);
@@ -50,7 +56,7 @@ this.onFullScreen = {
 				// prevent the toolbars from moving around when entering or leaving fullscreen mode
 				this.noAnimation();
 
-				let inFullScreen = window.fullScreen && !document.mozFullScreen;
+				let inFullScreen = window.fullScreen && !this.fullscreenElement;
 
 				// only call the handlers if there was a change
 				if(inFullScreen == this.entered) { return; }
