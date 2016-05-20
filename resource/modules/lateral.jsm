@@ -1,4 +1,4 @@
-// VERSION 2.0.4
+// VERSION 2.0.5
 
 this.__defineGetter__('gCustomizeMode', function() { return window.gCustomizeMode; });
 
@@ -350,7 +350,7 @@ this.lateral = {
 	},
 
 	customize: function(e) {
-		if(e === true || e.type == 'beforecustomization') {
+		if(e && (e === true || e.type == 'beforecustomization')) {
 			// I have to disable autohide, or it screws up the layout when leaving customize mode, no idea why though...
 			autoHide.deinit(this.bar);
 			Overlays.overlayWindow(window, 'lateralCustomize');

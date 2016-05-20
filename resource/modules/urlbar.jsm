@@ -1,4 +1,4 @@
-// VERSION 2.0.8
+// VERSION 2.0.9
 
 this.__defineGetter__('gURLBar', function() { return window.gURLBar; });
 this.__defineGetter__('locationContainer', function() { return $('urlbar-container'); });
@@ -146,7 +146,7 @@ this.urlbar = {
 	},
 
 	customize: function(e) {
-		if(e === true || e.type == 'beforecustomization') {
+		if(e && (e === true || e.type == 'beforecustomization')) {
 			Overlays.overlayWindow(window, 'urlbarCustomize');
 		} else {
 			Overlays.removeOverlayWindow(window, 'urlbarCustomize');

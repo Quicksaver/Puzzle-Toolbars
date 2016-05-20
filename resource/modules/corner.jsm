@@ -1,4 +1,4 @@
-// VERSION 2.0.7
+// VERSION 2.0.8
 
 this.__defineGetter__('gFindBar', function() { return window.gFindBar; });
 this.__defineGetter__('bottomBox', function() { return $('browser-bottombox'); });
@@ -322,7 +322,7 @@ this.corner = {
 	},
 
 	customize: function(e) {
-		if(e === true || e.type == 'beforecustomization') {
+		if(e && (e === true || e.type == 'beforecustomization')) {
 			Overlays.overlayWindow(window, 'cornerCustomize');
 		} else {
 			Overlays.removeOverlayWindow(window, 'cornerCustomize');
