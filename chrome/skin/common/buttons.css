@@ -9,4 +9,31 @@
 		-moz-padding-end: 0 !important;
 	}
 
+	/* fixes for Pick & Save Images add-on button */
+	#nav-bar #puzzleBars-urlbar-bar #imageSaver-button[os=WINNT][cui-areatype=toolbar]:not([custom-theme]) .toolbarbutton-icon {
+		padding: 0;
+		width: 18px;
+		max-width: 18px;
+	}
+	#nav-bar #puzzleBars-urlbar-bar #imageSaver-button[os=WINNT][cui-areatype=toolbar]:not([custom-theme]) .dropmarker-icon {
+		padding-bottom: 0;
+		width: 9px;
+	}
+	@media (-moz-os-version: windows-win10) {
+		#nav-bar #puzzleBars-urlbar-bar #imageSaver-button[cui-areatype=toolbar]:not([custom-theme]) .toolbarbutton-icon {
+			padding: 0;
+		}
+	}
+	#nav-bar #puzzleBars-urlbar-bar #imageSaver-button[os=Linux][cui-areatype=toolbar]:not([custom-theme]) .toolbarbutton-icon {
+		padding: 0;
+		width: 18px !important;
+	}
+	#nav-bar #puzzleBars-urlbar-bar #imageSaver-button[os=Linux][cui-areatype=toolbar]:not([custom-theme]) .dropmarker-icon {
+		margin-top: 0;
+		margin-bottom: 0;
+		padding-top: 0;
+		padding-bottom: 0;
+		width: 9px;
+	}
+
 }
