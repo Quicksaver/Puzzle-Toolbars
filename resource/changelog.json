@@ -1,9 +1,22 @@
 {
-	"current":"2.1.12",
+	"current":"2.1.13",
 	"knownissues":[
 		["There are some <a=https://github.com/Quicksaver/Puzzle-Toolbars/issues/24>minor (aesthetic) issues</a> when the Location Bar Puzzle Bar is used together with <a=https://addons.mozilla.org/firefox/addon/ui-enhancer/>Location Bar Enhancer</a>."]
 	],
 	"releases": {
+		"2.1.13":{
+			"date":"May 22, 2016",
+			"notes":[
+				["removed","Compatibility with Firefox 44 and below, compatibility with Firefox 45 will be maintained for the duration of the ESR 45 life cycle"],
+				["bugfix","(Firefox 48) preferences tab wouldn't work (<a=https://github.com/Quicksaver/Puzzle-Toolbars/issues/86>issue #86</a>)"],
+				["bugfix","(non-e10s) some missing functionality right after updating the add-on until the browser was restarted"],
+				["bugfix","After navigating away from the preferences tab, navigating back (through the back button) wouldn't work"],
+				["bugfix","(Firefox 47) could fail to detect customize mode during startup"],
+				["bugfix","Small memory leak when disabling the add-on (thanks to the8472)"],
+				["bugfix","Compatibility with <a=https://addons.mozilla.org/firefox/addon/picknsave/>Pick & Save Images</a>, its icon would be heavily distorted if placed in the location bar's puzzle bar (<a=https://github.com/Quicksaver/Puzzle-Toolbars/issues/88>issue #88</a>)"],
+				["","Other minor updates"]
+			]
+		},
 		"2.1.12":{
 			"date":"February 7, 2016",
 			"notes":[
