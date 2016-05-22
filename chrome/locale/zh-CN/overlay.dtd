@@ -1,8 +1,8 @@
 <!ENTITY OptionsMenu.label "Puzzle Bars 选项">
 <!ENTITY bottom.name "底部拼图栏">
 <!ENTITY bottom.accesskey "z">
-<!ENTITY bottom.menuAdd "添加到从底部拼图栏">
-<!ENTITY bottom.menuMove "移动到从底部拼图栏">
+<!ENTITY bottom.menuAdd "添加到底部拼图栏">
+<!ENTITY bottom.menuMove "移动到底部拼图栏">
 <!ENTITY bottom.menuRemove "从底部拼图栏移除">
 <!ENTITY corner.name "角落拼图栏">
 <!ENTITY corner.accesskey "r">

@@ -1,7 +1,6 @@
 content   puzzlebars                    chrome/content/
 resource  puzzlebars                    resource/
 
-locale    puzzlebars-en   en-US         chrome/locale/en-US/
 locale    puzzlebars      en-US         chrome/locale/en-US/
 locale    puzzlebars      es-ES         chrome/locale/es-ES/
 locale    puzzlebars      fr            chrome/locale/fr/
