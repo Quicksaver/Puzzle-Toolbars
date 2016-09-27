@@ -15,8 +15,9 @@ window:not([inDOMFullscreen]) .puzzleBars-bar[moz-collapsed="true"]:not([collaps
 
 /* Inner buttons and other elements display */
 
-/* don't show buttons labels in any of our toolbars */
-.puzzleBars-bar *:not(#zoom-reset-button):not(.bookmark-item):not(#bookmarks-toolbar-placeholder) > .toolbarbutton-text {
+/* don't show buttons labels in any of our toolbars,
+   except for Tab Group's button if it's showing the current group's title */
+.puzzleBars-bar *:not(#zoom-reset-button):not(.bookmark-item):not(#bookmarks-toolbar-placeholder):not([showGroupTitle]) > .toolbarbutton-text {
 	visibility: collapse;
 }
 
