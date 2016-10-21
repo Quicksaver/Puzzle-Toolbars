@@ -2,7 +2,7 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
 
-// VERSION 3.0.8
+// VERSION 3.0.9
 
 this.__defineGetter__('PrintPreviewListener', function() { return window.PrintPreviewListener; });
 this.__defineGetter__('gNavBar', function() { return $('nav-bar'); });
@@ -100,6 +100,10 @@ this.bars = {
 		for(let bar of this._bars.values()) {
 			yield bar;
 		}
+	},
+
+	get: function(id) {
+		return this._bars.get(id);
 	},
 
 	onWidgetAdded: function(aWidget, aArea) { this.widgetCustomized(aWidget, aArea); },

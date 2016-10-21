@@ -2,7 +2,7 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
 
-// VERSION 1.0.17
+// VERSION 1.0.18
 
 Modules.LOADMODULE = function() {
 	AddonManager.getAddonByID("s3download@statusbar", function(addon) {
@@ -23,6 +23,7 @@ Modules.LOADMODULE = function() {
 	Modules.load('compatibilityFix/UIEnhancer');
 	Modules.load('compatibilityFix/theFoxOnlyBetter');
 	Modules.load('compatibilityFix/OmniSidebar');
+	Modules.load('compatibilityFix/TabGroups');
 };
 
 Modules.UNLOADMODULE = function() {
@@ -35,4 +36,5 @@ Modules.UNLOADMODULE = function() {
 	Modules.unload('compatibilityFix/UIEnhancer');
 	Modules.unload('compatibilityFix/theFoxOnlyBetter');
 	Modules.unload('compatibilityFix/OmniSidebar');
+	Modules.unload('compatibilityFix/TabGroups');
 };
