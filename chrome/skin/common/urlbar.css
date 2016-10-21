@@ -28,7 +28,7 @@
 
 /* Inner buttons and other elements display */
 /* !important tags are necessary, especially for urlbarBar, as are extra selectors */
-#puzzleBars-urlbar-bar :-moz-any(.toolbarbutton-badge-container,.toolbarbutton-icon) {
+#puzzleBars-urlbar-bar :-moz-any(.toolbarbutton-badge-container,.toolbarbutton-icon,.toolbarbutton-text) {
 	padding: 0 !important;
 }
 #nav-bar #puzzleBars-urlbar-bar *:not(.toolbarbutton-menubutton-button):not(.toolbarbutton-combined) > .toolbarbutton-icon {
@@ -39,6 +39,12 @@
 }
 #nav-bar #puzzleBars-urlbar-bar :-moz-any(.toolbarbutton-1,.chromeclass-toolbar-additional)[type="menu-button"] dropmarker image {
 	border: none;
+}
+#puzzleBars-urlbar-bar *:not(.toolbarbutton-menubutton-button):not(.toolbarbutton-combined) .toolbarbutton-text {
+	margin: 0 2px !important;
+	background: none !important;
+	box-shadow: none !important;
+	border: none !important;
 }
 
 /* little tweaks to make the search bar fit better */
