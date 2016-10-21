@@ -133,6 +133,12 @@ No point in creating a whole routine to check if this needs to load (Ghostery is
 	margin: 0 5px 0 6px !important;
 }
 
+/* Bring the badge a little closer to the center of the button. */
+.puzzleBars-bar .toolbarbutton-badge {
+	margin-top: -3px !important;
+	-moz-margin-end: -3px !important;
+}
+
 /* Puzzle Pieces */
 
 window[customizing="true"] .PuzzlePiece {
