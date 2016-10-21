@@ -2,7 +2,7 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
 
-// VERSION 1.4.0
+// VERSION 1.4.1
 
 objName = 'puzzleBars';
 objPathString = 'puzzlebars';
@@ -88,7 +88,7 @@ paneList = [
 	[ 'paneBottom' ],
 	[ 'paneCorner' ],
 	[ 'paneLateral' ],
-	[ 'paneTop' ],
+	[ 'paneTop', true ],
 	[ 'paneURLBar', true ],
 ];
 
