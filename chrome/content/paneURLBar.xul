@@ -77,8 +77,8 @@
 		</groupbox>
 
 		<groupbox align="start" id="paneURLBar-shortcut" collapsed="true" data-category="paneURLBar">
-			<caption label="&OptKeyboardShortcut.captionA;"/>
-			<hbox jump="urlbar &OptKeyboardShortcut.captionA;">
+			<caption label="&OptKeyboardShortcut.captionB;"/>
+			<hbox jump="urlbar &OptKeyboardShortcut.captionB;">
 				<checkbox class="smallindent" keysetAccel="urlbar" delayPreference="pref-urlbar_accel" dependson="pref-urlbar_bar"/>
 				<checkbox class="smallindent" keysetAlt="urlbar" delayPreference="pref-urlbar_alt" dependson="pref-urlbar_bar"/>
 				<checkbox class="smallindent" keysetShift="urlbar" delayPreference="pref-urlbar_shift" dependson="pref-urlbar_bar"/>

@@ -116,8 +116,8 @@
 		</groupbox>
 
 		<groupbox align="start" id="paneCorner-shortcut" collapsed="true" data-category="paneCorner">
-			<caption label="&OptKeyboardShortcut.captionA;"/>
-			<hbox jump="corner &OptKeyboardShortcut.captionA;">
+			<caption label="&OptKeyboardShortcut.captionB;"/>
+			<hbox jump="corner &OptKeyboardShortcut.captionB;">
 				<checkbox class="smallindent" keysetAccel="corner" delayPreference="pref-corner_accel" dependson="pref-corner_bar"/>
 				<checkbox class="smallindent" keysetAlt="corner" delayPreference="pref-corner_alt" dependson="pref-corner_bar"/>
 				<checkbox class="smallindent" keysetShift="corner" delayPreference="pref-corner_shift" dependson="pref-corner_bar"/>

@@ -80,8 +80,8 @@
 		</groupbox>
 
 		<groupbox align="start" id="paneTop-shortcut" collapsed="true" data-category="paneTop">
-			<caption label="&OptKeyboardShortcut.captionA;"/>
-			<hbox jump="top &OptKeyboardShortcut.captionA;">
+			<caption label="&OptKeyboardShortcut.captionB;"/>
+			<hbox jump="top &OptKeyboardShortcut.captionB;">
 				<checkbox class="smallindent" keysetAccel="top" delayPreference="pref-top_accel" dependson="pref-top_bar"/>
 				<checkbox class="smallindent" keysetAlt="top" delayPreference="pref-top_alt" dependson="pref-top_bar"/>
 				<checkbox class="smallindent" keysetShift="top" delayPreference="pref-top_shift" dependson="pref-top_bar"/>

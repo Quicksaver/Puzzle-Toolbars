@@ -90,8 +90,8 @@
 		</groupbox>
 
 		<groupbox align="start" id="paneLateral-shortcut" collapsed="true" data-category="paneLateral">
-			<caption label="&OptKeyboardShortcut.captionA;"/>
-			<hbox jump="lateral &OptKeyboardShortcut.captionA;">
+			<caption label="&OptKeyboardShortcut.captionB;"/>
+			<hbox jump="lateral &OptKeyboardShortcut.captionB;">
 				<checkbox class="smallindent" keysetAccel="lateral" delayPreference="pref-lateral_accel" dependson="pref-lateral_bar"/>
 				<checkbox class="smallindent" keysetAlt="lateral" delayPreference="pref-lateral_alt" dependson="pref-lateral_bar"/>
 				<checkbox class="smallindent" keysetShift="lateral" delayPreference="pref-lateral_shift" dependson="pref-lateral_bar"/>

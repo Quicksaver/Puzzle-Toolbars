@@ -38,4 +38,4 @@
 <!ENTITY OptMoveBottom.label "Place at the bottom">
 <!ENTITY OptMoveBottom.tooltip "Show the puzzle piece at the bottom of the toolbar rather than at the top.">
 
-<!ENTITY OptKeyboardShortcut.captionA "Keyboard shortcut for enabling or disabling">
+<!ENTITY OptKeyboardShortcut.captionB "Keyboard shortcut for opening and closing">
