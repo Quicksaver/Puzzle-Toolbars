@@ -56,7 +56,7 @@ window:not([customizing="true"]) #puzzleBars-top-bar:not([slimChrome]):not([hide
 
 #puzzleBars-top-PP {
 	position: fixed;
-	z-index: 2; /* nav-bar has z-index:1 */
+	z-index: 3; /* nav-bar has z-index:1 and tabs have z-index:2 */
 }
 
 #puzzleBars-top-PP:not([movetoright]) image { -moz-image-region: rect(0px, 32px, 32px, 0px); }

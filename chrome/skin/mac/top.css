@@ -12,10 +12,6 @@
 
 /* Puzzle Pieces */
 
-#puzzleBars-top-PP {
-	z-index: 3;
-}
-
 #puzzleBars-top-PP:not([active]):not(:hover) {
 	clip: rect(18px, 32px, 32px, 0px);
 }
