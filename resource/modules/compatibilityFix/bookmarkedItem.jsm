@@ -2,7 +2,7 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
 
-// VERSION 2.0.0
+// VERSION 2.0.1
 
 this.__defineGetter__('BookmarkingUI', function() { return window.BookmarkingUI; });
 this.__defineGetter__('StarUI', function() { return window.StarUI; });
@@ -79,7 +79,7 @@ Modules.LOADMODULE = function() {
 		for(let bar of bars) {
 			if(!bar._autohide) { continue; }
 
-			if(isAncestor(aAnchorElement, bar) && !trueAttribute(bar, 'hover')) {
+			if(isAncestor(aAnchorElement, bar) && !autoHide.isBarShowing(bar)) {
 				// re-command the panel to open when the chrome finishes expanding
 				var starUIListener = function() {
 					bar._transition.remove(starUIListener);

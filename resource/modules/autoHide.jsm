@@ -2,7 +2,7 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
 
-// VERSION 3.0.9
+// VERSION 3.0.10
 
 this.autoHide = {
 	handleEvent: function(e) {
@@ -84,6 +84,10 @@ this.autoHide = {
 			}, duration);
 			bar._initialShowings.add(thisShowing);
 		}
+	},
+
+	isBarShowing: function(bar) {
+		return trueAttribute(bar, 'hover') || (self.urlbar && bar == urlbar.bar && Prefs.urlbar_whenfocused && !trueAttribute(gURLBar, 'focused'));
 	},
 
 	// Keep toolbar visible when opening menus within it
@@ -196,7 +200,7 @@ this.autoHide = {
 		// Similarly to the 'click' handler below,
 		// popups shouldn't flash or jump around because the toolbars are temporarily hidden before the popup is fully shown.
 		if(e.type == 'popupshowing') {
-			if(trueAttribute(hold, 'hover')) {
+			if(this.isBarShowing(hold)) {
 				this.initialShow(hold, 500);
 			}
 			return;
@@ -215,7 +219,7 @@ this.autoHide = {
 				this.releasePopups.delete(target);
 			}
 
-			if(!trueAttribute(hold, 'hover')) {
+			if(!this.isBarShowing(hold)) {
 				target.collapsed = true;
 				hold._transition.add(this);
 				Timers.init('ensureHoldPopupShows', () => { this.popupsFinishedVisible(); }, 400);

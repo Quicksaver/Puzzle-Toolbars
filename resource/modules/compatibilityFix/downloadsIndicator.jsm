@@ -2,7 +2,7 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
 
-// VERSION 2.1.0
+// VERSION 2.1.1
 
 this.__defineGetter__('DownloadsIndicatorView', function() { return window.DownloadsIndicatorView; });
 this.__defineGetter__('DownloadsCommon', function() { return window.DownloadsCommon; });
@@ -47,7 +47,7 @@ this.downloadsIndicator = {
 				&& DownloadsIndicatorView._initialized && DownloadsCommon.animateNotifications
 				&& (isAncestor($('downloads-button'), bar) || isAncestor($('downloads-button'), bar._overflowTarget))) {
 					// if toolbar is hidden, pause until it is shown
-					if(!trueAttribute(bar, 'hover')) {
+					if(!autoHide.isBarShowing(bar)) {
 						var selfRemove = (e) => {
 							bar._transition.remove(selfRemove);
 							this.handleEvent(e);
