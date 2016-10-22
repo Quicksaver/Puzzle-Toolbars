@@ -2,7 +2,7 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
 
-// VERSION 2.0.5
+// VERSION 2.0.6
 
 this.top = {
 	get bar () { return $(objName+'-top-bar'); },
@@ -118,6 +118,8 @@ this.top = {
 	},
 
 	onLoad: function() {
+		this.bar._puzzleBar = this;
+
 		Listeners.add(window, 'PuzzleBarsMoved', this);
 
 		this.togglePP(); // implies this.move()
@@ -134,6 +136,8 @@ this.top = {
 
 		// deinitialize bar after we've removed all listeners and handlers, so they don't react to this uselessly
 		bars.deinit(this.bar, this.PP);
+
+		delete this.bar._puzzleBar;
 	}
 };
 

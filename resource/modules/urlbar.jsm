@@ -2,7 +2,7 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
 
-// VERSION 2.0.9
+// VERSION 2.0.10
 
 this.__defineGetter__('gURLBar', function() { return window.gURLBar; });
 this.__defineGetter__('locationContainer', function() { return $('urlbar-container'); });
@@ -158,6 +158,8 @@ this.urlbar = {
 	},
 
 	onLoad: function() {
+		this.bar._puzzleBar = this;
+
 		Listeners.add(this.bar, 'ToggledPuzzleBar', this);
 		Listeners.add(window, 'PuzzleBarsMoved', this);
 
@@ -187,6 +189,8 @@ this.urlbar = {
 		Listeners.remove(this.bar, 'HoverPuzzleBar', this);
 		bars.deinit(this.bar, this.PP);
 		removeAttribute(gURLBar, objName+'-WhenFocused');
+
+		delete this.bar._puzzleBar;
 	}
 };
 

@@ -2,7 +2,7 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
 
-// VERSION 2.0.4
+// VERSION 2.0.5
 
 this.bottom = {
 	get box () { return $('browser-bottombox'); },
@@ -146,6 +146,8 @@ this.bottom = {
 	},
 
 	onLoad: function() {
+		this.bar._puzzleBar = this;
+
 		Listeners.add(window, 'PuzzleBarsMoved', this);
 		Watchers.addAttributeWatcher(gNavBar, 'brighttext', this);
 
@@ -166,6 +168,8 @@ this.bottom = {
 		// deinitialize bar after we've removed all listeners and handlers, so they don't react to this uselessly
 		autoHide.deinit(this.bar);
 		bars.deinit(this.bar, this.PP);
+
+		delete this.bar._puzzleBar;
 	}
 };
 

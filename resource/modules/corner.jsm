@@ -2,7 +2,7 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
 
-// VERSION 2.0.8
+// VERSION 2.0.9
 
 this.__defineGetter__('gFindBar', function() { return window.gFindBar; });
 this.__defineGetter__('bottomBox', function() { return $('browser-bottombox'); });
@@ -334,6 +334,8 @@ this.corner = {
 	},
 
 	onLoad: function() {
+		this.bar._puzzleBar = this;
+
 		// bugfix: on startup the toolbar and puzzle piece would slide down across the whole window
 		setAttribute(document.documentElement, objName+'-noAnimation', 'true');
 
@@ -374,6 +376,8 @@ this.corner = {
 		bars.deinit(this.bar, this.PP);
 
 		removeAttribute(document.documentElement, objName+'-noAnimation');
+
+		delete this.bar._puzzleBar;
 	}
 };
 

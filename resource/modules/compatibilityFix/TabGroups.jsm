@@ -2,7 +2,7 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
 
-// VERSION 1.0.1
+// VERSION 1.0.2
 
 this.__defineGetter__('tabGroups', function() { return window.tabGroups; });
 
@@ -29,6 +29,21 @@ this.tg = {
 	unlisten: function() {
 		AddonManager.removeAddonListener(this);
 		this.disable();
+	},
+
+	handleEvent: function(e) {
+		switch(e.type) {
+			case 'TabBarUpdated':
+			case 'tabviewhidden':
+				let placement = CustomizableUI.getPlacementOfWidget(tabGroups.TabView.kButtonId);
+				if(placement) {
+					let bar = bars.get(placement.area);
+					if(bar) {
+						bar._puzzleBar.move();
+					}
+				}
+				break;
+		}
 	},
 
 	enable: function() {
@@ -74,6 +89,9 @@ this.tg = {
 
 			return false;
 		}, Piggyback.MODE_BEFORE);
+
+		Listeners.add(gBrowser.tabContainer, 'TabBarUpdated', this);
+		Listeners.add(window, 'tabviewhidden', this);
 	},
 
 	disable: function() {
@@ -81,6 +99,9 @@ this.tg = {
 		this.initialized = false;
 
 		Piggyback.revert('tabGroups', tabGroups.quickAccess, 'toggle');
+
+		Listeners.remove(gBrowser.tabContainer, 'TabBarUpdated', this);
+		Listeners.remove(window, 'tabviewhidden', this);
 	}
 };
 
