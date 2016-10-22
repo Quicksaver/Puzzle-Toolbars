@@ -2,7 +2,7 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
 
-// VERSION 2.0.10
+// VERSION 2.0.11
 
 this.__defineGetter__('gURLBar', function() { return window.gURLBar; });
 this.__defineGetter__('locationContainer', function() { return $('urlbar-container'); });
@@ -78,6 +78,10 @@ this.urlbar = {
 				}
 				break;
 		}
+	},
+
+	attrWatcher: function() {
+		this.brightText();
 	},
 
 	setKey: function() {
@@ -157,16 +161,38 @@ this.urlbar = {
 		}
 	},
 
+	_parseRGB: /^rgba?\((\d+), (\d+), (\d+)/,
+
+	parseRGB: function(aColorString) {
+		let rgb = this._parseRGB.exec(aColorString);
+		rgb.shift();
+		return { r: parseInt(rgb[0]), g: parseInt(rgb[1]), b: parseInt(rgb[2]) };
+	},
+
+	parseLuminance: function(rgb) {
+		return 0.2125 * rgb.r + 0.7154 * rgb.g + 0.0721 * rgb.b;
+	},
+
+	brightText: function() {
+		// We don't actually want to follow the brighttext attribute in the nav-bar, because the background we're interested on is the urlbar's.
+		let style = getComputedStyle(gURLBar);
+		let rgb = this.parseRGB(style.color);
+		let luminance = this.parseLuminance(rgb);
+		toggleAttribute(this.bar, 'brighttext', luminance > 110);
+	},
+
 	onLoad: function() {
 		this.bar._puzzleBar = this;
 
 		Listeners.add(this.bar, 'ToggledPuzzleBar', this);
 		Listeners.add(window, 'PuzzleBarsMoved', this);
+		Watchers.addAttributeWatcher(gNavBar, 'brighttext', this);
 
 		this.togglePP();
 		this.isActive();
 		this.move();
 		this.whenFocused();
+		this.brightText();
 		this.autoHide();
 
 		bars.init(this.bar, this.PP);
@@ -183,6 +209,7 @@ this.urlbar = {
 
 		Listeners.remove(this.bar, 'ToggledPuzzleBar', this);
 		Listeners.remove(window, 'PuzzleBarsMoved', this);
+		Watchers.removeAttributeWatcher(gNavBar, 'brighttext', this);
 
 		// deinitialize bar after we've removed all listeners and handlers, so they don't react to this uselessly
 		autoHide.deinit(this.bar);
