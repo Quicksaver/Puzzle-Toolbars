@@ -2,7 +2,7 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
 
-// VERSION 1.0.2
+// VERSION 1.0.3
 
 this.__defineGetter__('tabGroups', function() { return window.tabGroups; });
 
@@ -33,8 +33,7 @@ this.tg = {
 
 	handleEvent: function(e) {
 		switch(e.type) {
-			case 'TabBarUpdated':
-			case 'tabviewhidden':
+			case 'ActiveGroupNameChanged':
 				let placement = CustomizableUI.getPlacementOfWidget(tabGroups.TabView.kButtonId);
 				if(placement) {
 					let bar = bars.get(placement.area);
@@ -49,6 +48,8 @@ this.tg = {
 	enable: function() {
 		if(this.initialized) { return; }
 		this.initialized = true;
+
+		Listeners.add(window, 'ActiveGroupNameChanged', this);
 
 		// Preventing "blinking" TG's quick access panel.
 		Piggyback.add('tabGroups', tabGroups.quickAccess, 'toggle', function() {
@@ -89,19 +90,15 @@ this.tg = {
 
 			return false;
 		}, Piggyback.MODE_BEFORE);
-
-		Listeners.add(gBrowser.tabContainer, 'TabBarUpdated', this);
-		Listeners.add(window, 'tabviewhidden', this);
 	},
 
 	disable: function() {
 		if(!this.initialized) { return; }
 		this.initialized = false;
 
-		Piggyback.revert('tabGroups', tabGroups.quickAccess, 'toggle');
+		Listeners.remove(window, 'ActiveGroupNameChanged', this);
 
-		Listeners.remove(gBrowser.tabContainer, 'TabBarUpdated', this);
-		Listeners.remove(window, 'tabviewhidden', this);
+		Piggyback.revert('tabGroups', tabGroups.quickAccess, 'toggle');
 	}
 };
 
