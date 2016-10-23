@@ -113,6 +113,14 @@ http://mxr.mozilla.org/mozilla-central/source/browser/base/content/browser.css#3
 	        		linear-gradient(to top, transparent, rgba(255,255,255,.45) 30%) !important;
 }
 
+/* don't show special nav-bar effects in badged buttons */
+#nav-bar .puzzleBars-bar toolbarbutton.badged-button:not([disabled=true]):not([checked]):not([open]):not(:active):hover > .toolbarbutton-badge-stack,
+#nav-bar .puzzleBars-bar toolbarbutton.badged-button:not([disabled=true]):-moz-any(:active,:hover,[open],[checked]) .toolbarbutton-badge-stack {
+	background: none;
+	border-color: transparent;
+	box-shadow: none;
+}
+
 /* ghostery's button is actually a stack, and the label above it does carry our hover effects, so we just disable mouse events on it,
 this doesn't take away functionality as the button behind it is still clickable and performs the same action as when clicking the label.
 No point in creating a whole routine to check if this needs to load (Ghostery is restartless), putting this here is just easier and simpler. */
