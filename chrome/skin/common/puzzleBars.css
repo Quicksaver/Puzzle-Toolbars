@@ -141,6 +141,13 @@ No point in creating a whole routine to check if this needs to load (Ghostery is
 	margin: 0 5px 0 6px !important;
 }
 
+/* Don't show effects on outer HTTPS Everywhere button (button in button thing) */
+.puzzleBars-bar #https-everywhere-button {
+	background: none !important;
+	border-color: transparent !important;
+	box-shadow: none !important;
+}
+
 /* Bring the badge a little closer to the center of the button. */
 .puzzleBars-bar .toolbarbutton-badge {
 	margin-top: -3px !important;
