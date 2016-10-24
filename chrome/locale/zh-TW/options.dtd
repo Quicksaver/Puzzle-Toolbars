@@ -34,4 +34,4 @@
 <!ENTITY OptExtend.tooltip "這個選項會將工具列顯示到瀏覽器視窗中最大的可用空間，即便它沒有足夠的項目或小工具在其中，若您在其中使用彈性空間時很有用。">
 <!ENTITY OptMoveBottom.label "置於底部">
 <!ENTITY OptMoveBottom.tooltip "在工具列底部而非頂部顯示 Puzzle piece。">
-<!ENTITY OptKeyboardShortcut.captionA "啟用或停用鍵盤快捷鍵設定">
+<!ENTITY OptKeyboardShortcut.captionB "啟用或停用鍵盤快捷鍵設定">

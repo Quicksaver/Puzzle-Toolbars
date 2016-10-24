@@ -34,4 +34,4 @@
 <!ENTITY OptExtend.tooltip "Позволяет занять панели максимально возможную площадь, не зависимо от ее содержимого.">
 <!ENTITY OptMoveBottom.label "Поместить вниз">
 <!ENTITY OptMoveBottom.tooltip "Показывать паззл-кнопку внизу панели.">
-<!ENTITY OptKeyboardShortcut.captionA "Горячие клавиши">
+<!ENTITY OptKeyboardShortcut.captionB "Горячие клавиши">

@@ -34,4 +34,4 @@
 <!ENTITY OptExtend.tooltip "Visar verktygsfältet över hela det tillgängliga utrymmet i webbläsarfönstret, även om det inte har tillräckligt många objekt eller gränssnittskomponenter i sig. Bra om du vill använda flexibla mellanrum.">
 <!ENTITY OptMoveBottom.label "Placera nederst">
 <!ENTITY OptMoveBottom.tooltip "Visa pusselbiten nederst i verktygsfältet istället för överst.">
-<!ENTITY OptKeyboardShortcut.captionA "Kortkommando för aktivering eller inaktivering">
+<!ENTITY OptKeyboardShortcut.captionB "Kortkommando för öppen och stänga">

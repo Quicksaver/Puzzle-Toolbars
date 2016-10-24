@@ -34,4 +34,4 @@
 <!ENTITY OptExtend.tooltip "Esta opção mostra a barra de ferramentas ao longo de toda a largura disponível na janela, mesmo que não tenha items suficientes para a encher; especialmente útil se quiser utilizar espaços flexíveis.">
 <!ENTITY OptMoveBottom.label "Colocar ao fundo">
 <!ENTITY OptMoveBottom.tooltip "Mostra a peça do puzzle ao fundo da barra de ferramentas em vez de ao topo.">
-<!ENTITY OptKeyboardShortcut.captionA "Atalho de teclado para activar ou desactivar">
+<!ENTITY OptKeyboardShortcut.captionB "Atalho de teclado para abrir e fechar">

@@ -34,4 +34,4 @@
 <!ENTITY OptExtend.tooltip "此选项会在浏览器窗口中用最多的可用空间显示工具栏，即使它没有足够多的项目或覆盖它的窗口小部件；如果您想要一块固定的空间，这会非常有用。">
 <!ENTITY OptMoveBottom.label "放置在底部">
 <!ENTITY OptMoveBottom.tooltip "在工具栏的底部而不是顶部显示“一块拼图”。">
-<!ENTITY OptKeyboardShortcut.captionA "键盘快捷键设置">
+<!ENTITY OptKeyboardShortcut.captionB "键盘快捷键设置">
