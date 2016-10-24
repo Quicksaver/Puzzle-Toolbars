@@ -1,9 +1,28 @@
 {
-	"current":"2.1.14",
+	"current":"2.1.15",
 	"knownissues":[
 		["There are some <a=https://github.com/Quicksaver/Puzzle-Toolbars/issues/24>minor (aesthetic) issues</a> when the Location Bar Puzzle Bar is used together with <a=https://addons.mozilla.org/firefox/addon/ui-enhancer/>Location Bar Enhancer</a>."]
 	],
 	"releases": {
+		"2.1.15":{
+			"date":"October 24, 2016",
+			"notes":[
+				["changed","Hide unnecessary Slim Chrome related checkbox in the options page for the Top Puzzle Bar when Beyond Australis add-on is not installed"],
+				["bugfix","Compatibility with <a=https://addons.mozilla.org/firefox/addon/tab-groups-panorama/>Tab Groups</a>; groups button would be almost invisible if it was showing the group name instead of the icon"],
+				["bugfix","In small windows, the add-on's preferences page could overflow and lose its scrollbars, where some content would be inaccessible"],
+				["bugfix","Compatibility with <a=https://addons.mozilla.org/firefox/addon/tab-mix-plus/>Tab Mix Plus</a>; setting a shortcut to one reserved (but unused) by Tab Mix Plus's session related features at startup wouldn't work"],
+				["bugfix","Small compatibility fixes for Firefox 51"],
+				["bugfix","In a few cases (multi-window + e10s + sometimes) the add-on could fail to fully initialize"],
+				["bugfix","Tweak the appearance of badged buttons in a Puzzle Toolbar, so that the badge isn't too outside of the button"],
+				["bugfix","Labeled buttons in the Location Bar Puzzle Bar were a little off"],
+				["bugfix","Try not to blink the <a=https://addons.mozilla.org/firefox/addon/tab-groups-panorama/>Tab Groups</a> quick access panel when opening it anchored to a button on one of our hidden toolbars (<a=https://github.com/Quicksaver/Puzzle-Toolbars/issues/97>issue #97</a>)"],
+				["bugfix","Make sure dimensions of puzzle bars are updated when the tab groups button shows the name of the current group (<a=https://github.com/Quicksaver/Puzzle-Toolbars/issues/98>issue #98</a>)"],
+				["bugfix","Style the buttons correctly in the location bar puzzle bar with themes that make it dark (<a=https://github.com/Quicksaver/Puzzle-Toolbars/issues/93>issue #93</a>)"],
+				["bugfix","Appearance tweaks for the <a=https://addons.mozilla.org/firefox/addon/https-everywhere/>HTTPS Everywhere</a> button (<a=https://github.com/Quicksaver/Puzzle-Toolbars/issues/93>issue #93</a>)"],
+				["general","Added MPL license headers to source files"],
+				["","Other minor fixes"]
+			]
+		},
 		"2.1.14":{
 			"date":"May 22, 2016",
 			"notes":[
