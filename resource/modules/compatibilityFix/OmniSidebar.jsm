@@ -2,7 +2,7 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
 
-// VERSION 2.0.5
+// VERSION 2.0.6
 
 this.__defineGetter__('omnisidebar', function() { return window.omnisidebar; });
 this.__defineGetter__('leftSidebar', function() { return omnisidebar && omnisidebar.leftSidebar; });
@@ -35,6 +35,7 @@ this.osb = {
 				if(typeof(lateral) != 'undefined' && e.target == lateral.bar) {
 					this.shouldFix(leftSidebar, rightSidebar, true, 'left');
 					this.shouldFix(rightSidebar, leftSidebar, true, 'right');
+					this.move(e);
 				}
 				break;
 
@@ -46,7 +47,6 @@ this.osb = {
 
 			case 'beforecustomization':
 			case 'aftercustomization':
-			case 'LoadedAutoHidePuzzleBar':
 			case 'UnloadedAutoHidePuzzleBar':
 			case 'sidebarAbove':
 			case 'sidebarDocked':
@@ -65,29 +65,24 @@ this.osb = {
 			case 'twinSidebar':
 			case 'renderabove':
 			case 'renderaboveTwin':
-				lateral.sidebarOpen();
-				break;
-
 			case 'moveSidebars':
-				lateral.sidebarOpen();
-				if(lateral.bar) {
-					this.shouldFix(leftSidebar, rightSidebar, true, 'left');
-					this.shouldFix(rightSidebar, leftSidebar, true, 'right');
-				}
-				break;
-
 			case 'lateral_placement':
-				if(lateral.bar) {
-					this.shouldFix(leftSidebar, rightSidebar, true, 'left');
-					this.shouldFix(rightSidebar, leftSidebar, true, 'right');
-				}
+				aSync(() => {
+					lateral.sidebarOpen();
+					if(lateral.bar) {
+						this.shouldFix(leftSidebar, rightSidebar, true, 'left');
+						this.shouldFix(rightSidebar, leftSidebar, true, 'right');
+					}
+				});
 				// no break;
 
 			case 'lateral_bar':
 			case 'lateral_autohide':
 			case 'autoHide':
 			case 'autoHideTwin':
-				this.move();
+				aSync(() => {
+					this.move();
+				});
 				break;
 		}
 	},
