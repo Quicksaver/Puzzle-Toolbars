@@ -1,24 +1,24 @@
 {
 	"current":"2.1.15",
 	"knownissues":[
-		["There are some <a=https://github.com/Quicksaver/Puzzle-Toolbars/issues/24>minor (aesthetic) issues</a> when the Location Bar Puzzle Bar is used together with <a=https://addons.mozilla.org/firefox/addon/ui-enhancer/>Location Bar Enhancer</a>."]
+		["There are some <i=24> when the Location Bar Puzzle Bar is used together with <e=ui-enhancer>Location Bar Enhancer</e>."]
 	],
 	"releases": {
 		"2.1.15":{
 			"date":"October 24, 2016",
 			"notes":[
 				["changed","Hide unnecessary Slim Chrome related checkbox in the options page for the Top Puzzle Bar when Beyond Australis add-on is not installed"],
-				["bugfix","Compatibility with <a=https://addons.mozilla.org/firefox/addon/tab-groups-panorama/>Tab Groups</a>; groups button would be almost invisible if it was showing the group name instead of the icon"],
+				["bugfix","Compatibility with <e=tab-groups-panorama>Tab Groups</e>; groups button would be almost invisible if it was showing the group name instead of the icon"],
 				["bugfix","In small windows, the add-on's preferences page could overflow and lose its scrollbars, where some content would be inaccessible"],
-				["bugfix","Compatibility with <a=https://addons.mozilla.org/firefox/addon/tab-mix-plus/>Tab Mix Plus</a>; setting a shortcut to one reserved (but unused) by Tab Mix Plus's session related features at startup wouldn't work"],
+				["bugfix","Compatibility with <e=tab-mix-plus>Tab Mix Plus</e>; setting a shortcut to one reserved (but unused) by Tab Mix Plus's session related features at startup wouldn't work"],
 				["bugfix","Small compatibility fixes for Firefox 51"],
 				["bugfix","In a few cases (multi-window + e10s + sometimes) the add-on could fail to fully initialize"],
 				["bugfix","Tweak the appearance of badged buttons in a Puzzle Toolbar, so that the badge isn't too outside of the button"],
 				["bugfix","Labeled buttons in the Location Bar Puzzle Bar were a little off"],
-				["bugfix","Try not to blink the <a=https://addons.mozilla.org/firefox/addon/tab-groups-panorama/>Tab Groups</a> quick access panel when opening it anchored to a button on one of our hidden toolbars (<a=https://github.com/Quicksaver/Puzzle-Toolbars/issues/97>issue #97</a>)"],
-				["bugfix","Make sure dimensions of puzzle bars are updated when the tab groups button shows the name of the current group (<a=https://github.com/Quicksaver/Puzzle-Toolbars/issues/98>issue #98</a>)"],
-				["bugfix","Style the buttons correctly in the location bar puzzle bar with themes that make it dark (<a=https://github.com/Quicksaver/Puzzle-Toolbars/issues/93>issue #93</a>)"],
-				["bugfix","Appearance tweaks for the <a=https://addons.mozilla.org/firefox/addon/https-everywhere/>HTTPS Everywhere</a> button (<a=https://github.com/Quicksaver/Puzzle-Toolbars/issues/93>issue #93</a>)"],
+				["bugfix","Try not to blink the <e=tab-groups-panorama>Tab Groups</e> quick access panel when opening it anchored to a button on one of our hidden toolbars (<i=97>)"],
+				["bugfix","Make sure dimensions of puzzle bars are updated when the tab groups button shows the name of the current group (<i=98>)"],
+				["bugfix","Style the buttons correctly in the location bar puzzle bar with themes that make it dark (<i=93>)"],
+				["bugfix","Appearance tweaks for the <e=https-everywhere>HTTPS Everywhere</e> button (<i=93>)"],
 				["general","Added MPL license headers to source files"],
 				["","Other minor fixes"]
 			]
@@ -33,12 +33,12 @@
 			"date":"May 22, 2016",
 			"notes":[
 				["removed","Compatibility with Firefox 44 and below, compatibility with Firefox 45 will be maintained for the duration of the ESR 45 life cycle"],
-				["bugfix","(Firefox 48) preferences tab wouldn't work (<a=https://github.com/Quicksaver/Puzzle-Toolbars/issues/86>issue #86</a>)"],
+				["bugfix","(Firefox 48) preferences tab wouldn't work (<i=86>)"],
 				["bugfix","(non-e10s) some missing functionality right after updating the add-on until the browser was restarted"],
 				["bugfix","After navigating away from the preferences tab, navigating back (through the back button) wouldn't work"],
 				["bugfix","(Firefox 47) could fail to detect customize mode during startup"],
 				["bugfix","Small memory leak when disabling the add-on (thanks to the8472)"],
-				["bugfix","Compatibility with <a=https://addons.mozilla.org/firefox/addon/picknsave/>Pick & Save Images</a>, its icon would be heavily distorted if placed in the location bar's puzzle bar (<a=https://github.com/Quicksaver/Puzzle-Toolbars/issues/88>issue #88</a>)"],
+				["bugfix","Compatibility with <e=picknsave>Pick & Save Images</e>, its icon would be heavily distorted if placed in the location bar's puzzle bar (<i=88>)"],
 				["","Other minor updates"]
 			]
 		},
@@ -94,7 +94,7 @@
 		"2.1.6":{
 			"date":"November 8, 2015",
 			"notes":[
-				["updated","Don't use eval in any part of the code; should bring a slight performance enhancement when used together with <a=https://addons.mozilla.org/firefox/addon/tile-tabs/>Tile Tabs</a>"],
+				["updated","Don't use eval in any part of the code; should bring a slight performance enhancement when used together with <e=tile-tabs>Tile Tabs</e>"],
 				["updated","Minor code cleanup"],
 				["bugfix","The keyboard shortcut dropdown selectors weren't properly populated only with the available keys"],
 				["bugfix","Possible fix for slight appearance issue with badge icons"]
@@ -108,7 +108,7 @@
 				["updated","Minor improvements to multiline string concatenation code, as suggested by AMO reviewer"],
 				["updated","Share icons in the add-on's About pane"],
 				["updated","Minor improvements to global add-on and individual toolbar deinitialization speed"],
-				["bugfix","Some dynamic menupopups, such as the one opened by <a=https://addons.mozilla.org/firefox/addon/noscript/>NoScript</a>'s button, could cause the toolbars to get stuck open when set to autohide"],
+				["bugfix","Some dynamic menupopups, such as the one opened by <e=noscript>NoScript</e>'s button, could cause the toolbars to get stuck open when set to autohide"],
 				["bugfix","(Firefox 44) the add-on would fail to start in the latest Nightly builds"],
 				["bugfix","Toolbars wouldn't work properly in fullscreen mode"],
 				["","Other minor fixes and improvements"]
@@ -119,7 +119,7 @@
 			"notes":[
 				["removed","Compatibility with Firefox 40"],
 				["updated","es-ES locale"],
-				["bugfix","(Firefox 42+) Badge icons, such as the Hello! button, would appear distorted in the Location Bar Puzzle Bar (<a=https://github.com/Quicksaver/Puzzle-Toolbars/issues/82>issue #82</a>)"],
+				["bugfix","(Firefox 42+) Badge icons, such as the Hello! button, would appear distorted in the Location Bar Puzzle Bar (<i=82>)"],
 				["","Other minor improvements"]
 			]
 		},
@@ -137,7 +137,7 @@
 			"date":"August 9, 2015",
 			"notes":[
 				["updated","fr locale"],
-				["bugfix","Compatibility with <a=https://addons.mozilla.org/firefox/addon/omnisidebar/>OmniSidebar</a> and <a=https://addons.mozilla.org/firefox/addon/the-fox-only-better/>The Fox, Only Better</a>: the Bookmark This Page button would stop working if one of the add-ons was disabled/updated; this fix requires a browser restart"],
+				["bugfix","Compatibility with <e=omnisidebar>OmniSidebar</e> and <e=the-fox-only-better>The Fox, Only Better</e>: the Bookmark This Page button would stop working if one of the add-ons was disabled/updated; this fix requires a browser restart"],
 				["bugfix","(Firefox 41+) toolbars would not react correctly when entering or exiting fullscreen"]
 			]
 		},
@@ -150,7 +150,7 @@
 				["bugfix","Force LTR layout for the preferences tab options, at least until any RTL locales are included"],
 				["bugfix","Minor startup improvements"],
 				["bugfix","The preferences, especially the corner active mouse area slider, were very sluggish to change, all should be much smoother now"],
-				["bugfix","Lightweight themes (personas) were not being applied to the corner puzzle toolbar (<a=https://github.com/Quicksaver/Puzzle-Toolbars/issues/81>issue #81</a>)"]
+				["bugfix","Lightweight themes (personas) were not being applied to the corner puzzle toolbar (<i=81>)"]
 			]
 		},
 		"2.1":{
@@ -161,15 +161,15 @@
 				["changed","The active development process for the add-on is undergoing a few changes, check out the information and links at the top of this pane for more details"],
 				["removed","Compatibility with Firefox 37 and below"],
 				["bugfix","Downloads indicator could not reflect the actual status of current downloads"],
-				["bugfix","Compatibility with latest version of <a=https://addons.mozilla.org/firefox/addon/omnisidebar/>OmniSidebar</a>"],
+				["bugfix","Compatibility with latest version of <e=omnisidebar>OmniSidebar</e>"],
 				["bugfix","Don't load the puzzle toolbars in popup windows where they're not supposed to exist"],
-				["bugfix","When placing the bookmarks toolbar in any of the puzzle toolbars, it could fail to initialize properly when starting up the browser (<a=https://github.com/Quicksaver/Puzzle-Toolbars/issues/80>issue #80</a>)"]
+				["bugfix","When placing the bookmarks toolbar in any of the puzzle toolbars, it could fail to initialize properly when starting up the browser (<i=80>)"]
 			]
 		},
 		"2.0.8":{
 			"date":"May 9, 2015",
 			"notes":[
-				["bugfix","Compatibility with latest version of <a=https://addons.mozilla.org/firefox/addon/the-fox-only-better/>The Fox, Only Better</a>"]
+				["bugfix","Compatibility with latest version of <e=the-fox-only-better>The Fox, Only Better</e>"]
 			]
 		},
 		"2.0.7":{
@@ -186,20 +186,20 @@
 			"notes":[
 				["changed","Release Notes tab URI defaults to about:puzzlebars instead of chrome://..., which is now fully functional in multiprocess firefox (e10s)"],
 				["bugfix","The Release Notes link in the preferences dialog would sometimes fail to work"],
-				["bugfix","Compatibility with <a=https://addons.mozilla.org/firefox/addon/tree-style-tab/>Tree Style Tab</a>'s autohide tabs toolbar feature, corner puzzle toolbar would not be properly positioned"]
+				["bugfix","Compatibility with <e=tree-style-tab>Tree Style Tab</e>'s autohide tabs toolbar feature, corner puzzle toolbar would not be properly positioned"]
 			]
 		},
 		"2.0.5":{
 			"date":"February 11, 2015",
 			"notes":[
-				["bugfix","<a=https://addons.mozilla.org/firefox/addon/stylish/>Stylish</a> button would be a few pixels too wide for its icon when placed in the Location Bar Puzzle Bar"],
-				["bugfix","<a=https://addons.mozilla.org/firefox/addon/show-anchors-2/>Show Anchors 2</a> button (and possibly others) could not have the hover style applied when hovered"]
+				["bugfix","<e=stylish>Stylish</e> button would be a few pixels too wide for its icon when placed in the Location Bar Puzzle Bar"],
+				["bugfix","<e=show-anchors-2>Show Anchors 2</e> button (and possibly others) could not have the hover style applied when hovered"]
 			]
 		},
 		"2.0.4":{
 			"date":"February 6, 2015",
 			"notes":[
-				["bugfix","Appearance fixes for <a=https://lastpass.com/>LastPass</a>'s toolbar button (<a=https://github.com/Quicksaver/Puzzle-Toolbars/issues/70>issue #70</a>)"],
+				["bugfix","Appearance fixes for <a=https://lastpass.com/>LastPass</a>'s toolbar button (<i=70>)"],
 				["bugfix","The corner bar's puzzle piece would occlude the bottom toolbar when set to autohide"]
 			]
 		},
@@ -225,13 +225,13 @@
 				["bugfix","Prevent some visual glitches during startup"],
 				["bugfix","Location bar puzzle bar wouldn't appear in Customize Mode sometimes"],
 				["bugfix","Improved compatibility with my other add-ons, if you use any of them make sure they are also updated and restart your browser afterwards"],
-				["bugfix","Compatibility with <a=https://addons.mozilla.org/firefox/addon/quickjava/>Quick Java</a>, it's icons would be misproportioned when placed in any puzzle toolbar"],
-				["bugfix","If more than one window is open, toggling a toolbar in one window wouldn't correctly update its puzzle piece in other windows (<a=https://github.com/Quicksaver/Puzzle-Toolbars/issues/62>issue #62</a>)"],
+				["bugfix","Compatibility with <e=quickjava>Quick Java</e>, it's icons would be misproportioned when placed in any puzzle toolbar"],
+				["bugfix","If more than one window is open, toggling a toolbar in one window wouldn't correctly update its puzzle piece in other windows (<i=62>)"],
 				["bugfix","Toolbars wouldn't be properly sized/positioned when resizing the window in e10s"],
-				["bugfix","Compatibility with <a=https://addons.mozilla.org/firefox/addon/omnisidebar/>OmniSidebar</a>, the lateral puzzle bar should work in perfect harmony with the sidebar in all modes"],
+				["bugfix","Compatibility with <e=omnisidebar>OmniSidebar</e>, the lateral puzzle bar should work in perfect harmony with the sidebar in all modes"],
 				["bugfix","Fixed several issues when placing the Bookmarks Toolbar Items in any of the puzzle toolbars"],
 				["bugfix","Hello button in location bar puzzle bar was squished (probably other badge-type widgets as well)"],
-				["bugfix","Compatibility with <a=https://addons.mozilla.org/firefox/addon/foxyproxy-standard/>FoxyProxy Standard</a> and <a=https://addons.mozilla.org/firefox/addon/foxyproxy-basic/>FoxyProxy Basic</a>, their toolbar icons wouldn't change state after a restart when placed in a puzzle toolbar"],
+				["bugfix","Compatibility with <e=foxyproxy-standard>FoxyProxy Standard</e> and <e=foxyproxy-basic>FoxyProxy Basic</e>, their toolbar icons wouldn't change state after a restart when placed in a puzzle toolbar"],
 				["","Other minor improvements"]
 			]
 		},
@@ -242,16 +242,16 @@
 				["new","Can enable all different toolbar methods simultaneously"],
 				["new","Open the release notes tab when the add-on updates"],
 				["new","Support < (less than) and > (greater than) characters in the keyboard shortcut"],
-				["new","The puzzle bar in the location bar can optionally automatically hide only when the cursor is in the location bar (<a=https://github.com/Quicksaver/Puzzle-Toolbars/issues/30>issue #30</a>)"],
+				["new","The puzzle bar in the location bar can optionally automatically hide only when the cursor is in the location bar (<i=30>)"],
 				["new","Added version information to the top of the window DOM tree, for better compatibility with themes"],
 				["new","Corner toolbar can be extended to cover all the available window width"],
 				["new","Bottom toolbar now has its own overflow panel"],
 				["new","Lateral (vertical) and top toolbars"],
-				["new","The area in the corner reactive to the mouse to show the toolbar can be customized (larger area = easier to show the toolbar when it's autohiding) (<a=https://github.com/Quicksaver/Puzzle-Toolbars/issues/40>issue #40</a>)"],
+				["new","The area in the corner reactive to the mouse to show the toolbar can be customized (larger area = easier to show the toolbar when it's autohiding) (<i=40>)"],
 				["changed","Improved display and handling of toolbar separators"],
 				["changed","Status bar is now movable; to use it just drag it from the customize dialog into any toolbar"],
 				["changed","Puzzle piece icon in corner toolbar also shrinks when not hovered, just like the others"],
-				["changed","When using dark themes (personas), the buttons hover effects are now white-ish for a better contrast (<a=https://github.com/Quicksaver/Puzzle-Toolbars/issues/42>issue #42</a>)"],
+				["changed","When using dark themes (personas), the buttons hover effects are now white-ish for a better contrast (<i=42>)"],
 				["removed","Compatibility with Firefox 31 and below"],
 				["removed","Ability to use flexible spaces in the menu panel"],
 				["removed","No longer migrate the items from the navigation bar (old add-on bar) and from Classic Theme Restorer's add-on bar to ours, as it no longer makes sense to do it"],
@@ -260,18 +260,18 @@
 				["bugfix","e10s compatibility"],
 				["bugfix","Enhanced compatibility with my other add-ons"],
 				["bugfix","Enhanced compatibility with other add-ons that also have a \"restore status bar\" feature when ours is disabled (may require a browser restart)"],
-				["bugfix","Corner puzzle bar wouldn't be properly styled when previewing themes (personas) (<a=https://github.com/Quicksaver/Puzzle-Toolbars/issues/38>issue #38</a>)"],
-				["bugfix","Buttons would be shown outside of the toolbar in customize mode (<a=https://github.com/Quicksaver/Puzzle-Toolbars/issues/50>issue #50</a>)"],
+				["bugfix","Corner puzzle bar wouldn't be properly styled when previewing themes (personas) (<i=38>)"],
+				["bugfix","Buttons would be shown outside of the toolbar in customize mode (<i=50>)"],
 				["bugfix","Add-on could sometimes not deinitialize properly"],
-				["bugfix","Enhanced compatibility with <a=https://addons.mozilla.org/firefox/addon/classicthemerestorer/>Classic Theme Restorer</a>"],
+				["bugfix","Enhanced compatibility with <e=classicthemerestorer>Classic Theme Restorer</e>"],
 				["bugfix","Opening the toolbar in the location bar would happen immediately sometimes, without the transition animation"],
 				["bugfix","In Firefox 34 and above, the toolbars opened/closed state wouldn't be remembered between sessions"],
 				["bugfix","Bookmarks star button would not initialize properly on startup in any puzzle toolbar"],
 				["bugfix","Some menus and panels, like the bookmarked item panel, would not force the toolbars to stay visible if autohide was enabled"],
-				["bugfix","Compatibility with <a=https://addons.mozilla.org/firefox/addon/cookiesafe-ff-4-compatible/>CookieSafe</a>, its button would appear distored in any puzzle toolbar"],
-				["bugfix","Toolbars should hide when in fullscreen and the native firefox option \"Hide Toolbars\" is enabled (Windows and Linux) (<a=https://github.com/Quicksaver/Puzzle-Toolbars/issues/46>issue #46</a>)"],
-				["bugfix","Compatibility with <a=https://addons.mozilla.org/firefox/addon/hide-caption-titlebar-plus-sma/>Hide Caption Titlebar Plus</a>, mousing over its movable tab title elements would not keep the toolbars visible when autohiding was enabled"],
-				["bugfix","Compatibility with <a=https://addons.mozilla.org/firefox/addon/tab-mix-plus/>Tab Mix Plus</a> tabs on bottom feature, the bottom puzzle piece would be inaccessible"],
+				["bugfix","Compatibility with <e=cookiesafe-ff-4-compatible>CookieSafe</e>, its button would appear distored in any puzzle toolbar"],
+				["bugfix","Toolbars should hide when in fullscreen and the native firefox option \"Hide Toolbars\" is enabled (Windows and Linux) (<i=46>)"],
+				["bugfix","Compatibility with <e=hide-caption-titlebar-plus-sma>Hide Caption Titlebar Plus</e>, mousing over its movable tab title elements would not keep the toolbars visible when autohiding was enabled"],
+				["bugfix","Compatibility with <e=tab-mix-plus>Tab Mix Plus</e> tabs on bottom feature, the bottom puzzle piece would be inaccessible"],
 				["updated","Code clean-up"],
 				["","Many other minor fixes and improvements"]
 			]
