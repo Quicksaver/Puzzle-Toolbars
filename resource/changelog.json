@@ -1,9 +1,18 @@
 {
-	"current":"2.1.15",
+	"current":"2.1.16",
 	"knownissues":[
-		["There are some <i=24> when the Location Bar Puzzle Bar is used together with <e=ui-enhancer>Location Bar Enhancer</e>."]
+		["There are some issues (<i=24>) when the Location Bar Puzzle Bar is used together with <e=ui-enhancer>Location Bar Enhancer</e>."]
 	],
 	"releases": {
+		"2.1.16":{
+			"date":"December 12, 2016",
+			"notes":[
+				["changed","When the add-on is automatically updated, it now shows a less intrusive notification toaster message linking to the release notes; as before, this can still be disabled in the About page in the add-on's preferences"],
+				["updated","es-ES, ru, and zh-TW locales"],
+				["bugfix","Compatibility with <e=omnisidebar>OmniSidebar</e>, the Lateral Puzzle Bar would interfere with the sidebar docking"],
+				["","Other minor fixes"]
+			]
+		},
 		"2.1.15":{
 			"date":"October 24, 2016",
 			"notes":[
