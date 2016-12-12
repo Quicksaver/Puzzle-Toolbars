@@ -34,4 +34,4 @@
 <!ENTITY OptExtend.tooltip "Esta opción muestra la barra de herramientas sobre el máximo de espacio disponible en la ventana del navegador, incluso si no tiene suficientes elementos o funciones para cubrirlo; es especialmente práctico si quiere utilizar espacios flexibles en ella.">
 <!ENTITY OptMoveBottom.label "Situar en la parte inferior">
 <!ENTITY OptMoveBottom.tooltip "Muestra la pieza de puzzle en la parte inferior de la barra de herramientas en lugar de en la parte superior.">
-<!ENTITY OptKeyboardShortcut.captionB "Atajo de teclado para habilitar o deshabilitar">
+<!ENTITY OptKeyboardShortcut.captionB "Atajo de teclado para abrir y cerrar">
